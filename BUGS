@@ -1,0 +1,15 @@
+
+- The timing is not provided. Due to Java timing of a process is impossible to
+  generare the needed (real) timing (a clock of 8Mhz). So, actually the emulated
+  clock generates a tick only after realising the mutex to other threads. This
+  means that in multi cpu this can produce sinchronization problems to the
+  various threads.
+  Note that actually cpu can't gives the real performance, due to Java slow
+  velocity and the experimental implementation choosed.
+
+- cpu emulation may contains bugs. These are due to c to java conversion.
+
+- vic emulation are too young. Due to 1 to 1 implementation, it can be follow
+  actively
+
+

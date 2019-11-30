@@ -1,0 +1,3 @@
+#!/bin/sh
+# executing jc64 java programs
+  java -cp /home/ice/zzz/lib/jc64/jc64.jar sw_emulator.hardware.machine.C64

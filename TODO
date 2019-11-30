@@ -1,0 +1,20 @@
+
+ A lot!!!!
+
+ - make keyboard and joystick emulation
+ - fix and debug cpu and vic emulation
+ - rewrite some of IO8 and port
+ - make complete cia emulation
+ - make sid emulation
+ - make monitor for cpu and vic
+ - make file managements
+ - make user and cartridge port
+ - ...
+
+ JC64Dis:
+
+ use an hacked sidln version for having a file with the true memory usage about
+ a sid tune. Then we can have a dissassembly that understand where there is the
+ code and where is the data.
+ This will come before each other planned features.
+

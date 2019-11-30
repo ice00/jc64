@@ -1,0 +1,342 @@
+#!/bin/sh
+#
+# This script is for compiling/installing/uninstalling the jc64 emulator
+#
+# ChangesLog
+# ----------
+# 0.0.2
+# create jar executable
+# 0.0.1
+#  work with current initial release
+#
+
+#script version
+VER=0.0.2;
+
+#source directory from jc64 base directory
+SOURCE=./src/
+ISOURCE=../
+
+#bin directory from jc64 base directory and the inverse
+BIN=./bin/
+IBIN=../
+
+#docs directory from jc64 base directory and the inverse
+DOCS=./doc/
+IDOCS=../
+
+#javadoc directory from jc64 base directory and the inverse
+JDOCS=./javadoc/
+IJDOCS=../
+
+#data directory from jc64 base and the inverse
+DATA=./data/
+IDATA=../
+
+#javac compiler
+JAVAC=javac
+
+#javac options
+JOPT=-g
+
+#javadoc compiler
+JDOC=javadoc
+
+#javadoc options
+JDOPT=-private
+
+#define user passed output path
+OUT=/usr
+if [ x"$2" != x ]
+  then
+    OUT=$2
+fi
+
+#define project directory name
+PRJ=jc64
+if [ x"$3" != x ]
+  then
+    PRJ=$3
+fi
+
+# output directory
+OUT_BIN=$OUT/bin
+OUT_DOC=$OUT/doc/$PRJ
+OUT_LIB=$OUT/lib/$PRJ
+
+# see if the runtime lib path is different from installation path
+if [ x"$4" != x ]
+  then
+    tmplib=$4
+  else
+   tmplib=$OUT_LIB
+fi
+
+# installation definition
+INSTALL="/usr/bin/install -c"
+INSTALL_PROGRAM=$INSTALL
+INSTALL_DATA="$INSTALL -m 644"
+INSTALL_SCRIPT=$INSTALL_PROGRAM
+
+# find all the java source files
+find_sources() {
+  echo "Find sources..."
+
+  cd $IBIN
+  cd $SOURCE
+  find ./ -name '*.java' > ${ISOURCE}${BIN}files.unix
+  cd $ISOURCE
+  cd $BIN
+}
+
+#compile all the files
+compile_sources() {
+  echo "Compiling the sources..."
+
+  cd $IBIN
+  cd $SOURCE
+  $JAVAC $JOPT @${ISOURCE}${BIN}files.unix
+  cd $ISOURCE
+  cd $BIN
+}
+
+#document all the files
+document_sources() {
+  echo "Generate Documentation for the sources..."
+
+  cd $IBIN
+
+  #make sure that javadoc/ exists
+  mkdir -p ${JDOCS}
+
+  cd $SOURCE
+  $JDOC $JDOPT -d ${ISOURCE}${JDOCS} @${ISOURCE}${BIN}files.unix
+  cd $ISOURCE
+  cd $BIN
+}
+
+#cleaning the enviroment
+clean_env() {
+  echo "Cleaning enviroment"
+
+  # erase files in bin directory
+  rm jc64
+  rm jc64dis
+  rm files.unix
+
+  cd $IBIN
+
+  # erase files in source directory
+  FIND=$SOURCE
+  TYPE=*.class
+  clean_rec
+
+  # erase files in javadoc directory
+  if cd ${JDOCS}
+    then
+     rm -r *
+     cd ${IJDOCS}
+     #remove javadoc directory
+     rmdir ${JDOCS}
+  fi
+
+  cd $BIN
+}
+
+# installing one path and all directory recursive in it
+# FIND must contain the path to search
+# DEST must contain the destination path base
+# TYPE the type of file to install (* *.class ...)
+inst_rec () {
+  $INSTALL_DATA $FIND/$TYPE $DEST/$FIND   # install files
+  for i in $FIND/* ;  do {                # scan all the files
+    if  test -d $i                        # is a directory ?
+      then
+        $INSTALL -d $DEST/$i              # be sure that directory exists
+
+        FIND=$i
+        (inst_rec)                        # go into it
+    fi
+  };
+  done
+}
+
+# clean files in all directory recursive in it
+# FIND must contain the path to clean
+# TYPE the type of file to clean (*.class ...)
+clean_rec () {
+  rm -r $FIND/$TYPE                       # clean files
+  for i in $FIND/* ;  do {                # scan all the files
+    if  test -d $i                        # is a directory ?
+      then
+        FIND=$i
+        (clean_rec)                       # go into it
+    fi
+  };
+  done
+}
+
+# install script in binary directory
+install_bin() {
+  echo "Installing bin..."
+
+  # creating the script program using actual setting
+  echo "#!/bin/sh" > jc64
+  echo "# executing jc64 java programs" >> jc64
+  echo "  java -cp $tmplib/jc64.jar sw_emulator.hardware.machine.C64" >> jc64
+
+  echo "#!/bin/sh" > jc64dis
+  echo "# executing jc64 disassembler java programs" >> jc64dis
+  echo "  java -cp $tmplib/jc64.jar sw_emulator.software.FileDasm"  >> jc64dis
+
+  # be sure that bin exists
+  $INSTALL -d $OUT_BIN
+
+  $INSTALL_SCRIPT jc64 $OUT_BIN/jc64
+  $INSTALL_SCRIPT jc64dis $OUT_BIN/jc64dis
+}
+
+# install file in library directory
+install_lib() {
+  echo "Installing lib..."
+
+  cd $IBIN
+
+  rm -r ${OUT_LIB}/classes
+
+  DEST=$OUT_LIB
+  FIND=$SOURCE
+  $INSTALL -d $OUT_LIB/$FIND
+  TYPE=*.class
+  inst_rec
+
+  mv ${OUT_LIB}/$SOURCE ${OUT_LIB}/classes
+
+  # installing data directory
+  DEST=$OUT_LIB
+  FIND=$DATA
+  $INSTALL -d $OUT_LIB/$FIND
+  TYPE=*
+  inst_rec
+
+  #generate jar
+  JUMP=$PWD
+  cd ${OUT_LIB}/classes/
+  jar -cf $JUMP/jc64.jar .
+  cd $JUMP
+
+  rm -r ${OUT_LIB}/classes
+
+  mv ${OUT_LIB}/$DATA ${OUT_LIB}/rom
+
+  cd ${OUT_LIB}/
+  jar -uf $JUMP/jc64.jar .
+  cd $JUMP
+
+  rm -r ${OUT_LIB}/
+
+  # be sure that bin exists
+  $INSTALL -d ${OUT_LIB}
+
+  $INSTALL_DATA jc64.jar ${OUT_LIB}/
+
+  rm jc64.jar
+
+  cd $BIN
+
+}
+
+# install file in documentation directory
+install_doc() {
+  echo "Installing doc..."
+
+  cd $IBIN
+
+  DEST=$OUT_DOC
+  FIND=$DOCS
+  $INSTALL -d $OUT_DOC/$FIND
+  TYPE=*
+  inst_rec
+
+  DEST=$OUT_DOC
+  FIND=$JDOCS
+  $INSTALL -d $OUT_DOC/$FIND
+  TYPE=*
+  inst_rec
+
+  cd $BIN
+}
+
+# uninstall bin directory
+uninstall_bin() {
+  echo "Uninstalling bin..."
+
+  rm $OUT_BIN/jc64
+  rm $OUT_BIN/jc64dis
+}
+
+# uninstall lib directory
+uninstall_lib() {
+  echo "Uninstalling lib..."
+
+  rm -r $OUT_LIB
+}
+
+# uninstall doc directory
+uninstall_doc() {
+  echo "Uninstalling doc..."
+
+  rm -r $OUT_DOC
+}
+
+# show info about the script
+show_info() {
+  echo "JC64 mainternance script"
+  echo "version $VER"
+  echo
+  echo "usage: jc64_make mode [path name] [ex_lib]"
+  echo "where mode is:"
+  echo "  configure: configure the enviroment"
+  echo "  compile:   compile the project"
+  echo "  document:  generate documentation of the class"
+  echo "  clean:     clean the enviroment"
+  echo "  install:   install the program"
+  echo "  uninstall: uninstall the program"
+  echo "path is the installation path (default=/usr)"
+  echo "name is the directory name (dafault=/jc64)"
+  echo "ex_lib is the execution lib (use by RPM)"
+}
+
+case $1 in
+  configure )
+    find_sources
+    ;;
+
+  compile )
+    compile_sources
+    ;;
+
+  clean )
+    clean_env
+    ;;
+
+  document )
+    document_sources
+    ;;
+
+  install )
+    install_bin
+    install_lib
+    install_doc
+    ;;
+
+  uninstall )
+    uninstall_bin
+    uninstall_lib
+    uninstall_doc
+    ;;
+
+  * )
+   show_info
+   ;;
+esac

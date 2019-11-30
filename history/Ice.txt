@@ -1,0 +1,798 @@
+C64 Java Software Emulator
+Ice Team Free Software Group
+Ice (T.S.) work history
+
+  Date    |Time|    File       |    Short Comment
+----------+----+---------------+------------------------------------
+16/08/1999    5 readableBus    : make definition
+16/08/1999    5 writeableBus   : make definition
+16/08/1999   25 C64MemoryBus   : give load and store functions
+16/08/1999   45 M6510          : addressing modes
+16/08/1999   45 M6510          : flags + some A* instructions
+17/08/1999 1:35 M6510          : flags + ADC instruction + ARR + addrssing
+18/08/1999 3:30 M6510          : addressing + instruction call list + C*, D* instructions
+19/08/1999   30 M6510          : D*, I* instructions
+20/08/1999   50 M6510          : I*, J* instructions
+20/08/1999   15 disassembler   : interface definitions
+20/08/1999 2:30 M6510Dasm      : various tables, costants and dis. method
+21/08/1999 1:10 M6510Dasm      : comment
+21/08/1999 1:30 C64Dasm        : italian version
+21/08/1999   10 Unsigned       : done methods
+22/08/1999 1:15 C64Dasm        : english conversion
+23/08/1999 1:25 C64Dasm        : english conversion
+23/08/1999   10 C64MemoryBus   : int reconversion
+23/08/1999   45 M6510          : int reconversion
+24/08/1999   20 C64Dasm        : english conversion
+27/08/1999   15 M6510Dasm      : revision
+27/08/1999   10 C64Dasm        : english conversion
+29/08/1999   30 C64Dasm        : english conversion
+29/08/1999   30 M6510          : L* instructions
+30/08/1999   55 M6510          : L*, N* instructions
+31/08/1999 2:15 M6510          : N*, O*, P*, R*, S* instructions
+01/09/1999   55 M6510          : S*, T* instructions
+01/09/1999    5 Memory         : create base structure
+02/09/1999   35 Memory         : makes adjustement
+02/09/1999   20 ROM            : create base structure
+02/09/1999   20 vary           : 'C64MemoryBus' changes to 'Bus'
+04/09/1999 4:00 M6510          : new harchitecture
+10/09/1999 1:00 M6510          : store addressing
+11/09/1999 2:40 M6510          : load store addressing
+12/09/1999 1:05 M6510          : all opcode
+18/09/1999 2:40 M6510          : decode routine
+19/09/1999   30 C64            : init memory
+19/09/1999    5 Monitor        : a monitor for threads
+19/09/1999   45 Clock          : a 8Mhz PAL NTSC clock
+19/09/1999    5 M6510          : add clock monitor
+24/09/1999   10 M6510          : add signals
+01/10/1999 1:30 M6510          : insert irq and nmi interrupt
+02/10/1999   25 M6510          : power management
+02/10/1999   30 vary           : package restaling
+02/10/1999    5 powered        : make interface
+02/10/1999   15 ColorRAM       : make definitios
+13/10/1999   10 M6510          : fix regS bits
+14/10/1999   40 M6510IO        : base methods
+15/10/1999   40 C64Bus         : make bus for cpu and vic
+15/10/1999   10 Bus            : redefinition
+15/10/1999   10 Vary           : propagate changes to other module
+15/10/1999 1:05 M6510IO        : port 0/1 operations
+15/10/1999   15 C64M6510IO     : mmu monitor
+15/10/1999   15 PLA82S100      : base definition
+16/10/1999   45 PLA82S100      : power, vic tables
+16/10/1999   25 VIC6567        : interfaces and run
+17/10/1999 1:20 PLA82S100      : build read cpu tables
+18/10/1999   45 PLA82S100      : choose tables
+18/10/1999    5 C64Bus         : minor change to setTable
+18/10/1999   30 Patch          : definition of a memory patch
+18/10/1999 1:30 KernalPatcher  : revision data definition
+19/10/1999    5 KernalPatcher  : useRevision method
+19/10/1999   25 CartridgePort  : definition + game, exrom signals
+22/10/1999   25 PLA82S100      : write tables for cpu
+22/10/1999   25 CartdrigePort  : volatile signals
+23/10/1999   15 Cartdrige      : make a null cartridge
+23/10/1999   15 ResetCartridge : meke a reset cartridge
+24/10/1999   10 PLA82S100      : select vic tables
+24/10/1999   10 M6526          : interfaces used
+24/10/1999   15 vary           : restructuring
+24/10/1999   25 IO8            : I/O for 8 bits (take up from M6510IO)
+24/10/1999    5 IO6            : I/O for 6 bits (take up from IO8)
+24/10/1999   15 M6510IO        : restructuring
+24/10/1999   15 M6526IO        : ports A and B
+01/11/1999 1:30 KernalPatch    : add rev 0
+01/11/1999   30 M6510Dasm      : add mode3 naming
+03/11/1999   10 ColorRam       : upper 4 bits
+03/11/1999   10 Vary           : propagate the modifications
+03/11/1999    5 dinamic        : dinamic refresh interface
+03/11/1999   10 RAM            : make a dinamic RAM
+03/11/1999    5 C64            : dram redefinition
+04/11/1999 1:30 M6567          : read and write of some ports
+16/11/1999   35 M6567          : variables and g-access
+17/11/1999 1:05 M6567          : read and writes of other ports + c,r,i-access
+17/11/1999   10 C64Bus         : vic 12 bits read operation
+17/11/1999   10 FlipFlop       : a flip/flop for vic operation
+21/11/1999 2:10 M6567          : cycle coding
+22/11/1999 1:50 M6567          : more cycle coding
+23/11/1999 1:15 M6567          : BA signals
+26/11/1999   30 M6510          : BRANCH restyling + RDY signals
+05/12/1999   45 M6567          : cycle in methods fi low
+06/12/1999   15 M6567          : cycle in methods fi hi
+06/12/1999   30 VicII          : restiling
+06/12/1999   30 M6569          : cycle for M6569
+07/12/1999   10 M6569          : cycle ~ok
+07/12/1999   25 VicII          : more cycle methods, signals
+07/12/1999    5 Bus            : aec signal
+07/12/1999   10 C64Bus         : aec signal
+07/12/1999    5 signaller      : interface for signals
+07/12/1999   10 M6510          : new signals codify
+09/12/1999 1:10 VicII          : AEC and BA signals, ports
+10/12/1999   35 VicII          : expansion f.f. + vary
+10/12/1999   10 vary           : compilation
+12/12/1999   15 VicII          : run method
+13/12/1999    5 signaller      : new signals
+13/12/1999   25 M6526          : partial signaller implementation
+29/12/1999    5 VicII_IO       : make abstract class
+29/12/1999   10 C64VicII_IO    : make Vic IO in C64
+29/12/1999    5 VicII          : propagate changes
+29/12/1999    5 M6526          : new signals
+29/12/1999   15 C64Cia1        : base signals
+04/01/2000   15 PLA82S100      : use signaller interface
+04/01/2000   10 C64M6510IO     : notify signals to PLA
+04/01/2000    5 signaller      : new signals
+05/01/2000   20 M6510          : uses signaller
+11/01/2000   10 Cartridge      : uses signaller
+18/01/2000    5 CartridgeIO    : abstract definition
+18/01/2000   10 Vari           : compile errors
+19/01/2000   10 C64CartridgeIO : some connections
+21/01/2000   15 C64CartridgeIO : signals
+21/01/2000   15 AndPort        : and port utility
+21/01/2000   10 C64VicII_IO    : send signals to and ports
+21/01/2000    5 C64            : add the new ports
+21/01/2000   10 C64Dasm        : finish english conversion
+15/02/2000   10 Joystick       : abstact operations
+15/02/2000    5 WireAnd        : wire and of 2 lines 
+01/04/2000   10 M6510          : right construction 
+01/04/2000    5 Vari           : make right compilation of project  
+01/04/2000   15 C64            : update declarations
+01/04/2000    5 C64Bus         : right constructors 
+14/04/2000   10 vary           : delete CartridgePort, fixed english 
+15/04/2000    5 M6569          : more comments
+15/04/2000   10 M6567R8        : make from M6569
+15/04/2000   10 M6567R56A      : make from M6569
+15/04/2000   15 Sid            : make base definition  
+15/04/2000    5 PLA82S100      : add Sid
+15/04/2000    5 VicII          : make constructor
+15/04/2000    5 vary           : constructors in M656xxx 
+15/04/2000   10 C64            : insert M6569 
+16/04/2000   10 Keyboard       : make a matrix generic keyboard 
+16/04/2000    5 keys           : a interface for keyboard matrix
+16/04/2000   25 C64Keyboard    : make the c64 matrix keyboard
+16/04/2000   15 C64Cia1IO      : use monitor, WireAnd  
+22/04/2000   15 C64Keyboard    : calculate the output
+24/04/2000    5 C64Keyboard    : complete output of rows
+24/04/2000    5 C64            : add cia 1 IO and keyboard
+25/04/2000   20 VicII          : add graphic data sequencer, dot clock
+25/04/2000    5 vary           : make initialization in the 3 Vic 
+26/04/2000   15 VicII          : fix rasters position and idle state 
+01/05/2000   35 VicII          : graphics data calc. in various mode (1 pixel)
+01/05/2000   30 VicII          : graphics data calc. in various mode (2 pixels)
+02/05/2000   35 VicII          : all graphics + inits for srites
+07/05/2000   10 VicII          : multiplexer output
+10/05/2000   30 VicII          : normal sprite + graphics collision
+11/05/2000   15 VicII          : sprites collision + doc
+14/05/2000   15 VicII          : multicolor sprite
+17/05/2000    5 C64            : add TV 
+21/05/2000   10 C64            : add Cartridge 
+21/05/2000    5 vary           : correct some initialization bugs 
+24/05/2000   10 VicII          : correct rasterX bugs
+24/05/2000    5 M6510          : do minor adjustement
+27/05/2000   20 IO6            : new management 
+27/05/2000    5 IO8            : new management
+27/05/2000    5 M6526          : fix IO
+27/05/2000    5 C64            : add cia and new TV
+31/05/2000   25 M6510          : correct bugs in ROL/ROR/ASL/SLR, cross
+02/06/2000    5 Cartridge      : make readable, writeable bus
+02/06/2000    5 PLA82S100      : use expansion addresses
+02/06/2000    5 ResetCartridge : make functional
+10/06/2000   10 VicII          : use buffer for data
+25/06/2000   20 GameCartridge  : make game with 2 roms
+30/06/2000   15 FileCartridge  : read file of cartridge
+01/07/2000   50 FileCartridge  : determine the cartridge
+08/07/2000   15 FileCartridge  : read 16kb cartridge
+15/07/2000   15 VicII          : interrupt registers
+29/07/2000    5 M6526          : activate ports support
+05/08/2000   10 C64Cia2IO      : make base cia2 io
+05/08/2000   10 vary           : propagate changes
+06/08/2000   10 VicII          : code for send IRQ signal
+12/08/2000    5 VicII          : activate raster IRQ
+14/08/2000   10 vary           : IO6/8 modification 
+20/08/2000    5 VicII          : correct important bug for sprites
+03/09/2000   10 VicII          : correct bugs for x expand
+05/05/2001    5 M6510Dasm      : make fastest with StringBuffer
+05/05/2001   20 vary           : create a base unix mainternance script
+05/05/2001   25 C64SidDasm     : comment the extended sid registers
+05/05/2001   35 FileDasm       : file disassembler
+06/05/2001 1:00 FileDasm       : complete the program
+14/07/2001 1:40 C64MusDasm     : disassembly mus file begin
+15/07/2001 1:10 C64MusDasm     : finish adding commands
+21/02/2001   40 FileDasm       : add mus support
+21/02/2001   10 C64MusDasm     : voices dissassembly
+03/11/2001   15 VicII          : fix cycle calling and remove +4 patch
+09/12/2001   15 VicII          : remove bug (last mob coloumn was not displayed)
+25/04/2002 1:00 vary           : made execution from jar package
+28/10/2002   15 FileDasm       : add RSID support + use buffer for I/O
+13/10/2003   10 memoryState    : definitions of interfaces
+13/10/2003   40 MemoryFlags    : definitions 
+14/10/2003   15 MemoryFlags    : constructor
+14/10/2003   10 FileDasm       : get paramether
+16/10/2003   20 vary           : fix for new model
+17/10/2003   30 M6510Dasm      : use memory state
+18/10/2003   20 vary           : complete the code
+03/12/2005   30 vary           : remove a init bug in the bus
+09/12/2005   30 Clock          : add clock at 50Hz
+09/12/2005   10 C64            : make the use of tod for cia
+09/12/2005   10 M6526          : use monitor
+10/12/2005   40 M6526          : read/write tod registers
+11/12/2005   30 M6526          : increment tod
+06/01/2006    5 FlipFlopClock  : create a clocked flip flop
+06/01/2006 1:00 M6526          : implement flip flop logic
+06/01/2006   30 Counter        : implement cia counter
+07/01/2006   20 M6526          : complete timer part left
+15/01/2006   40 M6526          : implement interrupt
+18/01/2006   10 M6526          : fix interrupt
+18/01/2006   15 M6510          : fix interrupt
+
+  File       | Total Time
+-------------+------------
+dinamic           5
+disassembler     15
+keys              5
+memoryState      10
+powered           5
+readableBus       5
+signaller        15
+writeableBus      5
+AndPort          15
+Bus              50
+C64            1:40
+C64Bus         1:10
+C64CartridgeIO   25
+C64Cia1IO        30
+C64Cia2IO        10
+C64Dasm        5:20
+C64Keyboard      45
+C64M6510IO       25
+C64MusDasm     3:00
+C64SidDasm       25
+C64VicII_IO      20
+Cartdrige        30
+CartridgePort    50
+CartridgeIO       5
+Clock          1:15
+ColorRAM         25
+Counter          30
+FileCartridge  1:20
+FileDasm       2:40
+FlipFlop         10
+FlipFlopClock     5
+GameCartridge    20
+IO6              25
+IO8              30
+Joystick         10
+KernalPatcher  3:05
+Keyboard         10
+M6510         20:05
+M6510Dasm      5:00
+M6510IO        2:00
+M6526          4:10
+M6526IO          15
+M6567R56A        10
+M6567R8          10
+M6569            45
+MemoryFlags      55
+VicII         17:55
+VicII_IO          5
+Memory           40
+Monitor           5
+Patch            30
+PLA82S100      4:05
+RAM              10
+ResetCartridge   20
+ROM              20
+Sid              15
+Unsigned         10
+WireAnd           5
+vary           5:15
+              ------
+             101:15
+
+Debug:
+
+20/08/1999   45  Test1        : debug for M6510Dasm
+27/08/1999   40  Test2        : debug for disassembler
+02/10/1999 2:00  Test3        : some minor bugs in M6510 found
+03/10/1999 1:00  Test3        : some bugs in M6510
+04/10/1999   30  Test4+UtTest4: make M6510 simple debugger
+04/10/1999 1:10  Test4        : correct some bugs (flags, ...)
+17/05/2000    5  vary         : correct initialization
+20/05/2000   15  vary         : add a Jield to Clock, ... VicII start
+21/05/2000   15  vary         : found initialization bugs
+24/05/2000   10  vary         : found screen dimension errate calculation
+26/05/2000    5  vary         : found that IO6/8 may be changed
+27/05/2000    5  vary         : found branch bug in M6510
+28/05/2000   15  vary         : found Vic (addr), cpu (store, inc dec) bugs
+31/05/2000   20  vary         : found cpu (ROL...) and vic bugs (addr,break)
+02/06/2000   10  vary         : found invalid conversion for compares
+03/06/2000    5  vary         : found double variables, so invalid init.
+10/06/2000   10  vary         : found Vic bugs (load, sequencer)
+11/06/2000   10  vary         : found cpu ADC and SBC bugs
+17/06/2000   15  vary         : still bugs in ADC, SBC, CMP (now fixed?)
+18/06/2000   15  vary         : correct bugs in BRANCH cross
+25/06/2000   10  vary         : patch and correct minor bugs in vic
+08/07/2000   15  C64_1        : test game cartridge
+09/07/2000   10  vary         : load cartridge + correct vic bugs
+10/07/2000   15  C64_test     : test suite patch
+21/07/2000   10  C64_test     : START: fix ADC (SBC) Zero calculation
+23/07/2000   20  C64_test     : CMPB: fix status flag
+05/08/2000    5  vary         : debug 6526 port A,B
+12/08/2000   10  vary         : debug thread synchronization
+13/08/2000   10  vary         : CPUTEST debug (correct some bugs in IO6/8)
+14/08/2000    5  vary         : CPUTEST debug
+20/08/2000   40  vary         : create Test1/2 prg: correct bugs with them
+01/09/2000   20  vary         : create Test3: found x expand bugs, multicolor
+03/09/2000    5  vary         : create Test4: found multicolor bugs
+17/07/2001    5  vary         : correct jc64dis prg address bug
+08/12/2001   20  vary         : debug sprites: found a last column bug
+20/01/2006 1:00  vary         : correct BREAK flag interrupt
+20/01/2006   20  vary         : correct irq jump
+           ----
+          13:10
+
+More Comment:
+
+16/08/99
+Start to write a new C64 emulator based on Java language.
+The 6510 emulation is the transport to Java of VICE C code.
+
+04/09/99
+I'm not happy to the 6510 emulation. The VICE emulation is very efficient,
+timing provided, and simple coded. But I don't want to have a speed emulation
+(we use Java), I want a code that illustrate a very realistic emulation.
+So M6510 is to completly change!
+
+01/10/99
+M6510 is now completly changed, and the comments inserted may describe how a
+real 6510 cpu works.
+
+16/10/99
+The use of the Bus class will be probably make a realistic simulation of C64
+bus, because it allow accesses by M6510 and Vic II (and cartridge with minor
+changes). The emulation of PLA 82S100 will be reduce to only calculate the
+appropriate tables of devices into the bus, for the Cpu, Vic (and eventually
+cartridge).
+
+All chips emulated are a Thread class, so it will be synchronized, but the
+emulation can be like in a real hardware architecture. In particular the chip
+that use a clock, will be sinchronized to a Clock thread, while the chips that
+are not clocked (like PLA) calculate their output only when the input changes.
+This software architecture is thinked for allowing the clock Fase 1 and 2 (that
+the Vic II use) emulation.
+Else, in a multi-cpu computers, the use of thread may speed up the Java
+emulation.
+
+24/10/99
+The names of package probably need new names.
+The I/O port used in M6510IO shuld be similar to the 2 used in cia, so a new
+class will be created for all.
+The ResetCartrigge probably will be delated, because the reset is done by a
+user port button, not in carteridge.
+Vic6567 may renamed in M6567.
+
+03/11/99
+Creates the RAM class for having a dinamic ram refresh used by the Vic.
+
+17/11/99
+I'm thinking that the class M6567 may be renamed to VicII and then the classes
+M6567 and M6569 will be derived from the above. VicII should be all the
+operation, while the others initialize only the chip correctly. This is
+probably correct for M6526 that should become CIA.
+Now I have to decide how a emulation of Vic will be done.
+The most probably candidate is these:
+
+  manages 1 pixel of output for cycle
+  |   |   |   |   |   |   |   |
+  0   1   2   3   4   5   6   7
+  |               |
+  fi0_            fi0-
+  manage Vic      Manage Vic/Cpu
+  cycle           cycle
+
+The generation of 1 pixel for cycle (8Mhz) is like in real Vic but it will be
+probably slow. But, on the other hand, we use Java, so we don't know how it
+remaps the output bits to the screen of the hardware where Java runs
+(optimization for 4, 8 ... bits can depends from screen devices). Eventually
+the generated bits can be buffered in memory and that passed to Java plotting
+routine. But these will see when there will be the moment.
+
+In the manage Vic cycle there will a check for the actual cycle and then we
+done the needed operation (c-access, g-access, ...). Check that not depends
+from cycle but from raster will check always.
+
+21/11/99
+The interesting features of the approch using this kind of emulation (chip
+based with signals) is that we can build a PAL C64 with a NTSC VIC II for
+see the result. Or we can build expansions in a realistic way.
+
+Now I am writing the vic cycles, but there's one thing that not return right.
+In Vic Article in section 3.8.1 the 3 point of sprite display, the rule says:
+"In first fase on cycle 55 and 56 ..." (the cycle is based for 6569).
+So if in cycle 55 the DMA for sprite 0 is not changed to on, and than the
+condition become true in cycle 56, there's a bus conflic.
+The vic set BA low for reading after 3 cycle, so 56 57 58 of fase 2, but in
+cycle 58 phase 2 there's the reading of sprite 0 data. If the processor is
+writing a data in cycle 58 there's a conflict.
+Otherwise there's a point that I don't understand that make this condiction
+not able to come out. (My PAL commodore 64 is never broken when I play some
+games!)
+
+30/11/99
+There's one point of Vic cycle that I'm coding that is not good. I choose to
+have a swith statement and that I look for the actual cycle and emulate it.
+But the Vic may emulate the 6569 and 6567 two variants, so the cycles may
+depend from parameters and the switch is changes in two switch plus many if.
+So the derived class may only initialize two varibles: the max number of
+cycle and the cycle where we fetch the 0 sprite pointer. This means that the
+code is not coding in a very well faction, because it may emulates 3 different
+Vics. The OOP way is to implements the specific features on one Vic in the
+derived class, but this means that we must rewrite all the methods that emulate
+the cycle (actualy there's two method: fi0low and fi0high) insert the same code
+but in different cycles. But if a rule is to be modified, this means that we
+must modify three equals code in 3 class.
+The other solution is to incapsulated some code into some methods and than in a
+cycle we call that method. So we have to change only one class if a rule changes.
+
+05/12/99
+The understand point of Vic article was the AEC signals: if that rare event
+appears, the AEC signal disable Vic bus, so vic read $ff data and cpu write
+correctly (now I must implement it).
+Another point of coding for vic is if the graphics routine (the routine that
+calculate the graphics data and sprites data): may they be done in other class,
+or may stay in this?
+
+06/12/99
+M6567 become VicII.
+
+07/12/99
+My volatile definition of signals probably changes to effective level, because
+it's more simple to manage all kind off signals.
+
+14/12/99
+Actually I'm thinking how to make Cia emulation cycle exact. The only documentation
+that's I have is the Cia describtion of Cbm manuals. It seems accurate (there's
+a Cia diagram block), but probably not all the features are descrbibe. The other
+question is how to rapresent the TOD, CNT, SP, FLAG ad PC signals. PC is describe
+as 0 in portB handshacking, else 1; FLAG is sensible to negative changes of level,
+and probably the other ar sensible to high changes (not for SP). The speed up
+choiche is to make the signal that are changes sensible as my volatile definition
+(a method is call when that changes are available), but I probably choose to
+use "signaller" interface and make all the signal level. This choice will make
+the project more oop.
+
+But there's some important changes to do; listen:
+A class x1 that implement "signaller" is a chip that has some input signal pins of
+the type declared in "signaller". So when something call x1.notifySignal(yy,...)
+this means that his input signal yy is changed.
+Then the class x2 is a chip that has an output pin connected to the x1 chip, so
+when it's output changes, it will notify to this to the other chip. But the
+chip don't know how is connected, so he notify this to his "Connection" class.
+"Connection" is an abstract class that implements "signaller", that notify the
+passed signals to the right connected chips.
+An examples: the Cia 2 Irq output is connected to Nmi of Cpu and Cartridge, so
+his Connection class may notify this signal converting it from Irq to Nmi for
+both the destination.
+So the abstract of "Connection" is given because the implementation depens by the
+machine we build. "Connection" is declared in "machine" directory for this porpuse.
+Another way is to not build "Connection" and to build the corresponding class
+that implements directly "signaller". This second way is more similar to the actual.
+At this moment the choose is not taken.
+
+25/12/99
+Another point is that the use of IO should be groups with the "Connection". Even if
+a 8 bit I/O port are manage with high level function (write or read to port), the
+bits may be connected to pins that are in "signaller". So, for example, M6526IO
+manage the two 8 bits port and C64M6510IO will manage the connection of them. But
+we must manage even the FLAG, SP, ... and they will be manage by the same class.
+
+A extra point is this, but it be for all the Ice Team projects: a Secret class (for
+Java program) that contain secret message! We are programmers and usually a
+programmer wants to put a secret features to his product. Think abaut game. A player
+will be happy if one day he found that his favorite games contains a features that
+make him invicible, that he can use other things, and so on.
+But we produce free software, so it's impossible (because if the player looks
+at the sources, he found the secret). Yes, but we can allow that a programmer
+puts a piece of not executable code that contain his secret message into the project.
+This is not the same as above, but it's better that nothing.
+So a secret class contain the string abaut the program and the authors, that are
+printed by the program, plus a string for each programmer that can be used for
+insert secret things and are not used (the dimension of string may depens from
+projects dimension, number of Ice Team programmers, ...)
+
+28/12/99
+Here the latest decision about signals:
+Think for clocked chip: when an external signal is sent to them, they see that
+signal when the clock arrive, so is correct to use "notifySignal", else a not
+clocked chip (like PLA82S100) may manage it as soon as possible, so it may be
+advised by a "Monitor" that a signal is changed (like in this implementation).
+But for a chip that give that signal, he don't know the attached chips type, so
+the operation for he may be the same.
+But think again to CIA port: the processor manage the 8 bits port like a group
+of bits, so it's correct to use actually implementation (writeToPort), otherwise
+he give the other signals bit by bit (like IRQ) so it's correct to use notifySignal.
+The only thing to change is the specific implementation of CIA IO class for the
+machine being used it: this class may use again notifySignal if one signal (from
+port of bit) goes to clocked chip and the advice to Monitor if the chip is not
+clocked. So the "Connection" class may not be used.
+
+29/12/99
+Due to the new signals management, even the cartridge emulation may be changed
+from actual.
+Another important point is this:
+when a signals goes to not clocked chips, he notify his changes to a Monitor, so
+all the chip that are connected may read this value.
+The other method is to use the monitors in the chips that are to be notify.
+I'm now thinking how solution is the better.
+
+03/01/2000
+The better solution is probably this:
+The IO class of the chip that has a output signal use "notifySignal" to clocked
+and not cloched connected chips. But if a chip is not clocked, he resume it with
+an "opSignal" to the monitor owned by the not clocked chip (actually the monitor
+is owned by the chip that make the output).
+This means that we use more monitors for the same signal (if there are some chips
+connected), but the resume class will be indipendent by the chip that has resumed
+it. So the actual PLA class may be more machine indipendent.
+Note that actual cpu signal was used with bits position (so max 32 signals are
+possible), but this will be erased for numbered signal.
+
+11/01/2000
+The actual Cartridge and CartridgePort may be changed for having signaller
+interface. In particular there are to create a null Cartridge class that
+implement signaller (this is null in the sense that the signal passed to it
+are descarded) and the abstract CartridgeIO for IO that become C64CartridgeIO
+in the C64 implementation.
+
+08/02/2000
+I'm now defining how to emulate the keyboard and joystick. The ideas are below:
+use a UserEvent class for manage all the user events like keyboard, joystick
+and mouse. This class translate the PC keyboard to C64. There are after 3
+classes: Keyboard, Joystick (in 2 implementation of an abstract class). The
+class Keyboard may manage even the wire and of joystick and cia output using
+the util class WireAnd.
+
+08/04/2000
+Michele Caira is a new Ice Team member. Welcome.
+
+15/04/2000
+Create Sid class for having right construction of other class that use the
+sid. Create the 2 variant of M6567 vic II chips.
+
+16/04/2000
+Creat a matrix keyboard. This use the interface keys, so the UserEvent may
+notify the keys that are pressed or released using the methods in the
+interface.
+
+25/04/2000
+Michele is being creating the TV class using a raster interface. With this
+class will be possible to complete the vic emulation (because we can debug the
+Vic when build it). So, I'm try to think that a pixel to pixel generation,
+with dot-clock, may be made. This choice is motived by:
+1: we emulate the dot clock in the vic
+2: I think that the internal logic of vic use a pixel to pixel generation,
+   because this probalby simplify the internal logic
+3: this probably simplify the emulation
+4: is more simple to detect sprite collision outiside the visible screen
+   region
+but:
+1: 8 pixels generation is faster
+2: and make 100% real emulation
+
+01/05/2000
+The pixel to pixel implementation seems to look good at the moment (but only 
+1 pixel information are implemented, e.g text mode, bitmap mode, invalid
+bitmap1,...)  
+
+10/05/2000
+The sprite implementation (1 pixel) is simple.
+
+20/05/2000
+Start debugging. Michele is writing a new windows implementation, but I test
+the emulator with the actual implementation. Found some minor bugs due to the
+JDK thread handling (must use yield) that Kaffe don't manifest (for Linux).
+
+21/05/2000
+Found a serious error. The Clock cannot be programmed to go at 8MhZ of dot
+clock (I had insert errate data). This means that the structure may be changed.
+One solution is this:
+Clock attends his time only called some Yield, so all must go at the max cpu
+(not the 64) speed (this means use priority to prevent thread synchronization
+error). Then after a Vic frame is completed, a process may attend to
+compensate for the too much speed used. This tecnique permits even to detect
+if the emulation can not go at the max speed.
+Actualy the debug go away using the actual structure. The new will be insert
+after.
+
+24/05/2000
+Found that the screen Y dimension (200 visible) are calculate in errate manner.
+This may depens by border flip flop not correctly updated or raster/rasterX
+invalid update.
+
+26/05/2000
+The IO6/8 may be changed, because with actual implementation the instruction
+of kernal at FDD5 may not be executed correctly.
+The rule is that portData can't give the correct result as now. A use of
+another portBuffer is necessary for remember the actual input/output value of
+port (like in M6510 internal schematics).
+
+31/05/2000
+Correct some bugs in cpu and vic emulation. Some bugs remain in cpu emulation
+(the point where COMMODORE string is print are not reached)
+
+03/06/2000
+Now the Vic need to synchronized the various action that are done in the
+dot-clock, and fi clock. For examples, VMLI is incremented by one after each
+g-access in fi clock, but in dot clock, VMLI is need to read the graphics
+data, so the operation may be done in a right manner for avoid invalid
+addressing.
+
+05/06/2000
+For syncgronized I must use more code, because the Vic use internal structure
+(not completely described in vic article) that are necessary for having the
+right operations between dot clock and fi operations. This means, for
+examples, that data readed in g-accesses (in 4 dot clock completly ticks)
+cannot be used by dot clock in that cycle. 
+The right scheme seems like this:
+  
+FI   00000000000    11111111111
+DOT  01 01 01 01    01 01 01 01 
+OP   D  D  D  DL    D  D  D  DH
+
+The hard point is this:
+ The data read in C access is store in videoMatrix[VMLI] in L
+ The VMLI is incremented by 1 in H
+so only 4 bits (color information) are taken correctly from videoMatrix[VMLI]
+in one cycle when we display it. The solution is that exist a 12 bit buffer
+used by the sequencer that are loaded with the last value of
+videoMatrix[VMLI] (before incrementing VMLI).
+
+where:
+ D=dot operation
+ L=fi low operation
+ H=fi high operation
+
+17/06/2000
+The COMMODORE string appears, but the screen is erased after. Else, the screen
+is one char more dx of the expected, due a bug (or invalid initialization) in
+the Vic emulation.
+
+18/06/2000
+COMMODORE string is ok. There was a bugs in the calculation of cross in the
+BRANCH instruction. Now, all the addressing that use cross must be controlled
+due to the potential same bugs.
+
+24/06/2000
+Now it's difficult to adjust Vic graphics generation. Actual (with the value
+of first visible x.coo e Last visible x.coo) it takes 405 visible pixel for
+line instead of 403 for PAL timing. Then there's one null char after the sx
+border (probably 8 pixels of delay) and finally sx border is bigger thar dx
+border.
+The answers may be found in Pal Timing article that I'm now studing.
+
+25/06/2000
+The answers is that i probably must use buffer for correctly manage access and
+display, so for now I patch the code for look right in normal functions.
+Now, I will implement game cartridge, so the Vic will be tested with graphics
+and sprites. The cartridge scheme is take from my Lazarian cart.
+
+16/07/2000
+Made a debug class for loading prg program: it now possible to use the Test
+Suite for the emulator.
+
+21/07/2000
+Test Suite 2.15:    START: block 12 failed
+correct tha ADC Zero flag calculation, so START now works correctly.
+
+23/07/2000
+Test Suite 2.15: LDAB, CMPB:  same ouput error
+correct Break and Unused flag of cpu emulation
+
+28/07/2000
+CLCM, JMPW, JMPI ok
+
+05/08/2000
+The disassembly of M6510 is too slow for big (>3Kb) binary code. I think this
+depend because String are used instead of StringBuffer (e.g. Pascal version
+was very, very faster than this).
+
+08/08/2000
+In comp.sys.cbm, Christer Palm has shown how the keyboard matrix is
+reversible (well, I don't figure this possible before now), and how to manage
+the ports. This mean that more code are to be added. Thanks Christer.
+In particular, WireAnd may be make reversible too.
+
+12/08/2000
+Actual fram rate is 0.125 frame/sec, because one frame is generate is 8 sec in
+PII 266Mhz. But I have misurate how much time the JVM spend for threads
+synchronization: if we run only Clock and in run of VicII only the monitor of
+Clock  are called (so, no dotClock, fiLow, fiHigh and cpu instruction emulation
+are called), it spends 5 minutes for generating 1 second of emulated time (50
+frames) instead of 6m 40s. So only 2 thread sincronization (to a total of more
+than 5) spend the 75% of cpu time!!!
+If I apply this little patch: don't call the externalMonitor.opWait() in the
+run of VicII and executes a yield() instead, a frame is generate in 4,3 second
+(0.232 f/s), so about 3m 50s for 1 second of emulated time.
+But the JDK of Sun for Linux don't repaint the screen, while the Blackdown
+stay 5.3 second but redraw the screen.
+
+13/08/2000
+The CPUTEST show some errors in cpu I/O. The solution is to use the IO8
+instead IO6 (the fact that the upper 2 bits are not used don't means that they
+don't exists - e.g. see cpu temperature measurement probably found).
+LDAB ok.
+
+14/08/2000
+CPUTEST shows that IO8 is will become to much complicated for the cpu I/O. So
+it must be general and an IO8Cpu will be probably created for the cpu I/O.
+The other thing is that it will be probably use a byte access for internal
+operation (for speedup emulation).
+
+16/08/2000
+One year later. Well, with the help of Michele, the actual point is good,
+because the main screen appears :-).
+
+19/08/2000
+LDAZ, LDAZX, LDAA ok.
+
+20/08/2000
+With simple programs that shows sprites, correct bugs in VicII. Now the
+sprites is correctly visualized until the last line, then it don't appears.
+
+21/08/2000
+The last line is correctly not visualized with actual implementation, so
+probably there are some things in Vic Article not followed in true way, listen:
+
+in cycle 55 and 56 McBase is cleared and DMA can start
+in cycle 56 Mc is loaded from McBase
+in cycle 15 McBase add by 2 (if exp. f.f. set)
+in cycle 16 McBase add by 1 (if exp. f.f. set)
+in cycle 16 if MCbase=63 display off
+
+So, if sprite may be write at raster line 200, we obtain:
+  raster line     MCBase at cycle 17   MC at cycle 17    Display
+   200                   xx                   xx            none
+   201                    3                   3             1line
+   202                    6                   6             2line
+   ...
+   220                    60                  60            20line      
+   221                    63                  63            none
+
+27/04/2001
+The project goes to Sourceforge.
+
+16/08/2001
+Two years later. Well, now JC64Dis is working. I hope to be able to add more
+code soon.
+
+03/11/2001
+Ok, take evidence of when delay is generated from reading the data and showing
+from VicII:
+
+phi0:   0 1 0 1 0 1 0 1
+vic:    r c g c g c g c
+       |   | | | |
+xcoo:  0   0 0 0 0
+       0   1 1 1 2
+       c   4 8 c 0
+
+graph        |0 1|0 2|
+
+signal           |0 1|1 2|
+           |12 p.|
+
+So I find that the cycle in VicII was not initialize in a correct way. However,
+it is not clear where the delay is generated: if we assume that it is generaten
+all (8bits) in the color generation, actual implementation work correctly
+without buffer (and if we not read the lighpen position).
+
+08/01/2002
+For the last sprite lines, I'm thinking of disable sprite display when the DMA
+for sprites is turned on if needed. This will resolve the problems.
+Else I would introduce some more modifications:
+1) add patterns for better managing of the class
+2) use the time based onto one frame. So the emulation will go at the max speed
+for one frame, then it is checked when the other frame will be generated
+(actually when was to generate in the past for having real-time...)
+This need that is to use another monitor with multi values that the chips that
+have start an operation will signal the caller when they finish (e.g the vic notify
+cpu and exp. port, they notify to the vic when they finish).
+3) Insert the needed code for having the monitor (not thesemaphore, but the tool
+for stepping into instructions) for both VIC and CPU.
+
+This require lot of work, I hope to come soon with the modifications.

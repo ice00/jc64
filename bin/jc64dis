@@ -1,0 +1,3 @@
+#!/bin/sh
+# executing jc64 disassembler java programs
+  java -cp /home/ice/SRC/cvsroot/jc64/netbeans/dist/jc64.jar sw_emulator.software.FileDasm 
