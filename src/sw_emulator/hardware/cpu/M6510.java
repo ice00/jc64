@@ -2132,7 +2132,7 @@ public class M6510 extends Thread implements powered, signaller {
     p0=load(regPC);               // read next instruction byte (forget it)
     clock();                      // 2
 
-    store(regS--, regP);          // push register on stack, decrement S
+    store(regS--, regP| P_BREAK); // push register on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
     clock();                      // 3
@@ -3436,6 +3436,11 @@ public class M6510 extends Thread implements powered, signaller {
       if (sigRESET==1) {
         //reset();
       }
+      
+      // do nothing until the bus is available
+      while (!bus.isInitialized()) { // there's a bus?
+        yield(); // no, attend power
+      }
 
       if (!power) {
         regA=0;
@@ -3449,6 +3454,11 @@ public class M6510 extends Thread implements powered, signaller {
         while (!power) {
           yield();                              // give mutex to other threads
         }
+        
+              // do nothing until the bus is available
+      while (!bus.isInitialized()) { // there's a bus?
+        yield(); // no, attend power
+      }
 
         regPC=bus.load(regPC, view, sigAEC)+
              (bus.load(regPC+1, view, sigAEC)<<8);
@@ -3474,6 +3484,7 @@ public class M6510 extends Thread implements powered, signaller {
     switch (type) {
       case S_IRQ:                                // interrupt IRQ
         sigIRQ=value;
+        if (value==0) irqPending=false;
         break;
       case S_NMI:                                // interrupt NMI
         sigNMI=value;
