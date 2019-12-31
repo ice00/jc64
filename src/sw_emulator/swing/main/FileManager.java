@@ -162,6 +162,9 @@ public class FileManager {
         if (in.readBoolean()) project.memory[i].userComment=in.readUTF();
         else project.memory[i].userComment=null;
         
+        if (in.readBoolean()) project.memory[i].userBlockComment=in.readUTF();
+        else project.memory[i].userBlockComment=null;
+        
         if (in.readBoolean()) project.memory[i].dasmLocation=in.readUTF();
         else project.memory[i].dasmLocation=null;
         
@@ -224,6 +227,13 @@ public class FileManager {
           } else {
               out.writeBoolean(false);
             }
+          
+          if (memory.userBlockComment!=null) {
+              out.writeBoolean(true);
+              out.writeUTF(memory.userBlockComment);
+          } else {
+              out.writeBoolean(false);
+            }         
           
           if (memory.dasmLocation!=null) {
               out.writeBoolean(true);

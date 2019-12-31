@@ -142,6 +142,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddCommentActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddBlock">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/block.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Add user block comment"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddBlockActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUserLabel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -363,8 +374,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar" max="32767" attributes="0"/>
-          <Component id="jSplitPaneExternal" alignment="0" pref="738" max="32767" attributes="0"/>
+          <Component id="jToolBar" pref="771" max="32767" attributes="0"/>
+          <Component id="jSplitPaneExternal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -372,7 +383,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jToolBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSplitPaneExternal" pref="557" max="32767" attributes="0"/>
+              <Component id="jSplitPaneExternal" pref="620" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -500,7 +511,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClearUMemActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonClearUMem1">
+        <Component class="javax.swing.JButton" name="jButtonAddUserComm">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/sw_emulator/swing/icons/comm.png"/>
@@ -511,10 +522,24 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClearUMem1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUserCommActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonClearUMem2">
+        <Component class="javax.swing.JButton" name="jButtonAddUserBlock">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/sw_emulator/swing/icons/block.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Add a block user comment"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUserBlockActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonAddUserLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/sw_emulator/swing/icons/mem2.png"/>
@@ -525,7 +550,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClearUMem2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUserLabelActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonMarkCode">
@@ -779,7 +804,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemory.getData()[rowIndex];&#xa;      switch (dataTableModelMemory.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemory.getData()[rowIndex];&#xa;      switch (dataTableModelMemory.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);"/>
               </AuxValues>
             </Component>

@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing;
 
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -30,6 +31,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
@@ -141,8 +144,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorButton1 = new javax.swing.JToolBar.Separator();
         jButtonClearDMem = new javax.swing.JButton();
         jButtonClearUMem = new javax.swing.JButton();
-        jButtonClearUMem1 = new javax.swing.JButton();
-        jButtonClearUMem2 = new javax.swing.JButton();
+        jButtonAddUserComm = new javax.swing.JButton();
+        jButtonAddUserBlock = new javax.swing.JButton();
+        jButtonAddUserLabel = new javax.swing.JButton();
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
@@ -193,6 +197,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                         case UL:
                         if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;
                         break;
+                        case UB:
+                        if ((Boolean)getValueAt(rowIndex, colIndex)) tip="<html>"+memory.userBlockComment.replace("\n", "<br>")+"</html>";
+                        break;
                     }
                 } catch (RuntimeException e1) {
                     //catch null pointer exception if mouse is over an empty line
@@ -216,6 +223,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemClearDMem = new javax.swing.JMenuItem();
         jMenuItemClearUMem = new javax.swing.JMenuItem();
         jMenuItemAddComment = new javax.swing.JMenuItem();
+        jMenuItemAddBlock = new javax.swing.JMenuItem();
         jMenuItemUserLabel = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
@@ -343,29 +351,41 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBar.add(jButtonClearUMem);
 
-        jButtonClearUMem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/comm.png"))); // NOI18N
-        jButtonClearUMem1.setToolTipText("Add user comment");
-        jButtonClearUMem1.setFocusable(false);
-        jButtonClearUMem1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonClearUMem1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonClearUMem1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddUserComm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/comm.png"))); // NOI18N
+        jButtonAddUserComm.setToolTipText("Add user comment");
+        jButtonAddUserComm.setFocusable(false);
+        jButtonAddUserComm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAddUserComm.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAddUserComm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClearUMem1ActionPerformed(evt);
+                jButtonAddUserCommActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClearUMem1);
+        jToolBar.add(jButtonAddUserComm);
 
-        jButtonClearUMem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem2.png"))); // NOI18N
-        jButtonClearUMem2.setToolTipText("Add user label");
-        jButtonClearUMem2.setFocusable(false);
-        jButtonClearUMem2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonClearUMem2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonClearUMem2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddUserBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/block.png"))); // NOI18N
+        jButtonAddUserBlock.setToolTipText("Add a block user comment");
+        jButtonAddUserBlock.setFocusable(false);
+        jButtonAddUserBlock.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAddUserBlock.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAddUserBlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClearUMem2ActionPerformed(evt);
+                jButtonAddUserBlockActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClearUMem2);
+        jToolBar.add(jButtonAddUserBlock);
+
+        jButtonAddUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem2.png"))); // NOI18N
+        jButtonAddUserLabel.setToolTipText("Add user label");
+        jButtonAddUserLabel.setFocusable(false);
+        jButtonAddUserLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAddUserLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAddUserLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddUserLabelActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonAddUserLabel);
 
         jButtonMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/code.png"))); // NOI18N
         jButtonMarkCode.setToolTipText("Mark the selected addresses as code");
@@ -686,6 +706,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMarkCode.add(jMenuItemAddComment);
 
+    jMenuItemAddBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/block.png"))); // NOI18N
+    jMenuItemAddBlock.setText("Add user block comment");
+    jMenuItemAddBlock.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemAddBlockActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemAddBlock);
+
     jMenuItemUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem2.png"))); // NOI18N
     jMenuItemUserLabel.setText("Add user label");
     jMenuItemUserLabel.addActionListener(new java.awt.event.ActionListener() {
@@ -848,15 +877,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+        .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE))
+            .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
     );
 
     pack();
@@ -1040,21 +1069,29 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_FINDS);
     }//GEN-LAST:event_jButtonFindSourceActionPerformed
 
-    private void jButtonClearUMem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearUMem1ActionPerformed
+    private void jButtonAddUserCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserCommActionPerformed
       execute(MEM_ADDCOMM);
-    }//GEN-LAST:event_jButtonClearUMem1ActionPerformed
+    }//GEN-LAST:event_jButtonAddUserCommActionPerformed
 
     private void jMenuItemAddCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddCommentActionPerformed
       execute(MEM_ADDCOMM);
     }//GEN-LAST:event_jMenuItemAddCommentActionPerformed
 
-    private void jButtonClearUMem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearUMem2ActionPerformed
+    private void jButtonAddUserLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserLabelActionPerformed
       execute(MEM_ADDLABEL);
-    }//GEN-LAST:event_jButtonClearUMem2ActionPerformed
+    }//GEN-LAST:event_jButtonAddUserLabelActionPerformed
 
     private void jMenuItemUserLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserLabelActionPerformed
       execute(MEM_ADDLABEL);
     }//GEN-LAST:event_jMenuItemUserLabelActionPerformed
+
+    private void jButtonAddUserBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserBlockActionPerformed
+      execute(MEM_ADDBLOCK);
+    }//GEN-LAST:event_jButtonAddUserBlockActionPerformed
+
+    private void jMenuItemAddBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddBlockActionPerformed
+      execute(MEM_ADDBLOCK);
+    }//GEN-LAST:event_jMenuItemAddBlockActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1093,10 +1130,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddUserBlock;
+    private javax.swing.JButton jButtonAddUserComm;
+    private javax.swing.JButton jButtonAddUserLabel;
     private javax.swing.JButton jButtonClearDMem;
     private javax.swing.JButton jButtonClearUMem;
-    private javax.swing.JButton jButtonClearUMem1;
-    private javax.swing.JButton jButtonClearUMem2;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonConfigure;
     private javax.swing.JButton jButtonDisassemble;
@@ -1117,6 +1155,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
     private javax.swing.JMenuItem jMenuItemClearDMem;
     private javax.swing.JMenuItem jMenuItemClearUMem;
@@ -1227,6 +1266,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_MARKDATA:
          markAsData();  
+         break;
+       case MEM_ADDBLOCK:
+         addBlock();
          break;
          
        case HELP_CONTENTS: 
@@ -1573,6 +1615,29 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.userLocation=label;
       dataTableModelMemory.fireTableDataChanged(); 
     }
+  }
+
+  /**
+   * Add a block for comment
+   */
+  private void addBlock() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+      
+    MemoryDasm mem= project.memory[row];
+    JTextArea area=new JTextArea(20,20);
+    area.setText(mem.userBlockComment);
+    area.setFont(new Font("monospaced", Font.PLAIN, 12));
+
+    JScrollPane scrollPane = new JScrollPane(area);
+    
+    if (JOptionPane.showConfirmDialog(null, scrollPane, "Add a multi-lines block comment", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+      mem.userBlockComment=area.getText();
+      dataTableModelMemory.fireTableDataChanged();  
+    }              
   }
   
 }

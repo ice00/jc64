@@ -35,8 +35,11 @@ public class MemoryDasm {
   /** Memory comment from dasm disassemble */
   public String dasmComment;
   
-  /** Memory comment from user (if not null it surclass the dasm one) */
+  /** Memory comment from user (if not null it surclass the dasm one) */  
   public String userComment;
+  
+  /** Memory block comment from user */
+  public String userBlockComment;
   
   /** Location defined by dasm disassemble */
   public String dasmLocation;

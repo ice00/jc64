@@ -527,10 +527,20 @@ public class M6510Dasm implements disassembler {
     this.pos=pos;;
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
-        mem=memory[(int)pc];
-        isCode=(mem.isCode || (!mem.isData && option.useAsCode));
+      mem=memory[(int)pc];
+      isCode=(mem.isCode || (!mem.isData && option.useAsCode));
         
-        if (isCode) {                    
+        if (isCode) {       
+          // add block if user declare it
+          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+            // split by new line
+            String[] lines = mem.userBlockComment.split("\\r?\\n");
+            for (String line : lines) {
+              if ("".equals(line)) result.append("\n");
+              else result.append(";").append(line).append("\n");   
+            }  
+          }  
+            
           // add the label if it was declared by dasm or user           
           if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
           else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
@@ -573,6 +583,16 @@ public class M6510Dasm implements disassembler {
           pos=this.pos;
           pc=this.pc;
         } else {
+            // add block if user declare it
+            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+              // split by new line
+              String[] lines = mem.userBlockComment.split("\\r?\\n");
+              for (String line : lines) {
+                if ("".equals(line)) result.append("\n");
+                else result.append(";").append(line).append("\n");   
+              }  
+            }             
+            
             // add the label if it was declared by dasm or user   
             label=null;
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
@@ -642,10 +662,20 @@ public class M6510Dasm implements disassembler {
     this.pos=pos;;
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
-         mem=memory[(int)pc];
-        isCode=(mem.isCode || (!mem.isData && option.useAsCode));
+      mem=memory[(int)pc];
+      isCode=(mem.isCode || (!mem.isData && option.useAsCode));
         
-        if (isCode) {                    
+        if (isCode) {                
+          // add block if user declare it
+          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+            // split by new line
+            String[] lines = mem.userBlockComment.split("\\r?\\n");
+            for (String line : lines) {
+              if ("".equals(line)) result.append("\n");
+              else result.append(";").append(line).append("\n");   
+            }  
+          }  
+            
           // add the label if it was declared by dasm or user           
           if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
           else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
@@ -679,6 +709,16 @@ public class M6510Dasm implements disassembler {
           pos=this.pos;
           pc=this.pc;
         } else {
+            // add block if user declare it
+            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+              // split by new line
+              String[] lines = mem.userBlockComment.split("\\r?\\n");
+              for (String line : lines) {
+                if ("".equals(line)) result.append("\n");
+                else result.append(";").append(line).append("\n");   
+              }  
+            }             
+            
             // add the label if it was declared by dasm or user   
             label=null;
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;

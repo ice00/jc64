@@ -101,6 +101,10 @@ public interface userAction {
   /** Memory add user label */
   public static final int MEM_ADDLABEL = 24;
   
+  /** Memory add user block comment */
+  public static final int MEM_ADDBLOCK = 25;
+  
+  
   /**
    * Execute the passed user action
    * 
