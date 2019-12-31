@@ -104,6 +104,9 @@ public interface userAction {
   /** Memory add user block comment */
   public static final int MEM_ADDBLOCK = 25;
   
+  /** Memory clear dasm label  */
+  public static final int MEM_CLEARDLABEL = 26;
+  
   
   /**
    * Execute the passed user action

@@ -131,6 +131,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemClearUMemActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClearDLabel">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser2.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Clear dasm automatic label"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemClearDLabelActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddComment">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -374,7 +385,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar" pref="771" max="32767" attributes="0"/>
+          <Component id="jToolBar" max="32767" attributes="0"/>
           <Component id="jSplitPaneExternal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -509,6 +520,20 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClearUMemActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonClearDLabel">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/sw_emulator/swing/icons/eraser2.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Erase dasm automatic label"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClearDLabelActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAddUserComm">
@@ -808,7 +833,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemory.getData()[rowIndex];&#xa;      switch (dataTableModelMemory.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);&#xa;jTableMemory.getColumnModel().getColumn(0).setPreferredWidth(310);&#xa;"/>
               </AuxValues>
             </Component>
           </SubComponents>

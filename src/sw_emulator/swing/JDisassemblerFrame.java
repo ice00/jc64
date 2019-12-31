@@ -144,6 +144,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorButton1 = new javax.swing.JToolBar.Separator();
         jButtonClearDMem = new javax.swing.JButton();
         jButtonClearUMem = new javax.swing.JButton();
+        jButtonClearDLabel = new javax.swing.JButton();
         jButtonAddUserComm = new javax.swing.JButton();
         jButtonAddUserBlock = new javax.swing.JButton();
         jButtonAddUserLabel = new javax.swing.JButton();
@@ -222,6 +223,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuMarkCode = new javax.swing.JMenu();
         jMenuItemClearDMem = new javax.swing.JMenuItem();
         jMenuItemClearUMem = new javax.swing.JMenuItem();
+        jMenuItemClearDLabel = new javax.swing.JMenuItem();
         jMenuItemAddComment = new javax.swing.JMenuItem();
         jMenuItemAddBlock = new javax.swing.JMenuItem();
         jMenuItemUserLabel = new javax.swing.JMenuItem();
@@ -350,6 +352,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonClearUMem);
+
+        jButtonClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser2.png"))); // NOI18N
+        jButtonClearDLabel.setToolTipText("Erase dasm automatic label");
+        jButtonClearDLabel.setFocusable(false);
+        jButtonClearDLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonClearDLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonClearDLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearDLabelActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonClearDLabel);
 
         jButtonAddUserComm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/comm.png"))); // NOI18N
         jButtonAddUserComm.setToolTipText("Add user comment");
@@ -604,6 +618,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jTableMemory.setModel(dataTableModelMemory);
     jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);
+    jTableMemory.getColumnModel().getColumn(0).setPreferredWidth(310);
     jScrollPaneMemory.setViewportView(jTableMemory);
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
@@ -701,6 +716,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMarkCode.add(jMenuItemClearUMem);
+
+    jMenuItemClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser2.png"))); // NOI18N
+    jMenuItemClearDLabel.setText("Clear dasm automatic label");
+    jMenuItemClearDLabel.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemClearDLabelActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemClearDLabel);
 
     jMenuItemAddComment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/comm.png"))); // NOI18N
     jMenuItemAddComment.setText("Add user comment");
@@ -882,7 +906,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1146,6 +1170,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
+    private void jMenuItemClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearDLabelActionPerformed
+      execute(MEM_CLEARDLABEL);  
+    }//GEN-LAST:event_jMenuItemClearDLabelActionPerformed
+
+    private void jButtonClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearDLabelActionPerformed
+      execute(MEM_CLEARDLABEL);  
+    }//GEN-LAST:event_jButtonClearDLabelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1186,6 +1218,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonAddUserBlock;
     private javax.swing.JButton jButtonAddUserComm;
     private javax.swing.JButton jButtonAddUserLabel;
+    private javax.swing.JButton jButtonClearDLabel;
     private javax.swing.JButton jButtonClearDMem;
     private javax.swing.JButton jButtonClearUMem;
     private javax.swing.JButton jButtonClose;
@@ -1210,6 +1243,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
+    private javax.swing.JMenuItem jMenuItemClearDLabel;
     private javax.swing.JMenuItem jMenuItemClearDMem;
     private javax.swing.JMenuItem jMenuItemClearUMem;
     private javax.swing.JMenuItem jMenuItemCloseProject;
@@ -1322,6 +1356,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_ADDBLOCK:
          addBlock();
+         break;
+       case MEM_CLEARDLABEL:
+         clearDLabel();  
          break;
          
        case HELP_CONTENTS: 
@@ -1661,7 +1698,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         JOptionPane.showMessageDialog(this, "Label too long. Max alloed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
         return;
       }
-      
+        
+      if (label.length()<5) {
+        JOptionPane.showMessageDialog(this, "Label too short. Min alloed=5", "Error", JOptionPane.ERROR_MESSAGE);     
+        return;
+      }    
+            
       // see if the label is already defined
       for (MemoryDasm memory : project.memory) {
         if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {
@@ -1697,5 +1739,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();  
     }              
   }
-  
+
+  /**
+   * Clear dasm label (can be regenerated next time)
+   */
+  private void clearDLabel() {
+    MemoryDasm mem;   
+      
+    int rows[]=jTableMemory.getSelectedRows();
+        
+    for (int i=0; i<rows.length; i++) {
+      mem= project.memory[rows[i]];
+      if (mem.dasmLocation!=null) mem.dasmLocation=null;
+    }
+    
+    dataTableModelMemory.fireTableDataChanged();    
+  }  
 }

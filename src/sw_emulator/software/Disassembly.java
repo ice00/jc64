@@ -260,7 +260,7 @@ public class Disassembly {
         tmp.append("\n");
         tmp.append(sid.cdasm(inB, sidPos, inB.length, sidPC));
         disassembly=tmp.toString(); 
-    }
+      }
      
   }
   
@@ -292,25 +292,43 @@ public class Disassembly {
    * @param asSource true if output should be as a source file
    */
   private void disassemlyPRG(boolean asSource) {
-     C64Dasm prg=new C64Dasm();
-     prg.language=option.commentLanguagePreview;
-     prg.setMemory(memory);
-     prg.setOption(option);
-     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
+    C64Dasm prg=new C64Dasm();
+    prg.language=option.commentLanguagePreview;
+    prg.setMemory(memory);
+    prg.setOption(option);
+    int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      
-     // calculate start/end address
-     startAddress=start;
-     endAddress=inB.length-1+startAddress;
-     startBuffer=2;
-     endBuffer=(endAddress-startAddress);
+    // calculate start/end address
+    startAddress=start;
+    endAddress=inB.length-1+startAddress;
+    startBuffer=2;
+    endBuffer=(endAddress-startAddress);
+    
+    markInside(startAddress, endAddress);
      
-     markInside(startAddress, endAddress);
+    // search for SID frequency table
+    SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
+            option.sidFreqLoLabel, option.sidFreqHiLabel);
      
-     StringBuilder tmp=new StringBuilder();
-     tmp.append(fileType.getDescription(inB));
-     tmp.append("\n");
-     tmp.append(prg.cdasm(inB, 2, inB.length, start));
-     disassembly=tmp.toString();
+    StringBuilder tmp=new StringBuilder();
+    
+    if (asSource) {
+        
+      tmp.append("  processor 6502\n\n");
+
+      tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
+      tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
+      tmp.append("\n");
+      tmp.append("  .org ").append(ShortToExe(start)).append("\n\n");
+      
+      tmp.append(prg.csdasm(inB, 2, inB.length, start));
+      source=tmp.toString();
+    } else {    
+        tmp.append(fileType.getDescription(inB));
+        tmp.append("\n");
+        tmp.append(prg.cdasm(inB, 2, inB.length, start));
+        disassembly=tmp.toString();
+      }       
   }    
   
  /**

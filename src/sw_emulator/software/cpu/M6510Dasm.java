@@ -1006,6 +1006,6 @@ public class M6510Dasm implements disassembler {
    * @param addr the address to add as label
    */
   private void setLabel(long addr) {
-    memory[(int)addr].dasmLocation="A"+ShortToExe((int)addr);
+    if (memory[(int)addr].isInside) memory[(int)addr].dasmLocation="A"+ShortToExe((int)addr);
   }
 }
