@@ -73,6 +73,7 @@ public class FileManager {
       option.commentLanguagePreview = in.readByte();     
       option.useAsCode = in.readBoolean();
       option.eraseDComm = in.readBoolean();
+      option.maxLabelLength = in.readInt();
       
       option.psidInitSongsLabel = in.readUTF();
       option.psidPlaySoundsLabel = in.readUTF();
@@ -107,6 +108,7 @@ public class FileManager {
       out.writeByte(option.commentLanguagePreview);
       out.writeBoolean(option.useAsCode);
       out.writeBoolean(option.eraseDComm);
+      out.writeInt(option.maxLabelLength);
       
       out.writeUTF(option.psidInitSongsLabel);
       out.writeUTF(option.psidPlaySoundsLabel);

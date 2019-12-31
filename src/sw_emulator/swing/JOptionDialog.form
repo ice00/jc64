@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupOpcodeFormatting">
     </Component>
@@ -86,7 +86,7 @@
                                   <Component id="jLabel1" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jCheckBoxUndefinedCode" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -109,6 +109,11 @@
                                       </Group>
                                       <Component id="jCheckBoxOpcodeFormattingPreview" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxEraseDComm" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelMaxLength" min="-2" pref="381" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxLength" min="-2" pref="52" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace pref="46" max="32767" attributes="0"/>
                               </Group>
@@ -138,7 +143,12 @@
                           <Component id="jCheckBoxEraseDComm" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCheckBoxUndefinedCode" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="308" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jSpinnerMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="286" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -240,6 +250,21 @@
                   <Events>
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUndefinedCodeItemStateChanged"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JSpinner" name="jSpinnerMaxLength">
+                  <Properties>
+                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                      <SpinnerModel initial="25" maximum="40" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxLengthStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelMaxLength">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Max lenght of label (some assembler has a limit):"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

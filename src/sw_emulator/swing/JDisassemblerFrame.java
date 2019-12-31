@@ -589,6 +589,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     }
     );
+    rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaSourceMouseClicked(evt);
+        }
+    });
     jScrollPaneRight.setViewportView(rSyntaxTextAreaSource);
 
     jSplitPaneInternal.setRightComponent(jScrollPaneRight);
@@ -1037,11 +1042,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
       try {
+        int addr=-1;  
         // get starting position of clicked point  
         int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
         
-        // address of this instruction
-        int addr=Integer.decode("0x"+rSyntaxTextAreaDis.getDocument().getText(pos,4));
+        // get the first word of the string
+        String str=rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength);
+        str=str.contains(" ") ? str.split(" ")[0] : str;  
+ 
+        if (str.length()==4) addr=Integer.decode("0x"+str);
+        else {
+          str=str.contains(":") ? str.split(":")[0] : str;  
+          for (MemoryDasm memory : project.memory) {
+            if (str.equals(memory.dasmLocation) || str.equals(memory.userLocation)) {
+                addr=memory.address;
+                break;      
+            }    
+          }  
+        }
+        
+        if (addr==-1) return;
                 
         //scroll to that point
         jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
@@ -1092,6 +1112,39 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jMenuItemAddBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddBlockActionPerformed
       execute(MEM_ADDBLOCK);
     }//GEN-LAST:event_jMenuItemAddBlockActionPerformed
+
+    private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
+      try {
+        int addr=-1;  
+        // get starting position of clicked point  
+        int pos=Utilities.getRowStart(rSyntaxTextAreaSource, rSyntaxTextAreaSource.getCaretPosition());
+        
+        // get the first word of the string
+        String str=rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength);
+        str=str.contains(" ") ? str.split(" ")[0] : str; 
+ 
+        if (str.length()==4) addr=Integer.decode("0x"+str);
+        else {
+          str=str.contains(":") ? str.split(":")[0] : str;  
+          for (MemoryDasm memory : project.memory) {
+            if (str.equals(memory.dasmLocation) || str.equals(memory.userLocation)) {
+                addr=memory.address;
+                break;      
+            }    
+          }  
+        }
+        
+        if (addr==-1) return;
+                
+        //scroll to that point
+        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        
+        // select this row
+        jTableMemory.setRowSelectionInterval(addr, addr);
+      } catch (Exception e) {
+          System.err.println(e);
+      }
+    }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1601,6 +1654,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       if (label.contains(" ")) {
         JOptionPane.showMessageDialog(this, "Label must not contain spaces", "Error", JOptionPane.ERROR_MESSAGE);   
+        return;
+      }
+      
+      if (label.length()>option.maxLabelLength) {
+        JOptionPane.showMessageDialog(this, "Label too long. Max alloed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
         return;
       }
       

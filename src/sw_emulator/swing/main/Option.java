@@ -47,6 +47,9 @@ public class Option {
   /** Erase Dasm comment when convering to data*/
   public boolean eraseDComm = true;
   
+  /** Max length of a label */
+  public int maxLabelLength=25;
+  
   
   
   /** Psid init song label to use as user defined */
@@ -60,4 +63,5 @@ public class Option {
   
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
+
 }

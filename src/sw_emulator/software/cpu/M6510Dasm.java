@@ -523,6 +523,7 @@ public class M6510Dasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
+    int counter=0;               // data aligment counter
     
     this.pos=pos;;
     this.pc=pc;
@@ -530,7 +531,13 @@ public class M6510Dasm implements disassembler {
       mem=memory[(int)pc];
       isCode=(mem.isCode || (!mem.isData && option.useAsCode));
         
-        if (isCode) {       
+        if (isCode) {    
+          if (counter>0) {
+            // we were on data, so close it
+            result.append("\n");
+            counter=0;
+          }   
+            
           // add block if user declare it
           if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
             // split by new line
@@ -584,7 +591,12 @@ public class M6510Dasm implements disassembler {
           pc=this.pc;
         } else {
             // add block if user declare it
-            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                
+              if (counter>0) {
+                // we where on a line with many bytes, so close it and start from 0
+                result.append("\n");
+                counter=0;
+              }                 
               // split by new line
               String[] lines = mem.userBlockComment.split("\\r?\\n");
               for (String line : lines) {
@@ -599,6 +611,12 @@ public class M6510Dasm implements disassembler {
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
             if (label!=null) {
+              if (counter>0) {
+                // we where on a line with many bytes, so close it and start from 0
+                result.append("\n");
+                counter=0;
+              }                 
+                
               result.append(label).append(":");
                         
               if (mem.userComment!=null) {
@@ -612,26 +630,20 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
+            if (counter>3) {
+              // we already are above the limit, so split the line
+              result.append("\n");
+              counter=0;
+            }
+            
+            if (counter==0) tmp2="  .byte $";
+            else tmp2=", $";
+            
             // this is a data declaration
-            tmp2=ShortToExe((int)pc)+"  .byte $"+ByteToExe(Unsigned.done(buffer[pos]));
+            result.append(tmp2).append(ByteToExe(Unsigned.done(buffer[pos])));
             pos++;
             pc++;
-            if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-              tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-              pos++;
-              pc++;       
-              if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-                tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-                pos++;
-                pc++;       
-                if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-                  tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-                  pos++;
-                  pc++;                                          
-                }                                    
-              }                                    
-            }                      
-            result.append(tmp2).append("\n");
+            counter++;
             
             this.pos=pos;
             this.pc=pc;            
@@ -658,6 +670,7 @@ public class M6510Dasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
+    int counter=0;               // data aligment counter
     
     this.pos=pos;;
     this.pc=pc;
@@ -665,7 +678,13 @@ public class M6510Dasm implements disassembler {
       mem=memory[(int)pc];
       isCode=(mem.isCode || (!mem.isData && option.useAsCode));
         
-        if (isCode) {                
+        if (isCode) {        
+          if (counter>0) {
+            // we were on data, so close it
+            result.append("\n");
+            counter=0;
+          }  
+               
           // add block if user declare it
           if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
             // split by new line
@@ -711,6 +730,12 @@ public class M6510Dasm implements disassembler {
         } else {
             // add block if user declare it
             if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
+              if (counter>0) {
+                // we where on a line with many bytes, so close it and start from 0
+                result.append("\n");
+                counter=0;
+              } 
+                
               // split by new line
               String[] lines = mem.userBlockComment.split("\\r?\\n");
               for (String line : lines) {
@@ -725,6 +750,12 @@ public class M6510Dasm implements disassembler {
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
             if (label!=null) {
+              if (counter>0) {
+                // we where on a line with many bytes, so close it and start from 0
+                result.append("\n");
+                counter=0;
+              }   
+                
               result.append(label).append(":");
                         
               if (mem.userComment!=null) {
@@ -738,28 +769,20 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
+            if (counter>3) {
+              // we already are above the limit, so split the line
+              result.append("\n");
+              counter=0;
+            }
+            
+            if (counter==0) tmp2="  .byte $";
+            else tmp2=", $";
+            
             // this is a data declaration
-            tmp2="  .byte $"+ByteToExe(Unsigned.done(buffer[pos]));
+            result.append(tmp2).append(ByteToExe(Unsigned.done(buffer[pos])));
             pos++;
             pc++;
-            
-            
-            if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-              tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-              pos++;
-              pc++;       
-              if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-                tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-                pos++;
-                pc++;       
-                if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
-                  tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
-                  pos++;
-                  pc++;                                          
-                }                                    
-              }                                    
-            }                      
-            result.append(tmp2).append("\n");
+            counter++;
             
             this.pos=pos;
             this.pc=pc;            

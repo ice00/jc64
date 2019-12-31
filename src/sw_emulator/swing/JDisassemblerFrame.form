@@ -772,6 +772,9 @@
                     </Property>
                     <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogSource=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaSource);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaSource.getSelectedText();&#xa;      }&#xa;}&#xa;);"/>
                   </AuxValues>
