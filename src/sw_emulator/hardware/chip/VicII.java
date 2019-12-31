@@ -461,6 +461,7 @@ public abstract class VicII extends Thread implements powered,
           // attend that the connected circuits have finish
           while (!intMonitor.isFinish()) {
             yield();
+            ///intMonitor.opWait2();
           }          
           intMonitor.opSignal();                   // clock tick at 1/8 of dot
           break;
@@ -472,6 +473,8 @@ public abstract class VicII extends Thread implements powered,
           tick=0;                                  // reset tick counter
           break;
       }
+      
+      ///extMonitor.opSignal2();
     }
   }
 

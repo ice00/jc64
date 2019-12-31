@@ -1,6 +1,4 @@
-
-
-package sw_emulator;
+package debug;
 
 import sw_emulator.hardware.cpu.*;
 import sw_emulator.hardware.bus.*;

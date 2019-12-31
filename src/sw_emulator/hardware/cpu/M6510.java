@@ -32,6 +32,7 @@ import sw_emulator.hardware.powered;
 import sw_emulator.hardware.signaller;
 import java.lang.InterruptedException;
 import java.lang.Thread;
+import sw_emulator.util.Monitor2;
 
 /**
  * Emulate the Mos 6510 cpu.
@@ -927,6 +928,7 @@ public class M6510 extends Thread implements powered, signaller {
     if (sigNMI==0) nmiPending=true;
     if (sigIRQ==0) irqPending=true;
      
+    ///monitor.opSignal2(); 
     monitor.opWait();
   }
 

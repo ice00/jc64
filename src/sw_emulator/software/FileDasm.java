@@ -35,6 +35,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import sw_emulator.software.memory.memoryState;
+import sw_emulator.swing.main.Project;
 
 /**
  * Disassemble a given file in raw format (.prg) or in psid (.sid) format.
@@ -97,6 +99,9 @@ public class FileDasm {
   
   /** The state of the memory */
   public MemoryFlags memory;
+  
+  /** Memory to use */
+  public MemoryDasm[] memoryDasm=new MemoryDasm[0xFFFF+1];;
 
   /** CHR$ conversion table (0x01 = no output) */
   public static char CHRtab[] = {
@@ -137,7 +142,23 @@ public class FileDasm {
     }
     
     // create the memory state of this program
-    memory=new MemoryFlags(names);
+    memory=new MemoryFlags(names);  
+    byte[] memoryFlags=memory.getMemoryState(0, 0xFFFF);
+    
+    for (int i=0; i<memoryDasm.length; i++) {
+     memoryDasm[i]=new MemoryDasm();  
+     memoryDasm[i].address=i;  
+   }       
+    
+    for (int i=0; i<memoryDasm.length; i++) {        
+       memoryDasm[i].isData = (memoryFlags[i] & 
+              (memoryState.MEM_READ | memoryState.MEM_READ_FIRST |
+               memoryState.MEM_WRITE | memoryState.MEM_WRITE_FIRST |
+               memoryState.MEM_SAMPLE)) !=0;
+      
+       memoryDasm[i].isCode = (memoryFlags[i] & 
+                       (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) !=0;                                             
+    }
 
     // see if the file is present
     try {
@@ -183,25 +204,27 @@ public class FileDasm {
     if (isPSID()) {
       C64SidDasm sid=new C64SidDasm();
       sid.language=lang;
-      outB=sid.cdasm(inB, sidPos, result, sidPC, memory);
+      sid.setMemory(memoryDasm);
+      outB=sid.cdasm(inB, sidPos, result, sidPC);
     } else
        if (isMUS(result)) {
          C64MusDasm mus=new C64MusDasm();
 
          outB="VOICE 1 MUSIC DATA: \n\n";
-         outB+=mus.cdasm(inB, ind1, ind2-1, ind1+musPC, null);
+         outB+=mus.cdasm(inB, ind1, ind2-1, ind1+musPC);
 
          outB+="\nVOICE 2 MUSIC DATA: \n\n";
-         outB+=mus.cdasm(inB, ind2, ind3-1, ind2+musPC, null);
+         outB+=mus.cdasm(inB, ind2, ind3-1, ind2+musPC);
 
          outB+="\nVOICE 3 MUSIC DATA: \n\n";
-         outB+=mus.cdasm(inB, ind3, txtA-1, ind3+musPC, null);
+         outB+=mus.cdasm(inB, ind3, txtA-1, ind3+musPC);
        } else {
            C64Dasm prg=new C64Dasm();
            prg.language=lang;
+           prg.setMemory(memoryDasm);
            int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
 
-           outB=prg.cdasm(inB, 2, result, start, memory);
+           outB=prg.cdasm(inB, 2, result, start);
          }
 
     // write output to the file
@@ -254,8 +277,8 @@ public class FileDasm {
         } 
       }
 
-    inN=new String(args[pos]);
-    outN=new String(args[++pos]);
+    inN=args[pos];
+    outN=args[++pos];
     
     if ((args.length-pos)==0) return true;
     
@@ -310,28 +333,28 @@ public class FileDasm {
       if (inB[0]==0x52) first='R';
       else first='P';
 
-      outF.write(new String(first+"SID file version "+psidVersion+"\n").getBytes());
-      outF.write(new String("Load Address: "+Integer.toHexString(psidLAddr)+"\n").getBytes());
-      outF.write(new String("Init Address: "+Integer.toHexString(psidIAddr)+"\n").getBytes());
-      outF.write(new String("Play Address: "+Integer.toHexString(psidPAddr)+"\n").getBytes());
+      outF.write((first+"SID file version "+psidVersion+"\n").getBytes());
+      outF.write(("Load Address: "+Integer.toHexString(psidLAddr)+"\n").getBytes());
+      outF.write(("Init Address: "+Integer.toHexString(psidIAddr)+"\n").getBytes());
+      outF.write(("Play Address: "+Integer.toHexString(psidPAddr)+"\n").getBytes());
       for (int i=0x16; i<0x36; i++) {
         if (inB[i]==0) break;
         tmp.append((char)inB[i]);
       }
-      outF.write(new String("name:      "+tmp+"\n").getBytes());
+      outF.write(("name:      "+tmp+"\n").getBytes());
       tmp=new StringBuffer("");
       for (int i=0x36; i<0x56; i++) {
         if (inB[i]==0) break;
         tmp.append((char)inB[i]);
       }
-      outF.write(new String("author:    "+tmp+"\n").getBytes());
+      outF.write(("author:    "+tmp+"\n").getBytes());
       tmp=new StringBuffer("");
       for (int i=0x56; i<0x76; i++) {
         if (inB[i]==0) break;
         tmp.append((char)inB[i]);
       }
-      outF.write(new String("copyright: "+tmp+"\n").getBytes());
-      outF.write(new String("songs: "+psidSong+" (startsong: "+psidSSong+")\n\n").getBytes());
+      outF.write(("copyright: "+tmp+"\n").getBytes());
+      outF.write(("songs: "+psidSong+" (startsong: "+psidSSong+")\n\n").getBytes());
     } catch (IOException e) {
         System.out.println("Error writing output file: "+e);
       }
@@ -402,7 +425,7 @@ public class FileDasm {
         }
 
         tmp.append('\n');
-        outF.write(new String(tmp+"\n").getBytes());
+        outF.write((tmp+"\n").getBytes());
       } catch (IOException e) {
           System.out.println("Error writing output file: "+e);
         }

@@ -52,6 +52,7 @@ public class C64Dasm extends M6510Dasm {
    * @param value the operation value (if needed by this instruction)
    * @return a comment string
    */
+  @Override
   public String dcom(int iType, int aType, long addr, long value) {
     switch (aType) {
       case A_ZPG:
@@ -96,7 +97,7 @@ public class C64Dasm extends M6510Dasm {
               case 0x22:
               case 0x23:
               case 0x24:
-              case 0x25: return "Area puntatori programmi di utilit�";
+              case 0x25: return "Area puntatori programmi di utilità";
               case 0x26:
               case 0x27:
               case 0x28:
@@ -453,7 +454,7 @@ public class C64Dasm extends M6510Dasm {
               case 0xD018: return "Registro di controllo della memoria del VIC";
               case 0xD019: return "Registro indicatore di interruzione";
               case 0xD01A: return "Registro maschera IRQ";
-              case 0xD01B: return "Priorit� di schermo sprite-fondo";
+              case 0xD01B: return "Priorità di schermo sprite-fondo";
               case 0xD01C: return "Seleziona il modo multicolore per sprite 0..7";
               case 0xD01D: return "Espansione (2X) orrizzontale (X) sprite 0..7";
               case 0xD01E: return "Scoperta contatto fra due animazioni";
@@ -568,7 +569,7 @@ public class C64Dasm extends M6510Dasm {
               case 0xE422: return "Routine: Stampa messaggi iniziali + set della memoria";
               case 0xE453: return "Routine: imposta vettori per BASIC (case 0x300..case 0x309)";
               case 0xE4AD: return "Routine: Apre il canale di output + errori";
-              case 0xE4D3: return "Routine: Aggiorna controllo bit partenza/parit�";
+              case 0xE4D3: return "Routine: Aggiorna controllo bit partenza/parità";
               case 0xE4DA: return "Routine: Pone il colore al carattere corrente";
               case 0xE4E0: return "Routine: Attende alcuni secondi o pressione tasto";
               case 0xE500: return "Routine IOBASE del KERNAL";
@@ -584,7 +585,7 @@ public class C64Dasm extends M6510Dasm {
               case 0xE68A: return "Routine: Attiva/Disattiva Editor modo \"quote\"";
               case 0xE716: return "Routine: Invia un carattere sullo schermo";
               case 0xE87C: return "Routine: Aggiorna schermo come per RETURN";
-              case 0xE891: return "Routine: Aggiorna schermo/editor perch� premuto RETURN";
+              case 0xE891: return "Routine: Aggiorna schermo/editor perchè premuto RETURN";
               case 0xE8CD: return "Routine: Cerca (e cambia) codici Ascii colori";
               case 0xE8EA: return "Routine: Scorrimento schermo verso l'alto per nuova riga";
               case 0xE9F0: return "Routine: Calcola indirizzo di linea schermo corrente";
@@ -629,8 +630,8 @@ public class C64Dasm extends M6510Dasm {
               case 0xF2EE: return "Routine: Indirizza dispositivo/Riorganizza tabella";
               case 0xF2F1: return "Routine: Riorganizza tabella file per chiusura";
               case 0xF2F2: return "Routine: Riorganizza tabella file per chiusura (A=par.)";
-              case 0xF30F: return "Routine: Cerca indice tabella (X) del file (X=n�file)";
-              case 0xF314: return "Routine: Cerca indice tabella (X) del file (A=n�file)";
+              case 0xF30F: return "Routine: Cerca indice tabella (X) del file (X=n°file)";
+              case 0xF314: return "Routine: Cerca indice tabella (X) del file (A=n°file)";
               case 0xF31F: return "Routine: Rende il file all'indirizzo X attivo";
               case 0xF32F: return "Routine CLALL del KERNAL";
               case 0xF333: return "Routine CLRCHN del KERNAL";
@@ -1186,7 +1187,7 @@ public class C64Dasm extends M6510Dasm {
               case 0xD022: return "Background 1 color";
               case 0xD023: return "Background 2 color";
               case 0xD024: return "Background 3 color";
-              case 0xD025: return "Multicolor aniamtion 0 register";
+              case 0xD025: return "Multicolor animation 0 register";
               case 0xD026: return "Multicolor animation 1 register";
               case 0xD027: return "Color sprite 0";
               case 0xD028: return "Color sprite 1";
@@ -1352,8 +1353,8 @@ public class C64Dasm extends M6510Dasm {
               case 0xF2EE: return "Routine: device addresses/Table reorganizes";
               case 0xF2F1: return "Routine: Table reorganizes for file closing";
               case 0xF2F2: return "Routine: Table reorganizes for file closing (A=par.)";
-              case 0xF30F: return "Routine: Searches table index (X) of file (X=n�file)";
-              case 0xF314: return "Routine: Searches table index (X) of file (A=n�file)";
+              case 0xF30F: return "Routine: Searches table index (X) of file (X=n°file)";
+              case 0xF314: return "Routine: Searches table index (X) of file (A=n°file)";
               case 0xF31F: return "Routine: Makes the file at X addrress active";
               case 0xF32F: return "Routine CLALL of KERNAL";
               case 0xF333: return "Routine CLRCHN of KERNAL";

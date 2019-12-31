@@ -33,6 +33,7 @@ import sw_emulator.util.Monitor;
 import sw_emulator.util.FlipFlop;
 import sw_emulator.util.FlipFlopClock;
 import sw_emulator.util.Counter;
+import sw_emulator.util.Monitor2;
 
 /**
  * MOS 6526 cia chip implementation
@@ -739,6 +740,7 @@ public class M6526 extends Thread implements powered, signaller,
       
       bodyAsync();                            // execute tha async part of body
       bodySync();                             // execute the cia clock boby
+      //monitor.opSignal2();
       monitor.opWait();                       // attend clock signal 
     }  
   }

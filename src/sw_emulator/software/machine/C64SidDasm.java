@@ -43,6 +43,7 @@ public class C64SidDasm extends C64Dasm {
    * @param value the operation value (if needed by this instruction)
    * @return a comment string
    */
+  @Override
   public String dcom(int iType, int aType, long addr, long value) {
     switch (aType) {
       case A_ZPG:

@@ -26,9 +26,7 @@ package sw_emulator.software.memory;
 
 import sw_emulator.software.memory.memoryState;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -58,6 +56,15 @@ public class MemoryFlags implements memoryState {
          memory=realAllBinFile(names);
       }
   } 
+  
+  /**
+   * Construct a memory area with given value
+   * 
+   * @param memory thew mmeory to use
+   */
+  public MemoryFlags(byte[] memory) {
+    this.memory=memory;  
+  }
 
   /**
    * Get the memory state likes that all memory locations are of cpu instructions 
@@ -85,6 +92,7 @@ public class MemoryFlags implements memoryState {
    * @return the state of memory as a array of SIDLN flags from 
    *         <code>startAddress</code> and <code>endAddress</code>
    */
+  @Override
   public byte[] getMemoryState(int startAddress, int endAddress) {
     if (endAddress<startAddress) return null;
   
@@ -192,7 +200,7 @@ public class MemoryFlags implements memoryState {
    * @param mem2 the second memory map
    * @return the resulting memory map
    */
-  protected byte[] orMemory(byte[] mem1, byte[] mem2) {
+  public byte[] orMemory(byte[] mem1, byte[] mem2) {
     byte[] res=new byte[65535];
    
     for (int i=0; i<res.length; i++) {

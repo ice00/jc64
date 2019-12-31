@@ -63,7 +63,7 @@ public class C64_test implements powered{
   /**
    * Path where the roms images are stored
    */
-  public static final String ROM_PATH="./rom/";
+  public static final String ROM_PATH="/rom/";
 
   /**
    * 8Kb of Ram memory address 0x0000 0x1FFF
@@ -260,7 +260,7 @@ public class C64_test implements powered{
     FileInputStream file; // the file
 
     try {
-      file=new FileInputStream("/home/ice/ldab.prg");
+      file=new FileInputStream("/home/ice/Scaricati/ldab.prg");
       try {
         int kk=file.available();
         fileImage=new byte[kk];

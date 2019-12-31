@@ -1,4 +1,4 @@
-package sw_emulator;
+package debug;
 
 import sw_emulator.hardware.device.raster;
 import sw_emulator.hardware.device.TV;

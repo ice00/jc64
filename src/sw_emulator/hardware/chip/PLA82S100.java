@@ -37,6 +37,7 @@ import sw_emulator.hardware.chip.VicII;
 import sw_emulator.hardware.chip.M6526;
 import sw_emulator.hardware.chip.Sid;
 import sw_emulator.util.Monitor;
+import sw_emulator.util.Monitor2;
 
 /**
  * Emulate the PLA 82S100 chip of a Commodore 64 computer.
@@ -714,6 +715,7 @@ public class PLA82S100 extends Thread implements powered, signaller {
         yield();                // no, attend power
       }
       chooseTables();           // calculate the right tables for bus
+      ///monitor.opSignal2();
       monitor.opWait();         // attend a signal changes value
     }
   }

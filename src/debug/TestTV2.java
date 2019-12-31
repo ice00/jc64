@@ -1,4 +1,4 @@
-package sw_emulator;
+package debug;
 
 import sw_emulator.hardware.device.raster;
 import sw_emulator.hardware.device.TV;
@@ -12,7 +12,7 @@ class TestTV2
  public TestTV2()
  {
   tv=new TV();
-  byte[] charData = load("./roms/Char.rom");
+  byte[] charData = load("data/char.rom");
   write(charData);
   //tv.updateFrame();
   tv.displayCurrentFrame();

@@ -126,9 +126,9 @@ public class Cartridge extends Thread implements powered, signaller,
    * Set up the connection of IO with the external.
    * The cpu emulation is not started if this value is null equal.
    *
-   * @param io the external connection
+   * @param ioPort the external connection
    */
   public void setIO(CartridgeIO ioPort) {
-    this.io=io;
+    this.io=ioPort;
   }
 }

@@ -1,6 +1,6 @@
 // test M6510 emulation in a simple C64 memory map
 
-package sw_emulator;
+package debug;
 
 import sw_emulator.hardware.cpu.*;
 import sw_emulator.hardware.memory.*;

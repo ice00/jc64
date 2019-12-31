@@ -29,6 +29,7 @@ import sw_emulator.hardware.powered;
 import sw_emulator.hardware.signaller;
 import sw_emulator.hardware.bus.readableBus;
 import sw_emulator.hardware.bus.writeableBus;
+import sw_emulator.util.Monitor2;
 
 /**
  * Emulate the Sid chip.
@@ -85,6 +86,7 @@ public /*abstract*/ class Sid extends Thread implements powered, signaller,
           yield();                                  // give mutex
         }
 
+      ///monitor.opSignal2();
       monitor.opWait();                            // attend synchronization
       //....
     }

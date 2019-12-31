@@ -32,6 +32,7 @@ import sw_emulator.hardware.memory.dinamic;
 import sw_emulator.hardware.device.raster;
 import sw_emulator.util.FlipFlop;
 import sw_emulator.util.Monitor;
+import sw_emulator.util.Monitor2;
 
 /**
  * Emulate the Vic 6567R8 chip.
@@ -66,7 +67,7 @@ public class M6567R8 extends VicII {
    *
    * @param extMonitor the external clock monitor
    * @param bus the bus
-   * @param viev the vic bus view
+   * @param view the vic bus view
    * @param io the vic io
    * @param devicesToRefresh the devices to be refreshed
    * @param tv the raster TV attached to the Vic output

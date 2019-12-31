@@ -39,7 +39,7 @@ import java.util.Locale;
 public class C64MusDasm extends M6510Dasm {
   /**
    * Return the mnemonic assembler instruction rapresent by passed code bytes.
-   * Here we give not assemper instruction, but music notation like in mus
+   * Here we give not assembler instruction, but music notation like in mus
    * file.
    *
    * @param buffer the buffer containg the data
@@ -48,6 +48,7 @@ public class C64MusDasm extends M6510Dasm {
    *           by the <code>pos</code> in the buffer
    * @return a string menemonic rapresentation of instruction
    */
+  @Override
   public String dasm(byte[] buffer, int pos, long pc) {
     String result="???";                  // result string
     int b1=Unsigned.done(buffer[pos]);    // first command byte
@@ -601,12 +602,12 @@ public class C64MusDasm extends M6510Dasm {
    * @return a string rapresentation of disasemble with comment
    */
   public String cdasm(byte[] buffer, int start, int end, long pc) {
-    StringBuffer result=new StringBuffer ("");            // resulting string
+    StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
     int pos=start;               // actual position in buffer
 
-    this.pos=pos;;
+    this.pos=pos;
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer
       tmp=dasm(buffer);

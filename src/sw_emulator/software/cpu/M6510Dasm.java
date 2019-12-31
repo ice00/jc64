@@ -24,17 +24,16 @@
 
 package sw_emulator.software.cpu;
 
-import sw_emulator.software.cpu.disassembler;
-import sw_emulator.software.memory.memoryState;
 import sw_emulator.math.Unsigned;
-import java.lang.Integer;
-import java.lang.String;
 import java.util.Locale;
+import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.main.Option;
 
 /**
  * Disasseble the M6510 code instructions
  * This class implements the </code>disassembler</code> interface, so it must
  * disassemble one instruction and comment it.
+ * 
  * Note that the instruction comment are provided only for giving information
  * about undocument instruction.
  * Also some methods are provided for changing the name of undocument
@@ -154,87 +153,87 @@ public class M6510Dasm implements disassembler {
    */
   public String[] mnemonics={
     // legal instruction first:
-    new String("ADC"),
-    new String("AND"),
-    new String("ASL"),
-    new String("BCC"),
-    new String("BCS"),
-    new String("BEQ"),
-    new String("BIT"),
-    new String("BMI"),
-    new String("BNE"),
-    new String("BPL"),
-    new String("BRK"),
-    new String("BVC"),
-    new String("BVS"),
-    new String("CLC"),
-    new String("CLD"),
-    new String("CLI"),
-    new String("CLV"),
-    new String("CMP"),
-    new String("CPX"),
-    new String("CPY"),
-    new String("DEC"),
-    new String("DEX"),
-    new String("DEY"),
-    new String("EOR"),
-    new String("INC"),
-    new String("INX"),
-    new String("INY"),
-    new String("JMP"),
-    new String("JSR"),
-    new String("LDA"),
-    new String("LDX"),
-    new String("LDY"),
-    new String("LSR"),
-    new String("NOP"),
-    new String("ORA"),
-    new String("PHA"),
-    new String("PHP"),
-    new String("PLA"),
-    new String("PLP"),
-    new String("ROL"),
-    new String("ROR"),
-    new String("RTI"),
-    new String("RTS"),
-    new String("SBC"),
-    new String("SEC"),
-    new String("SED"),
-    new String("SEI"),
-    new String("STA"),
-    new String("STX"),
-    new String("STY"),
-    new String("TAX"),
-    new String("TAY"),
-    new String("TSX"),
-    new String("TXA"),
-    new String("TXS"),
-    new String("TYA"),
+    "ADC", 
+    "AND",
+    "ASL",
+    "BCC",
+    "BCS",
+    "BEQ",
+    "BIT",
+    "BMI",
+    "BNE",
+    "BPL",
+    "BRK",
+    "BVC",
+    "BVS",
+    "CLC",
+    "CLD",
+    "CLI",
+    "CLV",
+    "CMP",
+    "CPX",
+    "CPY",
+    "DEC",
+    "DEX",
+    "DEY",
+    "EOR",
+    "INC",
+    "INX",
+    "INY",
+    "JMP",
+    "JSR",
+    "LDA",
+    "LDX",
+    "LDY",
+    "LSR",
+    "NOP",
+    "ORA",
+    "PHA",
+    "PHP",
+    "PLA",
+    "PLP",
+    "ROL",
+    "ROR",
+    "RTI",
+    "RTS",
+    "SBC",
+    "SEC",
+    "SED",
+    "SEI",
+    "STA",
+    "STX",
+    "STY",
+    "TAX",
+    "TAY",
+    "TSX",
+    "TXA",
+    "TXS",
+    "TYA",
     // undocument instruction
-    new String("ANC"),
-    new String("ANE"),
-    new String("ARR"),
-    new String("ASR"),
-    new String("DCP"),
-    new String("ISB"),
-    new String("JAM"),
-    new String("LAS"),
-    new String("LAX"),
-    new String("LXA"),
-    new String("NOOP"),
-    new String("NOOP"),
-    new String("NOOP"),
-    new String("RLA"),
-    new String("RRA"),
-    new String("SAX"),
-    new String("SBX"),
-    new String("SHA"),
-    new String("SHX"),
-    new String("SHY"),
-    new String("SHS"),
-    new String("SLO"),
-    new String("SRE"),
-    new String("USBC")
+    "ANC",
+    "ANE",
+    "ARR",
+    "ASR",
+    "DCP",
+    "ISB",
+    "JAM",
+    "LAS",
+    "LAX",
+    "LXA",
+    "NOOP",
+    "NOOP",
+    "NOOP",
+    "RLA",
+    "RRA",
+    "SAX",
+    "SBX",
+    "SHA",
+    "SHX",
+    "SHY",
+    "SHS",
+    "SLO",
+    "SRE",
+    "USBC"
   };
 
   /**
@@ -276,35 +275,35 @@ public class M6510Dasm implements disassembler {
   };
 
   public byte[] tableModes={
-    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 00
     A_IMP, A_IMM, A_ACC, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX,
-    A_ABS, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_ABS, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 20
     A_IMP, A_IMM, A_ACC, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX,
-    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 40
     A_IMP, A_IMM, A_ACC, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX,
-    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 60
     A_IMP, A_IMM, A_ACC, A_IMM, A_IND, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX,
-    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 80
     A_IMP, A_IMM, A_IMP, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPY, A_ZPY,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABY, A_ABY,
-    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // A0
     A_IMP, A_IMM, A_IMP, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPY, A_ZPY,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABY, A_ABY,
-    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // C0
     A_IMP, A_IMM, A_IMP, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX,
-    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,
+    A_IMM, A_IDX, A_IMM, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // E0
     A_IMP, A_IMM, A_IMP, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX
@@ -339,6 +338,25 @@ public class M6510Dasm implements disassembler {
    * Last program counter value
    */
   public long pc=0;
+  
+  /** Memory dasm to use */
+  MemoryDasm[] memory;
+  
+  /** Option to use */
+  Option option;
+  
+  /**
+   * Set the memory dasm to use
+   * 
+   * @param memory the memroy dasm
+   */
+  public void setMemory(MemoryDasm[] memory) {
+    this.memory=memory;  
+  }
+  
+  public void setOption(Option option) {
+    this.option=option;
+  }
 
   /**
    * Return the mnemonic assembler instruction rapresent by passed code bytes.
@@ -350,11 +368,14 @@ public class M6510Dasm implements disassembler {
    * @return a string menemonic rapresentation of instruction
    */
   public String dasm(byte[] buffer, int pos, long pc) {
-    String result=new String();          // result disassemble string
+    String result="";          // result disassemble string
     int op=Unsigned.done(buffer[pos++]); // instruction opcode
 
     iType=(int)tableMnemonics[op];   // store the type for creating comment
-    result=mnemonics[iType];
+    
+    if (option.opcodeUpperCasePreview) result=mnemonics[iType];
+    else result=mnemonics[iType].toLowerCase();
+        
     if (result.length()==3) result+=" ";
     result+=" ";
 
@@ -374,77 +395,103 @@ public class M6510Dasm implements disassembler {
         break;
       case A_IMM:     // immediate
         aType=A_IMM;
-        value=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="#$"+ByteToExe((int)value);
         pc+=2;
         break;
       case A_ZPG:     // zero page
         aType=A_ZPG;
-        addr=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="$"+ByteToExe((int)addr);
         pc+=2;
         break;
       case A_ZPX:     // zero page x
         aType=A_ZPX;
-        addr=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="$"+ByteToExe((int)addr)+",X";
         pc+=2;
         break;
       case A_ZPY:     // zero page y
         aType=A_ZPY;
-        addr=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="$"+ByteToExe((int)addr)+",Y";
         pc+=2;
         break;
       case A_ABS:     // absolute
         aType=A_ABS;
-        addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        else addr=-1;
         pos++;
-        result+="$"+ShortToExe((int)addr);
         pc+=3;
+        
+       // if (iType==M_JMP || iType==M_JSR) {
+          result+=getLabel(addr);
+          setLabel(addr);
+        //} else result+="$"+ShortToExe((int)addr);
         break;
       case A_ABX:     // absolute x
         aType=A_ABX;
-        addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        else addr=-1;
         pos++;
-        result+="$"+ShortToExe((int)addr)+",X";
+        
+        ///result+="$"+ShortToExe((int)addr)+",X";
+        result+=getLabelX(addr);
+        setLabel(addr);
+        
         pc+=3;
         break;
       case A_ABY:     // absolute y
         aType=A_ABS;
-        addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        else addr=-1;
         pos++;
-        result+="$"+ShortToExe((int)addr)+",Y";
+        
+        //result+="$"+ShortToExe((int)addr)+",Y";        
+        result+=getLabelY(addr);
+        setLabel(addr);
+        
         pc+=3;
         break;
       case A_REL:     // relative
         aType=A_REL;
-        addr=pc+buffer[pos++]+2;
-        result+="$"+ShortToExe((int)addr);
+        if (pos<buffer.length) addr=pc+buffer[pos++]+2;
+        else addr=-1;   
+        
+        result+=getLabel(addr);
+        setLabel(addr);
+        
         pc+=2;
         break;
       case A_IND:     // indirect
         aType=A_IND;
-        addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        else addr=-1;
         pos++;
         result+="($"+ShortToExe((int)addr)+")";
         pc+=3;
         break;
       case A_IDX:     // indirect x
         aType=A_IDX;
-        addr=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="($"+ByteToExe((int)addr)+",X)";
         pc+=2;
         break;
       case A_IDY:     // indirect y
         aType=A_IDY;
-        addr=Unsigned.done(buffer[pos++]);
+        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+        else addr=-1;
         result+="($"+ByteToExe((int)addr)+"),Y";
         pc+=2;
         break;
     }
     this.pc=pc;
-    this.pos=pos;
+    this.pos=pos;   
     return result;
   }
 
@@ -465,72 +512,99 @@ public class M6510Dasm implements disassembler {
    * @param buffer the buffer containing the code
    * @param start the start position in buffer
    * @param end the end position in buffer
-   * @param pc the programn counter for start position
-   * @param memory the memory state (SIDLN flags)   
+   * @param pc the programn counter for start position 
    * @return a string rapresentation of disasemble with comment
    */
-  public String cdasm(byte[] buffer, int start, int end, long pc, memoryState memory) {
-    StringBuffer result=new StringBuffer ("");            // resulting string
+  public String cdasm(byte[] buffer, int start, int end, long pc) {
+    StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
+    String label;                // string for label
+    MemoryDasm mem;              // memory dasm
     int pos=start;               // actual position in buffer
-    boolean wasCode=true;        // true if we were decoding an instruction
     boolean isCode=true;         // true if we are decoding an instruction
     
-    byte[] state=memory.getMemoryState(0, 65535);
-
     this.pos=pos;;
     this.pc=pc;
-    while (pos<end | pos<start) { // verify also that don't circle in the buffer
-      if (wasCode) {    
-        if ((state[(int)pc] & 
-          (memoryState.MEM_READ | memoryState.MEM_READ_FIRST |
-           memoryState.MEM_WRITE | memoryState.MEM_WRITE_FIRST |
-           memoryState.MEM_SAMPLE)) ==0 ) {
-          isCode=true;    
-        } else {
-            isCode=false;
-          }
-      } else {
-          if ((state[(int)pc] & 
-             (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) ==0 ) {
-            isCode=false;               
-          } else {
-               isCode=true;
-            }                     
-        }    
+    while (pos<end | pos<start) { // verify also that don't circle in the buffer        
+        mem=memory[(int)pc];
+        isCode=(mem.isCode || (!mem.isData && option.useAsCode));
         
-        if (isCode) {
-          // this is an instruction   
-          tmp=dasm(buffer);
+        if (isCode) {                    
+          // add the label if it was declared by dasm or user           
+          if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
+          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
+          
+          // this is an instruction
+          tmp=dasm(buffer); 
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));
-          if (this.pc-pc==2) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]));
-          if (this.pc-pc==3) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]))+
-                                   " "+ByteToExe(Unsigned.done(buffer[pos+2]));
+          if (this.pc-pc==2) {
+            if (pos+1<buffer.length) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]));
+            else tmp2+=" ??";
+          }
+          if (this.pc-pc==3) {
+            if (pos+2<buffer.length) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]))+
+                                           " "+ByteToExe(Unsigned.done(buffer[pos+2]));
+            else tmp2+=" ?????";
+          }    
           for (int i=tmp2.length(); i<17; i++) // insert spaces
             tmp2+=" ";
           tmp=tmp2+tmp;
           tmp2="";
-          for (int i=tmp.length(); i<34; i++) // insert spaces
+          for (int i=tmp.length(); i<43; i++) // insert spaces
             tmp2+=" ";
-          result.append(tmp).append(tmp2).append(dcom()).append("\n");
+          result.append(tmp).append(tmp2);
+          
+          tmp2=dcom();   
+          
+          // if there is a user comment, then use it
+          if (mem.userComment!=null) result.append(" ").append(mem.userComment).append("\n"); 
+          else result.append(" ").append(tmp2).append("\n");  
+          
+          // always add a carriage return after a RTS, RTI or JMP
+          if (iType==M_JMP || iType==M_RTS || iType==M_RTI) result.append("\n");    
+          
+          if (pc>=0) {
+            // rememeber this dasm automatic comment  
+            if (!"".equals(tmp2)) mem.dasmComment=tmp2;
+            else mem.dasmComment=null;
+          }         
+          
           pos=this.pos;
           pc=this.pc;
-          wasCode=true;
         } else {
+            // add the label if it was declared by dasm or user   
+            label=null;
+            if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
+            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
+            
+            if (label!=null) {
+              result.append(label).append(":");
+                        
+              if (mem.userComment!=null) {
+                tmp2="";
+                for (int i=label.length()+1; i<43; i++) // insert spaces
+                  tmp2+=" ";  
+                result.append(tmp2);
+                 
+                if (!"".equals(mem.userComment)) result.append(" ").append(mem.userComment).append("\n");
+                else result.append("\n");
+              } else result.append("\n");
+            }  
+            
             // this is a data declaration
             tmp2=ShortToExe((int)pc)+"  .byte $"+ByteToExe(Unsigned.done(buffer[pos]));
             pos++;
             pc++;
-            if ((state[(int)pc] & (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) ==0 ) {
+            if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
               tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
               pos++;
               pc++;       
-              if ((state[(int)pc] & (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) ==0 ) {
+              if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
                 tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
                 pos++;
                 pc++;       
-                if ((state[(int)pc] & (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) ==0 ) {
+                if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
                   tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
                   pos++;
                   pc++;                                          
@@ -541,11 +615,119 @@ public class M6510Dasm implements disassembler {
             
             this.pos=pos;
             this.pc=pc;            
-            wasCode=false;
-          }         
+          }  
+        
     } 
     return result.toString();
   }
+  
+  /**
+   * Comment and Disassemble a region of the buffer as source
+   *
+   * @param buffer the buffer containing the code
+   * @param start the start position in buffer
+   * @param end the end position in buffer
+   * @param pc the programn counter for start position 
+   * @return a string rapresentation of disasemble with comment
+   */
+  public String csdasm(byte[] buffer, int start, int end, long pc) {
+    StringBuilder result=new StringBuilder ("");            // resulting string
+    String tmp;                  // local temp string
+    String tmp2;                 // local temp string
+    String label;                // string for label 
+    MemoryDasm mem;              // memory dasm
+    int pos=start;               // actual position in buffer
+    boolean isCode=true;         // true if we are decoding an instruction
+    
+    this.pos=pos;;
+    this.pc=pc;
+    while (pos<end | pos<start) { // verify also that don't circle in the buffer        
+         mem=memory[(int)pc];
+        isCode=(mem.isCode || (!mem.isData && option.useAsCode));
+        
+        if (isCode) {                    
+          // add the label if it was declared by dasm or user           
+          if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
+          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
+          
+          // this is an instruction
+          tmp=dasm(buffer); 
+  
+          tmp2="";
+          for (int i=tmp.length(); i<34; i++) // insert spaces
+            tmp2+=" ";
+          result.append("      ").append(tmp).append(tmp2);
+          
+          tmp2=dcom();   
+          
+          // if there is a user comment, then use it
+          if (mem.userComment!=null) {
+               if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
+               else result.append("\n");
+          }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
+                  else result.append("\n");
+          
+          // always add a carriage return after a RTS, RTI or JMP
+          if (iType==M_JMP || iType==M_RTS || iType==M_RTI) result.append("\n");          
+          
+          if (pc>=0) {
+            // rememeber this dasm automatic comment  
+            if (!"".equals(tmp2)) mem.dasmComment=tmp2;
+            else mem.dasmComment=null;
+          }         
+          
+          pos=this.pos;
+          pc=this.pc;
+        } else {
+            // add the label if it was declared by dasm or user   
+            label=null;
+            if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
+            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
+            
+            if (label!=null) {
+              result.append(label).append(":");
+                        
+              if (mem.userComment!=null) {
+                tmp2="";
+                for (int i=label.length()+1; i<40; i++) // insert spaces
+                  tmp2+=" ";  
+                result.append(tmp2);
+                 
+                if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
+                else result.append("\n");
+              } else result.append("\n");
+            }  
+            
+            // this is a data declaration
+            tmp2="  .byte $"+ByteToExe(Unsigned.done(buffer[pos]));
+            pos++;
+            pc++;
+            
+            
+            if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
+              tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
+              pos++;
+              pc++;       
+              if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
+                tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
+                pos++;
+                pc++;       
+                if (memory[(int)pc].isData || (!memory[(int)pc].isCode && !option.useAsCode) ) {
+                  tmp2+=", $"+ByteToExe(Unsigned.done(buffer[pos]));
+                  pos++;
+                  pc++;                                          
+                }                                    
+              }                                    
+            }                      
+            result.append(tmp2).append("\n");
+            
+            this.pos=pos;
+            this.pc=pc;            
+          }  
+        
+    } 
+    return result.toString();
+  }  
 
   /**
    * Return a comment string for the passed instruction
@@ -556,6 +738,7 @@ public class M6510Dasm implements disassembler {
    * @param value the operation value (if needed by this instruction)
    * @return a comment string
    */
+  @Override
   public String dcom(int iType, int aType, long addr, long value) {
     switch (iType) {
       case M_SLO:
@@ -606,7 +789,9 @@ public class M6510Dasm implements disassembler {
    */
   protected String ByteToExe(int value) {
     int tmp=value;
-
+    
+    if (value<0) return "??";
+    
     String ret=Integer.toHexString(tmp);
     if (ret.length()==1) ret="0"+ret;
     return ret.toUpperCase(Locale.ENGLISH);
@@ -621,11 +806,21 @@ public class M6510Dasm implements disassembler {
   protected String ShortToExe(int value) {
     int tmp=value;
 
+    if (value<0) return "????";
+    
     String ret=Integer.toHexString(tmp);
     int len=ret.length();
-    if (len==1) ret="000"+ret;
-    else if (len==2) ret="00"+ret;
-         else if (len==3) ret="0"+ret;
+    switch (len) {
+      case 1:
+        ret="000"+ret;
+        break;
+     case 2:
+        ret="00"+ret;
+        break;
+     case 3:
+        ret="0"+ret;
+        break;
+    }
     return ret.toUpperCase(Locale.ENGLISH);
   }
 
@@ -691,12 +886,63 @@ public class M6510Dasm implements disassembler {
         mnemonics[M_NOP2]="SKW";
         mnemonics[M_SAX]="AXS";
         mnemonics[M_SBX]="SAX";  // name conflict with other modes
-        mnemonics[M_SLO]="ASO";
-        mnemonics[M_SHA]="AXA";
-        mnemonics[M_SHS]="TAS";
+        mnemonics[M_SHA]="AXA";        
         mnemonics[M_SHX]="XAS";
-        mnemonics[M_SHY]="SAY";
+        mnemonics[M_SHY]="SAY";        
+        mnemonics[M_SHS]="TAS";
+        mnemonics[M_SLO]="ASO";        
         mnemonics[M_SRE]="LSE";
     }
+  }
+
+  /**
+   * Get the label or memory location ($)
+   * 
+   * @param addr the address of the label
+   * @return the label or memory location ($)
+   */
+  private String getLabel(long addr) {
+    MemoryDasm mem=memory[(int)addr];
+     
+    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
+    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
+    return "$"+ShortToExe((int)addr);        
+  } 
+
+  /**
+   * Get the label or memory location ($,Y)
+   * 
+   * @param addr the address of the label
+   * @return the label or memory location ($,Y)
+   */
+  private String getLabelY(long addr) {
+    MemoryDasm mem=memory[(int)addr];
+     
+    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+",Y";
+    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+",Y";
+    return "$"+ShortToExe((int)addr)+",Y";      
+  }
+  
+  /**
+   * Get the label or memory location ($,X)
+   * 
+   * @param addr the address of the label
+   * @return the label or memory location ($,X)
+   */
+  private String getLabelX(long addr) {
+    MemoryDasm mem=memory[(int)addr];
+     
+    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+",X";
+    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+",X";
+    return "$"+ShortToExe((int)addr)+",X";      
+  }  
+  
+  /**
+   * Set the dasm label
+   * 
+   * @param addr the address to add as label
+   */
+  private void setLabel(long addr) {
+    memory[(int)addr].dasmLocation="A"+ShortToExe((int)addr);
   }
 }

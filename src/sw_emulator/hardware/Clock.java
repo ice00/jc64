@@ -26,7 +26,10 @@ package sw_emulator.hardware;
 
 import java.lang.Thread;
 import java.lang.Exception;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sw_emulator.util.Monitor;
+import sw_emulator.util.Monitor2;
 
 /**
  * Creates a clock circuits.
@@ -93,7 +96,9 @@ public class Clock extends Thread {
   }
 
   /**
-   * Register external devices that ccan receive TOD signal
+   * Register external devices that can receive TOD signal
+   * 
+   * @param devices the device to add
    */
   public void registerTod(signaller[] devices) {
      this.devices=devices;
@@ -117,8 +122,9 @@ public class Clock extends Thread {
    * Notify a clock tick in the monitor
    */
   public void run() {
+      ///long start=0;
     while (true) {
-      while (started==false) {       // attens a start command
+      while (started==false) {       // attend a start command
         yield();
       }
 
@@ -129,6 +135,7 @@ public class Clock extends Thread {
       // attend that the connected circuits have finish
       while (!monitor.isFinish()) {
         yield();
+        //monitor.opWait2();
       }
       
       
@@ -142,6 +149,8 @@ public class Clock extends Thread {
             devices[i].notifySignal(signaller.S_TOD, 1); // 0 to 1
           }
         }
+        
+       /// start = System.nanoTime();
       }
       
       // test for generating a tod low signal
@@ -150,7 +159,11 @@ public class Clock extends Thread {
           for (int i=0; i<devices.length; i++) {
             devices[i].notifySignal(signaller.S_TOD, 0); // 1 to 0
           }
-        }        
+        }   
+        
+       /// long finish = System.nanoTime();
+       /// long timeElapsed = finish - start;
+       /// System.err.println(timeElapsed/1000000);
       }     
     }
   }
