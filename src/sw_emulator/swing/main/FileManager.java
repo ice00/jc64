@@ -176,6 +176,9 @@ public class FileManager {
         project.memory[i].isInside=in.readBoolean();
         project.memory[i].isCode=in.readBoolean();
         project.memory[i].isData=in.readBoolean();
+        project.memory[i].copy=in.readByte();
+        project.memory[i].related=in.readInt();
+        project.memory[i].type=in.readChar();
       }
       
     } catch (Exception e) {
@@ -254,6 +257,9 @@ public class FileManager {
           out.writeBoolean(memory.isInside);
           out.writeBoolean(memory.isCode);
           out.writeBoolean(memory.isData);
+          out.writeByte(memory.copy);
+          out.writeInt(memory.related);
+          out.writeChar(memory.type);
       }  
       
       out.flush();

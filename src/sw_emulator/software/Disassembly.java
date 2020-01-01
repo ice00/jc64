@@ -171,34 +171,32 @@ public class Disassembly {
     C64SidDasm sid=new C64SidDasm();
     sid.language=option.commentLanguagePreview;
     sid.setMemory(memory);
-    sid.setOption(option);
+    sid.setOption(option);    
     
-    
-    psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;
-    
+    psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
     psidPAddr=Unsigned.done(inB[13])+Unsigned.done(inB[12])*256;    
     memory[psidIAddr].userLocation=option.psidInitSongsLabel;
     memory[psidPAddr].userLocation=option.psidPlaySoundsLabel;
     
-    psidDOff=(int)inB[7];
+    psidDOff=Unsigned.done(inB[0x07])+Unsigned.done(inB[0x06])*256;
     
     //calculate address for disassembler
     if (psidLAddr==0) {
       sidPC=Unsigned.done(inB[psidDOff])+Unsigned.done(inB[psidDOff+1])*256;
       sidPos=psidDOff+2;
       startAddress=sidPC;
-      endAddress=sidPC+inB.length-0x7c-2;      
+      endAddress=sidPC+inB.length-sidPos-1;      
     } else {
         sidPos=psidDOff;
         sidPC=psidLAddr;
         startAddress=sidPC;
-        endAddress=sidPC+inB.length-0x7c;     
+        endAddress=sidPC+inB.length-sidPos-1;     
       }
     startBuffer=sidPos;
     endBuffer=sidPos+(endAddress-startAddress);
     
-    markInside(startAddress, endAddress);
+    markInside(startAddress, endAddress, sidPos);
     
     // search for SID frequency table
     SidFreq.instance.identifyFreq(inB, memory, sidPos, inB.length, sidPC-sidPos,
@@ -211,9 +209,8 @@ public class Disassembly {
       tmp.append("  processor 6502\n\n");
       
       // calculate org for header
-      int header=psidLAddr;
-      if (header==0) header=inB[0x7C]+inB[0x7D]*256;      
-      header-=(inB[0x07]+inB[0x06]*256);
+      int header=sidPC;   
+      header-=sidPos;
       if (psidLAddr==0) header-=2;      
       tmp.append("  .org $").append(ShortToExe(header)).append("\n\n");
       
@@ -299,12 +296,12 @@ public class Disassembly {
     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      
     // calculate start/end address
-    startAddress=start;
-    endAddress=inB.length-1+startAddress;
+    startAddress=start;    
     startBuffer=2;
-    endBuffer=(endAddress-startAddress);
+    endAddress=inB.length-1-startBuffer+startAddress;
+    endBuffer=inB.length-1;
     
-    markInside(startAddress, endAddress);
+    markInside(startAddress, endAddress, 2);
      
     // search for SID frequency table
     SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
@@ -364,10 +361,12 @@ public class Disassembly {
    * 
    * @param start the start of internal
    * @param end the end of internal
+   * @param offset in buffer of start position
    */
-  private void markInside(int start, int end) {
+  private void markInside(int start, int end, int offset) {
     for (int i=start; i<=end; i++) {
       memory[i].isInside=true;  
+      memory[i].copy=inB[i-start+offset];
     }  
   }
 }

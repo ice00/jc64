@@ -55,4 +55,13 @@ public class MemoryDasm {
   
   /** True if this is data */
   public boolean isData;
+  
+  /** If inside it store the copy of value of memory */
+  public byte copy;
+  
+  /** Related address (#< or #>)*/
+  public int related=-1;
+  
+  /** Type of relation for related < or > */
+  public char type=' ';
 }

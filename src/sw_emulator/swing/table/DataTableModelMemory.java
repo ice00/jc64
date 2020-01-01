@@ -42,7 +42,8 @@ public class DataTableModelMemory extends AbstractTableModel {
     UC("User comment", Boolean.class),
     DL("Dasm location", Boolean.class),
     UL("User location", Boolean.class),
-    UB("User block comment", Boolean.class);
+    UB("User block comment", Boolean.class),
+    RE("Related address", Character.class);
       
     String columnsTip;
     Class type;
@@ -123,7 +124,9 @@ public class DataTableModelMemory extends AbstractTableModel {
         case UL:
           return memory.userLocation!=null;      
         case UB:
-          return memory.userBlockComment!=null;                  
+          return memory.userBlockComment!=null;     
+        case RE:
+          return memory.type;
     }  
     return "";
   }

@@ -107,6 +107,11 @@ public interface userAction {
   /** Memory clear dasm label  */
   public static final int MEM_CLEARDLABEL = 26;
   
+  /** Memory assign #<  */
+  public static final int MEM_LOW = 28;
+  
+  /** Memory assign #>  */
+  public static final int MEM_HIGH = 29;
   
   /**
    * Execute the passed user action

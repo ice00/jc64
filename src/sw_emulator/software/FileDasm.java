@@ -36,7 +36,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import sw_emulator.software.memory.memoryState;
-import sw_emulator.swing.main.Project;
 
 /**
  * Disassemble a given file in raw format (.prg) or in psid (.sid) format.

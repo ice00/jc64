@@ -396,7 +396,7 @@ public class M6510Dasm implements disassembler {
       case A_IMM:     // immediate
         aType=A_IMM;
         if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
-        else addr=-1;
+        else value=0;
         result+="#$"+ByteToExe((int)value);
         pc+=2;
         break;
@@ -404,21 +404,21 @@ public class M6510Dasm implements disassembler {
         aType=A_ZPG;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="$"+ByteToExe((int)addr);
+        result+=getLabelZero(addr);
         pc+=2;
         break;
       case A_ZPX:     // zero page x
         aType=A_ZPX;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="$"+ByteToExe((int)addr)+",X";
+        result+=getLabelZero(addr)+",X";
         pc+=2;
         break;
       case A_ZPY:     // zero page y
         aType=A_ZPY;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="$"+ByteToExe((int)addr)+",Y";
+        result+=getLabelZero(addr)+",Y";
         pc+=2;
         break;
       case A_ABS:     // absolute
@@ -439,8 +439,7 @@ public class M6510Dasm implements disassembler {
         else addr=-1;
         pos++;
         
-        ///result+="$"+ShortToExe((int)addr)+",X";
-        result+=getLabelX(addr);
+        result+=getLabel(addr)+",X";
         setLabel(addr);
         
         pc+=3;
@@ -450,9 +449,8 @@ public class M6510Dasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         pos++;
-        
-        //result+="$"+ShortToExe((int)addr)+",Y";        
-        result+=getLabelY(addr);
+       
+        result+=getLabel(addr)+",Y";
         setLabel(addr);
         
         pc+=3;
@@ -479,14 +477,14 @@ public class M6510Dasm implements disassembler {
         aType=A_IDX;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="($"+ByteToExe((int)addr)+",X)";
+        result+="("+getLabelZero(addr)+",X)";
         pc+=2;
         break;
       case A_IDY:     // indirect y
         aType=A_IDY;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="($"+ByteToExe((int)addr)+"),Y";
+        result+="("+getLabelZero(addr)+"),Y";
         pc+=2;
         break;
     }
@@ -521,6 +519,7 @@ public class M6510Dasm implements disassembler {
     String tmp2;                 // local temp string
     String label;                // string for label
     MemoryDasm mem;              // memory dasm
+    MemoryDasm memRel;           // memory related
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     int counter=0;               // data aligment counter
@@ -638,11 +637,19 @@ public class M6510Dasm implements disassembler {
               counter=0;
             }
             
-            if (counter==0) tmp2="  .byte $";
-            else tmp2=", $";
+            if (counter==0) tmp2="  .byte ";
+            else tmp2=", ";
             
-            // this is a data declaration
-            result.append(tmp2).append(ByteToExe(Unsigned.done(buffer[pos])));
+            // this is a data declaration            
+            if (mem.related>=0 ) {
+              // the byte is a reference
+              memRel=memory[mem.related];   
+              
+              if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) result.append(tmp2).append(mem.type).append(memRel.userLocation);
+              else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) result.append(tmp2).append(mem.type).append(memRel.dasmLocation);
+                   else result.append(tmp2).append(mem.type).append("$").append(ShortToExe(memRel.address));
+            } else result.append(tmp2).append("$").append(ByteToExe(Unsigned.done(buffer[pos])));
+            
             pos++;
             pc++;
             counter++;
@@ -670,6 +677,7 @@ public class M6510Dasm implements disassembler {
     String tmp2;                 // local temp string
     String label;                // string for label 
     MemoryDasm mem;              // memory dasm
+    MemoryDasm memRel;           // memory related
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     int counter=0;               // data aligment counter
@@ -782,8 +790,17 @@ public class M6510Dasm implements disassembler {
             if (counter==0) tmp2="  .byte $";
             else tmp2=", $";
             
-            // this is a data declaration
-            result.append(tmp2).append(ByteToExe(Unsigned.done(buffer[pos])));
+            // this is a data declaration            
+            if (mem.related>=0 ) {
+              // the byte is a reference
+              memRel=memory[mem.related];   
+              
+              if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) result.append(tmp2).append(mem.type).append(memRel.userLocation);
+              else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) result.append(tmp2).append(mem.type).append(memRel.dasmLocation);
+                   else result.append(tmp2).append(mem.type).append("$").append(ShortToExe(memRel.address));
+            } else result.append(tmp2).append("$").append(ByteToExe(Unsigned.done(buffer[pos])));
+            
+            
             pos++;
             pc++;
             counter++;
@@ -961,6 +978,36 @@ public class M6510Dasm implements disassembler {
         mnemonics[M_SRE]="LSE";
     }
   }
+  
+  /**
+   * Get the label of immediate value
+   * 
+   * @param addr the address of the value
+   * @param value in that location
+   * @return the label of location
+   */
+  private String getLabelImm(long addr, int value) {
+    if (addr<0) return "$??"; 
+    
+    return "#$"+ByteToExe(value);
+  }
+  
+  
+  /**
+   * Get the label or memory location ($) of zero page
+   * 
+   * @param addr the address of the label
+   * @return the label or memory location ($)
+   */
+  private String getLabelZero(long addr) {
+    if (addr<0) return "$??";
+      
+    MemoryDasm mem=memory[(int)addr];
+     
+    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
+    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
+    return "$"+ByteToExe((int)addr);        
+  } 
 
   /**
    * Get the label or memory location ($)
@@ -969,40 +1016,14 @@ public class M6510Dasm implements disassembler {
    * @return the label or memory location ($)
    */
   private String getLabel(long addr) {
+    if (addr<0) return "$????";  
+      
     MemoryDasm mem=memory[(int)addr];
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
     return "$"+ShortToExe((int)addr);        
   } 
-
-  /**
-   * Get the label or memory location ($,Y)
-   * 
-   * @param addr the address of the label
-   * @return the label or memory location ($,Y)
-   */
-  private String getLabelY(long addr) {
-    MemoryDasm mem=memory[(int)addr];
-     
-    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+",Y";
-    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+",Y";
-    return "$"+ShortToExe((int)addr)+",Y";      
-  }
-  
-  /**
-   * Get the label or memory location ($,X)
-   * 
-   * @param addr the address of the label
-   * @return the label or memory location ($,X)
-   */
-  private String getLabelX(long addr) {
-    MemoryDasm mem=memory[(int)addr];
-     
-    if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+",X";
-    if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+",X";
-    return "$"+ShortToExe((int)addr)+",X";      
-  }  
   
   /**
    * Set the dasm label
@@ -1010,7 +1031,9 @@ public class M6510Dasm implements disassembler {
    * @param addr the address to add as label
    */
   private void setLabel(long addr) {
-    if (memory[(int)addr].isInside) memory[(int)addr].dasmLocation="A"+ShortToExe((int)addr);
+    if (addr<0) return;
+    
+    if (memory[(int)addr].isInside) memory[(int)addr].dasmLocation="W"+ShortToExe((int)addr);
   }
   
   /**
@@ -1045,14 +1068,16 @@ public class M6510Dasm implements disassembler {
       else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
       
       if (label!=null) {
-        tmp=label+" = $"+ShortToExe(mem.address);
+        if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
+        else tmp=label+" = $"+ShortToExe(mem.address);
         
         tmp2="";
         for (int i=tmp.length(); i<34; i++) // insert spaces
           tmp2+=" ";
         result.append(tmp).append(tmp2);
           
-        tmp2=dcom();   
+        if (mem.dasmComment!=null) tmp2=mem.dasmComment;   
+        else tmp2="";
           
         // if there is a user comment, then use it
         if (mem.userComment!=null) {
@@ -1062,6 +1087,6 @@ public class M6510Dasm implements disassembler {
                 else result.append("\n");                        
       }
     }
-    return result.toString();
+    return result.append("\n").toString();
   }
 }

@@ -27,12 +27,16 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Locale;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
@@ -150,6 +154,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonAddUserLabel = new javax.swing.JButton();
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
+        jButtonMarkLow = new javax.swing.JButton();
+        jButtonMarkMax = new javax.swing.JButton();
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
@@ -201,6 +207,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                         case UB:
                         if ((Boolean)getValueAt(rowIndex, colIndex)) tip="<html>"+memory.userBlockComment.replace("\n", "<br>")+"</html>";
                         break;
+                        case RE:
+                        if (memory.type!=' ') {
+                            MemoryDasm mem=dataTableModelMemory.getData()[memory.related];
+                            if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
+                            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
+                            else tip="#"+memory.type+"$"+ShortToExe(mem.address);
+                        }
+                        break;
                     }
                 } catch (RuntimeException e1) {
                     //catch null pointer exception if mouse is over an empty line
@@ -224,12 +238,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemClearDMem = new javax.swing.JMenuItem();
         jMenuItemClearUMem = new javax.swing.JMenuItem();
         jMenuItemClearDLabel = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAddComment = new javax.swing.JMenuItem();
         jMenuItemAddBlock = new javax.swing.JMenuItem();
         jMenuItemUserLabel = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
+        jMenuItemMemLow = new javax.swing.JMenuItem();
+        jMenuItemMemHigh = new javax.swing.JMenuItem();
         jMenuOption = new javax.swing.JMenu();
         jMenuItemConfigure = new javax.swing.JMenuItem();
         jMenuItemSIDLD = new javax.swing.JMenuItem();
@@ -424,6 +441,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonMarkData);
+
+        jButtonMarkLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/min.png"))); // NOI18N
+        jButtonMarkLow.setToolTipText("Assign the selected address as #<");
+        jButtonMarkLow.setFocusable(false);
+        jButtonMarkLow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkLow.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkLow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkLowActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkLow);
+
+        jButtonMarkMax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/max.png"))); // NOI18N
+        jButtonMarkMax.setToolTipText("Assign the selected address as #>");
+        jButtonMarkMax.setFocusable(false);
+        jButtonMarkMax.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkMax.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkMaxActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkMax);
         jToolBar.add(jSeparatorButton3);
 
         jButtonConfigure.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/configure.png"))); // NOI18N
@@ -614,7 +655,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jSplitPaneExternal.setRightComponent(jSplitPaneInternal);
 
-    jScrollPaneMemory.setPreferredSize(new java.awt.Dimension(150, 403));
+    jScrollPaneMemory.setPreferredSize(new java.awt.Dimension(170, 403));
 
     jTableMemory.setModel(dataTableModelMemory);
     jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);
@@ -725,6 +766,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMarkCode.add(jMenuItemClearDLabel);
+    jMenuMarkCode.add(jSeparator4);
 
     jMenuItemAddComment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/comm.png"))); // NOI18N
     jMenuItemAddComment.setText("Add user comment");
@@ -771,6 +813,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMarkCode.add(jMenuItemMarkData);
+
+    jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
+    jMenuItemMemLow.setText("Assign the selected address as #<");
+    jMenuItemMemLow.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMemLowActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemMemLow);
+
+    jMenuItemMemHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
+    jMenuItemMemHigh.setText("Assign the selected address as #>");
+    jMenuItemMemHigh.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMemHighActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemMemHigh);
 
     jMenuBar.add(jMenuMarkCode);
 
@@ -906,7 +966,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1178,6 +1238,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_CLEARDLABEL);  
     }//GEN-LAST:event_jButtonClearDLabelActionPerformed
 
+    private void jButtonMarkLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkLowActionPerformed
+      execute(MEM_LOW);
+    }//GEN-LAST:event_jButtonMarkLowActionPerformed
+
+    private void jButtonMarkMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkMaxActionPerformed
+      execute(MEM_HIGH);
+    }//GEN-LAST:event_jButtonMarkMaxActionPerformed
+
+    private void jMenuItemMemLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMemLowActionPerformed
+      execute(MEM_LOW);
+    }//GEN-LAST:event_jMenuItemMemLowActionPerformed
+
+    private void jMenuItemMemHighActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMemHighActionPerformed
+      execute(MEM_HIGH);
+    }//GEN-LAST:event_jMenuItemMemHighActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1231,6 +1307,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonFindSource;
     private javax.swing.JButton jButtonMarkCode;
     private javax.swing.JButton jButtonMarkData;
+    private javax.swing.JButton jButtonMarkLow;
+    private javax.swing.JButton jButtonMarkMax;
     private javax.swing.JButton jButtonNewProject;
     private javax.swing.JButton jButtonOpenProject;
     private javax.swing.JButton jButtonSIDLD;
@@ -1258,6 +1336,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemLicense;
     private javax.swing.JMenuItem jMenuItemMarkCode;
     private javax.swing.JMenuItem jMenuItemMarkData;
+    private javax.swing.JMenuItem jMenuItemMemHigh;
+    private javax.swing.JMenuItem jMenuItemMemLow;
     private javax.swing.JMenuItem jMenuItemNewProject;
     private javax.swing.JMenuItem jMenuItemOpenProject;
     private javax.swing.JMenuItem jMenuItemSIDLD;
@@ -1275,6 +1355,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparatorButton1;
     private javax.swing.JToolBar.Separator jSeparatorButton2;
     private javax.swing.JToolBar.Separator jSeparatorButton3;
@@ -1359,6 +1440,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_CLEARDLABEL:
          clearDLabel();  
+         break;
+       case MEM_LOW:
+         memLow();  
+         break;
+       case MEM_HIGH:
+         memHigh();  
          break;
          
        case HELP_CONTENTS: 
@@ -1754,5 +1841,151 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     dataTableModelMemory.fireTableDataChanged();    
+  }  
+
+  /**
+   * Assign a reference to memory as #<
+   */
+  private void memLow() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    Vector cols=new Vector();
+    cols.add("ADDR");
+    cols.add("DASM");
+    cols.add("USER");
+        
+    Vector rows=new Vector();
+    Vector data;
+    
+    int value=project.memory[row].copy & 0xFF;
+    
+    for (MemoryDasm memory : project.memory) {
+      if (!memory.isInside) continue;
+      
+      if ((memory.address & 0xFF)==value) {
+          data=new Vector();
+          
+          data.add(ShortToExe(memory.address));
+          data.add(memory.dasmLocation);
+          data.add(memory.userLocation);
+          
+          rows.add(data);
+      }
+    }
+
+    JTable table = new JTable(rows, cols);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    
+    if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
+            "Select the address to use as #<", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+        
+       int rowS=table.getSelectedRow();
+       if (rowS<0) {
+         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+            if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+              project.memory[row].type=' ';
+              project.memory[row].related=-1;
+            }
+         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+         return;
+       } else {         
+           project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
+           project.memory[row].type='<';
+         }
+       
+       dataTableModelMemory.fireTableDataChanged();      
+        
+    }   
+    
+  }
+
+  /**
+   * Assign a reference to memory as #>
+   */
+  private void memHigh() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    Vector cols=new Vector();
+    cols.add("ADDR");
+    cols.add("DASM");
+    cols.add("USER");
+        
+    Vector rows=new Vector();
+    Vector data;
+    
+    int value=project.memory[row].copy & 0xFF;
+    
+    for (MemoryDasm memory : project.memory) {
+      if (!memory.isInside) continue;
+      
+      if (((memory.address>>8) & 0xFF)==value) {
+          data=new Vector();
+          
+          data.add(ShortToExe(memory.address));
+          data.add(memory.dasmLocation);
+          data.add(memory.userLocation);
+          
+          rows.add(data);
+      }
+    }
+    
+    JTable table = new JTable(rows, cols);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    
+    if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
+           "Select the address to use as #>", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+        
+       int rowS=table.getSelectedRow();
+       if (rowS<0) {
+         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+            if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+              project.memory[row].type=' ';
+              project.memory[row].related=-1;
+            }
+         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+         return;
+       } else {         
+           project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
+           project.memory[row].type='>';
+         }
+       
+       dataTableModelMemory.fireTableDataChanged();
+    }   
+    
+  }
+  
+  /**
+   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
+   *
+   * @param value the short value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected String ShortToExe(int value) {
+    int tmp=value;
+
+    if (value<0) return "????";
+    
+    String ret=Integer.toHexString(tmp);
+    int len=ret.length();
+    switch (len) {
+      case 1:
+        ret="000"+ret;
+        break;
+     case 2:
+        ret="00"+ret;
+        break;
+     case 3:
+        ret="0"+ret;
+        break;
+    }
+    return ret.toUpperCase(Locale.ENGLISH);
   }  
 }

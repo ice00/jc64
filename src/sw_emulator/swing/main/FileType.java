@@ -216,9 +216,11 @@ import sw_emulator.math.Unsigned;
     v1Length=Unsigned.done(inB[2])+Unsigned.done(inB[3])*256;
     v2Length=Unsigned.done(inB[4])+Unsigned.done(inB[5])*256;
     v3Length=Unsigned.done(inB[6])+Unsigned.done(inB[7])*256;
+    
+    if (inB.length<v1Length+v2Length+v3Length) return false;
 
     // calculate pointer to voice data
-    int  ind1=8;
+    int ind1=8;
     int ind2=ind1+v1Length;
     int ind3=ind2+v2Length;
 
