@@ -525,6 +525,8 @@ public class M6510Dasm implements disassembler {
     boolean isCode=true;         // true if we are decoding an instruction
     int counter=0;               // data aligment counter
     
+    result.append(addConstants());
+    
     this.pos=pos;;
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
@@ -671,6 +673,8 @@ public class M6510Dasm implements disassembler {
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     int counter=0;               // data aligment counter
+    
+    result.append(addConstants());
     
     this.pos=pos;;
     this.pc=pc;
@@ -1007,5 +1011,57 @@ public class M6510Dasm implements disassembler {
    */
   private void setLabel(long addr) {
     if (memory[(int)addr].isInside) memory[(int)addr].dasmLocation="A"+ShortToExe((int)addr);
+  }
+  
+  /**
+   * Add constants to the source
+   * 
+   * @return the constants
+   */
+  private String addConstants() {
+    String label;  
+    String tmp;
+    String tmp2;
+    String[] lines;
+      
+    StringBuilder result=new StringBuilder();
+    
+    for (MemoryDasm mem : memory) {
+      if (mem.isInside) continue;
+      
+      // look for block comment
+      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {
+        // split by new line
+        lines = mem.userBlockComment.split("\\r?\\n");
+        for (String line : lines) {
+          if ("".equals(line)) result.append("\n");
+          else result.append(";").append(line).append("\n");   
+        }                    
+      }
+      
+      // look for constant
+      label=null;
+      if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
+      else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
+      
+      if (label!=null) {
+        tmp=label+" = $"+ShortToExe(mem.address);
+        
+        tmp2="";
+        for (int i=tmp.length(); i<34; i++) // insert spaces
+          tmp2+=" ";
+        result.append(tmp).append(tmp2);
+          
+        tmp2=dcom();   
+          
+        // if there is a user comment, then use it
+        if (mem.userComment!=null) {
+             if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
+             else result.append("\n");
+        }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
+                else result.append("\n");                        
+      }
+    }
+    return result.toString();
   }
 }

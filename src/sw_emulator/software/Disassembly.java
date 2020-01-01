@@ -316,6 +316,7 @@ public class Disassembly {
         
       tmp.append("  processor 6502\n\n");
 
+      tmp.append("  .org ").append(ShortToExe(start-2)).append("\n\n");
       tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
       tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
       tmp.append("\n");

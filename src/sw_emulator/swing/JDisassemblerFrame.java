@@ -1695,12 +1695,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
       
       if (label.length()>option.maxLabelLength) {
-        JOptionPane.showMessageDialog(this, "Label too long. Max alloed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
+        JOptionPane.showMessageDialog(this, "Label too long. Max allowed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
         return;
       }
         
-      if (label.length()<5) {
-        JOptionPane.showMessageDialog(this, "Label too short. Min alloed=5", "Error", JOptionPane.ERROR_MESSAGE);     
+      if (label.length()<6) {
+        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=6", "Error", JOptionPane.ERROR_MESSAGE);     
         return;
       }    
             
