@@ -397,7 +397,8 @@ public class M6510Dasm implements disassembler {
         aType=A_IMM;
         if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
         else value=0;
-        result+="#$"+ByteToExe((int)value);
+        
+        result+=getLabelImm(pc+1, value);
         pc+=2;
         break;
       case A_ZPG:     // zero page
@@ -986,10 +987,18 @@ public class M6510Dasm implements disassembler {
    * @param value in that location
    * @return the label of location
    */
-  private String getLabelImm(long addr, int value) {
+  private String getLabelImm(long addr, long value) {
     if (addr<0) return "$??"; 
     
-    return "#$"+ByteToExe(value);
+    // this is a data declaration            
+    if (memory[(int)addr].related>=0 ) {                
+      // the byte is a reference
+      MemoryDasm memRel=memory[memory[(int)addr].related];   
+              
+      if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
+      else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
+           else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
+    } else  return "#$"+ByteToExe((int)value);
   }
   
   
