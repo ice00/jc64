@@ -398,7 +398,7 @@ public class M6510Dasm implements disassembler {
         if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
         else value=0;
         
-        result+=getLabelImm(pc+1, value);
+        result+="#"+getLabelImm(pc+1, value);
         pc+=2;
         break;
       case A_ZPG:     // zero page
@@ -545,7 +545,7 @@ public class M6510Dasm implements disassembler {
             // split by new line
             String[] lines = mem.userBlockComment.split("\\r?\\n");
             for (String line : lines) {
-              if ("".equals(line)) result.append("\n");
+              if ("".equals(line) || " ".equals(line)) result.append("\n");
               else result.append(";").append(line).append("\n");   
             }  
           }  
@@ -602,7 +602,7 @@ public class M6510Dasm implements disassembler {
               // split by new line
               String[] lines = mem.userBlockComment.split("\\r?\\n");
               for (String line : lines) {
-                if ("".equals(line)) result.append("\n");
+                if ("".equals(line) || " ".equals(line)) result.append("\n");
                 else result.append(";").append(line).append("\n");   
               }  
             }             
@@ -632,7 +632,7 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
-            if (counter>3) {
+            if (counter>option.maxAggregate-1) {
               // we already are above the limit, so split the line
               result.append("\n");
               counter=0;
@@ -703,7 +703,7 @@ public class M6510Dasm implements disassembler {
             // split by new line
             String[] lines = mem.userBlockComment.split("\\r?\\n");
             for (String line : lines) {
-              if ("".equals(line)) result.append("\n");
+              if ("".equals(line) || " ".equals(line)) result.append("\n");
               else result.append(";").append(line).append("\n");   
             }  
           }  
@@ -752,7 +752,7 @@ public class M6510Dasm implements disassembler {
               // split by new line
               String[] lines = mem.userBlockComment.split("\\r?\\n");
               for (String line : lines) {
-                if ("".equals(line)) result.append("\n");
+                if ("".equals(line) || " ".equals(line)) result.append("\n");
                 else result.append(";").append(line).append("\n");   
               }  
             }             
@@ -782,7 +782,7 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
-            if (counter>3) {
+            if (counter>option.maxAggregate-1) {
               // we already are above the limit, so split the line
               result.append("\n");
               counter=0;
@@ -998,7 +998,7 @@ public class M6510Dasm implements disassembler {
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
            else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
-    } else  return "#$"+ByteToExe((int)value);
+    } else  return "$"+ByteToExe((int)value);
   }
   
   

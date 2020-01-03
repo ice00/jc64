@@ -74,6 +74,7 @@ public class FileManager {
       option.useAsCode = in.readBoolean();
       option.eraseDComm = in.readBoolean();
       option.maxLabelLength = in.readInt();
+      option.maxAggregate = in.readInt();
       
       option.psidInitSongsLabel = in.readUTF();
       option.psidPlaySoundsLabel = in.readUTF();
@@ -109,6 +110,7 @@ public class FileManager {
       out.writeBoolean(option.useAsCode);
       out.writeBoolean(option.eraseDComm);
       out.writeInt(option.maxLabelLength);
+      out.writeInt(option.maxAggregate);
       
       out.writeUTF(option.psidInitSongsLabel);
       out.writeUTF(option.psidPlaySoundsLabel);

@@ -49,7 +49,9 @@ public class Option {
   
   /** Max length of a label */
   public int maxLabelLength=25;
-  
+    
+  /** Max aggregate for data row */
+  public int maxAggregate=8;
   
   
   /** Psid init song label to use as user defined */

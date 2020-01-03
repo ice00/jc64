@@ -74,6 +74,8 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxUndefinedCode = new javax.swing.JCheckBox();
         jSpinnerMaxLength = new javax.swing.JSpinner();
         jLabelMaxLength = new javax.swing.JLabel();
+        jLabelAggregate = new javax.swing.JLabel();
+        jSpinnerMaxAggregate = new javax.swing.JSpinner();
         jPanelDefinitive = new javax.swing.JPanel();
         jLabelPSIDinitsong = new javax.swing.JLabel();
         jLabelPSIDplaysound = new javax.swing.JLabel();
@@ -174,6 +176,15 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelMaxLength.setText("Max lenght of label (some assembler has a limit):");
 
+        jLabelAggregate.setText("Aggregate up to X values on a data row:");
+
+        jSpinnerMaxAggregate.setModel(new javax.swing.SpinnerNumberModel(8, 2, 8, 1));
+        jSpinnerMaxAggregate.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerMaxAggregateStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -204,9 +215,13 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxOpcodeFormattingPreview, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabelAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                                    .addComponent(jSpinnerMaxAggregate))))
                         .addContainerGap(46, Short.MAX_VALUE))))
         );
         jPanelPreviewLayout.setVerticalGroup(
@@ -233,7 +248,11 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMaxLength))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAggregate)
+                    .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Preview", jPanelPreview);
@@ -454,6 +473,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.maxLabelLength=(Integer)jSpinnerMaxLength.getValue();
     }//GEN-LAST:event_jSpinnerMaxLengthStateChanged
 
+    private void jSpinnerMaxAggregateStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMaxAggregateStateChanged
+      option.maxAggregate=(Integer)jSpinnerMaxAggregate.getValue();
+    }//GEN-LAST:event_jSpinnerMaxAggregateStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -508,6 +531,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
     private javax.swing.JCheckBox jCheckBoxUndefinedCode;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelAggregate;
     private javax.swing.JLabel jLabelIllegalOpcodeStyle;
     private javax.swing.JLabel jLabelMaxLength;
     private javax.swing.JLabel jLabelPSIDinitsong;
@@ -523,6 +547,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonStyle1;
     private javax.swing.JRadioButton jRadioButtonStyle2;
     private javax.swing.JRadioButton jRadioButtonStyle3;
+    private javax.swing.JSpinner jSpinnerMaxAggregate;
     private javax.swing.JSpinner jSpinnerMaxLength;
     private javax.swing.JTabbedPane jTabbedPaneOption;
     private javax.swing.JTextField jTextFieldInitSongs;
@@ -558,5 +583,6 @@ public class JOptionDialog extends javax.swing.JDialog {
       jTextFieldSidFreqLo.setText(option.sidFreqLoLabel);
       jTextFieldSidFreqHi.setText(option.sidFreqHiLabel);
       jSpinnerMaxLength.setValue(option.maxLabelLength);
+      jSpinnerMaxAggregate.setValue(option.maxAggregate);
     }
 }

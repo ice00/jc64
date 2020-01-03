@@ -110,9 +110,15 @@
                                       <Component id="jCheckBoxOpcodeFormattingPreview" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxEraseDComm" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelMaxLength" min="-2" pref="381" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jLabelAggregate" max="32767" attributes="0"/>
+                                              <Component id="jLabelMaxLength" pref="381" max="32767" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinnerMaxLength" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jSpinnerMaxLength" pref="52" max="32767" attributes="0"/>
+                                              <Component id="jSpinnerMaxAggregate" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="46" max="32767" attributes="0"/>
@@ -148,7 +154,12 @@
                               <Component id="jSpinnerMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="286" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabelAggregate" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSpinnerMaxAggregate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="260" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -265,6 +276,21 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Max lenght of label (some assembler has a limit):"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelAggregate">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Aggregate up to X values on a data row:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSpinner" name="jSpinnerMaxAggregate">
+                  <Properties>
+                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                      <SpinnerModel initial="8" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxAggregateStateChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
