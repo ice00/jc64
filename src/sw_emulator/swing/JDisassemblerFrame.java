@@ -25,6 +25,7 @@ package sw_emulator.swing;
 
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Locale;
@@ -125,8 +126,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         FileManager.instance.readOptionFile(FileManager.optionFile, option);
         jOptionDialog.useOption(option);
         
-        projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis", "dis"));
-        exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source","txt"));
+        projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
+        exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));
     }
 
     /**
@@ -154,6 +155,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonAddUserLabel = new javax.swing.JButton();
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
+        jButtonMarkPlus = new javax.swing.JButton();
         jButtonMarkLow = new javax.swing.JButton();
         jButtonMarkMax = new javax.swing.JButton();
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
@@ -161,6 +163,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonSIDLD = new javax.swing.JButton();
         jButtonViewProject = new javax.swing.JButton();
         jSeparatorButton2 = new javax.swing.JToolBar.Separator();
+        jButtonFindMem = new javax.swing.JButton();
         jButtonDisassemble = new javax.swing.JButton();
         jButtonFindDis = new javax.swing.JButton();
         jButtonExportAsDiss = new javax.swing.JButton();
@@ -210,9 +213,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                         case RE:
                         if (memory.type!=' ') {
                             MemoryDasm mem=dataTableModelMemory.getData()[memory.related];
-                            if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
-                            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
-                            else tip="#"+memory.type+"$"+ShortToExe(mem.address);
+                            if (memory.type=='+') {
+                                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+(memory.address-memory.related);
+                                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+(memory.address-memory.related);
+                                else tip="$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
+                            } else {
+                                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
+                                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
+                                else tip="#"+memory.type+"$"+ShortToExe(mem.address);
+                            }
                         }
                         break;
                     }
@@ -245,6 +254,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
+        jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
         jMenuItemMemHigh = new javax.swing.JMenuItem();
         jMenuOption = new javax.swing.JMenu();
@@ -253,6 +263,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorOption = new javax.swing.JPopupMenu.Separator();
         jMenuItemViewProject = new javax.swing.JMenuItem();
         jMenuSource = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemDiss = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemFindDis = new javax.swing.JMenuItem();
@@ -442,6 +453,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBar.add(jButtonMarkData);
 
+        jButtonMarkPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/plus.png"))); // NOI18N
+        jButtonMarkPlus.setToolTipText("Mark the selected addresses as +");
+        jButtonMarkPlus.setFocusable(false);
+        jButtonMarkPlus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkPlus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkPlusActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkPlus);
+
         jButtonMarkLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/min.png"))); // NOI18N
         jButtonMarkLow.setToolTipText("Assign the selected address as #<");
         jButtonMarkLow.setFocusable(false);
@@ -503,6 +526,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBar.add(jButtonViewProject);
         jToolBar.add(jSeparatorButton2);
+
+        jButtonFindMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/finda.png"))); // NOI18N
+        jButtonFindMem.setToolTipText("Find a memory address");
+        jButtonFindMem.setFocusable(false);
+        jButtonFindMem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFindMem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonFindMem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFindMemActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonFindMem);
 
         jButtonDisassemble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exec.png"))); // NOI18N
         jButtonDisassemble.setToolTipText("Disassemble");
@@ -814,6 +849,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMarkCode.add(jMenuItemMarkData);
 
+    jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
+    jMenuItemPlus.setText("Assign the selected addresses as +");
+    jMenuItemPlus.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemPlusActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemPlus);
+
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
     jMenuItemMemLow.addActionListener(new java.awt.event.ActionListener() {
@@ -871,6 +915,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuBar.add(jMenuOption);
 
     jMenuSource.setText("Source");
+
+    jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/finda.png"))); // NOI18N
+    jMenuItem1.setText("Find memory address");
+    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem1ActionPerformed(evt);
+        }
+    });
+    jMenuSource.add(jMenuItem1);
 
     jMenuItemDiss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exec.png"))); // NOI18N
     jMenuItemDiss.setText("Disassemble");
@@ -966,7 +1019,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1254,6 +1307,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_HIGH);
     }//GEN-LAST:event_jMenuItemMemHighActionPerformed
 
+    private void jButtonFindMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindMemActionPerformed
+      execute(SOURCE_FINDA);
+    }//GEN-LAST:event_jButtonFindMemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+      execute(SOURCE_FINDA);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButtonMarkPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkPlusActionPerformed
+      execute(MEM_PLUS);
+    }//GEN-LAST:event_jButtonMarkPlusActionPerformed
+
+    private void jMenuItemPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPlusActionPerformed
+      execute(MEM_PLUS);
+    }//GEN-LAST:event_jMenuItemPlusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1304,11 +1373,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonExportAsDiss;
     private javax.swing.JButton jButtonExportAsSource;
     private javax.swing.JButton jButtonFindDis;
+    private javax.swing.JButton jButtonFindMem;
     private javax.swing.JButton jButtonFindSource;
     private javax.swing.JButton jButtonMarkCode;
     private javax.swing.JButton jButtonMarkData;
     private javax.swing.JButton jButtonMarkLow;
     private javax.swing.JButton jButtonMarkMax;
+    private javax.swing.JButton jButtonMarkPlus;
     private javax.swing.JButton jButtonNewProject;
     private javax.swing.JButton jButtonOpenProject;
     private javax.swing.JButton jButtonSIDLD;
@@ -1318,6 +1389,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -1340,6 +1412,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemMemLow;
     private javax.swing.JMenuItem jMenuItemNewProject;
     private javax.swing.JMenuItem jMenuItemOpenProject;
+    private javax.swing.JMenuItem jMenuItemPlus;
     private javax.swing.JMenuItem jMenuItemSIDLD;
     private javax.swing.JMenuItem jMenuItemSaveAsProject;
     private javax.swing.JMenuItem jMenuItemSaveProject;
@@ -1408,12 +1481,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case SOURCE_EXPASSOURCE:
         exportAs(rSyntaxTextAreaSource.getText());    
         break;
+      case SOURCE_FINDA:
+        findAddress();
+        break;   
       case SOURCE_FINDD:
         findDialogDis.setVisible(true);
         break;
       case SOURCE_FINDS:
         findDialogSource.setVisible(true);
-        break;
+        break;        
       case APP_EXIT:
         exit();
         break;        
@@ -1446,6 +1522,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_HIGH:
          memHigh();  
+         break;
+       case MEM_PLUS:
+         memPlus();  
          break;
          
        case HELP_CONTENTS: 
@@ -1863,17 +1942,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     int value=project.memory[row].copy & 0xFF;
     
-    for (MemoryDasm memory : project.memory) {
-      if (!memory.isInside) continue;
-      
+    for (MemoryDasm memory : project.memory) {    
       if ((memory.address & 0xFF)==value) {
-          data=new Vector();
+        if (!memory.isInside && memory.userLocation==null) continue;
           
-          data.add(ShortToExe(memory.address));
-          data.add(memory.dasmLocation);
-          data.add(memory.userLocation);
+        data=new Vector();
           
-          rows.add(data);
+        data.add(ShortToExe(memory.address));
+        data.add(memory.dasmLocation);
+        data.add(memory.userLocation);
+          
+        rows.add(data);
       }
     }
 
@@ -1923,17 +2002,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     int value=project.memory[row].copy & 0xFF;
     
-    for (MemoryDasm memory : project.memory) {
-      if (!memory.isInside) continue;
-      
+    for (MemoryDasm memory : project.memory) {      
       if (((memory.address>>8) & 0xFF)==value) {
-          data=new Vector();
+        if (!memory.isInside && memory.userLocation==null) continue;  
           
-          data.add(ShortToExe(memory.address));
-          data.add(memory.dasmLocation);
-          data.add(memory.userLocation);
+        data=new Vector();
           
-          rows.add(data);
+        data.add(ShortToExe(memory.address));
+        data.add(memory.dasmLocation);
+        data.add(memory.userLocation);
+          
+        rows.add(data);
       }
     }
     
@@ -1961,7 +2040,87 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }   
     
   }
-  
+ 
+  /**
+   * Find a memory address
+   */
+  private void findAddress() {
+    String addr=JOptionPane.showInputDialog(this, "Search and go to a given HEX memory address");
+    if (addr==null) return;
+    
+    try {
+      int pos=Integer.parseInt(addr,16);
+      if (pos<0 || pos>0xFFFF) return;
+    
+      jTableMemory.getSelectionModel().setSelectionInterval(pos, pos);
+      jTableMemory.scrollRectToVisible(new Rectangle(jTableMemory.getCellRect(pos, 0, true)));
+    } catch (Exception e) {
+      }
+  }
+
+  /**
+   * Mark the memroy as address +
+   */
+  private void memPlus() {
+ int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    Vector cols=new Vector();
+    cols.add("ADDR");
+    cols.add("DASM");
+    cols.add("USER");
+        
+    Vector rows=new Vector();
+    Vector data;
+    
+    int value=project.memory[row].copy & 0xFF;
+    
+    MemoryDasm mem=project.memory[row];
+    MemoryDasm memory;
+    
+    int addr;
+    for (int i=1; i<32; i++) {
+      addr=mem.address-i;
+      if (i<0) continue;
+      
+      memory=project.memory[addr];
+      
+      data=new Vector();
+          
+      data.add(ShortToExe(memory.address));
+      data.add(memory.dasmLocation);
+      data.add(memory.userLocation);
+          
+      rows.add(data);
+    }
+    
+    JTable table = new JTable(rows, cols);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
+    
+    if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
+           "Select the address to use as + in table", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+        
+       int rowS=table.getSelectedRow();
+       if (rowS<0) {
+         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+            if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+              project.memory[row].type=' ';
+              project.memory[row].related=-1;
+            }
+         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+         return;
+       } else {         
+           mem.related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
+           mem.type='+';
+         }
+       
+       dataTableModelMemory.fireTableDataChanged();
+    }
+  }
+    
   /**
    * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
    *
@@ -1987,5 +2146,5 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         break;
     }
     return ret.toUpperCase(Locale.ENGLISH);
-  }  
+  }      
 }

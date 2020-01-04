@@ -52,8 +52,8 @@ public class MemoryTableCellRenderer extends DefaultTableCellRenderer {
                                                       isSelected, hasFocus,
                                                       row, column);
       
-      if (isSelected) return c;
-      if (disassembly.startAddress<0) return c;
+      if (isSelected) return c;      
+      if (disassembly==null || disassembly.startAddress<0) return c;
       
       if (DataTableModelMemory.columns[table.convertColumnIndexToModel(column)]==ID) {
         if (row<disassembly.startAddress || row>disassembly.endAddress) c.setBackground(Color.white);

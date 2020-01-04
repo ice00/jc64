@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Preview Area</h1>
+  <p>
+  If you open a MUS file, the preview area show a human redable form of the tune, divided by each voice and reporting the author comments if present. No source code are given as this is intented to use for studing how a tune were composed in SIDPlayer.
+  </p>
+  
+  <p align="center"><img src="./preview1.png"></p>  
+  
+  <p>
+  In case of SID or PRG file, the preview showes the generated source code in an intermediate form where emphasy is given to the value of a location, even if it is of an peace of code that are disassembled.<br>
+  When you study a code a simple byte could be a reference to a memory location as a low/high part so it is important to be able to catch those situation in a easy way.
+  </p>
+  
+  <p align="center"><img src="./preview2.png"></p>  
+  
+  <p>
+  Essentially the memory are marked as of data are showed as a sequences of <b>.byte</b> values (grouped in a way you can choose in options), while instructions (memory location marked as of code) are decode with their memory locations and bytes values before the true assembler representation. Even row comments appears just after the instructions.<br>
+  Instead global comments (used to give a better view structure to the source) are visible.<br>
+  Labels (automatic or user manual) are already present and used inside the instructions.<br><br>
+  
+  A very usefull function is that when you click into a memory area (address or in label format), the memory area table will be positionating to that memory location.
+  
+  </p>
+  
+   <hr>
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>

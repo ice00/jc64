@@ -201,6 +201,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemMarkDataActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPlus">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/plus.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Assign the selected addresses as +"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPlusActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemLow">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -276,6 +287,17 @@
             <Property name="text" type="java.lang.String" value="Source"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/finda.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Find memory address"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDiss">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -409,7 +431,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar" pref="880" max="32767" attributes="0"/>
+          <Component id="jToolBar" max="32767" attributes="0"/>
           <Component id="jSplitPaneExternal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -630,6 +652,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMarkDataActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="jButtonMarkPlus">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/sw_emulator/swing/icons/plus.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Mark the selected addresses as +"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMarkPlusActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="jButtonMarkLow">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -703,6 +739,20 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparatorButton2">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonFindMem">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/sw_emulator/swing/icons/finda.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Find a memory address"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFindMemActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonDisassemble">
           <Properties>
@@ -884,7 +934,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemory.getData()[rowIndex];&#xa;      switch (dataTableModelMemory.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;        case RE:&#xa;          if (memory.type!=&apos; &apos;) {&#xa;            MemoryDasm mem=dataTableModelMemory.getData()[memory.related];&#xa;            if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=&quot;#&quot;+memory.type+mem.userLocation;&#xa;            else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=&quot;#&quot;+memory.type+mem.dasmLocation;&#xa;                 else tip=&quot;#&quot;+memory.type+&quot;$&quot;+ShortToExe(mem.address);&#xa;          }&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemory.getData()[rowIndex];&#xa;      switch (dataTableModelMemory.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;        case RE:&#xa;          if (memory.type!=&apos; &apos;) {&#xa;            MemoryDasm mem=dataTableModelMemory.getData()[memory.related];&#xa;            if (memory.type==&apos;+&apos;) {&#xa;              if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=mem.userLocation+&quot;+&quot;+(memory.address-memory.related); &#xa;              else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=mem.dasmLocation+&quot;+&quot;+(memory.address-memory.related);&#xa;                   else tip=&quot;$&quot;+ShortToExe(mem.address)+&quot;+&quot;+(memory.address-memory.related);&#xa;            } else {&#xa;               if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=&quot;#&quot;+memory.type+mem.userLocation;&#xa;               else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=&quot;#&quot;+memory.type+mem.dasmLocation;&#xa;                    else tip=&quot;#&quot;+memory.type+&quot;$&quot;+ShortToExe(mem.address);&#xa;            }&#xa;          }&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);&#xa;jTableMemory.getColumnModel().getColumn(0).setPreferredWidth(310);&#xa;"/>
               </AuxValues>
             </Component>

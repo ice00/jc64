@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Memory Area</h1>
+  <p>
+  Once a file that are not a MUS is processed, in the memory area there will appears a table that contains all $FFFF C64 memory addresses in sequences with different colors and flag information in the columns.
+  </p>
+  
+  <p align="center"><img src="./mem1.png"></p>  
+  
+  <p>
+  The meanings of columns are:
+   <ul>
+    <li>ID: the memory address location number in Hex format.</li>
+    <li>DC: the Dasm automatic row comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the comment itself.</li>
+    <li>UC: the user manual row comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the comment itself.</li>
+    <li>DL: the Dasm label name assigned to this memory location. The program generate it as Wxxxx (where xxxx is the memory address in Hex). If it is set, than by passing with the mouse over it will show the label itself</li>
+    <li>UL: the user label name assigned to this memory location. If it is set, than by passing with the mouse over it will show the label itself</li>
+    <li>UB: the user global comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the global comment itself</li>
+    <li>RE: it indicates that the location is related to another, so it can contains the value +, < and >. By passing with the mouse over it will show the related address.</li>
+   </ul>
+   The colors instead could be:
+    <ul>
+     <li>White: this indicates that the memory address is outside the binary data read from the file. Assigning label or comments to this area works different from the inside area (all other colors means an area inside the binary file)</li>
+     <li>Light gray: this area are undefined, or in other words, we did not say if it is a code to execute or a data to being read by other codes. Disassembler threats code and data area in different manner. In option, you can select if an undefined area must be used as code or as data by default, but during your analysis you must declare the right type as soon as you understand the code.</li>
+     <li>Light blue: this area is of data.</li>
+     <li>Green: this are is of code.</li>
+    </ul>
+  </p>
+  
+  <p align="center"><img src="./mem2.png"></p>  
+  
+   <hr>
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>

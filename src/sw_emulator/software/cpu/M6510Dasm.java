@@ -612,6 +612,9 @@ public class M6510Dasm implements disassembler {
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
+            // avoid to label a memroy in table reference
+            if (mem.type=='+') label=null;
+            
             if (label!=null) {
               if (counter>0) {
                 // we where on a line with many bytes, so close it and start from 0
@@ -642,7 +645,7 @@ public class M6510Dasm implements disassembler {
             else tmp2=", ";
             
             // this is a data declaration            
-            if (mem.related>=0 ) {
+            if (mem.type=='<' || mem.type=='>') {
               // the byte is a reference
               memRel=memory[mem.related];   
               
@@ -762,6 +765,9 @@ public class M6510Dasm implements disassembler {
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
+            // avoid to label a memroy in table reference
+            if (mem.type=='+') label=null;
+            
             if (label!=null) {
               if (counter>0) {
                 // we where on a line with many bytes, so close it and start from 0
@@ -788,11 +794,11 @@ public class M6510Dasm implements disassembler {
               counter=0;
             }
             
-            if (counter==0) tmp2="  .byte $";
-            else tmp2=", $";
+            if (counter==0) tmp2="  .byte ";
+            else tmp2=", ";
             
             // this is a data declaration            
-            if (mem.related>=0 ) {
+            if (mem.type=='<' || mem.type=='>') {
               // the byte is a reference
               memRel=memory[mem.related];   
               
@@ -991,7 +997,7 @@ public class M6510Dasm implements disassembler {
     if (addr<0) return "$??"; 
     
     // this is a data declaration            
-    if (memory[(int)addr].related>=0 ) {                
+    if (memory[(int)addr].type=='<' || memory[(int)addr].type=='>') {                
       // the byte is a reference
       MemoryDasm memRel=memory[memory[(int)addr].related];   
               
@@ -1028,6 +1034,15 @@ public class M6510Dasm implements disassembler {
     if (addr<0) return "$????";  
       
     MemoryDasm mem=memory[(int)addr];
+    
+    if (mem.type=='+') {
+      /// this is a memory in table label
+      int pos=mem.address-mem.related;
+      MemoryDasm mem2=memory[mem.related];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+      return "$"+ShortToExe((int)mem.related)+"+"+pos;  
+    }
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
@@ -1042,7 +1057,13 @@ public class M6510Dasm implements disassembler {
   private void setLabel(long addr) {
     if (addr<0) return;
     
-    if (memory[(int)addr].isInside) memory[(int)addr].dasmLocation="W"+ShortToExe((int)addr);
+    MemoryDasm mem=memory[(int)addr];
+           
+    if (mem.isInside) {
+      if (mem.type=='+') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
+        
+      mem.dasmLocation="W"+ShortToExe((int)addr);
+    }
   }
   
   /**

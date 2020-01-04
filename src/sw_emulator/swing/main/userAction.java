@@ -113,6 +113,12 @@ public interface userAction {
   /** Memory assign #>  */
   public static final int MEM_HIGH = 29;
   
+  /** Find memory address  */
+  public static final int SOURCE_FINDA = 30;  
+  
+  /** Memory table plus */
+  public static final int MEM_PLUS = 31; 
+  
   /**
    * Execute the passed user action
    * 

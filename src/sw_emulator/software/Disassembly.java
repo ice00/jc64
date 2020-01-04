@@ -153,6 +153,7 @@ public class Disassembly {
     tmp.append(mus.cdasm(inB, ind3, txtA-1, ind3+musPC));    
     
     disassembly=tmp.toString();
+    source="";
   }
   
   /**
@@ -248,7 +249,7 @@ public class Disassembly {
         psidLAddr=inB[0x7C]+inB[0x7D]*256;  // modify this value as used for org starting
       }
       tmp.append("\n");
-      tmp.append("  .org ").append(ShortToExe(psidLAddr)).append("\n\n");
+      tmp.append("  .org $").append(ShortToExe(psidLAddr)).append("\n\n");
       
       tmp.append(sid.csdasm(inB, sidPos, inB.length, sidPC));
       source=tmp.toString();
@@ -313,11 +314,11 @@ public class Disassembly {
         
       tmp.append("  processor 6502\n\n");
 
-      tmp.append("  .org ").append(ShortToExe(start-2)).append("\n\n");
+      tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");
       tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
       tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
       tmp.append("\n");
-      tmp.append("  .org ").append(ShortToExe(start)).append("\n\n");
+      tmp.append("  .org $").append(ShortToExe(start)).append("\n\n");
       
       tmp.append(prg.csdasm(inB, 2, inB.length, start));
       source=tmp.toString();
