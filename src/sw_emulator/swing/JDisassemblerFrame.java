@@ -1749,6 +1749,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.isData=true;
       mem.isCode=false;
       if (option.eraseDComm) mem.dasmComment=null;
+      if (option.erasePlus && mem.type=='+') {
+        mem.related=-1;
+        mem.type=' ';
+      }
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -2105,7 +2109,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
        int rowS=table.getSelectedRow();
        if (rowS<0) {
-         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+         if (project.memory[row].type=='+') {
             if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
               project.memory[row].type=' ';
               project.memory[row].related=-1;

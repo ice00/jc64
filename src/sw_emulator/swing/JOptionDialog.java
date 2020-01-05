@@ -66,7 +66,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonStyle1 = new javax.swing.JRadioButton();
         jRadioButtonStyle2 = new javax.swing.JRadioButton();
         jRadioButtonStyle3 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelLanguage = new javax.swing.JLabel();
         jRadioButtonLangEnglish = new javax.swing.JRadioButton();
         jRadioButtonLangItalian = new javax.swing.JRadioButton();
         jCheckBoxEraseDComm = new javax.swing.JCheckBox();
@@ -76,15 +76,16 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelMaxLength = new javax.swing.JLabel();
         jLabelAggregate = new javax.swing.JLabel();
         jSpinnerMaxAggregate = new javax.swing.JSpinner();
-        jPanelDefinitive = new javax.swing.JPanel();
         jLabelPSIDinitsong = new javax.swing.JLabel();
-        jLabelPSIDplaysound = new javax.swing.JLabel();
         jTextFieldInitSongs = new javax.swing.JTextField();
+        jLabelPSIDplaysound = new javax.swing.JLabel();
         jTextFieldPlaySound = new javax.swing.JTextField();
         jLabelSIDfreqLo = new javax.swing.JLabel();
         jTextFieldSidFreqLo = new javax.swing.JTextField();
         jLabelSIDfreqHi = new javax.swing.JLabel();
         jTextFieldSidFreqHi = new javax.swing.JTextField();
+        jCheckBoxOpcodeFormattingSource = new javax.swing.JCheckBox();
+        jCheckBoxErasePlus = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jButtonLoad = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
@@ -124,7 +125,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Language of comments:");
+        jLabelLanguage.setText("Language of comments:");
 
         buttonGroupLanguage.add(jRadioButtonLangEnglish);
         jRadioButtonLangEnglish.setSelected(true);
@@ -152,7 +153,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         });
 
         jCheckBoxOpcodeFormattingPreview.setSelected(true);
-        jCheckBoxOpcodeFormattingPreview.setText("Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...)");
+        jCheckBoxOpcodeFormattingPreview.setText("Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview");
         jCheckBoxOpcodeFormattingPreview.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxOpcodeFormattingPreviewItemStateChanged(evt);
@@ -185,81 +186,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
-        jPanelPreview.setLayout(jPanelPreviewLayout);
-        jPanelPreviewLayout.setHorizontalGroup(
-            jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(292, 292, 292))
-                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelIllegalOpcodeStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addComponent(jRadioButtonStyle1)
-                                        .addGap(47, 47, 47)
-                                        .addComponent(jRadioButtonStyle2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButtonStyle3))
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addComponent(jRadioButtonLangEnglish, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButtonLangItalian))))
-                            .addComponent(jCheckBoxOpcodeFormattingPreview, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabelAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(jSpinnerMaxAggregate))))
-                        .addContainerGap(46, Short.MAX_VALUE))))
-        );
-        jPanelPreviewLayout.setVerticalGroup(
-            jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelIllegalOpcodeStyle)
-                    .addComponent(jRadioButtonStyle1)
-                    .addComponent(jRadioButtonStyle2)
-                    .addComponent(jRadioButtonStyle3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jRadioButtonLangEnglish)
-                    .addComponent(jRadioButtonLangItalian))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxOpcodeFormattingPreview)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxEraseDComm)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxUndefinedCode)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelMaxLength))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAggregate)
-                    .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(260, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneOption.addTab("Preview", jPanelPreview);
-
         jLabelPSIDinitsong.setText("PSID init songs label:");
-
-        jLabelPSIDplaysound.setText("PSID play sound label:");
 
         jTextFieldInitSongs.setText("initSongs");
         jTextFieldInitSongs.setToolTipText("Label to use for the PSID starting init routine");
@@ -268,6 +195,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                 jTextFieldInitSongsFocusLost(evt);
             }
         });
+
+        jLabelPSIDplaysound.setText("PSID play sound label:");
 
         jTextFieldPlaySound.setText("playSound");
         jTextFieldPlaySound.setToolTipText("Label to use for PSID play sound routine");
@@ -297,53 +226,127 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanelDefinitiveLayout = new javax.swing.GroupLayout(jPanelDefinitive);
-        jPanelDefinitive.setLayout(jPanelDefinitiveLayout);
-        jPanelDefinitiveLayout.setHorizontalGroup(
-            jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDefinitiveLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDefinitiveLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelDefinitiveLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(334, Short.MAX_VALUE))
+        jCheckBoxOpcodeFormattingSource.setText("Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source");
+        jCheckBoxOpcodeFormattingSource.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxOpcodeFormattingSourceItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxErasePlus.setSelected(true);
+        jCheckBoxErasePlus.setText("Erase relative + address when mark a memory location as Data");
+        jCheckBoxErasePlus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxErasePlusItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
+        jPanelPreview.setLayout(jPanelPreviewLayout);
+        jPanelPreviewLayout.setHorizontalGroup(
+            jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                        .addComponent(jLabelLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(292, 292, 292))
+                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                    .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(517, 517, 517))
+                                .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                    .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jSpinnerMaxLength)
+                                            .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
+                                    .addComponent(jLabelIllegalOpcodeStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                            .addComponent(jRadioButtonStyle1)
+                                            .addGap(47, 47, 47)
+                                            .addComponent(jRadioButtonStyle2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRadioButtonStyle3))
+                                        .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                            .addComponent(jRadioButtonLangEnglish, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jRadioButtonLangItalian))))
+                                .addComponent(jCheckBoxOpcodeFormattingPreview, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxOpcodeFormattingSource, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxErasePlus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(46, Short.MAX_VALUE))))
         );
-        jPanelDefinitiveLayout.setVerticalGroup(
-            jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDefinitiveLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanelPreviewLayout.setVerticalGroup(
+            jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIllegalOpcodeStyle)
+                    .addComponent(jRadioButtonStyle1)
+                    .addComponent(jRadioButtonStyle2)
+                    .addComponent(jRadioButtonStyle3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelLanguage)
+                    .addComponent(jRadioButtonLangEnglish)
+                    .addComponent(jRadioButtonLangItalian))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxOpcodeFormattingPreview)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxOpcodeFormattingSource)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxEraseDComm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxErasePlus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxUndefinedCode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMaxLength))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAggregate)
+                    .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPSIDinitsong)
                     .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPSIDplaysound)
                     .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSIDfreqLo)
                     .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDefinitiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSIDfreqHi)
                     .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        jTabbedPaneOption.addTab("Definitive", jPanelDefinitive);
+        jTabbedPaneOption.addTab("Option", jPanelPreview);
 
         jPanel2.add(jTabbedPaneOption, java.awt.BorderLayout.CENTER);
 
@@ -393,26 +396,6 @@ public class JOptionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButtonStyle1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle1ItemStateChanged
-        option.illegalOpcodeModePreview=M6510Dasm.MODE1;
-    }//GEN-LAST:event_jRadioButtonStyle1ItemStateChanged
-
-    private void jRadioButtonStyle2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle2ItemStateChanged
-        option.illegalOpcodeModePreview=M6510Dasm.MODE2;
-    }//GEN-LAST:event_jRadioButtonStyle2ItemStateChanged
-
-    private void jRadioButtonStyle3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle3ItemStateChanged
-        option.illegalOpcodeModePreview=M6510Dasm.MODE3;
-    }//GEN-LAST:event_jRadioButtonStyle3ItemStateChanged
-
-    private void jRadioButtonLangEnglishItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonLangEnglishItemStateChanged
-        option.commentLanguagePreview=C64Dasm.LANG_ENGLISH;
-    }//GEN-LAST:event_jRadioButtonLangEnglishItemStateChanged
-
-    private void jRadioButtonLangItalianItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonLangItalianItemStateChanged
-        option.commentLanguagePreview=C64Dasm.LANG_ITALIAN;
-    }//GEN-LAST:event_jRadioButtonLangItalianItemStateChanged
-
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
       if(!FileManager.instance.readOptionFile(FileManager.optionFile, option)) {
         JOptionPane.showMessageDialog(this, "Error reading the option file", "Loading error", JOptionPane.ERROR_MESSAGE);
@@ -429,53 +412,81 @@ public class JOptionDialog extends javax.swing.JDialog {
       setVisible(false);
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
-    private void jCheckBoxEraseDCommItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxEraseDCommItemStateChanged
-      option.eraseDComm=jCheckBoxEraseDComm.isSelected();
-    }//GEN-LAST:event_jCheckBoxEraseDCommItemStateChanged
+    private void jTextFieldSidFreqHiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldSidFreqHiFocusLost
+        String txt=jTextFieldSidFreqHi.getText();
+        txt=txt.replaceAll(" ", "");
+        if ("".equals(txt)) option.sidFreqHiLabel="frequencyHi";
+        else option.sidFreqHiLabel=txt;
+    }//GEN-LAST:event_jTextFieldSidFreqHiFocusLost
 
-    private void jCheckBoxOpcodeFormattingPreviewItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxOpcodeFormattingPreviewItemStateChanged
-      option.opcodeUpperCasePreview=jCheckBoxOpcodeFormattingPreview.isSelected();
-    }//GEN-LAST:event_jCheckBoxOpcodeFormattingPreviewItemStateChanged
-
-    private void jCheckBoxUndefinedCodeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxUndefinedCodeItemStateChanged
-      option.useAsCode=jCheckBoxUndefinedCode.isSelected();
-    }//GEN-LAST:event_jCheckBoxUndefinedCodeItemStateChanged
+    private void jTextFieldSidFreqLoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldSidFreqLoFocusLost
+        String txt=jTextFieldSidFreqLo.getText();
+        txt=txt.replaceAll(" ", "");
+        if ("".equals(txt)) option.sidFreqLoLabel="frequencyLo";
+        else option.sidFreqLoLabel=txt;
+    }//GEN-LAST:event_jTextFieldSidFreqLoFocusLost
 
     private void jTextFieldPlaySoundFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPlaySoundFocusLost
-      String txt=jTextFieldPlaySound.getText();
-      txt=txt.replaceAll(" ", "");
-      if ("".equals(txt)) option.psidPlaySoundsLabel="playSound";
-      else option.psidPlaySoundsLabel=txt;
+        String txt=jTextFieldPlaySound.getText();
+        txt=txt.replaceAll(" ", "");
+        if ("".equals(txt)) option.psidPlaySoundsLabel="playSound";
+        else option.psidPlaySoundsLabel=txt;
     }//GEN-LAST:event_jTextFieldPlaySoundFocusLost
 
     private void jTextFieldInitSongsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldInitSongsFocusLost
-      String txt=jTextFieldInitSongs.getText();
-      txt=txt.replaceAll(" ", "");
-      if ("".equals(txt)) option.psidInitSongsLabel="initSongs";
-      else option.psidInitSongsLabel=txt;
+        String txt=jTextFieldInitSongs.getText();
+        txt=txt.replaceAll(" ", "");
+        if ("".equals(txt)) option.psidInitSongsLabel="initSongs";
+        else option.psidInitSongsLabel=txt;
     }//GEN-LAST:event_jTextFieldInitSongsFocusLost
 
-    private void jTextFieldSidFreqLoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldSidFreqLoFocusLost
-      String txt=jTextFieldSidFreqLo.getText();
-      txt=txt.replaceAll(" ", "");
-      if ("".equals(txt)) option.sidFreqLoLabel="frequencyLo";
-      else option.sidFreqLoLabel=txt;       
-    }//GEN-LAST:event_jTextFieldSidFreqLoFocusLost
-
-    private void jTextFieldSidFreqHiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldSidFreqHiFocusLost
-      String txt=jTextFieldSidFreqHi.getText();
-      txt=txt.replaceAll(" ", "");
-      if ("".equals(txt)) option.sidFreqHiLabel="frequencyHi";
-      else option.sidFreqHiLabel=txt; 
-    }//GEN-LAST:event_jTextFieldSidFreqHiFocusLost
+    private void jSpinnerMaxAggregateStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMaxAggregateStateChanged
+        option.maxAggregate=(Integer)jSpinnerMaxAggregate.getValue();
+    }//GEN-LAST:event_jSpinnerMaxAggregateStateChanged
 
     private void jSpinnerMaxLengthStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMaxLengthStateChanged
-      option.maxLabelLength=(Integer)jSpinnerMaxLength.getValue();
+        option.maxLabelLength=(Integer)jSpinnerMaxLength.getValue();
     }//GEN-LAST:event_jSpinnerMaxLengthStateChanged
 
-    private void jSpinnerMaxAggregateStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMaxAggregateStateChanged
-      option.maxAggregate=(Integer)jSpinnerMaxAggregate.getValue();
-    }//GEN-LAST:event_jSpinnerMaxAggregateStateChanged
+    private void jCheckBoxUndefinedCodeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxUndefinedCodeItemStateChanged
+        option.useAsCode=jCheckBoxUndefinedCode.isSelected();
+    }//GEN-LAST:event_jCheckBoxUndefinedCodeItemStateChanged
+
+    private void jCheckBoxOpcodeFormattingPreviewItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxOpcodeFormattingPreviewItemStateChanged
+        option.opcodeUpperCasePreview=jCheckBoxOpcodeFormattingPreview.isSelected();
+    }//GEN-LAST:event_jCheckBoxOpcodeFormattingPreviewItemStateChanged
+
+    private void jCheckBoxEraseDCommItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxEraseDCommItemStateChanged
+        option.eraseDComm=jCheckBoxEraseDComm.isSelected();
+    }//GEN-LAST:event_jCheckBoxEraseDCommItemStateChanged
+
+    private void jRadioButtonLangItalianItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonLangItalianItemStateChanged
+        option.commentLanguage=C64Dasm.LANG_ITALIAN;
+    }//GEN-LAST:event_jRadioButtonLangItalianItemStateChanged
+
+    private void jRadioButtonLangEnglishItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonLangEnglishItemStateChanged
+        option.commentLanguage=C64Dasm.LANG_ENGLISH;
+    }//GEN-LAST:event_jRadioButtonLangEnglishItemStateChanged
+
+    private void jRadioButtonStyle3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle3ItemStateChanged
+        option.illegalOpcodeMode=M6510Dasm.MODE3;
+    }//GEN-LAST:event_jRadioButtonStyle3ItemStateChanged
+
+    private void jRadioButtonStyle2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle2ItemStateChanged
+        option.illegalOpcodeMode=M6510Dasm.MODE2;
+    }//GEN-LAST:event_jRadioButtonStyle2ItemStateChanged
+
+    private void jRadioButtonStyle1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonStyle1ItemStateChanged
+        option.illegalOpcodeMode=M6510Dasm.MODE1;
+    }//GEN-LAST:event_jRadioButtonStyle1ItemStateChanged
+
+    private void jCheckBoxOpcodeFormattingSourceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxOpcodeFormattingSourceItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxOpcodeFormattingSourceItemStateChanged
+
+    private void jCheckBoxErasePlusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxErasePlusItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxErasePlusItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -528,11 +539,13 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonLoad;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JCheckBox jCheckBoxEraseDComm;
+    private javax.swing.JCheckBox jCheckBoxErasePlus;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
+    private javax.swing.JCheckBox jCheckBoxOpcodeFormattingSource;
     private javax.swing.JCheckBox jCheckBoxUndefinedCode;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAggregate;
     private javax.swing.JLabel jLabelIllegalOpcodeStyle;
+    private javax.swing.JLabel jLabelLanguage;
     private javax.swing.JLabel jLabelMaxLength;
     private javax.swing.JLabel jLabelPSIDinitsong;
     private javax.swing.JLabel jLabelPSIDplaysound;
@@ -540,7 +553,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelSIDfreqLo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanelDefinitive;
     private javax.swing.JPanel jPanelPreview;
     private javax.swing.JRadioButton jRadioButtonLangEnglish;
     private javax.swing.JRadioButton jRadioButtonLangItalian;
@@ -570,14 +582,16 @@ public class JOptionDialog extends javax.swing.JDialog {
      * Apply option to graphical container
      */
     private void applyOption() {
-      jRadioButtonLangEnglish.setSelected(option.commentLanguagePreview==C64Dasm.LANG_ENGLISH);
-      jRadioButtonLangItalian.setSelected(option.commentLanguagePreview==C64Dasm.LANG_ITALIAN);
-      jRadioButtonStyle1.setSelected((option.illegalOpcodeModePreview==M6510Dasm.MODE1));
-      jRadioButtonStyle2.setSelected((option.illegalOpcodeModePreview==M6510Dasm.MODE2));
-      jRadioButtonStyle3.setSelected((option.illegalOpcodeModePreview==M6510Dasm.MODE3));
+      jRadioButtonLangEnglish.setSelected(option.commentLanguage==C64Dasm.LANG_ENGLISH);
+      jRadioButtonLangItalian.setSelected(option.commentLanguage==C64Dasm.LANG_ITALIAN);
+      jRadioButtonStyle1.setSelected((option.illegalOpcodeMode==M6510Dasm.MODE1));
+      jRadioButtonStyle2.setSelected((option.illegalOpcodeMode==M6510Dasm.MODE2));
+      jRadioButtonStyle3.setSelected((option.illegalOpcodeMode==M6510Dasm.MODE3));
       jCheckBoxOpcodeFormattingPreview.setSelected(option.opcodeUpperCasePreview);      
+      jCheckBoxOpcodeFormattingSource.setSelected(option.opcodeUpperCaseSource);      
       jCheckBoxUndefinedCode.setSelected(option.useAsCode);
       jCheckBoxEraseDComm.setSelected(option.eraseDComm);
+      jCheckBoxErasePlus.setSelected(option.erasePlus);
       jTextFieldInitSongs.setText(option.psidInitSongsLabel);
       jTextFieldPlaySound.setText(option.psidPlaySoundsLabel);
       jTextFieldSidFreqLo.setText(option.sidFreqLoLabel);

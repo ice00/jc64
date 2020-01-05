@@ -69,10 +69,12 @@ public class FileManager {
                          new FileInputStream(file))); 
      
       option.opcodeUpperCasePreview = in.readBoolean();
-      option.illegalOpcodeModePreview = in.readByte();
-      option.commentLanguagePreview = in.readByte();     
+      option.opcodeUpperCaseSource = in.readBoolean();
+      option.illegalOpcodeMode = in.readByte();
+      option.commentLanguage = in.readByte();     
       option.useAsCode = in.readBoolean();
       option.eraseDComm = in.readBoolean();
+      option.erasePlus = in.readBoolean();
       option.maxLabelLength = in.readInt();
       option.maxAggregate = in.readInt();
       
@@ -105,10 +107,12 @@ public class FileManager {
       
     
       out.writeBoolean(option.opcodeUpperCasePreview);
-      out.writeByte(option.illegalOpcodeModePreview);
-      out.writeByte(option.commentLanguagePreview);
+      out.writeBoolean(option.opcodeUpperCaseSource);
+      out.writeByte(option.illegalOpcodeMode);
+      out.writeByte(option.commentLanguage);
       out.writeBoolean(option.useAsCode);
       out.writeBoolean(option.eraseDComm);
+      out.writeBoolean(option.erasePlus);
       out.writeInt(option.maxLabelLength);
       out.writeInt(option.maxAggregate);
       

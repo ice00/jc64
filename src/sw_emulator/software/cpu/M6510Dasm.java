@@ -420,29 +420,33 @@ public class M6510Dasm implements disassembler {
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
         result+=getLabelZero(addr)+",Y";
+        
         pc+=2;
         break;
       case A_ABS:     // absolute
         aType=A_ABS;
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
-        pos++;
-        pc+=3;
         
-       // if (iType==M_JMP || iType==M_JSR) {
-          result+=getLabel(addr);
-          setLabel(addr);
-        //} else result+="$"+ShortToExe((int)addr);
+        result+=getLabel(addr);
+        setLabel(addr);
+        setLabelPlus(pc,1);
+        setLabelPlus(pc,2);
+        
+        pos++;
+        pc+=3;    
         break;
       case A_ABX:     // absolute x
         aType=A_ABX;
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
-        pos++;
         
         result+=getLabel(addr)+",X";
         setLabel(addr);
+        setLabelPlus(pc,1);
+        setLabelPlus(pc,2);
         
+        pos++;        
         pc+=3;
         break;
       case A_ABY:     // absolute y
@@ -453,6 +457,8 @@ public class M6510Dasm implements disassembler {
        
         result+=getLabel(addr)+",Y";
         setLabel(addr);
+        setLabelPlus(pc,1);
+        setLabelPlus(pc,2);
         
         pc+=3;
         break;
@@ -994,7 +1000,7 @@ public class M6510Dasm implements disassembler {
    * @return the label of location
    */
   private String getLabelImm(long addr, long value) {
-    if (addr<0) return "$??"; 
+    if (addr<0 || addr>0xffff) return "$??"; 
     
     // this is a data declaration            
     if (memory[(int)addr].type=='<' || memory[(int)addr].type=='>') {                
@@ -1015,7 +1021,7 @@ public class M6510Dasm implements disassembler {
    * @return the label or memory location ($)
    */
   private String getLabelZero(long addr) {
-    if (addr<0) return "$??";
+    if (addr<0 || addr>0xffff) return "$??";
       
     MemoryDasm mem=memory[(int)addr];
      
@@ -1031,7 +1037,7 @@ public class M6510Dasm implements disassembler {
    * @return the label or memory location ($)
    */
   private String getLabel(long addr) {
-    if (addr<0) return "$????";  
+    if (addr<0 || addr>0xffff) return "$????";  
       
     MemoryDasm mem=memory[(int)addr];
     
@@ -1055,7 +1061,7 @@ public class M6510Dasm implements disassembler {
    * @param addr the address to add as label
    */
   private void setLabel(long addr) {
-    if (addr<0) return;
+    if (addr<0 || addr>0xffff) return;
     
     MemoryDasm mem=memory[(int)addr];
            
@@ -1063,6 +1069,26 @@ public class M6510Dasm implements disassembler {
       if (mem.type=='+') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
         
       mem.dasmLocation="W"+ShortToExe((int)addr);
+    }
+  }
+  
+  /**
+   * Set the label for plus relative address if this is the case
+   * 
+   * @param addr tha address where to point
+   * @param offset the offset to add
+   */
+  private void setLabelPlus(long addr, int offset) {
+    if (addr<0 || addr+offset>0xffff) return;
+    
+    MemoryDasm mem=memory[(int)addr+offset];
+    
+    if (mem.isInside) {
+      if (mem.dasmLocation!=null) {
+        mem.type='+';
+        mem.related=(int)addr;
+        setLabel(addr);
+      } 
     }
   }
   

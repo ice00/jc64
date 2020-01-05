@@ -170,7 +170,7 @@ public class Disassembly {
     int sidPC;        // PC value of start of sid program 
       
     C64SidDasm sid=new C64SidDasm();
-    sid.language=option.commentLanguagePreview;
+    sid.language=option.commentLanguage;
     sid.setMemory(memory);
     sid.setOption(option);    
     
@@ -291,7 +291,7 @@ public class Disassembly {
    */
   private void disassemlyPRG(boolean asSource) {
     C64Dasm prg=new C64Dasm();
-    prg.language=option.commentLanguagePreview;
+    prg.language=option.commentLanguage;
     prg.setMemory(memory);
     prg.setOption(option);
     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;

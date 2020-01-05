@@ -32,20 +32,26 @@ import sw_emulator.software.machine.C64Dasm;
  * @author ice
  */
 public class Option {
-  /** Mode of the illegal opcode in preview */
-  public byte illegalOpcodeModePreview = M6510Dasm.MODE1;
+  /** Mode of the illegal opcode  */
+  public byte illegalOpcodeMode = M6510Dasm.MODE1;
         
   /** Uper case for opcode in preview */
   public boolean  opcodeUpperCasePreview = true;
   
-  /** Language for comment in preview */
-  public byte commentLanguagePreview = C64Dasm.LANG_ENGLISH;
+  /** Uper case for opcode in source */
+  public boolean  opcodeUpperCaseSource = true;  
+  
+  /** Language for comment  */
+  public byte commentLanguage = C64Dasm.LANG_ENGLISH;
   
   /** Use as code (not data) if memory is undefined */
   public boolean useAsCode = true;
   
   /** Erase Dasm comment when convering to data*/
   public boolean eraseDComm = true;
+  
+  /** Erase Dasm plus addresses when convering to data*/
+  public boolean erasePlus = true;
   
   /** Max length of a label */
   public int maxLabelLength=25;
