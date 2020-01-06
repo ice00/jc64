@@ -1115,13 +1115,13 @@ public class M6510Dasm implements disassembler {
       if (mem.isInside) continue;
       
       // look for block comment
-      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {
+      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {      
         // split by new line
         lines = mem.userBlockComment.split("\\r?\\n");
         for (String line : lines) {
-          if ("".equals(line)) result.append("\n");
+          if ("".equals(line) || " ".equals(line)) result.append("\n");
           else result.append(";").append(line).append("\n");   
-        }                    
+        }  
       }
       
       // look for constant
