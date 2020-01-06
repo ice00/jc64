@@ -42,7 +42,7 @@ public class C64Dasm extends M6510Dasm {
    * Actual selected language (default=english)
    */
   public byte language=LANG_ENGLISH;
-
+  
   /**
    * Return a comment string for the passed instruction
    *

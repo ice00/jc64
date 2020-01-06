@@ -39,7 +39,7 @@ public class Option {
   public boolean  opcodeUpperCasePreview = true;
   
   /** Uper case for opcode in source */
-  public boolean  opcodeUpperCaseSource = true;  
+  public boolean  opcodeUpperCaseSource = false;  
   
   /** Language for comment  */
   public byte commentLanguage = C64Dasm.LANG_ENGLISH;

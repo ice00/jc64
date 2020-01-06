@@ -157,7 +157,7 @@ public class Disassembly {
   }
   
   /**
-   * Disassembly a MUS file
+   * Disassembly a SID file
    * 
    * @param asSource true if output should be as a source file
    */
@@ -206,6 +206,7 @@ public class Disassembly {
     StringBuilder tmp=new StringBuilder();
     
     if (asSource) {
+      sid.upperCase=option.opcodeUpperCaseSource;
         
       tmp.append("  processor 6502\n\n");
       
@@ -254,6 +255,7 @@ public class Disassembly {
       tmp.append(sid.csdasm(inB, sidPos, inB.length, sidPC));
       source=tmp.toString();
     } else {
+        sid.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
         tmp.append(sid.cdasm(inB, sidPos, inB.length, sidPC));
@@ -311,7 +313,7 @@ public class Disassembly {
     StringBuilder tmp=new StringBuilder();
     
     if (asSource) {
-        
+      prg.upperCase=option.opcodeUpperCaseSource;  
       tmp.append("  processor 6502\n\n");
 
       tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");
@@ -323,6 +325,7 @@ public class Disassembly {
       tmp.append(prg.csdasm(inB, 2, inB.length, start));
       source=tmp.toString();
     } else {    
+        prg.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
         tmp.append(prg.cdasm(inB, 2, inB.length, start));

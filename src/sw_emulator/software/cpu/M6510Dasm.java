@@ -149,6 +149,11 @@ public class M6510Dasm implements disassembler {
   public static final byte A_IDY=13; // indirect y
 
   /**
+   * Actual case to use for text
+   */
+  public boolean upperCase=true;
+  
+  /**
    * Contains the mnemonics of instructions
    */
   public String[] mnemonics={
@@ -373,7 +378,7 @@ public class M6510Dasm implements disassembler {
 
     iType=(int)tableMnemonics[op];   // store the type for creating comment
     
-    if (option.opcodeUpperCasePreview) result=mnemonics[iType];
+    if (upperCase) result=mnemonics[iType];
     else result=mnemonics[iType].toLowerCase();
         
     if (result.length()==3) result+=" ";
@@ -412,14 +417,14 @@ public class M6510Dasm implements disassembler {
         aType=A_ZPX;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+=getLabelZero(addr)+",X";
+        result+=getLabelZero(addr)+(upperCase? ",X": ",x");
         pc+=2;
         break;
       case A_ZPY:     // zero page y
         aType=A_ZPY;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+=getLabelZero(addr)+",Y";
+        result+=getLabelZero(addr)+(upperCase? ",Y": ",y");
         
         pc+=2;
         break;
@@ -441,7 +446,7 @@ public class M6510Dasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         
-        result+=getLabel(addr)+",X";
+        result+=getLabel(addr)+(upperCase? ",X": ",x");
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
@@ -455,7 +460,7 @@ public class M6510Dasm implements disassembler {
         else addr=-1;
         pos++;
        
-        result+=getLabel(addr)+",Y";
+        result+=getLabel(addr)+(upperCase? ",Y": ",y");
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
@@ -477,21 +482,22 @@ public class M6510Dasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         pos++;
-        result+="($"+ShortToExe((int)addr)+")";
+        result+="("+getLabel(addr)+")";
+        setLabel(addr);
         pc+=3;
         break;
       case A_IDX:     // indirect x
         aType=A_IDX;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="("+getLabelZero(addr)+",X)";
+        result+="("+getLabelZero(addr)+(upperCase? ",X)": ",x)");
         pc+=2;
         break;
       case A_IDY:     // indirect y
         aType=A_IDY;
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
-        result+="("+getLabelZero(addr)+"),Y";
+        result+="("+getLabelZero(addr)+(upperCase? "),Y": "),y");
         pc+=2;
         break;
     }
@@ -694,7 +700,7 @@ public class M6510Dasm implements disassembler {
     
     result.append(addConstants());
     
-    this.pos=pos;;
+    this.pos=pos;
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
       mem=memory[(int)pc];

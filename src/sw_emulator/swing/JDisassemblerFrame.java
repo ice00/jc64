@@ -278,7 +278,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemCredits = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
 
         jToolBar.setFloatable(false);
@@ -850,7 +850,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuMarkCode.add(jMenuItemMarkData);
 
     jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
-    jMenuItemPlus.setText("Assign the selected addresses as +");
+    jMenuItemPlus.setText("Assign the selected address as +");
     jMenuItemPlus.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemPlusActionPerformed(evt);
@@ -1122,7 +1122,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemClearDMemActionPerformed
 
     private void jButtonClearDMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearDMemActionPerformed
-      execute(MEM_CLEARDCOM);
+       execute(MEM_CLEARDCOM);
     }//GEN-LAST:event_jButtonClearDMemActionPerformed
 
     private void jButtonClearUMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearUMemActionPerformed
@@ -1697,10 +1697,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
     for (int i=0; i<rows.length; i++) {
       mem= project.memory[rows[i]];
-      if (mem.dasmComment!=null) mem.userComment="";
+      if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
     }
     
     dataTableModelMemory.fireTableDataChanged();
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
   }
   
   /**
@@ -1717,6 +1721,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     dataTableModelMemory.fireTableDataChanged();
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
   } 
   
   /**
@@ -1734,6 +1742,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     dataTableModelMemory.fireTableDataChanged();  
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
   }
   
   /**
@@ -1756,6 +1768,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     dataTableModelMemory.fireTableDataChanged();  
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
   }
 
   /**
@@ -1834,6 +1850,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     String comment=JOptionPane.showInputDialog(this, "Insert the comment for the selected memory location", mem.userComment);
     if (comment!=null) mem.userComment=comment;  
     dataTableModelMemory.fireTableDataChanged(); 
+    jTableMemory.setRowSelectionInterval(row, row); 
   }
 
   /**
@@ -1884,6 +1901,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       mem.userLocation=label;
       dataTableModelMemory.fireTableDataChanged(); 
+      jTableMemory.setRowSelectionInterval(row, row); 
     }
   }
 
@@ -1906,7 +1924,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     if (JOptionPane.showConfirmDialog(null, scrollPane, "Add a multi-lines block comment", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
       mem.userBlockComment=area.getText();
+      if ("".equals(mem.userBlockComment)) mem.userBlockComment=null;
       dataTableModelMemory.fireTableDataChanged();  
+      jTableMemory.setRowSelectionInterval(row, row); 
     }              
   }
 
@@ -1924,6 +1944,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     dataTableModelMemory.fireTableDataChanged();    
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
   }  
 
   /**
@@ -1966,24 +1990,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
             "Select the address to use as #<", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
         
-       int rowS=table.getSelectedRow();
-       if (rowS<0) {
-         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
-            if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-              project.memory[row].type=' ';
-              project.memory[row].related=-1;
-            }
-         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
-         return;
-       } else {         
-           project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
-           project.memory[row].type='<';
-         }
+      int rowS=table.getSelectedRow();
+      if (rowS<0) {
+        if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+          if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+            project.memory[row].type=' ';
+            project.memory[row].related=-1;
+          }
+        } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+        return;
+      } else {         
+          project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
+          project.memory[row].type='<';
+        }
        
-       dataTableModelMemory.fireTableDataChanged();      
-        
-    }   
-    
+      dataTableModelMemory.fireTableDataChanged();      
+      jTableMemory.setRowSelectionInterval(row, row); 
+    }       
   }
 
   /**
@@ -2041,6 +2064,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          }
        
        dataTableModelMemory.fireTableDataChanged();
+       jTableMemory.setRowSelectionInterval(row, row);
     }   
     
   }
@@ -2066,7 +2090,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Mark the memroy as address +
    */
   private void memPlus() {
- int row=jTableMemory.getSelectedRow();
+    int row=jTableMemory.getSelectedRow();
     if (row<0) {
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
@@ -2107,21 +2131,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
            "Select the address to use as + in table", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
         
-       int rowS=table.getSelectedRow();
-       if (rowS<0) {
-         if (project.memory[row].type=='+') {
-            if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-              project.memory[row].type=' ';
-              project.memory[row].related=-1;
-            }
-         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
-         return;
-       } else {         
+      int rowS=table.getSelectedRow();
+      if (rowS<0) {
+        if (project.memory[row].type=='+') {
+          if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+            project.memory[row].type=' ';
+            project.memory[row].related=-1;
+          }
+        } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+        return;
+      } else {         
            mem.related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
            mem.type='+';
-         }
+        }
        
-       dataTableModelMemory.fireTableDataChanged();
+      dataTableModelMemory.fireTableDataChanged();
+      jTableMemory.setRowSelectionInterval(row, row);
     }
   }
     

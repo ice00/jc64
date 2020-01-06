@@ -88,31 +88,31 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelSIDfreqHi" min="-2" pref="229" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="517" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jLabelPSIDplaysound" max="32767" attributes="0"/>
-                                                  <Component id="jLabelAggregate" max="32767" attributes="0"/>
-                                                  <Component id="jLabelMaxLength" max="32767" attributes="0"/>
-                                                  <Component id="jLabelPSIDinitsong" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jLabelSIDfreqLo" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jTextFieldPlaySound" min="-2" pref="219" max="-2" attributes="0"/>
-                                                  <Component id="jTextFieldInitSongs" min="-2" pref="219" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jSpinnerMaxLength" max="32767" attributes="0"/>
-                                                      <Component id="jSpinnerMaxAggregate" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelSIDfreqHi" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jLabelPSIDplaysound" max="32767" attributes="0"/>
+                                                      <Component id="jLabelAggregate" max="32767" attributes="0"/>
+                                                      <Component id="jLabelMaxLength" max="32767" attributes="0"/>
+                                                      <Component id="jLabelPSIDinitsong" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelSIDfreqLo" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="jTextFieldSidFreqLo" min="-2" pref="219" max="-2" attributes="0"/>
-                                                  <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jTextFieldPlaySound" min="-2" pref="219" max="-2" attributes="0"/>
+                                                      <Component id="jTextFieldInitSongs" min="-2" pref="219" max="-2" attributes="0"/>
+                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="jSpinnerMaxLength" max="32767" attributes="0"/>
+                                                          <Component id="jSpinnerMaxAggregate" min="-2" pref="52" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="jTextFieldSidFreqLo" min="-2" pref="219" max="-2" attributes="0"/>
+                                                      <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
+                                          <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">

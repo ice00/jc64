@@ -206,7 +206,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/plus.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Assign the selected addresses as +"/>
+                <Property name="text" type="java.lang.String" value="Assign the selected address as +"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPlusActionPerformed"/>
@@ -408,7 +408,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="JC64Dis"/>
   </Properties>
   <SyntheticProperties>
