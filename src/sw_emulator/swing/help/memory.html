@@ -59,10 +59,14 @@
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
    <p align="center"><img src="./memory7.png"></p>   
-   Using this function you can create such relation: you need to positionate to the element you want to make point to another, then into the given table you can choose one address (that can have a label, but if it is not present Dasm engine will create one for it). At this point the label of this address will not be used and instead will be used the one that are associated with the offest for it.<br>
-   You wil lse that now the RE column will have a + inside it and the tool tip will gives the address + offset.     
-
-   
+   <p>Using this function you can create such relation: you need to positionate to the element you want to make point to another, then into the given table you can choose one address (that can have a label, but if it is not present Dasm engine will create one for it). At this point the label of this address will not be used and instead will be used the one that are associated with the offest for it.<br>
+   You will see that now the RE column will have a + inside it and the tool tip will gives the address + offset. </p>
+   <p align="center"><img src="./memory8.png"></p> 
+   <p>You should note that the Dasm engine will create in automatic a such relation in one particular case: where there is a self modified code!<br>
+   A common way to save raster line or write compact code is to modify the low/high byte of the address of an LDA or STA instruction. 
+   In this case you cannot create a label to that memory location as it is inside the code, so you must refer to it as another (usually labelling where the instruction start) plus an offset:</p>
+   <p align="center"><img src="./memory9.png"></p> 
+   You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.
    
    <h2>Assign the selected address as #< </h2>
    <h2>Assign the selected address as #> </h2>
