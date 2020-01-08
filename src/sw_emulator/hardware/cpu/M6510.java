@@ -1454,6 +1454,9 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // 2
 
     switch (type) {
+      case M_ZERO:
+        tmp=loadStoreZero(tmp);
+        break;   
       case M_ZERO_X:
         tmp=loadStoreZeroX(tmp);
         break;
@@ -2776,7 +2779,7 @@ public class M6510 extends Thread implements powered, signaller {
         tmp=storeAbsY(tmp);
         break;
       case M_IND_X:
-        tmp=storeIndY(tmp);
+        tmp=storeIndX(tmp);
         break;
       case M_IND_Y:
         tmp=storeIndY(tmp);
