@@ -66,12 +66,27 @@
    A common way to save raster line or write compact code is to modify the low/high byte of the address of an LDA or STA instruction. 
    In this case you cannot create a label to that memory location as it is inside the code, so you must refer to it as another (usually labelling where the instruction start) plus an offset:</p>
    <p align="center"><img src="./memory9.png"></p> 
-   You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.
+   You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.  </p>
    
    <h2>Assign the selected address as #< </h2>
+   <p>In some cases a immediate value is not a simple byte but it could be the low part of one address.<br>
+  <p> In you reverse a binary to source you can compile again the file back to binary and it works, but if you relocate the code to another memory position it will not works if the byte where a low part of one pointer.<br>
+   It is let to your analisys to find such relation but the program will help you.<br>
+   You need to select the memory location of that byte (that is the next byte after the opcode position for example) and this function will open a table where 
+   all possible addresses in the binary range are equal to that byte as low part:</p>
+   <p align="center"><img src="./memory10.png"></p> 
+  <p> If you press Ok without select an location and there was already a mapped one, the program will ask you if it has to remove the association.<br>
+   The RE column will show an < sign in that location and the tool tip will show the value of it</p>
+   
+   </p>
+   
    <h2>Assign the selected address as #> </h2>
+   <p>This function is the analoge of the previous but operates with the high part of an address. </p>
   
-  </p>
+   <p align="center"><img src="./memory11.png"></p> 
+  
+
+   <p>As a final note you should know that you cannot mark a memory location as + and # at the same time. Only one is tollerated!</p>
    <hr>
     <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
   </body>

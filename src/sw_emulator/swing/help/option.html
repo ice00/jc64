@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Option menu</h1>
+  <p>The option menu has few choices:</p>
+  <p align="center"><img src="./option1.png"></p>  
+  <p align="center"><img src="./option2.png"></p>  
+  
+  <h2>General Option</h2>
+  <p>Here you can changes varous option about the Dasm disassembler engine:</p>
+  <p align="center"><img src="./option3.png"></p> 
+<p>
+ <ul>
+  <li><b>Illegal opcode style</b>: changes the mode as undocument instructions are called as they are not standard:
+     <ol>
+      <li>ANE, ISB, SHY, SHS: Mode use by John west and Marko M"akel"a</li>
+      <li>AXA, ISC, SYH, SSH: Mode use by Juergen Buchmueller</li>
+      <li>XAA, INS, SAY, TAS: Mode use by Adam Vardy</li>
+     </ol>     
+  </li>
+  <li><b>Language of comments</b>: automatic comments added by Dasm engine can be in English or Italian</li>
+  <li><b>Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview</b>: in preview of source uses upper or lower text case formatting</li>
+  <li><b>Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source</b>: in source uses upper or lower text case formatting</li>
+  <li><b>Erase DASM automatic comment when mark a memory location as Data:</b> when you mark a memory location as data you can choose if the automatic comment (that is assed for code) should be erased as not more useful</li>
+  <li><b>Erase relative + address when mark a memory location as Data</b>: as relative plus association are done in automatic onto code, you can choose that it will be erased if you mark the memory location as of data</li>
+  <li><b>Undefined code/data used as code instead of data</b>: select how undefinde memory location should be managed (code or data)</li>
+  <li><b>Max lenght of label (some assembler has a limit):</b>: fix the max length of a label you can insert (minimun is fixed to 6) so you are sure to not go over the limitation of some assembler</li>
+  <li><b>Aggregate up to X values on a data row:</b> data memory locations will be grouped in group automatically of 2..8 bytes</li>
+  <li><b>PSID init songs label:</b> as Psid has a init routine to call, this label will be used automatically by Dasm engine as a user label definition (so you can't change it with label creation function)</li>
+  <li><b>PSID play sound label:</b> as Psid has a play routine to call, this label will be used automatically by Dasm engine as a user label definition (so you can't change it with label creation function)</li>
+  <li><b>SID frequency table low label:</b> automatically detect a frequency table low part and create this user label for it (see the note at the end of this section)</li>
+  <li><b>SID frequency table high label:</b> automatically detect a frequency table high part and create this user label for it (see the note at the end of this section)</li>
+ </ul>
+ The Dasm engine used the SidFreq class implemented in XSidplay2 for detecting the A4 frequency that a tune is playing by searching in memory for the low and high part of table frequency of the octaves the SID can play.<br>
+ Where such area are find, it will be marked ad data kind and the label for low and high position are generated as user label and a comment is added for giving the A4 frequency information
+</p>
+<p align="center"><img src="./option5.png"></p> 
+  <h2>Apply SIDlD memory flags to memory</h2>
+  <p>If you have associated some SIDLD file to the project, here you can apply to the memory location, so you will get the code/data part compiled in automatic.
+   The program takes your confirmation before going on.
+  </p>
+
+  <h2>View Project</h2>
+ <p>This menu will open the dialog box used for creating the project. 
+  Here you can still going to add other SIDLD files or changing the file to disassemblate.
+</p>
+  <p align="center"><img src="./option4.png"></p> 
+   <hr>
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>
+

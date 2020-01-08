@@ -66,6 +66,27 @@ public class JProjectDialog extends javax.swing.JDialog {
      */
     public void setUp(Project project) {
       this.project=project;  
+      
+      jTextFieldProjectName.setText(project.name);
+      jTextFieldInputFile.setText(project.file);
+      jTextAreaDescr.setText(project.description);
+      if (project.fileType!=null) {
+        switch (project.fileType) {
+          case PRG:
+            jRadioButtonPRG.setSelected(true);
+            break;
+          case SID:
+            jRadioButtonSID.setSelected(true);
+            break;
+          case MUS:
+            jRadioButtonMUS.setSelected(true);
+            break;
+        }
+      } else {
+          jRadioButtonPRG.setSelected(false);
+          jRadioButtonSID.setSelected(false);
+          jRadioButtonMUS.setSelected(false);
+        }
     }
 
     /**
@@ -88,10 +109,10 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonSID = new javax.swing.JRadioButton();
         jRadioButtonMUS = new javax.swing.JRadioButton();
         jRadioButtonPRG = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabelFileDes = new javax.swing.JLabel();
+        jScrollPaneDescr = new javax.swing.JScrollPane();
         jTextAreaDescr = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelSidLd = new javax.swing.JLabel();
         jButtonClear = new javax.swing.JButton();
         jButtonAddNext = new javax.swing.JButton();
         jButtonInit = new javax.swing.JButton();
@@ -129,15 +150,15 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonPRG.setText("PRG");
         jRadioButtonPRG.setEnabled(false);
 
-        jLabel1.setText("File description:");
+        jLabelFileDes.setText("File description:");
 
         jTextAreaDescr.setEditable(false);
         jTextAreaDescr.setColumns(20);
         jTextAreaDescr.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaDescr.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaDescr);
+        jScrollPaneDescr.setViewportView(jTextAreaDescr);
 
-        jLabel2.setText("SIDLD memory flag: ");
+        jLabelSidLd.setText("SIDLD memory flag: ");
 
         jButtonClear.setText("Clear");
         jButtonClear.setToolTipText("Clear the memory flag as of all undefined");
@@ -170,14 +191,14 @@ public class JProjectDialog extends javax.swing.JDialog {
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPaneDescr)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelFileDes))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
@@ -193,7 +214,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jButtonSelect))
                             .addComponent(jTextFieldProjectName)))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSidLd, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,17 +241,17 @@ public class JProjectDialog extends javax.swing.JDialog {
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addComponent(jLabelFileType)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabelFileDes))
                     .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonSID)
                         .addComponent(jRadioButtonMUS)
                         .addComponent(jRadioButtonPRG)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelSidLd)
                     .addComponent(jButtonAddNext)
                     .addComponent(jButtonInit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -372,17 +393,17 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonInit;
     private javax.swing.JButton jButtonSelect;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelFileDes;
     private javax.swing.JLabel jLabelFileType;
     private javax.swing.JLabel jLabelInputFile;
     private javax.swing.JLabel jLabelProjectName;
+    private javax.swing.JLabel jLabelSidLd;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelDn;
     private javax.swing.JRadioButton jRadioButtonMUS;
     private javax.swing.JRadioButton jRadioButtonPRG;
     private javax.swing.JRadioButton jRadioButtonSID;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneDescr;
     private javax.swing.JTextArea jTextAreaDescr;
     private javax.swing.JTextField jTextFieldInputFile;
     private javax.swing.JTextField jTextFieldProjectName;

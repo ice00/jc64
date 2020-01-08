@@ -1781,7 +1781,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (project==null) {
       JOptionPane.showMessageDialog(this, "No project are actually being used.", "Warning", JOptionPane.WARNING_MESSAGE);   
     }  else {  
-         int res=JOptionPane.showConfirmDialog(this, "Confirm to apply SIDLD memory flags to code/data inm table?", "Information", JOptionPane.YES_NO_OPTION);
+         int res=JOptionPane.showConfirmDialog(this, "Confirm to apply SIDLD memory flags to code/data in table?", "Information", JOptionPane.YES_NO_OPTION);
          if (res == JFileChooser.APPROVE_OPTION) {
              
            for (int i=0; i<project.memoryFlags.length; i++) {        
@@ -1793,9 +1793,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                project.memory[i].isCode = (project.memoryFlags[i] & 
                        (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) !=0;                                             
            }
-         }
-         
-         JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);  
+           JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);  
+         }                  
        }  
   }
   

@@ -1500,7 +1500,7 @@ public class M6510 extends Thread implements powered, signaller {
     setNZ(regX);
   }
 
-   /**
+  /**
    * Execute a DEY legal instruction
    */
   public void DEY() {
