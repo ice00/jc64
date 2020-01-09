@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Source menu</h1>
+  <p>The Source menu has those choices:</p>
+  <p align="center"><img src="./source2.png"></p>  
+  <p align="center"><img src="./source3.png"></p>  
+ <h2>Find memory address</h2>
+ <p> It asks you to insert a 4 chars hex number and then it positionate the memory table in the row of that address.</p>
+ 
+ <h2>Disassemble</h2>
+ <p>It starts the Dasm disassember procedure that parse again the binary file and apply the modification to the source.<br>
+ For speed up purpose only one passage is done when it generate the preview source, then another one is done when generate the source.<br>
+ Two passes is always needed to apply one modification generated in one point to the previous passed one (like a jump in one point to a back location that were not already labeled), so the preview is always one step behind, 
+ but source windows has the code processed two times as there is no difference into the Dasm engine when generating a preview or source, but only a different output of collected data.<br>
+ Since the actual state of disassembly is stored in the project you should find such difference in the first generation or when you mark a data area as code.<br>
+ When the generation is done, the preview and source area will be updated but you will not lose the actual line position.</p>
+ 
+ <h2>Find text in preview</h2>
+ <p>It opens a standard windows for inserting a text and find it inside the preview area. It has many option, like mark up all match, go backward and forward, match regular expression, whole word and lower/upper case.</p>
+ <p align="center"><img src="./source4.png"></p>  
+ 
+ <h2>Export As of preview</h2>
+</p> Export the actual preview source into a file.</p>
+ 
+ <h2>Find text in source</h2>
+ <p>It opens a standard windows for inserting a text and find it inside the preview area. It has many option, like mark up all match, go backward and forward, match regular expression, whole word and lower/upper case.</p>
+ <p align="center"><img src="./source4.png"></p>  
+ 
+ <h2>Export As of source</h2>
+</p> Export the actual preview source into a file.</p>
+   <hr>
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>
+

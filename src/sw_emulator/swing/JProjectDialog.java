@@ -315,6 +315,11 @@ public class JProjectDialog extends javax.swing.JDialog {
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
        project.name=jTextFieldProjectName.getText();
+       
+       if (project.file==null || "".equals(project.file)) {
+         if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION) setVisible(false);
+         else return;
+       }
         
        setVisible(false);
     }//GEN-LAST:event_jButtonCloseActionPerformed

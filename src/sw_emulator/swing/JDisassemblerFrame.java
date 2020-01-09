@@ -1555,9 +1555,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         projectFile=null;
         jProjectDialog.setUp(project);            
         jProjectDialog.setVisible(true);
-        dataTableModelMemory.setData(project.memory);
-        dataTableModelMemory.fireTableDataChanged();
-        execute(SOURCE_DISASS);
+        
+        if (project.file==null || "".equals(project.file)) {
+          project=null;
+          savedProject=null;          
+        } else {
+          dataTableModelMemory.setData(project.memory);
+          dataTableModelMemory.fireTableDataChanged();
+          execute(SOURCE_DISASS);
+        }
       }    
   }
   
