@@ -2407,7 +2407,9 @@ public class M6510 extends Thread implements powered, signaller {
    regS|=0x100;
    clock();                       // 3
 
-   regP=load(regS++);             // pop P from stack, increment S
+   regP=load(regS++) |            // pop P from stack, increment S
+            P_UNUSED |            // unused and break must be 1
+            P_BREAK;        
    regS&=0x1FF;                   // regS is in 100h-1FFh
    regS|=0x100;
    clock();                       // 4
