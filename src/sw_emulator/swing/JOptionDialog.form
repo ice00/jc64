@@ -371,7 +371,7 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldSidFreqLo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="frequencyLo"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for PSID play sound routine"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Label to use for low address of frequency table"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqLoFocusLost"/>
@@ -385,7 +385,7 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldSidFreqHi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="frequencyHi"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for PSID play sound routine"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Label to use for high address of frequenct table"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqHiFocusLost"/>

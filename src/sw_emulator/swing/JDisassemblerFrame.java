@@ -1589,6 +1589,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Project open user action
    */
   private void projectOpen() {
+   if (savedProject!=null)   System.err.println("###"+savedProject.memory[0].userComment);  
+      
     if (project != null && !project.equals(savedProject)) {
       JOptionPane.showMessageDialog(this, "Project not saved. Close it, then create a new one.", "Information", JOptionPane.WARNING_MESSAGE);
     } else {
@@ -1602,6 +1604,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               JOptionPane.showMessageDialog(this, "File readed", "Information", JOptionPane.INFORMATION_MESSAGE);
               execute(SOURCE_DISASS);
             }
+            savedProject=project.clone();
             dataTableModelMemory.setData(project.memory);
             dataTableModelMemory.fireTableDataChanged();
           }
@@ -1621,6 +1624,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
               JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
+              savedProject=project.clone();
             }  
         }
       }      
@@ -1640,6 +1644,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
               JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
+              savedProject=project.clone();
             }
         }
      }      
@@ -1671,7 +1676,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         } else {
             int retVal=exportAsChooserFile.showSaveDialog(this);
             if (retVal == JFileChooser.APPROVE_OPTION) {
-              file=projectChooserFile.getSelectedFile();
+              file=exportAsChooserFile.getSelectedFile();
               if (!FileManager.instance.writeTxtFile(file , text)) {
                 JOptionPane.showMessageDialog(this, "Error writing txt file", "Error", JOptionPane.ERROR_MESSAGE);
               } else {
@@ -1853,7 +1858,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
     MemoryDasm mem= project.memory[row];
     String comment=JOptionPane.showInputDialog(this, "Insert the comment for the selected memory location", mem.userComment);
+    
+    System.err.println("###"+project.memory[0].userComment+"###"+savedProject.memory[0].userComment);
+    
     if (comment!=null) mem.userComment=comment;  
+    
+      System.err.println("###"+project.memory[0].userComment+"###"+savedProject.memory[0].userComment);
+    
     dataTableModelMemory.fireTableDataChanged(); 
     jTableMemory.setRowSelectionInterval(row, row); 
   }

@@ -49,6 +49,7 @@ public class JAboutDialog extends javax.swing.JDialog {
         jLabelTitle = new javax.swing.JLabel();
         jLabelPresent = new javax.swing.JLabel();
         jButtonClose = new javax.swing.JButton();
+        jLabelVersion = new javax.swing.JLabel();
         jLabelYear = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,6 +72,10 @@ public class JAboutDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelVersion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelVersion.setText("Version 0.7");
+        jLabelVersion.setToolTipText("");
+
         jLabelYear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelYear.setText("(c) 2020");
         jLabelYear.setToolTipText("");
@@ -92,6 +97,10 @@ public class JAboutDialog extends javax.swing.JDialog {
                 .addGap(166, 166, 166))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabelVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -105,13 +114,15 @@ public class JAboutDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelVersion)
+                .addGap(12, 12, 12)
                 .addComponent(jLabelYear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jButtonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
 
-        setSize(new java.awt.Dimension(453, 311));
+        setSize(new java.awt.Dimension(453, 337));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,6 +152,7 @@ public class JAboutDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelPresent;
     private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelVersion;
     private javax.swing.JLabel jLabelYear;
     // End of variables declaration//GEN-END:variables
     

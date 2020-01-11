@@ -23,6 +23,9 @@
  */
 package sw_emulator.swing.main;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Objects;
 import sw_emulator.software.MemoryDasm;
 
 /**
@@ -72,15 +75,56 @@ public class Project implements Cloneable{
     fileType=FileType.getFileType(inB);
     description=fileType.getDescription(inB);
   }
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 89 * hash + Objects.hashCode(this.fileType);
+    hash = 89 * hash + Objects.hashCode(this.name);
+    hash = 89 * hash + Objects.hashCode(this.file);
+    hash = 89 * hash + Objects.hashCode(this.description);
+    hash = 89 * hash + Arrays.hashCode(this.inB);
+    hash = 89 * hash + Arrays.hashCode(this.memoryFlags);
+    hash = 89 * hash + Arrays.deepHashCode(this.memory);
+    return hash;
+  }
   
   @Override
-  public Project clone() {
-    try {
-      Project p = (Project) super.clone();
-      return p;
-    } catch (CloneNotSupportedException e) {
-        System.err.println();
-        return null;
-      }
+  public Project clone() { 
+    Project p = new Project();
+      
+    p.description=this.description;
+    p.file=this.file;
+    p.fileType=this.fileType;
+    if (this.inB!=null) p.inB=this.inB.clone();
+    if (p.memoryFlags!=null) p.memoryFlags=this.memoryFlags.clone();
+    p.name=this.name;
+      
+    for (int i=0; i<this.memory.length; i++) {
+      p.memory[i]=this.memory[i].clone();
+    }
+      
+    return p;
   }    
+
+  @Override
+  public boolean equals(Object o) {
+    if (! (o instanceof Project)) return false;
+    Project p=(Project)o;
+    
+    if (!Objects.equals(this.name,p.name)) return false;
+    if (!Objects.equals(this.file,p.file)) return false;
+    if (!Objects.equals(this.description,p.description)) return false;
+    if (this.fileType != p.fileType) return false;
+    if (!Arrays.equals(this.memoryFlags, p.memoryFlags)) return false;
+    if (!Arrays.equals(this.inB, p.inB)) return false;
+    if (!Arrays.equals(this.memory, p.memory)) return false;
+    
+    for (int i=0; i<this.memory.length; i++) {
+      if (!this.memory[i].equals(p.memory[i])) return false;   
+    }   
+    
+    return true;
+  }
+  
 }

@@ -220,17 +220,17 @@ public class Disassembly {
       if (inB[0]=='P') tmp.append("  .byte \"PSID\"\n");
       else tmp.append("  .byte \"RSID\"\n");
       
-      tmp.append("  .word $").append(ShortToExe(inB[0x05]+inB[0x04]*256)).append("         ; version\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x07]+inB[0x06]*256)).append("         ; data offset\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x09]+inB[0x08]*256)).append("         ; load address in CBM format\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x04]+inB[0x05]*256)).append("         ; version\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x06]+inB[0x07]*256)).append("         ; data offset\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x08]+inB[0x09]*256)).append("         ; load address in CBM format\n");
       tmp.append("  .byte >").append(option.psidInitSongsLabel).append("\n");
       tmp.append("  .byte <").append(option.psidInitSongsLabel).append("\n");
       tmp.append("  .byte >").append(option.psidPlaySoundsLabel).append("\n");
       tmp.append("  .byte <").append(option.psidPlaySoundsLabel).append("\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x0F]+inB[0x0E]*256)).append("         ; songs\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x11]+inB[0x10]*256)).append("         ; default song\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x13]+inB[0x12]*256)).append("         ; speed\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x15]+inB[0x14]*256)).append("         ; speed\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x0E]+inB[0x0F]*256)).append("         ; songs\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x10]+inB[0x12]*256)).append("         ; default song\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x12]+inB[0x13]*256)).append("         ; speed\n");
+      tmp.append("  .word $").append(ShortToExe(inB[0x14]+inB[0x15]*256)).append("         ; speed\n");
    
       addString(tmp, 0x16, 0x36);
       addString(tmp, 0x36, 0x56);
@@ -238,9 +238,9 @@ public class Disassembly {
       
       // test if version > 1
       if (inB[0x07]>0x76) {
-        tmp.append("  .word $").append(ShortToExe(inB[0x77]+inB[0x76]*256)).append("         ; word flag\n");  
-        tmp.append("  .word $").append(ShortToExe(inB[0x79]+inB[0x78]*256)).append("         ; start and page length\n");  
-        tmp.append("  .word $").append(ShortToExe(inB[0x7B]+inB[0x7A]*256)).append("         ; second and third SID address \n");     
+        tmp.append("  .word $").append(ShortToExe(inB[0x76]+inB[0x77]*256)).append("         ; word flag\n");  
+        tmp.append("  .word $").append(ShortToExe(inB[0x78]+inB[0x79]*256)).append("         ; start and page length\n");  
+        tmp.append("  .word $").append(ShortToExe(inB[0x7A]+inB[0x7B]*256)).append("         ; second and third SID address \n");     
       }
       tmp.append("\n");
       if (psidLAddr==0) {

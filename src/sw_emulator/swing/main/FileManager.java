@@ -314,7 +314,8 @@ public class FileManager {
    * @return true if operation is ok
    */
     public boolean writeTxtFile(File file, String text) {
-      try (FileWriter writer=new FileWriter(file);
+      try (
+        FileWriter writer=new FileWriter(file);
         BufferedWriter bw=new BufferedWriter(writer)) {
         bw.write(text);
       } catch (IOException e) {

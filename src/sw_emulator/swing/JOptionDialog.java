@@ -209,7 +209,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelSIDfreqLo.setText("SID frequency table low label:");
 
         jTextFieldSidFreqLo.setText("frequencyLo");
-        jTextFieldSidFreqLo.setToolTipText("Label to use for PSID play sound routine");
+        jTextFieldSidFreqLo.setToolTipText("Label to use for low address of frequency table");
         jTextFieldSidFreqLo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldSidFreqLoFocusLost(evt);
@@ -219,7 +219,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelSIDfreqHi.setText("SID frequency table high label:");
 
         jTextFieldSidFreqHi.setText("frequencyHi");
-        jTextFieldSidFreqHi.setToolTipText("Label to use for PSID play sound routine");
+        jTextFieldSidFreqHi.setToolTipText("Label to use for high address of frequenct table");
         jTextFieldSidFreqHi.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldSidFreqHiFocusLost(evt);

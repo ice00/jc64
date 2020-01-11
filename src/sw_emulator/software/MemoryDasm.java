@@ -23,12 +23,15 @@
  */
 package sw_emulator.software;
 
+import java.util.Objects;
+import sw_emulator.swing.main.Project;
+
 /**
  * Memory cell for the disassembler
  * 
  * @author ice
  */
-public class MemoryDasm {
+public class MemoryDasm implements Cloneable {
   /** Address of memory (0..$FFFF) */  
   public int address;  
   
@@ -64,4 +67,46 @@ public class MemoryDasm {
   
   /** Type of relation for related < or > */
   public char type=' ';
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof MemoryDasm))  return false;
+    MemoryDasm d=(MemoryDasm) o;
+    
+    if (this.address != d.address) return false;
+    if (!Objects.equals(this.dasmComment, d.dasmComment)) return false;
+    if (!Objects.equals(this.userComment, d.userComment)) return false;
+    if (!Objects.equals(this.userBlockComment, d.userBlockComment)) return false;
+    if (!Objects.equals(this.dasmLocation, d.dasmLocation)) return false;
+    if (!Objects.equals(this.userLocation, d.userLocation)) return false;
+    if (this.isInside != d.isInside) return false;
+    if (this.isCode != d.isCode) return false;
+    if (this.isData != d.isData) return false;
+    if (this.copy != d.copy) return false;
+    if (this.related != d.related) return false;
+    if (this.type != d.type) return false;
+    
+    return true;
+  }
+
+ @Override
+  public MemoryDasm clone() {
+    MemoryDasm m = new MemoryDasm();
+    
+    m.address=this.address;
+    m.copy=this.copy;
+    m.dasmComment=this.dasmComment;
+    m.dasmLocation=this.dasmLocation;
+    m.isCode=this.isCode;
+    m.isData=this.isData;
+    m.isInside=this.isInside;
+    m.related=this.related;
+    m.type=this.type;
+    m.userBlockComment=this.userBlockComment;
+    m.userComment=this.userComment;
+    m.userLocation=this.userLocation;
+          
+    return m;    
+  }  
+  
 }
