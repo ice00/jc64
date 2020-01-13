@@ -2267,6 +2267,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     val=(val<<1) | (regP & P_CARRY);
     setCarry(val & 0x100);
+    val&=0xff;                    //8 bits
     setNZ(val);
     clock();                      // ++
 
