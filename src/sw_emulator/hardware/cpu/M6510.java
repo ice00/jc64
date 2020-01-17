@@ -972,13 +972,13 @@ public class M6510 extends Thread implements powered, signaller {
     }
 
     tmpVal=tmp;
-    if ((regP & P_DECIMAL)==1) {
+    if ((regP & P_DECIMAL)!=0) {
       tmp=(regA & 0x0f)+(tmpVal & 0x0f)+ (regP & P_CARRY);
       if (tmp>0x9) tmp+=0x6;
       if (tmp<=0x0f)
         tmp=(tmp & 0x0f)+(regA & 0xf0)+(tmpVal & 0xf0);
       else tmp=(tmp & 0x0f)+(regA & 0xf0)+(tmpVal & 0xf0)+ 0x10;
-      setZero(!((regA+tmpVal+(regP & P_SIGN) & 0xff)!=0));
+      setZero(!((regA+tmpVal+(regP & P_CARRY) & 0xff)!=0));
       setSign(tmp & 0x80);
       setOverflow((((regA ^ tmp) & 0x80)!=0) && !(((regA ^ tmpVal) & 0x80)!=0));
       if ((tmp & 0x1f0)> 0x90)
@@ -2570,7 +2570,6 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // 2
 
     setDecimal(1);
-    regPC+=1;
   }
 
   /**
