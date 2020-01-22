@@ -85,16 +85,17 @@ public class C64Cia1IO extends M6526IO {
    * @param type the type of I/O that <code>advice</code> is for.
    * @param value the bits of port that have changes their value
    */
+  @Override
   public void advice(int type, int value) {
     if (type==T_PORTA) {
-      if ((value & 0x01)==1) wireLine[0].line1(portA.getP0());
-      if ((value & 0x02)==1) wireLine[0].line1(portA.getP1());
-      if ((value & 0x04)==1) wireLine[0].line1(portA.getP2());
-      if ((value & 0x08)==1) wireLine[0].line1(portA.getP3());
-      if ((value & 0x10)==1) wireLine[0].line1(portA.getP4());
-      if ((value & 0x20)==1) wireLine[0].line1(portA.getP5());
-      if ((value & 0x40)==1) wireLine[0].line1(portA.getP6());
-      if ((value & 0x80)==1) wireLine[0].line1(portA.getP7());
+      if ((value & 0x01)!=0) wireLine[0].line1(portA.getP0());
+      if ((value & 0x02)!=0) wireLine[0].line1(portA.getP1());
+      if ((value & 0x04)!=0) wireLine[0].line1(portA.getP2());
+      if ((value & 0x08)!=0) wireLine[0].line1(portA.getP3());
+      if ((value & 0x10)!=0) wireLine[0].line1(portA.getP4());
+      if ((value & 0x20)!=0) wireLine[0].line1(portA.getP5());
+      if ((value & 0x40)!=0) wireLine[0].line1(portA.getP6());
+      if ((value & 0x80)!=0) wireLine[0].line1(portA.getP7());
 
       monitor.opSignal();                     // resume the keyboard
     }
@@ -106,6 +107,7 @@ public class C64Cia1IO extends M6526IO {
    * @param type the type of signal
    * @param value the value of the signal (0/1)
    */
+  @Override
   public void notifySignal(int type, int value) {
     switch (type) {
       case S_IRQ:                                     // notify IRQ signal

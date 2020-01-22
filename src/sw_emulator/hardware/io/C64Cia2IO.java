@@ -1,5 +1,5 @@
 /**
- * @(#)C64Cia1IO.java 2000/08/05
+ * @(#)C64Cia2IO.java 2000/08/05
  *
  * ICE Team Free Software Group
  *
@@ -72,21 +72,22 @@ public class C64Cia2IO extends M6526IO {
    * @param type the type of I/O that <code>advice</code> is for.
    * @param value the bits of port that have changes their value
    */
+  @Override
   public void advice(int type, int value) {
     if (type==T_PORTA) {
       if ((value & 0x03)!=0) {
-        if ((value & 0x01)==1) pla.notifySignal(S_VA14, portA.getP0());
-        if ((value & 0x02)==1) pla.notifySignal(S_VA15, portA.getP1());
+        if ((value & 0x01)!=0) pla.notifySignal(S_VA14, portA.getP0());
+        if ((value & 0x02)!=0) pla.notifySignal(S_VA15, portA.getP1());
 
         pla.monitor.opSignal();     // resume the pla for managing the changes
       }
 
-      if ((value & 0x04)==1) ;
-      if ((value & 0x08)==1) ;
-      if ((value & 0x10)==1) ;
-      if ((value & 0x20)==1) ;
-      if ((value & 0x40)==1) ;
-      if ((value & 0x80)==1) ;
+      if ((value & 0x04)!=0) ;
+      if ((value & 0x08)!=0) ;
+      if ((value & 0x10)!=0) ;
+      if ((value & 0x20)!=0) ;
+      if ((value & 0x40)!=0) ;
+      if ((value & 0x80)!=0) ;
     }
   }
 
@@ -96,6 +97,7 @@ public class C64Cia2IO extends M6526IO {
    * @param type the type of signal
    * @param value the value of the signal (0/1)
    */
+  @Override
   public void notifySignal(int type, int value) {
     switch (type) {
       case S_IRQ:                                      // notify IRQ signal

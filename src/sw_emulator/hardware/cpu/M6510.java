@@ -2513,26 +2513,34 @@ public class M6510 extends Thread implements powered, signaller {
         tmp=loadIndY(tmp);
         break;
     }
-
+    
     src=tmp;
-    tmp=regA-src-((~(regP & P_CARRY))& 0x01);
+    tmp=regA-src-((regP & P_CARRY)!=0 ? 0 : 1); 
     if ((regP & P_DECIMAL)!=0) {
       int tmpA;
-      tmpA=(regA & 0xf)-(src & 0xf)-((~(regP & P_CARRY))& 0x01);
+      tmpA=(regA & 0xf)-(src & 0xf)-((regP & P_CARRY)!=0 ? 0 : 1); 
       if ((tmpA & 0x10)!=0)
         tmpA=((tmpA - 6) & 0xf)| ((regA & 0xf0)-(src & 0xf0)-0x10);
       else
         tmpA=(tmpA & 0xf) | ((regA & 0xf0)-(src & 0xf0));
       if ((tmpA & 0x100)!=0)
         tmpA-=0x60;
-      setCarry(tmp<0x100);
-      setNZ(tmp);
-      setOverflow((((regA^tmp) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
-      regA=tmpA;
+      setCarry(tmp>=0);
+      setNZ(tmp & 0xff);
+      setOverflow(              
+        (((regA^tmp) & 0x80)!=0) 
+              && 
+        (((regA^src) & 0x80)!=0)
+      );
+      regA=Unsigned.done((byte)tmpA);
     } else {
         setNZ(tmp & 0xff);
         setCarry(tmp>=0);
-        setOverflow((((regA^tmp) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
+       setOverflow(              
+        (((regA^tmp) & 0x80)!=0) 
+              && 
+        (((regA^src) & 0x80)!=0)
+      );
         regA=Unsigned.done((byte)tmp);
     }
   }
@@ -2547,7 +2555,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // 2
 
     tmp=(regA & regX)-tmp;
-    setCarry(tmp<0x100);
+    setCarry(tmp>=0);
     regX=tmp & 0xff;
     setNZ(regX);
   }
