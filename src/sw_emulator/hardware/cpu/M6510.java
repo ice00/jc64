@@ -2054,27 +2054,37 @@ public class M6510 extends Thread implements powered, signaller {
   public void NOOP(int type) {
     int tmp;
 
-    tmp=load(regPC++);            // fetch next value, increment PC
-    clock();                      // 2
+    tmp=load(regPC); // fetch next value, increment PC
+    clock(); // 2
 
     switch (type) {
       case M_IMM:
+        regPC++;
+        break;
       case M_IMP:
         break;
       case M_ZERO:
+        regPC++;
         tmp=loadZero(tmp);
         break;
       case M_ZERO_X:
+        regPC++;
         tmp=loadZeroX(tmp);
         break;
+      case M_ABS:
+        regPC++;
+        tmp=loadAbs(tmp);
+        break;
       case M_ABS_X:
+        regPC++;
         tmp=loadAbsX(tmp);
         break;
       case M_IND_X:
+        regPC++;
         tmp=loadIndX(tmp);
         break;
-    }
-  }
+   }
+} 
 
   /**
    * Execute a ORA cpu legal instruction.
