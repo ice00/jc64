@@ -586,7 +586,7 @@ public class M6510 extends Thread implements powered, signaller {
    * @param addr the address location
    * @return the effective address and the readed byte (stored in 24 bits of 32)
    */
-  protected int loadStoreIndY(int addr) {
+ protected int loadStoreIndY(int addr) {
     int cross=0;                  // 1 if there's a page boundary crossing
     int tmp,tmp2;
 
@@ -609,7 +609,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     store(tmp2, tmp);             // write the value back to the effective addr.
                                   // *= high byte of effec. addr. may be invalid
-    return tmp;
+    return (tmp2<<8)+tmp;
   }
 
   /**
@@ -2225,6 +2225,8 @@ public class M6510 extends Thread implements powered, signaller {
 
     val=tmp & 0xff;               // extract the packed information
     tmp>>=8;
+    
+    val = ((val<<1) | (regP & P_CARRY)); 
 
     setCarry(val & 0x100);
     regA&=val;
@@ -2232,7 +2234,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++
+    clock();                      // ++    
   }
 
   /**
