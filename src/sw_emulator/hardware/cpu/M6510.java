@@ -2380,28 +2380,28 @@ public class M6510 extends Thread implements powered, signaller {
     val2=val>>1;
     if ((regP & P_CARRY)!=0)
       val2|=0x80;
-    setCarry(val & 0x1);
+    setCarry(val & 0x1);   
 
     tmpVal=val2;
-    if ((regP & P_DECIMAL)==1) {
+    if ((regP & P_DECIMAL)!=0) {
       tmp2=(regA & 0x0f)+(tmpVal & 0x0f)+ (regP & P_CARRY);
       if (tmp2>0x9) tmp2+=0x6;
       if (tmp2<=0x0f)
         tmp2=(tmp2 & 0x0f)+(regA & 0xf0)+(tmpVal & 0xf0);
       else tmp2=(tmp2 & 0x0f)+(regA & 0xf0)+(tmpVal & 0xf0)+ 0x10;
-      setZero(!((regA+tmpVal+(regP & P_SIGN) & 0xff)!=0));
-      setSign(tmp & 0x80);
+      setZero(!((regA+tmpVal+(regP & P_CARRY) & 0xff)!=0));
+      setSign(tmp2 & 0x80);
       setOverflow((((regA^tmp2) & 0x80)!=0) && !(((regA^tmpVal) & 0x80)!=0));
       if ((tmp2 & 0x1f0)> 0x90)
         tmp2+=0x60;
       setCarry((tmp2 & 0xff0)>0xf0);
     } else {
         tmp2=tmpVal+regA+(regP & P_CARRY);
-        setNZ(tmp2);
-        setOverflow(!(((regA^tmpVal) & 0x80)!=0)&&(((regA^tmp) & 0X80)!=0));
+        setNZ(tmp2 & 0xff);
+        setOverflow((((regA ^ tmpVal) & 0x80)==0)&&(((regA ^ tmp2) & 0x80)!=0));
         setCarry(tmp2>0xff);
       }
-    regA=tmp2;
+    regA=tmp2 & 0xff;
     clock();                      // ++
 
     store(tmp, val2);             // write the new value to the effective addr.
