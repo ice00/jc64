@@ -1697,13 +1697,13 @@ public class M6510 extends Thread implements powered, signaller {
         tmpA=(tmpA & 0xf) | ((regA & 0xf0)-(src & 0xf0));
       if ((tmpA & 0x100)!=0)
         tmpA-=0x60;
-      setCarry(val2<0x100);
+      setCarry(val2>=0); 
       setNZ(val2);
       setOverflow((((regA^val2) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
       regA=tmpA;
     } else {
         setNZ(val2);
-        setCarry(val2 < 0x100);
+        setCarry(val2>=0); 
         setOverflow((((regA^val2) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
         regA=val2;
     }
