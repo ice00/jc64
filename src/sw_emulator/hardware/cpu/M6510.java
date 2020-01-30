@@ -1656,8 +1656,8 @@ public class M6510 extends Thread implements powered, signaller {
     int tmp, val, val2, src;
 
     tmp=load(regPC++);            // fetch next value, increment PC
-    clock();                      // 2
-
+    clock();                      // 2 
+    
     switch (type) {
       case M_ZERO:
         tmp=loadStoreZero(tmp);
@@ -1687,30 +1687,30 @@ public class M6510 extends Thread implements powered, signaller {
 
     val=(val+1) & 0xff;           // do operation
     src=val;
-    val2=regA-src-((~(regP & P_CARRY))& 0x01);
+    val2=regA-src-((regP & P_CARRY)!=0 ? 0 : 1); 
     if ((regP & P_DECIMAL)!=0) {
       int tmpA;
-      tmpA=(regA & 0xf)-(src & 0xf)-((~(regP & P_CARRY))& 0x01);
+      tmpA=(regA & 0xf)-(src & 0xf)-((regP & P_CARRY)!=0 ? 0 : 1); 
       if ((tmpA & 0x10)!=0)
-        tmpA=((tmpA - 6) & 0xf) | ((regA & 0xf0)-(src & 0xf0)-0x10);
+        tmpA=((tmpA - 6) & 0xf)| ((regA & 0xf0)-(src & 0xf0)-0x10);
       else
         tmpA=(tmpA & 0xf) | ((regA & 0xf0)-(src & 0xf0));
       if ((tmpA & 0x100)!=0)
         tmpA-=0x60;
-      setCarry(val2>=0); 
-      setNZ(val2);
+      setCarry(val2>=0);
+      setNZ(val2 & 0xff);
       setOverflow((((regA^val2) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
-      regA=tmpA;
+      regA=Unsigned.done((byte)tmpA);
     } else {
-        setNZ(val2);
-        setCarry(val2>=0); 
+        setNZ(val2 & 0xff);
+        setCarry(val2>=0);
         setOverflow((((regA^val2) & 0x80)!=0) && (((regA^src) & 0x80))!=0);
-        regA=val2;
+        regA=Unsigned.done((byte)val2);
     }
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++
+    clock();                      // ++    
   }
 
   /**
@@ -3278,7 +3278,7 @@ public class M6510 extends Thread implements powered, signaller {
       return;
     }
 
-    if ((p0>=0xE0) && (p0<0xFF)) {
+    if ((p0>=0xE0) && (p0<=0xFF)) {
       switch (p0) {
         case 0xF0: BRANCH((regP & P_ZERO)!=0);  break;      // F0: BEQ $nnnn
 
