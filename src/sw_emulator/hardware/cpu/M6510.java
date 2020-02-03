@@ -2476,7 +2476,7 @@ public class M6510 extends Thread implements powered, signaller {
         tmp=storeAbs(tmp);
         break;
       case M_IND_X:
-        tmp=storeIndY(tmp);
+        tmp=storeIndX(tmp);
         break;
     }
 
