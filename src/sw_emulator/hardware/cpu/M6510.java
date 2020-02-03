@@ -1231,7 +1231,7 @@ public class M6510 extends Thread implements powered, signaller {
   public void BRK() {
     int tmp;
 
-    tmp=load(regPC);              // read next byte (and forget it)
+    tmp=load(regPC++);            // read next byte (and forget it)
     clock();                      // 2
 
     setBreak(1);                  // push PCH on stack (with B flag set), dec. S
@@ -1240,7 +1240,7 @@ public class M6510 extends Thread implements powered, signaller {
     regS|=0x100;
     clock();                      // 3
 
-    store(regS--, regPC);         // push PCL on stack, decrement S
+    store(regS--, regPC & 0xff);  // push PCL on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
     clock();                      // 4
@@ -1628,7 +1628,7 @@ public class M6510 extends Thread implements powered, signaller {
     regS|=0x100;
     clock();                      // 3
 
-    store(regS--, regPC);         // push PCL on stack, decrement S
+    store(regS--, regPC & 0xff);  // push PCL on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
     clock();                      // 4
@@ -1646,7 +1646,7 @@ public class M6510 extends Thread implements powered, signaller {
           (load(0xffff)<<8);
     clock();                      // 7
   }
-
+  
   /**
    * Execute a ISB cpu undocument instruction.
    *
@@ -1768,7 +1768,7 @@ public class M6510 extends Thread implements powered, signaller {
     regS|=0x100;
     clock();                      // 4
 
-    store(regS--, regPC);         // push PCL on stack, decrement S
+    store(regS--, regPC & 0xff);  // push PCL on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
     clock();                      // 5
@@ -1989,11 +1989,6 @@ public class M6510 extends Thread implements powered, signaller {
   /**
    * Execute a LXA cpu undocument instruction.
    * Note: this code is not exactly becouse the real is unstable.
-   *
-   * @param value the byte value to use for operation (stored in 32 bits)
-   * @param clk1 the first clock increment
-   * @param clk2 the second clock increment
-   * @param pci the program counter increment
    */
   public void LXA() {
     int tmp;
@@ -2019,7 +2014,7 @@ public class M6510 extends Thread implements powered, signaller {
     regS|=0x100;
     clock();                      // 3
 
-    store(regS--, regPC);         // push PCL on stack, decrement S
+    store(regS--, regPC & 0xff);  // push PCL on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
     clock();                      // 4
@@ -3353,12 +3348,12 @@ public class M6510 extends Thread implements powered, signaller {
       regS|=0x100;
       clock();                    // 3
 
-      store(regS--, regPC);       // push PCL on stack, decrement S
+      store(regS--, regPC & 0xff);// push PCL on stack, decrement S
       regS&=0x1FF;                // regS is in 100h-1FFh
       regS|=0x100;
       clock();                    // 4
 
-      store(regS--, regP);        // push P on stack, decrement S
+      store(regS--, regP&~P_BREAK);        // push P on stack, decrement S
       regS&=0x1FF;                // regS is in 100h-1FFh
       regS|=0x100;
       clock();                    // 5
@@ -3393,13 +3388,13 @@ public class M6510 extends Thread implements powered, signaller {
       regS|=0x100;
       clock();                    // 3
 
-      store(regS--, regPC);       // push PCL on stack, decrement S
+      store(regS--, regPC & 0xff);// push PCL on stack, decrement S
       regS&=0x1FF;                // regS is in 100h-1FFh
       regS|=0x100;
       clock();                    // 4
 
       if (nmiPending) {           // skip IRQ
-        store(regS--, regP);      // push P on stack, decrement S
+        store(regS--, regP&~P_BREAK);      // push P on stack, decrement S
         regS&=0x1FF;              // regS is in 100h-1FFh
         regS|=0x100;
         clock();                  // 5
