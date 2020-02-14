@@ -29,14 +29,10 @@ import java.lang.InterruptedException;
 /**
  * Implement a Monitor for sinchronizing threads
  * The available operation to the monitor are <code>opSignal</code> and
- * <code>opWait</code>. 
- * 
- * An internal counter is used for know when all the
+ * <code>opWait</code>. A internal counter is used for know when all the
  * given threads that use this monitor have finish to make their body.
  * This is needed as the caller of <code>opSignal</code> has to know
- * when the other has finish before going away. 
- * 
- * In the real system,
+ * when the other has finish before going away. In the real system,
  * this is not needed as the operations terminate in the clock period 
  * of time. <code>opNotify</code> is to use for notify the thread that
  * call <code>opSignal</code> that this thread will do a <code>opWait</code>
@@ -66,11 +62,11 @@ public class Monitor {
     this.name=name;
   }
   
-    public Monitor() {
-
+  public Monitor() {
   }
+  
   /**
-   * Notify that this thread will do an <code>opWait</code> to this monitor
+   * Notify the this thread will do an <code>opWait</code> to this monitor
    */
   public synchronized void opNotify() {
     //System.out.println("NOTIFY: "+name+" "+counter+" "+maxCounter);  
@@ -104,7 +100,7 @@ public class Monitor {
    * 
    * @return true if all threads have finish
    */
-  public  boolean isFinish() {
+  public synchronized boolean isFinish() {
     //System.out.println("ISFINISH: "+name+" "+counter+" "+maxCounter);      
     return (counter==0);
   }  

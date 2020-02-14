@@ -29,11 +29,12 @@ import sw_emulator.hardware.signaller;
 import sw_emulator.hardware.bus.readableBus;
 import sw_emulator.hardware.bus.writeableBus;
 import sw_emulator.hardware.io.M6526IO;
+import sw_emulator.math.Unsigned;
 import sw_emulator.util.Monitor;
 import sw_emulator.util.FlipFlop;
 import sw_emulator.util.FlipFlopClock;
 import sw_emulator.util.Counter;
-import sw_emulator.util.Monitor2;
+import sw_emulator.util.FlipFlopDelayClock;
 
 /**
  * MOS 6526 cia chip implementation
@@ -165,23 +166,23 @@ public class M6526 extends Thread implements powered, signaller,
   /** CountA0 flip flop */
   protected FlipFlop fCountA0=new FlipFlop();
 
-  /** CountA1 flip flop */
-  protected FlipFlopClock fCountA1=new FlipFlopClock();
+  /** CountA1 delay flip flop */
+  protected FlipFlopDelayClock fCountA1=new FlipFlopDelayClock();
   
   /** LoadA0 flip flop */
   protected FlipFlop fLoadA0=new FlipFlop();
   
-  /** LoadA1 flip flop */
-  protected FlipFlopClock fLoadA1=new FlipFlopClock();
+  /** LoadA1 delay flip flop */
+  protected FlipFlopDelayClock fLoadA1=new FlipFlopDelayClock();
   
   /** OneShotA0 flip flop */
-  protected FlipFlopClock fOneShotA0=new FlipFlopClock();  
+  protected FlipFlopDelayClock fOneShotA0=new FlipFlopDelayClock();  
   
   /** CountA2 flip flop */
   protected FlipFlopClock fCountA2=new FlipFlopClock();  
   
-  /** CountA3 flip flop */
-  protected FlipFlopClock fCountA3=new FlipFlopClock(); 
+  /** CountA3 delay flip flop */
+  protected FlipFlopDelayClock fCountA3=new FlipFlopDelayClock(); 
   
   /** TimerA flip flop */
   protected FlipFlop fTimerA=new FlipFlop();  
@@ -194,23 +195,23 @@ public class M6526 extends Thread implements powered, signaller,
   /** CountB0 flip flop */
   protected FlipFlop fCountB0=new FlipFlop();
 
-  /** CountB1 flip flop */
-  protected FlipFlopClock fCountB1=new FlipFlopClock(); 
+  /** CountB1 delay flip flop */
+  protected FlipFlopDelayClock fCountB1=new FlipFlopDelayClock(); 
   
   /** LoadB0 flip flop */
   protected FlipFlop fLoadB0=new FlipFlop();
   
-  /** LoadB1 flip flop */
-  protected FlipFlopClock fLoadB1=new FlipFlopClock();
+  /** LoadB1 delay flip flop */
+  protected FlipFlopDelayClock fLoadB1=new FlipFlopDelayClock();
     
-  /** OneShotB0 flip flop */
-  protected FlipFlopClock fOneShotB0=new FlipFlopClock();    
+  /** OneShotB0 delay flip flop */
+  protected FlipFlopDelayClock fOneShotB0=new FlipFlopDelayClock();    
   
   /** CountB2 flip flop */
   protected FlipFlopClock fCountB2=new FlipFlopClock();  
   
-  /** CountB3 flip flop */
-  protected FlipFlopClock fCountB3=new FlipFlopClock();    
+  /** CountB3 delay flip flop */
+  protected FlipFlopDelayClock fCountB3=new FlipFlopDelayClock();   
 
   /** TimerB flip flop */
   protected FlipFlop fTimerB=new FlipFlop();     
@@ -331,6 +332,7 @@ public class M6526 extends Thread implements powered, signaller,
    * @param addr the address location
    * @param value the byte value
    */
+  @Override
   public void write(int addr, byte value) {
     addr&=0x0F;
     switch (addr) {
@@ -344,13 +346,13 @@ public class M6526 extends Thread implements powered, signaller,
         timerA.setLow(value);
         break;
       case 0x05:                                     // TA high
-        timerA.setHigh(value);
+        timerA.setHigh(value);     
         break;        
       case 0x06:                                     // TB low
-        timerB.setLow(value);
+        timerB.setLow(value);       
         break;
       case 0x07:                                     // TB high
-        timerB.setHigh(value);
+        timerB.setHigh(value);         
         break;                
       case 0x08:                                     // TOD 10TH
         if (CRB7==0) {                               // TOD
@@ -399,33 +401,32 @@ public class M6526 extends Thread implements powered, signaller,
         CRA5=(value>>=1)& 0x01;               
         CRA6=(value>>=1)& 0x01;                
         CRA7=(value>>=1)& 0x01;
-        if (CRA0==1) {                               // START
-          fTimerA.set();
-          // as reset in this flip flop can occurs in the phi phase,
-          // here we must update CountA2
-          if (inTimerA==1) fCountA2.set();          
-        }
+                                                     // START
+        fTimerA.set();
+        // as reset in this flip flop can occurs in the phi phase,
+        // here we must update CountA2  
+        fCountA2.set(CRA0==1 & inTimerA==1);       
+
         if (CRA4==1) fLoadA0.set();                  // force loadA0 
-        if (CRA3==1) fOneShotA0.set();               // RUNMODE
-        else         fOneShotA0.reset();
+        fOneShotA0.set(CRA3==1);                     // RUNMODE        
         break;
-      case 0x0F:                                     // CRB
-        CRB0=value & 0x01;
+      case 0x0F:                                     // CRB       
+        CRB0=value & 0x01; 
         CRB1=(value>>=1)& 0x01;
         CRB2=(value>>=1)& 0x01;
         CRB3=(value>>=1)& 0x01;
         CRB4=(value>>=1)& 0x01;
         CRB56=(value>>=1)& 0x03;        
         CRB7=(value>>=2)& 0x01;                      // TOD/ALLARM    
-        if (CRB0==1) {                               // START
+                                                     // START
           fTimerB.set();
           // as reset in this flip flop can occurs in the phi phase,
-          // here we must update CountA2
-          if (inTimerB==1) fCountB2.set();          
-        }        
+          // here we must update CountA2    
+          fCountB2.set(CRB0==1 && inTimerB==1);
+          
         if (CRB4==1) fLoadB0.set();                  // force loadA0 
-        if (CRB3==1) fOneShotB0.set();               // RUNMODE
-        else         fOneShotB0.reset();        
+        fOneShotB0.set(CRB3==1);                    // RUNMODE
+        
         break;
     }
   }
@@ -436,6 +437,7 @@ public class M6526 extends Thread implements powered, signaller,
    * @param addr the address location
    * @return the readed byte
    */
+  @Override
   public byte read(int addr) {
     addr&=0x0F;
     switch (addr) {
@@ -444,14 +446,14 @@ public class M6526 extends Thread implements powered, signaller,
       case 0x02:                                     // Port A direction
       case 0x03:                                     // Port B direction
         return (byte)io.readFromPort(addr);
-      case 0x04:                                     // TA low
+      case 0x04:                                     // TA low      
         return (byte)timerA.getLow();
-      case 0x05:                                     // TA high
+      case 0x05:                                     // TA high         
         return (byte)timerA.getHigh();  
-      case 0x06:                                     // TB low
-        return (byte)timerB.getLow();
-      case 0x07:                                     // TB high
-        return (byte)timerB.getHigh();          
+      case 0x06:                                     // TB low       
+        return (byte)timerB.getLow();       
+      case 0x07:                                     // TB high           
+        return (byte)timerB.getHigh();       
       case 0x08:                                     // TOD 10TH 
         return (byte)latchTodThs;
       case 0x09:                                     // TOD sec 
@@ -472,15 +474,14 @@ public class M6526 extends Thread implements powered, signaller,
                 C_TB<<1+
                 C_TA;
         // clear according to figure 5
-        //if (C_IR==1) 
         io.notifySignal(sig_irq, 1);  // disable interrupt
+                                      // the flip flop reset signal is below  
         C_IR=0;
         C_FLG=0;
         C_SP=0;
         C_ALRM=0;
         C_TB=0;
-        C_TA=0;
-        fInterrupt1.reset();        
+        C_TA=0;               
         return (byte)res;
       case 0x0E:                                     // CRA state 
         return (byte)(CRA0+
@@ -491,7 +492,7 @@ public class M6526 extends Thread implements powered, signaller,
                      (CRA5<<5)+
                      (CRA6<<6)+
                      (CRA7<<7));
-      case 0x0F:                                     // CRA state 
+      case 0x0F:                                     // CRB state 
         return (byte)(CRB0+
                      (CRB1<<1)+
                      (CRB2<<2)+
@@ -500,6 +501,8 @@ public class M6526 extends Thread implements powered, signaller,
                      (CRB56<<5)+                     
                      (CRB7<<7));        
      }
+    
+    fInterrupt1.reset(addr==0x0D); 
     return 0;
   }
 
@@ -521,6 +524,7 @@ public class M6526 extends Thread implements powered, signaller,
    * @param type the type of signal
    * @param value the value of the signal (0/1)
    */
+  @Override
   public void notifySignal(int type, int value) {
     switch (type) {
       case S_TOD:
@@ -551,7 +555,7 @@ public class M6526 extends Thread implements powered, signaller,
   /**
    * Set up the connection of IO with the external.
    *
-   * @param ioPort the external connection
+   * @param io the external connection
    */
   public void setIO(M6526IO io) {
     this.io=io;
@@ -625,8 +629,8 @@ public class M6526 extends Thread implements powered, signaller,
     fLoadB0.reset();
     fLoadB1.clock();
     fOneShotB0.clock();
-    fCountA3.clock();
-    fCountA2.clock();    
+    fCountB3.clock();    ///
+    fCountB2.clock();    ///
     timerB.clock();
     
     fInterrupt1.clock();
@@ -641,51 +645,36 @@ public class M6526 extends Thread implements powered, signaller,
    * Emulate all the login and connections between the flip flop
    */
   protected void bodyAsync() {
+    boolean temp;  
+      
     /// these are to be called before the clock for having the force load
-    if (fLoadA0.isSet()) fLoadA1.set();
-    else                 fLoadA1.reset();
-    
-    if (fLoadB0.isSet()) fLoadB1.set();
-    else                 fLoadB1.reset();
+    fLoadA1.set(fLoadA0.isSet());        
+    fLoadB1.set(fLoadB0.isSet());
     
     // emulate as in figure 3    
-    if (fCountA3.isSet()) timerA.setDec(true);
-    else                  timerA.setDec(false);
-    
-    if (fCountB3.isSet()) timerB.setDec(true);
-    else                  timerB.setDec(false);
-    
+    timerA.setDec(fCountA3.isSet());    
+    timerB.setDec(fCountB3.isSet());
+
     // emulate as in figure 3
-    if (fCountA2.isSet()) fCountA3.set();
-    else                  fCountA3.reset();
-    
-    if (fCountB2.isSet()) fCountB3.set();
-    else                  fCountB3.reset(); 
+    fCountA3.set(fCountA2.isSet());  
+    fCountB3.set(fCountB2.isSet());
     
     // calculate outTimerA output value
     // emulate as in figure 3    
-    if (fCountA2.isReset() || timerA.isZero()) outTimerA=0;
-    else outTimerA=1;
-    
-    if (fCountB2.isReset() || timerB.isZero()) outTimerB=0;
-    else outTimerB=1;    
-    
-    // emulate as in figure 3    
-    if ((outTimerA==1) || fLoadA1.isSet()) {
-      timerA.load();
-      fCountA2.reset();
-    }
-    
-    if ((outTimerB==1) || fLoadB1.isSet()) {
-      timerB.load();
-      fCountB2.reset();
-    }    
-    
+    outTimerA=((fCountA2.isSet() && timerA.isZero()) ? 1:0);   
+    outTimerB=((fCountB2.isSet() && timerB.isZero()) ? 1:0);
+  
+    temp=(outTimerA==1) || fLoadA1.isSet();
+    timerA.load(temp);
+    fCountA2.reset(temp);  
+
+    temp=(outTimerB==1) || fLoadB1.isSet();
+    timerB.load(temp);
+    fCountB2.reset(temp);
+        
     // emulate as in figure 1
-    if (fCountA0.isSet()) fCountA1.set();
-    else                  fCountA1.reset();
-    if (fCountB0.isSet()) fCountB1.set();
-    else                  fCountB1.reset();      
+    fCountA1.set(fCountA0.isSet());
+    fCountB1.set(fCountB0.isSet());      
     
     // calculate inTimerA input value
     // emulate as in figure 1    
@@ -706,19 +695,19 @@ public class M6526 extends Thread implements powered, signaller,
         inTimerB=outTimerA;                          // same output as A
         break;
       case 0x03:
-        inTimerB=inTimerA & inputCNT;                // and of cnt/intput A
+        inTimerB=outTimerA & inputCNT;               // and of cnt/intput A
         break;        
     }    
     
     // emulate as in figure 3    
     if (((CRA3==1) || fOneShotA0.isSet()) && outTimerA==1) fTimerA.reset();    
-    if (fTimerA.isSet() && inTimerA==1) fCountA2.set();
+    fCountA2.set((fTimerA.isSet() && inTimerA==1));
     
     if (((CRB3==1) || fOneShotB0.isSet()) && outTimerB==1) fTimerB.reset();    
-    if (fTimerB.isSet() && inTimerB==1) fCountB2.set();
+    fCountB2.set((fTimerB.isSet() && inTimerB==1));
     
     // emulate as in figure 5
-    if ((outTimerA==1 && M_TA==1) || (outTimerB==1 && M_TB==1)) fInterrupt1.set();
+    fInterrupt1.set(((outTimerA==1 && M_TA==1) || (outTimerB==1 && M_TB==1)));
   }
   
   /**
@@ -739,8 +728,7 @@ public class M6526 extends Thread implements powered, signaller,
       }      
       
       bodyAsync();                            // execute tha async part of body
-      bodySync();                             // execute the cia clock boby
-      //monitor.opSignal2();
+      bodySync();                             // execute the cia clock boby      
       monitor.opWait();                       // attend clock signal 
     }  
   }

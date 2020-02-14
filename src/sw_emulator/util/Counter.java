@@ -24,6 +24,8 @@
 
 package sw_emulator.util;
 
+import sw_emulator.math.Unsigned;
+
 /**
  * Clocked counter with latch used by Cia
  *
@@ -33,7 +35,7 @@ package sw_emulator.util;
 public class Counter {
   
   /** Actual counter value (16 bit) */
-  protected int counter=0;
+  public int counter=0; ////
   
   /** Latch value (16 bit) */
   protected int latch=0xFFFF;
@@ -49,8 +51,9 @@ public class Counter {
    *
    * @param value the 8 bit value
    */ 
-  public void setLow(int value) {
-    latch=(latch & 0xFF00) | value;    
+  public void setLow(byte value) {
+    int ivalue=Unsigned.done(value);
+    latch=(latch & 0xFF00) | ivalue;    
   }
   
   /**
@@ -58,11 +61,12 @@ public class Counter {
    *
    * @param value the 8 bit value
    */ 
-  public void setHigh(int value) {
-    latch=(latch & 0x00FF) | value<<8;    
-    
+  public void setHigh(byte value) {
+    int ivalue=Unsigned.done(value);      
+    latch=(latch & 0x00FF) | ivalue<<8;    
+   
     // if not decrementing, counter is loaded with latch
-    if (!decState) counter=latch;
+///////    if (!decState) counter=latch;
   }  
   
   /**
@@ -94,7 +98,7 @@ public class Counter {
     
     if (toLoad) {
       counter=latch;
-      toLoad=false;
+      ///toLoad=false;  
     }
   }
   
@@ -112,6 +116,15 @@ public class Counter {
    */
   public void load() {
     toLoad=true;
+  }
+  
+  /**
+   * Set to load counter from latch
+   * 
+   * @param status true/false for load from latch
+   */
+  public void load(boolean status) {
+    toLoad=status;
   }
   
   /**

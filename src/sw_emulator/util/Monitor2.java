@@ -69,6 +69,8 @@ public class Monitor2 extends Monitor{
     this.name=name;
   }
   
+  
+  
   /**
    * Notify that this thread will do an <code>opWait</code> to this monitor
    */

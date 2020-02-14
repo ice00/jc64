@@ -22,7 +22,7 @@
  *  02111-1307  USA.
  */
 
-package debug;
+package sw_emulator.hardware.machine;
 //package debug;
 
 import sw_emulator.hardware.powered;
@@ -68,7 +68,7 @@ public class C64_1 implements powered{
   /**
    * Path where the roms images are stored
    */
-  public static final String ROM_PATH="/rom/";
+  public static final String ROM_PATH="./rom/";
 
   /**
    * 8Kb of Ram memory address 0x0000 0x1FFF
@@ -258,7 +258,7 @@ public class C64_1 implements powered{
     c64Form.setVisible(true);
 
     // read cartridge:
-    fileCart.setFileName("/tmp/dig-dug.crt");
+    fileCart.setFileName("/mnt/new/home/ice/dig_dug.crt");
     System.out.println(fileCart.readFile());
     System.out.println(fileCart.determineCart());
     gameExp=(GameCartridge)fileCart.getCartridge(0);
@@ -310,16 +310,6 @@ public class C64_1 implements powered{
   public void powerOn() {
     gameExp.powerOn();
      exp.powerOn();
- /**   pla.powerOn();
-    System.out.println(" Pla: power is on");
-
-    cpu.powerOn();
-    System.out.println(" Cpu: power is on");
-
-    vic.powerOn();
-    System.out.println(" VIC: power is on");
-    */
-    
     pla.powerOn();
     System.out.println(" Pla: power is on");
 
@@ -328,15 +318,6 @@ public class C64_1 implements powered{
 
     vic.powerOn();
     System.out.println(" VIC: power is on");
-    
-    cia1.powerOn();
-    System.out.println(" CIA1: power is on");
-    
-    cia2.powerOn();
-    System.out.println(" CIA2: power is on");    
-    
-    sid.powerOn();
-    System.out.println(" SID: power is on");  
   }
 
   /**

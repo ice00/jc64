@@ -32,7 +32,6 @@ import sw_emulator.hardware.powered;
 import sw_emulator.hardware.signaller;
 import java.lang.InterruptedException;
 import java.lang.Thread;
-import sw_emulator.util.Monitor2;
 
 /**
  * Emulate the Mos 6510 cpu.
@@ -243,11 +242,10 @@ public class M6510 extends Thread implements powered, signaller {
    * @param value the value to store
    */
   protected void store(int addr, int value) {
-    if (addr<2) {
+    if (addr<2) {       
       ioPort.writeToPort(addr, value);
       // write previous value that the data bus still have.
       bus.store(addr & 0xffff, bus.previous, view, sigAEC);
-
     } else bus.store(addr & 0xffff, value, view, sigAEC);
   }
 
@@ -328,7 +326,7 @@ public class M6510 extends Thread implements powered, signaller {
                                   // *= page boundary crossing are not handled
     return tmp;
   }
-
+  
   /**
    * Load Indirect Y addressing mode
    *
@@ -360,7 +358,7 @@ public class M6510 extends Thread implements powered, signaller {
                                   // *= high byte of effec. addr. may be invalid
     return tmp;
   }
-
+  
   /**
    * Load Absolute addressing mode
    *
@@ -389,7 +387,7 @@ public class M6510 extends Thread implements powered, signaller {
     int cross=0;                  // 1 if there's a page boundary crossing
     int tmp, tmp2;
 
-    if (((addr+regX) & 0xff00)!=0)
+    if (((addr + regX) & 0xff00)!=0)
       cross=1;
     addr|=(load(regPC++)<<8);     // fetch hi byte of address, increment PC
     tmp2=(addr & 0xff00)+
@@ -586,7 +584,7 @@ public class M6510 extends Thread implements powered, signaller {
    * @param addr the address location
    * @return the effective address and the readed byte (stored in 24 bits of 32)
    */
- protected int loadStoreIndY(int addr) {
+  protected int loadStoreIndY(int addr) {
     int cross=0;                  // 1 if there's a page boundary crossing
     int tmp,tmp2;
 
@@ -927,8 +925,7 @@ public class M6510 extends Thread implements powered, signaller {
         
     if (sigNMI==0) nmiPending=true;
     if (sigIRQ==0) irqPending=true;
-     
-    ///monitor.opSignal2(); 
+
     monitor.opWait();
   }
 
@@ -940,13 +937,13 @@ public class M6510 extends Thread implements powered, signaller {
    * @param type the type of addressing
    */
   public void ADC(int type) {
-    int tmp, tmpVal;
+    int tmp, al, ah, tmpVal;
 
     tmp=load(regPC++);            // fetch next value, increment PC
     clock();                      // 2
 
     switch (type) {
-      case M_IMM:
+      case M_IMM:          
         break;
       case M_ZERO:
         tmp=loadZero(tmp);
@@ -971,8 +968,8 @@ public class M6510 extends Thread implements powered, signaller {
         break;
     }
 
-    tmpVal=tmp;
-    if ((regP & P_DECIMAL)!=0) {
+    tmpVal=tmp;    
+    if ((regP & P_DECIMAL)!=0) {  
       tmp=(regA & 0x0f)+(tmpVal & 0x0f)+ (regP & P_CARRY);
       if (tmp>0x9) tmp+=0x6;
       if (tmp<=0x0f)
@@ -983,14 +980,14 @@ public class M6510 extends Thread implements powered, signaller {
       setOverflow((((regA ^ tmp) & 0x80)!=0) && !(((regA ^ tmpVal) & 0x80)!=0));
       if ((tmp & 0x1f0)> 0x90)
         tmp+=0x60;
-      setCarry((tmp & 0xff0)>0xf0);
+      setCarry((tmp & 0xff0)>0xf0);      
     } else {
         tmp=tmpVal+regA+(regP & P_CARRY);
         setNZ(tmp & 0xff);
         setOverflow( (((regA ^ tmpVal) & 0x80)==0)&&(((regA ^ tmp) & 0x80)!=0));
         setCarry(tmp & 0xff00);
       }
-    regA=tmp & 0xff;
+    regA=tmp & 0xff;  
   }
 
   /**
@@ -1092,7 +1089,7 @@ public class M6510 extends Thread implements powered, signaller {
        setNZ(tmp);
        setCarry(tmp & 0x40);
        setOverflow((tmp & 0x40) ^ ((tmp & 0x20) << 1));
-       regA=tmp; 
+       regA=tmp;
       }
   }
 
@@ -1257,7 +1254,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     regPC=(regPC & 0xff)+         // fetch PCH
           (load(0xffff)<<8);
-    setInterrupt(1); 
+    setInterrupt(1);
     clock();                      // 7
   }
 
@@ -1458,7 +1455,7 @@ public class M6510 extends Thread implements powered, signaller {
     switch (type) {
       case M_ZERO:
         tmp=loadStoreZero(tmp);
-        break;   
+        break;        
       case M_ZERO_X:
         tmp=loadStoreZeroX(tmp);
         break;
@@ -1502,7 +1499,7 @@ public class M6510 extends Thread implements powered, signaller {
     setNZ(regX);
   }
 
-  /**
+   /**
    * Execute a DEY legal instruction
    */
   public void DEY() {
@@ -1648,7 +1645,7 @@ public class M6510 extends Thread implements powered, signaller {
           (load(0xffff)<<8);
     clock();                      // 7
   }
-  
+
   /**
    * Execute a ISB cpu undocument instruction.
    *
@@ -1728,7 +1725,6 @@ public class M6510 extends Thread implements powered, signaller {
    */
   public void JMP(int type) {
     int tmp;
-
     tmp=load(regPC++);            // fetch low addr./pointer byte, increment PC
     clock();                      // 2
 
@@ -1736,19 +1732,19 @@ public class M6510 extends Thread implements powered, signaller {
       case M_ABS:
         regPC=tmp+
               (load(regPC)<<8);   // copy low addr. byte to PCL, fetch hi to PCH
-        clock();                  // 3
+        clock();                  // 3         
         break;
       case M_IND:
         int tmp2;
 
         tmp+=(load(regPC++)<<8);  // fetch pointer address high, increment PC
         clock();                  // 3
-
+         
         tmp2=load(tmp);           // fetch low address to latch
         clock();                  // 4
                                   // fetch PCH, copy latch to PCL
         regPC=(load((tmp & 0xff00)|((tmp+1)& 0xff))<<8)+tmp2;
-        clock();                  // 5
+        clock();                  // 5               
     }
   }
 
@@ -2038,9 +2034,9 @@ public class M6510 extends Thread implements powered, signaller {
   /**
    * Execute a NOP cpu legal instruction
    */
-  public void NOP() {
+  public void NOP() {      
     p0=load(regPC);               // read next byte (and forget it)
-    clock();                      // 2
+    clock();                      // 2 
   }
 
   /**
@@ -2050,38 +2046,38 @@ public class M6510 extends Thread implements powered, signaller {
    */
   public void NOOP(int type) {
     int tmp;
-
-    tmp=load(regPC); // fetch next value, increment PC
-    clock(); // 2
+  
+    tmp=load(regPC);              // fetch next value, increment PC
+    clock();                      // 2
 
     switch (type) {
       case M_IMM:
-        regPC++;
-        break;
-      case M_IMP:
+        regPC++;  
+        break;  
+      case M_IMP:        
         break;
       case M_ZERO:
         regPC++;
         tmp=loadZero(tmp);
         break;
       case M_ZERO_X:
-        regPC++;
+        regPC++;  
         tmp=loadZeroX(tmp);
         break;
       case M_ABS:
-        regPC++;
+        regPC++;  
         tmp=loadAbs(tmp);
-        break;
+        break;        
       case M_ABS_X:
-        regPC++;
+        regPC++;  
         tmp=loadAbsX(tmp);
         break;
       case M_IND_X:
         regPC++;
         tmp=loadIndX(tmp);
         break;
-   }
-} 
+    }
+  }
 
   /**
    * Execute a ORA cpu legal instruction.
@@ -2134,6 +2130,7 @@ public class M6510 extends Thread implements powered, signaller {
     store(regS--, regA);          // push register on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
+   
     clock();                      // 3
   }
 
@@ -2144,9 +2141,9 @@ public class M6510 extends Thread implements powered, signaller {
     p0=load(regPC);               // read next instruction byte (forget it)
     clock();                      // 2
 
-    store(regS--, regP| P_BREAK); // push register on stack, decrement S
+    store(regS--, regP | P_BREAK);          // push register on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
-    regS|=0x100;
+    regS|=0x100;  
     clock();                      // 3
   }
 
@@ -2163,7 +2160,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // 3
 
     regA=load(regS);              // pop register from stack
-    setNZ(regA);
+    setNZ(regA);    
     clock();                      // 4
   }
 
@@ -2181,7 +2178,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     regP=load(regS) |             // pop register from stack
          P_UNUSED |               // unused and break must be 1
-         P_BREAK;
+         P_BREAK;  
     clock();                      // 4
   }
 
@@ -2195,7 +2192,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     tmp=load(regPC++);            // fetch next value, increment PC
     clock();                      // 2
-
+    
     switch (type) {
       case M_ZERO:
         tmp=loadStoreZero(tmp);
@@ -2231,7 +2228,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++    
+    clock();                      // ++ 
   }
 
   /**
@@ -2418,8 +2415,8 @@ public class M6510 extends Thread implements powered, signaller {
    clock();                       // 3
 
    regP=load(regS++) |            // pop P from stack, increment S
-            P_UNUSED |            // unused and break must be 1
-            P_BREAK;        
+        P_UNUSED |                // unused and break must be 1
+        P_BREAK;
    regS&=0x1FF;                   // regS is in 100h-1FFh
    regS|=0x100;
    clock();                       // 4
@@ -2586,7 +2583,7 @@ public class M6510 extends Thread implements powered, signaller {
     load(regPC);                  // fetch next byte (and forget it)
     clock();                      // 2
 
-    setDecimal(1);
+    setDecimal(1); 
   }
 
   /**
@@ -2682,10 +2679,9 @@ public class M6510 extends Thread implements powered, signaller {
    */
   public void SLO(int type) {
     int tmp, val;
-
+        
     tmp=load(regPC++);            // fetch next value, increment PC
     clock();                      // 2
-
     switch (type) {
       case M_ZERO:
         tmp=loadStoreZero(tmp);
@@ -2720,7 +2716,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++
+    clock();                      // ++ 
   }
 
   /**
@@ -3448,6 +3444,11 @@ public class M6510 extends Thread implements powered, signaller {
     while(ioPort==null) {
       yield();
     }
+    
+    // do nothing until the bus is available
+    while (!bus.isInitialized())  {              // there's a bus?
+      yield();                                   // no, attend power
+    }
    
     regA=0;
     regX=0;
@@ -3459,11 +3460,6 @@ public class M6510 extends Thread implements powered, signaller {
     while(true) {
       if (sigRESET==1) {
         //reset();
-      }
-      
-      // do nothing until the bus is available
-      while (!bus.isInitialized()) { // there's a bus?
-        yield(); // no, attend power
       }
 
       if (!power) {
@@ -3478,17 +3474,18 @@ public class M6510 extends Thread implements powered, signaller {
         while (!power) {
           yield();                              // give mutex to other threads
         }
-        
-              // do nothing until the bus is available
-      while (!bus.isInitialized()) { // there's a bus?
-        yield(); // no, attend power
-      }
-
         regPC=bus.load(regPC, view, sigAEC)+
              (bus.load(regPC+1, view, sigAEC)<<8);
+        
+        if (regPC==0xffff) {
+            regPC=0xFFFC;
+            regPC=bus.load(regPC, view, sigAEC)+
+             (bus.load(regPC+1, view, sigAEC)<<8);
+            
+        }
         clock();                                // attend synchronization
       }
-         //System.out.println(Integer.toHexString(regPC));
+         ///System.out.println(Integer.toHexString(regPC));
       interrupt();                  // search for interrupt or reset signal
       p0=load(regPC++);             // read opcode, increment pc
       regPC&=0xFFFF;                // mask PC
@@ -3542,9 +3539,3 @@ public class M6510 extends Thread implements powered, signaller {
     power=false;    // power is off
   }
 }
-
-
-
-
-
-

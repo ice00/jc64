@@ -1,5 +1,5 @@
 /*
- * @(#)FlipFlopClock.java 2006/01/06
+ * @(#)FlipFlopDelayClock.java 2020/02/11
  *
  * ICE Team free software group
  *
@@ -26,56 +26,60 @@
 package sw_emulator.util;
 
 /**
- * A Clocked FlipFlop with <code>set</code>, <code>reset</code> and <code>clock</code>
+ * A Clocked Delay FlipFlop with <code>set</code>, <code>reset</code> and <code>clock</code>
  * operations.
  *
- * The output state of the flip flop is taken by the input value when there is 
+ * The output state of the flip flop is taken by the input value (set or reset) when there is 
  * the clock operation
- *
+ * 
+ * S/R ->[  ]->out
+ *        ^
+ *        |
+ *      Clock
+ * 
  * @author Ice
  * @version 1.00 06/01/2006
  */
-public class FlipFlopClock {
+public class FlipFlopDelayClock {
   
   /**
-   * The input state for set of the flip/flop
+   * The input state of the flip/flop
    */
-  private boolean inStateSet=false;
-  
-  /**
-   * The input state for reset of the flip/flop
-   */
-  private boolean inStateReset=false;  
+  private boolean inState=false;
   
   /**
    * The output state of the flip/flop
    */
   private boolean outState=false;  
   
- /**
+  /**
    * Set the state of the flip/flop
    * 
-   * @param state true/false set state
+   * @param state set (true) or reset (false) state
    */
   public void set(boolean state) {
-    inStateSet=state;
+    inState=state;
+  }  
+  
+ /**
+   * Set the state of the flip/flop
+   */
+  public void set() {
+    inState=true;
   }
 
   /**
    * Reset the state of the flip/flop
-   * 
-   * @param state true/false reset state
    */
-  public void reset(boolean state) {
-    inStateReset=state;
+  public void reset() {
+    inState=false;
   }
   
   /**
    * Clock operation
    */
   public void clock() {
-    if (!outState) outState=inStateSet;
-    else outState=!inStateReset;
+    outState=inState;
   }
   
   /**
@@ -95,6 +99,15 @@ public class FlipFlopClock {
   public boolean isReset() {
     return !outState;
   }   
+  
+  /**
+   * Get the actual state
+   * 
+   * @return the actual state
+   */
+  public boolean getState() {
+    return outState;  
+  }
   
   /**
    * Get a 0/1 representation of the output state
