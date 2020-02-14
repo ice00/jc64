@@ -1257,6 +1257,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     regPC=(regPC & 0xff)+         // fetch PCH
           (load(0xffff)<<8);
+    setInterrupt(1); 
     clock();                      // 7
   }
 
