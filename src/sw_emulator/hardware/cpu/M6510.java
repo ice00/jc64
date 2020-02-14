@@ -1092,6 +1092,7 @@ public class M6510 extends Thread implements powered, signaller {
        setNZ(tmp);
        setCarry(tmp & 0x40);
        setOverflow((tmp & 0x40) ^ ((tmp & 0x20) << 1));
+       regA=tmp; 
       }
   }
 
@@ -2647,7 +2648,7 @@ public class M6510 extends Thread implements powered, signaller {
     tmp=load(regPC++);            // fetch next value, increment PC
     clock();                      // 2
 
-    tmp=storeAbsY(tmp);
+    tmp=storeAbsX(tmp);
 
     store(tmp, regY &
           ((tmp>>8) & 0xff)+1);   // write to effective address
@@ -3165,8 +3166,8 @@ public class M6510 extends Thread implements powered, signaller {
         case 0x93: SHA(M_IND_Y);                break;      // 93: SHA ($nn),Y
         case 0x9F: SHA(M_ABS_Y);                break;      // 9F: SHA $nnnn,Y
 
-        case 0x9E: SHX();                       break;      // 9E: SHX $nnnn,Y
-        case 0x9C: SHY();                       break;      // 9C: SHY $nnnn,Y
+        case 0x9E: SHX();                       break;      // 9E: SHX $nnnn,X
+        case 0x9C: SHY();                       break;      // 9C: SHY $nnnn,X
         case 0x9B: SHS();                       break;      // 9B: SHS $nnnn,Y
 
         case 0x80: NOOP(M_IMM);                 break;      // 80: NOOP #$nn
