@@ -1784,7 +1784,7 @@ public class M6510 extends Thread implements powered, signaller {
   public void LAS() {
     int tmp;
 
-    tmp=load(regP++);             // fetch low address byte, increment PC
+    tmp=load(regPC++);            // fetch low address byte, increment PC
     clock();                      // 2
 
     tmp=loadAbsY(tmp);

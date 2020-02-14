@@ -97,7 +97,7 @@ public class IO8 extends IO6{
    */
   protected void setP6_(int value) {
     if ((portDir & 0x40)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x40;
+      if (((portDataOut & 0x40)^value)!=0) remember|=0x40;
     }
     if (value!=0) portDataOut|=value;
       else portDataOut&=~0x40;
@@ -111,7 +111,7 @@ public class IO8 extends IO6{
    */
   protected void setP7_(int value) {
     if ((portDir & 0x80)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x80;
+      if (((portDataOut & 0x80)^value)!=0) remember|=0x80;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x80;

@@ -21,6 +21,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  *  02111-1307  USA.
  */
+package debug;
 
 import sw_emulator.hardware.powered;
 import sw_emulator.hardware.signaller;
@@ -231,6 +232,9 @@ public class C64_test implements powered{
    * The Cia 2 IO signals connections
    */
   public C64Cia2IO cia2IO=new C64Cia2IO(cpu, exp, pla);
+  
+  /** Devices that will need tod signal */
+  protected signaller[] devicesTod={cia1, cia2};
 
   /**
    * The expansion IO signals connections
@@ -238,9 +242,12 @@ public class C64_test implements powered{
   public C64CartridgeIO expIO=new C64CartridgeIO(cpu, pla, and6, and3);
 
   public C64_test() {
+    clock.registerTod(devicesTod);  // register cia for using tod from the clock
     initMemory();
     c64Form.addTV(tv);
     c64Form.setVisible(true);
+  
+    
     cpu.setIO(cpuIO);                 // set cpu IO signals
     vic.setIO(vicIO);                 // set vic IO signals
     keyb.setIO(cia1IO);               // set keyb IO signals
@@ -251,24 +258,48 @@ public class C64_test implements powered{
 
     kernal.change(0xfd84, (byte)0xa0);      // don't fill the memory
     kernal.change(0xfd85, (byte)00);
-
-    kernal.change(0xe445, (byte)0x16);     // jmp 2070
-    kernal.change(0xe446, (byte)0x08);
-
-
+    
+    kernal.change(0xea87, (byte)0x60);  
+    
+   // kernal.change(0xe445, (byte)0x16);     // jmp 2070
+   // kernal.change(0xe446, (byte)0x08);
+    
     byte[] fileImage;
     FileInputStream file; // the file
 
     try {
-      file=new FileInputStream("/home/ice/Scaricati/ldab.prg");
+      file=new FileInputStream("c:\\temp\\MMU.prg"); 
       try {
         int kk=file.available();
         fileImage=new byte[kk];
 
         file.read(fileImage);
+        
+        int address=fileImage[0]+fileImage[1]*256;
+        
+        System.err.println(address);
 
         for (int i=2; i<kk; i++)
-        ram0.change(2047+i,fileImage[i]);
+        ram0.change(address+i-2,fileImage[i]);
+        
+        
+        for (int i=2; i<kk; i++) {
+          if (fileImage[i]==-98) {   //0x9e
+            String addr="";
+            int k=1;
+            while (fileImage[i+k]!=0) {
+              addr=addr+(fileImage[i+k]-48);
+              k++;
+            }
+            int val=Integer.valueOf(addr);
+            
+            System.err.println(val);
+              
+            kernal.change(0xe445, (byte)(val & 0xff));     // jmp 2070
+            kernal.change(0xe446, (byte)(val>>8));
+            break;
+          }
+        }
       } catch (IOException e) {
           System.err.println("err");
         }
@@ -318,6 +349,15 @@ public class C64_test implements powered{
 
     vic.powerOn();
     System.out.println(" VIC: power is on");
+    
+    cia1.powerOn();
+    System.out.println(" CIA1: power is on");
+    
+    cia2.powerOn();
+    System.out.println(" CIA2: power is on");    
+    
+    sid.powerOn();
+    System.out.println(" SID: power is on");    
   }
 
   /**
@@ -332,5 +372,14 @@ public class C64_test implements powered{
 
     vic.powerOff();
     System.out.println(" VIC: power is off");
+    
+    cia1.powerOff();
+    System.out.println(" CIA1: power is off");
+    
+    cia2.powerOff();
+    System.out.println(" CIA2: power is off");        
+    
+    sid.powerOff();
+    System.out.println(" SID: power is off");    
   }
 }

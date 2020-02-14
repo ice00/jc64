@@ -275,7 +275,7 @@ public class IO6 {
    */
   protected void setP0_(int value) {
     if ((portDir & 0x01)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x01;
+      if (((portDataOut & 0x01)^value)!=0) remember|=0x01;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x01;
@@ -289,7 +289,7 @@ public class IO6 {
    */
   protected void setP1_(int value) {
     if ((portDir & 0x02)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x02;
+      if (((portDataOut & 0x02)^value)!=0) remember|=0x02;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x02;
@@ -303,7 +303,7 @@ public class IO6 {
    */
   protected void setP2_(int value) {
     if ((portDir & 0x04)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x04;
+      if (((portDataOut & 0x04)^value)!=0) remember|=0x04;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x04;
@@ -317,7 +317,7 @@ public class IO6 {
    */
   protected void setP3_(int value) {
     if ((portDir & 0x08)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x08;
+      if (((portDataOut & 0x08)^value)!=0) remember|=0x08;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x08;
@@ -331,7 +331,7 @@ public class IO6 {
    */
   protected void setP4_(int value) {
     if ((portDir & 0x10)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x10;
+      if (((portDataOut & 0x10)^value)!=0) remember|=0x10;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x10;
@@ -345,7 +345,7 @@ public class IO6 {
    */
   protected void setP5_(int value) {
     if ((portDir & 0x20)!=0) { // output port ?
-      if (((portDataOut & value)^value)!=0) remember|=0x20;
+      if (((portDataOut & 0x20)^value)!=0) remember|=0x20;
     }
     if (value!=0) portDataOut|=value;
     else portDataOut&=~0x20;
