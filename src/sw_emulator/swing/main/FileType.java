@@ -118,6 +118,7 @@ import sw_emulator.math.Unsigned;
               pos++;
             } while ( !((c==0x0D) || (c==0x00) || (pos>inB.length)) );
             tmp.append('\n');
+            if (c==0x00) break; // must exit of the lines are incomplete
           }
 
           tmp.append('\n');          

@@ -142,8 +142,6 @@ public class Disassembly {
     ind3=ind2+v2Length;
     txtA=v1Length+v2Length+v3Length+8;
     
-    tmp.append(fileType.getDescription(inB));
-    tmp.append("\n");
     tmp.append(fileType.getDescription(inB)).append("\n");
     tmp.append("VOICE 1 MUSIC DATA: \n\n");
     tmp.append(mus.cdasm(inB, ind1, ind2-1, ind1+musPC));
