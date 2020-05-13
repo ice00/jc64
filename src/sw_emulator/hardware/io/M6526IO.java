@@ -126,11 +126,11 @@ public abstract class M6526IO implements signaller {
         break;
       case 0x02:                    // write port A bits direction
         portA.portDir=value & 0xFF;
-        advice(T_PORTB, 0x3F);      // advice for all (this is most general!)
+        advice(T_PORTA, 0x3F);      // advice for all (this is most general!)
         break;
       case 0x03:                    // write port B bits direction
         portB.portDir=value & 0xFF;
-        advice(T_PORTA, 0x3F);      // advice for all (this is most general!)
+        advice(T_PORTB, 0x3F);      // advice for all (this is most general!)
         break;
     }
   }
