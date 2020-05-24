@@ -24,12 +24,8 @@
 
 package sw_emulator.hardware;
 
-import java.lang.Thread;
-import java.lang.Exception;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sw_emulator.util.Monitor;
-import sw_emulator.util.Monitor2;
+
 
 /**
  * Creates a clock circuits.
@@ -66,7 +62,7 @@ public class Clock extends Thread {
   /**
    * Create a clock of 8Mhz for PAL or NTSC
    *
-   * @param the type (PAL or NTSC)
+   * @param type the type (PAL or NTSC)
    */
   public Clock(int type) {
     setType(type);
@@ -77,6 +73,8 @@ public class Clock extends Thread {
 
   /**
    * Set the actual type of clock (default is PAL)
+   * 
+   * @param type the type to set
    */
   public void setType(int type) {
     if ((type==PAL) || (type==NTSC))
@@ -122,21 +120,21 @@ public class Clock extends Thread {
    * Notify a clock tick in the monitor
    */
   public void run() {
-      ///long start=0;
+    ///long start=0;
     while (true) {
       while (started==false) {       // attend a start command
         yield();
       }
 
       
-          //if (type==NTSC) wait((int)(12*realTime), (int)(222*realTime));
-          //else            wait((int)(12*realTime), (int)(690*realTime));
+      //if (type==NTSC) wait((int)(12*realTime), (int)(222*realTime));
+      //else            wait((int)(12*realTime), (int)(690*realTime));
        
       // attend that the connected circuits have finish
-      while (!monitor.isFinish()) {
-        yield();
-        //monitor.opWait2();
-      }
+ //     while (!monitor.isFinish()) {
+ //       yield();
+ //       //monitor.opWait2();
+ //     }
       
       
       monitor.opSignal();

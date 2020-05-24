@@ -187,6 +187,9 @@ public class M6510 extends Thread implements powered, signaller {
 
   /** True if a NMI interrupt is pending */
   protected boolean nmiPending=false;
+  
+  /** Clock counter */
+  public long clock=0;
 
   /**
    * Construct a Mos 6510 cpu.
@@ -230,7 +233,7 @@ public class M6510 extends Thread implements powered, signaller {
     while (sigRDY==0) {                      // is RDY low?
       monitor.opWait();                      // subspend Cpu activity
     }
-    if (addr<2) return ioPort.readFromPort(addr & 0xffff);
+    if (addr<2) return ioPort.readFromPort(addr & 0xffff, clock);
     else        return bus.load(addr & 0xffff, view, sigAEC);
   }
 
@@ -243,7 +246,7 @@ public class M6510 extends Thread implements powered, signaller {
    */
   protected void store(int addr, int value) {
     if (addr<2) {       
-      ioPort.writeToPort(addr, value);
+      ioPort.writeToPort(addr, value, clock);
       // write previous value that the data bus still have.
       bus.store(addr & 0xffff, bus.previous, view, sigAEC);
     } else bus.store(addr & 0xffff, value, view, sigAEC);
@@ -326,6 +329,43 @@ public class M6510 extends Thread implements powered, signaller {
                                   // *= page boundary crossing are not handled
     return tmp;
   }
+  
+  /**
+   * Load Indirect Y addressing mode
+   *
+   * @param addr the address location
+   * @return the readed byte value (stored in 32 bits)
+   */
+/**  protected int loadIndY(int addr) {
+    int cross=0;                  // 1 if there's a page boundary crossing
+    int tmp,tmp2,base;
+    
+    tmp2=load(addr);              // fetch effective address low
+    clock();                      // 3
+    
+    tmp2+=(load( (addr+1) & 0xff )<<8);      // fetch effective address hi
+    base=tmp2;	    
+  //  tmp2=(tmp2 & 0xff00) |
+  //       ((tmp2+regY)& 0xff);     // add Y to low byte of effective address
+    
+    tmp2=(tmp2+regY)&0xffff;
+
+    clock();                      // 4
+
+    tmp=load(tmp2);               // read from effective address *
+    
+    if ((base & 0xff00) != (tmp2 & 0xff00)) cross=1;
+    //tmp2+=(cross<<8);             // fix hi byte of effective address          
+    clock();                      // 5
+
+    if (cross==1) {
+//      tmp=load(tmp2);             // read from effective address  
+      clock();                    // 6
+    }
+                                  // *= high byte of effec. addr. may be invalid
+    return tmp;
+  }
+**/
   
   /**
    * Load Indirect Y addressing mode
@@ -921,8 +961,8 @@ public class M6510 extends Thread implements powered, signaller {
    * before it is resume. Sorry...
    */
   public void clock() {
-    ///System.out.println("Clock");
-        
+    clock++;
+    
     if (sigNMI==0) nmiPending=true;
     if (sigIRQ==0) irqPending=true;
 
@@ -940,8 +980,8 @@ public class M6510 extends Thread implements powered, signaller {
     int tmp, al, ah, tmpVal;
 
     tmp=load(regPC++);            // fetch next value, increment PC
-    clock();                      // 2
-
+    clock();                      // 2     
+    
     switch (type) {
       case M_IMM:          
         break;
@@ -1229,7 +1269,7 @@ public class M6510 extends Thread implements powered, signaller {
   public void BRK() {
     int tmp;
 
-    tmp=load(regPC++);            // read next byte (and forget it)
+    tmp=load(regPC++);              // read next byte (and forget it)
     clock();                      // 2
 
     setBreak(1);                  // push PCH on stack (with B flag set), dec. S
@@ -1732,7 +1772,7 @@ public class M6510 extends Thread implements powered, signaller {
       case M_ABS:
         regPC=tmp+
               (load(regPC)<<8);   // copy low addr. byte to PCL, fetch hi to PCH
-        clock();                  // 3         
+        clock();                  // 3        
         break;
       case M_IND:
         int tmp2;
@@ -1987,6 +2027,11 @@ public class M6510 extends Thread implements powered, signaller {
   /**
    * Execute a LXA cpu undocument instruction.
    * Note: this code is not exactly becouse the real is unstable.
+   *
+   * @param value the byte value to use for operation (stored in 32 bits)
+   * @param clk1 the first clock increment
+   * @param clk2 the second clock increment
+   * @param pci the program counter increment
    */
   public void LXA() {
     int tmp;
@@ -2036,7 +2081,7 @@ public class M6510 extends Thread implements powered, signaller {
    */
   public void NOP() {      
     p0=load(regPC);               // read next byte (and forget it)
-    clock();                      // 2 
+    clock();                      // 2        
   }
 
   /**
@@ -2130,7 +2175,7 @@ public class M6510 extends Thread implements powered, signaller {
     store(regS--, regA);          // push register on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
     regS|=0x100;
-   
+      
     clock();                      // 3
   }
 
@@ -2143,7 +2188,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     store(regS--, regP | P_BREAK);          // push register on stack, decrement S
     regS&=0x1FF;                  // regS is in 100h-1FFh
-    regS|=0x100;  
+    regS|=0x100;   
     clock();                      // 3
   }
 
@@ -2160,7 +2205,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // 3
 
     regA=load(regS);              // pop register from stack
-    setNZ(regA);    
+    setNZ(regA); 
     clock();                      // 4
   }
 
@@ -2178,7 +2223,7 @@ public class M6510 extends Thread implements powered, signaller {
 
     regP=load(regS) |             // pop register from stack
          P_UNUSED |               // unused and break must be 1
-         P_BREAK;  
+         P_BREAK;   
     clock();                      // 4
   }
 
@@ -2228,7 +2273,8 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++ 
+    clock();                      // ++
+     
   }
 
   /**
@@ -2414,8 +2460,8 @@ public class M6510 extends Thread implements powered, signaller {
    regS|=0x100;
    clock();                       // 3
 
-   regP=load(regS++) |            // pop P from stack, increment S
-        P_UNUSED |                // unused and break must be 1
+   regP=load(regS++) |             // pop P from stack, increment S
+        P_UNUSED |               // unused and break must be 1
         P_BREAK;
    regS&=0x1FF;                   // regS is in 100h-1FFh
    regS|=0x100;
@@ -2433,7 +2479,7 @@ public class M6510 extends Thread implements powered, signaller {
   /**
    * Execute a RTS cpu legal instruction
    */
-  public void RTS() {
+  public void RTS() {      
     p0=load(regPC);               // read next instruction byte
     clock();                      // 2
 
@@ -2583,7 +2629,7 @@ public class M6510 extends Thread implements powered, signaller {
     load(regPC);                  // fetch next byte (and forget it)
     clock();                      // 2
 
-    setDecimal(1); 
+    setDecimal(1);          
   }
 
   /**
@@ -2681,7 +2727,8 @@ public class M6510 extends Thread implements powered, signaller {
     int tmp, val;
         
     tmp=load(regPC++);            // fetch next value, increment PC
-    clock();                      // 2
+    clock();                      // 2  
+    
     switch (type) {
       case M_ZERO:
         tmp=loadStoreZero(tmp);
@@ -2716,7 +2763,7 @@ public class M6510 extends Thread implements powered, signaller {
     clock();                      // ++
 
     store(tmp, val);              // write the new value to the effective addr.
-    clock();                      // ++ 
+    clock();                      // ++
   }
 
   /**
@@ -2934,7 +2981,7 @@ public class M6510 extends Thread implements powered, signaller {
   /**
    * Decode the opcode and execute the operation
    */
-  public void decode(){
+  public void decode(){   
     if ((p0>=0x00) && (p0<0x20)) {
       switch (p0) {
         case 0x10: BRANCH((regP & P_SIGN)==0);  break;      // 10: BPL $nnnn
@@ -3445,10 +3492,10 @@ public class M6510 extends Thread implements powered, signaller {
       yield();
     }
     
-    // do nothing until the bus is available
-    while (!bus.isInitialized())  {              // there's a bus?
-      yield();                                   // no, attend power
-    }
+      // do nothing until the bus is available
+      while (!bus.isInitialized())  {              // there's a bus?
+        yield();                                   // no, attend power
+      }
    
     regA=0;
     regX=0;
@@ -3538,4 +3585,15 @@ public class M6510 extends Thread implements powered, signaller {
   public void powerOff() {
     power=false;    // power is off
   }
+  
+  
+  private String strReg() {
+    return ("     A:"+Integer.toHexString(regA)+" X:"+Integer.toHexString(regX)+" Y:"+Integer.toHexString(regY)+" SP:"+Integer.toHexString(regS)+" F:"+Integer.toBinaryString(regP));
+  }
 }
+
+
+
+
+
+

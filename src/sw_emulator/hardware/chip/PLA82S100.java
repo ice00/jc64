@@ -33,11 +33,7 @@ import sw_emulator.hardware.memory.ColorRAM;
 import sw_emulator.hardware.bus.C64Bus;
 import sw_emulator.hardware.bus.readableBus;
 import sw_emulator.hardware.bus.writeableBus;
-import sw_emulator.hardware.chip.VicII;
-import sw_emulator.hardware.chip.M6526;
-import sw_emulator.hardware.chip.Sid;
-import sw_emulator.util.Monitor;
-import sw_emulator.util.Monitor2;
+import sw_emulator.util.Monitor1;
 
 /**
  * Emulate the PLA 82S100 chip of a Commodore 64 computer.
@@ -69,7 +65,7 @@ public class PLA82S100 extends Thread implements powered, signaller {
   private boolean ultimax=false;
 
   /** The monitor where PLA attend a signal that changing value */
-  public Monitor monitor=new Monitor("PLA 82S100");
+  public Monitor1 monitor=new Monitor1("PLA 82S100");
 
   /** A copy of actual C64 bus. */
   protected C64Bus bus;
@@ -728,7 +724,6 @@ public class PLA82S100 extends Thread implements powered, signaller {
   public void chooseTables() {
     // suppose not ultimax mode
     ultimax=false;
-
     // calculate current memory configuration
     int config=(loram<<4)+(hiram<<3)+(exrom<<2)+(game<<1)+charen;
 
@@ -807,7 +802,7 @@ public class PLA82S100 extends Thread implements powered, signaller {
       case 0x01:
         bus.setTableVic(vicT1);
         break;
-      case 0x02:
+      case 0x02:        
         if (ultimax) bus.setTableVic(vicT2);
         else bus.setTableVic(vicT2R);
         break;

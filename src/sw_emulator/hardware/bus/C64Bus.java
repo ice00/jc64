@@ -106,7 +106,6 @@ public class C64Bus extends Bus{
    * @param view the bus view of the device that write to the bus
    * @param aec the AEC signal state of the chip
    */
-  @Override
   public void store(int addr, int value, int view, int aec) {
     switch (view) {
       case V_CPU:
@@ -132,7 +131,6 @@ public class C64Bus extends Bus{
    * @param aec the AEC signal state of the chip
    * @return the readed byte stored in 32 bits
    */
-  @Override
   public int load(int addr, int view, int aec) {
     switch (view) {
       case V_CPU:
@@ -146,7 +144,7 @@ public class C64Bus extends Bus{
       case V_VIC:
          if (aec==0) {
            // use previous value for cpu I/O operation
-           previous=Unsigned.done(readTableVic[(addr & 0x3FFF)>>8].read(addr & 0x3FFF));
+           previous=Unsigned.done(readTableVic[(addr & 0x3FFF)>>8].read((addr & 0x3FFF)));
            return previous+
                   ((color.read(addr)& 0x0F)<<8);
          } else {
@@ -162,6 +160,7 @@ public class C64Bus extends Bus{
    *
    * @param readTableCpu the table for reading from bus by cpu view
    * @param writeTableCpu the table for writing to bus by cpu view
+   * @param readTableVic the table for reading from bus by vic view
    */
   public void setTableCpu(readableBus[] readTableCpu, writeableBus[] writeTableCpu) {
     this.readTableCpu=readTableCpu;
@@ -191,9 +190,10 @@ public class C64Bus extends Bus{
    *
    * @return true if bus is initialized correctly
    */
-  @Override
   public boolean isInitialized() {
-    return (readTableVic!=null) && (color!=null) && (readTableCpu!=null);
+    if ((readTableVic!=null) && (color!=null) && (readTableCpu!=null)) {
+      return true;
+    } else return false;
   }
 }
 

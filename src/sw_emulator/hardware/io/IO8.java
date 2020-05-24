@@ -33,15 +33,17 @@ package sw_emulator.hardware.io;
  * @version 1.01 27/05/2000
  */
 public class IO8 extends IO6{
-  /**
-   * Default output value of port 6 if it is set to input
-   */
+  /** Default output value of port 6 if it is set to input */
   public int defaultP6=1;
 
-  /**
-   * Default output value of port 7 if it is set to input
-   */
+  /** Default output value of port 7 if it is set to input */
   public int defaultP7=1;
+  
+  /** True if the bit of port 6 is open */
+  public boolean isOpenP6=false;  
+  
+  /** True if the bit of port 7 is open */
+  public boolean isOpenP7=false;    
 
   /**
    * Set the value of input port 6

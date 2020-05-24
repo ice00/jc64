@@ -21,8 +21,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  *  02111-1307  USA.
  */
+
 package sw_emulator.util;
 
+import java.lang.InterruptedException;
 import java.util.concurrent.Phaser;
 
 /**
@@ -41,7 +43,7 @@ import java.util.concurrent.Phaser;
  * @author Ice
  * @version 1.00 19/09/1999
  */
-public class Monitor {
+public class Monitor1 {
 
   /** Contains the name of the monitor (used as debug info) */
   protected String name;
@@ -52,28 +54,22 @@ public class Monitor {
   /** The max threads counter value to use */
   protected int maxCounter=0;
   
-  /** Phaser for syncronization */
-  protected Phaser phaser=new Phaser();
-
   /**
    * Build a named monitor
    *
    * @param name the monitor debug name
    */
-  public Monitor(String name) {
+  public Monitor1(String name) {
     this.name=name;
-    phaser.register(); // regist myself
   }
   
-  public Monitor() {
-    phaser.register();  // regist myself
+  public Monitor1() {
   }
   
   /**
    * Notify the this thread will do an <code>opWait</code> to this monitor
    */
-  public void opNotify() {
-    phaser.register();
+  public synchronized void opNotify() {
     //System.out.println("NOTIFY: "+name+" "+counter+" "+maxCounter);  
     maxCounter++;
   }
@@ -81,27 +77,27 @@ public class Monitor {
   /**
    * Subspend the thread until a <code>opSignal</code> operation is made
    */
-  public void opWait() {
+  public synchronized void opWait() {
     //System.out.println("WAIT: "+name+" "+counter+" "+maxCounter);
-    /*
+  
     try {
       if (counter>0) counter--;
       wait();
     } catch (InterruptedException e) {
         System.err.println("Thread error for monitor "+name+": "+e);
       }
-    */
-    phaser.arriveAndAwaitAdvance();
+    
+
   }
 
   /**
    * Resume all the thread that was subspended by <code>opWait</code> operation
    */
-  public void opSignal() {
+  public synchronized void opSignal() {
     //System.out.println("SIGNAL: "+name+" "+counter+" "+maxCounter);
     counter=maxCounter;
-    //notifyAll();
-    phaser.arriveAndAwaitAdvance();
+    notifyAll();
+
   }
   
   /**
@@ -109,7 +105,7 @@ public class Monitor {
    * 
    * @return true if all threads have finish
    */
-  public boolean isFinish() {
+  public synchronized boolean isFinish() {
     //System.out.println("ISFINISH: "+name+" "+counter+" "+maxCounter);      
     return (counter==0);
   }  

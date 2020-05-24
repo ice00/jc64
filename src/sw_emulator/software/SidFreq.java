@@ -363,6 +363,9 @@ public class SidFreq {
       // catch ha error on DEMOS/M-R/Max_Mix.sid (table 440Hz; A2 - values 0744 instead of 0751)
       if (i==9 && diff==42) continue;
       
+      // catch errors onto Mon/Futurecomposer (table: 424Hz; B1 - values 03E0 instead of 03F4)
+      if (i==11 && diff==20) continue;
+      
       if (diff>ERROR) return false;
     }
    

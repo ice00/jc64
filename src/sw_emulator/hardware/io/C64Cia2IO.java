@@ -75,12 +75,11 @@ public class C64Cia2IO extends M6526IO {
   @Override
   public void advice(int type, int value) {
     if (type==T_PORTA) {
-      if ((value & 0x03)!=0) {
-        if ((value & 0x01)!=0) pla.notifySignal(S_VA14, portA.getP0());
-        if ((value & 0x02)!=0) pla.notifySignal(S_VA15, portA.getP1());
-
+      /*if ((value & 0x03)!=0) {
+        if ((value & 0x01)!=0)*/ pla.notifySignal(S_VA14, portA.getP0());
+       /* if ((value & 0x02)!=0)*/ pla.notifySignal(S_VA15, portA.getP1());
         pla.monitor.opSignal();     // resume the pla for managing the changes
-      }
+      //}
 
       if ((value & 0x04)!=0) ;
       if ((value & 0x08)!=0) ;

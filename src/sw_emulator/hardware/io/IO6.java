@@ -27,7 +27,7 @@ package sw_emulator.hardware.io;
 /**
  * This class manage a 6 bits bidirectional I/O port.
  * For each port there's two methods for set or get the value of port:
- * <code>setPx</cope> and <code>getPx</code>. These methods provide also a
+ * <code>setPx</code> and <code>getPx</code>. These methods provide also a
  * system for having default ouput where a port is defined for input, but the
  * output line is also connected to pull-up or pull-down resistors. So a class
  * that use it, may define the variables <code>defaultPx</code> to be of value 0
@@ -74,60 +74,64 @@ package sw_emulator.hardware.io;
  *  internal write x:           DataIn bit buffer=x
  *  external:                   read the pull-up value (not x)
  * </pre>
+ * 
+ * Note. A bit can be non connected, so in this case there is a fall back time
+ * as internal capacitors store a 1 value that than goes to 0 in that time.
  *
  * @author Ice
  * @version 1.01 27/05/2000
  */
 public class IO6 {
-  /**
-   * I/O Port direction register: 0=input, 1=output
-   */
+  /** I/O Port direction register: 0=input, 1=output */
   public int portDir;
 
-  /**
-   * I/O Port data register for output
-   */
+  /** I/O Port data register for output */
   public int portDataOut;
 
-  /**
-   * I/O Port data register for input
-   */
+  /* I/O Port data register for input */
   public int portDataIn=0xff;
+  
+  /** Clock fall back time for capacitors of open ports */
+  public int fallBackTime=0;
 
-  /**
-   * A 1 bit indicated that a output port have change it's value
-   */
+  /* A 1 bit indicated that a output port have change it's value */
   public int remember=0;
 
-  /**
-   * Default output value of port 0 if it is set to input
-   */
+  /** Default output value of port 0 if it is set to input */
   public int defaultP0=1;
-
-  /**
-   * Default output value of port 1 if it is set to input
-   */
+  
+  /** Default output value of port 1 if it is set to input */
   public int defaultP1=1;
 
-  /**
-   * Default output value of port 2 if it is set to input
-   */
+  /** Default output value of port 2 if it is set to input */
   public int defaultP2=1;
 
-  /**
-   * Default output value of port 3 if it is set to input
-   */
+  /** Default output value of port 3 if it is set to input */
   public int defaultP3=1;
 
-  /**
-   * Default output value of port 4 if it is set to input
-   */
+  /** Default output value of port 4 if it is set to input */
   public int defaultP4=1;
 
-  /**
-   * Default output value of port 5 if it is set to input
-   */
+  /** Default output value of port 5 if it is set to input */
   public int defaultP5=0;
+  
+  /** True if the bit of port 0 is open */
+  public boolean isOpenP0=false;
+
+  /** True if the bit of port 1 is open */
+  public boolean isOpenP1=false;
+
+  /** True if the bit of port 2 is open */
+  public boolean isOpenP2=false;
+
+  /** True if the bit of port 3 is open */
+  public boolean isOpenP3=false;
+
+  /** True if the bit of port 4 is open */
+  public boolean isOpenP4=false;  
+  
+  /** True if the bit of port 5 is open */
+  public boolean isOpenP5=false;  
 
   /**
    * Set the value of input port 0

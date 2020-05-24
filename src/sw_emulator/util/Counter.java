@@ -98,7 +98,7 @@ public class Counter {
     
     if (toLoad) {
       counter=latch;
-      ///toLoad=false;  
+      toLoad=false;  
     }
   }
   

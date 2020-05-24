@@ -75,5 +75,8 @@ public class C64M6510IO extends M6510IO {
     port.defaultP1=1;
     port.defaultP2=1;
     port.defaultP4=1;
+    port.fallBackTime=350000; // 350 msec.
+    port.isOpenP6=true;
+    port.isOpenP7=true;
   }
 }

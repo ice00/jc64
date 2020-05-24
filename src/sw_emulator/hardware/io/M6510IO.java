@@ -46,13 +46,15 @@ public class M6510IO {
    */
   public IO8 port=new IO8();
 
+
   /**
    * Read the direction/value of I/O port
    *
    * @param addr the 0/1 address
+   * @param clock the actual clock timing
    * @return the readed byte
    */
-  public int readFromPort(int addr) {
+  public int readFromPort(int addr, long clock) {
     if (addr==0) {
       return port.portDir;
     } else {
@@ -72,8 +74,9 @@ public class M6510IO {
    *
    * @param addr the 0/1 address
    * @param value the value to write
+   * @param clock the actual clock timing
    */
-  public void writeToPort(int addr, int value) {
+  public void writeToPort(int addr, int value,  long clock) {
     if (addr==0) {               // write port bits direction
       port.portDir=value;
       advice(0xFF);              // advice for all (this is most general!)
