@@ -22,6 +22,8 @@
  */
 package sw_emulator.software;
 
+import sw_emulator.math.Unsigned;
+
 /**
  * Modified version of SidFreq by XSidPlay2
  * 
@@ -141,8 +143,8 @@ public class SidFreq {
     }
     
     // get the A4 note
-    sid=(int)inB[high+A4]*256+(int)inB[low+A4];  
-    
+    sid=Unsigned.done(inB[high+A4])*256+Unsigned.done(inB[low+A4]);  
+
     addData(high, low, sid);
     markMemory(high, high+TABLE+6, 1);
     markMemory(low, low+TABLE+6, 1);
@@ -186,7 +188,7 @@ public class SidFreq {
     if (low==-1) return false;  
   
     // get the A4 note
-    sid=(int)inB[high+A4*2]*256+(int)inB[low+A4*2];  
+    sid=Unsigned.done(inB[high+A4*2])*256+Unsigned.done(inB[low+A4*2]);  
     
     addData(high, low, sid);
     markMemory(high, high+TABLE+6, 2);
@@ -241,7 +243,7 @@ public class SidFreq {
     if (low==-1) return false;
      
     // get the A4 note
-    sid=(int)inB[high+A4]*256+(int)inB[low+A4];   
+    sid=Unsigned.done(inB[high+A4])*256+Unsigned.done(inB[low+A4]);   
    
     addData(high, low, sid);
     markMemory(high, high+SHORT+6, 1);
@@ -348,6 +350,11 @@ public class SidFreq {
          
       // catch an error on MUSICIANS/P/PseudoGrafx/Fonttime.sid (short table seems 476Hz)
       if (i==2 && diff==25) continue;    
+      
+      // catch 3 errors into Sound Tracher 64
+      if (i==2 && diff==48) continue;  
+      if (i==9 && diff==302) continue; 
+      if (i==10 && diff==514) continue;
     
       // catch an error onto TFX note table 449Hz
       if (i==3 && diff==25) continue;       
