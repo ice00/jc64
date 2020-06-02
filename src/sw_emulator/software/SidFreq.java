@@ -357,7 +357,12 @@ public class SidFreq {
       if (i==10 && diff==514) continue;
     
       // catch an error onto TFX note table 449Hz
-      if (i==3 && diff==25) continue;       
+      if (i==3 && diff==25) continue; 
+
+      // catch 3 errors onto Groo/Psygon at 434Hz
+      if (i==3 && diff==48) continue; 
+      if (i==10 && diff==302) continue; 
+      if (i==11 && diff==512) continue;      
     
       // catch an error onto TFX 2.7 note table (table 424Hz: E0 is 0147 instead of 0151)
       // catch an error onto TFX 2.9 note table (table 449Hz: D#0 is 0147 instead of 0151)
