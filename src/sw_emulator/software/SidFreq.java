@@ -36,8 +36,11 @@ public class SidFreq {
   /** Table size */
   static final int TABLE = 96-6;
   
-  /** Short tablke size */
+  /** Short table size */
   static final int SHORT=72;
+  
+  /** Short2 table size */
+  static final int SHORT2=65;  
   
   /** Error for note difference */
   static final int ERROR=6;
@@ -94,7 +97,8 @@ public class SidFreq {
     
     if (linearTable()) return;
     if (combinedTable()) return;
-    shortLinearTable();        
+    if (shortLinearTable()) return;        
+    shortCombinedTable();
   }
   
   /**
@@ -196,6 +200,51 @@ public class SidFreq {
       
     return true;    
   }
+  
+  /**
+   * Search for short tables in combined way (low + high or high + low)
+   * 
+   * @return true if the table is fount
+   */
+  private boolean shortCombinedTable() {
+    int sid;
+    int i;
+    int high=-1;
+    int low=-1;
+     
+    // check for high frequency table
+    for (i=0; i<end-SHORT2*2; i++) {
+      if (searchShortHigh2(i)) {
+        high=i;
+        break;         
+      }
+    }  
+       
+    // look if high table was fount
+    if (high==-1) return false;  
+  
+    // check for low frequency table
+    for (i=0; i<end-SHORT2*2; i++) {
+      if (i!=high) {
+        if (searchShortLow2(high, i)) {
+          low=i;
+          break;         
+        }
+      }
+    }
+   
+    // look if low table was fount
+    if (low==-1) return false;  
+  
+    // get the A4 note
+    sid=Unsigned.done(inB[high+A4*2])*256+Unsigned.done(inB[low+A4*2]);  
+    
+    addData(high, low, sid);
+    markMemory(high, high+SHORT2*2, 2);
+    markMemory(low, low+SHORT2*2, 2);
+      
+    return true;    
+  }
 
   /**
    * Search for short tables in linear way (low / high or high / low)
@@ -251,7 +300,7 @@ public class SidFreq {
       
     return true;    
    }
- 
+  
   /**
    * Search for the high frequency table in linear way
    *
@@ -267,7 +316,11 @@ public class SidFreq {
    
     // search for increasing numbers
     for (i=index+3; i<index+TABLE; i++) {
-      if ((int)(inB[i]& 0xFF)<actual) return false;
+      if ((int)(inB[i]& 0xFF)<actual) {
+        // catch a very big error on Vibrants/JO note table at 424Hz 
+        if (actual==7 && (int)(inB[i]& 0xFF)==3 && (int)(inB[i-2]& 0xFF)==3)  actual=((int)inB[i]& 0xFF); 
+        else return false;
+      }   
       else actual=((int)inB[i]& 0xFF);
     }
    
@@ -319,6 +372,28 @@ public class SidFreq {
   } 
   
   /**
+   * Search for the high frequency table in *2 way
+   *
+   * @param index the index where to start the test
+   * @return true if there is a high frequency table in that position 
+   */ 
+  private boolean searchShortHigh2(int index) {
+    int i;
+    int actual=1;   
+   
+    // it must start with three 1
+    if ( ((int)(inB[index+0]& 0xFF)!=1) || ((int)(inB[index+2]& 0xFF)!=1) || ((int)(inB[index+4]& 0xFF)!=1)) return false;
+   
+    // search for increasing numbers
+    for (i=index+6; i<index+SHORT2*2; i++, i++) {
+      if ((int)(inB[i]& 0xFF)<actual) return false;
+      else actual=(int)(inB[i]& 0xFF);
+    }
+   
+    return true;   
+  } 
+  
+  /**
    * Search for a low frequency table in linear way
    * 
    * @param high the position of high table
@@ -330,6 +405,10 @@ public class SidFreq {
     int note1, note2, note3, note4, note5, note6, note7;
     int diff;
    
+    boolean errSoundTracker=false;
+    boolean errGrooPsygon=false;
+    boolean errVibrantsJO=false;
+    
     // scan all notes
     for (i=0; i<12; i++) {
       note1=(int)(inB[high+i]& 0xFF)*256+(int)(inB[index+i]& 0xFF);
@@ -347,30 +426,52 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note4*2 - note5);
       if (i<11) diff+=Math.abs(note5*2 - note6);
       if (i<11) diff+=Math.abs(note6*2 - note7);
+      
+      // catch error into Vibrants/JO note table at 416Hz  
+      if (i==0 && diff==212) continue;   
+      
          
       // catch an error on MUSICIANS/P/PseudoGrafx/Fonttime.sid (short table seems 476Hz)
       if (i==2 && diff==25) continue;    
       
-      // catch 3 errors into Sound Tracher 64
-      if (i==2 && diff==48) continue;  
-      if (i==9 && diff==302) continue; 
-      if (i==10 && diff==514) continue;
+      // catch 3 errors into Sound Tracher 64 at 459Hz
+      if (i==2 && diff==48) { errSoundTracker=true; continue;}  
+      if (errSoundTracker) {
+        if (i==9 && diff==302) continue; 
+        if (i==10 && diff==514) continue;
+      }  
     
       // catch an error onto TFX note table 449Hz
       if (i==3 && diff==25) continue; 
 
+      // catch 4 errors into Vibrants/JO note table at 416Hz 
+      if (i==3 && diff==118) {errVibrantsJO=true; continue;} 
+      if (errVibrantsJO) {
+         if (i==4 && diff==153) continue;
+         if (i==5 && diff==193) continue;
+         if (i==7 && diff==110) continue;
+      }   
+            
       // catch 3 errors onto Groo/Psygon at 434Hz
-      if (i==3 && diff==48) continue; 
-      if (i==10 && diff==302) continue; 
-      if (i==11 && diff==512) continue;      
+      if (i==3 && diff==48) {errGrooPsygon=true; continue;}
+      if (errGrooPsygon) {
+        if (i==10 && diff==302) continue; 
+        if (i==11 && diff==512) continue;
+      }     
     
       // catch an error onto TFX 2.7 note table (table 424Hz: E0 is 0147 instead of 0151)
       // catch an error onto TFX 2.9 note table (table 449Hz: D#0 is 0147 instead of 0151)
       // catch an error into DMC note table (table 424Hz: E0 is 0147 instead of 0151)
       if (i==4 && diff==25) continue;
+      
+      // catch 1 error into Vibrants/JO note table at 440Hz
+      if (i==4 && diff==127) continue;
 
       // catch a big error on Music Mixer notes table (table 440Hz: F#4 - values 18E0 instead of 189C)
       if (i==6 && diff==206) continue;
+      
+      // catch a very big error (originated in high table) on Vibrants/JO note table at 424Hz 
+      if (i==8 && diff==3074) continue;
     
       // catch ha error on DEMOS/M-R/Max_Mix.sid (table 440Hz; A2 - values 0744 instead of 0751)
       if (i==9 && diff==42) continue;
@@ -441,6 +542,8 @@ public class SidFreq {
     int i;
     int note1, note2, note3, note4, note5, note6, note7;
     int diff;
+    
+    boolean errVibrantsJO=false;
    
     // scan all notes
     for (i=0; i<12; i++) {
@@ -459,6 +562,53 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note4*2 - note5);
       if (i<11) diff+=Math.abs(note5*2 - note6);
       if (i<11) diff+=Math.abs(note6*2 - note7);
+      
+      // catch 4 errors into Vibrants/JO note table at 434Hz 
+      if (i==3 && diff==48) { errVibrantsJO=true; continue; }
+      if (errVibrantsJO) {
+        if (i==8 && diff==81) continue; 
+        if (i==9 && diff==264) continue;   
+        if (i==10 && diff==302) continue; 
+      }   
+      
+      if (diff>ERROR) return false;
+    }
+   
+    return true;    
+  }  
+  
+  /**
+   * Search for a low frequency table in *2 way
+   * 
+   * @param high the position of high table
+   * @param index the index where to search for low table
+   * @return true if there is a low frequency table in that position 
+   */ 
+  private boolean searchShortLow2(int high, int index) {
+    int i;
+    int note1, note2, note3, note4, note5, note6, note7;
+    int diff;
+       
+    // scan all notes
+    for (i=0; i<12; i++) {
+      note1=(int)(inB[high+i*2]& 0xFF)*256+(int)(inB[index+i*2]& 0xFF);
+      note2=(int)(inB[high+i*2+24]& 0xFF)*256+(int)(inB[index+i*2+24]& 0xFF);
+      note3=(int)(inB[high+i*2+24*2]& 0xFF)*256+(int)(inB[index+i*2+24*2]& 0xFF);
+      note4=(int)(inB[high+i*2+24*3]& 0xFF)*256+(int)(inB[index+i*2+24*3]& 0xFF);
+      note5=(int)(inB[high+i*2+24*4]& 0xFF)*256+(int)(inB[index+i*2+24*4]& 0xFF);
+      
+      diff=0;
+      diff+=Math.abs(note1*2 - note2);
+      diff+=Math.abs(note2*2 - note3);
+      diff+=Math.abs(note3*2 - note4);
+      diff+=Math.abs(note4*2 - note5);
+
+      
+      // catch an error into Vibrants/JO note table at 434Hz
+      if (i==3 && diff==31) continue; 
+      
+      // catch an error into Vibrants/JO note table at 434Hz
+      if (i==4 && diff==363) continue; 
       
       if (diff>ERROR) return false;
     }
