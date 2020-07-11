@@ -35,6 +35,7 @@ public class JAboutDialog extends javax.swing.JDialog {
     public JAboutDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);        
         initComponents();
+        Shared.framesList.add(this);
     }
     
     /** This method is called from within the constructor to

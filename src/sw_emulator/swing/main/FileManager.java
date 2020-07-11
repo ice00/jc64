@@ -83,6 +83,12 @@ public class FileManager {
       option.sidFreqLoLabel = in.readUTF();
       option.sidFreqHiLabel = in.readUTF();
       
+      // new      
+      option.theme = in.readInt();
+      option.lafName = in.readUTF();
+      option.flatLaf = in.readUTF();
+      
+      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -120,6 +126,11 @@ public class FileManager {
       out.writeUTF(option.psidPlaySoundsLabel);
       out.writeUTF(option.sidFreqLoLabel);
       out.writeUTF(option.sidFreqHiLabel);
+      
+      // new
+      out.writeInt(option.theme);
+      out.writeUTF(option.lafName);
+      out.writeUTF(option.flatLaf);
       
       out.flush();
       out.close();

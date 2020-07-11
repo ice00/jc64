@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -110,7 +111,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Help dialog */
   JHelpFrame jHelpFrame=new JHelpFrame();
   
-  /** Find dialòg for source */
+  /** Find dialog for source */
   FindDialog findDialogSource;
   
   /** Find dialog for disassembly */
@@ -120,10 +121,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     /**
      * Creates new form JFrameDisassembler
      */
-    public JDisassemblerFrame() {
+    public JDisassemblerFrame() {        
         initComponents();
+        Shared.framesList.add(this);
         
         FileManager.instance.readOptionFile(FileManager.optionFile, option);
+        
+        if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
+        else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
+        
         jOptionDialog.useOption(option);
         
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
@@ -1351,6 +1357,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         //</editor-fold>
         //</editor-fold>
 
+        Option.installLook();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -37,7 +37,8 @@ public class JHelpFrame extends javax.swing.JFrame {
  
     /** Creates new form JHelpFrame */
     public JHelpFrame() {
-      initComponents();       
+      initComponents();  
+      Shared.framesList.add(this);
     }
     
     /** This method is called from within the constructor to

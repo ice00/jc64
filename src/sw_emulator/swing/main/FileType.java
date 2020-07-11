@@ -241,7 +241,7 @@ import sw_emulator.math.Unsigned;
     */
    private static boolean isPRG(byte[] inB) {
      int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
-     return (inB.length<=65535+2-start); 
+     return (inB.length<=65535+3-start); 
    }
    
   }  
