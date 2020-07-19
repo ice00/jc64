@@ -56,6 +56,9 @@ public class JOptionDialog extends javax.swing.JDialog {
   
   /** Default list model for laf look & feel */
   DefaultListModel<String> listModel=new DefaultListModel();
+  
+  /** True if event can be processed */
+  boolean goFlat=false;
     
     
     /**
@@ -898,6 +901,8 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonLookSynthItemStateChanged
 
     private void jListLafValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListLafValueChanged
+      if (!goFlat) return;
+        
       if (evt != null && evt.getValueIsAdjusting()) {
         return;
       }
@@ -1112,6 +1117,8 @@ public class JOptionDialog extends javax.swing.JDialog {
         name=(String)listModel.elementAt(i);
         if (name.equals(actualLaf)) jListLaf.setSelectedIndex(i);
       }  
+      
+      goFlat=true;
       
       // show the look and feel radio selected
       String lafName=option.getLafName();

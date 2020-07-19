@@ -124,6 +124,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     public JDisassemblerFrame() {        
         initComponents();
         Shared.framesList.add(this);
+        Shared.framesList.add(projectChooserFile);
+        Shared.framesList.add(exportAsChooserFile);
+        Shared.framesList.add(findDialogDis);
+        Shared.framesList.add(findDialogSource);
+        findDialogDis.setSearchString(" ");
+        findDialogSource.setSearchString(" ");
         
         FileManager.instance.readOptionFile(FileManager.optionFile, option);
         
@@ -1598,7 +1604,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectOpen() {
    if (savedProject!=null)   System.err.println("###"+savedProject.memory[0].userComment);  
-      
+
     if (project != null && !project.equals(savedProject)) {
       JOptionPane.showMessageDialog(this, "Project not saved. Close it, then create a new one.", "Information", JOptionPane.WARNING_MESSAGE);
     } else {

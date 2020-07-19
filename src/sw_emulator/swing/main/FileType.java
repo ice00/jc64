@@ -192,12 +192,14 @@ import sw_emulator.math.Unsigned;
           ||(inB[1]!='S')||(inB[2]!='I')||(inB[3]!='D')) return false;
 
       // check PSID version
-      if ((inB[4]!='\0')|| (inB[5]!='\1' && inB[5]!='\2')) return false;
+      if ((inB[4]!='\0')|| (inB[5]!='\1') && (inB[5]!='\2') && (inB[5]!='\3')) return false;
       psidVersion=(int)inB[5];
 
       // check PSID data offset
       if ((inB[6]!='\0')|| (inB[7]!=0x76 && inB[7]!=0x7C)) return false;
       psidDOff=(int)inB[7];
+      if (psidVersion==4 && psidDOff==0x76) return false; 
+      if (psidVersion==3 && psidDOff==0x76) return false; 
       if (psidVersion==2 && psidDOff==0x76) return false; 
       if (psidVersion==1 && psidDOff==0x7C) return false;
       return true;

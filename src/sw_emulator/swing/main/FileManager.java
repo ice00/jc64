@@ -298,7 +298,7 @@ public class FileManager {
    * @throws SecurityException
    */
   public byte[] readFile(String inN) throws FileNotFoundException, IOException, SecurityException {
-    byte[] inB = new byte[20000];      
+    byte[] inB = new byte[66000];      
     int size;
     BufferedInputStream inF;  
       

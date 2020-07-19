@@ -54,6 +54,8 @@ public class JProjectDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Shared.framesList.add(this);
+        Shared.framesList.add(fileChooser);
+        Shared.framesList.add(memFileChooser);
         
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PSID/RSID tune", "sid"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MUS tune", "mus"));
