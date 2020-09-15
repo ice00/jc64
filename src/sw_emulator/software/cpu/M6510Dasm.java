@@ -391,7 +391,7 @@ public class M6510Dasm implements disassembler {
         break;
       case A_ACC:     // accumulator
         aType=A_ACC;
-        result+="A";
+        ///result+="A";
         pc++;
         break;
       case A_IMP:     // implicit
@@ -437,6 +437,8 @@ public class M6510Dasm implements disassembler {
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
+        //setLabelMinus(pc,1);
+        //setLabelMinus(pc,2);        
         
         pos++;
         pc+=3;    
@@ -450,6 +452,8 @@ public class M6510Dasm implements disassembler {
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
+        //setLabelMinus(pc,1);
+        //setLabelMinus(pc,2); 
         
         pos++;        
         pc+=3;
@@ -464,6 +468,8 @@ public class M6510Dasm implements disassembler {
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
+        //setLabelMinus(pc,1);
+        //setLabelMinus(pc,2); 
         
         pc+=3;
         break;
@@ -624,8 +630,8 @@ public class M6510Dasm implements disassembler {
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
-            // avoid to label a memroy in table reference
-            if (mem.type=='+') label=null;
+            // avoid to label a memory in table reference
+            if (mem.type=='+' || mem.type=='-') label=null;
             
             if (label!=null) {
               if (counter>0) {
@@ -697,7 +703,7 @@ public class M6510Dasm implements disassembler {
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     int counter=0;               // data aligment counter
-    
+     
     result.append(addConstants());
     
     this.pos=pos;
@@ -777,8 +783,8 @@ public class M6510Dasm implements disassembler {
             if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
             else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
             
-            // avoid to label a memroy in table reference
-            if (mem.type=='+') label=null;
+            // avoid to label a memory in table reference
+            if (mem.type=='+' || mem.type=='-') label=null;
             
             if (label!=null) {
               if (counter>0) {
@@ -802,12 +808,19 @@ public class M6510Dasm implements disassembler {
             
             if (counter>option.maxAggregate-1) {
               // we already are above the limit, so split the line
+              //result.append(desAsChar.toString()+"\n");
               result.append("\n");
               counter=0;
             }
             
-            if (counter==0) tmp2="  .byte ";
-            else tmp2=", ";
+            if (counter==0) {
+               tmp2="  .byte ";
+               //desAsChar=new String[option.maxAggregate];
+            }
+            else {
+               tmp2=", ";
+               //desAsChar[counter]=""+mem.copy;
+            }
             
             // this is a data declaration            
             if (mem.type=='<' || mem.type=='>') {
@@ -1055,6 +1068,15 @@ public class M6510Dasm implements disassembler {
       if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
       return "$"+ShortToExe((int)mem.related)+"+"+pos;  
     }
+    
+    if (mem.type=='-') {
+      /// this is a memory in table label
+      int pos=mem.address-mem.related;
+      MemoryDasm mem2=memory[mem.related];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
+      return "$"+ShortToExe((int)mem.related)+pos;  
+    }    
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
@@ -1072,7 +1094,7 @@ public class M6510Dasm implements disassembler {
     MemoryDasm mem=memory[(int)addr];
            
     if (mem.isInside) {
-      if (mem.type=='+') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
+      if (mem.type=='+' || mem.type=='-') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
         
       mem.dasmLocation="W"+ShortToExe((int)addr);
     }
@@ -1097,6 +1119,26 @@ public class M6510Dasm implements disassembler {
       } 
     }
   }
+  
+  /**
+   * Set the label for minus relative address if this is the case
+   * 
+   * @param addr tha address where to point
+   * @param offset the offset to sub
+   */
+  private void setLabelMinus(long addr, int offset) {
+    if (addr<0 || addr+offset>0xffff) return;
+    
+    MemoryDasm mem=memory[(int)addr-offset];
+    
+    if (mem.isInside && mem.type!='+') {
+      if (mem.dasmLocation!=null) {
+        mem.type='-';
+        mem.related=(int)addr;
+        setLabel(addr);
+      } 
+    }
+  }  
   
   /**
    * Add constants to the source

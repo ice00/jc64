@@ -168,6 +168,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
         jButtonMarkPlus = new javax.swing.JButton();
+        jButtonMarkMinus = new javax.swing.JButton();
         jButtonMarkLow = new javax.swing.JButton();
         jButtonMarkMax = new javax.swing.JButton();
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
@@ -267,6 +268,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
         jMenuItemPlus = new javax.swing.JMenuItem();
+        jMenuItemMinus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
         jMenuItemMemHigh = new javax.swing.JMenuItem();
         jMenuOption = new javax.swing.JMenu();
@@ -476,6 +478,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonMarkPlus);
+
+        jButtonMarkMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/minus.png"))); // NOI18N
+        jButtonMarkMinus.setToolTipText("Mark the selected addresses as -");
+        jButtonMarkMinus.setFocusable(false);
+        jButtonMarkMinus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkMinus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkMinusActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkMinus);
 
         jButtonMarkLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/min.png"))); // NOI18N
         jButtonMarkLow.setToolTipText("Assign the selected address as #<");
@@ -713,7 +727,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuFile.setText("File");
 
-    jMenuItemNewProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+    jMenuItemNewProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemNewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filenew.png"))); // NOI18N
     jMenuItemNewProject.setMnemonic('w');
     jMenuItemNewProject.setText("New Project");
@@ -726,7 +740,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuFile.add(jMenuItemNewProject);
     jMenuFile.add(jSeparatorProject1);
 
-    jMenuItemOpenProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+    jMenuItemOpenProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemOpenProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/fileopen.png"))); // NOI18N
     jMenuItemOpenProject.setMnemonic('e');
     jMenuItemOpenProject.setText("Open Project");
@@ -737,7 +751,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuFile.add(jMenuItemOpenProject);
 
-    jMenuItemCloseProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+    jMenuItemCloseProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemCloseProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/close.png"))); // NOI18N
     jMenuItemCloseProject.setMnemonic('c');
     jMenuItemCloseProject.setText("Close Project");
@@ -750,7 +764,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuFile.add(jMenuItemCloseProject);
     jMenuFile.add(jSeparatorProject2);
 
-    jMenuItemSaveProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+    jMenuItemSaveProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesave.png"))); // NOI18N
     jMenuItemSaveProject.setMnemonic('s');
     jMenuItemSaveProject.setText("Save Project");
@@ -869,6 +883,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMarkCode.add(jMenuItemPlus);
+
+    jMenuItemMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minus.png"))); // NOI18N
+    jMenuItemMinus.setText("Assign the selected address as -");
+    jMenuItemMinus.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMinusActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemMinus);
 
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
@@ -1031,7 +1054,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1335,6 +1358,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_PLUS);
     }//GEN-LAST:event_jMenuItemPlusActionPerformed
 
+    private void jButtonMarkMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkMinusActionPerformed
+      execute(MEM_MINUS);
+    }//GEN-LAST:event_jButtonMarkMinusActionPerformed
+
+    private void jMenuItemMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMinusActionPerformed
+      execute(MEM_MINUS);
+    }//GEN-LAST:event_jMenuItemMinusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1393,6 +1424,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonMarkData;
     private javax.swing.JButton jButtonMarkLow;
     private javax.swing.JButton jButtonMarkMax;
+    private javax.swing.JButton jButtonMarkMinus;
     private javax.swing.JButton jButtonMarkPlus;
     private javax.swing.JButton jButtonNewProject;
     private javax.swing.JButton jButtonOpenProject;
@@ -1424,6 +1456,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemMarkData;
     private javax.swing.JMenuItem jMenuItemMemHigh;
     private javax.swing.JMenuItem jMenuItemMemLow;
+    private javax.swing.JMenuItem jMenuItemMinus;
     private javax.swing.JMenuItem jMenuItemNewProject;
     private javax.swing.JMenuItem jMenuItemOpenProject;
     private javax.swing.JMenuItem jMenuItemPlus;
@@ -1540,6 +1573,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_PLUS:
          memPlus();  
          break;
+       case MEM_MINUS:
+         memMinus();  
+         break;         
          
        case HELP_CONTENTS: 
          jHelpFrame.setVisible(true);
@@ -2179,6 +2215,70 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       jTableMemory.setRowSelectionInterval(row, row);
     }
   }
+  
+/**
+   * Mark the memroy as address -
+   */
+  private void memMinus() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    Vector cols=new Vector();
+    cols.add("ADDR");
+    cols.add("DASM");
+    cols.add("USER");
+        
+    Vector rows=new Vector();
+    Vector data;
+    
+    int value=project.memory[row].copy & 0xFF;
+    
+    MemoryDasm mem=project.memory[row];
+    MemoryDasm memory;
+    
+    int addr;
+    for (int i=1; i<32; i++) {
+      addr=mem.address+i;
+      if (i<0) continue;
+      
+      memory=project.memory[addr];
+      
+      data=new Vector();
+          
+      data.add(ShortToExe(memory.address));
+      data.add(memory.dasmLocation);
+      data.add(memory.userLocation);
+          
+      rows.add(data);
+    }
+    
+    JTable table = new JTable(rows, cols);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
+    
+    if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
+           "Select the address to use as - in table", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+        
+      int rowS=table.getSelectedRow();
+      if (rowS<0) {
+        if (project.memory[row].type=='-') {
+          if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+            project.memory[row].type=' ';
+            project.memory[row].related=-1;
+          }
+        } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+        return;
+      } else {         
+           mem.related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
+           mem.type='-';
+        }
+       
+      dataTableModelMemory.fireTableDataChanged();
+      jTableMemory.setRowSelectionInterval(row, row);
+    }
+  }  
     
   /**
    * Convert a unsigned short (containing in a int) to Exe upper case 4 chars

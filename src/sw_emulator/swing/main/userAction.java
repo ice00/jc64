@@ -119,6 +119,9 @@ public interface userAction {
   /** Memory table plus */
   public static final int MEM_PLUS = 31; 
   
+  /** Memory table minus */
+  public static final int MEM_MINUS = 32;   
+  
   /**
    * Execute the passed user action
    * 

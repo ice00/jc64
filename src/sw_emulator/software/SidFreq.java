@@ -36,6 +36,9 @@ public class SidFreq {
   /** Table size */
   static final int TABLE = 96-6;
   
+  /** All table size */
+  static final int ALL = 96;
+  
   /** Short table size */
   static final int SHORT=72;
   
@@ -98,7 +101,9 @@ public class SidFreq {
     if (linearTable()) return;
     if (combinedTable()) return;
     if (shortLinearTable()) return;        
-    shortCombinedTable();
+    if (shortCombinedTable()) return;
+    if (linearInverseTable()) return;
+    highOctave();
   }
   
   /**
@@ -635,7 +640,7 @@ public class SidFreq {
   }
   
   /**
-   * Mark the memroy as data
+   * Mark the memory as data
    * 
    * @param start the position to start
    * @param end the end position
@@ -646,4 +651,165 @@ public class SidFreq {
       if (!memory[i+offset].isCode && !memory[i+offset].isData) memory[i+offset].isData=true;
     }   
   }
+
+  /**
+   * Looks for an high octave table
+   * 
+   * @return true if it is find
+   */
+  private boolean highOctave() {
+    final double STEP=Math.pow(2, 1/12);
+    int[] freq=new int[12];
+      
+    for (int i=0; i<end-13*2; i++) {
+      if ((int)inB[i]==0 && (int)inB[i+13]==0) {
+        freq[0]=(int)(inB[i+1]& 0xFF)+(int)(inB[i+14]& 0xFF)*256; 
+        if (freq[0]==0) continue;
+        freq[1]=(int)(inB[i+2]& 0xFF)+(int)(inB[i+15]& 0xFF)*256;
+        if (freq[1]==0 || freq[1]<=freq[0] || Math.abs(freq[1]/freq[0]-STEP)>0.00001) continue;        
+        freq[2]=(int)(inB[i+3]& 0xFF)+(int)(inB[i+16]& 0xFF)*256;
+        if (freq[2]==0 || freq[2]<=freq[1] || Math.abs(freq[2]/freq[1]-STEP)>0.00001) continue;
+        freq[3]=(int)(inB[i+4]& 0xFF)+(int)(inB[i+17]& 0xFF)*256;
+        if (freq[3]==0 || freq[3]<=freq[2] || Math.abs(freq[3]/freq[2]-STEP)>0.00001) continue;
+        freq[4]=(int)(inB[i+5]& 0xFF)+(int)(inB[i+18]& 0xFF)*256;
+        if (freq[4]==0 || freq[4]<=freq[3] || Math.abs(freq[4]/freq[3]-STEP)>0.00001) continue;
+        freq[5]=(int)(inB[i+6]& 0xFF)+(int)(inB[i+19]& 0xFF)*256;        
+        if (freq[5]==0 || freq[5]<=freq[4] || Math.abs(freq[5]/freq[4]-STEP)>0.00001) continue;
+        freq[6]=(int)(inB[i+7]& 0xFF)+(int)(inB[i+20]& 0xFF)*256;
+        if (freq[6]==0 || freq[6]<=freq[5] || Math.abs(freq[6]/freq[5]-STEP)>0.00001) continue;
+        freq[7]=(int)(inB[i+8]& 0xFF)+(int)(inB[i+21]& 0xFF)*256;
+        if (freq[7]==0 || freq[7]<=freq[6] || Math.abs(freq[7]/freq[6]-STEP)>0.00001) continue;
+        freq[8]=(int)(inB[i+9]& 0xFF)+(int)(inB[i+22]& 0xFF)*256;
+        if (freq[8]==0 || freq[8]<=freq[7] || Math.abs(freq[8]/freq[7]-STEP)>0.00001) continue;
+        freq[9]=(int)(inB[i+10]& 0xFF)+(int)(inB[i+23]& 0xFF)*256;
+        if (freq[9]==0 || freq[9]<=freq[8] || Math.abs(freq[9]/freq[8]-STEP)>0.00001) continue;
+        freq[10]=(int)(inB[i+11]& 0xFF)+(int)(inB[i+24]& 0xFF)*256;
+        if (freq[10]==0 || freq[10]<=freq[9] || Math.abs(freq[10]/freq[9]-STEP)>0.00001) continue;
+        freq[11]=(int)(inB[i+12]& 0xFF)+(int)(inB[i+25]& 0xFF)*256;
+        if (freq[11]==0 || freq[11]<=freq[10] || Math.abs(freq[11]/freq[10]-STEP)>0.00001) continue;
+        
+        if (freq[11]<62000) continue;
+
+        addData(i+13, i, freq[9]/8);
+        markMemory(i+13, i+26, 1);
+        markMemory(i, i+13, 1);
+      }  
+    }      
+    
+    return false;      
+  }    
+    
+  /**
+   * Search for tables in linear way (low / high or high / low) with inverse direction
+   *  
+   * @return true if the table is fount
+   */
+  private boolean linearInverseTable() {
+    int i;  
+    int sid;
+    int high=-1;
+    int low=-1;   
+    
+    // check for high frequency table
+    for (i=end-1; i>=start+ALL; i--) {
+      if (searchInverseHigh(i)) {
+        high=i;
+        break;         
+      }
+    }  
+    
+    // look if high table was fount
+    if (high==-1) return false;      
+
+    // check for low frequency table (first part)
+    if (high>ALL) {
+      for (i=0+ALL; i<high; i++) {
+        if (searchInverseLow(high, i)) {
+          low=i;
+          break;
+        }           
+      }
+    
+      // check for high frequency table (second part)
+      if ((low==-1) && (high<end-ALL)) {
+        for (i=high+ALL; i<end; i++) {
+          if (searchInverseLow(high, i)) {
+            low=i;
+            break;
+          }                 
+        }
+      }
+    
+      // look if low table was fount
+      if (low==-1) return false;
+    }
+    
+    // get the A4 note
+    sid=Unsigned.done(inB[high-A4])*256+Unsigned.done(inB[low-A4]);  
+
+    addData(high-ALL+1, low-ALL+1, sid);
+    markMemory(high-ALL+1, high, 1);
+    markMemory(low-ALL+1, low, 1);
+ 
+    return true;    
+  }
+   
+/**
+   * Search for the high frequency inverse table in linear way
+   *
+   * @param index the index where to start the test
+   * @return true if there is a high frequency table in that position 
+   */ 
+  private boolean searchInverseHigh(int index) {
+    int i;
+    int actual=1;   
+   
+    // it must start with three 1
+    if ( ((int)inB[index-0]!=1) || ((int)inB[index-1]!=1) || ((int)inB[index-2]!=1)) return false;
+   
+    // search for increasing numbers
+    for (i=index-3; i>index-ALL; i--) {
+      if ((int)(inB[i]& 0xFF)<actual) return false;
+      else actual=((int)inB[i]& 0xFF);
+    }
+
+    return true;   
+  }    
+  
+/**
+   * Search for a low frequency inverse table in linear way
+   * 
+   * @param high the position of high table
+   * @param index the index where to search for low table
+   * @return true if there is a low frequency table in that position 
+   */ 
+  private boolean searchInverseLow(int high, int index){
+    int i;
+    int note1, note2, note3, note4, note5, note6, note7;
+    int diff;
+       
+    // scan all notes
+    for (i=0; i<12; i++) {
+      note1=(int)(inB[high-i]& 0xFF)*256+(int)(inB[index-i]& 0xFF);
+      note2=(int)(inB[high-i-12]& 0xFF)*256+(int)(inB[index-i-12]& 0xFF);
+      note3=(int)(inB[high-i-12*2]& 0xFF)*256+(int)(inB[index-i-12*2]& 0xFF);
+      note4=(int)(inB[high-i-12*3]& 0xFF)*256+(int)(inB[index-i-12*3]& 0xFF);
+      note5=(int)(inB[high-i-12*4]& 0xFF)*256+(int)(inB[index-i-12*4]& 0xFF);
+      note6=(int)(inB[high-i-12*5]& 0xFF)*256+(int)(inB[index-i-12*5]& 0xFF);
+      note7=(int)(inB[high-i-12*6]& 0xFF)*256+(int)(inB[index-i-12*6]& 0xFF);
+  
+      diff=0;
+      diff+=Math.abs(note1*2 - note2);
+      if (i<11) diff+=Math.abs(note2*2 - note3);
+      if (i<11) diff+=Math.abs(note3*2 - note4);
+      if (i<11) diff+=Math.abs(note4*2 - note5);
+      if (i<11) diff+=Math.abs(note5*2 - note6);
+      if (i<11) diff+=Math.abs(note6*2 - note7);
+            
+      if (diff>ERROR) return false;
+    }
+   
+    return true;
+  }   
+
 }
