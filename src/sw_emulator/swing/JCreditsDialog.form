@@ -57,7 +57,7 @@
         <Component class="javax.swing.JTextPane" name="jTextPaneCredits">
           <Properties>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;Code:&lt;/b&gt;&lt;br&gt;&#xa;     Stefano Tognon (Ice00)&#xa;     &lt;br&gt;&lt;br&gt;&#xa;     &lt;b&gt;External syntax highlight library:&lt;/b&gt;&lt;br&gt;&#xa;     Robert Futrell&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;Code:&lt;/b&gt;&lt;br&gt;&#xa;     Stefano Tognon (Ice00)&#xa;     &lt;br&gt;&lt;br&gt;&#xa;     &lt;b&gt;External syntax highlight library:&lt;/b&gt;&lt;br&gt;&#xa;     Robert Futrell&#xa;     &lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;Flat look &amp; feel:&lt;/b&gt;&lt;br&gt;&#xa;FormDev Software GmbH&#xa;    &lt;/p&gt;&#xa;&#xa;&#xa;&#xa;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>

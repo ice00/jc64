@@ -66,7 +66,14 @@
    A common way to save raster line or write compact code is to modify the low/high byte of the address of an LDA or STA instruction. 
    In this case you cannot create a label to that memory location as it is inside the code, so you must refer to it as another (usually labelling where the instruction start) plus an offset:</p>
    <p align="center"><img src="./memory9.png"></p> 
-   You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.  </p>
+   <p>You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.  </p>
+  
+   <h2>Assign the selected address as -</h2>
+   <p>In some cases even having a pointer that refers to a label that is ahead can be usefull, so this create (in the same manner of plus) a minus relation<br>
+    <p align="center"><img src="./memory12.png"></p>  
+    <p>You will see that now the RE column will have a - inside it and the tool tip will gives the address - offset. </p>
+     <p align="center"><img src="./memory13.png"></p> 
+   <p>You can delete a minus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it.</p>
    
    <h2>Assign the selected address as #< </h2>
    <p>In some cases a immediate value is not a simple byte but it could be the low part of one address.<br>
