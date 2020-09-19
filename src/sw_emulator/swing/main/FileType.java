@@ -125,6 +125,14 @@ import sw_emulator.math.Unsigned;
           return tmp.toString();
         }
     },  // MUS
+    MPR {
+        @Override
+        public String getDescription(byte[] inB) {
+          MPR mpr=new MPR();
+          mpr.getElements(inB);          
+          return "Multiple programs\n\n"+mpr.getDescription();
+        }
+    },  // Multiple PRG
     PRG {
         @Override
         public String getDescription(byte[] inB) {
@@ -173,6 +181,7 @@ import sw_emulator.math.Unsigned;
     public static FileType getFileType(byte[] inB) {
       if (isPSID(inB)) return SID;
       if (isMUS(inB)) return MUS;
+      if (isMPR(inB)) return MPR;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -246,4 +255,19 @@ import sw_emulator.math.Unsigned;
      return (inB.length<=65535+3-start); 
    }
    
+   /**
+    * Determine if the input file is a MPR file
+    * 
+    * @param inB the data
+    * @return true if the file is a MPR file
+    */
+   private static boolean isMPR(byte[] inB) {
+     if (inB[0]!=0) return false;
+     if (inB[1]!=5) return false;
+     if (inB[2]!='M') return false;
+     if (inB[3]!='P') return false;
+     if (inB[4]!='R') return false;
+     if (inB[5]!='G') return false;
+     return inB[6] == '#';
+   }    
   }  

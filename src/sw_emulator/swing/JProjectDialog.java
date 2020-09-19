@@ -59,6 +59,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PSID/RSID tune", "sid"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MUS tune", "mus"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program", "mpr"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
     }
     
@@ -84,11 +85,15 @@ public class JProjectDialog extends javax.swing.JDialog {
           case MUS:
             jRadioButtonMUS.setSelected(true);
             break;
+          case MPR:
+            jRadioButtonMPR.setSelected(true);
+            break;            
         }
       } else {
           jRadioButtonPRG.setSelected(false);
           jRadioButtonSID.setSelected(false);
           jRadioButtonMUS.setSelected(false);
+          jRadioButtonMPR.setSelected(false);          
         }
     }
 
@@ -119,6 +124,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jButtonClear = new javax.swing.JButton();
         jButtonAddNext = new javax.swing.JButton();
         jButtonInit = new javax.swing.JButton();
+        jRadioButtonMPR = new javax.swing.JRadioButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -187,6 +193,10 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFileType.add(jRadioButtonMPR);
+        jRadioButtonMPR.setText("MPR");
+        jRadioButtonMPR.setEnabled(false);
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -210,6 +220,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jRadioButtonMUS)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonPRG)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonMPR)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
@@ -224,7 +236,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addComponent(jButtonInit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAddNext)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 147, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelCenterLayout.setVerticalGroup(
@@ -248,7 +260,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                     .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonSID)
                         .addComponent(jRadioButtonMUS)
-                        .addComponent(jRadioButtonPRG)))
+                        .addComponent(jRadioButtonPRG)
+                        .addComponent(jRadioButtonMPR)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,10 +312,14 @@ public class JProjectDialog extends javax.swing.JDialog {
             case PRG:
               jRadioButtonPRG.setSelected(true);
               break;  
+            case MPR:
+              jRadioButtonMPR.setSelected(true);
+              break;              
             case UND:
               jRadioButtonSID.setSelected(false);  
               jRadioButtonMUS.setSelected(false);  
-              jRadioButtonPRG.setSelected(false);  
+              jRadioButtonPRG.setSelected(false); 
+              jRadioButtonMPR.setSelected(false); 
               break;
           }
         } catch (FileNotFoundException e) {
@@ -408,6 +425,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelSidLd;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JRadioButton jRadioButtonMPR;
     private javax.swing.JRadioButton jRadioButtonMUS;
     private javax.swing.JRadioButton jRadioButtonPRG;
     private javax.swing.JRadioButton jRadioButtonSID;

@@ -122,6 +122,9 @@ public interface userAction {
   /** Memory table minus */
   public static final int MEM_MINUS = 32;   
   
+  /** MPR creation option */
+  public static final int OPTION_MPR = 33;
+  
   /**
    * Execute the passed user action
    * 

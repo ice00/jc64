@@ -54,6 +54,7 @@ import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.FileManager;
+import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.userAction;
@@ -96,6 +97,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Export as file chooser */
   JFileChooser exportAsChooserFile=new JFileChooser();
   
+  /** Load MPR as file chooser */
+  JFileChooser optionMPRLoadChooserFile=new JFileChooser();
+  
+  /** Save MPR as file chooser */
+  JFileChooser optionMPRSaveChooserFile=new JFileChooser();
+  
   /** Memory cell renderer for table */
   MemoryTableCellRenderer memoryTableCellRenderer=new MemoryTableCellRenderer();
   
@@ -126,6 +133,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         Shared.framesList.add(this);
         Shared.framesList.add(projectChooserFile);
         Shared.framesList.add(exportAsChooserFile);
+        Shared.framesList.add(optionMPRLoadChooserFile);
+        Shared.framesList.add(optionMPRSaveChooserFile);
         Shared.framesList.add(findDialogDis);
         Shared.framesList.add(findDialogSource);
         findDialogDis.setSearchString(" ");
@@ -140,6 +149,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
         exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));
+        optionMPRLoadChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program (prg, bin)", "prg", "bin"));
+        optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
+        optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
+        optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
+        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");    
     }
 
     /**
@@ -174,6 +188,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
+        jButtonMPR = new javax.swing.JButton();
         jButtonViewProject = new javax.swing.JButton();
         jSeparatorButton2 = new javax.swing.JToolBar.Separator();
         jButtonFindMem = new javax.swing.JButton();
@@ -274,6 +289,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuOption = new javax.swing.JMenu();
         jMenuItemConfigure = new javax.swing.JMenuItem();
         jMenuItemSIDLD = new javax.swing.JMenuItem();
+        jMenuItemMPR = new javax.swing.JMenuItem();
         jSeparatorOption = new javax.swing.JPopupMenu.Separator();
         jMenuItemViewProject = new javax.swing.JMenuItem();
         jMenuSource = new javax.swing.JMenu();
@@ -539,6 +555,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonSIDLD);
+
+        jButtonMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/create.png"))); // NOI18N
+        jButtonMPR.setToolTipText("Create a MRP archive");
+        jButtonMPR.setFocusable(false);
+        jButtonMPR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMPR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMPR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMPRActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMPR);
 
         jButtonViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/view_detailed.png"))); // NOI18N
         jButtonViewProject.setToolTipText("View project");
@@ -934,6 +962,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuOption.add(jMenuItemSIDLD);
+
+    jMenuItemMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/create.png"))); // NOI18N
+    jMenuItemMPR.setText("Create a MPR archive");
+    jMenuItemMPR.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMPRActionPerformed(evt);
+        }
+    });
+    jMenuOption.add(jMenuItemMPR);
     jMenuOption.add(jSeparatorOption);
 
     jMenuItemViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/view_detailed.png"))); // NOI18N
@@ -1054,7 +1091,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1366,6 +1403,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_MINUS);
     }//GEN-LAST:event_jMenuItemMinusActionPerformed
 
+    private void jMenuItemMPRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMPRActionPerformed
+      execute(OPTION_MPR);
+    }//GEN-LAST:event_jMenuItemMPRActionPerformed
+
+    private void jButtonMPRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMPRActionPerformed
+      execute(OPTION_MPR);
+    }//GEN-LAST:event_jButtonMPRActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1420,6 +1465,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonFindDis;
     private javax.swing.JButton jButtonFindMem;
     private javax.swing.JButton jButtonFindSource;
+    private javax.swing.JButton jButtonMPR;
     private javax.swing.JButton jButtonMarkCode;
     private javax.swing.JButton jButtonMarkData;
     private javax.swing.JButton jButtonMarkLow;
@@ -1452,6 +1498,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemFindDis;
     private javax.swing.JMenuItem jMenuItemFindSource;
     private javax.swing.JMenuItem jMenuItemLicense;
+    private javax.swing.JMenuItem jMenuItemMPR;
     private javax.swing.JMenuItem jMenuItemMarkCode;
     private javax.swing.JMenuItem jMenuItemMarkData;
     private javax.swing.JMenuItem jMenuItemMemHigh;
@@ -1519,6 +1566,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case OPTION_SIDLD:
         optionSIDLD();  
         break;        
+      case OPTION_MPR:
+        optionMPR();
+        break;
       case SOURCE_DISASS:
         disassembly();
         break;            
@@ -1860,11 +1910,45 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
+   * MPR create option
+   */
+  private void optionMPR() {
+    JOptionPane.showMessageDialog(this,"A MPR is a group of PRG files saved together\n"+
+                                       "Selelect all PRG the files with a multi selection (use CTRL+click) in the next dialog\n"+
+                                       "Then you had to choose the output MPR file name in the last dialog", "Create a multi PRG archive", JOptionPane.INFORMATION_MESSAGE);
+      
+    optionMPRLoadChooserFile.showOpenDialog(this);
+    File[] files = optionMPRLoadChooserFile.getSelectedFiles();  
+    if (files.length==0) {
+      JOptionPane.showMessageDialog(this,"Aborting creation due to not files selected", "Warning", JOptionPane.WARNING_MESSAGE);
+      return;
+    }
+    
+    MPR mpr=new MPR();
+    if (!mpr.setElements(files)) {
+      JOptionPane.showMessageDialog(this,"I/O error in reading the files", "Error", JOptionPane.ERROR_MESSAGE);  
+      return;
+    }
+    
+    if (optionMPRSaveChooserFile.showSaveDialog(this)==JFileChooser.APPROVE_OPTION) {
+       if (!mpr.saveFile(optionMPRSaveChooserFile.getSelectedFile())) {
+         JOptionPane.showMessageDialog(this,"Error saving the file", "Error", JOptionPane.ERROR_MESSAGE);  
+         return;
+       }
+    } else {
+        JOptionPane.showMessageDialog(this,"No file selected", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+      }
+    
+   JOptionPane.showMessageDialog(this, mpr.getDescription(), "Information on saved file", JOptionPane.INFORMATION_MESSAGE);
+  }
+  
+  /**
    * Disassembly the memory
    */
   private void disassembly() {
-    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, false);
-    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, true);
+    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, false);
+    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, true);
     int lineS=0;
     int lineD=0;
     try {

@@ -54,6 +54,9 @@ public class Project implements Cloneable{
   /** Contains the data of input file */
   public byte[] inB;
   
+  /** Mpr contents */
+  public MPR mpr;
+  
   /** Memory flag of SIDLD */
   public byte[] memoryFlags=new byte[0xFFFF+1];
   
@@ -74,6 +77,11 @@ public class Project implements Cloneable{
     this.inB=inB;
     fileType=FileType.getFileType(inB);
     description=fileType.getDescription(inB);
+    
+    if (fileType==FileType.MPR) {
+      mpr=new MPR();
+      mpr.getElements(inB);
+    }
   }
 
   @Override

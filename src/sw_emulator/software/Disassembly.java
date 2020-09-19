@@ -23,12 +23,15 @@
  */
 package sw_emulator.software;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.machine.C64Dasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
 import sw_emulator.swing.main.FileType;
+import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 
 /**
@@ -58,6 +61,9 @@ public class Disassembly {
   /** Buffer of data to disassemble */
   private byte[] inB;
   
+  /** Eventual mulpiple program */
+  private MPR mpr;
+  
   /** The type of file */
   private FileType fileType;
   
@@ -74,12 +80,14 @@ public class Disassembly {
    * @param inB the buffer
    * @param option for disassembler
    * @param memory the memory for dasm
+   * @param mpr eventual MPR blocks to use
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
+    this.mpr=mpr;
 
     this.memory=memory;
       
@@ -100,6 +108,9 @@ public class Disassembly {
       case PRG:
         disassemlyPRG(asSource);  
         break;
+      case MPR:
+        disassemlyMPR(asSource);  
+        break;        
       case UND:            
         source="";
         disassembly="";   
@@ -142,6 +153,8 @@ public class Disassembly {
     ind3=ind2+v2Length;
     txtA=v1Length+v2Length+v3Length+8;
     
+    tmp.append(fileType.getDescription(inB));
+    tmp.append("\n");
     tmp.append(fileType.getDescription(inB)).append("\n");
     tmp.append("VOICE 1 MUSIC DATA: \n\n");
     tmp.append(mus.cdasm(inB, ind1, ind2-1, ind1+musPC));
@@ -258,8 +271,7 @@ public class Disassembly {
         tmp.append("\n");
         tmp.append(sid.cdasm(inB, sidPos, inB.length, sidPC));
         disassembly=tmp.toString(); 
-      }
-     
+      }     
   }
   
   /**
@@ -285,7 +297,7 @@ public class Disassembly {
   }
   
   /**
-   * Disassembly a MUS file
+   * Disassembly a PRG file
    * 
    * @param asSource true if output should be as a source file
    */
@@ -330,6 +342,72 @@ public class Disassembly {
         disassembly=tmp.toString();
       }       
   }    
+  
+  /**
+   * Disassembly a MPR file
+   * 
+   * @param asSource true if output should be as a source file
+   */
+  private void disassemlyMPR(boolean asSource) {
+    C64Dasm prg=new C64Dasm();
+    prg.language=option.commentLanguage;
+    prg.setMemory(memory);
+    prg.setOption(option);
+    
+    if (mpr==null) return;
+    
+    StringBuilder tmp=new StringBuilder();
+    
+    byte[] inB;
+    
+    boolean first=true;
+    
+    if (asSource) {
+      prg.upperCase=option.opcodeUpperCaseSource;  
+      tmp.append("  processor 6502\n\n");
+    } else {    
+        prg.upperCase=option.opcodeUpperCasePreview;
+        tmp.append(fileType.getDescription(this.inB));
+        tmp.append("\n");        
+      }
+    
+    Iterator<byte[]> iter=mpr.blocks.iterator();
+    while (iter.hasNext()) {
+      inB=iter.next();
+      
+      int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
+      
+      // calculate start/end address
+      startAddress=start;    
+      startBuffer=2;
+      endAddress=inB.length-1-startBuffer+startAddress;
+      endBuffer=inB.length-1;
+      
+      markInside(startAddress, endAddress, 2);
+     
+      // search for SID frequency table
+      SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
+             option.sidFreqLoLabel, option.sidFreqHiLabel);
+      
+
+      if (asSource) {
+        if (first) {
+          tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");        
+          tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
+          tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
+          tmp.append("\n");
+          first=false;
+        }
+        tmp.append("  .org $").append(ShortToExe(start)).append("\n\n");
+        tmp.append(prg.csdasm(inB, 2, inB.length, start));
+      } else {    
+          tmp.append(prg.cdasm(inB, 2, inB.length, start));
+        }       
+    }
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
+  }
   
  /**
    * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
