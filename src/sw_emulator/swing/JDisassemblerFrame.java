@@ -1671,18 +1671,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Project close user action
    */
   private void projectClose() {
-    if (project != null && !project.equals(savedProject)) {
+    if (project == null) return;
+    
+    if (!project.equals(savedProject)) {
       int res=JOptionPane.showConfirmDialog(this, "Project not saved. Close it anywere?", "Information", JOptionPane.YES_NO_OPTION);
-      if (res==JOptionPane.YES_OPTION) {
-        project=null;
-        savedProject=null;
-        projectFile=null;
-        rSyntaxTextAreaSource.setText("");
-        rSyntaxTextAreaDis.setText("");
-        dataTableModelMemory.setData(null);
-        dataTableModelMemory.fireTableDataChanged();
-      }
+      if (res!=JOptionPane.YES_OPTION) return;              
     }       
+  
+    project=null;
+    savedProject=null;
+    projectFile=null;
+    rSyntaxTextAreaSource.setText("");
+    rSyntaxTextAreaDis.setText("");
+    dataTableModelMemory.setData(null);
+    dataTableModelMemory.fireTableDataChanged();
   }
   
   /**
@@ -1947,8 +1949,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Disassembly the memory
    */
   private void disassembly() {
-    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, false);
-    disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, true);
+    if (project==null) {
+      disassembly.source="";
+      disassembly.disassembly="";
+    } else {
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, false);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, true);
+      }  
     int lineS=0;
     int lineD=0;
     try {

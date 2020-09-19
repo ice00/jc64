@@ -196,6 +196,11 @@ public class FileManager {
         project.memory[i].copy=in.readByte();
         project.memory[i].related=in.readInt();
         project.memory[i].type=in.readChar();
+        
+        if (project.fileType==FileType.MPR) {
+          project.mpr=new MPR();
+          project.mpr.getElements(project.inB);
+        }
       }
       
     } catch (Exception e) {
