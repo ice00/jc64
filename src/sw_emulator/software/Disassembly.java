@@ -24,6 +24,7 @@
 package sw_emulator.software;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
@@ -58,6 +59,12 @@ public class Disassembly {
   /** Ending buffer address of data from file */
   public int endBuffer; 
   
+  /** Starting address for MPR */
+  public int[] startMPR;
+  
+  /** Ending address for MPR */
+  public int[] endMPR;
+  
   /** Buffer of data to disassemble */
   private byte[] inB;
   
@@ -90,6 +97,9 @@ public class Disassembly {
     this.mpr=mpr;
 
     this.memory=memory;
+    
+    startMPR=null;
+    endMPR=null;
       
     // avoid to precess null data  
     if (inB==null) {
@@ -367,23 +377,43 @@ public class Disassembly {
       tmp.append("  processor 6502\n\n");
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
+        
         tmp.append(fileType.getDescription(this.inB));
         tmp.append("\n");        
       }
     
+    // sort by asc memory address
+     Collections.sort(mpr.blocks, new Comparator<byte[]>() {
+        @Override
+        public int compare(byte[] block2, byte[] block1)
+        {
+
+            return  (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256)-
+                    (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256);
+        }
+     });
+     
+     startMPR=new int[mpr.block];
+     endMPR=new int[mpr.block];
+    
     Iterator<byte[]> iter=mpr.blocks.iterator();
+    int i=0;
     while (iter.hasNext()) {
       inB=iter.next();
       
       int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
-      
+ 
       // calculate start/end address
       startAddress=start;    
       startBuffer=2;
       endAddress=inB.length-1-startBuffer+startAddress;
       endBuffer=inB.length-1;
       
-      markInside(startAddress, endAddress, 2);
+      startMPR[i]=startAddress;
+      endMPR[i]=endAddress;
+      i++;
+      
+      markInside(inB, startAddress, endAddress, 2);
      
       // search for SID frequency table
       SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
@@ -449,4 +479,19 @@ public class Disassembly {
       memory[i].copy=inB[i-start+offset];
     }  
   }
+  
+  /**
+   * Mark the memory as inside
+   * 
+   * @param inB the buffer to use
+   * @param start the start of internal
+   * @param end the end of internal
+   * @param offset in buffer of start position
+   */
+  private void markInside(byte[] inB, int start, int end, int offset) {
+    for (int i=start; i<=end; i++) {
+      memory[i].isInside=true;  
+      memory[i].copy=inB[i-start+offset];
+    }  
+  }  
 }

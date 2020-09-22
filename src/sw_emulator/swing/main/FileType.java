@@ -129,7 +129,8 @@ import sw_emulator.math.Unsigned;
         @Override
         public String getDescription(byte[] inB) {
           MPR mpr=new MPR();
-          mpr.getElements(inB);          
+          if (!mpr.getElements(inB)) return "Multiple programs\n\n"+mpr.getDescription()+"\n\n"+
+                                            "I/O error reading the file!!!";       
           return "Multiple programs\n\n"+mpr.getDescription();
         }
     },  // Multiple PRG

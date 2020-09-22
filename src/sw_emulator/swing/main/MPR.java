@@ -43,9 +43,11 @@ public class MPR {
     * @return true if operation is ok
     */
    public boolean getElements(byte[] inB) {
+     boolean res=true;  
      DataInputStream in=new DataInputStream(new ByteArrayInputStream(inB));
      
      int size;
+     int i=0;
      
      byte[] buf;
      
@@ -53,10 +55,10 @@ public class MPR {
        header=in.readUTF();
        block=in.readInt();
        blocks=new ArrayList<>(block);
-       for (int i=0; i<block; i++) {
+       for (i=0; i<block; i++) {
          size=in.readInt();
          buf=new byte[size];
-         if (in.read(buf, 0, size)<0) return false;
+         if (in.read(buf, 0, size)<0) res&=false;
          blocks.add(buf);
        }       
        
@@ -66,16 +68,17 @@ public class MPR {
         public int compare(byte[] block2, byte[] block1)
         {
 
-            return  (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256)-
-                    (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256);
+            return  (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256)-
+                    (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256);
         }
     });
        
      } catch (IOException e) {
         System.err.println(e);
+        block=i; // force to be the last readed in case of error
         return false;
      }
-     return true;
+     return res;
    }
    
    /**
@@ -110,8 +113,8 @@ public class MPR {
         public int compare(byte[] block2, byte[] block1)
         {
 
-            return  (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256)-
-                    (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256);
+            return  (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256)-
+                    (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256);
         }
      });
           
@@ -129,8 +132,8 @@ public class MPR {
         public int compare(byte[] block2, byte[] block1)
         {
 
-            return  (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256)-
-                    (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256);
+            return  (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256)-
+                    (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256);
         }
      });
      
@@ -173,6 +176,9 @@ public class MPR {
          out.writeInt(outB.length);
          out.write(outB);
        }
+       
+       out.flush();
+       out.close();
      } catch (Exception e) {
          System.err.println(e);
          return false;
