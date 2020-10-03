@@ -189,6 +189,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonAddUserComm = new javax.swing.JButton();
         jButtonAddUserBlock = new javax.swing.JButton();
         jButtonAddUserLabel = new javax.swing.JButton();
+        jButtonAddUserLabelOp = new javax.swing.JButton();
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
         jButtonMarkPlus = new javax.swing.JButton();
@@ -289,6 +290,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemAddComment = new javax.swing.JMenuItem();
         jMenuItemAddBlock = new javax.swing.JMenuItem();
         jMenuItemUserLabel = new javax.swing.JMenuItem();
+        jMenuItemUserLabelOp = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
@@ -479,6 +481,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonAddUserLabel);
+
+        jButtonAddUserLabelOp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem3.png"))); // NOI18N
+        jButtonAddUserLabelOp.setToolTipText("Add user label on next word address");
+        jButtonAddUserLabelOp.setFocusable(false);
+        jButtonAddUserLabelOp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAddUserLabelOp.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAddUserLabelOp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddUserLabelOpActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonAddUserLabelOp);
 
         jButtonMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/code.png"))); // NOI18N
         jButtonMarkCode.setToolTipText("Mark the selected addresses as code");
@@ -934,6 +948,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMarkCode.add(jMenuItemUserLabel);
+
+    jMenuItemUserLabelOp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem3.png"))); // NOI18N
+    jMenuItemUserLabelOp.setText("Add user label on next address");
+    jMenuItemUserLabelOp.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUserLabelOpActionPerformed(evt);
+        }
+    });
+    jMenuMarkCode.add(jMenuItemUserLabelOp);
     jMenuMarkCode.add(jSeparator3);
 
     jMenuItemMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/code.png"))); // NOI18N
@@ -1133,7 +1156,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -1453,6 +1476,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(OPTION_MPR);
     }//GEN-LAST:event_jButtonMPRActionPerformed
 
+    private void jButtonAddUserLabelOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserLabelOpActionPerformed
+      execute(MEM_ADDLABELOP);
+    }//GEN-LAST:event_jButtonAddUserLabelOpActionPerformed
+
+    private void jMenuItemUserLabelOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserLabelOpActionPerformed
+      execute(MEM_ADDLABELOP);
+    }//GEN-LAST:event_jMenuItemUserLabelOpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1495,6 +1526,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonAddUserBlock;
     private javax.swing.JButton jButtonAddUserComm;
     private javax.swing.JButton jButtonAddUserLabel;
+    private javax.swing.JButton jButtonAddUserLabelOp;
     private javax.swing.JButton jButtonClearDLabel;
     private javax.swing.JButton jButtonClearDMem;
     private javax.swing.JButton jButtonClearUMem;
@@ -1554,6 +1586,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemSaveProject;
     private javax.swing.JMenuItem jMenuItemSourceSaveAs;
     private javax.swing.JMenuItem jMenuItemUserLabel;
+    private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewProject;
     private javax.swing.JMenu jMenuMarkCode;
     private javax.swing.JMenu jMenuOption;
@@ -1643,7 +1676,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_ADDLABEL:
          addLabel();
-         break;         
+         break;      
+       case MEM_ADDLABELOP:
+         addLabelOp();
+         break;                   
        case MEM_MARKCODE:
          markAsCode();  
          break;
@@ -2068,6 +2104,72 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) initial=mem.dasmLocation;
     
     String label=JOptionPane.showInputDialog(this, "Insert the label for the selected memory location", initial);  
+    if (label!=null) {
+      if ("".equals(label)) {
+        JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   
+        mem.userLocation=null;
+        return;
+      }  
+      
+      if (label.contains(" ")) {
+        JOptionPane.showMessageDialog(this, "Label must not contain spaces", "Error", JOptionPane.ERROR_MESSAGE);   
+        return;
+      }
+      
+      if (label.length()>option.maxLabelLength) {
+        JOptionPane.showMessageDialog(this, "Label too long. Max allowed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
+        return;
+      }
+        
+      if (label.length()<6) {
+        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=6", "Error", JOptionPane.ERROR_MESSAGE);     
+        return;
+      }    
+            
+      // see if the label is already defined
+      for (MemoryDasm memory : project.memory) {
+        if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {
+          JOptionPane.showMessageDialog(this, "This label is already used into the source", "Error", JOptionPane.ERROR_MESSAGE);  
+          return;
+       }
+      }
+      
+      mem.userLocation=label;
+      dataTableModelMemory.fireTableDataChanged(); 
+      jTableMemory.setRowSelectionInterval(row, row); 
+    }
+  }
+  
+  /**
+   * Add a user label to the next word address of selected memory address
+   */
+  private void addLabelOp() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    // avoid to read over the end
+    if (row>=0xFFFE) {
+      JOptionPane.showMessageDialog(this, "Address locate over $FFFF boundary", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;        
+    }
+    
+    // avoid to use not defined bytes
+    if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
+      JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;         
+    }
+    
+    // get next address
+    MemoryDasm mem= project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];
+    
+    String initial="";
+    if (mem.userLocation!=null) initial=mem.userLocation;
+    else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) initial=mem.dasmLocation;
+    
+    String label=JOptionPane.showInputDialog(this, "Insert the label for the address of operation", initial);  
     if (label!=null) {
       if ("".equals(label)) {
         JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   

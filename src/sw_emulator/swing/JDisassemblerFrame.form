@@ -188,6 +188,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUserLabelActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUserLabelOp">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/mem3.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Add user label on next address"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUserLabelOpActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMarkCode">
@@ -453,7 +464,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar" pref="989" max="32767" attributes="0"/>
+          <Component id="jToolBar" max="32767" attributes="0"/>
           <Component id="jSplitPaneExternal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -658,6 +669,20 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUserLabelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonAddUserLabelOp">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/sw_emulator/swing/icons/mem3.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Add user label on next word address"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUserLabelOpActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonMarkCode">

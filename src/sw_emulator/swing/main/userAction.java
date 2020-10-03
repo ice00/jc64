@@ -125,6 +125,9 @@ public interface userAction {
   /** MPR creation option */
   public static final int OPTION_MPR = 33;
   
+  /** Memory add user label opcode */
+  public static final int MEM_ADDLABELOP = 34;
+  
   /**
    * Execute the passed user action
    * 
