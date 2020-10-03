@@ -38,10 +38,50 @@ public class C64Dasm extends M6510Dasm {
   public static final byte LANG_ENGLISH=1;
   public static final byte LANG_ITALIAN=2;
 
-  /**
-   * Actual selected language (default=english)
-   */
+  /** Actual selected language (default=english) */
   public byte language=LANG_ENGLISH;
+  
+  /** Comment zero page area */
+  public boolean commentZeroPage=true;
+  
+  /** Comment stack area */
+  public boolean commentStackArea=true;
+  
+  /** Comment 200 area */
+  public boolean comment200Area=true;
+  
+  /** Comment 300 area */
+  public boolean comment300Area=true;
+  
+  /** Comment screen area */
+  public boolean commentScreenArea=true; 
+  
+  /** Comment basic free area */
+  public boolean commentBasicFreeArea=false;
+  
+  /** Comment basic rom area */
+  public boolean commentBasicRom=true;
+  
+  /** Comment free ram area */
+  public boolean commentFreeRam=false;
+  
+  /** Comment Vic II chip */
+  public boolean commentVicII=true;
+  
+  /** Comment Sid chip */
+  public boolean commentSid=true; 
+  
+  /** Comment color area */
+  public boolean commentColorArea=true; 
+  
+  /** Comment Cia 1 chip */
+  public boolean commentCia1=true;  
+  
+  /** Comment Cia 2 chip */
+  public boolean commentCia2=true;
+  
+  /** Comment Kernal Rom */
+  public boolean commentKernalRom=true;
   
   /**
    * Return a comment string for the passed instruction
@@ -65,6 +105,22 @@ public class C64Dasm extends M6510Dasm {
       case A_IND:
       case A_IDX:
       case A_IDY:
+        // do not get comment if appropriate option is not selected  
+        if ((int)addr<=0xFF && !commentZeroPage) return "";
+        if ((int)addr>=0x100 && (int)addr<=0x1FF && !commentStackArea) return "";
+        if ((int)addr>=0x200 && (int)addr<=0x2FF && !comment200Area) return "";
+        if ((int)addr>=0x300 && (int)addr<=0x3FF && !comment300Area) return "";
+        if ((int)addr>=0x400 && (int)addr<=0x7FF && !commentScreenArea) return "";
+        if ((int)addr>=0x800 && (int)addr<=0x9FFF && !commentBasicFreeArea) return "";
+        if ((int)addr>=0xA000 && (int)addr<=0xBFFF && !commentBasicRom) return "";
+        if ((int)addr>=0xC000 && (int)addr<=0xCFFF && !commentFreeRam) return "";
+        if ((int)addr>=0xD000 && (int)addr<=0xD3FF && !commentVicII) return "";
+        if ((int)addr>=0xD400 && (int)addr<=0xD7FF && !commentSid) return "";
+        if ((int)addr>=0xD800 && (int)addr<=0xDBFF && !commentColorArea) return "";
+        if ((int)addr>=0xDC00 && (int)addr<=0xDCFF && !commentCia1) return "";
+        if ((int)addr>=0xDD00 && (int)addr<=0xDEFF && !commentCia2) return "";
+        if ((int)addr>=0xE000 && (int)addr<=0xFFFF && !commentKernalRom) return "";
+        
         switch (language) {
           case LANG_ITALIAN:
             switch ((int)addr) {
@@ -926,7 +982,7 @@ public class C64Dasm extends M6510Dasm {
                 if ((addr>=0x263) && (addr<=0x26C)) return "Tabella KERNAL: Numero dispositivo per ogni file";
                 if ((addr>=0x26D) && (addr<=0x276)) return "Tabella KERNAL: Indirizzo secondario di ogni file";
                 if ((addr>=0x277) && (addr<=0x280)) return "Coda del buffer della tastiera (FIFO)";
-                if ((addr>=0x2A7) && (addr<=0x2FF)) return "Non usati";
+                if ((addr>=0x2A7) && (addr<=0x2FF)) return "Non usato";
                 if ((addr>=0x334) && (addr<=0x33B)) return "Non usato";
                 if ((addr>=0x33C) && (addr<=0x3FB)) return "Buffer di I/O del nastro";
                 if ((addr>=0x3FC) && (addr<=0x3FF)) return "Non usato";

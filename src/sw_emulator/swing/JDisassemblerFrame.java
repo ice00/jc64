@@ -388,7 +388,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jToolBar.add(jSeparatorButton1);
 
         jButtonClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser.png"))); // NOI18N
-        jButtonClearDMem.setToolTipText("Esase dasm automatic comment");
+        jButtonClearDMem.setToolTipText("Erase dasm automatic comment");
         jButtonClearDMem.setFocusable(false);
         jButtonClearDMem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonClearDMem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1703,7 +1703,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (!FileManager.instance.readProjectFile(projectFile , project)) {
               JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
-              JOptionPane.showMessageDialog(this, "File readed", "Information", JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
               execute(SOURCE_DISASS);
             }
             savedProject=project.clone();

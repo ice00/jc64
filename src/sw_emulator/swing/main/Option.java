@@ -276,6 +276,50 @@ public class Option {
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
   
+  // comments
+  
+  /** Comment zero page area */
+  public boolean commentZeroPage=true;
+  
+  /** Comment stack area */
+  public boolean commentStackArea=true;
+  
+  /** Comment 200 area */
+  public boolean comment200Area=true;
+  
+  /** Comment 300 area */
+  public boolean comment300Area=true;
+  
+  /** Comment screen area */
+  public boolean commentScreenArea=true; 
+  
+  /** Comment basic free area */
+  public boolean commentBasicFreeArea=false;
+  
+  /** Comment basic rom area */
+  public boolean commentBasicRom=true;
+  
+  /** Comment free ram area */
+  public boolean commentFreeRam=false;
+  
+  /** Comment Vic II chip */
+  public boolean commentVicII=true;
+  
+  /** Comment Sid chip */
+  public boolean commentSid=true; 
+  
+  /** Comment color area */
+  public boolean commentColorArea=true; 
+  
+  /** Comment Cia 1 chip */
+  public boolean commentCia1=true;  
+  
+  /** Comment Cia 2 chip */
+  public boolean commentCia2=true;
+  
+  /** Comment Kernal Rom */
+  public boolean commentKernalRom=true; 
+  
   /**
    * Get the flat laf theme
    * 

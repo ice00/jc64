@@ -314,6 +314,21 @@ public class Disassembly {
   private void disassemlyPRG(boolean asSource) {
     C64Dasm prg=new C64Dasm();
     prg.language=option.commentLanguage;
+    prg.commentZeroPage=option.commentZeroPage;
+    prg.commentStackArea=option.commentStackArea;
+    prg.comment200Area=option.comment200Area;
+    prg.comment300Area=option.comment300Area;        
+    prg.commentScreenArea=option.commentScreenArea;
+    prg.commentBasicFreeArea=option.commentBasicFreeArea;
+    prg.commentBasicRom=option.commentBasicRom;
+    prg.commentFreeRam=option.commentFreeRam;
+    prg.commentVicII=option.commentVicII;
+    prg.commentSid=option.commentSid;
+    prg.commentColorArea=option.commentColorArea;
+    prg.commentCia1=option.commentCia1;
+    prg.commentCia2=option.commentCia2;
+    
+    
     prg.setMemory(memory);
     prg.setOption(option);
     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;

@@ -83,12 +83,26 @@ public class FileManager {
       option.sidFreqLoLabel = in.readUTF();
       option.sidFreqHiLabel = in.readUTF();
       
-      // new      
+      // 0.8     
       option.theme = in.readInt();
       option.lafName = in.readUTF();
       option.flatLaf = in.readUTF();
       
-      
+      // 0.9
+      option.commentZeroPage = in.readBoolean();
+      option.commentStackArea = in.readBoolean();
+      option.comment200Area = in.readBoolean();
+      option.comment300Area = in.readBoolean();
+      option.commentScreenArea = in.readBoolean();
+      option.commentBasicFreeArea = in.readBoolean();
+      option.commentBasicRom = in.readBoolean();
+      option.commentFreeRam = in.readBoolean();
+      option.commentVicII = in.readBoolean();
+      option.commentSid = in.readBoolean();
+      option.commentColorArea = in.readBoolean();          
+      option.commentCia1 = in.readBoolean();
+      option.commentCia2 = in.readBoolean();
+      option.commentKernalRom = in.readBoolean();                      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -127,10 +141,26 @@ public class FileManager {
       out.writeUTF(option.sidFreqLoLabel);
       out.writeUTF(option.sidFreqHiLabel);
       
-      // new
+      // 0.8
       out.writeInt(option.theme);
       out.writeUTF(option.lafName);
       out.writeUTF(option.flatLaf);
+      
+      // 0.9
+      out.writeBoolean(option.commentZeroPage);
+      out.writeBoolean(option.commentStackArea);
+      out.writeBoolean(option.comment200Area);
+      out.writeBoolean(option.comment300Area);
+      out.writeBoolean(option.commentScreenArea);
+      out.writeBoolean(option.commentBasicFreeArea);
+      out.writeBoolean(option.commentBasicRom);
+      out.writeBoolean(option.commentFreeRam);
+      out.writeBoolean(option.commentVicII);
+      out.writeBoolean(option.commentSid);
+      out.writeBoolean(option.commentColorArea);          
+      out.writeBoolean(option.commentCia1);
+      out.writeBoolean(option.commentCia2);
+      out.writeBoolean(option.commentKernalRom);
       
       out.flush();
       out.close();

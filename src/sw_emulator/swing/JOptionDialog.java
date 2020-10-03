@@ -139,7 +139,23 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextFieldSidFreqHi = new javax.swing.JTextField();
         jCheckBoxOpcodeFormattingSource = new javax.swing.JCheckBox();
         jCheckBoxErasePlus = new javax.swing.JCheckBox();
-        jPanelCn = new javax.swing.JPanel();
+        jPanelComment = new javax.swing.JPanel();
+        jCheckBoxZeroPage = new javax.swing.JCheckBox();
+        jCheckBoxStackArea = new javax.swing.JCheckBox();
+        jCheckBox200Area = new javax.swing.JCheckBox();
+        jCheckBox300Area = new javax.swing.JCheckBox();
+        jCheckBoxFreeArea = new javax.swing.JCheckBox();
+        jCheckBoxFreeRam = new javax.swing.JCheckBox();
+        jCheckBoxBasicRom = new javax.swing.JCheckBox();
+        jCheckBoxVicII = new javax.swing.JCheckBox();
+        jCheckBoxSid = new javax.swing.JCheckBox();
+        jCheckBoxColor = new javax.swing.JCheckBox();
+        jCheckBoxCia1 = new javax.swing.JCheckBox();
+        jCheckBoxCia2 = new javax.swing.JCheckBox();
+        jCheckBoxKernalRom = new javax.swing.JCheckBox();
+        jCheckBoxScreenArea = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jPanelLook = new javax.swing.JPanel();
         jRadioButtonLookJava = new javax.swing.JRadioButton();
         jRadioButtonLookMac = new javax.swing.JRadioButton();
         jRadioButtonLookMetal = new javax.swing.JRadioButton();
@@ -422,10 +438,189 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSIDfreqHi)
                     .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Option", jPanelPreview);
+
+        jCheckBoxZeroPage.setSelected(true);
+        jCheckBoxZeroPage.setText("Zero page area ($00..$FF)");
+        jCheckBoxZeroPage.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxZeroPageItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxStackArea.setSelected(true);
+        jCheckBoxStackArea.setText("Stack area ($100..$1FF)");
+        jCheckBoxStackArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxStackAreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBox200Area.setSelected(true);
+        jCheckBox200Area.setText("Support area for BASIC/KERNAL part 1 ($200..$2FF)");
+        jCheckBox200Area.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox200AreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBox300Area.setSelected(true);
+        jCheckBox300Area.setText("Support area for BASIC/KERNAL part 2 ($300..$3FF)");
+        jCheckBox300Area.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox300AreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxFreeArea.setText("BASIC (free) area ($800..$9FFF)");
+        jCheckBoxFreeArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxFreeAreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxFreeRam.setSelected(true);
+        jCheckBoxFreeRam.setText("Free Ram ($C000..$CFFF)");
+        jCheckBoxFreeRam.setEnabled(false);
+        jCheckBoxFreeRam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxFreeRamItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxBasicRom.setSelected(true);
+        jCheckBoxBasicRom.setText("BASIC ROM ($A000..$BFFF)");
+        jCheckBoxBasicRom.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxBasicRomItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVicII.setSelected(true);
+        jCheckBoxVicII.setText("VIC II chip ($D000..$D3FF)");
+        jCheckBoxVicII.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVicIIItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxSid.setSelected(true);
+        jCheckBoxSid.setText("SID chip ($D400..$D7FF)");
+        jCheckBoxSid.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxSidItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxColor.setSelected(true);
+        jCheckBoxColor.setText("Color RAM ($D800..$DBFF)");
+        jCheckBoxColor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxColorItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxCia1.setSelected(true);
+        jCheckBoxCia1.setText("CIA 1 ($DC00..$DCFF)");
+        jCheckBoxCia1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxCia1ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxCia2.setSelected(true);
+        jCheckBoxCia2.setText("CIA 2 ($DD00..$DDFF)");
+        jCheckBoxCia2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxCia2ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxKernalRom.setSelected(true);
+        jCheckBoxKernalRom.setText("KERNAL ROM ($E000..$FFFF)");
+        jCheckBoxKernalRom.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxKernalRomItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxScreenArea.setSelected(true);
+        jCheckBoxScreenArea.setText("Screen area ($400..$7FF)");
+        jCheckBoxScreenArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxScreenAreaItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Automatic add comments to those known locations:");
+
+        javax.swing.GroupLayout jPanelCommentLayout = new javax.swing.GroupLayout(jPanelComment);
+        jPanelComment.setLayout(jPanelCommentLayout);
+        jPanelCommentLayout.setHorizontalGroup(
+            jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCommentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxScreenArea, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+                    .addGroup(jPanelCommentLayout.createSequentialGroup()
+                        .addGroup(jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jCheckBoxKernalRom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxCia1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxSid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVicII, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxFreeRam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxFreeArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox200Area, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxStackArea, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxZeroPage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox300Area, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxBasicRom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxCia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelCommentLayout.setVerticalGroup(
+            jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCommentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxZeroPage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxStackArea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox200Area)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox300Area)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxScreenArea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxFreeArea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxBasicRom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxFreeRam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVicII)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxSid)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxColor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxCia1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxCia2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxKernalRom)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneOption.addTab("Comments", jPanelComment);
 
         buttonGroupLook.add(jRadioButtonLookJava);
         jRadioButtonLookJava.setText("Java");
@@ -576,19 +771,19 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelFlatLaf.setText("Flat laf look & feel:");
 
-        javax.swing.GroupLayout jPanelCnLayout = new javax.swing.GroupLayout(jPanelCn);
-        jPanelCn.setLayout(jPanelCnLayout);
-        jPanelCnLayout.setHorizontalGroup(
-            jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCnLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelLookLayout = new javax.swing.GroupLayout(jPanelLook);
+        jPanelLook.setLayout(jPanelLookLayout);
+        jPanelLookLayout.setHorizontalGroup(
+            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLookLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelCnLayout.createSequentialGroup()
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
                         .addComponent(jRadioButtonLookCWin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelBracket)
                         .addGap(13, 13, 13)
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelTheme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioButtonOcean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioButtonSteel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -597,8 +792,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jRadioButtonHighContrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioButtonEmerald, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioButtonRuby, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelCnLayout.createSequentialGroup()
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jRadioButtonLookSynth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioButtonLookJava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -610,23 +805,23 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                 .addContainerGap(261, Short.MAX_VALUE))
         );
-        jPanelCnLayout.setVerticalGroup(
-            jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCnLayout.createSequentialGroup()
+        jPanelLookLayout.setVerticalGroup(
+            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLookLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCnLayout.createSequentialGroup()
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTheme)
                             .addComponent(jLabelFlatLaf))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCnLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLookLayout.createSequentialGroup()
                                 .addComponent(jRadioButtonOcean)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonSteel)
@@ -636,9 +831,9 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addComponent(jRadioButtonCharcoal)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPaneList)))
-                    .addGroup(jPanelCnLayout.createSequentialGroup()
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelCnLayout.createSequentialGroup()
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelLookLayout.createSequentialGroup()
                                 .addComponent(jLabelLook)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButtonLookJava)
@@ -649,28 +844,28 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonLookWin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jRadioButtonLookCWin)
                                     .addComponent(jRadioButtonHighContrast)))
                             .addComponent(jLabelBracket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButtonLookGtk)
                             .addComponent(jRadioButtonEmerald))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButtonLookNimbus)
                             .addComponent(jRadioButtonRuby))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonLookSynth))
                         .addContainerGap(206, Short.MAX_VALUE))))
         );
 
-        jTabbedPaneOption.addTab("Look & Feel", jPanelCn);
+        jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
 
-        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.CENTER);
+        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.PAGE_START);
 
         jButtonLoad.setText("Load");
         jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -971,6 +1166,62 @@ public class JOptionDialog extends javax.swing.JDialog {
       } 
     }//GEN-LAST:event_jRadioButtonRubyItemStateChanged
 
+    private void jCheckBoxZeroPageItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxZeroPageItemStateChanged
+      option.commentZeroPage=jCheckBoxZeroPage.isSelected();
+    }//GEN-LAST:event_jCheckBoxZeroPageItemStateChanged
+
+    private void jCheckBoxStackAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxStackAreaItemStateChanged
+      option.commentStackArea=jCheckBoxStackArea.isSelected();
+    }//GEN-LAST:event_jCheckBoxStackAreaItemStateChanged
+
+    private void jCheckBox200AreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox200AreaItemStateChanged
+      option.comment200Area=jCheckBox200Area.isSelected(); 
+    }//GEN-LAST:event_jCheckBox200AreaItemStateChanged
+
+    private void jCheckBox300AreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox300AreaItemStateChanged
+      option.comment300Area=jCheckBox300Area.isSelected(); 
+    }//GEN-LAST:event_jCheckBox300AreaItemStateChanged
+
+    private void jCheckBoxFreeAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxFreeAreaItemStateChanged
+      option.commentBasicFreeArea=jCheckBoxFreeArea.isSelected();
+    }//GEN-LAST:event_jCheckBoxFreeAreaItemStateChanged
+
+    private void jCheckBoxBasicRomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxBasicRomItemStateChanged
+      option.commentBasicRom=jCheckBoxBasicRom.isSelected();
+    }//GEN-LAST:event_jCheckBoxBasicRomItemStateChanged
+
+    private void jCheckBoxFreeRamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxFreeRamItemStateChanged
+      option.commentFreeRam=jCheckBoxFreeRam.isSelected();
+    }//GEN-LAST:event_jCheckBoxFreeRamItemStateChanged
+
+    private void jCheckBoxVicIIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVicIIItemStateChanged
+      option.commentVicII=jCheckBoxVicII.isSelected();
+    }//GEN-LAST:event_jCheckBoxVicIIItemStateChanged
+
+    private void jCheckBoxSidItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxSidItemStateChanged
+      option.commentSid=jCheckBoxSid.isSelected();
+    }//GEN-LAST:event_jCheckBoxSidItemStateChanged
+
+    private void jCheckBoxColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxColorItemStateChanged
+      option.commentColorArea=jCheckBoxColor.isSelected();
+    }//GEN-LAST:event_jCheckBoxColorItemStateChanged
+
+    private void jCheckBoxCia1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxCia1ItemStateChanged
+      option.commentCia1=jCheckBoxCia1.isSelected();
+    }//GEN-LAST:event_jCheckBoxCia1ItemStateChanged
+
+    private void jCheckBoxCia2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxCia2ItemStateChanged
+      option.commentCia2=jCheckBoxCia2.isSelected();
+    }//GEN-LAST:event_jCheckBoxCia2ItemStateChanged
+
+    private void jCheckBoxKernalRomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxKernalRomItemStateChanged
+      option.commentKernalRom=jCheckBoxKernalRom.isSelected();
+    }//GEN-LAST:event_jCheckBoxKernalRomItemStateChanged
+
+    private void jCheckBoxScreenAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxScreenAreaItemStateChanged
+      option.commentScreenArea=jCheckBoxScreenArea.isSelected();
+    }//GEN-LAST:event_jCheckBoxScreenAreaItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1023,11 +1274,26 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonLoad;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JCheckBox jCheckBox200Area;
+    private javax.swing.JCheckBox jCheckBox300Area;
+    private javax.swing.JCheckBox jCheckBoxBasicRom;
+    private javax.swing.JCheckBox jCheckBoxCia1;
+    private javax.swing.JCheckBox jCheckBoxCia2;
+    private javax.swing.JCheckBox jCheckBoxColor;
     private javax.swing.JCheckBox jCheckBoxEraseDComm;
     private javax.swing.JCheckBox jCheckBoxErasePlus;
+    private javax.swing.JCheckBox jCheckBoxFreeArea;
+    private javax.swing.JCheckBox jCheckBoxFreeRam;
+    private javax.swing.JCheckBox jCheckBoxKernalRom;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingSource;
+    private javax.swing.JCheckBox jCheckBoxScreenArea;
+    private javax.swing.JCheckBox jCheckBoxSid;
+    private javax.swing.JCheckBox jCheckBoxStackArea;
     private javax.swing.JCheckBox jCheckBoxUndefinedCode;
+    private javax.swing.JCheckBox jCheckBoxVicII;
+    private javax.swing.JCheckBox jCheckBoxZeroPage;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAggregate;
     private javax.swing.JLabel jLabelArrow;
     private javax.swing.JLabel jLabelBracket;
@@ -1042,8 +1308,9 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelSIDfreqLo;
     private javax.swing.JLabel jLabelTheme;
     private javax.swing.JList<String> jListLaf;
-    private javax.swing.JPanel jPanelCn;
+    private javax.swing.JPanel jPanelComment;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JPanel jPanelLook;
     private javax.swing.JPanel jPanelOption;
     private javax.swing.JPanel jPanelPreview;
     private javax.swing.JRadioButton jRadioButtonAqua;
