@@ -27,17 +27,25 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -58,6 +66,7 @@ import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.userAction;
+import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
 import sw_emulator.swing.table.MemoryTableCellRenderer;
 
@@ -153,7 +162,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
         optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
-        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");    
+        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");          
     }
 
     /**
@@ -171,6 +180,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonClose = new javax.swing.JButton();
         jButtonSaveProject = new javax.swing.JButton();
         jButtonSaveProjectAs = new javax.swing.JButton();
+        jButtonMPR = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
         jSeparatorButton1 = new javax.swing.JToolBar.Separator();
         jButtonClearDMem = new javax.swing.JButton();
@@ -188,7 +198,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
-        jButtonMPR = new javax.swing.JButton();
         jButtonViewProject = new javax.swing.JButton();
         jSeparatorButton2 = new javax.swing.JToolBar.Separator();
         jButtonFindMem = new javax.swing.JButton();
@@ -270,6 +279,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSaveProject = new javax.swing.JMenuItem();
         jMenuItemSaveAsProject = new javax.swing.JMenuItem();
         jSeparatorProject3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemMPR = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuMarkCode = new javax.swing.JMenu();
         jMenuItemClearDMem = new javax.swing.JMenuItem();
@@ -289,7 +299,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuOption = new javax.swing.JMenu();
         jMenuItemConfigure = new javax.swing.JMenuItem();
         jMenuItemSIDLD = new javax.swing.JMenuItem();
-        jMenuItemMPR = new javax.swing.JMenuItem();
         jSeparatorOption = new javax.swing.JPopupMenu.Separator();
         jMenuItemViewProject = new javax.swing.JMenuItem();
         jMenuSource = new javax.swing.JMenu();
@@ -373,6 +382,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonSaveProjectAs);
+
+        jButtonMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/create.png"))); // NOI18N
+        jButtonMPR.setToolTipText("Create a MRP archive");
+        jButtonMPR.setFocusable(false);
+        jButtonMPR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMPR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMPR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMPRActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMPR);
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exit.png"))); // NOI18N
         jButtonExit.setToolTipText("Save project as");
@@ -556,18 +577,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBar.add(jButtonSIDLD);
 
-        jButtonMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/create.png"))); // NOI18N
-        jButtonMPR.setToolTipText("Create a MRP archive");
-        jButtonMPR.setFocusable(false);
-        jButtonMPR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonMPR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonMPR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMPRActionPerformed(evt);
-            }
-        });
-        jToolBar.add(jButtonMPR);
-
         jButtonViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/view_detailed.png"))); // NOI18N
         jButtonViewProject.setToolTipText("View project");
         jButtonViewProject.setFocusable(false);
@@ -691,6 +700,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         }
     );
+
+    rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK),
+        new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                execute(SOURCE_FINDD);
+            }
+        }
+    );
     rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseClicked(evt);
@@ -733,6 +751,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     }
     );
+
+    rSyntaxTextAreaSource.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK),
+        new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                execute(SOURCE_FINDS);
+            }
+        }
+    );
     rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseClicked(evt);
@@ -749,6 +776,21 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jTableMemory.setModel(dataTableModelMemory);
     jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);
     jTableMemory.getColumnModel().getColumn(0).setPreferredWidth(310);
+
+    InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    ActionMap am = this.getRootPane().getActionMap();
+
+    //add custom action
+    im.put(KeyStroke.getKeyStroke("control F"), "save");
+    am.put("save", new AbstractAction(){
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            execute(SOURCE_FINDA);
+        }
+    });
+
+    ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
+
     jScrollPaneMemory.setViewportView(jTableMemory);
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
@@ -814,6 +856,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuFile.add(jMenuItemSaveAsProject);
     jMenuFile.add(jSeparatorProject3);
+
+    jMenuItemMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/create.png"))); // NOI18N
+    jMenuItemMPR.setText("Create a MPR archive");
+    jMenuItemMPR.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMPRActionPerformed(evt);
+        }
+    });
+    jMenuFile.add(jMenuItemMPR);
 
     jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exit.png"))); // NOI18N
     jMenuItemExit.setMnemonic('x');
@@ -962,15 +1013,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuOption.add(jMenuItemSIDLD);
-
-    jMenuItemMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/create.png"))); // NOI18N
-    jMenuItemMPR.setText("Create a MPR archive");
-    jMenuItemMPR.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jMenuItemMPRActionPerformed(evt);
-        }
-    });
-    jMenuOption.add(jMenuItemMPR);
     jMenuOption.add(jSeparatorOption);
 
     jMenuItemViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/view_detailed.png"))); // NOI18N
@@ -2223,7 +2265,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        dataTableModelMemory.fireTableDataChanged();
        jTableMemory.setRowSelectionInterval(row, row);
     }   
-    
   }
  
   /**
