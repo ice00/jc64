@@ -17,7 +17,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/filenew.png"/>
                 </Property>
-                <Property name="mnemonic" type="int" value="119"/>
+                <Property name="mnemonic" type="int" value="110"/>
                 <Property name="text" type="java.lang.String" value="New Project"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -35,8 +35,9 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/fileopen.png"/>
                 </Property>
-                <Property name="mnemonic" type="int" value="101"/>
+                <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Open Project"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenProjectActionPerformed"/>
@@ -63,7 +64,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSaveProject">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+S"/>
+                  <KeyStroke key="Shift+Ctrl+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/filesave.png"/>
@@ -78,6 +79,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSaveAsProject">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+V"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/filesaveas.png"/>
                 </Property>
@@ -92,6 +96,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMPR">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+M"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/create.png"/>
                 </Property>
@@ -103,6 +110,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemExit">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+X"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/exit.png"/>
                 </Property>
@@ -122,9 +132,13 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClearDMem">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+A"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Clear dasm automatic comment"/>
               </Properties>
               <Events>
@@ -133,9 +147,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClearUMem">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+M"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser1.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Clear user comment"/>
               </Properties>
               <Events>
@@ -144,9 +162,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClearDLabel">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+R"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser2.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="114"/>
                 <Property name="text" type="java.lang.String" value="Clear dasm automatic label"/>
               </Properties>
               <Events>
@@ -157,10 +179,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddComment">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+U"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/comm.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="117"/>
                 <Property name="text" type="java.lang.String" value="Add user comment"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddCommentActionPerformed"/>
@@ -168,10 +195,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddBlock">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+B"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/block.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="98"/>
                 <Property name="text" type="java.lang.String" value="Add user block comment"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddBlockActionPerformed"/>
@@ -179,10 +211,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUserLabel">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+L"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/mem2.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="108"/>
                 <Property name="text" type="java.lang.String" value="Add user label"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUserLabelActionPerformed"/>
@@ -190,9 +227,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUserLabelOp">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+N"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/mem3.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="110"/>
                 <Property name="text" type="java.lang.String" value="Add user label on next address"/>
               </Properties>
               <Events>
@@ -203,9 +244,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMarkCode">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+C"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/code.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Mark as code"/>
               </Properties>
               <Events>
@@ -214,9 +259,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMarkData">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+D"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/data.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="100"/>
                 <Property name="text" type="java.lang.String" value="Mark as data"/>
               </Properties>
               <Events>
@@ -225,9 +274,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+G"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/garb.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="103"/>
                 <Property name="text" type="java.lang.String" value="Mark as garbage"/>
               </Properties>
               <Events>
@@ -236,10 +289,14 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPlus">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+ADD"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/plus.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign the selected address as +"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPlusActionPerformed"/>
@@ -247,6 +304,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMinus">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+SUBTRACT"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/minus.png"/>
                 </Property>
@@ -258,10 +318,14 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemLow">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+LESS"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/min.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign the selected address as #&lt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemMemLowActionPerformed"/>
@@ -269,6 +333,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemHigh">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+GREATER"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/max.png"/>
                 </Property>
@@ -288,6 +355,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemConfigure">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+O"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/configure.png"/>
                 </Property>
@@ -300,10 +370,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSIDLD">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+E"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/mem.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Apply SIDLD flags to memory"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSIDLDActionPerformed"/>
@@ -313,10 +388,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemViewProject">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+J"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/view_detailed.png"/>
                 </Property>
-                <Property name="mnemonic" type="int" value="118"/>
+                <Property name="mnemonic" type="int" value="106"/>
                 <Property name="text" type="java.lang.String" value="View Project"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -333,6 +411,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+F"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/finda.png"/>
                 </Property>
@@ -344,10 +425,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDiss">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+D"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/exec.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="100"/>
                 <Property name="text" type="java.lang.String" value="Disassemble"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDissActionPerformed"/>
@@ -357,6 +443,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFindDis">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+F"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/findd.png"/>
                 </Property>
@@ -369,10 +458,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDissSaveAs">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+P"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/exportas1.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="112"/>
                 <Property name="text" type="java.lang.String" value="Export As of preview"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDissSaveAsActionPerformed"/>
@@ -382,6 +476,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFindSource">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+F"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/finds.png"/>
                 </Property>
@@ -393,10 +490,15 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSourceSaveAs">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+S"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/exportas2.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Export As of source"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSourceSaveAsActionPerformed"/>
@@ -411,10 +513,15 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemContents">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+H"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/help_index.png"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="104"/>
                 <Property name="text" type="java.lang.String" value="Help contents"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemContentsActionPerformed"/>
@@ -424,6 +531,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemLicense">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+L"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="108"/>
                 <Property name="text" type="java.lang.String" value="License"/>
               </Properties>
               <Events>
@@ -432,6 +543,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCredits">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+D"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="100"/>
                 <Property name="text" type="java.lang.String" value="Credits"/>
               </Properties>
               <Events>
@@ -440,7 +555,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAbout">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+A"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="About"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAboutActionPerformed"/>
