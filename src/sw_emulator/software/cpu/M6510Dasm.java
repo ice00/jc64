@@ -541,6 +541,7 @@ public class M6510Dasm implements disassembler {
     MemoryDasm memRel;           // memory related
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
+    boolean wasGarbage=false;    // true if we were decoding garbage
     int counter=0;               // data aligment counter
     
     result.append(addConstants());
@@ -549,7 +550,7 @@ public class M6510Dasm implements disassembler {
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
       mem=memory[(int)pc];
-      isCode=(mem.isCode || (!mem.isData && option.useAsCode));
+      isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
         if (isCode) {    
           if (counter>0) {
@@ -557,6 +558,12 @@ public class M6510Dasm implements disassembler {
             result.append("\n");
             counter=0;
           }   
+          
+          // must put the org if we start from an garbage area
+          if (wasGarbage) {
+            wasGarbage=false;
+             result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+          }
             
           // add block if user declare it
           if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
@@ -609,7 +616,23 @@ public class M6510Dasm implements disassembler {
           
           pos=this.pos;
           pc=this.pc;
-        } else {
+        } else 
+            if (mem.isGarbage) {
+              wasGarbage=true;
+              pos++;
+              pc++;
+              counter++;
+            
+              this.pos=pos;
+              this.pc=pc; 
+            } 
+          else {    
+            // must put the org if we start from an garbage area
+            if (wasGarbage) {
+              wasGarbage=false;
+               result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+            }            
+            
             // add block if user declare it
             if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                
               if (counter>0) {
@@ -702,6 +725,7 @@ public class M6510Dasm implements disassembler {
     MemoryDasm memRel;           // memory related
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
+    boolean wasGarbage=false;    // true if we were decoding garbage
     int counter=0;               // data aligment counter
      
     result.append(addConstants());
@@ -710,7 +734,7 @@ public class M6510Dasm implements disassembler {
     this.pc=pc;
     while (pos<end | pos<start) { // verify also that don't circle in the buffer        
       mem=memory[(int)pc];
-      isCode=(mem.isCode || (!mem.isData && option.useAsCode));
+      isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
         if (isCode) {        
           if (counter>0) {
@@ -718,6 +742,12 @@ public class M6510Dasm implements disassembler {
             result.append("\n");
             counter=0;
           }  
+          
+          // must put the org if we start from an garbage area
+          if (wasGarbage) {
+            wasGarbage=false;
+             result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+          }             
                
           // add block if user declare it
           if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
@@ -761,7 +791,22 @@ public class M6510Dasm implements disassembler {
           
           pos=this.pos;
           pc=this.pc;
-        } else {
+        } else if (mem.isGarbage) {
+              wasGarbage=true;
+              pos++;
+              pc++;
+              counter++;
+            
+              this.pos=pos;
+              this.pc=pc; 
+            } 
+          else { 
+            // must put the org if we start from an garbage area
+            if (wasGarbage) {
+              wasGarbage=false;
+               result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+            }   
+            
             // add block if user declare it
             if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
               if (counter>0) {

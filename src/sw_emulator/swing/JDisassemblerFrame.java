@@ -192,6 +192,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonAddUserLabelOp = new javax.swing.JButton();
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
+        jButtonMarkGarbage = new javax.swing.JButton();
         jButtonMarkPlus = new javax.swing.JButton();
         jButtonMarkMinus = new javax.swing.JButton();
         jButtonMarkLow = new javax.swing.JButton();
@@ -282,7 +283,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorProject3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMPR = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
-        jMenuMarkCode = new javax.swing.JMenu();
+        jMenuMarkGarbage = new javax.swing.JMenu();
         jMenuItemClearDMem = new javax.swing.JMenuItem();
         jMenuItemClearUMem = new javax.swing.JMenuItem();
         jMenuItemClearDLabel = new javax.swing.JMenuItem();
@@ -294,6 +295,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMinus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
@@ -517,6 +519,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonMarkData);
+
+        jButtonMarkGarbage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/garb.png"))); // NOI18N
+        jButtonMarkGarbage.setToolTipText("Mark the selected addresses as garbage");
+        jButtonMarkGarbage.setFocusable(false);
+        jButtonMarkGarbage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkGarbage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkGarbage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkGarbageActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkGarbage);
 
         jButtonMarkPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/plus.png"))); // NOI18N
         jButtonMarkPlus.setToolTipText("Mark the selected addresses as +");
@@ -892,7 +906,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuBar.add(jMenuFile);
 
-    jMenuMarkCode.setText("Memory");
+    jMenuMarkGarbage.setText("Memory");
 
     jMenuItemClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser.png"))); // NOI18N
     jMenuItemClearDMem.setText("Clear dasm automatic comment");
@@ -901,7 +915,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearDMemActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemClearDMem);
+    jMenuMarkGarbage.add(jMenuItemClearDMem);
 
     jMenuItemClearUMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser1.png"))); // NOI18N
     jMenuItemClearUMem.setText("Clear user comment");
@@ -910,7 +924,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearUMemActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemClearUMem);
+    jMenuMarkGarbage.add(jMenuItemClearUMem);
 
     jMenuItemClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser2.png"))); // NOI18N
     jMenuItemClearDLabel.setText("Clear dasm automatic label");
@@ -919,8 +933,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearDLabelActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemClearDLabel);
-    jMenuMarkCode.add(jSeparator4);
+    jMenuMarkGarbage.add(jMenuItemClearDLabel);
+    jMenuMarkGarbage.add(jSeparator4);
 
     jMenuItemAddComment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/comm.png"))); // NOI18N
     jMenuItemAddComment.setText("Add user comment");
@@ -929,7 +943,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemAddCommentActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemAddComment);
+    jMenuMarkGarbage.add(jMenuItemAddComment);
 
     jMenuItemAddBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/block.png"))); // NOI18N
     jMenuItemAddBlock.setText("Add user block comment");
@@ -938,7 +952,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemAddBlockActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemAddBlock);
+    jMenuMarkGarbage.add(jMenuItemAddBlock);
 
     jMenuItemUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem2.png"))); // NOI18N
     jMenuItemUserLabel.setText("Add user label");
@@ -947,7 +961,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemUserLabelActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemUserLabel);
+    jMenuMarkGarbage.add(jMenuItemUserLabel);
 
     jMenuItemUserLabelOp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem3.png"))); // NOI18N
     jMenuItemUserLabelOp.setText("Add user label on next address");
@@ -956,8 +970,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemUserLabelOpActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemUserLabelOp);
-    jMenuMarkCode.add(jSeparator3);
+    jMenuMarkGarbage.add(jMenuItemUserLabelOp);
+    jMenuMarkGarbage.add(jSeparator3);
 
     jMenuItemMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/code.png"))); // NOI18N
     jMenuItemMarkCode.setText("Mark as code");
@@ -966,7 +980,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMarkCodeActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemMarkCode);
+    jMenuMarkGarbage.add(jMenuItemMarkCode);
 
     jMenuItemMarkData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/data.png"))); // NOI18N
     jMenuItemMarkData.setText("Mark as data");
@@ -975,7 +989,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMarkDataActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemMarkData);
+    jMenuMarkGarbage.add(jMenuItemMarkData);
+
+    jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/garb.png"))); // NOI18N
+    jMenuItem2.setText("Mark as garbage");
+    jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem2ActionPerformed(evt);
+        }
+    });
+    jMenuMarkGarbage.add(jMenuItem2);
 
     jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
     jMenuItemPlus.setText("Assign the selected address as +");
@@ -984,7 +1007,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemPlusActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemPlus);
+    jMenuMarkGarbage.add(jMenuItemPlus);
 
     jMenuItemMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minus.png"))); // NOI18N
     jMenuItemMinus.setText("Assign the selected address as -");
@@ -993,7 +1016,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMinusActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemMinus);
+    jMenuMarkGarbage.add(jMenuItemMinus);
 
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
@@ -1002,7 +1025,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMemLowActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemMemLow);
+    jMenuMarkGarbage.add(jMenuItemMemLow);
 
     jMenuItemMemHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
     jMenuItemMemHigh.setText("Assign the selected address as #>");
@@ -1011,9 +1034,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMemHighActionPerformed(evt);
         }
     });
-    jMenuMarkCode.add(jMenuItemMemHigh);
+    jMenuMarkGarbage.add(jMenuItemMemHigh);
 
-    jMenuBar.add(jMenuMarkCode);
+    jMenuBar.add(jMenuMarkGarbage);
 
     jMenuOption.setText("Option");
     jMenuOption.setToolTipText("");
@@ -1484,6 +1507,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_ADDLABELOP);
     }//GEN-LAST:event_jMenuItemUserLabelOpActionPerformed
 
+    private void jButtonMarkGarbageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkGarbageActionPerformed
+      execute(MEM_MARKGARB);
+    }//GEN-LAST:event_jButtonMarkGarbageActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+      execute(MEM_MARKGARB);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1542,6 +1573,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonMPR;
     private javax.swing.JButton jButtonMarkCode;
     private javax.swing.JButton jButtonMarkData;
+    private javax.swing.JButton jButtonMarkGarbage;
     private javax.swing.JButton jButtonMarkLow;
     private javax.swing.JButton jButtonMarkMax;
     private javax.swing.JButton jButtonMarkMinus;
@@ -1556,6 +1588,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -1588,7 +1621,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemUserLabel;
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewProject;
-    private javax.swing.JMenu jMenuMarkCode;
+    private javax.swing.JMenu jMenuMarkGarbage;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JScrollPane jScrollPaneLeft;
@@ -1686,6 +1719,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_MARKDATA:
          markAsData();  
          break;
+       case MEM_MARKGARB:
+         markAsGarbage();  
+         break;        
        case MEM_ADDBLOCK:
          addBlock();
          break;
@@ -1930,6 +1966,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem= project.memory[rows[i]];
       mem.isCode=true;
       mem.isData=false;
+      mem.isGarbage=false;
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -1940,7 +1977,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
-   * Mark user selection as code
+   * Mark user selection as data
    */
   private void markAsData() {
     MemoryDasm mem;   
@@ -1951,6 +1988,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem= project.memory[rows[i]];
       mem.isData=true;
       mem.isCode=false;
+      mem.isGarbage=false;
       if (option.eraseDComm) mem.dasmComment=null;
       if (option.erasePlus && mem.type=='+') {
         mem.related=-1;
@@ -1965,6 +2003,33 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   }
 
+  /**
+   * Mark user selection as garbage
+   */
+  private void markAsGarbage() {
+    MemoryDasm mem;   
+      
+    int rows[]=jTableMemory.getSelectedRows();
+        
+    for (int i=0; i<rows.length; i++) {
+      mem= project.memory[rows[i]];
+      mem.isData=false;
+      mem.isCode=false;
+      mem.isGarbage=true;
+      if (option.eraseDComm) mem.dasmComment=null;
+      if (option.erasePlus && mem.type=='+') {
+        mem.related=-1;
+        mem.type=' ';
+      }
+    }
+    
+    dataTableModelMemory.fireTableDataChanged();  
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
+  }  
+  
   /**
    * Apply SIDLD flags to memory
    */

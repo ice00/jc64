@@ -61,6 +61,7 @@ public class MemoryTableCellRenderer extends DefaultTableCellRenderer {
               if (row>=disassembly.startMPR[i] && row<=disassembly.endMPR[i]) {
                 if (disassembly.memory[row].isCode) c.setBackground(Color.green);
                 else if (disassembly.memory[row].isData) c.setBackground(Color.cyan);
+                else if (disassembly.memory[row].isGarbage) c.setBackground(Color.red);
                 else c.setBackground(Color.LIGHT_GRAY);                  
                 return c;
               } 
@@ -70,6 +71,7 @@ public class MemoryTableCellRenderer extends DefaultTableCellRenderer {
             if (row<disassembly.startAddress || row>disassembly.endAddress) c.setBackground(Color.white);
             else if (disassembly.memory[row].isCode) c.setBackground(Color.green);
             else if (disassembly.memory[row].isData) c.setBackground(Color.cyan);
+            else if (disassembly.memory[row].isGarbage) c.setBackground(Color.red);
             else c.setBackground(Color.LIGHT_GRAY);
           }
       }

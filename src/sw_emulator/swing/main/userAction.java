@@ -128,6 +128,9 @@ public interface userAction {
   /** Memory add user label opcode */
   public static final int MEM_ADDLABELOP = 34;
   
+  /** Mark memory of garbage kind */
+  public static final int MEM_MARKGARB = 35;
+  
   /**
    * Execute the passed user action
    * 

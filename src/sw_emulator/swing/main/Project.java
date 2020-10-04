@@ -31,11 +31,14 @@ import sw_emulator.software.MemoryDasm;
 /**
  * Container for the project
  * 
+ * Version 0: initial
+ * Version 1: add isGarbage onto memoryDasm
+ * 
  * @author ice
  */
 public class Project implements Cloneable{ 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=0;       
+  public static final byte ACTUAL_VERSION=1;       
     
   /**
    * Type of the file

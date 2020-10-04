@@ -59,6 +59,9 @@ public class MemoryDasm implements Cloneable {
   /** True if this is data */
   public boolean isData;
   
+  /** True if this is garbage */
+  public boolean isGarbage;
+  
   /** If inside it store the copy of value of memory */
   public byte copy;
   
@@ -82,6 +85,7 @@ public class MemoryDasm implements Cloneable {
     if (this.isInside != d.isInside) return false;
     if (this.isCode != d.isCode) return false;
     if (this.isData != d.isData) return false;
+    if (this.isGarbage != d.isGarbage) return false;
     if (this.copy != d.copy) return false;
     if (this.related != d.related) return false;
     if (this.type != d.type) return false;
@@ -99,6 +103,7 @@ public class MemoryDasm implements Cloneable {
     m.dasmLocation=this.dasmLocation;
     m.isCode=this.isCode;
     m.isData=this.isData;
+    m.isGarbage=this.isGarbage;    
     m.isInside=this.isInside;
     m.related=this.related;
     m.type=this.type;
