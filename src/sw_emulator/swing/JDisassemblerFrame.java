@@ -825,6 +825,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
 
+    jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jTableMemoryMouseClicked(evt);
+        }
+    });
     jScrollPaneMemory.setViewportView(jTableMemory);
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
@@ -1407,7 +1412,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       try {
         // get starting position of clicked point  
         int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-              
+       
         int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
         
         if (addr==-1) return;
@@ -1620,6 +1625,35 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           System.err.println(e);;
         }  
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseReleased
+
+    private void jTableMemoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMouseClicked
+      if (evt.getClickCount() == 2) {  
+        int actual;  
+        
+        // get the address in hex format
+        int addr=jTableMemory.getSelectedRow();
+        int pos=0;        
+
+        // scan all lines for the memory location
+        try {
+          String preview=rSyntaxTextAreaDis.getText();
+          String lines[] = preview.split("\\r?\\n");
+          for (String line: lines) {
+            actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
+            if (actual==addr) {      
+              // set preview in the find position  
+              rSyntaxTextAreaDis.setCaretPosition(pos);
+              rSyntaxTextAreaDis.requestFocusInWindow();
+              break;
+            } else {
+                pos+=line.length()+1;
+              }
+          }
+        } catch (Exception e) {
+            System.err.println();  
+          }  
+      }
+    }//GEN-LAST:event_jTableMemoryMouseClicked
 
     /**
      * @param args the command line arguments
