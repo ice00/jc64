@@ -738,6 +738,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaDisMouseReleased(evt);
+        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseClicked(evt);
         }
@@ -789,6 +792,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaSourceMouseReleased(evt);
+        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseClicked(evt);
         }
@@ -1399,24 +1405,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
       try {
-        int addr=-1;  
         // get starting position of clicked point  
         int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-        
-        // get the first word of the string
-        String str=rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength);
-        str=str.contains(" ") ? str.split(" ")[0] : str;  
- 
-        if (str.length()==4) addr=Integer.decode("0x"+str);
-        else {
-          str=str.contains(":") ? str.split(":")[0] : str;  
-          for (MemoryDasm memory : project.memory) {
-            if (str.equals(memory.dasmLocation) || str.equals(memory.userLocation)) {
-                addr=memory.address;
-                break;      
-            }    
-          }  
-        }
+              
+        int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
         
         if (addr==-1) return;
                 
@@ -1472,24 +1464,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
       try {
-        int addr=-1;  
         // get starting position of clicked point  
         int pos=Utilities.getRowStart(rSyntaxTextAreaSource, rSyntaxTextAreaSource.getCaretPosition());
         
-        // get the first word of the string
-        String str=rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength);
-        str=str.contains(" ") ? str.split(" ")[0] : str; 
- 
-        if (str.length()==4) addr=Integer.decode("0x"+str);
-        else {
-          str=str.contains(":") ? str.split(":")[0] : str;  
-          for (MemoryDasm memory : project.memory) {
-            if (str.equals(memory.dasmLocation) || str.equals(memory.userLocation)) {
-                addr=memory.address;
-                break;      
-            }    
-          }  
-        }
+        int addr=searchAddress(rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength));
         
         if (addr==-1) return;
                 
@@ -1574,6 +1552,74 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
       execute(MEM_MARKGARB);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void rSyntaxTextAreaDisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseReleased
+      String selected=rSyntaxTextAreaDis.getSelectedText();
+      
+      int actual;
+      
+      int min=0xffff+1;  // min find address
+      int max=-1;        // max find address
+      
+      // avoid no selected text
+      if (selected==null) return;
+      
+      try {
+        String lines[] = selected.split("\\r?\\n");
+        for (String line: lines) {
+          actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));  
+          if (actual==-1) continue;
+        
+          if (actual<min) min=actual;
+          if (actual>max) max=actual;
+        }
+      
+        // if max is not -1 we find a range
+        if (max==-1) return;
+      
+        //scroll to that point
+        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        
+        // select this rows
+        jTableMemory.setRowSelectionInterval(min, max);
+      } catch (Exception e) {
+          System.err.println(e);;
+        }  
+    }//GEN-LAST:event_rSyntaxTextAreaDisMouseReleased
+
+    private void rSyntaxTextAreaSourceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseReleased
+      String selected=rSyntaxTextAreaSource.getSelectedText();
+      
+      int actual;
+      
+      int min=0xffff+1;  // min find address
+      int max=-1;        // max find address
+      
+      // avoid no selected text
+      if (selected==null) return;
+      
+      try {
+        String lines[] = selected.split("\\r?\\n");
+        for (String line: lines) {
+          actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));  
+          if (actual==-1) continue;
+        
+          if (actual<min) min=actual;
+          if (actual>max) max=actual;
+        }
+      
+        // if max is not -1 we find a range
+        if (max==-1) return;
+      
+        //scroll to that point
+        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        
+        // select this rows
+        jTableMemory.setRowSelectionInterval(min, max);
+      } catch (Exception e) {
+          System.err.println(e);;
+        }  
+    }//GEN-LAST:event_rSyntaxTextAreaSourceMouseReleased
 
     /**
      * @param args the command line arguments
@@ -2665,4 +2711,35 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     return ret.toUpperCase(Locale.ENGLISH);
   }      
+  
+  /**
+   * Search for a memory address (even as label) from the initial passed string
+   * 
+   * @param initial the initial buffer to search for
+   * @return the address or -1 if not find
+   */
+  protected int searchAddress(String initial) {
+    int addr=-1;
+    
+    try {
+      // get the first word of the string
+      String str=initial;
+      str=str.contains(" ") ? str.split(" ")[0] : str; 
+ 
+      if (str.length()==4) addr=Integer.decode("0x"+str);
+      else {
+        str=str.contains(":") ? str.split(":")[0] : str;  
+        for (MemoryDasm memory : project.memory) {
+          if (str.equals(memory.dasmLocation) || str.equals(memory.userLocation)) {
+            addr=memory.address;
+            break;      
+          }    
+        }  
+      }
+    } catch (Exception e)  {
+        System.err.println(e);   
+      }    
+    
+    return addr;
+  }
 }
