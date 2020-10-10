@@ -190,6 +190,7 @@ public class FileManager {
       project.file=in.readUTF();
       project.description=in.readUTF();
       project.fileType=FileType.valueOf(in.readUTF());
+      project.targetType=TargetType.valueOf(in.readUTF());  // version 1
       
       int size=in.readInt();      
       project.inB=new byte[size];
@@ -261,6 +262,7 @@ public class FileManager {
       out.writeUTF(project.file);
       out.writeUTF(project.description);
       out.writeUTF(project.fileType.name());
+      out.writeUTF(project.targetType.name());  // version 1
       
       out.writeInt(project.inB.length);
       out.write(project.inB);

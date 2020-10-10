@@ -31,6 +31,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.Project;
+import sw_emulator.swing.main.TargetType;
 
 /**
  * Dialog for project
@@ -95,6 +96,31 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonMUS.setSelected(false);
           jRadioButtonMPR.setSelected(false);          
         }
+      if (project.targetType!=null) {
+        switch (project.targetType) {
+          case C64:
+            jRadioButtonC64.setSelected(true);
+            break;
+          case C1541:
+            jRadioButtonC1541.setSelected(true);
+            break;
+          case C128:  
+            jRadioButtonC128.setSelected(true);
+            break;  
+          case VIC20:
+            jRadioButtonVic20.setSelected(true);
+            break;   
+          case PLUS4:
+            jRadioButtonPlus4.setSelected(true);
+            break;        
+        }          
+      } else {
+          jRadioButtonC64.setSelected(true);       
+          jRadioButtonC1541.setSelected(false);
+          jRadioButtonC128.setSelected(false);
+          jRadioButtonVic20.setSelected(false);
+          jRadioButtonPlus4.setSelected(false);
+        }
     }
 
     /**
@@ -107,6 +133,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroupFileType = new javax.swing.ButtonGroup();
+        buttonGroupTarget = new javax.swing.ButtonGroup();
         jPanelCenter = new javax.swing.JPanel();
         jLabelProjectName = new javax.swing.JLabel();
         jTextFieldProjectName = new javax.swing.JTextField();
@@ -125,6 +152,12 @@ public class JProjectDialog extends javax.swing.JDialog {
         jButtonAddNext = new javax.swing.JButton();
         jButtonInit = new javax.swing.JButton();
         jRadioButtonMPR = new javax.swing.JRadioButton();
+        jLabelFileTarget = new javax.swing.JLabel();
+        jRadioButtonC64 = new javax.swing.JRadioButton();
+        jRadioButtonC1541 = new javax.swing.JRadioButton();
+        jRadioButtonC128 = new javax.swing.JRadioButton();
+        jRadioButtonVic20 = new javax.swing.JRadioButton();
+        jRadioButtonPlus4 = new javax.swing.JRadioButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -197,6 +230,49 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonMPR.setText("MPR");
         jRadioButtonMPR.setEnabled(false);
 
+        jLabelFileTarget.setText("Target machine:");
+
+        buttonGroupTarget.add(jRadioButtonC64);
+        jRadioButtonC64.setSelected(true);
+        jRadioButtonC64.setText("C64");
+        jRadioButtonC64.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonC64ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTarget.add(jRadioButtonC1541);
+        jRadioButtonC1541.setText("C1541");
+        jRadioButtonC1541.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonC1541ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTarget.add(jRadioButtonC128);
+        jRadioButtonC128.setText("C128");
+        jRadioButtonC128.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonC128ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTarget.add(jRadioButtonVic20);
+        jRadioButtonVic20.setText("Vic20");
+        jRadioButtonVic20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonVic20ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTarget.add(jRadioButtonPlus4);
+        jRadioButtonPlus4.setText("Plus4");
+        jRadioButtonPlus4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPlus4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -210,8 +286,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFileDes))
+                            .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
@@ -229,14 +304,29 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jButtonSelect))
                             .addComponent(jTextFieldProjectName)))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addComponent(jLabelSidLd, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonInit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAddNext)
-                        .addGap(0, 147, Short.MAX_VALUE)))
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelSidLd, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonClear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonInit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddNext))
+                            .addComponent(jLabelFileDes)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonC64)
+                                .addGap(6, 6, 6)
+                                .addComponent(jRadioButtonC1541)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonC128)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonVic20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonPlus4)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelCenterLayout.setVerticalGroup(
@@ -253,17 +343,24 @@ public class JProjectDialog extends javax.swing.JDialog {
                     .addComponent(jButtonSelect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addComponent(jLabelFileType)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelFileDes))
                     .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonSID)
                         .addComponent(jRadioButtonMUS)
                         .addComponent(jRadioButtonPRG)
-                        .addComponent(jRadioButtonMPR)))
+                        .addComponent(jRadioButtonMPR))
+                    .addComponent(jLabelFileType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFileTarget)
+                    .addComponent(jRadioButtonC64)
+                    .addComponent(jRadioButtonC1541)
+                    .addComponent(jRadioButtonC128)
+                    .addComponent(jRadioButtonVic20)
+                    .addComponent(jRadioButtonPlus4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelFileDes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
@@ -305,21 +402,53 @@ public class JProjectDialog extends javax.swing.JDialog {
           switch (project.fileType) {
             case SID:   
               jRadioButtonSID.setSelected(true);
+              jRadioButtonC64.setSelected(true); 
+              project.targetType=TargetType.C64;
+              jRadioButtonC64.setEnabled(false);
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);
               break;
             case MUS:
               jRadioButtonMUS.setSelected(true);
+              jRadioButtonC64.setSelected(true); 
+              project.targetType=TargetType.C64;
+              jRadioButtonC64.setEnabled(false);
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);             
               break;
             case PRG:
               jRadioButtonPRG.setSelected(true);
+              jRadioButtonC64.setEnabled(true);
+              project.targetType=TargetType.C64;
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);              
               break;  
             case MPR:
               jRadioButtonMPR.setSelected(true);
+              jRadioButtonC64.setEnabled(true);
+              project.targetType=TargetType.C64;
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);                
               break;              
             case UND:
               jRadioButtonSID.setSelected(false);  
               jRadioButtonMUS.setSelected(false);  
               jRadioButtonPRG.setSelected(false); 
-              jRadioButtonMPR.setSelected(false); 
+              jRadioButtonMPR.setSelected(false);
+              jRadioButtonC64.setEnabled(true);
+              project.targetType=TargetType.C64;
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);                
               break;
           }
         } catch (FileNotFoundException e) {
@@ -368,6 +497,26 @@ public class JProjectDialog extends javax.swing.JDialog {
       project.memoryFlags=memoryFlags.getMemoryState(0, 0xFFFF);
     }//GEN-LAST:event_jButtonInitActionPerformed
 
+    private void jRadioButtonC64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC64ActionPerformed
+      project.targetType=TargetType.C64;
+    }//GEN-LAST:event_jRadioButtonC64ActionPerformed
+
+    private void jRadioButtonC1541ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC1541ActionPerformed
+      project.targetType=TargetType.C1541;
+    }//GEN-LAST:event_jRadioButtonC1541ActionPerformed
+
+    private void jRadioButtonC128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC128ActionPerformed
+      project.targetType=TargetType.C128;  
+    }//GEN-LAST:event_jRadioButtonC128ActionPerformed
+
+    private void jRadioButtonVic20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVic20ActionPerformed
+      project.targetType=TargetType.VIC20;
+    }//GEN-LAST:event_jRadioButtonVic20ActionPerformed
+
+    private void jRadioButtonPlus4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPlus4ActionPerformed
+      project.targetType=TargetType.PLUS4;
+    }//GEN-LAST:event_jRadioButtonPlus4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,22 +562,29 @@ public class JProjectDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFileType;
+    private javax.swing.ButtonGroup buttonGroupTarget;
     private javax.swing.JButton jButtonAddNext;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonInit;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabelFileDes;
+    private javax.swing.JLabel jLabelFileTarget;
     private javax.swing.JLabel jLabelFileType;
     private javax.swing.JLabel jLabelInputFile;
     private javax.swing.JLabel jLabelProjectName;
     private javax.swing.JLabel jLabelSidLd;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JRadioButton jRadioButtonC128;
+    private javax.swing.JRadioButton jRadioButtonC1541;
+    private javax.swing.JRadioButton jRadioButtonC64;
     private javax.swing.JRadioButton jRadioButtonMPR;
     private javax.swing.JRadioButton jRadioButtonMUS;
     private javax.swing.JRadioButton jRadioButtonPRG;
+    private javax.swing.JRadioButton jRadioButtonPlus4;
     private javax.swing.JRadioButton jRadioButtonSID;
+    private javax.swing.JRadioButton jRadioButtonVic20;
     private javax.swing.JScrollPane jScrollPaneDescr;
     private javax.swing.JTextArea jTextAreaDescr;
     private javax.swing.JTextField jTextFieldInputFile;

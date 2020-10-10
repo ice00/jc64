@@ -23,7 +23,6 @@
  */
 package sw_emulator.swing.main;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Objects;
 import sw_emulator.software.MemoryDasm;
@@ -33,6 +32,7 @@ import sw_emulator.software.MemoryDasm;
  * 
  * Version 0: initial
  * Version 1: add isGarbage onto memoryDasm
+ *            add TargetType
  * 
  * @author ice
  */
@@ -59,6 +59,9 @@ public class Project implements Cloneable{
   
   /** Mpr contents */
   public MPR mpr;
+  
+  /** Target machine type*/
+  public TargetType targetType;
   
   /** Memory flag of SIDLD */
   public byte[] memoryFlags=new byte[0xFFFF+1];
@@ -97,6 +100,7 @@ public class Project implements Cloneable{
     hash = 89 * hash + Arrays.hashCode(this.inB);
     hash = 89 * hash + Arrays.hashCode(this.memoryFlags);
     hash = 89 * hash + Arrays.deepHashCode(this.memory);
+    hash = 89 * hash + Objects.hashCode(this.targetType);
     return hash;
   }
   
@@ -107,6 +111,7 @@ public class Project implements Cloneable{
     p.description=this.description;
     p.file=this.file;
     p.fileType=this.fileType;
+    p.targetType=this.targetType;
     if (this.inB!=null) p.inB=this.inB.clone();
     if (p.memoryFlags!=null) p.memoryFlags=this.memoryFlags.clone();
     p.name=this.name;
@@ -127,6 +132,7 @@ public class Project implements Cloneable{
     if (!Objects.equals(this.file,p.file)) return false;
     if (!Objects.equals(this.description,p.description)) return false;
     if (this.fileType != p.fileType) return false;
+    if (this.targetType != p.targetType) return false;
     if (!Arrays.equals(this.memoryFlags, p.memoryFlags)) return false;
     if (!Arrays.equals(this.inB, p.inB)) return false;
     if (!Arrays.equals(this.memory, p.memory)) return false;

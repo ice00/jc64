@@ -28,12 +28,15 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.machine.C64Dasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
+import sw_emulator.software.machine.D1541Dasm;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
+import sw_emulator.swing.main.TargetType;
 
 /**
  * Disassembly the given buffer of data
@@ -88,9 +91,10 @@ public class Disassembly {
    * @param option for disassembler
    * @param memory the memory for dasm
    * @param mpr eventual MPR blocks to use
+   * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, TargetType targetType, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
@@ -116,10 +120,10 @@ public class Disassembly {
         dissassemblySID(asSource);  
         break;
       case PRG:
-        disassemlyPRG(asSource);  
+        disassemlyPRG(asSource, targetType);  
         break;
       case MPR:
-        disassemlyMPR(asSource);  
+        disassemlyMPR(asSource, targetType);  
         break;        
       case UND:            
         source="";
@@ -310,24 +314,44 @@ public class Disassembly {
    * Disassembly a PRG file
    * 
    * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
    */
-  private void disassemlyPRG(boolean asSource) {
-    C64Dasm prg=new C64Dasm();
-    prg.language=option.commentLanguage;
-    prg.commentZeroPage=option.commentZeroPage;
-    prg.commentStackArea=option.commentStackArea;
-    prg.comment200Area=option.comment200Area;
-    prg.comment300Area=option.comment300Area;        
-    prg.commentScreenArea=option.commentScreenArea;
-    prg.commentBasicFreeArea=option.commentBasicFreeArea;
-    prg.commentBasicRom=option.commentBasicRom;
-    prg.commentFreeRam=option.commentFreeRam;
-    prg.commentVicII=option.commentVicII;
-    prg.commentSid=option.commentSid;
-    prg.commentColorArea=option.commentColorArea;
-    prg.commentCia1=option.commentCia1;
-    prg.commentCia2=option.commentCia2;
-    
+  private void disassemlyPRG(boolean asSource, TargetType targetType) {
+    M6510Dasm prg;
+      
+    switch (targetType) {
+      case C64:
+        prg=new C64Dasm();  
+        ((C64Dasm)prg).language=option.commentLanguage;        
+        ((C64Dasm)prg).commentZeroPage=option.commentZeroPage;
+        ((C64Dasm)prg).commentStackArea=option.commentStackArea;
+        ((C64Dasm)prg).comment200Area=option.comment200Area;
+        ((C64Dasm)prg).comment300Area=option.comment300Area;        
+        ((C64Dasm)prg).commentScreenArea=option.commentScreenArea;
+        ((C64Dasm)prg).commentBasicFreeArea=option.commentBasicFreeArea;
+        ((C64Dasm)prg).commentBasicRom=option.commentBasicRom;
+        ((C64Dasm)prg).commentFreeRam=option.commentFreeRam;
+        ((C64Dasm)prg).commentVicII=option.commentVicII;
+        ((C64Dasm)prg).commentSid=option.commentSid;
+        ((C64Dasm)prg).commentColorArea=option.commentColorArea;
+        ((C64Dasm)prg).commentCia1=option.commentCia1;
+        ((C64Dasm)prg).commentCia2=option.commentCia2;
+        break;  
+      case C1541:
+        prg=new D1541Dasm();   
+        break;
+      case C128:
+        prg=new C64Dasm();  // to change
+        break;
+      case VIC20:
+        prg=new C64Dasm();  // to change
+        break;
+      case PLUS4:
+        prg=new C64Dasm();  // to change  
+        break;
+      default:  
+        prg=new M6510Dasm();
+    }      
     
     prg.setMemory(memory);
     prg.setOption(option);
@@ -372,10 +396,45 @@ public class Disassembly {
    * Disassembly a MPR file
    * 
    * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
    */
-  private void disassemlyMPR(boolean asSource) {
-    C64Dasm prg=new C64Dasm();
-    prg.language=option.commentLanguage;
+  private void disassemlyMPR(boolean asSource, TargetType targetType) {
+    M6510Dasm prg;
+      
+    switch (targetType) {
+      case C64:
+        prg=new C64Dasm();  
+        ((C64Dasm)prg).language=option.commentLanguage;
+        ((C64Dasm)prg).commentZeroPage=option.commentZeroPage;
+        ((C64Dasm)prg).commentStackArea=option.commentStackArea;
+        ((C64Dasm)prg).comment200Area=option.comment200Area;
+        ((C64Dasm)prg).comment300Area=option.comment300Area;        
+        ((C64Dasm)prg).commentScreenArea=option.commentScreenArea;
+        ((C64Dasm)prg).commentBasicFreeArea=option.commentBasicFreeArea;
+        ((C64Dasm)prg).commentBasicRom=option.commentBasicRom;
+        ((C64Dasm)prg).commentFreeRam=option.commentFreeRam;
+        ((C64Dasm)prg).commentVicII=option.commentVicII;
+        ((C64Dasm)prg).commentSid=option.commentSid;
+        ((C64Dasm)prg).commentColorArea=option.commentColorArea;
+        ((C64Dasm)prg).commentCia1=option.commentCia1;
+        ((C64Dasm)prg).commentCia2=option.commentCia2;        
+        break;  
+      case C1541:
+        prg=new D1541Dasm();   
+        break;
+      case C128:
+        prg=new C64Dasm();  // to change
+        break;
+      case VIC20:
+        prg=new C64Dasm();  // to change
+        break;
+      case PLUS4:
+        prg=new C64Dasm();  // to change  
+        break;
+      default:  
+        prg=new M6510Dasm();
+    }
+       
     prg.setMemory(memory);
     prg.setOption(option);
     

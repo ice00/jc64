@@ -25,7 +25,6 @@ package sw_emulator.swing;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -34,8 +33,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Locale;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -50,7 +47,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Caret;
 import javax.swing.text.Utilities;
 import org.fife.rsta.ui.search.FindDialog;
 import org.fife.rsta.ui.search.SearchEvent;
@@ -2236,8 +2232,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       disassembly.source="";
       disassembly.disassembly="";
     } else {
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, false);
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, true);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.targetType, false);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.targetType, true);
       }  
     int lineS=0;
     int lineD=0;
