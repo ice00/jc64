@@ -342,7 +342,18 @@ public class Disassembly {
         break;  
       case C1541:
         prg=new C1541Dasm();   
-        ((C1541Dasm)prg).language=option.commentLanguage;        
+        ((C1541Dasm)prg).language=option.commentLanguage; 
+        ((C1541Dasm)prg).commentC1541ZeroPage=option.commentC1541ZeroPage;
+        ((C1541Dasm)prg).commentC1541StackArea=option.commentC64StackArea;
+        ((C1541Dasm)prg).commentC1541_200Area=option.commentC1541_200Area;
+        ((C1541Dasm)prg).commentC1541Buffer0=option.commentC1541Buffer0;
+        ((C1541Dasm)prg).commentC1541Buffer1=option.commentC1541Buffer1;
+        ((C1541Dasm)prg).commentC1541Buffer2=option.commentC1541Buffer2;
+        ((C1541Dasm)prg).commentC1541Buffer3=option.commentC1541Buffer3;
+        ((C1541Dasm)prg).commentC1541Buffer4=option.commentC1541Buffer4;
+        ((C1541Dasm)prg).commentC1541Via1=option.commentC1541Via1;
+        ((C1541Dasm)prg).commentC1541Via2=option.commentC1541Via2;
+        ((C1541Dasm)prg).commentC1541Kernal=option.commentC1541Kernal;        
         break;
       case C128:
         prg=new C128Dasm();  
@@ -428,7 +439,18 @@ public class Disassembly {
         break;  
       case C1541:
         prg=new C1541Dasm();   
-        ((C1541Dasm)prg).language=option.commentLanguage;        
+        ((C1541Dasm)prg).language=option.commentLanguage;      
+        ((C1541Dasm)prg).commentC1541ZeroPage=option.commentC1541ZeroPage;
+        ((C1541Dasm)prg).commentC1541StackArea=option.commentC64StackArea;
+        ((C1541Dasm)prg).commentC1541_200Area=option.commentC1541_200Area;
+        ((C1541Dasm)prg).commentC1541Buffer0=option.commentC1541Buffer0;
+        ((C1541Dasm)prg).commentC1541Buffer1=option.commentC1541Buffer1;
+        ((C1541Dasm)prg).commentC1541Buffer2=option.commentC1541Buffer2;
+        ((C1541Dasm)prg).commentC1541Buffer3=option.commentC1541Buffer3;
+        ((C1541Dasm)prg).commentC1541Buffer4=option.commentC1541Buffer4;
+        ((C1541Dasm)prg).commentC1541Via1=option.commentC1541Via1;
+        ((C1541Dasm)prg).commentC1541Via2=option.commentC1541Via2;
+        ((C1541Dasm)prg).commentC1541Kernal=option.commentC1541Kernal;
         break;
       case C128:
         prg=new C128Dasm();  

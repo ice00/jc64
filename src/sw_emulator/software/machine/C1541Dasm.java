@@ -39,6 +39,41 @@ public class C1541Dasm extends M6510Dasm {
 
   /** Actual selected language (default=english) */
   public byte language=LANG_ENGLISH;
+  
+/** C1541: Comment zero page area */
+  public boolean commentC1541ZeroPage;
+  
+  /** C1541: Comment stack area */
+  public boolean commentC1541StackArea;
+  
+  /** C1541: Comment 200 area */
+  public boolean commentC1541_200Area;
+  
+  /** C1541: Comment VIA 1 */
+  public boolean commentC1541Via1;
+  
+  /** C1541: Comment VIA 2 */
+  public boolean commentC1541Via2;
+  
+  /** C1541: Comment Kernal */
+  public boolean commentC1541Kernal;
+  
+  /** C1541: Comment buffer 0 */
+  public boolean commentC1541Buffer0;
+  
+  /** C1541: Comment buffer 1 */
+  public boolean commentC1541Buffer1;
+  
+  /** C1541: Comment buffer 2 */
+  public boolean commentC1541Buffer2;
+  
+  /** C1541: Comment buffer 3 */
+  public boolean commentC1541Buffer3;
+  
+  /** C1541: Comment buffer 4 */
+  public boolean commentC1541Buffer4;
+  
+  
    
   /**
    * Return a comment string for the passed instruction
@@ -61,7 +96,20 @@ public class C1541Dasm extends M6510Dasm {
       case A_REL:
       case A_IND:
       case A_IDX:
-      case A_IDY:         
+      case A_IDY:    
+        // do not get comment if appropriate option is not selected  
+        if ((int)addr<=0xFF && !commentC1541ZeroPage) return "";
+        if ((int)addr>=0x100 && (int)addr<=0x1FF && !commentC1541StackArea) return "";
+        if ((int)addr>=0x200 && (int)addr<=0x2FF && !commentC1541_200Area) return "";
+        if ((int)addr>=0x300 && (int)addr<=0x3FF && !commentC1541Buffer0) return "";
+        if ((int)addr>=0x400 && (int)addr<=0x7FF && !commentC1541Buffer1) return "";
+        if ((int)addr>=0x500 && (int)addr<=0x5FF && !commentC1541Buffer2) return "";
+        if ((int)addr>=0x600 && (int)addr<=0x6FF && !commentC1541Buffer3) return "";
+        if ((int)addr>=0x700 && (int)addr<=0x7FF && !commentC1541Buffer4) return "";        
+        if ((int)addr>=0x1800 && (int)addr<=0x180F && !commentC1541Via1) return "";
+        if ((int)addr>=0x1C00 && (int)addr<=0x1C0F && !commentC1541Via2) return "";
+        if ((int)addr>=0xC000 && (int)addr<=0xCFFF && !commentC1541Kernal) return "";          
+          
         switch (language) {
           case LANG_ITALIAN:
             switch ((int)addr) {
