@@ -1,5 +1,5 @@
 /**
- * @(#)C64Dasm.java 2020/10/05
+ * @(#)C1541Dasm.java 2020/10/05
  *
  * ICE Team Free Software Group
  *
@@ -21,7 +21,6 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  *  02111-1307  USA.
  */
-
 package sw_emulator.software.machine;
 
 import sw_emulator.software.cpu.M6510Dasm;
@@ -33,7 +32,7 @@ import sw_emulator.software.cpu.M6510Dasm;
  * @author Ice
  * @version 1.00 05/10/2020
  */
-public class D1541Dasm extends M6510Dasm {
+public class C1541Dasm extends M6510Dasm {
   // Available language
   public static final byte LANG_ENGLISH=1;
   public static final byte LANG_ITALIAN=2;

@@ -81,8 +81,6 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedDarkC
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
 import java.awt.Component;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import sw_emulator.software.cpu.M6510Dasm;
@@ -276,49 +274,90 @@ public class Option {
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
   
-  // comments
+  
+  
+  
+  // comments C64
   
   /** Comment zero page area */
-  public boolean commentZeroPage=true;
+  public boolean commentC64ZeroPage=true;
   
   /** Comment stack area */
-  public boolean commentStackArea=true;
+  public boolean commentC64StackArea=true;
   
   /** Comment 200 area */
-  public boolean comment200Area=true;
+  public boolean commentC64_200Area=true;
   
   /** Comment 300 area */
-  public boolean comment300Area=true;
+  public boolean commentC64_300Area=true;
   
   /** Comment screen area */
-  public boolean commentScreenArea=true; 
+  public boolean commentC64ScreenArea=true; 
   
   /** Comment basic free area */
-  public boolean commentBasicFreeArea=false;
+  public boolean commentC64BasicFreeArea=false;
   
   /** Comment basic rom area */
-  public boolean commentBasicRom=true;
+  public boolean commentC64BasicRom=true;
   
   /** Comment free ram area */
-  public boolean commentFreeRam=false;
+  public boolean commentC64FreeRam=false;
   
   /** Comment Vic II chip */
-  public boolean commentVicII=true;
+  public boolean commentC64VicII=true;
   
   /** Comment Sid chip */
-  public boolean commentSid=true; 
+  public boolean commentC64Sid=true; 
   
   /** Comment color area */
-  public boolean commentColorArea=true; 
+  public boolean commentC64ColorArea=true; 
   
   /** Comment Cia 1 chip */
-  public boolean commentCia1=true;  
+  public boolean commentC64Cia1=true;  
   
   /** Comment Cia 2 chip */
-  public boolean commentCia2=true;
+  public boolean commentC64Cia2=true;
   
   /** Comment Kernal Rom */
-  public boolean commentKernalRom=true; 
+  public boolean commentC64KernalRom=true; 
+  
+  
+  
+  // comments C1541
+  
+  /** C1541: Comment zero page area */
+  public boolean commentC1541ZeroPage=true;
+  
+  /** C1541: Comment stack area */
+  public boolean commentC1541StackArea=true;
+  
+  /** C1541: Comment 200 area */
+  public boolean commentC1541_200Area=true;
+  
+  /** C1541: Comment VIA 1 */
+  public boolean commentC1541Via1=true;
+  
+  /** C1541: Comment VIA 2 */
+  public boolean commentC1541Via2=true;
+  
+  /** C1541: Comment Kernal */
+  public boolean commentC1541Kernal=true;
+  
+  /** C1541: Comment buffer 0 */
+  public boolean commentC1541Buffer0=false;
+  
+  /** C1541: Comment buffer 1 */
+  public boolean commentC1541Buffer1=false;
+  
+  /** C1541: Comment buffer 2 */
+  public boolean commentC1541Buffer2=false;
+  
+  /** C1541: Comment buffer 3 */
+  public boolean commentC1541Buffer3=false;
+  
+  /** C1541: Comment buffer 4 */
+  public boolean commentC1541Buffer4=false;
+  
   
   /**
    * Get the flat laf theme

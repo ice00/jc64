@@ -89,20 +89,32 @@ public class FileManager {
       option.flatLaf = in.readUTF();
       
       // 0.9
-      option.commentZeroPage = in.readBoolean();
-      option.commentStackArea = in.readBoolean();
-      option.comment200Area = in.readBoolean();
-      option.comment300Area = in.readBoolean();
-      option.commentScreenArea = in.readBoolean();
-      option.commentBasicFreeArea = in.readBoolean();
-      option.commentBasicRom = in.readBoolean();
-      option.commentFreeRam = in.readBoolean();
-      option.commentVicII = in.readBoolean();
-      option.commentSid = in.readBoolean();
-      option.commentColorArea = in.readBoolean();          
-      option.commentCia1 = in.readBoolean();
-      option.commentCia2 = in.readBoolean();
-      option.commentKernalRom = in.readBoolean();                      
+      option.commentC64ZeroPage = in.readBoolean();
+      option.commentC64StackArea = in.readBoolean();
+      option.commentC64_200Area = in.readBoolean();
+      option.commentC64_300Area = in.readBoolean();
+      option.commentC64ScreenArea = in.readBoolean();
+      option.commentC64BasicFreeArea = in.readBoolean();
+      option.commentC64BasicRom = in.readBoolean();
+      option.commentC64FreeRam = in.readBoolean();
+      option.commentC64VicII = in.readBoolean();
+      option.commentC64Sid = in.readBoolean();
+      option.commentC64ColorArea = in.readBoolean();          
+      option.commentC64Cia1 = in.readBoolean();
+      option.commentC64Cia2 = in.readBoolean();
+      option.commentC64KernalRom = in.readBoolean(); 
+      
+      option.commentC1541ZeroPage = in.readBoolean();
+      option.commentC1541StackArea = in.readBoolean();
+      option.commentC1541_200Area = in.readBoolean();  
+      option.commentC1541Buffer0 = in.readBoolean();  
+      option.commentC1541Buffer1 = in.readBoolean();  
+      option.commentC1541Buffer2 = in.readBoolean();  
+      option.commentC1541Buffer3 = in.readBoolean();  
+      option.commentC1541Buffer4 = in.readBoolean();  
+      option.commentC1541Via1 = in.readBoolean();  
+      option.commentC1541Via2 = in.readBoolean();  
+      option.commentC1541Kernal = in.readBoolean();  
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -147,21 +159,32 @@ public class FileManager {
       out.writeUTF(option.flatLaf);
       
       // 0.9
-      out.writeBoolean(option.commentZeroPage);
-      out.writeBoolean(option.commentStackArea);
-      out.writeBoolean(option.comment200Area);
-      out.writeBoolean(option.comment300Area);
-      out.writeBoolean(option.commentScreenArea);
-      out.writeBoolean(option.commentBasicFreeArea);
-      out.writeBoolean(option.commentBasicRom);
-      out.writeBoolean(option.commentFreeRam);
-      out.writeBoolean(option.commentVicII);
-      out.writeBoolean(option.commentSid);
-      out.writeBoolean(option.commentColorArea);          
-      out.writeBoolean(option.commentCia1);
-      out.writeBoolean(option.commentCia2);
-      out.writeBoolean(option.commentKernalRom);
+      out.writeBoolean(option.commentC64ZeroPage);
+      out.writeBoolean(option.commentC64StackArea);
+      out.writeBoolean(option.commentC64_200Area);
+      out.writeBoolean(option.commentC64_300Area);
+      out.writeBoolean(option.commentC64ScreenArea);
+      out.writeBoolean(option.commentC64BasicFreeArea);
+      out.writeBoolean(option.commentC64BasicRom);
+      out.writeBoolean(option.commentC64FreeRam);
+      out.writeBoolean(option.commentC64VicII);
+      out.writeBoolean(option.commentC64Sid);
+      out.writeBoolean(option.commentC64ColorArea);          
+      out.writeBoolean(option.commentC64Cia1);
+      out.writeBoolean(option.commentC64Cia2);
+      out.writeBoolean(option.commentC64KernalRom);
       
+      out.writeBoolean(option.commentC1541ZeroPage);
+      out.writeBoolean(option.commentC1541StackArea);
+      out.writeBoolean(option.commentC1541_200Area);
+      out.writeBoolean(option.commentC1541Buffer0);
+      out.writeBoolean(option.commentC1541Buffer1);
+      out.writeBoolean(option.commentC1541Buffer2);
+      out.writeBoolean(option.commentC1541Buffer3);
+      out.writeBoolean(option.commentC1541Buffer4);
+      out.writeBoolean(option.commentC1541Via1);
+      out.writeBoolean(option.commentC1541Via2);
+      out.writeBoolean(option.commentC1541Kernal);
       out.flush();
       out.close();
     } catch (Exception e) {

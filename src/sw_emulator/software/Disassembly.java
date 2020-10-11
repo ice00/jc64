@@ -29,10 +29,13 @@ import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.cpu.M6510Dasm;
+import sw_emulator.software.machine.C128Dasm;
 import sw_emulator.software.machine.C64Dasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
-import sw_emulator.software.machine.D1541Dasm;
+import sw_emulator.software.machine.C1541Dasm;
+import sw_emulator.software.machine.CPlus4Dasm;
+import sw_emulator.software.machine.CVic20Dasm;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
@@ -323,31 +326,35 @@ public class Disassembly {
       case C64:
         prg=new C64Dasm();  
         ((C64Dasm)prg).language=option.commentLanguage;        
-        ((C64Dasm)prg).commentZeroPage=option.commentZeroPage;
-        ((C64Dasm)prg).commentStackArea=option.commentStackArea;
-        ((C64Dasm)prg).comment200Area=option.comment200Area;
-        ((C64Dasm)prg).comment300Area=option.comment300Area;        
-        ((C64Dasm)prg).commentScreenArea=option.commentScreenArea;
-        ((C64Dasm)prg).commentBasicFreeArea=option.commentBasicFreeArea;
-        ((C64Dasm)prg).commentBasicRom=option.commentBasicRom;
-        ((C64Dasm)prg).commentFreeRam=option.commentFreeRam;
-        ((C64Dasm)prg).commentVicII=option.commentVicII;
-        ((C64Dasm)prg).commentSid=option.commentSid;
-        ((C64Dasm)prg).commentColorArea=option.commentColorArea;
-        ((C64Dasm)prg).commentCia1=option.commentCia1;
-        ((C64Dasm)prg).commentCia2=option.commentCia2;
+        ((C64Dasm)prg).commentZeroPage=option.commentC64ZeroPage;
+        ((C64Dasm)prg).commentStackArea=option.commentC64StackArea;
+        ((C64Dasm)prg).comment200Area=option.commentC64_200Area;
+        ((C64Dasm)prg).comment300Area=option.commentC64_300Area;        
+        ((C64Dasm)prg).commentScreenArea=option.commentC64ScreenArea;
+        ((C64Dasm)prg).commentBasicFreeArea=option.commentC64BasicFreeArea;
+        ((C64Dasm)prg).commentBasicRom=option.commentC64BasicRom;
+        ((C64Dasm)prg).commentFreeRam=option.commentC64FreeRam;
+        ((C64Dasm)prg).commentVicII=option.commentC64VicII;
+        ((C64Dasm)prg).commentSid=option.commentC64Sid;
+        ((C64Dasm)prg).commentColorArea=option.commentC64ColorArea;
+        ((C64Dasm)prg).commentCia1=option.commentC64Cia1;
+        ((C64Dasm)prg).commentCia2=option.commentC64Cia2;
         break;  
       case C1541:
-        prg=new D1541Dasm();   
+        prg=new C1541Dasm();   
+        ((C1541Dasm)prg).language=option.commentLanguage;        
         break;
       case C128:
-        prg=new C64Dasm();  // to change
+        prg=new C128Dasm();  
+        ((C128Dasm)prg).language=option.commentLanguage;
         break;
       case VIC20:
-        prg=new C64Dasm();  // to change
+        prg=new CVic20Dasm(); 
+        ((CVic20Dasm)prg).language=option.commentLanguage;        
         break;
       case PLUS4:
-        prg=new C64Dasm();  // to change  
+        prg=new CPlus4Dasm();  
+        ((CPlus4Dasm)prg).language=option.commentLanguage;       
         break;
       default:  
         prg=new M6510Dasm();
@@ -405,31 +412,35 @@ public class Disassembly {
       case C64:
         prg=new C64Dasm();  
         ((C64Dasm)prg).language=option.commentLanguage;
-        ((C64Dasm)prg).commentZeroPage=option.commentZeroPage;
-        ((C64Dasm)prg).commentStackArea=option.commentStackArea;
-        ((C64Dasm)prg).comment200Area=option.comment200Area;
-        ((C64Dasm)prg).comment300Area=option.comment300Area;        
-        ((C64Dasm)prg).commentScreenArea=option.commentScreenArea;
-        ((C64Dasm)prg).commentBasicFreeArea=option.commentBasicFreeArea;
-        ((C64Dasm)prg).commentBasicRom=option.commentBasicRom;
-        ((C64Dasm)prg).commentFreeRam=option.commentFreeRam;
-        ((C64Dasm)prg).commentVicII=option.commentVicII;
-        ((C64Dasm)prg).commentSid=option.commentSid;
-        ((C64Dasm)prg).commentColorArea=option.commentColorArea;
-        ((C64Dasm)prg).commentCia1=option.commentCia1;
-        ((C64Dasm)prg).commentCia2=option.commentCia2;        
+        ((C64Dasm)prg).commentZeroPage=option.commentC64ZeroPage;
+        ((C64Dasm)prg).commentStackArea=option.commentC64StackArea;
+        ((C64Dasm)prg).comment200Area=option.commentC64_200Area;
+        ((C64Dasm)prg).comment300Area=option.commentC64_300Area;        
+        ((C64Dasm)prg).commentScreenArea=option.commentC64ScreenArea;
+        ((C64Dasm)prg).commentBasicFreeArea=option.commentC64BasicFreeArea;
+        ((C64Dasm)prg).commentBasicRom=option.commentC64BasicRom;
+        ((C64Dasm)prg).commentFreeRam=option.commentC64FreeRam;
+        ((C64Dasm)prg).commentVicII=option.commentC64VicII;
+        ((C64Dasm)prg).commentSid=option.commentC64Sid;
+        ((C64Dasm)prg).commentColorArea=option.commentC64ColorArea;
+        ((C64Dasm)prg).commentCia1=option.commentC64Cia1;
+        ((C64Dasm)prg).commentCia2=option.commentC64Cia2;        
         break;  
       case C1541:
-        prg=new D1541Dasm();   
+        prg=new C1541Dasm();   
+        ((C1541Dasm)prg).language=option.commentLanguage;        
         break;
       case C128:
-        prg=new C64Dasm();  // to change
+        prg=new C128Dasm();  
+        ((C128Dasm)prg).language=option.commentLanguage;
         break;
       case VIC20:
-        prg=new C64Dasm();  // to change
+        prg=new CVic20Dasm(); 
+        ((CVic20Dasm)prg).language=option.commentLanguage;        
         break;
       case PLUS4:
-        prg=new C64Dasm();  // to change  
+        prg=new CPlus4Dasm();  
+        ((CPlus4Dasm)prg).language=option.commentLanguage;       
         break;
       default:  
         prg=new M6510Dasm();
