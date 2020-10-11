@@ -31,6 +31,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.AbstractAction;
@@ -96,8 +97,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Project dialog */
   JProjectDialog jProjectDialog=new JProjectDialog(this, true);
   
-  /** Project chhoser file dialog*/
+  /** Project chooser file dialog*/
   JFileChooser projectChooserFile=new JFileChooser();
+  
+  /** Project merge file dialog*/
+  JFileChooser projectMergeFile=new JFileChooser();  
   
   /** Export as file chooser */
   JFileChooser exportAsChooserFile=new JFileChooser();
@@ -137,6 +141,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         initComponents();
         Shared.framesList.add(this);
         Shared.framesList.add(projectChooserFile);
+        Shared.framesList.add(projectMergeFile);
         Shared.framesList.add(exportAsChooserFile);
         Shared.framesList.add(optionMPRLoadChooserFile);
         Shared.framesList.add(optionMPRSaveChooserFile);
@@ -153,6 +158,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jOptionDialog.useOption(option);
         
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
+        projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
         exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));
         optionMPRLoadChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program (prg, bin)", "prg", "bin"));
         optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
@@ -177,6 +183,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonSaveProject = new javax.swing.JButton();
         jButtonSaveProjectAs = new javax.swing.JButton();
         jButtonMPR = new javax.swing.JButton();
+        jButtonMerge = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
         jSeparatorButton1 = new javax.swing.JToolBar.Separator();
         jButtonClearDMem = new javax.swing.JButton();
@@ -268,7 +275,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         };
         jMenuBar = new javax.swing.JMenuBar();
-        jMenuFile = new javax.swing.JMenu();
+        jMenuMerge = new javax.swing.JMenu();
         jMenuItemNewProject = new javax.swing.JMenuItem();
         jSeparatorProject1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOpenProject = new javax.swing.JMenuItem();
@@ -278,6 +285,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSaveAsProject = new javax.swing.JMenuItem();
         jSeparatorProject3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMPR = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuMemory = new javax.swing.JMenu();
         jMenuItemClearDMem = new javax.swing.JMenuItem();
@@ -394,6 +402,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonMPR);
+
+        jButtonMerge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/merge.png"))); // NOI18N
+        jButtonMerge.setToolTipText("Collaborative merge");
+        jButtonMerge.setFocusable(false);
+        jButtonMerge.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMerge.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMerge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMergeActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMerge);
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exit.png"))); // NOI18N
         jButtonExit.setToolTipText("Save project as");
@@ -830,7 +850,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
 
-    jMenuFile.setText("File");
+    jMenuMerge.setText("File");
 
     jMenuItemNewProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemNewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filenew.png"))); // NOI18N
@@ -842,8 +862,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemNewProjectActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemNewProject);
-    jMenuFile.add(jSeparatorProject1);
+    jMenuMerge.add(jMenuItemNewProject);
+    jMenuMerge.add(jSeparatorProject1);
 
     jMenuItemOpenProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemOpenProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/fileopen.png"))); // NOI18N
@@ -855,7 +875,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemOpenProjectActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemOpenProject);
+    jMenuMerge.add(jMenuItemOpenProject);
 
     jMenuItemCloseProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemCloseProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/close.png"))); // NOI18N
@@ -867,8 +887,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemCloseProjectActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemCloseProject);
-    jMenuFile.add(jSeparatorProject2);
+    jMenuMerge.add(jMenuItemCloseProject);
+    jMenuMerge.add(jSeparatorProject2);
 
     jMenuItemSaveProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesave.png"))); // NOI18N
@@ -880,7 +900,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemSaveProjectActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemSaveProject);
+    jMenuMerge.add(jMenuItemSaveProject);
 
     jMenuItemSaveAsProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemSaveAsProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesaveas.png"))); // NOI18N
@@ -891,8 +911,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemSaveAsProjectActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemSaveAsProject);
-    jMenuFile.add(jSeparatorProject3);
+    jMenuMerge.add(jMenuItemSaveAsProject);
+    jMenuMerge.add(jSeparatorProject3);
 
     jMenuItemMPR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/create.png"))); // NOI18N
@@ -902,7 +922,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMPRActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemMPR);
+    jMenuMerge.add(jMenuItemMPR);
+
+    jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/merge.png"))); // NOI18N
+    jMenuItem2.setText("Collaborative merge");
+    jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem2ActionPerformed(evt);
+        }
+    });
+    jMenuMerge.add(jMenuItem2);
 
     jMenuItemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exit.png"))); // NOI18N
@@ -913,9 +943,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemExitActionPerformed(evt);
         }
     });
-    jMenuFile.add(jMenuItemExit);
+    jMenuMerge.add(jMenuItemExit);
 
-    jMenuBar.add(jMenuFile);
+    jMenuBar.add(jMenuMerge);
 
     jMenuMemory.setText("Memory");
 
@@ -1651,6 +1681,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     }//GEN-LAST:event_jTableMemoryMouseClicked
 
+    private void jButtonMergeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMergeActionPerformed
+      execute(PROJ_MERGE);
+    }//GEN-LAST:event_jButtonMergeActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+      execute(PROJ_MERGE);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1714,6 +1752,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonMarkMax;
     private javax.swing.JButton jButtonMarkMinus;
     private javax.swing.JButton jButtonMarkPlus;
+    private javax.swing.JButton jButtonMerge;
     private javax.swing.JButton jButtonNewProject;
     private javax.swing.JButton jButtonOpenProject;
     private javax.swing.JButton jButtonSIDLD;
@@ -1721,9 +1760,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonSaveProjectAs;
     private javax.swing.JButton jButtonViewProject;
     private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -1758,6 +1797,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewProject;
     private javax.swing.JMenu jMenuMemory;
+    private javax.swing.JMenu jMenuMerge;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JScrollPane jScrollPaneLeft;
@@ -1801,6 +1841,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case PROJ_SAVEAS:
         projectSaveAs();
         break;        
+      case PROJ_MERGE:
+        projectMerge();
+        break;       
       case OPTION_CONFIGURE:
         jOptionDialog.setVisible(true);
         break;
@@ -1941,8 +1984,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Project open user action
    */
   private void projectOpen() {
-   if (savedProject!=null)   System.err.println("###"+savedProject.memory[0].userComment);  
-
     if (project != null && !project.equals(savedProject)) {
       JOptionPane.showMessageDialog(this, "Project not saved. Close it, then create a new one.", "Information", JOptionPane.WARNING_MESSAGE);
     } else {
@@ -2650,6 +2691,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();
       jTableMemory.setRowSelectionInterval(row, row);
     }
+  }
+  
+  /**
+   * Collaborative merge of another user contribution
+   */
+  private void projectMerge() {
+    if (project == null) {
+      JOptionPane.showMessageDialog(this, "You must be inside a project to merge it with another!", "Information", JOptionPane.WARNING_MESSAGE);
+      return;
+    } 
+ 
+    int retVal=projectMergeFile.showOpenDialog(this);
+    if (retVal == JFileChooser.APPROVE_OPTION) {
+       File mergeFile=projectMergeFile.getSelectedFile();
+       Project mergeProject=new Project();
+       if (!FileManager.instance.readProjectFile(mergeFile , mergeProject)) {
+         JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
+         return;  
+       } 
+                   
+       // test that the projects are of the same
+       if ((Arrays.hashCode(mergeProject.inB) != Arrays.hashCode(project.inB)) ||
+           (mergeProject.mpr.hashCode() != project.hashCode())) {
+         JOptionPane.showMessageDialog(this, "Hashcode of the projects are different: they are not of the same source", "Error", JOptionPane.ERROR_MESSAGE);
+         return;            
+       }
+       
+       
+       // take description from secondary only if not present in primary
+       if (project.description==null || "".equals(project.description)) project.description=mergeProject.description;
+       
+       /// TODO
+          
+       dataTableModelMemory.fireTableDataChanged();
+    }
+           
   }
   
 /**

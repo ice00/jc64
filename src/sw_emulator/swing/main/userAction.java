@@ -131,6 +131,10 @@ public interface userAction {
   /** Mark memory of garbage kind */
   public static final int MEM_MARKGARB = 35;
   
+  /** Collaborative merge */
+  public static final int PROJ_MERGE = 36;
+  
+  
   /**
    * Execute the passed user action
    * 

@@ -36,7 +36,7 @@ import sw_emulator.software.MemoryDasm;
  * 
  * @author ice
  */
-public class Project implements Cloneable{ 
+public class Project implements Cloneable { 
   /** Actual version of project */ 
   public static final byte ACTUAL_VERSION=1;       
     
@@ -101,6 +101,7 @@ public class Project implements Cloneable{
     hash = 89 * hash + Arrays.hashCode(this.memoryFlags);
     hash = 89 * hash + Arrays.deepHashCode(this.memory);
     hash = 89 * hash + Objects.hashCode(this.targetType);
+    hash = 89 * hash + MPR.hashCode(this.mpr); 
     return hash;
   }
   
@@ -115,6 +116,7 @@ public class Project implements Cloneable{
     if (this.inB!=null) p.inB=this.inB.clone();
     if (p.memoryFlags!=null) p.memoryFlags=this.memoryFlags.clone();
     p.name=this.name;
+    if (this.mpr!=null) p.mpr=(MPR)this.mpr.clone();
       
     for (int i=0; i<this.memory.length; i++) {
       p.memory[i]=this.memory[i].clone();
@@ -136,6 +138,15 @@ public class Project implements Cloneable{
     if (!Arrays.equals(this.memoryFlags, p.memoryFlags)) return false;
     if (!Arrays.equals(this.inB, p.inB)) return false;
     if (!Arrays.equals(this.memory, p.memory)) return false;
+    if (this.mpr==null && p.mpr!=null) return false;
+    if (this.mpr!=null && p.mpr==null) return false;
+    if (this.mpr!=null && p.mpr!=null) {
+      if (!this.mpr.header.equals(p.mpr.header)) return false;
+      if (this.mpr.block!=p.mpr.block) return false;
+      for (int i=0; i<this.mpr.block; i++) {
+        if (!Arrays.equals((byte[])this.mpr.blocks.get(i), p.mpr.blocks.get(i))) return false;
+      }  
+    }
     
     for (int i=0; i<this.memory.length; i++) {
       if (!this.memory[i].equals(p.memory[i])) return false;   

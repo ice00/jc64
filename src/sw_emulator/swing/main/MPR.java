@@ -10,15 +10,13 @@ import java.io.DataInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sw_emulator.math.Unsigned;
 
 /**
@@ -26,7 +24,7 @@ import sw_emulator.math.Unsigned;
  * 
  * @author stefano_tognon
  */
-public class MPR {
+public class MPR implements Cloneable {
    /** Header of file */ 
    public String header;
    
@@ -184,5 +182,35 @@ public class MPR {
          return false;
        }
        return true;
+   }
+   
+   /**
+    * Get hashcode by inner calculation
+    * 
+    * @param mpr the mpr to use
+    * @return the hashcode
+    */
+   public static int hashCode(MPR mpr) {
+     int hash=79*mpr.header.hashCode()+mpr.block;
+     for (byte[] inB: mpr.blocks) {
+       hash=79*hash+Arrays.hashCode(inB);
+     }
+     
+     return hash;
+   }
+   
+   /**
+    * Clone the object
+    * 
+    * @return the cloned object
+    */
+   @Override
+   public Object clone() {
+     MPR copy=new MPR();
+     copy.block=this.block;
+     copy.header=this.header;
+     copy.blocks=(ArrayList)this.blocks.clone();
+     
+     return copy;
    }
 }
