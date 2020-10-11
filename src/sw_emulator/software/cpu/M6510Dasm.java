@@ -1138,7 +1138,7 @@ public class M6510Dasm implements disassembler {
     
     MemoryDasm mem=memory[(int)addr];
            
-    if (mem.isInside) {
+    if (mem.isInside && !mem.isGarbage) {
       if (mem.type=='+' || mem.type=='-') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
         
       mem.dasmLocation="W"+ShortToExe((int)addr);

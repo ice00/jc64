@@ -279,7 +279,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorProject3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMPR = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
-        jMenuMarkGarbage = new javax.swing.JMenu();
+        jMenuMemory = new javax.swing.JMenu();
         jMenuItemClearDMem = new javax.swing.JMenuItem();
         jMenuItemClearUMem = new javax.swing.JMenuItem();
         jMenuItemClearDLabel = new javax.swing.JMenuItem();
@@ -291,7 +291,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemMarkGarbage = new javax.swing.JMenuItem();
         jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMinus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
@@ -917,7 +917,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuBar.add(jMenuFile);
 
-    jMenuMarkGarbage.setText("Memory");
+    jMenuMemory.setText("Memory");
 
     jMenuItemClearDMem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser.png"))); // NOI18N
@@ -928,7 +928,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearDMemActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemClearDMem);
+    jMenuMemory.add(jMenuItemClearDMem);
 
     jMenuItemClearUMem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemClearUMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser1.png"))); // NOI18N
@@ -939,7 +939,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearUMemActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemClearUMem);
+    jMenuMemory.add(jMenuItemClearUMem);
 
     jMenuItemClearDLabel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser2.png"))); // NOI18N
@@ -950,8 +950,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemClearDLabelActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemClearDLabel);
-    jMenuMarkGarbage.add(jSeparator4);
+    jMenuMemory.add(jMenuItemClearDLabel);
+    jMenuMemory.add(jSeparator4);
 
     jMenuItemAddComment.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemAddComment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/comm.png"))); // NOI18N
@@ -963,7 +963,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemAddCommentActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemAddComment);
+    jMenuMemory.add(jMenuItemAddComment);
 
     jMenuItemAddBlock.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemAddBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/block.png"))); // NOI18N
@@ -975,7 +975,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemAddBlockActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemAddBlock);
+    jMenuMemory.add(jMenuItemAddBlock);
 
     jMenuItemUserLabel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem2.png"))); // NOI18N
@@ -987,7 +987,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemUserLabelActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemUserLabel);
+    jMenuMemory.add(jMenuItemUserLabel);
 
     jMenuItemUserLabelOp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemUserLabelOp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem3.png"))); // NOI18N
@@ -998,8 +998,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemUserLabelOpActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemUserLabelOp);
-    jMenuMarkGarbage.add(jSeparator3);
+    jMenuMemory.add(jMenuItemUserLabelOp);
+    jMenuMemory.add(jSeparator3);
 
     jMenuItemMarkCode.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/code.png"))); // NOI18N
@@ -1010,7 +1010,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMarkCodeActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemMarkCode);
+    jMenuMemory.add(jMenuItemMarkCode);
 
     jMenuItemMarkData.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMarkData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/data.png"))); // NOI18N
@@ -1021,18 +1021,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMarkDataActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemMarkData);
+    jMenuMemory.add(jMenuItemMarkData);
 
-    jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-    jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/garb.png"))); // NOI18N
-    jMenuItem2.setMnemonic('g');
-    jMenuItem2.setText("Mark as garbage");
-    jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+    jMenuItemMarkGarbage.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMarkGarbage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/garb.png"))); // NOI18N
+    jMenuItemMarkGarbage.setMnemonic('g');
+    jMenuItemMarkGarbage.setText("Mark as garbage");
+    jMenuItemMarkGarbage.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jMenuItem2ActionPerformed(evt);
+            jMenuItemMarkGarbageActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItem2);
+    jMenuMemory.add(jMenuItemMarkGarbage);
 
     jMenuItemPlus.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ADD, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
@@ -1043,7 +1043,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemPlusActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemPlus);
+    jMenuMemory.add(jMenuItemPlus);
 
     jMenuItemMinus.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SUBTRACT, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minus.png"))); // NOI18N
@@ -1053,7 +1053,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMinusActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemMinus);
+    jMenuMemory.add(jMenuItemMinus);
 
     jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
@@ -1064,7 +1064,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMemLowActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemMemLow);
+    jMenuMemory.add(jMenuItemMemLow);
 
     jMenuItemMemHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_GREATER, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
@@ -1074,9 +1074,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMemHighActionPerformed(evt);
         }
     });
-    jMenuMarkGarbage.add(jMenuItemMemHigh);
+    jMenuMemory.add(jMenuItemMemHigh);
 
-    jMenuBar.add(jMenuMarkGarbage);
+    jMenuBar.add(jMenuMemory);
 
     jMenuOption.setText("Option");
     jMenuOption.setToolTipText("");
@@ -1550,9 +1550,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_MARKGARB);
     }//GEN-LAST:event_jButtonMarkGarbageActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemMarkGarbageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarkGarbageActionPerformed
       execute(MEM_MARKGARB);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemMarkGarbageActionPerformed
 
     private void rSyntaxTextAreaDisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseReleased
       String selected=rSyntaxTextAreaDis.getSelectedText();
@@ -1724,7 +1724,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -1744,6 +1743,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemMPR;
     private javax.swing.JMenuItem jMenuItemMarkCode;
     private javax.swing.JMenuItem jMenuItemMarkData;
+    private javax.swing.JMenuItem jMenuItemMarkGarbage;
     private javax.swing.JMenuItem jMenuItemMemHigh;
     private javax.swing.JMenuItem jMenuItemMemLow;
     private javax.swing.JMenuItem jMenuItemMinus;
@@ -1757,7 +1757,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemUserLabel;
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewProject;
-    private javax.swing.JMenu jMenuMarkGarbage;
+    private javax.swing.JMenu jMenuMemory;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JScrollPane jScrollPaneLeft;
@@ -2152,6 +2152,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.isData=false;
       mem.isCode=false;
       mem.isGarbage=true;
+      mem.dasmLocation=null;
       if (option.eraseDComm) mem.dasmComment=null;
       if (option.erasePlus && mem.type=='+') {
         mem.related=-1;
