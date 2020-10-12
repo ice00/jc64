@@ -496,39 +496,39 @@ public class C1541Dasm extends M6510Dasm {
               case 0x2FE: return "Unità #0 Direzione di ricerca mezze traccie adiacente";
               case 0x2FF: return "Direzione di ricerca mezze traccie adiacente di unità non esistente #1";
               
-              case 0x1800: return "Port B #1 bus seriale";
-              case 0x1801: return "Port A #1 leggere per riconoscere l'interrupt generato da ATN IN che diventa alto";
-              case 0x1802: return "Port B #1 registro direzioni dati. Default: $1A, %00011010";
-              case 0x1803: return "Port A #1 registro direzioni dati. Default: $FF, %11111111.";
+              case 0x1800: return "Via #1: Port B #1 bus seriale";
+              case 0x1801: return "Via #1: Port A #1 leggere per riconoscere l'interrupt generato da ATN IN che diventa alto";
+              case 0x1802: return "Via #1: Port B #1 registro direzioni dati. Default: $1A, %00011010";
+              case 0x1803: return "Via #1: Port A #1 registro direzioni dati. Default: $FF, %11111111.";
               case 0x1804: 
-              case 0x1805: return "Timer #1 byte basso lettura o byte alto scrittura per avviare il timer o riavviare il timer in caso di underflow";
+              case 0x1805: return "Via #1: Timer #1 byte basso lettura o byte alto scrittura per avviare il timer o riavviare il timer in caso di underflow";
               case 0x1806: 
-              case 0x1807: return "Timer latch #1. Valore iniziale lettura/scrittura del timer da/a qui";
+              case 0x1807: return "Via #1: Timer latch #1. Valore iniziale lettura/scrittura del timer da/a qui";
               case 0x1808:
               case 0x1809:
-              case 0x180A: return "Non usato";
-              case 0x180B: return "Registro controllo timer #1";
-              case 0x180C: return "Non usato";
-              case 0x180D: return "Registro stato interruzione #1";
-              case 0x180E: return "Registro controllo interruzione #1";
-              case 0x180F: return "Non usato";
+              case 0x180A: return "Via #1: Non usato";
+              case 0x180B: return "Via #1: Registro controllo timer #1";
+              case 0x180C: return "Via #1: Non usato";
+              case 0x180D: return "Via #1: Registro stato interruzione #1";
+              case 0x180E: return "Via #1: Registro controllo interruzione #1";
+              case 0x180F: return "Via #1: Non usato";
               
-              case 0x1C00: return "Port B #2";
-              case 0x1C01: return "Port A #2 ultimo byte di dati letto da o da scrivere successivamente su disco";
-              case 0x1C02: return "Port B #2 registro direzione dati";
-              case 0x1C03: return "Port A #2 registro direzioni dati";
+              case 0x1C00: return "Via #2: Port B #2";
+              case 0x1C01: return "Via #2: Port A #2 ultimo byte di dati letto da o da scrivere successivamente su disco";
+              case 0x1C02: return "Via #2: Port B #2 registro direzione dati";
+              case 0x1C03: return "Via #2: Port A #2 registro direzioni dati";
               case 0x1C04: 
-              case 0x1C05: return "Timer #2. Byte basso lettura o byte alto scrittura per avviare il timer o riavviare il timer in caso di underflow";
+              case 0x1C05: return "Via #2: Timer #2. Byte basso lettura o byte alto scrittura per avviare il timer o riavviare il timer in caso di underflow";
               case 0x1C06: 
-              case 0x1C07: return "Timer latch #2. Valore iniziale lettura/scrittura del timer da/a qui";
+              case 0x1C07: return "Via #2: Timer latch #2. Valore iniziale lettura/scrittura del timer da/a qui";
               case 0x1C08:
               case 0x1C09:
-              case 0x1C0A: return "Non usato";
-              case 0x1C0B: return "Registro controllo timer #2";
-              case 0x1C0C: return "Registro controllo ausiliario #2";
-              case 0x1C0D: return "Registro stato interruzione #2";
-              case 0x1C0E: return "Registro controllo interruzione #2";
-              case 0x1C0F: return "Non usato";                
+              case 0x1C0A: return "Via #2: Non usato";
+              case 0x1C0B: return "Via #2: Registro controllo timer #2";
+              case 0x1C0C: return "Via #2: Registro controllo ausiliario #2";
+              case 0x1C0D: return "Via #2: Registro stato interruzione #2";
+              case 0x1C0E: return "Via #2: Registro controllo interruzione #2";
+              case 0x1C0F: return "Via #2: Non usato";                
               
               case 0xC100: return "Accende il LED per il drive corrente";
               case 0xC118: return "Accende il LED";
@@ -1292,39 +1292,39 @@ public class C1541Dasm extends M6510Dasm {
               case 0x2FE: return "Unit #0 direction of seeking of adjacent halftrack";
               case 0x2FF: return "Direction of seeking of adjacent halftrack of not existing unit #1";
               
-              case 0x1800: return "Port B #1, serial bus";
-              case 0x1801: return "Port A #1. Read to acknowledge interrupt generated by ATN IN going high";
-              case 0x1802: return "Port B #1 data direction register. Default: $1A, %00011010";
-              case 0x1803: return "Port A #1 data direction register. Default: $FF, %11111111.";
+              case 0x1800: return "Via #1: Port B #1, serial bus";
+              case 0x1801: return "Via #2: Port A #1. Read to acknowledge interrupt generated by ATN IN going high";
+              case 0x1802: return "Via #2: Port B #1 data direction register. Default: $1A, %00011010";
+              case 0x1803: return "Via #2: Port A #1 data direction register. Default: $FF, %11111111.";
               case 0x1804: 
-              case 0x1805: return "Timer #1. Read low byte or write high byte to start timer or restart timer upon underflow";
+              case 0x1805: return "Via #2: Timer #1. Read low byte or write high byte to start timer or restart timer upon underflow";
               case 0x1806: 
-              case 0x1807: return "Timer latch #1. Read/write starting value of timer from/to here";
+              case 0x1807: return "Via #2: Timer latch #1. Read/write starting value of timer from/to here";
               case 0x1808:
               case 0x1809:
-              case 0x180A: return "Unused";
-              case 0x180B: return "Timer control register #1";
-              case 0x180C: return "Unused";
-              case 0x180D: return "Interrupt status register #1";
-              case 0x180E: return "Interrupt control register #1";
-              case 0x180F: return "Unused";
+              case 0x180A: return "Via #2: Unused";
+              case 0x180B: return "Via #2: Timer control register #1";
+              case 0x180C: return "Via #2: Unused";
+              case 0x180D: return "Via #2: Interrupt status register #1";
+              case 0x180E: return "Via #2: Interrupt control register #1";
+              case 0x180F: return "Via #2: Unused";
               
-              case 0x1C00: return "Port B #2";
-              case 0x1C01: return "Port A #2. Data byte last read from or to be next written onto disk";
-              case 0x1C02: return "Port B #2 data direction register";
-              case 0x1C03: return "Port A #2 data direction register";
+              case 0x1C00: return "Via #2: Port B #2";
+              case 0x1C01: return "Via #2: Port A #2. Data byte last read from or to be next written onto disk";
+              case 0x1C02: return "Via #2: Port B #2 data direction register";
+              case 0x1C03: return "Via #2: Port A #2 data direction register";
               case 0x1C04: 
-              case 0x1C05: return "Timer #2. Read low byte or write high byte to start timer or restart timer upon underflow";
+              case 0x1C05: return "Via #2: Timer #2. Read low byte or write high byte to start timer or restart timer upon underflow";
               case 0x1C06: 
-              case 0x1C07: return "Timer latch #2. Read/write starting value of timer from/to here";
+              case 0x1C07: return "Via #2: Timer latch #2. Read/write starting value of timer from/to here";
               case 0x1C08:
               case 0x1C09:
-              case 0x1C0A: return "Unused";
-              case 0x1C0B: return "Timer control register #2";
-              case 0x1C0C: return "Auxiliary control register #2";
-              case 0x1C0D: return "Interrupt status register #2";
-              case 0x1C0E: return "Interrupt control register #2";
-              case 0x1C0F: return "Unused";        
+              case 0x1C0A: return "Via #2: Unused";
+              case 0x1C0B: return "Via #2: Timer control register #2";
+              case 0x1C0C: return "Via #2: Auxiliary control register #2";
+              case 0x1C0D: return "Via #2: Interrupt status register #2";
+              case 0x1C0E: return "Via #2: Interrupt control register #2";
+              case 0x1C0F: return "Via #2: Unused";        
               
               case 0xC100: return "Turn LED on for current drive";
               case 0xC118: return "Turn LED on";

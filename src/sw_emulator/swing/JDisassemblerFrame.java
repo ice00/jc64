@@ -926,7 +926,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/merge.png"))); // NOI18N
+    jMenuItem2.setMnemonic('r');
     jMenuItem2.setText("Collaborative merge");
+    jMenuItem2.setToolTipText("");
     jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItem2ActionPerformed(evt);
