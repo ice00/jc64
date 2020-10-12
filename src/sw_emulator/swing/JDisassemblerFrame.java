@@ -2721,10 +2721,37 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        }
        
        
-       // take description from secondary only if not present in primary
+       // take name/description from secondary only if not present in primary
+       if (project.name==null || "".equals(project.name)) project.name=mergeProject.name;       
        if (project.description==null || "".equals(project.description)) project.description=mergeProject.description;
        
-       /// TODO
+       
+       MemoryDasm memProject;
+       MemoryDasm memMerge;
+       
+       // scan all memory locations
+       for (int i=0; i<project.memory.length; i++) {
+          memProject=project.memory[i];
+          memMerge=mergeProject.memory[i];
+          
+          // apply secondary information if primary are not defined
+          if (memProject.userBlockComment==null || "".equals(memProject.userBlockComment)) memProject.userBlockComment=memMerge.userBlockComment;
+          if (memProject.userComment==null || "".equals(memProject.userComment)) memProject.userComment=memMerge.userComment;
+          if (memProject.userLocation==null || "".equals(memProject.userLocation)) memProject.userLocation=memMerge.userLocation;
+          
+          if (memProject.isInside) {
+            if (!memProject.isCode && !memProject.isData && !memProject.isGarbage) {
+              memProject.isCode=memMerge.isCode;
+              memProject.isData=memMerge.isData;
+              memProject.isGarbage=memMerge.isGarbage;
+            }  
+            
+            if (memProject.related!=-1) {
+              memProject.related=memMerge.related;
+              memProject.type=memMerge.type;
+            }
+          }
+       }
           
        dataTableModelMemory.fireTableDataChanged();
     }
