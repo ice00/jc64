@@ -92,16 +92,16 @@ public class CVic20Dasm extends M6510Dasm {
               case 0x0C: return "Flag DIM predefinito";
               case 0x0D: return "Tipo: FF=stringa, 00=numero";
               case 0x0E: return "Tipo: 80=intero, 00=virgola mobile";
-              case 0x0F: return "DATA scan/LlST quote/memory flag";
-              case 0x10: return "Subscript/FNx flag";
+              case 0x0F: return "Scansione DATI/Citazione LIST/flag di memoria";
+              case 0x10: return "Flag pedice /FNx";
               case 0x11: return "0 = INPUT;$40 = GET;$98 = READ";
-              case 0x12: return "ATN sign/Comparison eval flag";
-              case 0x13: return "Current l/O prompt flag";
+              case 0x12: return "Segno ATN/flag di valutazione di confronto";
+              case 0x13: return "Flag del prompt I/O corrente";
               case 0x14:
-              case 0x15: return "Integer value";
-              case 0x16: return "Pointer: temporary string stack";
+              case 0x15: return "Valore intero";
+              case 0x16: return "Puntatore: stack di stringhe temporaneo";
               case 0x17: 
-              case 0x18: return "Last temp string vector";
+              case 0x18: return "Ultimo vettore di stringa temporanea";
               case 0x19:         
               case 0x1A:
               case 0x1B:                  
@@ -110,60 +110,60 @@ public class CVic20Dasm extends M6510Dasm {
               case 0x1E:    
               case 0x1F:    
               case 0x20: 
-              case 0x21: return "Stack for temporary strings";              
+              case 0x21: return "Stack per stringhe temporanee";              
               case 0x22: 
               case 0x23: 
               case 0x24:
-              case 0x25: return "Utility pointer area";  
+              case 0x25: return "Area del puntatore di utilità";  
               case 0x26:
               case 0x27:
               case 0x28:
               case 0x29:
-              case 0x2A: return "Product area for multiplication";
+              case 0x2A: return "Area di prodotto per la moltiplicazione";
               case 0x2B: 
-              case 0x2C: return "Pointer: Start of Basic";
+              case 0x2C: return "Puntatore: inizio di BASIC";
               case 0x2D: 
-              case 0x2E: return "Pointer: Start of Variables";
+              case 0x2E: return "Puntatore: inizio delle variabili";
               case 0x2F: 
-              case 0x30: return "Pointer: Start of Arrays";
+              case 0x30: return "Puntatore: inizio degli array";
               case 0x31: 
-              case 0x32: return "Pointer: End of Arrays";
+              case 0x32: return "Puntatore: fine degli array";
               case 0x33: 
-              case 0x34: return "Pointer: String storage (moving down)";
+              case 0x34: return "Puntatore: memoria stringa (spostandosi verso il basso)";
               case 0x35: 
-              case 0x36: return "Utility string pointer";
+              case 0x36: return "Puntatore a stringa di utilità";
               case 0x37: 
-              case 0x38: return "Pointer: Limit of memory";
+              case 0x38: return "Puntatore: limite di memoria";
               case 0x39: 
-              case 0x3A: return "Current Basic line number";
+              case 0x3A: return "Numero di riga BASIC corrente";
               case 0x3B: 
-              case 0x3C: return "Previous Basic line number";
+              case 0x3C: return "Numero di riga BASIC precedente";
               case 0x3D: 
-              case 0x3E: return "Pointer: Basic statement for CONT";
+              case 0x3E: return "Puntatore: dichiarazione di base per CONT";
               case 0x3F: 
-              case 0x40: return "Current DATA line number";
+              case 0x40: return "Numero di riga DATI corrente";
               case 0x41: 
-              case 0x42: return "Current DATA address"; 
+              case 0x42: return "Indirizzo DATA corrente"; 
               case 0x43: 
-              case 0x44: return "Input vector";
+              case 0x44: return "Vettore di input";
               case 0x45: 
-              case 0x46: return "Current variable name";
+              case 0x46: return "Nome della variabile corrente";
               case 0x47: 
-              case 0x48: return "Current variable address";
+              case 0x48: return "Indirizzo variabile corrente";
               case 0x49: 
-              case 0x4A: return "Variable pointer for FOR/NEXT";
+              case 0x4A: return "Puntatore variabile per FOR/NEXT";
               case 0x4B: 
-              case 0x4C: return "Y-save; op-save; Basic pointer save";
-              case 0x4D: return "Comparison symbol accumulator";
+              case 0x4C: return "Y-save; op-save; Puntatore salvataggio BASIC";
+              case 0x4D: return "Accumulatore di simboli di confronto";
               case 0x4E:
               case 0x4F:
               case 0x50:
               case 0x51: 
               case 0x52: 
-              case 0x53: return "Misc work area, pointers, etc";
+              case 0x53: return "Area di lavoro varie, puntatori, ecc";
               case 0x54: 
               case 0x55: 
-              case 0x56: return "Jump vector for functions";
+              case 0x56: return "Salta il vettore per le funzioni";
               case 0x57:     
               case 0x58:
               case 0x59:      
@@ -173,253 +173,253 @@ public class CVic20Dasm extends M6510Dasm {
               case 0x5D: 
               case 0x5E:
               case 0x5F: 
-              case 0x60: return "Misc numeric work area";   
-              case 0x61: return "Accum#1: Exponent";
+              case 0x60: return "Area di lavoro numerica misc";   
+              case 0x61: return "Accum #1: esponente";
               case 0x62:
               case 0x63: 
               case 0x64: 
-              case 0x65: return "Accum#1: Mantissa"; 
-              case 0x66: return "Accum#1: Sign";
-              case 0x67: return "Series evaluation constant pointer";
-              case 0x68: return "Accum#1 hi-order (overflow)";
+              case 0x65: return "Accum #1: mantissa"; 
+              case 0x66: return "Accum #1: segno";
+              case 0x67: return "Puntatore della costante di valutazione della serie";
+              case 0x68: return "Accum #1 hi-order (overflow)";
               case 0x69: 
               case 0x6A: 
               case 0x6B:
               case 0x6C: 
               case 0x6D: 
-              case 0x6E: return "Accum#2: Exponent, etc.";
-              case 0x6F: return "Sign comparison, Acc#1 vs #2"; 
-              case 0x70: return "Accum#1 lo-order (rounding)";
+              case 0x6E: return "Accum #2: esponente, etc.";
+              case 0x6F: return "Segno di confronto, Accum #1 contro #2"; 
+              case 0x70: return "Accum #1 lo-order (arrotondamento)";
               case 0x71: 
-              case 0x72: return "Cassette buffer length/Series pointer";
+              case 0x72: return "Lunghezza buffer cassetta / Puntatore serie";
               case 0x7A: 
-              case 0x7B: return "Basic pointer (within subroutine)";              
+              case 0x7B: return "Puntatore di base (all'interno della subroutine)";              
               case 0x8B: 
               case 0x8C:
               case 0x8D: 
               case 0x8E:
-              case 0x8F: return "RND seed value";
-              case 0x90: return "Status word ST";
-              case 0x91: return "Keyswitch PIA: STOP and RVS flags";
-              case 0x92: return "Timing constant for tape";  
-              case 0x93: return "Load=0, Verify=1";
-              case 0x94: return "Serial output: deferred char flag";
-              case 0x95: return "Serial deferred character";
-              case 0x96: return "Tape EOT received";
-              case 0x97: return "Register save";
-              case 0x98: return "How many open files";
-              case 0x99: return "Input device (normally 0)";
-              case 0x9A: return "Output (CMD) device, normally 3";
-              case 0x9B: return "Tape character parity";
-              case 0x9C: return "Byte-received flag";
-              case 0x9D: return "Direct=$80/RUN=0 output control"; 
-              case 0x9E: return "Tape Pass 1 error log/char buffer";
-              case 0x9F: return "Tape Pass 2 error log corrected"; 
+              case 0x8F: return "RND valore seme";
+              case 0x90: return "Word di stato ST";
+              case 0x91: return "Selettore a chiave PIA: flag STOP e RVS";
+              case 0x92: return "Costante di tempo per il nastro";  
+              case 0x93: return "Carica=0, Verifica=1";
+              case 0x94: return "Uscita seriale: flag di caratteri differiti";
+              case 0x95: return "Carattere differito seriale";
+              case 0x96: return "EOT nastro ricevuto";
+              case 0x97: return "Registrati salva";
+              case 0x98: return "Quanti file aperti";
+              case 0x99: return "Dispositivo di input (normalmente 0)";
+              case 0x9A: return "Dispositivo di uscita (CMD), normalmente 3";
+              case 0x9B: return "Parità dei caratteri del nastro";
+              case 0x9C: return "Flag di byte ricevuti";
+              case 0x9D: return "Diretto=$80/RUN=0 controllo dell'uscita"; 
+              case 0x9E: return "Registro errori passaggio nastro 1/buffer carattere";
+              case 0x9F: return "Registro errori passaggio 2 nastro corretto"; 
               case 0xA0: 
               case 0xA1:
-              case 0xA2: return "Jiffy Clock (HML)";
-              case 0xA3: return "Serial bit count/EOI flag"; 
-              case 0xA4: return "Cycle count";
-              case 0xA5: return "Countdown, tape write/bit count";
-              case 0xA6: return "Pointer: tape buffer";
-              case 0xA7: return "Tape Write ldr count/Read pass/inbit";
-              case 0xA8: return "Tape Write new byte/Read error/inbit";
-              case 0xA9: return "Write start bit/Read bit err/stbit";
-              case 0xAA: return "Tape Scan;Cnt;Ld;End/byte assy";
-              case 0xAB: return " Write lead length/Rd checksum/parity";
+              case 0xA2: return "Orologio Jiffy (HML)";
+              case 0xA3: return "Conteggio bit seriale/flag EOI"; 
+              case 0xA4: return "Conteggio ciclo";
+              case 0xA5: return "Conto alla rovescia, scrittura su nastro/conteggio bit";
+              case 0xA6: return "Puntatore: buffer del nastro";
+              case 0xA7: return "Scrittura nastro ldr count/Read pass/inbit";
+              case 0xA8: return "Scrittura nastro nuovo byte/Errore lettura/inbit";
+              case 0xA9: return "Scrittura bit di partenza/Lettura bit errore/stbit";
+              case 0xAA: return "Scansione nastro;Cnt;Ld;Fine/byte assy";
+              case 0xAB: return "Scrivere lunghezza lead/checksum Rd/parità";
               case 0xAC:
-              case 0xAD: return "Pointer: tape buffer, scrolling";
+              case 0xAD: return "Puntatore: buffer del nastro, scorrimento";
               case 0xAE: 
-              case 0xAF: return "Tape end addresses/End of program";
+              case 0xAF: return "Indirizzi di fine nastro/Fine programma";
               case 0xB0:
-              case 0xB1: return "Tape timing constants";
+              case 0xB1: return "Costanti di temporizzazione del nastro";
               case 0xB2:
-              case 0xB3: return "Pointer: start of tape buffer";              
-              case 0xB4: return "Tape timer (1 =enable); bit cnt";
-              case 0xB5: return "Tape EOT/RS-232 next bit to send";
-              case 0xB6: return "Read character error/outbyte buffer";
-              case 0xB7: return "# characters in file name";
-              case 0xB8: return "Current logical file";
-              case 0xB9: return "Current secondary address";
-              case 0xBA: return "Current device";
+              case 0xB3: return "Puntatore: inizio del buffer del nastro";              
+              case 0xB4: return "Timer nastro (1=abilitato); bit cnt";
+              case 0xB5: return "Nastro EOT/RS-232 bit successivo da inviare";
+              case 0xB6: return "Lettura errore carattere/buffer outbyte";
+              case 0xB7: return "# caratteri nel nome del filee";
+              case 0xB8: return "File logico corrente";
+              case 0xB9: return "Indirizzo secondario attuale";
+              case 0xBA: return "Dispositivo corrente";
               case 0xBB: 
-              case 0xBC: return "Pointer: to file name";
-              case 0xBD: return "Write shift word/Read input char";
-              case 0xBE: return "# blocks remaining to Write/Read";
-              case 0xBF: return "Serial word buffer";
-              case 0xC0: return "Tape motor interlock";
+              case 0xBC: return "Puntatore: al nome del file";
+              case 0xBD: return "Scrivi la parola di spostamento/Leggi il carattere di input";
+              case 0xBE: return "# blocchi rimanenti da scrivere/leggere";
+              case 0xBF: return "Buffer di parole seriali";
+              case 0xC0: return "Blocco motore nastro";
               case 0xC1:
-              case 0xC2: return "I/O start addresses"; 
+              case 0xC2: return "Indirizzi iniziali di I/O"; 
               case 0xC3:
-              case 0xC4: return "KERNAL setup pointer";
-              case 0xC5: return "Current key pressed"; 
-              case 0xC6: return "# chars in keyboard buffer";
-              case 0xC7: return "Screen reverse flag";
-              case 0xC8: return "Pointer: End-of-line for input";
+              case 0xC4: return "Puntatore di configurazione KERNAL";
+              case 0xC5: return "Tasto corrente premuto"; 
+              case 0xC6: return "# caratteri nel buffer della tastiera";
+              case 0xC7: return "Contrassegno inverso dello schermo";
+              case 0xC8: return "Puntatore: fine riga per l'input";
               case 0xC9:
-              case 0xCA: return "Input cursor log (row, column)";
-              case 0xCB: return "Which key: 64 if no key";
-              case 0xCC: return "Cursor enable (0=flash cursor)";
-              case 0xCD: return "Cursor timing countdown";
-              case 0xCE: return "Character under cursor";
-              case 0xCF: return "Cursor in blink phase"; 
-              case 0xD0: return "Input from screen/from keyboard"; 
+              case 0xCA: return "Log del cursore di input (riga, colonna)";
+              case 0xCB: return "Quale chiave: 64 se nessuna chiave";
+              case 0xCC: return "Abilita cursore (0 = cursore lampeggiante)";
+              case 0xCD: return "Conto alla rovescia del tempo del cursore";
+              case 0xCE: return "Carattere sotto il cursore";
+              case 0xCF: return "Cursore in fase di lampeggio"; 
+              case 0xD0: return "Input da schermo/da tastiera"; 
               case 0xD1:
-              case 0xD2: return "Pointer to screen line";
-              case 0xD3: return "Position of cursor on above line";
-              case 0xD4: return "0=direct cursor, else programmed";
-              case 0xD5: return "Current screen line length";
-              case 0xD6: return "Row where cursor lives";
-              case 0xD7: return "Last inkey/checksum/buffer";
-              case 0xD8: return "# of INSERTs outstanding"; 
-              case 0xF1: return "Dummy screen link";
-              case 0xF2: return "Screen row marker";
+              case 0xD2: return "Puntatore alla linea schermo";
+              case 0xD3: return "Posizione del cursore sulla linea superiore";
+              case 0xD4: return "0=cursore diretto, altrimenti programmato";
+              case 0xD5: return "Lunghezza della riga dello schermo corrente";
+              case 0xD6: return "Riga in cui risiede il cursore";
+              case 0xD7: return "Ultimo inkey/checksum/buffer";
+              case 0xD8: return "# di INSERT in sospeso"; 
+              case 0xF1: return "Collegamento schermo fittizio";
+              case 0xF2: return "Indicatore di riga sullo schermo";
               case 0xF3: 
-              case 0xF4: return "Screen color pointer";   
+              case 0xF4: return "Puntatore a colori dello schermo";   
               case 0xF5:
-              case 0xF6: return "Keyboard pointer";
+              case 0xF6: return "Puntatore da tastiera";
               case 0xF7: 
-              case 0xF8: return "RS-232 Rcv pointer";
+              case 0xF8: return "Puntatore RS-232 Rcv";
               case 0xF9: 
-              case 0xFA: return "RS-232 Tx pointer"; 
+              case 0xFA: return "Puntatore RS-232 Tx"; 
               case 0xFB:
               case 0xFC:
               case 0xFD:
-              case 0xFE: return "Operating system free zero page space";
-              case 0xFF: return "Basic storage";  
+              case 0xFE: return "Sistema operativo spazio libero pagina zero";
+              case 0xFF: return "Archiviazione di base";  
                 
               case 0x281:
-              case 0x282: return "Start of memory for op system";
+              case 0x282: return "Inizio della memoria per il sistema operativo";
               case 0x283:
-              case 0x284: return "Top of memory for op system";   
-              case 0x285: return "Serial bus timeout flag";
-              case 0x286: return "Current color code"; 
-              case 0x287: return "Color under cursor";    
-              case 0x288: return "Screen memory page";                
-              case 0x289: return "Max size of keyboard buffer";
-              case 0x28A: return "Key repeat (128=repeat all keys)";
-              case 0x28B: return "Repeat speed counter";
-              case 0x28C: return "Repeat delay counter";
-              case 0x28D: return "Keyboard Shift/Control flag";
-              case 0x28E: return "Last keyboard shift pattern";
+              case 0x284: return "Parte superiore della memoria per il sistema operativo";   
+              case 0x285: return "Flag timeout bus seriale";
+              case 0x286: return "Codice colore corrente"; 
+              case 0x287: return "Colore sotto il cursore";    
+              case 0x288: return "Pagina di memoria dello schermo";                
+              case 0x289: return "Dimensione massima del buffer della tastiera";
+              case 0x28A: return "Ripetizione chiave (128 = ripeti tutte le chiavi)";
+              case 0x28B: return "Ripetere il contatore di velocità";
+              case 0x28C: return "Ripetere il contatore del ritardo";
+              case 0x28D: return "Flag Shift/Control della tastiera";
+              case 0x28E: return "Ultimo schema di spostamento della tastiera";
               case 0x28F:
-              case 0x290: return "Pointer: decode logic";
-              case 0x291: return "Shift mode switch (0=enabled, 128=locked)";
-              case 0x292: return "Autoscrolldownflag (0=on, <>0=off)";
-              case 0x293: return "RS-232 control register";
-              case 0x294: return "RS-232 command register";
+              case 0x290: return "Puntatore: decodifica logica";
+              case 0x291: return "Interruttore modalità cambio (0=abilitato, 128=bloccato)";
+              case 0x292: return "Flag di scorrimento automatico verso il basso (0 = attivato, <> 0 = disattivato)";
+              case 0x293: return "Registro di controllo RS-232";
+              case 0x294: return "Registro di comando RS-232";
               case 0x295:
-              case 0x296: return "Nonstandard (Bit time/2-100)";
-              case 0x297: return "RS-232 status register";
-              case 0x298: return "Number of bits to send";
+              case 0x296: return "Non standard (tempo bit / 2-100)";
+              case 0x297: return "Rgistro di stato RS-232";
+              case 0x298: return "Numero di bit da inviare";
               case 0x299: 
-              case 0x29A: return "Baud rate (full) bit time";
-              case 0x29B: return "RS-232 receive pointer";
-              case 0x29C: return "RS-232 input pointer";
-              case 0x29D: return "RS-232 transmit pointer";
-              case 0x29E: return "RS-232 output pointer";
+              case 0x29A: return "Baud rate (pieno) bit time";
+              case 0x29B: return "Puntatore di ricezione RS-232";
+              case 0x29C: return "Puntatore di ingresso RS-232";
+              case 0x29D: return "Puntatore di trasmissione RS-232";
+              case 0x29E: return "Puntatore di uscita RS-232";
               case 0x29F:
-              case 0x2A0: return "Holds IRQ during tape operations";
+              case 0x2A0: return "Mantiene IRQ durante le operazioni su nastro";
            
               case 0x300:
-              case 0x301: return "Error message link";
+              case 0x301: return "Error message linkCollegamento del messaggio di errore";
               case 0x302:
-              case 0x303: return "Basic warm start link";
+              case 0x303: return "Collegamento base per avviamento a caldo";
               case 0x304:
-              case 0x305: return "Crunch Basic tokens link";
+              case 0x305: return "Collegamento token Crunch Basic";
               case 0x306:
-              case 0x307: return "Print tokens link";
+              case 0x307: return "Link ai token di stampa";
               case 0x308:
-              case 0x309: return "Start new Basic code link";
+              case 0x309: return "Avvia un nuovo collegamento al codice di base";
               case 0x30A:
-              case 0x30B: return "Get arithmetic element link";
-              case 0x30C: return "Storage for 6502 .A register";
-              case 0x30D: return "Storage for 6502 .X register";
-              case 0x30E: return "Storage for 6502 .Y register";
-              case 0x30F: return "Storage for 6502 .P register";
+              case 0x30B: return "Ottieni il collegamento agli elementi aritmetici";
+              case 0x30C: return "Memoria per registro 6502 .A";
+              case 0x30D: return "Memoria per registro 6502 .X";
+              case 0x30E: return "Memoria per registro 6502 .Y";
+              case 0x30F: return "Memoria per registro 6502 .SP";
               case 0x314:
-              case 0x315: return "Hardware (IRQ) interrupt vector [EABF]";
+              case 0x315: return "Vettore di interrupt hardware (IRQ) [EABF]";
               case 0x316:
-              case 0x317: return "Break interrupt vector [FED2]";
+              case 0x317: return "Vettore di interruzione Break [FED2]";
               case 0x318:
-              case 0x319: return "NMI interrupt vector [FEAD]";
+              case 0x319: return "Vettore di interrupt NMI [FEAD]";
               case 0x31A:
-              case 0x31B: return "OPEN vector [F40A]";
+              case 0x31B: return "Vettore OPEN [F40A]";
               case 0x31C:
-              case 0x31D: return "CLOSE vector [F34A]";
+              case 0x31D: return "Vettore CLOSE [F34A]";
               case 0x31E:
-              case 0x31F: return "Set-input vector [F2C7]";
+              case 0x31F: return "Vettore Set-input [F2C7]";
               case 0x320:
-              case 0x321: return "Set-output vector [F309]";
+              case 0x321: return "Vettore Set-output [F309]";
               case 0x322:
-              case 0x323: return "Restore l/O vector [F3F3]";
+              case 0x323: return "Vettore Restore l/O [F3F3]";
               case 0x324:
-              case 0x325: return "INPUT vector [F20E]";
+              case 0x325: return "Vettore INPUT [F20E]";
               case 0x326:
-              case 0x327: return "Output vector [F27A]";
+              case 0x327: return "Vettore Output [F27A]";
               case 0x328:
-              case 0x329: return "Test-STOP vector [F770]";
+              case 0x329: return "Vettore Test-STOP [F770]";
               case 0x32A:
-              case 0x32B: return "GET vector [F1F5]";
+              case 0x32B: return "Vettore GET [F1F5]";
               case 0x32C:
-              case 0x32D: return "Abort l/O vector [F3EF]";
+              case 0x32D: return "Vettore Abort l/O [F3EF]";
               case 0x32E:
-              case 0x32F: return "User vector (default BRK) [FED2]";
+              case 0x32F: return "Vettore utente (BRK predefinito) [FED2]";
               case 0x330:
-              case 0x331: return "Link to load RAM [F549]";
+              case 0x331: return "Collegamento per caricare la RAM [F549]";
               case 0x332:
-              case 0x333: return "Link to save RAM [F685]";     
+              case 0x333: return "Collegamento per scrivere la RAM [F685]";     
               
-              case 0x9000: return "Vic: bits 0-6 horizontal centering, bit 7 sets interlace scan";
-              case 0x9001: return "Vic: vertical centering";
-              case 0x9002: return "Vic: bits 0-6 set # of columns, bit 7 is part of video matrix address";
-              case 0x9003: return "Vic: bits 1-6 set # of rows, bit 0 sets 8x8 or 16x8 chars";
-              case 0x9004: return "Vic: TV raster beam line";
-              case 0x9005: return "Vic: bits 0-3 start of character memory (default = 0), bits 4-7 is rest of video address (default= F)";
-              case 0x9006: return "Vic: horizontal position of light pen";
-              case 0x9007: return "Vic: vertical position of light pen";
-              case 0x9008: return "Vic: digitized value of paddle X";
-              case 0x9009: return "Vic: digitized value of paddle Y";
-              case 0x900A: return "Vic: frequency for oscillator 1 (low) (on: 128-255)";
-              case 0x900B: return "Vic: frequency for oscillator 2 (medium) (on: 128-255)";
-              case 0x900C: return "Vic: frequency for oscillator 3 (high) (on: 128-255)";
-              case 0x900D: return "Vic: frequency of noise source";
-              case 0x900E: return "Vic: bit 0-3 sets volume of all sound, bits 4-7 are auxiliary color information";
-              case 0x900F: return "Vic: Screen and border color register, bits 4-7 select background color, bits 0-2 select border color, bit 3 selects inverted or normal mode";
+              case 0x9000: return "Vic: bit 0-6 centratura orizzontale, bit 7 imposta la scansione interlacciata";
+              case 0x9001: return "Vic: centratura verticale";
+              case 0x9002: return "Vic: i bit 0-6 impostano il numero di colonne, il bit 7 fa parte dell'indirizzo della matrice video";
+              case 0x9003: return "Vic: i bit 1-6 impostano il numero di righe, il bit 0 imposta i caratteri 8x8 o 16x8";
+              case 0x9004: return "Vic: Linea del fascio televisivo raster";
+              case 0x9005: return "Vic: bit 0-3 inizio della memoria caratteri (predefinito = 0), bit 4-7 è il resto dell'indirizzo video (predefinito=F)";
+              case 0x9006: return "Vic: posizione orizzontale della penna luminosa";
+              case 0x9007: return "Vic: posizione verticale della penna luminosa";
+              case 0x9008: return "Vic: valore digitalizzato del paddle X";
+              case 0x9009: return "Vic: valore digitalizzato del paddle Y";
+              case 0x900A: return "Vic: frequenza per l'oscillatore 1 (basso) (on: 128-255)";
+              case 0x900B: return "Vic: frequenza per l'oscillatore 2 (medio) (on: 128-255)";
+              case 0x900C: return "Vic: frequenza per l'oscillatore 3 (alto) (on: 128-255)";
+              case 0x900D: return "Vic: frequenza sorgent rumore";
+              case 0x900E: return "Vic: il bit 0-3 imposta il volume di tutto il suono, i bit 4-7 sono informazioni ausiliarie sul colore";
+              case 0x900F: return "Vic: Registro del colore dello schermo e del bordo, bit 4-7 selezionare il colore di sfondo, bit 0-2 selezionare il colore del bordo, bit 3 seleziona la modalità invertita o normale";
               
-              case 0x9110: return "Via #1: Port B output register";
-              case 0x9111: return "Via #1: Port A output register";
-              case 0x9112: return "Via #1: Data direction register B";
-              case 0x9113: return "Via #1: Data direction register A";
-              case 0x9114: return "Via #1: Timer 1 low byte";
-              case 0x9115: return "Via #1: Timer 1 high byte & counter";
-              case 0x9116: return "Via #1: Timer 1 low byte";
-              case 0x9117: return "Via #1: Timer 1 high byte";
-              case 0x9118: return "Via #1: Timer 2 low byte";
-              case 0x9119: return "Via #1: Timer 2 high byte";
-              case 0x911A: return "Via #1: Shift register";
-              case 0x911B: return "Via #1: Auxiliary control register";
-              case 0x911C: return "Via #1: Peripheral control register";
-              case 0x911D: return "Via #1: Interrupt flag register";
-              case 0x911E: return "Via #1: Interrupt enable register";
-              case 0x911F: return "Via #1 :Port A (Sense cassette switch)";
+              case 0x9110: return "Via #1: Porta B registro uscita";
+              case 0x9111: return "Via #1: Porta A registero uscita";
+              case 0x9112: return "Via #1: Registro direzioni dati B";
+              case 0x9113: return "Via #1: Registro direzioni dati A";
+              case 0x9114: return "Via #1: Timer 1 byte basso";
+              case 0x9115: return "Via #1: Timer 1 byte alto e contatore";
+              case 0x9116: return "Via #1: Timer 1 byte basso";
+              case 0x9117: return "Via #1: Timer 1 byte alto";
+              case 0x9118: return "Via #1: Timer 2 byte basso";
+              case 0x9119: return "Via #1: Timer 2 byte alto";
+              case 0x911A: return "Via #1: Registro a scorrimento";
+              case 0x911B: return "Via #1: Registro di controllo ausiliario";
+              case 0x911C: return "Via #1: Registro di controllo periferico";
+              case 0x911D: return "Via #1: Registro flag di interruzione";
+              case 0x911E: return "Via #1: Registro di abilitazione interrupt";
+              case 0x911F: return "Via #1: Porta A (interruttore della cassetta Sense)";
               
-              case 0x9120: return "Via #1: Port B output register";
-              case 0x9121: return "Via #1: Port A output register";
-              case 0x9122: return "Via #1: Data direction register B";
-              case 0x9123: return "Via #1: Data direction register A";
-              case 0x9124: return "Via #1: Timer 1 low byte latch";
-              case 0x9125: return "Via #1: Timer 1 high byte latch";
-              case 0x9126: return "Via #1: Timer 1 low byte counter";
-              case 0x9127: return "Via #1: Timer 1 high byte counter";
-              case 0x9128: return "Via #1: Timer 2 low byte";
-              case 0x9129: return "Via #1: Timer 2 high byte";
-              case 0x912A: return "Via #1: Shift register";
-              case 0x912B: return "Via #1: Auxiliary control register";
-              case 0x912C: return "Via #1: Peripheral control register";
-              case 0x912D: return "Via #1: Interrupt flag register";
-              case 0x912E: return "Via #1: Interrupt enable register";
-              case 0x912F: return "Via #1: Port A output register";              
+              case 0x9120: return "Via #2: Port B output register";
+              case 0x9121: return "Via #2: Port A output register";
+              case 0x9122: return "Via #2: Data direction register B";
+              case 0x9123: return "Via #2: Data direction register A";
+              case 0x9124: return "Via #2: Timer 1 low byte latch";
+              case 0x9125: return "Via #2: Timer 1 high byte latch";
+              case 0x9126: return "Via #2: Timer 1 low byte counter";
+              case 0x9127: return "Via #2: Timer 1 high byte counter";
+              case 0x9128: return "Via #2: Timer 2 low byte";
+              case 0x9129: return "Via #2: Timer 2 high byte";
+              case 0x912A: return "Via #2: Shift register";
+              case 0x912B: return "Via #2: Auxiliary control register";
+              case 0x912C: return "Via #2: Peripheral control register";
+              case 0x912D: return "Via #2: Interrupt flag register";
+              case 0x912E: return "Via #2: Interrupt enable register";
+              case 0x912F: return "Via #2: Port A output register";              
               
               case 0xC000: 
               case 0xC001: return "Basic Restart Vectors";
@@ -1244,24 +1244,24 @@ public class CVic20Dasm extends M6510Dasm {
               case 0x911C: return "Via #1: Peripheral control register";
               case 0x911D: return "Via #1: Interrupt flag register";
               case 0x911E: return "Via #1: Interrupt enable register";
-              case 0x911F: return "Via #1 :Port A (Sense cassette switch)";
+              case 0x911F: return "Via #1: Port A (Sense cassette switch)";
               
-              case 0x9120: return "Via #1: Port B output register";
-              case 0x9121: return "Via #1: Port A output register";
-              case 0x9122: return "Via #1: Data direction register B";
-              case 0x9123: return "Via #1: Data direction register A";
-              case 0x9124: return "Via #1: Timer 1 low byte latch";
-              case 0x9125: return "Via #1: Timer 1 high byte latch";
-              case 0x9126: return "Via #1: Timer 1 low byte counter";
-              case 0x9127: return "Via #1: Timer 1 high byte counter";
-              case 0x9128: return "Via #1: Timer 2 low byte";
-              case 0x9129: return "Via #1: Timer 2 high byte";
-              case 0x912A: return "Via #1: Shift register";
-              case 0x912B: return "Via #1: Auxiliary control register";
-              case 0x912C: return "Via #1: Peripheral control register";
-              case 0x912D: return "Via #1: Interrupt flag register";
-              case 0x912E: return "Via #1: Interrupt enable register";
-              case 0x912F: return "Via #1: Port A output register";              
+              case 0x9120: return "Via #2: Port B output register";
+              case 0x9121: return "Via #2: Port A output register";
+              case 0x9122: return "Via #2: Data direction register B";
+              case 0x9123: return "Via #2: Data direction register A";
+              case 0x9124: return "Via #2: Timer 1 low byte latch";
+              case 0x9125: return "Via #2: Timer 1 high byte latch";
+              case 0x9126: return "Via #2: Timer 1 low byte counter";
+              case 0x9127: return "Via #2: Timer 1 high byte counter";
+              case 0x9128: return "Via #2: Timer 2 low byte";
+              case 0x9129: return "Via #2: Timer 2 high byte";
+              case 0x912A: return "Via #2: Shift register";
+              case 0x912B: return "Via #2: Auxiliary control register";
+              case 0x912C: return "Via #2: Peripheral control register";
+              case 0x912D: return "Via #2: Interrupt flag register";
+              case 0x912E: return "Via #2: Interrupt enable register";
+              case 0x912F: return "Via #2: Port A output register";              
               
               case 0xC000: 
               case 0xC001: return "Basic Restart Vectors";
