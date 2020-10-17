@@ -134,6 +134,38 @@ public interface userAction {
   /** Collaborative merge */
   public static final int PROJ_MERGE = 36;
   
+  /** Mark memory of byte data kind */
+  public static final int MEM_MARKDATA_B = 37;
+  
+  /** Mark memory of word data kind */
+  public static final int MEM_MARKDATA_W = 38;  
+  
+  /** Mark memory of long data kind */
+  public static final int MEM_MARKDATA_L = 39; 
+  
+  /** Mark memory of address data kind */
+  public static final int MEM_MARKDATA_A = 40;  
+  
+  /** Mark memory of stack word data kind */
+  public static final int MEM_MARKDATA_S = 41;  
+  
+  /** Mark memory of text data kind */
+  public static final int MEM_MARKDATA_T = 42;
+  
+  /** Mark memory of text with number of chars before data kind */
+  public static final int MEM_MARKDATA_N = 43;  
+  
+  /** Mark memory of text terminated with 0 data kind */
+  public static final int MEM_MARKDATA_Z = 44;  
+  
+  /** Mark memory of text with high bit 1 data kind */
+  public static final int MEM_MARKDATA_M = 45;   
+  
+  /** Mark memory of text shifted and high bit 1 data kind */
+  public static final int MEM_MARKDATA_H = 47;  
+  
+  /** Mark memory of text converted to screen code data kind */
+  public static final int MEM_MARKDATA_C = 48;   
   
   /**
    * Execute the passed user action
