@@ -179,6 +179,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData = new javax.swing.JPopupMenu();
         jMenuItemByte = new javax.swing.JMenuItem();
         jMenuItemWord = new javax.swing.JMenuItem();
+        jMenuItemWordSwapped = new javax.swing.JMenuItem();
         jMenuItemLong = new javax.swing.JMenuItem();
         jSeparatorPopUpMenu0 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAddress = new javax.swing.JMenuItem();
@@ -316,6 +317,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSubMenu = new javax.swing.JMenu();
         jMenuItemByte1 = new javax.swing.JMenuItem();
         jMenuItemWord1 = new javax.swing.JMenuItem();
+        jMenuItemWordSwapped1 = new javax.swing.JMenuItem();
         jMenuItemLong1 = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAddress1 = new javax.swing.JMenuItem();
@@ -370,6 +372,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuData.add(jMenuItemWord);
+
+        jMenuItemWordSwapped.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/P.png"))); // NOI18N
+        jMenuItemWordSwapped.setText("(P) Mark data as Word Swapped");
+        jMenuItemWordSwapped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemWordSwappedActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemWordSwapped);
 
         jMenuItemLong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/L.png"))); // NOI18N
         jMenuItemLong.setText("(L) Mark data as Long");
@@ -1249,6 +1260,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jSubMenu.add(jMenuItemWord1);
 
+    jMenuItemWordSwapped1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemWordSwapped1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/P.png"))); // NOI18N
+    jMenuItemWordSwapped1.setMnemonic('p');
+    jMenuItemWordSwapped1.setText("(P) Mark data as Word Swapped");
+    jMenuItemWordSwapped1.setToolTipText("");
+    jMenuItemWordSwapped1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemWordSwapped1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemWordSwapped1);
+
     jMenuItemLong1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemLong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/L.png"))); // NOI18N
     jMenuItemLong1.setMnemonic('l');
@@ -2021,96 +2044,104 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
 
     private void jMenuItemByteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteActionPerformed
-      markAsData(DataType.BYTE);      
+      execute(MEM_MARKDATA_B);
     }//GEN-LAST:event_jMenuItemByteActionPerformed
 
     private void jMenuItemWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordActionPerformed
-      markAsData(DataType.WORD);     
+      execute(MEM_MARKDATA_W);     
     }//GEN-LAST:event_jMenuItemWordActionPerformed
 
     private void jMenuItemLongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLongActionPerformed
-      markAsData(DataType.LONG);     
+      execute(MEM_MARKDATA_L); 
     }//GEN-LAST:event_jMenuItemLongActionPerformed
 
     private void jMenuItemAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddressActionPerformed
-      markAsData(DataType.ADDRESS); 
+      execute(MEM_MARKDATA_A);
     }//GEN-LAST:event_jMenuItemAddressActionPerformed
 
     private void jMenuItemStackWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStackWordActionPerformed
-      markAsData(DataType.STACK); 
+      execute(MEM_MARKDATA_S);
     }//GEN-LAST:event_jMenuItemStackWordActionPerformed
 
     private void jMenuItemTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextActionPerformed
-      markAsData(DataType.TEXT); 
+      execute(MEM_MARKDATA_T);
     }//GEN-LAST:event_jMenuItemTextActionPerformed
 
     private void jMenuItemNumTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumTextActionPerformed
-      markAsData(DataType.NUM_TEXT); 
+      execute(MEM_MARKDATA_N);
     }//GEN-LAST:event_jMenuItemNumTextActionPerformed
 
     private void jMenuItemTextZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextZeroActionPerformed
-      markAsData(DataType.ZERO_TEXT);
+      execute(MEM_MARKDATA_Z);
     }//GEN-LAST:event_jMenuItemTextZeroActionPerformed
 
     private void jMenuItemtextHighOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextHighOneActionPerformed
-      markAsData(DataType.HIGH_TEXT);  
+      execute(MEM_MARKDATA_M);
     }//GEN-LAST:event_jMenuItemtextHighOneActionPerformed
 
     private void jMenuItemtextShiftedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextShiftedActionPerformed
-      markAsData(DataType.SHIFT_TEXT);
+      execute(MEM_MARKDATA_H);
     }//GEN-LAST:event_jMenuItemtextShiftedActionPerformed
 
     private void jMenuItemTextScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextScreenActionPerformed
-      markAsData(DataType.SCREEN_TEXT); 
+      execute(MEM_MARKDATA_C); 
     }//GEN-LAST:event_jMenuItemTextScreenActionPerformed
 
     private void jMenuItemByte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByte1ActionPerformed
-      markAsData(DataType.BYTE);
+      execute(MEM_MARKDATA_B);
     }//GEN-LAST:event_jMenuItemByte1ActionPerformed
 
     private void jMenuItemWord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWord1ActionPerformed
-      markAsData(DataType.WORD);        
+      execute(MEM_MARKDATA_W);      
     }//GEN-LAST:event_jMenuItemWord1ActionPerformed
 
     private void jMenuItemLong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLong1ActionPerformed
-      markAsData(DataType.LONG);
+      execute(MEM_MARKDATA_L);
     }//GEN-LAST:event_jMenuItemLong1ActionPerformed
 
     private void jMenuItemAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddress1ActionPerformed
-      markAsData(DataType.ADDRESS);       
+      execute(MEM_MARKDATA_A);       
     }//GEN-LAST:event_jMenuItemAddress1ActionPerformed
 
     private void jMenuItemStackWord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStackWord1ActionPerformed
-      markAsData(DataType.STACK); 
+      execute(MEM_MARKDATA_S);
     }//GEN-LAST:event_jMenuItemStackWord1ActionPerformed
 
     private void jMenuItemText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemText1ActionPerformed
-      markAsData(DataType.TEXT);
+      execute(MEM_MARKDATA_T);
     }//GEN-LAST:event_jMenuItemText1ActionPerformed
 
     private void jMenuItemNumText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumText1ActionPerformed
-      markAsData(DataType.NUM_TEXT);
+      execute(MEM_MARKDATA_N);
     }//GEN-LAST:event_jMenuItemNumText1ActionPerformed
 
     private void jMenuItemTextZero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextZero1ActionPerformed
-      markAsData(DataType.ZERO_TEXT);
+      execute(MEM_MARKDATA_Z);
     }//GEN-LAST:event_jMenuItemTextZero1ActionPerformed
 
     private void jMenuItemtextHighOne1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextHighOne1ActionPerformed
-      markAsData(DataType.HIGH_TEXT);
+      execute(MEM_MARKDATA_M);
     }//GEN-LAST:event_jMenuItemtextHighOne1ActionPerformed
 
     private void jMenuItemtextShifted1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextShifted1ActionPerformed
-      markAsData(DataType.SHIFT_TEXT);
+      execute(MEM_MARKDATA_H);
     }//GEN-LAST:event_jMenuItemtextShifted1ActionPerformed
 
     private void jMenuItemTextScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextScreen1ActionPerformed
-      markAsData(DataType.SCREEN_TEXT);
+      execute(MEM_MARKDATA_C);
     }//GEN-LAST:event_jMenuItemTextScreen1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
       execute(APP_EXIT);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItemWordSwappedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordSwappedActionPerformed
+      execute(MEM_MARKDATA_P);  
+    }//GEN-LAST:event_jMenuItemWordSwappedActionPerformed
+
+    private void jMenuItemWordSwapped1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordSwapped1ActionPerformed
+      execute(MEM_MARKDATA_P);  
+    }//GEN-LAST:event_jMenuItemWordSwapped1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2237,6 +2268,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemViewProject;
     private javax.swing.JMenuItem jMenuItemWord;
     private javax.swing.JMenuItem jMenuItemWord1;
+    private javax.swing.JMenuItem jMenuItemWordSwapped;
+    private javax.swing.JMenuItem jMenuItemWordSwapped1;
     private javax.swing.JMenuItem jMenuItemtextHighOne;
     private javax.swing.JMenuItem jMenuItemtextHighOne1;
     private javax.swing.JMenuItem jMenuItemtextShifted;
@@ -2349,6 +2382,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_MARKDATA:
          markAsData(DataType.NONE);  
          break;
+       case MEM_MARKDATA_B:
+         markAsData(DataType.BYTE);      
+         break;      
+       case MEM_MARKDATA_W:  
+         markAsData(DataType.WORD);  
+         break;  
+       case MEM_MARKDATA_P:  
+         markAsData(DataType.SWAPPED);  
+         break;           
+       case MEM_MARKDATA_L:  
+         markAsData(DataType.LONG);   
+         break;          
+       case MEM_MARKDATA_A:  
+         markAsData(DataType.ADDRESS);     
+         break;         
+       case MEM_MARKDATA_S:  
+         markAsData(DataType.STACK);      
+         break;           
+       case MEM_MARKDATA_T: 
+         markAsData(DataType.TEXT);  
+         break;           
+       case MEM_MARKDATA_N:  
+         markAsData(DataType.NUM_TEXT);    
+         break;           
+       case MEM_MARKDATA_Z: 
+         markAsData(DataType.ZERO_TEXT);   
+         break;   
+       case MEM_MARKDATA_M:  
+         markAsData(DataType.HIGH_TEXT);   
+         break;            
+       case MEM_MARKDATA_H:  
+         markAsData(DataType.SHIFT_TEXT);   
+         break;           
+       case MEM_MARKDATA_C:  
+         markAsData(DataType.SCREEN_TEXT);  
+         break;         
        case MEM_MARKGARB:
          markAsGarbage();  
          break;        

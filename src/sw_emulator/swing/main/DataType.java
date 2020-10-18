@@ -48,6 +48,12 @@ package sw_emulator.swing.main;
           return 'W';
         }
     },
+    SWAPPED {
+        @Override
+        public char getChar() {
+          return 'P';
+        }
+    },    
     LONG {
         @Override
         public char getChar() {

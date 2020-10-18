@@ -140,26 +140,29 @@ public interface userAction {
   /** Mark memory of word data kind */
   public static final int MEM_MARKDATA_W = 38;  
   
+   /** Mark memory of word swapped data kind */
+  public static final int MEM_MARKDATA_P = 39;  
+  
   /** Mark memory of long data kind */
-  public static final int MEM_MARKDATA_L = 39; 
+  public static final int MEM_MARKDATA_L = 40; 
   
   /** Mark memory of address data kind */
-  public static final int MEM_MARKDATA_A = 40;  
+  public static final int MEM_MARKDATA_A = 41;  
   
   /** Mark memory of stack word data kind */
-  public static final int MEM_MARKDATA_S = 41;  
+  public static final int MEM_MARKDATA_S = 42;  
   
   /** Mark memory of text data kind */
-  public static final int MEM_MARKDATA_T = 42;
+  public static final int MEM_MARKDATA_T = 43;
   
   /** Mark memory of text with number of chars before data kind */
-  public static final int MEM_MARKDATA_N = 43;  
+  public static final int MEM_MARKDATA_N = 44;  
   
   /** Mark memory of text terminated with 0 data kind */
-  public static final int MEM_MARKDATA_Z = 44;  
+  public static final int MEM_MARKDATA_Z = 45;  
   
   /** Mark memory of text with high bit 1 data kind */
-  public static final int MEM_MARKDATA_M = 45;   
+  public static final int MEM_MARKDATA_M = 46;   
   
   /** Mark memory of text shifted and high bit 1 data kind */
   public static final int MEM_MARKDATA_H = 47;  
