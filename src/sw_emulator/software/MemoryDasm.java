@@ -24,7 +24,7 @@
 package sw_emulator.software;
 
 import java.util.Objects;
-import sw_emulator.swing.main.Project;
+import sw_emulator.swing.main.DataType;
 
 /**
  * Memory cell for the disassembler
@@ -70,8 +70,17 @@ public class MemoryDasm implements Cloneable {
   
   /** Type of relation for related < or > */
   public char type=' ';
+  
+  /** Type of data */
+  public DataType dataType=DataType.NONE;
 
-  @Override
+    /**
+     * Test if a given object is equal to this
+     * 
+     * @param o the object to test
+     * @return true if it is equal
+     */
+    @Override
   public boolean equals(Object o) {
     if (!(o instanceof MemoryDasm))  return false;
     MemoryDasm d=(MemoryDasm) o;
@@ -89,9 +98,30 @@ public class MemoryDasm implements Cloneable {
     if (this.copy != d.copy) return false;
     if (this.related != d.related) return false;
     if (this.type != d.type) return false;
+    if (this.dataType != d.dataType) return false;
     
     return true;
   }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.address;
+        hash = 53 * hash + Objects.hashCode(this.dasmComment);
+        hash = 53 * hash + Objects.hashCode(this.userComment);
+        hash = 53 * hash + Objects.hashCode(this.userBlockComment);
+        hash = 53 * hash + Objects.hashCode(this.dasmLocation);
+        hash = 53 * hash + Objects.hashCode(this.userLocation);
+        hash = 53 * hash + (this.isInside ? 1 : 0);
+        hash = 53 * hash + (this.isCode ? 1 : 0);
+        hash = 53 * hash + (this.isData ? 1 : 0);
+        hash = 53 * hash + (this.isGarbage ? 1 : 0);
+        hash = 53 * hash + this.copy;
+        hash = 53 * hash + this.related;
+        hash = 53 * hash + this.type;
+        hash = 53 * hash + Objects.hashCode(this.dataType);
+        return hash;
+    }
 
  @Override
   public MemoryDasm clone() {
@@ -110,6 +140,7 @@ public class MemoryDasm implements Cloneable {
     m.userBlockComment=this.userBlockComment;
     m.userComment=this.userComment;
     m.userLocation=this.userLocation;
+    m.dataType=this.dataType;
           
     return m;    
   }  

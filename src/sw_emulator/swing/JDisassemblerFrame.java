@@ -23,7 +23,6 @@
  */
 package sw_emulator.swing;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -58,6 +57,7 @@ import org.fife.ui.rtextarea.SearchResult;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.memory.memoryState;
+import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
@@ -1699,7 +1699,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void jButtonMarkDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkDataActionPerformed
       execute(MEM_MARKDATA);
-     // jPopupMenuData.show((JComponent)evt.getSource(), 0, ((JComponent)evt.getSource()).getHeight());
     }//GEN-LAST:event_jButtonMarkDataActionPerformed
 
     private void jMenuItemMarkCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarkCodeActionPerformed
@@ -2022,91 +2021,91 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
 
     private void jMenuItemByteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteActionPerformed
-       
+      markAsData(DataType.BYTE);      
     }//GEN-LAST:event_jMenuItemByteActionPerformed
 
     private void jMenuItemWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordActionPerformed
-      
+      markAsData(DataType.WORD);     
     }//GEN-LAST:event_jMenuItemWordActionPerformed
 
     private void jMenuItemLongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLongActionPerformed
-     
+      markAsData(DataType.LONG);     
     }//GEN-LAST:event_jMenuItemLongActionPerformed
 
     private void jMenuItemAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddressActionPerformed
-      
+      markAsData(DataType.ADDRESS); 
     }//GEN-LAST:event_jMenuItemAddressActionPerformed
 
     private void jMenuItemStackWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStackWordActionPerformed
-      
+      markAsData(DataType.STACK); 
     }//GEN-LAST:event_jMenuItemStackWordActionPerformed
 
     private void jMenuItemTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextActionPerformed
-      
+      markAsData(DataType.TEXT); 
     }//GEN-LAST:event_jMenuItemTextActionPerformed
 
     private void jMenuItemNumTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumTextActionPerformed
-       
+      markAsData(DataType.NUM_TEXT); 
     }//GEN-LAST:event_jMenuItemNumTextActionPerformed
 
     private void jMenuItemTextZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextZeroActionPerformed
-      
+      markAsData(DataType.ZERO_TEXT);
     }//GEN-LAST:event_jMenuItemTextZeroActionPerformed
 
     private void jMenuItemtextHighOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextHighOneActionPerformed
-        
+      markAsData(DataType.HIGH_TEXT);  
     }//GEN-LAST:event_jMenuItemtextHighOneActionPerformed
 
     private void jMenuItemtextShiftedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextShiftedActionPerformed
-      
+      markAsData(DataType.SHIFT_TEXT);
     }//GEN-LAST:event_jMenuItemtextShiftedActionPerformed
 
     private void jMenuItemTextScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextScreenActionPerformed
-     
+      markAsData(DataType.SCREEN_TEXT); 
     }//GEN-LAST:event_jMenuItemTextScreenActionPerformed
 
     private void jMenuItemByte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByte1ActionPerformed
-   
+      markAsData(DataType.BYTE);
     }//GEN-LAST:event_jMenuItemByte1ActionPerformed
 
     private void jMenuItemWord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWord1ActionPerformed
-     
+      markAsData(DataType.WORD);        
     }//GEN-LAST:event_jMenuItemWord1ActionPerformed
 
     private void jMenuItemLong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLong1ActionPerformed
- 
+      markAsData(DataType.LONG);
     }//GEN-LAST:event_jMenuItemLong1ActionPerformed
 
     private void jMenuItemAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddress1ActionPerformed
-      
+      markAsData(DataType.ADDRESS);       
     }//GEN-LAST:event_jMenuItemAddress1ActionPerformed
 
     private void jMenuItemStackWord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStackWord1ActionPerformed
-
+      markAsData(DataType.STACK); 
     }//GEN-LAST:event_jMenuItemStackWord1ActionPerformed
 
     private void jMenuItemText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemText1ActionPerformed
-      
+      markAsData(DataType.TEXT);
     }//GEN-LAST:event_jMenuItemText1ActionPerformed
 
     private void jMenuItemNumText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumText1ActionPerformed
-      
+      markAsData(DataType.NUM_TEXT);
     }//GEN-LAST:event_jMenuItemNumText1ActionPerformed
 
     private void jMenuItemTextZero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextZero1ActionPerformed
-    
+      markAsData(DataType.ZERO_TEXT);
     }//GEN-LAST:event_jMenuItemTextZero1ActionPerformed
 
     private void jMenuItemtextHighOne1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextHighOne1ActionPerformed
-      
+      markAsData(DataType.HIGH_TEXT);
     }//GEN-LAST:event_jMenuItemtextHighOne1ActionPerformed
 
     private void jMenuItemtextShifted1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemtextShifted1ActionPerformed
-      
+      markAsData(DataType.SHIFT_TEXT);
     }//GEN-LAST:event_jMenuItemtextShifted1ActionPerformed
 
     private void jMenuItemTextScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextScreen1ActionPerformed
-      
+      markAsData(DataType.SCREEN_TEXT);
     }//GEN-LAST:event_jMenuItemTextScreen1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -2348,7 +2347,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          markAsCode();  
          break;
        case MEM_MARKDATA:
-         markAsData();  
+         markAsData(DataType.NONE);  
          break;
        case MEM_MARKGARB:
          markAsGarbage();  
@@ -2596,6 +2595,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.isCode=true;
       mem.isData=false;
       mem.isGarbage=false;
+      mem.dataType=DataType.NONE;
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -2607,8 +2607,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /**
    * Mark user selection as data
+   * 
+   * @param dataType the type of date
    */
-  private void markAsData() {
+  private void markAsData(DataType dataType) {
     MemoryDasm mem;   
       
     int rows[]=jTableMemory.getSelectedRows();
@@ -2618,6 +2620,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.isData=true;
       mem.isCode=false;
       mem.isGarbage=false;
+      mem.dataType=dataType;
       if (option.eraseDComm) mem.dasmComment=null;
       if (option.erasePlus && mem.type=='+') {
         mem.related=-1;
@@ -3200,6 +3203,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               memProject.related=memMerge.related;
               memProject.type=memMerge.type;
             }
+            
+            if (memProject.dataType!=DataType.NONE) memProject.dataType=memMerge.dataType;
           }
        }
           

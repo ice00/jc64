@@ -247,7 +247,12 @@ public class FileManager {
         project.memory[i].isInside=in.readBoolean();
         project.memory[i].isCode=in.readBoolean();
         project.memory[i].isData=in.readBoolean();
-        if (version>0) project.memory[i].isGarbage=in.readBoolean(); // version 1
+        
+        if (version>0) {
+            project.memory[i].isGarbage=in.readBoolean();
+            project.memory[i].dataType=DataType.valueOf(in.readUTF());
+        } // version 1
+        
         project.memory[i].copy=in.readByte();
         project.memory[i].related=in.readInt();
         project.memory[i].type=in.readChar();
@@ -335,7 +340,8 @@ public class FileManager {
           out.writeBoolean(memory.isInside);
           out.writeBoolean(memory.isCode);
           out.writeBoolean(memory.isData);
-          out.writeBoolean(memory.isGarbage);  // version 1
+          out.writeBoolean(memory.isGarbage);    // version 1
+          out.writeUTF(memory.dataType.name());  // version 1
           out.writeByte(memory.copy);
           out.writeInt(memory.related);
           out.writeChar(memory.type);
