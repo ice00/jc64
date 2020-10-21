@@ -177,20 +177,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void initComponents() {
 
         jPopupMenuData = new javax.swing.JPopupMenu();
-        jMenuItemByte = new javax.swing.JMenuItem();
+        jMenuItemByteHex = new javax.swing.JMenuItem();
+        jMenuItemByteDec = new javax.swing.JMenuItem();
+        jMenuItemByteBin = new javax.swing.JMenuItem();
+        jMenuItemByteChar = new javax.swing.JMenuItem();
+        jSeparatorByte = new javax.swing.JPopupMenu.Separator();
         jMenuItemWord = new javax.swing.JMenuItem();
         jMenuItemWordSwapped = new javax.swing.JMenuItem();
+        jSeparatorWord = new javax.swing.JPopupMenu.Separator();
+        jMenuItemTribyte = new javax.swing.JMenuItem();
         jMenuItemLong = new javax.swing.JMenuItem();
         jSeparatorPopUpMenu0 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAddress = new javax.swing.JMenuItem();
         jMenuItemStackWord = new javax.swing.JMenuItem();
         jSeparatorPopUpMenu1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemSpriteMono = new javax.swing.JMenuItem();
+        jMenuItemSpriteMulti = new javax.swing.JMenuItem();
+        jSeparatorSprite = new javax.swing.JPopupMenu.Separator();
         jMenuItemText = new javax.swing.JMenuItem();
         jMenuItemNumText = new javax.swing.JMenuItem();
         jMenuItemTextZero = new javax.swing.JMenuItem();
         jMenuItemtextHighOne = new javax.swing.JMenuItem();
         jMenuItemtextShifted = new javax.swing.JMenuItem();
         jMenuItemTextScreen = new javax.swing.JMenuItem();
+        jMenuItemTextPetascii = new javax.swing.JMenuItem();
         jToolBar = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
         jButtonOpenProject = new javax.swing.JButton();
@@ -315,20 +325,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemMarkCode = new javax.swing.JMenuItem();
         jMenuItemMarkData = new javax.swing.JMenuItem();
         jSubMenu = new javax.swing.JMenu();
-        jMenuItemByte1 = new javax.swing.JMenuItem();
+        jMenuItemByteHex1 = new javax.swing.JMenuItem();
+        jMenuItemByteDec1 = new javax.swing.JMenuItem();
+        jMenuItemByteBin1 = new javax.swing.JMenuItem();
+        jMenuItemByteChar1 = new javax.swing.JMenuItem();
+        jSeparatorByte1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemWord1 = new javax.swing.JMenuItem();
         jMenuItemWordSwapped1 = new javax.swing.JMenuItem();
+        jSeparatorWord1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemTribyte1 = new javax.swing.JMenuItem();
         jMenuItemLong1 = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAddress1 = new javax.swing.JMenuItem();
         jMenuItemStackWord1 = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemSpriteMono1 = new javax.swing.JMenuItem();
+        jMenuItemSpriteMulti1 = new javax.swing.JMenuItem();
+        jSeparatorSprite1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemText1 = new javax.swing.JMenuItem();
         jMenuItemNumText1 = new javax.swing.JMenuItem();
         jMenuItemTextZero1 = new javax.swing.JMenuItem();
         jMenuItemtextHighOne1 = new javax.swing.JMenuItem();
         jMenuItemtextShifted1 = new javax.swing.JMenuItem();
         jMenuItemTextScreen1 = new javax.swing.JMenuItem();
+        jMenuItemTextPetascii1 = new javax.swing.JMenuItem();
         jMenuItemMarkGarbage = new javax.swing.JMenuItem();
         jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMinus = new javax.swing.JMenuItem();
@@ -355,14 +375,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemCredits = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
-        jMenuItemByte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
-        jMenuItemByte.setText("(B) Mark data as Byte");
-        jMenuItemByte.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemByteHex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+        jMenuItemByteHex.setText("(B) Mark data as Byte (HEX)");
+        jMenuItemByteHex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemByteActionPerformed(evt);
+                jMenuItemByteHexActionPerformed(evt);
             }
         });
-        jPopupMenuData.add(jMenuItemByte);
+        jPopupMenuData.add(jMenuItemByteHex);
+
+        jMenuItemByteDec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/D.png"))); // NOI18N
+        jMenuItemByteDec.setText("(D) Mark data as Byte (DEC)");
+        jMenuItemByteDec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemByteDecActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemByteDec);
+
+        jMenuItemByteBin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/Y.png"))); // NOI18N
+        jMenuItemByteBin.setText("(Y) Mark data as Byte (BIN)");
+        jMenuItemByteBin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemByteBinActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemByteBin);
+
+        jMenuItemByteChar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/R.png"))); // NOI18N
+        jMenuItemByteChar.setText("(R) Mark data as Byte (CHAR)");
+        jMenuItemByteChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemByteCharActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemByteChar);
+        jPopupMenuData.add(jSeparatorByte);
 
         jMenuItemWord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/W.png"))); // NOI18N
         jMenuItemWord.setText("(W) Mark data as Word");
@@ -381,6 +429,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuData.add(jMenuItemWordSwapped);
+        jPopupMenuData.add(jSeparatorWord);
+
+        jMenuItemTribyte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/E.png"))); // NOI18N
+        jMenuItemTribyte.setText("(E) Mark data as Tribyte");
+        jMenuItemTribyte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTribyteActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemTribyte);
 
         jMenuItemLong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/L.png"))); // NOI18N
         jMenuItemLong.setText("(L) Mark data as Long");
@@ -402,7 +460,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData.add(jMenuItemAddress);
 
         jMenuItemStackWord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/S.png"))); // NOI18N
-        jMenuItemStackWord.setText("(S) Mark data as Stack Work");
+        jMenuItemStackWord.setText("(S) Mark data as Stack Word");
         jMenuItemStackWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemStackWordActionPerformed(evt);
@@ -410,6 +468,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jPopupMenuData.add(jMenuItemStackWord);
         jPopupMenuData.add(jSeparatorPopUpMenu1);
+
+        jMenuItemSpriteMono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+        jMenuItemSpriteMono.setText("() Mark data as Monocromatic Sprite definitions");
+        jMenuItemSpriteMono.setToolTipText("");
+        jMenuItemSpriteMono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSpriteMonoActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemSpriteMono);
+
+        jMenuItemSpriteMulti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+        jMenuItemSpriteMulti.setText("() Mark data as Multicolor Sprite definitions");
+        jMenuItemSpriteMulti.setToolTipText("");
+        jMenuItemSpriteMulti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSpriteMultiActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemSpriteMulti);
+        jPopupMenuData.add(jSeparatorSprite);
 
         jMenuItemText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/T.png"))); // NOI18N
         jMenuItemText.setText("(T) Mark data as Text");
@@ -468,6 +547,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuData.add(jMenuItemTextScreen);
+
+        jMenuItemTextPetascii.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/I.png"))); // NOI18N
+        jMenuItemTextPetascii.setText("(I) Mark data as Text converted to petAscii code");
+        jMenuItemTextPetascii.setToolTipText("");
+        jMenuItemTextPetascii.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTextPetasciiActionPerformed(evt);
+            }
+        });
+        jPopupMenuData.add(jMenuItemTextPetascii);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
@@ -1238,16 +1327,50 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jSubMenu.setText("(more specific data selection)");
 
-    jMenuItemByte1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-    jMenuItemByte1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
-    jMenuItemByte1.setMnemonic('b');
-    jMenuItemByte1.setText("(B) Mark data as Byte");
-    jMenuItemByte1.addActionListener(new java.awt.event.ActionListener() {
+    jMenuItemByteHex1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemByteHex1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+    jMenuItemByteHex1.setMnemonic('b');
+    jMenuItemByteHex1.setText("(B) Mark data as Byte (HEX)");
+    jMenuItemByteHex1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jMenuItemByte1ActionPerformed(evt);
+            jMenuItemByteHex1ActionPerformed(evt);
         }
     });
-    jSubMenu.add(jMenuItemByte1);
+    jSubMenu.add(jMenuItemByteHex1);
+
+    jMenuItemByteDec1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemByteDec1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/D.png"))); // NOI18N
+    jMenuItemByteDec1.setMnemonic('d');
+    jMenuItemByteDec1.setText("(D) Mark data as Byte (DEC)");
+    jMenuItemByteDec1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemByteDec1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemByteDec1);
+
+    jMenuItemByteBin1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemByteBin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/Y.png"))); // NOI18N
+    jMenuItemByteBin1.setMnemonic('y');
+    jMenuItemByteBin1.setText("(Y) Mark data as Byte (BIN)");
+    jMenuItemByteBin1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemByteBin1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemByteBin1);
+
+    jMenuItemByteChar1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemByteChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/R.png"))); // NOI18N
+    jMenuItemByteChar1.setMnemonic('r');
+    jMenuItemByteChar1.setText("(R) Mark data as Byte (CHAR)");
+    jMenuItemByteChar1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemByteChar1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemByteChar1);
+    jSubMenu.add(jSeparatorByte1);
 
     jMenuItemWord1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemWord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/W.png"))); // NOI18N
@@ -1271,6 +1394,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jSubMenu.add(jMenuItemWordSwapped1);
+    jSubMenu.add(jSeparatorWord1);
+
+    jMenuItemTribyte1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/E.png"))); // NOI18N
+    jMenuItemTribyte1.setText("(E) Mark data as Tribyte");
+    jMenuItemTribyte1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemTribyte1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemTribyte1);
 
     jMenuItemLong1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemLong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/L.png"))); // NOI18N
@@ -1306,6 +1439,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jSubMenu.add(jMenuItemStackWord1);
     jSubMenu.add(jSeparator6);
+
+    jMenuItemSpriteMono1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+    jMenuItemSpriteMono1.setText("() Mark data as Monocromatic Sprite definitions");
+    jMenuItemSpriteMono1.setToolTipText("");
+    jMenuItemSpriteMono1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSpriteMono1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemSpriteMono1);
+
+    jMenuItemSpriteMulti1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+    jMenuItemSpriteMulti1.setText("() Mark data as Multicolor Sprite definitions");
+    jMenuItemSpriteMulti1.setToolTipText("");
+    jMenuItemSpriteMulti1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSpriteMulti1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemSpriteMulti1);
+    jSubMenu.add(jSeparatorSprite1);
 
     jMenuItemText1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemText1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/T.png"))); // NOI18N
@@ -1376,6 +1530,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jSubMenu.add(jMenuItemTextScreen1);
+
+    jMenuItemTextPetascii1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemTextPetascii1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/I.png"))); // NOI18N
+    jMenuItemTextPetascii1.setMnemonic('i');
+    jMenuItemTextPetascii1.setText("(I) Mark data as Text converted to petAscii code");
+    jMenuItemTextPetascii1.setToolTipText("");
+    jMenuItemTextPetascii1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemTextPetascii1ActionPerformed(evt);
+        }
+    });
+    jSubMenu.add(jMenuItemTextPetascii1);
 
     jMenuMemory.add(jSubMenu);
 
@@ -2043,9 +2209,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
 
-    private void jMenuItemByteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteActionPerformed
+    private void jMenuItemByteHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteHexActionPerformed
       execute(MEM_MARKDATA_B);
-    }//GEN-LAST:event_jMenuItemByteActionPerformed
+    }//GEN-LAST:event_jMenuItemByteHexActionPerformed
 
     private void jMenuItemWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordActionPerformed
       execute(MEM_MARKDATA_W);     
@@ -2087,9 +2253,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_MARKDATA_C); 
     }//GEN-LAST:event_jMenuItemTextScreenActionPerformed
 
-    private void jMenuItemByte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByte1ActionPerformed
+    private void jMenuItemByteHex1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteHex1ActionPerformed
       execute(MEM_MARKDATA_B);
-    }//GEN-LAST:event_jMenuItemByte1ActionPerformed
+    }//GEN-LAST:event_jMenuItemByteHex1ActionPerformed
 
     private void jMenuItemWord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWord1ActionPerformed
       execute(MEM_MARKDATA_W);      
@@ -2142,6 +2308,62 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jMenuItemWordSwapped1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWordSwapped1ActionPerformed
       execute(MEM_MARKDATA_P);  
     }//GEN-LAST:event_jMenuItemWordSwapped1ActionPerformed
+
+    private void jMenuItemByteDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteDecActionPerformed
+      execute(MEM_MARKDATA_D);
+    }//GEN-LAST:event_jMenuItemByteDecActionPerformed
+
+    private void jMenuItemByteBinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteBinActionPerformed
+      execute(MEM_MARKDATA_Y);  
+    }//GEN-LAST:event_jMenuItemByteBinActionPerformed
+
+    private void jMenuItemByteCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteCharActionPerformed
+      execute(MEM_MARKDATA_R);  
+    }//GEN-LAST:event_jMenuItemByteCharActionPerformed
+
+    private void jMenuItemByteDec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteDec1ActionPerformed
+      execute(MEM_MARKDATA_D); 
+    }//GEN-LAST:event_jMenuItemByteDec1ActionPerformed
+
+    private void jMenuItemByteBin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteBin1ActionPerformed
+      execute(MEM_MARKDATA_Y);  
+    }//GEN-LAST:event_jMenuItemByteBin1ActionPerformed
+
+    private void jMenuItemByteChar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteChar1ActionPerformed
+      execute(MEM_MARKDATA_R);  
+    }//GEN-LAST:event_jMenuItemByteChar1ActionPerformed
+
+    private void jMenuItemSpriteMonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMonoActionPerformed
+        
+    }//GEN-LAST:event_jMenuItemSpriteMonoActionPerformed
+
+    private void jMenuItemSpriteMultiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMultiActionPerformed
+       
+    }//GEN-LAST:event_jMenuItemSpriteMultiActionPerformed
+
+    private void jMenuItemTextPetascii1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextPetascii1ActionPerformed
+       execute(MEM_MARKDATA_I);  
+    }//GEN-LAST:event_jMenuItemTextPetascii1ActionPerformed
+
+    private void jMenuItemTextPetasciiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextPetasciiActionPerformed
+      execute(MEM_MARKDATA_I); 
+    }//GEN-LAST:event_jMenuItemTextPetasciiActionPerformed
+
+    private void jMenuItemTribyteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTribyteActionPerformed
+      execute(MEM_MARKDATA_E);  
+    }//GEN-LAST:event_jMenuItemTribyteActionPerformed
+
+    private void jMenuItemTribyte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTribyte1ActionPerformed
+      execute(MEM_MARKDATA_E); 
+    }//GEN-LAST:event_jMenuItemTribyte1ActionPerformed
+
+    private void jMenuItemSpriteMono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMono1ActionPerformed
+       
+    }//GEN-LAST:event_jMenuItemSpriteMono1ActionPerformed
+
+    private void jMenuItemSpriteMulti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMulti1ActionPerformed
+      
+    }//GEN-LAST:event_jMenuItemSpriteMulti1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2222,8 +2444,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemAddComment;
     private javax.swing.JMenuItem jMenuItemAddress;
     private javax.swing.JMenuItem jMenuItemAddress1;
-    private javax.swing.JMenuItem jMenuItemByte;
-    private javax.swing.JMenuItem jMenuItemByte1;
+    private javax.swing.JMenuItem jMenuItemByteBin;
+    private javax.swing.JMenuItem jMenuItemByteBin1;
+    private javax.swing.JMenuItem jMenuItemByteChar;
+    private javax.swing.JMenuItem jMenuItemByteChar1;
+    private javax.swing.JMenuItem jMenuItemByteDec;
+    private javax.swing.JMenuItem jMenuItemByteDec1;
+    private javax.swing.JMenuItem jMenuItemByteHex;
+    private javax.swing.JMenuItem jMenuItemByteHex1;
     private javax.swing.JMenuItem jMenuItemClearDLabel;
     private javax.swing.JMenuItem jMenuItemClearDMem;
     private javax.swing.JMenuItem jMenuItemClearUMem;
@@ -2255,14 +2483,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemSaveAsProject;
     private javax.swing.JMenuItem jMenuItemSaveProject;
     private javax.swing.JMenuItem jMenuItemSourceSaveAs;
+    private javax.swing.JMenuItem jMenuItemSpriteMono;
+    private javax.swing.JMenuItem jMenuItemSpriteMono1;
+    private javax.swing.JMenuItem jMenuItemSpriteMulti;
+    private javax.swing.JMenuItem jMenuItemSpriteMulti1;
     private javax.swing.JMenuItem jMenuItemStackWord;
     private javax.swing.JMenuItem jMenuItemStackWord1;
     private javax.swing.JMenuItem jMenuItemText;
     private javax.swing.JMenuItem jMenuItemText1;
+    private javax.swing.JMenuItem jMenuItemTextPetascii;
+    private javax.swing.JMenuItem jMenuItemTextPetascii1;
     private javax.swing.JMenuItem jMenuItemTextScreen;
     private javax.swing.JMenuItem jMenuItemTextScreen1;
     private javax.swing.JMenuItem jMenuItemTextZero;
     private javax.swing.JMenuItem jMenuItemTextZero1;
+    private javax.swing.JMenuItem jMenuItemTribyte;
+    private javax.swing.JMenuItem jMenuItemTribyte1;
     private javax.swing.JMenuItem jMenuItemUserLabel;
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewProject;
@@ -2291,6 +2527,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JToolBar.Separator jSeparatorButton1;
     private javax.swing.JToolBar.Separator jSeparatorButton2;
     private javax.swing.JToolBar.Separator jSeparatorButton3;
+    private javax.swing.JPopupMenu.Separator jSeparatorByte;
+    private javax.swing.JPopupMenu.Separator jSeparatorByte1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp1;
     private javax.swing.JPopupMenu.Separator jSeparatorOption;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu0;
@@ -2298,6 +2536,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparatorProject1;
     private javax.swing.JPopupMenu.Separator jSeparatorProject2;
     private javax.swing.JPopupMenu.Separator jSeparatorProject3;
+    private javax.swing.JPopupMenu.Separator jSeparatorSprite;
+    private javax.swing.JPopupMenu.Separator jSeparatorSprite1;
+    private javax.swing.JPopupMenu.Separator jSeparatorWord;
+    private javax.swing.JPopupMenu.Separator jSeparatorWord1;
     private javax.swing.JSplitPane jSplitPaneExternal;
     private javax.swing.JSplitPane jSplitPaneInternal;
     private javax.swing.JMenu jSubMenu;
@@ -2383,14 +2625,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          markAsData(DataType.NONE);  
          break;
        case MEM_MARKDATA_B:
-         markAsData(DataType.BYTE);      
+         markAsData(DataType.BYTE_HEX);      
          break;      
+       case MEM_MARKDATA_D:
+         markAsData(DataType.BYTE_DEC);      
+         break;           
+       case MEM_MARKDATA_Y:
+         markAsData(DataType.BYTE_BIN);      
+         break; 
+       case MEM_MARKDATA_R:
+         markAsData(DataType.BYTE_CHAR);      
+         break;          
        case MEM_MARKDATA_W:  
          markAsData(DataType.WORD);  
          break;  
        case MEM_MARKDATA_P:  
          markAsData(DataType.SWAPPED);  
-         break;           
+         break;      
+       case MEM_MARKDATA_E:  
+         markAsData(DataType.TRIBYTE);   
+         break;         
        case MEM_MARKDATA_L:  
          markAsData(DataType.LONG);   
          break;          
@@ -2417,7 +2671,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;           
        case MEM_MARKDATA_C:  
          markAsData(DataType.SCREEN_TEXT);  
-         break;         
+         break;  
+       case MEM_MARKDATA_I:  
+         markAsData(DataType.PETASCII_TEXT);  
+         break;           
        case MEM_MARKGARB:
          markAsGarbage();  
          break;        

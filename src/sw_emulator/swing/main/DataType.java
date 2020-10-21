@@ -36,12 +36,30 @@ package sw_emulator.swing.main;
         }
     },  
      
-    BYTE {
+    BYTE_HEX {
         @Override
         public char getChar() {
           return 'B';
         }
     },
+    BYTE_DEC {
+        @Override
+        public char getChar() {
+          return 'D';
+        }
+    },
+    BYTE_BIN {
+        @Override
+        public char getChar() {
+          return 'Y';
+        }
+    },
+    BYTE_CHAR {
+        @Override
+        public char getChar() {
+          return 'R';
+        }
+    },    
     WORD {
         @Override
         public char getChar() {
@@ -53,7 +71,13 @@ package sw_emulator.swing.main;
         public char getChar() {
           return 'P';
         }
-    },    
+    },  
+    TRIBYTE {
+        @Override
+        public char getChar() {
+          return 'E';
+        }
+    },     
     LONG {
         @Override
         public char getChar() {
@@ -106,6 +130,12 @@ package sw_emulator.swing.main;
         @Override
         public char getChar() {
           return 'C';
+        }        
+    },
+    PETASCII_TEXT {
+        @Override
+        public char getChar() {
+          return 'I';
         }        
     }   
     

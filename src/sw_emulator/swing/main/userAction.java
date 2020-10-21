@@ -134,41 +134,56 @@ public interface userAction {
   /** Collaborative merge */
   public static final int PROJ_MERGE = 36;
   
-  /** Mark memory of byte data kind */
+  /** Mark memory of byte (hex) data kind */
   public static final int MEM_MARKDATA_B = 37;
   
+  /** Mark memory of byte (decimal) data kind */
+  public static final int MEM_MARKDATA_D = 38;
+  
+  /** Mark memory of byte (binary) data kind */
+  public static final int MEM_MARKDATA_Y = 39;
+  
+  /** Mark memory of byte (char) data kind */
+  public static final int MEM_MARKDATA_R = 40;
+  
   /** Mark memory of word data kind */
-  public static final int MEM_MARKDATA_W = 38;  
+  public static final int MEM_MARKDATA_W = 41;  
   
    /** Mark memory of word swapped data kind */
-  public static final int MEM_MARKDATA_P = 39;  
+  public static final int MEM_MARKDATA_P = 42;  
+  
+  /** Mark memory of tribyte data kind */
+  public static final int MEM_MARKDATA_E = 43; 
   
   /** Mark memory of long data kind */
-  public static final int MEM_MARKDATA_L = 40; 
+  public static final int MEM_MARKDATA_L = 44; 
   
   /** Mark memory of address data kind */
-  public static final int MEM_MARKDATA_A = 41;  
+  public static final int MEM_MARKDATA_A = 45;  
   
   /** Mark memory of stack word data kind */
-  public static final int MEM_MARKDATA_S = 42;  
+  public static final int MEM_MARKDATA_S = 46;  
   
   /** Mark memory of text data kind */
-  public static final int MEM_MARKDATA_T = 43;
+  public static final int MEM_MARKDATA_T = 47;
   
   /** Mark memory of text with number of chars before data kind */
-  public static final int MEM_MARKDATA_N = 44;  
+  public static final int MEM_MARKDATA_N = 48;  
   
   /** Mark memory of text terminated with 0 data kind */
-  public static final int MEM_MARKDATA_Z = 45;  
+  public static final int MEM_MARKDATA_Z = 49;  
   
   /** Mark memory of text with high bit 1 data kind */
-  public static final int MEM_MARKDATA_M = 46;   
+  public static final int MEM_MARKDATA_M = 50;   
   
   /** Mark memory of text shifted and high bit 1 data kind */
-  public static final int MEM_MARKDATA_H = 47;  
+  public static final int MEM_MARKDATA_H = 51;  
   
   /** Mark memory of text converted to screen code data kind */
-  public static final int MEM_MARKDATA_C = 48;   
+  public static final int MEM_MARKDATA_C = 52;   
+  
+  /** Mark memory of text converted to petascii code data kind */
+  public static final int MEM_MARKDATA_I = 53;   
   
   /**
    * Execute the passed user action
