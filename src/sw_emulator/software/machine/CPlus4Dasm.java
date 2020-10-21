@@ -293,6 +293,140 @@ public class CPlus4Dasm extends M6510Dasm {
               case 0x2C9: return "Cosine of value of angle";
               case 0x2CA:
               case 0x2CB: return "Temps for angle distance routines";
+              case 0x2CC: return "Placeholder";
+              case 0x2CD: return "Pointer to begin no.";
+              case 0x2CE: return "Pointer to end no.";
+              case 0x2CF: return "Dollar flag";
+              case 0x2D0: return "Comma flag";
+              case 0x2D1: return "Counter";
+              case 0x2D2: return "Sign exponent";
+              case 0x2D3: return "Pointer to exponent";
+              case 0x2D4: return "# of digits before decimal point";
+              case 0x2D5: return "Justify flag";
+              case 0x2D6: return "# of pos before decimal point (field)";
+              case 0x2D7: return "# of pos after decimal point (field)";
+              case 0x2D8: return "+/- flag (field)";
+              case 0x2D9: return "Exponent flag (field)";
+              case 0x2DA: return "Switch/Characters column counter";
+              case 0x2DB: return "Char counter (field)/Characters row counter";
+              case 0x2DC: return "Sign no.";
+              case 0x2DD: return "Blank/star flag";
+              case 0x2DE: return "Pointer to beginning of field";
+              case 0x2DF: return "Length of format";
+              case 0x2E0: return "Length of format";
+              case 0x2F1:
+              case 0x2F3: return "Ptr to routine: convert float to integer";
+              case 0x2F4:
+              case 0x2F5: return "Ptr to routine: convert integer to float";
+              case 0x2FE:
+              case 0x2FF: return "Vector for function cartridge users";
+              case 0x300:
+              case 0x301: return "Indirect Error (Output Error in .X)";
+              case 0x302:
+              case 0x303: return "Indirect Main (System Direct Loop)";
+              case 0x304:
+              case 0x305: return "Indirect Crunch (Tokenization Routine)";
+              case 0x306:
+              case 0x307: return "Indirect List (Char List)";
+              case 0x308:
+              case 0x309: return "Indirect Gone (Character Dispatch)";
+              case 0x30A:
+              case 0x30B: return "Indirect Eval (Symbol Evaluation)";
+              case 0x30C: 
+              case 0x30D: return "Escape token crunch";
+              case 0x314:
+              case 0x315: return "IRQ Ram Vector";
+              case 0x316:
+              case 0x317: return "BRK Instr RAM Vector";
+              case 0x318:
+              case 0x319: return "Indirects for Code";
+              case 0x330:
+              case 0x331: return "Savesp";
+              case 0x3F3:
+              case 0x3F4: return "Length of data to be written to tape";
+              case 0x3F5:
+              case 0x3F6: return "Length of data to be read from tape";
+              case 0x4A2:
+              case 0x4A3:    
+              case 0x4A4: return "Numeric constant for Basic";
+              case 0x4E7: return "Print using fill symbol [space]";
+              case 0x4E8: return "Print using comma symbol [;]";
+              case 0x4E9: return "Print using D.P. symbol  [.]";
+              case 0x4EA: return "Print using monetary symbol [$]";
+              case 0x4EB:
+              case 0x4EC:    
+              case 0x4ED:    
+              case 0x4EE: return "Temp for instr";
+              case 0x4EF: return "Last error number";
+              case 0x4F0:    
+              case 0x4F1: return "Line # of last error";
+              case 0x4F2:    
+              case 0x4F3: return "Line to go on error";
+              case 0x4F4: return "Hold trap no. temporarily";
+              case 0x4FC:    
+              case 0x4FD: return "Table of pending jiffies (2's comp)";   
+              case 0x508: return "'cold' or 'warm' start status";
+              case 0x531: 
+              case 0x532: return "Start of memory [1000]";
+              case 0x533:
+              case 0x534: return "return \"Start of memory [1000]\";";
+              case 0x535: return "IEEE timeout flag";
+              case 0x536: return "File end reached = 1, 0 otherwise";
+              case 0x537: return "# of chars left in buffer (for R & W)";
+              case 0x538: return "# of total valid chars in buffer (R)";
+              case 0x539: return "Ptr to next char in buffer (for R & W)";
+              case 0x53A: return "Contains type of current cass file";
+              case 0x53B: return "Active attribute byte";
+              case 0x53C: return "Character flash flag";
+              case 0x53D: return "Free";
+              case 0x53E: return "OC Base location of screen (top) [0C]";
+              case 0x540: return "Key repeat flag";
+              case 0x543: return "Shift flag byte";
+              case 0x544: return "Last shift pattern";
+              case 0x545:
+              case 0x546: return "Indirect for keyboard table setup";
+              case 0x547: return "shift, C="; 
+              case 0x548: return "Auto scroll down flag (0=on,0<>off)";
+              case 0x54B: return "Monitor non-zpage storage";
+              case 0x55B: return "Used by various monitor routines";
+              case 0x55D: return "Used for programmable keys";
+              case 0x5E7: return "Temp for data write to kennedy";
+              case 0x5E8: return "Select for kennedy read or write";
+              case 0x5E9: return "Kennedy's dev #";
+              case 0x5EA: return "Rennedy present = $ff, else = $00";
+              case 0x5EB: return "Temp for type of open for kennedy";
+              case 0x5EC: 
+              case 0x5ED:
+              case 0x5EE: 
+              case 0x5EF: return "Physical Address Table";
+              case 0x5F0: 
+              case 0x5F1: return "Long jump address";
+              case 0x5F2: return "Long jump accumulator";
+              case 0x5F3: return "Long jump x register";
+              case 0x5F4: return "Long jump status register";
+              case 0x7B0: return "Byte to be written on tape";
+              case 0x7B1: return "Temp for parity calc";
+              case 0x7B2: 
+              case 0x7B3: return "Temp for write-header";
+              case 0x5B5: return "Local index for READBYTE routine: ";
+              case 0x5B6: return "Pointer into the error stack";
+              case 0x5B7: return "Number of first pass errors";
+              case 0x7BE: return "Stack marker for stopkey recover";
+              case 0x7BF: return "Stack marker for dropkey recover";
+              case 0x7C0:
+              case 0x7C1:
+              case 0x7C2:
+              case 0x7C3: return "Params passed to RDBLOK";
+              case 0x7C4: return "Temp stat save for RDBLOK";
+              case 0x7C5: return "# consec shorts to find in leader";
+              case 0x7C6: return "# Errors fatal in RD countdown";
+              case 0x7C7: return "Temp for Verify command";
+              case 0x7C8:
+              case 0x7C9:    
+              case 0x7CA:    
+              case 0x7CB: return "Pipe temp for T1";
+              case 0x7CC: return "Read error propagate";
+              
               
             default:
                 if ((addr>=0xD0) && (addr<=0xD7)) return "Area for use by speech software"; 
@@ -303,6 +437,25 @@ public class CPlus4Dasm extends M6510Dasm {
                 if ((addr>=0x259) && (addr<=0x25C)) return "Basic storage";
                 if ((addr>=0x25E) && (addr<=0x26D)) return "Area for filename";
                 if ((addr>=0x27D) && (addr<=0x2AC)) return "Area used to build DOS string";
+                if ((addr>=0x333) && (addr<=0x3F2)) return "Cassette tape buffer";
+                if ((addr>=0x3F7) && (addr<=0x436)) return "RS-232 input queue";
+                if ((addr>=0x494) && (addr<=0x4A1)) return "Shared ROM fetch sub";
+                if ((addr>=0x4A5) && (addr<=0x4AF)) return "Txtptr";
+                if ((addr>=0x4B0) && (addr<=0x4BA)) return "Index & Index1";
+                if ((addr>=0x4BB) && (addr<=0x4C5)) return "Index2";
+                if ((addr>=0x4C6) && (addr<=0x4D0)) return "Strng1";
+                if ((addr>=0x4D1) && (addr<=0x4DB)) return "Lowtr";
+                if ((addr>=0x4DC) && (addr<=0x4E6)) return "Facmo";
+                if ((addr>=0x509) && (addr<=0x512)) return "Logical file numbers";
+                if ((addr>=0x513) && (addr<=0x51C)) return "Primary device numbers";
+                if ((addr>=0x51D) && (addr<=0x526)) return "Secondary addresses";
+                if ((addr>=0x527) && (addr<=0x530)) return "IRQ keyboard buffer";   
+                if ((addr>=0x55F) && (addr<=0x556)) return "Table of P.F. lengths";  
+                if ((addr>=0x567) && (addr<=0x5E6)) return "P.F. Key storage area";  
+                if ((addr>=0x5F5) && (addr<=0x65D)) return "RAM areas for banking";  
+                if ((addr>=0x65E) && (addr<=0x6EB)) return "RAM area for speech";  
+                if ((addr>=0x6EC) && (addr<=0x7AF)) return "BASIC run-time stack";  
+                if ((addr>=0x7B8) && (addr<=0x7BD)) return "Time constant";
             }
         }
     }  
