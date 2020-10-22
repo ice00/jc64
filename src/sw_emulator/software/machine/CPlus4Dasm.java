@@ -426,8 +426,143 @@ public class CPlus4Dasm extends M6510Dasm {
               case 0x7CA:    
               case 0x7CB: return "Pipe temp for T1";
               case 0x7CC: return "Read error propagate";
-              
-              
+              case 0x7CD: return "User chracter to send";
+              case 0x7CE: return "0 = empty ; 1 = full";
+              case 0x7CF: return "System character to send";
+              case 0x7D0: return "0 = empty ; 1 = full";
+              case 0x7D1: return "Pntr to front of input queue";
+              case 0x7D2: return "Pntr to rear of input queue";
+              case 0x7D3: return "# of chars in input queue";
+              case 0x7D4: return "Temp status for ACIA";
+              case 0x7D5: return "Temp for input routine";
+              case 0x7D6: return "FLG for local pause";
+              case 0x7D7: return "FLG for remote pause";
+              case 0x7D8: return "FLG to indicate presence of ACIA";
+              case 0x7E5: return "Screen bottom (0...24)";
+              case 0x7E6: return "Screen top";
+              case 0x7E7: return "Screen left (0...39)";
+              case 0x7E8: return "Screen right";
+              case 0x7E9: return "Negative = scroll out";
+              case 0x7EA: return "Insert mode: FF = on, 00 = off";
+              case 0x7F2: return "Registers for SYS command";
+              case 0x7F6: return "Key scan index";
+              case 0x7F7: return "Flag to disable CTRL-S pause";
+              case 0x7F8: return "MSB for monitor fetches from ROM=0;RAM=1";
+              case 0x7F9: return "MSB for color/lim table in RAM=0;ROM=1";
+              case 0x7FA: return "ROM mask for split screen";
+              case 0x7FB: return "VM base mask for split screen";
+              case 0x7FC: return "Motor lock semaphore for cassette";
+              case 0x7FD: return "PAL tod";    
+              case 0xFCF1: 
+              case 0xFCF2:
+              case 0xFCF3: return "JMP to cartridge IRQ routine";
+              case 0xFCF4: 
+              case 0xFCF5:
+              case 0xFCF6: return "JMP to PHOENIX routine";
+              case 0xFCF7: 
+              case 0xFCF8:
+              case 0xFCF9: return "JMP to LONG FETCH routine";
+              case 0xFCFA:   
+              case 0xFCFB:
+              case 0xFCFC: return "JMP to LONG JUMP routine";    
+              case 0xFCFD:   
+              case 0xFCFE:
+              case 0xFCFF: return "JMP to LONG IRQ routine";                               
+              case 0xFD00: return "6551 ACIA: DATA port";
+              case 0xFD01: return "6551 ACIA: STATUS port";              
+              case 0xFD02: return "6551 ACIA: COMMAND port";
+              case 0xFD03: return "6551 ACIA: CONTROL port";
+              case 0xFD04:
+              case 0xFD08:
+              case 0xFD0C: return "6551 ACIA: copy";
+              case 0xFD10: return "6529B: User Port PIO (P0-P7)";
+              case 0xFD30: return "6529B: Keyboard PIO  Keyboard Matrix Connector";
+              case 0xFF00: return "TED: Timer 1 low";
+              case 0xFF01: return "TED: Timer 1 high";
+              case 0xFF02: return "TED: Timer 2 low";
+              case 0xFF03: return "TED: Timer 2 high";
+              case 0xFF04: return "TED: Timer 3 low";
+              case 0xFF05: return "TED: Timer 3 high";
+              case 0xFF06: return "TED: Test, ECM, BMM, Blank, Rows, Y2, Y1, Y0";
+              case 0xFF07: return "TED: RVS off PAL, Freeze, MCM, Columns, X2, X1, X0";
+              case 0xFF08: return "TED: Keyboard Latch";
+              case 0xFF09: return "TED: Interrupt";
+              case 0xFF0A: return "TED: Interrupt mask";
+              case 0xFF0B: return "TED: RC7, RC6, RC5, RC4, RC3, RC2, RC1, RC0";
+              case 0xFF0C: return "TED: C9, CUR8";
+              case 0xFF0D: return "TED: CUR7, CUR6, CUR5, CUR4, CUR3, CUR2, CUR1, CUR0";
+              case 0xFF0E: return "TED: Voice #1 frequency, bits 0-7";
+              case 0xFF0F: return "TED: Voice #2 frequency, bits 0-7";
+              case 0xFF10: return "TED: Voice #2 frequency, bits 8 & 9";
+              case 0xFF11: return "TED: Bits 0-3 : Volume control";
+              case 0xFF12: return "TED: Bit 0-1 : Voice #1 frequency, bits 8 & 9";
+              case 0xFF13: return "TED: Bit 0 Clock status";
+              case 0xFF14: return "TED: Bits 3-7 Video matrix/color memory base address";
+              case 0xFF15: return "TED: Background color register";
+              case 0xFF16: return "TED: Color register #1";
+              case 0xFF17: return "TED: Color register #2";
+              case 0xFF18: return "TED: Color registes #3";
+              case 0xFF19: return "TED: Color registes #4";
+              case 0xFF1A: return "TED: Bit map reload high";
+              case 0xFF1B: return "TED: Bit map reload low";
+              case 0xFF1C: return "TED: Bit 0 : Vertical line bit 8";
+              case 0xFF1D: return "TED: Bits 0-7 : Vertical line bits 0-7";
+              case 0xFF1E: return "TED: Horizontal position";
+              case 0xFF1F: return "TED: Blink, vertical sub address";
+              case 0xFF3E: return "ROM select";
+              case 0xFF3F: return "RAM select";
+              case 0xFF49:   
+              case 0xFF4A:
+              case 0xFF4B: return "JMP to define function key routine"; 
+              case 0xFF4C:   
+              case 0xFF4D:
+              case 0xFF4E: return "JMP to PRINT routine";   
+              case 0xFF4F:   
+              case 0xFF50:
+              case 0xFF51: return "JMP to PRIMM routine";
+              case 0xFF52:   
+              case 0xFF53:
+              case 0xFF54: return "JMP to ENTRY routine";              
+              case 0xFF80: return "Release of Kernel: (MSB: 0=NTSC ; 1=PAL)";
+              case 0xFF81: return "Initialize screen editor";
+              case 0xFF84: return "Initialize I/O devices";
+              case 0xFF87: return "Ram test";
+              case 0xFF8A: return "Restore vectors to initial values";
+              case 0xFF8D: return "Change vectors for user";
+              case 0xFF90: return "Control O.S. messages";
+              case 0xFF93: return "Send SA after LISTEN";
+              case 0xFF96: return "Send SA after TALK";
+              case 0xFF99: return "Set/Read top of memory";
+              case 0xFF9C: return "Set/Read bottom of memory";
+              case 0xFF9F: return "Scan keyboard";
+              case 0xFFA2: return "Set timeout in DMA disk";
+              case 0xFFA5: return "Handshake serial bus or DMA disk byte in";
+              case 0xFFA8: return "Handshake serial bus or DMA disk byte out";
+              case 0xFFAB: return "Send UNTALK out serial bus or DMA disk";
+              case 0xFFAE: return "Send UNLISTEN out serial bus or DMA disk";
+              case 0xFFB1: return "Send LISTEN out serial bus or DMA disk";
+              case 0xFFB4: return "Send TALK out serial bus or DMA disk";
+              case 0xFFB7: return "Return I/O STATUS byte";
+              case 0xFFBA: return "Set LA, FA, SA";
+              case 0xFFBD: return "Set length and FN address";
+              case 0xFFC0: return "Open logical file";
+              case 0xFFC3: return "Close logical file";
+              case 0xFFC6: return "Open channel in";
+              case 0xFFC9: return "open channel out";
+              case 0xFFCC: return "Close I/O channels";
+              case 0xFFCF: return "Input from channel";
+              case 0xFFD2: return "output to channel";
+              case 0xFFD5: return "Load from file";
+              case 0xFFD8: return "Save to file";
+              case 0xFFDB: return "Set internal clock";
+              case 0xFFDE: return "Read internal clock";
+              case 0xFFE1: return "Scan STOP key";
+              case 0xFFE4: return "Get character from queue";
+              case 0xFFE7: return "Close all files";
+              case 0xFFEA: return "Increment clock";
+              case 0xFFED: return "Screen org.";
+              case 0xFFF0: return "Read/Set X,Y coord of cursor";
+              case 0xFFF3: return "Return location of start of I/O";
             default:
                 if ((addr>=0xD0) && (addr<=0xD7)) return "Area for use by speech software"; 
                 if ((addr>=0xD8) && (addr<=0xE8)) return "Area for use by application software";   
@@ -456,6 +591,20 @@ public class CPlus4Dasm extends M6510Dasm {
                 if ((addr>=0x65E) && (addr<=0x6EB)) return "RAM area for speech";  
                 if ((addr>=0x6EC) && (addr<=0x7AF)) return "BASIC run-time stack";  
                 if ((addr>=0x7B8) && (addr<=0x7BD)) return "Time constant";
+                if ((addr>=0x7D9) && (addr<=0x7E4)) return "Indirect routine downloaded";
+                if ((addr>=0x800) && (addr<=0xBFF)) return "Color memory (Text)";
+                if ((addr>=0xC00) && (addr<=0xCFF)) return "Video matrix (Text)";
+                if ((addr>=0x1000) && (addr<=0x17FF)) return "BASIC RAM (without graphics)";
+                if ((addr>=0x1800) && (addr<=0x1BFF)) return "Luminance for bit map screen";
+                if ((addr>=0x1C00) && (addr<=0x1FFF)) return "Color for bit map";
+                if ((addr>=0x2000) && (addr<=0x3FFF)) return "Graphics screen data";
+                if ((addr>=0x4000) && (addr<=0x7FFF)) return "BASIC RAM (with graphics)";
+                if ((addr>=0x8000) && (addr<=0xBFFF)) return "BASIC ROM";
+                if ((addr>=0xC000) && (addr<=0xCFFF)) return "BASIC Expansion";
+                if ((addr>=0xD000) && (addr<=0xD7FF)) return "Character table";
+                if ((addr>=0xFD00) && (addr<=0xFD0F)) return "6551 ACIA";
+                if ((addr>=0xFD10) && (addr<=0xFD1F)) return "6529B";
+                if ((addr>=0xFD30) && (addr<=0xFD3F)) return "6529B";
             }
         }
     }  
