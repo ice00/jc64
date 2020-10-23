@@ -359,6 +359,77 @@ public class Option {
   public boolean commentC1541Buffer4=false;
   
   
+  /** Plus4: Comment zero page */
+  public boolean commentPlus4ZeroPage=true;
+  
+  /** Plus4: Comment stack area */
+  public boolean commentPlus4StackArea=true;
+  
+  /** Plus4: Comment 200 area */
+  public boolean commentPlus4_200Area=true;
+  
+  /** Plus4: Comment 300 area */
+  public boolean commentPlus4_300Area=true;
+  
+  /** Plus4: Comment 400 area */
+  public boolean commentPlus4_400Area=true;
+  
+  /** Plus4: Comment 500 area */
+  public boolean commentPlus4_500Area=true;
+  
+  /** Plus4: Comment 600 area */
+  public boolean commentPlus4_600Area=true;
+    
+  /** Plus4: Comment 700 area */
+  public boolean commentPlus4_700Area=true;
+  
+  /** Plus4: Comment color area */
+  public boolean commentPlus4ColorArea=false;
+  
+  /** Plus4: Comment video area */
+  public boolean commentPlus4VideoArea=false;
+  
+  /** Plus4: Comment BASIC RAM without graphics) */
+  public boolean commentPlus4BasicRamP=false;
+    
+  /** Plus4: Comment BASIC RAM with graphics) */
+  public boolean commentPlus4BasicRamN=false; 
+  
+  /** Plus4: Comment luminance */
+  public boolean commentPlus4Luminance=false;
+  
+  /** Plus4: Comment colore luminance */
+  public boolean commentPlus4ColorBitmap=false;
+  
+  /** Plus4: Comment graphic data */
+  public boolean commentPlus4GraphicData=false;
+  
+  /** Plus4: Comment BASIC rom */
+  public boolean commentPlus4BasicRom=false;
+  
+  /** Plus4: Comment BASIC extension */
+  public boolean commentPlus4BasicExt=false;
+  
+  /** Plus4: Comment caracter */
+  public boolean commentPlus4Caracter=false;
+  
+  /** Plus4: Comment Acia */
+  public boolean commentPlus4Acia=true;
+  
+  /** Plus4: Comment 6529B 1 */
+  public boolean commentPlus4_6529B_1=true;
+  
+  /** Plus4: Comment 6529B 2 */
+  public boolean commentPlus4_6529B_2=true;
+  
+  /** Plus4: Comment Ted */
+  public boolean commentPlus4Ted=true;
+  
+  /** Plus4: Comment Kernal */
+  public boolean commentPlus4Kernal=true;
+  
+  
+  
   /**
    * Get the flat laf theme
    * 

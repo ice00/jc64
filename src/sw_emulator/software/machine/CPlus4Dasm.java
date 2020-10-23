@@ -34,7 +34,6 @@ import static sw_emulator.software.cpu.M6510Dasm.A_REL;
 import static sw_emulator.software.cpu.M6510Dasm.A_ZPG;
 import static sw_emulator.software.cpu.M6510Dasm.A_ZPX;
 import static sw_emulator.software.cpu.M6510Dasm.A_ZPY;
-import static sw_emulator.software.machine.CVic20Dasm.LANG_ITALIAN;
 
 /**
  * Comment the memory location of Plus4 for the disassembler
@@ -49,6 +48,75 @@ public class CPlus4Dasm extends M6510Dasm {
 
   /** Actual selected language (default=english) */
   public byte language=LANG_ENGLISH;   
+  
+  /** Plus4: Comment zero page */
+  public boolean commentPlus4ZeroPage=true;
+  
+  /** Plus4: Comment stack area */
+  public boolean commentPlus4StackArea=true;
+  
+  /** Plus4: Comment 200 area */
+  public boolean commentPlus4_200Area=true;
+  
+  /** Plus4: Comment 300 area */
+  public boolean commentPlus4_300Area=true;
+  
+  /** Plus4: Comment 400 area */
+  public boolean commentPlus4_400Area=true;
+  
+  /** Plus4: Comment 500 area */
+  public boolean commentPlus4_500Area=true;
+  
+  /** Plus4: Comment 600 area */
+  public boolean commentPlus4_600Area=true;
+    
+  /** Plus4: Comment 700 area */
+  public boolean commentPlus4_700Area=true;
+  
+  /** Plus4: Comment color area */
+  public boolean commentPlus4ColorArea=false;
+  
+  /** Plus4: Comment video area */
+  public boolean commentPlus4VideoArea=false;
+  
+  /** Plus4: Comment BASIC RAM without graphics) */
+  public boolean commentPlus4BasicRamP=false;
+    
+  /** Plus4: Comment BASIC RAM with graphics) */
+  public boolean commentPlus4BasicRamN=false; 
+  
+  /** Plus4: Comment luminance */
+  public boolean commentPlus4Luminance=false;
+  
+  /** Plus4: Comment colore luminance */
+  public boolean commentPlus4ColorBitmap=false;
+  
+  /** Plus4: Comment graphic data */
+  public boolean commentPlus4GraphicData=false;
+  
+  /** Plus4: Comment BASIC rom */
+  public boolean commentPlus4BasicRom=false;
+  
+  /** Plus4: Comment BASIC extension */
+  public boolean commentPlus4BasicExt=false;
+  
+  /** Plus4: Comment caracter */
+  public boolean commentPlus4Caracter=false;
+  
+  /** Plus4: Comment Acia */
+  public boolean commentPlus4Acia=true;
+  
+  /** Plus4: Comment 6529B 1 */
+  public boolean commentPlus4_6529B_1=true;
+  
+  /** Plus4: Comment 6529B 2 */
+  public boolean commentPlus4_6529B_2=true;
+  
+  /** Plus4: Comment Ted */
+  public boolean commentPlus4Ted=true;
+  
+  /** Plus4: Comment Kernal */
+  public boolean commentPlus4Kernal=true;
   
   /**
    * Return a comment string for the passed instruction
@@ -73,8 +141,30 @@ public class CPlus4Dasm extends M6510Dasm {
       case A_IDX:
       case A_IDY:    
         // do not get comment if appropriate option is not selected  
-
-        switch (language) {
+        if ((int)addr<=0xFF && !commentPlus4ZeroPage) return "";
+        if ((int)addr>=0x100 && (int)addr<=0x1FF && !commentPlus4StackArea) return "";
+        if ((int)addr>=0x200 && (int)addr<=0x2FF && !commentPlus4_200Area) return "";
+        if ((int)addr>=0x300 && (int)addr<=0x3FF && !commentPlus4_300Area) return "";
+        if ((int)addr>=0x400 && (int)addr<=0x4FF && !commentPlus4_400Area) return "";
+        if ((int)addr>=0x500 && (int)addr<=0x5FF && !commentPlus4_500Area) return "";
+        if ((int)addr>=0x600 && (int)addr<=0x6FF && !commentPlus4_600Area) return "";
+        if ((int)addr>=0x700 && (int)addr<=0x7FF && !commentPlus4_700Area) return "";
+        if ((int)addr>=0x800 && (int)addr<=0xBFF && !commentPlus4ColorArea) return "";
+        if ((int)addr>=0xC00 && (int)addr<=0xCFF && !commentPlus4VideoArea) return "";
+        if ((int)addr>=0x1000 && (int)addr<=0x17FF && !commentPlus4BasicRamP) return "";
+        if ((int)addr>=0x1800 && (int)addr<=0x1BFF && !commentPlus4Luminance) return "";
+        if ((int)addr>=0x1C00 && (int)addr<=0x1FFF && !commentPlus4ColorBitmap) return ""; 
+        if ((int)addr>=0x2000 && (int)addr<=0x3FFF && !commentPlus4GraphicData) return "";
+        if ((int)addr>=0x4000 && (int)addr<=0x7FFF && !commentPlus4BasicRamN) return "";
+        if ((int)addr>=0x8000 && (int)addr<=0xBFFF && !commentPlus4BasicRom) return "";
+        if ((int)addr>=0xC000 && (int)addr<=0xCFFF && !commentPlus4BasicExt) return "";
+        if ((int)addr>=0xD000 && (int)addr<=0xDFFF && !commentPlus4Caracter) return "";
+        if ((int)addr>=0xFD00 && (int)addr<=0xFD0F && !commentPlus4Acia) return "";
+        if ((int)addr>=0xFD10 && (int)addr<=0xFD1F && !commentPlus4_6529B_1) return "";
+        if ((int)addr>=0xFD30 && (int)addr<=0xFD3F && !commentPlus4_6529B_2) return ""; 
+        if ((int)addr>=0xFF00 && (int)addr<=0xFF1F && !commentPlus4Ted) return ""; 
+        if ((int)addr>=0xFF20 && (int)addr<=0xFFFF && !commentPlus4Kernal) return "";
+        switch (language) {                       
           case LANG_ITALIAN:
             switch ((int)addr) {
           
@@ -475,8 +565,8 @@ public class CPlus4Dasm extends M6510Dasm {
               case 0xFD04:
               case 0xFD08:
               case 0xFD0C: return "6551 ACIA: copy";
-              case 0xFD10: return "6529B: User Port PIO (P0-P7)";
-              case 0xFD30: return "6529B: Keyboard PIO  Keyboard Matrix Connector";
+              case 0xFD10: return "6529B #1: User Port PIO (P0-P7)";
+              case 0xFD30: return "6529B #2: Keyboard PIO  Keyboard Matrix Connector";
               case 0xFF00: return "TED: Timer 1 low";
               case 0xFF01: return "TED: Timer 1 high";
               case 0xFF02: return "TED: Timer 2 low";
@@ -603,8 +693,8 @@ public class CPlus4Dasm extends M6510Dasm {
                 if ((addr>=0xC000) && (addr<=0xCFFF)) return "BASIC Expansion";
                 if ((addr>=0xD000) && (addr<=0xD7FF)) return "Character table";
                 if ((addr>=0xFD00) && (addr<=0xFD0F)) return "6551 ACIA";
-                if ((addr>=0xFD10) && (addr<=0xFD1F)) return "6529B";
-                if ((addr>=0xFD30) && (addr<=0xFD3F)) return "6529B";
+                if ((addr>=0xFD10) && (addr<=0xFD1F)) return "6529B #1";
+                if ((addr>=0xFD30) && (addr<=0xFD3F)) return "6529B #2";
             }
         }
     }  

@@ -1040,7 +1040,7 @@
                                       <Component id="jCheckBoxC1541Via1" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxC1541_200Area" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxC1541StackArea" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxC1541ZeroPage" pref="396" max="32767" attributes="0"/>
+                                      <Component id="jCheckBoxC1541ZeroPage" pref="399" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="379" max="-2" attributes="0"/>
                               </Group>
@@ -1185,7 +1185,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="783" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="786" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1207,7 +1207,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="783" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="786" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1229,15 +1229,329 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="783" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jCheckBoxPlus4_200Area" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="382" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jCheckBoxPlus4_400Area" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4_500Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jCheckBoxPlus4_6529B_1" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4_6529B_2" min="-2" pref="382" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jCheckBoxPlus4_600Area" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4_700Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jCheckBoxPlus4Ted" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4Kernal" min="-2" pref="382" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Component id="jCheckBoxPlus4ColorArea" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4VideoArea" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4BasicRamP" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4Luminance" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4ColorBitmap" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4GraphicData" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4BasicRamN" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="jCheckBoxPlus4ZeroPage" pref="373" max="32767" attributes="0"/>
+                                                          <Component id="jCheckBoxPlus4StackArea" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="jCheckBoxPlus4_300Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jCheckBoxPlus4Acia" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4BasicRom" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4BasicExt" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxPlus4Caracter" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="374" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4ZeroPage" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4BasicRom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4StackArea" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4BasicExt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_200Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4Caracter" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_300Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4Acia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_400Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4_6529B_1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_500Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4_6529B_2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_600Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4Ted" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCheckBoxPlus4_700Area" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxPlus4Kernal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4ColorArea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4VideoArea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4BasicRamP" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4Luminance" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4ColorBitmap" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4GraphicData" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4BasicRamN" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4ZeroPage">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Zero page area ($00..$FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4ZeroPageItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4StackArea">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Stack area ($100..$1FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4StackAreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_200Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 1 ($200..$2FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_200AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_300Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 2 ($300..$3FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_300AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_400Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 3 ($400..$4FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_400AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_500Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 4 ($500..$5FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_500AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_600Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 5 ($600..$6FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_600AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_700Area">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Support area for BASIC/KERNAL part 6 ($700..$7FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_700AreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4ColorArea">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Color memory ($800..$BFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4ColorAreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4VideoArea">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Video memory ($C00..$CFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4VideoAreaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4BasicRamP">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="BASIC RAM without graphics ($1000..$17FF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4BasicRamPItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4Luminance">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Luminance ($1800..$1BFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4LuminanceItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4ColorBitmap">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Color for bitmap($1C00..$1FFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4ColorBitmapItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4GraphicData">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Graphics data ($2000..$3FFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4GraphicDataItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4BasicRamN">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="BASIC RAM with graphics ($4000..$7FFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4BasicRamNItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4BasicRom">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="BASIC ROM ($8000..$BFFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4BasicRomItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4BasicExt">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="BASIC Expansion ($C000..$CFFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4BasicExtItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4Caracter">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Caracter table ($D000..$DFFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4CaracterItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4Acia">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="6551 ACIA ($FD00..$FD0F)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4AciaItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_6529B_1">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="6529B #1 ($FD10..$FD1F)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_6529B_1ItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4_6529B_2">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="6529B #2 ($FD30..$FD3F)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4_6529B_2ItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4Ted">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="TED ($FF00..$FF1F)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4TedItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxPlus4Kernal">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Kernal ($FF20..$FFFF)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxPlus4KernalItemStateChanged"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>

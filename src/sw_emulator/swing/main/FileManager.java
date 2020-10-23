@@ -115,6 +115,31 @@ public class FileManager {
       option.commentC1541Via1 = in.readBoolean();  
       option.commentC1541Via2 = in.readBoolean();  
       option.commentC1541Kernal = in.readBoolean();  
+      
+      option.commentPlus4ZeroPage = in.readBoolean(); 
+      option.commentPlus4StackArea = in.readBoolean(); 
+      option.commentPlus4_200Area = in.readBoolean(); 
+      option.commentPlus4_300Area = in.readBoolean(); 
+      option.commentPlus4_400Area = in.readBoolean(); 
+      option.commentPlus4_500Area = in.readBoolean(); 
+      option.commentPlus4_600Area = in.readBoolean(); 
+      option.commentPlus4_700Area = in.readBoolean(); 
+      option.commentPlus4ColorArea = in.readBoolean(); 
+      option.commentPlus4VideoArea = in.readBoolean(); 
+      option.commentPlus4BasicRamP = in.readBoolean(); 
+      option.commentPlus4BasicRamN = in.readBoolean(); 
+      option.commentPlus4Luminance = in.readBoolean(); 
+      option.commentPlus4ColorBitmap = in.readBoolean(); 
+      option.commentPlus4GraphicData = in.readBoolean(); 
+      option.commentPlus4BasicRom = in.readBoolean(); 
+      option.commentPlus4BasicExt = in.readBoolean(); 
+      option.commentPlus4Caracter = in.readBoolean(); 
+      option.commentPlus4Acia = in.readBoolean(); 
+      option.commentPlus4_6529B_1   = in.readBoolean(); 
+      option.commentPlus4_6529B_2 = in.readBoolean(); 
+      option.commentPlus4Ted = in.readBoolean(); 
+      option.commentPlus4Kernal = in.readBoolean();      
+              
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -185,6 +210,32 @@ public class FileManager {
       out.writeBoolean(option.commentC1541Via1);
       out.writeBoolean(option.commentC1541Via2);
       out.writeBoolean(option.commentC1541Kernal);
+      
+      out.writeBoolean(option.commentPlus4ZeroPage);
+      out.writeBoolean(option.commentPlus4StackArea);
+      out.writeBoolean(option.commentPlus4_200Area);
+      out.writeBoolean(option.commentPlus4_300Area);
+      out.writeBoolean(option.commentPlus4_400Area);
+      out.writeBoolean(option.commentPlus4_500Area);
+      out.writeBoolean(option.commentPlus4_600Area);
+      out.writeBoolean(option.commentPlus4_700Area);
+      out.writeBoolean(option.commentPlus4ColorArea);
+      out.writeBoolean(option.commentPlus4VideoArea);
+      out.writeBoolean(option.commentPlus4BasicRamP);
+      out.writeBoolean(option.commentPlus4BasicRamN);
+      out.writeBoolean(option.commentPlus4Luminance);
+      out.writeBoolean(option.commentPlus4ColorBitmap);
+      out.writeBoolean(option.commentPlus4GraphicData);
+      out.writeBoolean(option.commentPlus4BasicRom);
+      out.writeBoolean(option.commentPlus4BasicExt);
+      out.writeBoolean(option.commentPlus4Caracter);
+      out.writeBoolean(option.commentPlus4Acia);
+      out.writeBoolean(option.commentPlus4_6529B_1); 
+      out.writeBoolean(option.commentPlus4_6529B_2);
+      out.writeBoolean(option.commentPlus4Ted);
+      out.writeBoolean(option.commentPlus4Kernal);
+      
+      
       out.flush();
       out.close();
     } catch (Exception e) {
