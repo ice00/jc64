@@ -49,6 +49,66 @@ public class CVic20Dasm extends M6510Dasm {
   /** Actual selected language (default=english) */
   public byte language=LANG_ENGLISH;
   
+  /** Vic20: Comment zero page */
+  public boolean commentVic20ZeroPage;
+  
+  /** Vic20: Comment stack area */
+  public boolean commentVic20StackArea;
+  
+  /** Vic20: Comment 200 area */
+  public boolean commentVic20_200Area;
+  
+  /** Vic20: Comment 300 area */
+  public boolean commentVic20_300Area;
+  
+  /** Vic20: Comment 400 area */
+  public boolean commentVic20_400Area;
+  
+  /** Vic20: Comment Vic */
+  public boolean commentVic20Vic;
+  
+  /** Vic20: Comment Via 1 */
+  public boolean commentVic20Via1;
+  
+  /** Vic20: Comment Via 2 */
+  public boolean commentVic20Via2;
+  
+  /** Vic20: Comment user basic */
+  public boolean commentVic20UserBasic;
+  
+  /** Vic20: Comment screen */
+  public boolean commentVic20Screen;
+  
+  /** Vic20: Comment 8k expansion 1 */
+  public boolean commentVic20_8kExp1;
+  
+  /** Vic20: Comment 8k expansion 2 */
+  public boolean commentVic20_8kExp2;
+  
+  /** Vic20: Comment 8k expansion 3 */
+  public boolean commentVic20_8kExp3;
+  
+  /** Vic20: Comment character */
+  public boolean commentVic20Character;
+  
+  /** Vic20: Comment color */
+  public boolean commentVic20Color;
+  
+  /** Vic20: Comment block 2 */
+  public boolean commentVic20Block2;
+  
+  /** Vic20: Comment block 3 */
+  public boolean commentVic20Block3;
+  
+  /** Vic20: Comment block 4 */
+  public boolean commentVic20Block4;
+  
+  /** Vic20: Comment Basic rom */
+  public boolean commentVic20BasicRom;
+  
+  /** Vic20: Comment Kernal rom */
+  public boolean commentVic20KernalRom;
+  
   /**
    * Return a comment string for the passed instruction
    *
@@ -72,8 +132,26 @@ public class CVic20Dasm extends M6510Dasm {
       case A_IDX:
       case A_IDY:    
         // do not get comment if appropriate option is not selected  
-        
-          
+        if ((int)addr<=0xFF && !commentVic20ZeroPage) return "";
+        if ((int)addr>=0x100 && (int)addr<=0x1FF && !commentVic20StackArea) return "";
+        if ((int)addr>=0x200 && (int)addr<=0x2FF && !commentVic20_200Area) return "";
+        if ((int)addr>=0x300 && (int)addr<=0x3FF && !commentVic20_300Area) return "";
+        if ((int)addr>=0x400 && (int)addr<=0x7FF && !commentVic20_400Area) return "";
+        if ((int)addr>=0x1000 && (int)addr<=0x1DFF && !commentVic20UserBasic) return "";
+        if ((int)addr>=0x1E00 && (int)addr<=0x1FFF && !commentVic20Screen) return "";
+        if ((int)addr>=0x2000 && (int)addr<=0x3FFF && !commentVic20_8kExp1) return "";
+        if ((int)addr>=0x4000 && (int)addr<=0x5FFF && !commentVic20_8kExp2) return "";
+        if ((int)addr>=0x6000 && (int)addr<=0x7FFF && !commentVic20_8kExp2) return "";
+        if ((int)addr>=0x8000 && (int)addr<=0x8FFF && !commentVic20Character) return "";
+        if ((int)addr>=0x9000 && (int)addr<=0x900F && !commentVic20Vic) return "";
+        if ((int)addr>=0x9010 && (int)addr<=0x901F && !commentVic20Via1) return "";
+        if ((int)addr>=0x9030 && (int)addr<=0x903F && !commentVic20Via2) return ""; 
+        if ((int)addr>=0x9400 && (int)addr<=0x97FF && !commentVic20Color) return ""; 
+        if ((int)addr>=0x9800 && (int)addr<=0x9BFF && !commentVic20Block2) return "";
+        if ((int)addr>=0x9C00 && (int)addr<=0x9FFF && !commentVic20Block3) return "";
+        if ((int)addr>=0xA000 && (int)addr<=0xBFFF && !commentVic20Block4) return "";
+        if ((int)addr>=0xC000 && (int)addr<=0xDFFF && !commentVic20BasicRom) return "";
+        if ((int)addr>=0xE000 && (int)addr<=0xFFFF && !commentVic20KernalRom) return "";          
         switch (language) {
           case LANG_ITALIAN:
             switch ((int)addr) {

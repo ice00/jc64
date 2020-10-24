@@ -138,7 +138,28 @@ public class FileManager {
       option.commentPlus4_6529B_1   = in.readBoolean(); 
       option.commentPlus4_6529B_2 = in.readBoolean(); 
       option.commentPlus4Ted = in.readBoolean(); 
-      option.commentPlus4Kernal = in.readBoolean();      
+      option.commentPlus4Kernal = in.readBoolean();     
+      
+      option.commentVic20ZeroPage = in.readBoolean();
+      option.commentVic20StackArea = in.readBoolean();
+      option.commentVic20_200Area = in.readBoolean();
+      option.commentVic20_300Area = in.readBoolean();
+      option.commentVic20_400Area = in.readBoolean();
+      option.commentVic20Vic = in.readBoolean();
+      option.commentVic20Via1 = in.readBoolean();
+      option.commentVic20Via2 = in.readBoolean();
+      option.commentVic20UserBasic = in.readBoolean();
+      option.commentVic20Screen = in.readBoolean();
+      option.commentVic20_8kExp1 = in.readBoolean();
+      option.commentVic20_8kExp2 = in.readBoolean();
+      option.commentVic20_8kExp3 = in.readBoolean();
+      option.commentVic20Character = in.readBoolean();
+      option.commentVic20Color = in.readBoolean();
+      option.commentVic20Block2 = in.readBoolean();
+      option.commentVic20Block3 = in.readBoolean();
+      option.commentVic20Block4 = in.readBoolean();
+      option.commentVic20BasicRom = in.readBoolean();
+      option.commentVic20KernalRom = in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -235,6 +256,26 @@ public class FileManager {
       out.writeBoolean(option.commentPlus4Ted);
       out.writeBoolean(option.commentPlus4Kernal);
       
+      out.writeBoolean(option.commentVic20ZeroPage);
+      out.writeBoolean(option.commentVic20StackArea);
+      out.writeBoolean(option.commentVic20_200Area);
+      out.writeBoolean(option.commentVic20_300Area);
+      out.writeBoolean(option.commentVic20_400Area);
+      out.writeBoolean(option.commentVic20Vic);
+      out.writeBoolean(option.commentVic20Via1);
+      out.writeBoolean(option.commentVic20Via2);
+      out.writeBoolean(option.commentVic20UserBasic);
+      out.writeBoolean(option.commentVic20Screen);
+      out.writeBoolean(option.commentVic20_8kExp1);
+      out.writeBoolean(option.commentVic20_8kExp2);
+      out.writeBoolean(option.commentVic20_8kExp3);
+      out.writeBoolean(option.commentVic20Character);
+      out.writeBoolean(option.commentVic20Color);
+      out.writeBoolean(option.commentVic20Block2);
+      out.writeBoolean(option.commentVic20Block3);
+      out.writeBoolean(option.commentVic20Block4);
+      out.writeBoolean(option.commentVic20BasicRom);
+      out.writeBoolean(option.commentVic20KernalRom);      
       
       out.flush();
       out.close();

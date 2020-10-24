@@ -376,7 +376,27 @@ public class Disassembly {
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
-        ((CVic20Dasm)prg).language=option.commentLanguage;        
+        ((CVic20Dasm)prg).language=option.commentLanguage;          
+        ((CVic20Dasm)prg).commentVic20ZeroPage=option.commentVic20ZeroPage;
+        ((CVic20Dasm)prg).commentVic20StackArea=option.commentVic20StackArea;
+        ((CVic20Dasm)prg).commentVic20_200Area=option.commentVic20_200Area;
+        ((CVic20Dasm)prg).commentVic20_300Area=option.commentVic20_300Area;
+        ((CVic20Dasm)prg).commentVic20_400Area=option.commentVic20_400Area;
+        ((CVic20Dasm)prg).commentVic20Vic=option.commentVic20Vic;
+        ((CVic20Dasm)prg).commentVic20Via1=option.commentVic20Via1;
+        ((CVic20Dasm)prg).commentVic20Via2=option.commentVic20Via2;
+        ((CVic20Dasm)prg).commentVic20UserBasic=option.commentVic20UserBasic;
+        ((CVic20Dasm)prg).commentVic20Screen=option.commentVic20Screen;
+        ((CVic20Dasm)prg).commentVic20_8kExp1=option.commentVic20_8kExp1;
+        ((CVic20Dasm)prg).commentVic20_8kExp2=option.commentVic20_8kExp2;
+        ((CVic20Dasm)prg).commentVic20_8kExp3=option.commentVic20_8kExp3;
+        ((CVic20Dasm)prg).commentVic20Character=option.commentVic20Character;
+        ((CVic20Dasm)prg).commentVic20Color=option.commentVic20Color;
+        ((CVic20Dasm)prg).commentVic20Block2=option.commentVic20Block2;
+        ((CVic20Dasm)prg).commentVic20Block3=option.commentVic20Block3;
+        ((CVic20Dasm)prg).commentVic20Block4=option.commentVic20Block4;
+        ((CVic20Dasm)prg).commentVic20BasicRom=option.commentVic20BasicRom;
+        ((CVic20Dasm)prg).commentVic20KernalRom=option.commentVic20KernalRom;
         break;
       case PLUS4:
         prg=new CPlus4Dasm();  
@@ -496,7 +516,27 @@ public class Disassembly {
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
-        ((CVic20Dasm)prg).language=option.commentLanguage;        
+        ((CVic20Dasm)prg).language=option.commentLanguage;      
+        ((CVic20Dasm)prg).commentVic20ZeroPage=option.commentVic20ZeroPage;
+        ((CVic20Dasm)prg).commentVic20StackArea=option.commentVic20StackArea;
+        ((CVic20Dasm)prg).commentVic20_200Area=option.commentVic20_200Area;
+        ((CVic20Dasm)prg).commentVic20_300Area=option.commentVic20_300Area;
+        ((CVic20Dasm)prg).commentVic20_400Area=option.commentVic20_400Area;
+        ((CVic20Dasm)prg).commentVic20Vic=option.commentVic20Vic;
+        ((CVic20Dasm)prg).commentVic20Via1=option.commentVic20Via1;
+        ((CVic20Dasm)prg).commentVic20Via2=option.commentVic20Via2;
+        ((CVic20Dasm)prg).commentVic20UserBasic=option.commentVic20UserBasic;
+        ((CVic20Dasm)prg).commentVic20Screen=option.commentVic20Screen;
+        ((CVic20Dasm)prg).commentVic20_8kExp1=option.commentVic20_8kExp1;
+        ((CVic20Dasm)prg).commentVic20_8kExp2=option.commentVic20_8kExp2;
+        ((CVic20Dasm)prg).commentVic20_8kExp3=option.commentVic20_8kExp3;
+        ((CVic20Dasm)prg).commentVic20Character=option.commentVic20Character;
+        ((CVic20Dasm)prg).commentVic20Color=option.commentVic20Color;
+        ((CVic20Dasm)prg).commentVic20Block2=option.commentVic20Block2;
+        ((CVic20Dasm)prg).commentVic20Block3=option.commentVic20Block3;
+        ((CVic20Dasm)prg).commentVic20Block4=option.commentVic20Block4;
+        ((CVic20Dasm)prg).commentVic20BasicRom=option.commentVic20BasicRom;
+        ((CVic20Dasm)prg).commentVic20KernalRom=option.commentVic20KernalRom;
         break;
       case PLUS4:
         prg=new CPlus4Dasm();  

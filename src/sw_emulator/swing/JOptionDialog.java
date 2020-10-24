@@ -192,6 +192,26 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxC1541Buffer4 = new javax.swing.JCheckBox();
         jPanelC128Comm = new javax.swing.JPanel();
         jPanelVic20Comm = new javax.swing.JPanel();
+        jCheckBoxVic20StackArea = new javax.swing.JCheckBox();
+        jCheckBoxVic20ZeroPage = new javax.swing.JCheckBox();
+        jCheckBoxVic20_200Area = new javax.swing.JCheckBox();
+        jCheckBoxVic20_300Area = new javax.swing.JCheckBox();
+        jCheckBoxVic20_400Area = new javax.swing.JCheckBox();
+        jCheckBoxVic20Vic = new javax.swing.JCheckBox();
+        jCheckBoxVic20Via1 = new javax.swing.JCheckBox();
+        jCheckBoxVic20Via2 = new javax.swing.JCheckBox();
+        jCheckBoxVic20UserBasic = new javax.swing.JCheckBox();
+        jCheckBoxVic20Screen = new javax.swing.JCheckBox();
+        jCheckBoxVic20_8kExp1 = new javax.swing.JCheckBox();
+        jCheckBoxVic20_8kExp2 = new javax.swing.JCheckBox();
+        jCheckBoxVic20_8kExp3 = new javax.swing.JCheckBox();
+        jCheckBoxVic20Character = new javax.swing.JCheckBox();
+        jCheckBoxVic20Color = new javax.swing.JCheckBox();
+        jCheckBoxVic20Block2 = new javax.swing.JCheckBox();
+        jCheckBoxVic20Block3 = new javax.swing.JCheckBox();
+        jCheckBoxVic20Block4 = new javax.swing.JCheckBox();
+        jCheckBoxVic20BasicRom = new javax.swing.JCheckBox();
+        jCheckBoxVic20KernalRom = new javax.swing.JCheckBox();
         jPanelPlus4Comm = new javax.swing.JPanel();
         jCheckBoxPlus4ZeroPage = new javax.swing.JCheckBox();
         jCheckBoxPlus4StackArea = new javax.swing.JCheckBox();
@@ -892,7 +912,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC64Cia2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC64KernalRom)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("C64", jPanelC64Comm);
@@ -997,7 +1017,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jCheckBoxC1541Via1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541_200Area, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE))
+                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
                 .addGap(379, 379, 379))
         );
         jPanelC1541CommLayout.setVerticalGroup(
@@ -1025,7 +1045,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC1541Via2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC1541Kernal)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("C1541", jPanelC1541Comm);
@@ -1034,24 +1054,244 @@ public class JOptionDialog extends javax.swing.JDialog {
         jPanelC128Comm.setLayout(jPanelC128CommLayout);
         jPanelC128CommLayout.setHorizontalGroup(
             jPanelC128CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 786, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelC128CommLayout.setVerticalGroup(
             jPanelC128CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("C128", jPanelC128Comm);
+
+        jCheckBoxVic20StackArea.setSelected(true);
+        jCheckBoxVic20StackArea.setText("Stack area ($100..$1FF)");
+        jCheckBoxVic20StackArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20StackAreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20ZeroPage.setSelected(true);
+        jCheckBoxVic20ZeroPage.setText("Zero page area ($00..$FF)");
+        jCheckBoxVic20ZeroPage.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20ZeroPageItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_200Area.setSelected(true);
+        jCheckBoxVic20_200Area.setText("Support area for BASIC/KERNAL part 1 ($200..$2FF)");
+        jCheckBoxVic20_200Area.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_200AreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_300Area.setSelected(true);
+        jCheckBoxVic20_300Area.setText("Support area for BASIC/KERNAL part 2 ($300..$3FF)");
+        jCheckBoxVic20_300Area.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_300AreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_400Area.setSelected(true);
+        jCheckBoxVic20_400Area.setText("Support area for BASIC/KERNAL part 3 ($400..$4FF)");
+        jCheckBoxVic20_400Area.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_400AreaItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Vic.setSelected(true);
+        jCheckBoxVic20Vic.setText("VIC ($9000..$900F)");
+        jCheckBoxVic20Vic.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20VicItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Via1.setSelected(true);
+        jCheckBoxVic20Via1.setText("Via #1 ($9010..$901F)");
+        jCheckBoxVic20Via1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20Via1ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Via2.setSelected(true);
+        jCheckBoxVic20Via2.setText("Via #2 ($9020..$902F)");
+        jCheckBoxVic20Via2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20Via2ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20UserBasic.setText("User BASIC area ($1000..$1DFF)");
+        jCheckBoxVic20UserBasic.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20UserBasicItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Screen.setText("Screen memory ($1E00..$1FFF)");
+        jCheckBoxVic20Screen.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20ScreenItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_8kExp1.setText("8K expansion block 1 ($2000..$3FFF)");
+        jCheckBoxVic20_8kExp1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_8kExp1ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_8kExp2.setText("8K expansion block 2 ($4000..$5FFF)");
+        jCheckBoxVic20_8kExp2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_8kExp2ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20_8kExp3.setText("8K expansion block 3 ($6000..$7FFF)");
+        jCheckBoxVic20_8kExp3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20_8kExp3ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Character.setText("4K character ($8000..$8FFF)");
+        jCheckBoxVic20Character.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20CharacterItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Color.setText("Color RAM ($9400..$97FF)");
+        jCheckBoxVic20Color.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20ColorItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Block2.setText("I/O block 2 ($9800..$9BFF)");
+        jCheckBoxVic20Block2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20Block2ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Block3.setText("I/O block 3 ($9C00..$9FFF)");
+        jCheckBoxVic20Block3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20Block3ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20Block4.setText("8K decoded ($A0000..$BFFF)");
+        jCheckBoxVic20Block4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20Block4ItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20BasicRom.setSelected(true);
+        jCheckBoxVic20BasicRom.setText("BASIC ROM ($C0000..$DFFF)");
+        jCheckBoxVic20BasicRom.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20BasicRomItemStateChanged(evt);
+            }
+        });
+
+        jCheckBoxVic20KernalRom.setSelected(true);
+        jCheckBoxVic20KernalRom.setText("KERNAL ROM ($E0000..$FFFF)");
+        jCheckBoxVic20KernalRom.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVic20KernalRomItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelVic20CommLayout = new javax.swing.GroupLayout(jPanelVic20Comm);
         jPanelVic20Comm.setLayout(jPanelVic20CommLayout);
         jPanelVic20CommLayout.setHorizontalGroup(
             jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 786, Short.MAX_VALUE)
+            .addGroup(jPanelVic20CommLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelVic20CommLayout.createSequentialGroup()
+                        .addComponent(jCheckBoxVic20ZeroPage, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxVic20Block2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVic20CommLayout.createSequentialGroup()
+                        .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jCheckBoxVic20StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Color, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Via2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Via1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Vic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Character, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_8kExp3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_8kExp2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_8kExp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20Screen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20UserBasic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_400Area, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_300Area, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxVic20_200Area, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxVic20Block3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxVic20Block4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelVic20CommLayout.setVerticalGroup(
             jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGroup(jPanelVic20CommLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxVic20ZeroPage)
+                    .addComponent(jCheckBoxVic20Block2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxVic20StackArea)
+                    .addComponent(jCheckBoxVic20Block3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxVic20_200Area)
+                    .addComponent(jCheckBoxVic20Block4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxVic20_300Area)
+                    .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxVic20_400Area)
+                    .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20UserBasic)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Screen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20_8kExp1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20_8kExp2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20_8kExp3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Character)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Vic)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Via1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Via2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxVic20Color)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vic20", jPanelVic20Comm);
@@ -1329,7 +1569,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxPlus4GraphicData)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxPlus4BasicRamN)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Plus4", jPanelPlus4Comm);
@@ -1851,6 +2091,86 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.commentPlus4Kernal=jCheckBoxPlus4Kernal.isSelected();
     }//GEN-LAST:event_jCheckBoxPlus4KernalItemStateChanged
 
+    private void jCheckBoxVic20StackAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20StackAreaItemStateChanged
+      option.commentVic20StackArea=jCheckBoxVic20StackArea.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20StackAreaItemStateChanged
+
+    private void jCheckBoxVic20ZeroPageItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20ZeroPageItemStateChanged
+      option.commentVic20ZeroPage=jCheckBoxVic20ZeroPage.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20ZeroPageItemStateChanged
+
+    private void jCheckBoxVic20_200AreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_200AreaItemStateChanged
+      option.commentVic20_200Area=jCheckBoxVic20_200Area.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20_200AreaItemStateChanged
+
+    private void jCheckBoxVic20_300AreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_300AreaItemStateChanged
+      option.commentVic20_300Area=jCheckBoxVic20_300Area.isSelected();  
+    }//GEN-LAST:event_jCheckBoxVic20_300AreaItemStateChanged
+
+    private void jCheckBoxVic20_400AreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_400AreaItemStateChanged
+      option.commentVic20_400Area=jCheckBoxVic20_400Area.isSelected(); 
+    }//GEN-LAST:event_jCheckBoxVic20_400AreaItemStateChanged
+
+    private void jCheckBoxVic20VicItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20VicItemStateChanged
+      option.commentVic20Vic=jCheckBoxVic20Vic.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20VicItemStateChanged
+
+    private void jCheckBoxVic20Via1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20Via1ItemStateChanged
+      option.commentVic20Via1=jCheckBoxVic20Via1.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20Via1ItemStateChanged
+
+    private void jCheckBoxVic20Via2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20Via2ItemStateChanged
+      option.commentVic20Via2=jCheckBoxVic20Via2.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20Via2ItemStateChanged
+
+    private void jCheckBoxVic20UserBasicItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20UserBasicItemStateChanged
+      option.commentVic20UserBasic=jCheckBoxVic20UserBasic.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20UserBasicItemStateChanged
+
+    private void jCheckBoxVic20ScreenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20ScreenItemStateChanged
+      option.commentVic20Screen=jCheckBoxVic20Screen.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20ScreenItemStateChanged
+
+    private void jCheckBoxVic20_8kExp1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_8kExp1ItemStateChanged
+      option.commentVic20_8kExp1=jCheckBoxVic20_8kExp1.isSelected(); 
+    }//GEN-LAST:event_jCheckBoxVic20_8kExp1ItemStateChanged
+
+    private void jCheckBoxVic20_8kExp2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_8kExp2ItemStateChanged
+      option.commentVic20_8kExp2=jCheckBoxVic20_8kExp2.isSelected();    
+    }//GEN-LAST:event_jCheckBoxVic20_8kExp2ItemStateChanged
+
+    private void jCheckBoxVic20_8kExp3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20_8kExp3ItemStateChanged
+      option.commentVic20_8kExp3=jCheckBoxVic20_8kExp3.isSelected();
+    }//GEN-LAST:event_jCheckBoxVic20_8kExp3ItemStateChanged
+
+    private void jCheckBoxVic20CharacterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20CharacterItemStateChanged
+      option.commentVic20Character=jCheckBoxVic20Character.isSelected();  
+    }//GEN-LAST:event_jCheckBoxVic20CharacterItemStateChanged
+
+    private void jCheckBoxVic20ColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20ColorItemStateChanged
+      option.commentVic20Color=jCheckBoxVic20Color.isSelected();   
+    }//GEN-LAST:event_jCheckBoxVic20ColorItemStateChanged
+
+    private void jCheckBoxVic20Block2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20Block2ItemStateChanged
+      option.commentVic20Block2=jCheckBoxVic20Block2.isSelected();  
+    }//GEN-LAST:event_jCheckBoxVic20Block2ItemStateChanged
+
+    private void jCheckBoxVic20Block3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20Block3ItemStateChanged
+      option.commentVic20Block3=jCheckBoxVic20Block3.isSelected(); 
+    }//GEN-LAST:event_jCheckBoxVic20Block3ItemStateChanged
+
+    private void jCheckBoxVic20Block4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20Block4ItemStateChanged
+      option.commentVic20Block4=jCheckBoxVic20Block4.isSelected(); 
+    }//GEN-LAST:event_jCheckBoxVic20Block4ItemStateChanged
+
+    private void jCheckBoxVic20BasicRomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20BasicRomItemStateChanged
+      option.commentVic20BasicRom=jCheckBoxVic20BasicRom.isSelected(); 
+    }//GEN-LAST:event_jCheckBoxVic20BasicRomItemStateChanged
+
+    private void jCheckBoxVic20KernalRomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVic20KernalRomItemStateChanged
+      option.commentVic20KernalRom=jCheckBoxVic20KernalRom.isSelected();  
+    }//GEN-LAST:event_jCheckBoxVic20KernalRomItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1954,6 +2274,26 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxPlus4_6529B_2;
     private javax.swing.JCheckBox jCheckBoxPlus4_700Area;
     private javax.swing.JCheckBox jCheckBoxUndefinedCode;
+    private javax.swing.JCheckBox jCheckBoxVic20BasicRom;
+    private javax.swing.JCheckBox jCheckBoxVic20Block2;
+    private javax.swing.JCheckBox jCheckBoxVic20Block3;
+    private javax.swing.JCheckBox jCheckBoxVic20Block4;
+    private javax.swing.JCheckBox jCheckBoxVic20Character;
+    private javax.swing.JCheckBox jCheckBoxVic20Color;
+    private javax.swing.JCheckBox jCheckBoxVic20KernalRom;
+    private javax.swing.JCheckBox jCheckBoxVic20Screen;
+    private javax.swing.JCheckBox jCheckBoxVic20StackArea;
+    private javax.swing.JCheckBox jCheckBoxVic20UserBasic;
+    private javax.swing.JCheckBox jCheckBoxVic20Via1;
+    private javax.swing.JCheckBox jCheckBoxVic20Via2;
+    private javax.swing.JCheckBox jCheckBoxVic20Vic;
+    private javax.swing.JCheckBox jCheckBoxVic20ZeroPage;
+    private javax.swing.JCheckBox jCheckBoxVic20_200Area;
+    private javax.swing.JCheckBox jCheckBoxVic20_300Area;
+    private javax.swing.JCheckBox jCheckBoxVic20_400Area;
+    private javax.swing.JCheckBox jCheckBoxVic20_8kExp1;
+    private javax.swing.JCheckBox jCheckBoxVic20_8kExp2;
+    private javax.swing.JCheckBox jCheckBoxVic20_8kExp3;
     private javax.swing.JCheckBox jCheckC64BoxSid;
     private javax.swing.JCheckBox jCheckC64BoxVicII;
     private javax.swing.JLabel jLabel1;
@@ -2124,7 +2464,29 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxPlus4_600Area.setSelected(option.commentPlus4_600Area);
       jCheckBoxPlus4_6529B_1.setSelected(option.commentPlus4_6529B_1);
       jCheckBoxPlus4_6529B_2.setSelected(option.commentPlus4_6529B_2);
-      jCheckBoxPlus4_700Area.setSelected(option.commentPlus4_700Area);    
+      jCheckBoxPlus4_700Area.setSelected(option.commentPlus4_700Area); 
+      
+      // apply comments Vic20
+      jCheckBoxVic20BasicRom.setSelected(option.commentVic20BasicRom);
+      jCheckBoxVic20Block2.setSelected(option.commentVic20Block2);
+      jCheckBoxVic20Block3.setSelected(option.commentVic20Block3);
+      jCheckBoxVic20Block4.setSelected(option.commentVic20Block4);
+      jCheckBoxVic20Character.setSelected(option.commentVic20Character);
+      jCheckBoxVic20Color.setSelected(option.commentVic20Color);
+      jCheckBoxVic20KernalRom.setSelected(option.commentVic20KernalRom);
+      jCheckBoxVic20Screen.setSelected(option.commentVic20Screen);
+      jCheckBoxVic20StackArea.setSelected(option.commentVic20StackArea);
+      jCheckBoxVic20UserBasic.setSelected(option.commentVic20UserBasic);
+      jCheckBoxVic20Via1.setSelected(option.commentVic20Via1);
+      jCheckBoxVic20Via2.setSelected(option.commentVic20Via2);
+      jCheckBoxVic20Vic.setSelected(option.commentVic20Vic);
+      jCheckBoxVic20ZeroPage.setSelected(option.commentVic20ZeroPage);
+      jCheckBoxVic20_200Area.setSelected(option.commentVic20_200Area);
+      jCheckBoxVic20_300Area.setSelected(option.commentVic20_300Area);
+      jCheckBoxVic20_400Area.setSelected(option.commentVic20_400Area);
+      jCheckBoxVic20_8kExp1.setSelected(option.commentVic20_8kExp1);
+      jCheckBoxVic20_8kExp2.setSelected(option.commentVic20_8kExp2);
+      jCheckBoxVic20_8kExp3.setSelected(option.commentVic20_8kExp3);
     }
     
   /**
