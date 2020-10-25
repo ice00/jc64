@@ -274,7 +274,17 @@ public class Option {
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
   
+  /** Number of spaces in starting row of instruction */
+  public int numInstrSpaces=6;
   
+  /** Number of tabs in starting row of instrucyion */
+  public int numInstrTabs=0;
+  
+    /** Number of spaces in starting row of data */
+  public int numDataSpaces=6;
+  
+  /** Number of space in starting row of data */
+  public int numDataTabs=0;
   
   
   // comments C64

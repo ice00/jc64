@@ -150,7 +150,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         findDialogDis.setSearchString(" ");
         findDialogSource.setSearchString(" ");
         
-        FileManager.instance.readOptionFile(FileManager.optionFile, option);
+        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
         
         if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
         else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
@@ -1396,6 +1396,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jSubMenu.add(jMenuItemWordSwapped1);
     jSubMenu.add(jSeparatorWord1);
 
+    jMenuItemTribyte1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemTribyte1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/E.png"))); // NOI18N
     jMenuItemTribyte1.setText("(E) Mark data as Tribyte");
     jMenuItemTribyte1.addActionListener(new java.awt.event.ActionListener() {

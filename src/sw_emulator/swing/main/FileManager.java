@@ -46,7 +46,7 @@ public class FileManager {
   public static final FileManager instance=new FileManager();
     
   /** File to use for option*/
-  public static final File optionFile=new File(System.getProperty("user.home")+File.separator+".jc64dis");
+  public static final File OPTION_FILE=new File(System.getProperty("user.home")+File.separator+".jc64dis");
     
   /**
    * Singleton contructor
@@ -89,6 +89,11 @@ public class FileManager {
       option.flatLaf = in.readUTF();
       
       // 0.9
+      option.numInstrSpaces = in.readInt();
+      option.numInstrTabs = in.readInt();
+      option.numDataSpaces = in.readInt();
+      option.numDataTabs = in.readInt();
+      
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
       option.commentC64_200Area = in.readBoolean();
@@ -205,6 +210,11 @@ public class FileManager {
       out.writeUTF(option.flatLaf);
       
       // 0.9
+      out.writeInt(option.numInstrSpaces);
+      out.writeInt(option.numInstrTabs);
+      out.writeInt(option.numDataSpaces);
+      out.writeInt(option.numDataTabs);
+      
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);
       out.writeBoolean(option.commentC64_200Area);

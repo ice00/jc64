@@ -26,6 +26,7 @@ package sw_emulator.swing;
 import com.formdev.flatlaf.FlatLaf;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.UIManager;
 
@@ -137,32 +138,19 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextFieldSidFreqHi = new javax.swing.JTextField();
         jCheckBoxOpcodeFormattingSource = new javax.swing.JCheckBox();
         jCheckBoxErasePlus = new javax.swing.JCheckBox();
-        jPanelLook = new javax.swing.JPanel();
-        jRadioButtonLookJava = new javax.swing.JRadioButton();
-        jRadioButtonLookMac = new javax.swing.JRadioButton();
-        jRadioButtonLookMetal = new javax.swing.JRadioButton();
-        jRadioButtonLookWin = new javax.swing.JRadioButton();
-        jRadioButtonLookGtk = new javax.swing.JRadioButton();
-        jRadioButtonLookNimbus = new javax.swing.JRadioButton();
-        jLabelLook = new javax.swing.JLabel();
-        jLabelTheme = new javax.swing.JLabel();
-        jRadioButtonOcean = new javax.swing.JRadioButton();
-        jRadioButtonSteel = new javax.swing.JRadioButton();
-        jRadioButtonAqua = new javax.swing.JRadioButton();
-        jRadioButtonCharcoal = new javax.swing.JRadioButton();
-        jRadioButtonHighContrast = new javax.swing.JRadioButton();
-        jRadioButtonEmerald = new javax.swing.JRadioButton();
-        jRadioButtonRuby = new javax.swing.JRadioButton();
-        jRadioButtonLookCWin = new javax.swing.JRadioButton();
-        jLabelBracket = new javax.swing.JLabel();
-        jRadioButtonLookSynth = new javax.swing.JRadioButton();
-        jLabelArrow = new javax.swing.JLabel();
-        jScrollPaneList = new javax.swing.JScrollPane();
-        jListLaf = new javax.swing.JList<>();
-        jLabelFlatLaf = new javax.swing.JLabel();
+        jLabelInstrSep = new javax.swing.JLabel();
+        jSpinnerInstrSpaces = new javax.swing.JSpinner();
+        jSpinnerInstrTabs = new javax.swing.JSpinner();
+        jLabelInstrSpace = new javax.swing.JLabel();
+        jLabelInstrTabs = new javax.swing.JLabel();
+        jLabelDataSep = new javax.swing.JLabel();
+        jLabelDataSpace = new javax.swing.JLabel();
+        jSpinnerDataSpaces = new javax.swing.JSpinner();
+        jLabelDataTabs = new javax.swing.JLabel();
+        jSpinnerDataTabs = new javax.swing.JSpinner();
         jPanelComment = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jLabelautocomment = new javax.swing.JLabel();
+        jTabbedPaneComm = new javax.swing.JTabbedPane();
         jPanelC64Comm = new javax.swing.JPanel();
         jCheckBoxC64ZeroPage = new javax.swing.JCheckBox();
         jCheckBoxC64StackArea = new javax.swing.JCheckBox();
@@ -236,6 +224,38 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxPlus4_6529B_2 = new javax.swing.JCheckBox();
         jCheckBoxPlus4Ted = new javax.swing.JCheckBox();
         jCheckBoxPlus4Kernal = new javax.swing.JCheckBox();
+        jPanelDisassembler = new javax.swing.JPanel();
+        jLabelautocomment1 = new javax.swing.JLabel();
+        jComboBoxAssembler = new javax.swing.JComboBox<>();
+        jTabbedPaneAssembler = new javax.swing.JTabbedPane();
+        jPanelDasm = new javax.swing.JPanel();
+        jPanelTMPx = new javax.swing.JPanel();
+        jPanelCA64 = new javax.swing.JPanel();
+        jPanelAcme = new javax.swing.JPanel();
+        jPanelKickAssembler = new javax.swing.JPanel();
+        jPanelLook = new javax.swing.JPanel();
+        jRadioButtonLookJava = new javax.swing.JRadioButton();
+        jRadioButtonLookMac = new javax.swing.JRadioButton();
+        jRadioButtonLookMetal = new javax.swing.JRadioButton();
+        jRadioButtonLookWin = new javax.swing.JRadioButton();
+        jRadioButtonLookGtk = new javax.swing.JRadioButton();
+        jRadioButtonLookNimbus = new javax.swing.JRadioButton();
+        jLabelLook = new javax.swing.JLabel();
+        jLabelTheme = new javax.swing.JLabel();
+        jRadioButtonOcean = new javax.swing.JRadioButton();
+        jRadioButtonSteel = new javax.swing.JRadioButton();
+        jRadioButtonAqua = new javax.swing.JRadioButton();
+        jRadioButtonCharcoal = new javax.swing.JRadioButton();
+        jRadioButtonHighContrast = new javax.swing.JRadioButton();
+        jRadioButtonEmerald = new javax.swing.JRadioButton();
+        jRadioButtonRuby = new javax.swing.JRadioButton();
+        jRadioButtonLookCWin = new javax.swing.JRadioButton();
+        jLabelBracket = new javax.swing.JLabel();
+        jRadioButtonLookSynth = new javax.swing.JRadioButton();
+        jLabelArrow = new javax.swing.JLabel();
+        jScrollPaneList = new javax.swing.JScrollPane();
+        jListLaf = new javax.swing.JList<>();
+        jLabelFlatLaf = new javax.swing.JLabel();
         jPanelDn = new javax.swing.JPanel();
         jButtonLoad = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
@@ -394,6 +414,50 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelInstrSep.setText("Instruction separator in start of row of source:");
+
+        jSpinnerInstrSpaces.setModel(new javax.swing.SpinnerNumberModel(6, 0, 20, 1));
+        jSpinnerInstrSpaces.setToolTipText("At least 1 space or 1 tabs is necessary");
+        jSpinnerInstrSpaces.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerInstrSpacesStateChanged(evt);
+            }
+        });
+
+        jSpinnerInstrTabs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 8, 1));
+        jSpinnerInstrTabs.setToolTipText("At least 1 space or 1 tabs is necessary");
+        jSpinnerInstrTabs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerInstrTabsStateChanged(evt);
+            }
+        });
+
+        jLabelInstrSpace.setText("Spaces:");
+
+        jLabelInstrTabs.setText("Tabs:");
+
+        jLabelDataSep.setText("Data separator in start of row of source:");
+
+        jLabelDataSpace.setText("Spaces:");
+
+        jSpinnerDataSpaces.setModel(new javax.swing.SpinnerNumberModel(2, 0, 20, 1));
+        jSpinnerDataSpaces.setToolTipText("At least 1 space or 1 tabs is necessary");
+        jSpinnerDataSpaces.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDataSpacesStateChanged(evt);
+            }
+        });
+
+        jLabelDataTabs.setText("Tabs:");
+
+        jSpinnerDataTabs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 8, 1));
+        jSpinnerDataTabs.setToolTipText("At least 1 space or 1 tabs is necessary");
+        jSpinnerDataTabs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDataTabsStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -406,26 +470,6 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGap(292, 292, 292))
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelMaxLength, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jSpinnerMaxLength)
-                                                .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(134, 134, 134))
                             .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
                                     .addComponent(jLabelIllegalOpcodeStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,7 +489,47 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addComponent(jCheckBoxOpcodeFormattingSource, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCheckBoxErasePlus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
+                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                            .addComponent(jLabelDataSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(24, 24, 24)
+                                            .addComponent(jLabelDataSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jSpinnerDataSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(22, 22, 22)
+                                            .addComponent(jLabelDataTabs)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jSpinnerDataTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPreviewLayout.createSequentialGroup()
+                                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabelAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                                                .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                                                .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                                                .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                                                .addComponent(jLabelInstrSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(24, 24, 24)
+                                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jSpinnerMaxLength)
+                                                    .addComponent(jSpinnerMaxAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                    .addComponent(jLabelInstrSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jSpinnerInstrSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(22, 22, 22)
+                                                    .addComponent(jLabelInstrTabs)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jSpinnerInstrTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(55, 55, 55)))
                         .addContainerGap(54, Short.MAX_VALUE))))
         );
         jPanelPreviewLayout.setVerticalGroup(
@@ -496,255 +580,26 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSIDfreqHi)
                     .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelInstrSep)
+                    .addComponent(jSpinnerInstrSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerInstrTabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInstrSpace)
+                    .addComponent(jLabelInstrTabs))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDataSep)
+                    .addComponent(jSpinnerDataSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerDataTabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataSpace)
+                    .addComponent(jLabelDataTabs))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Option", jPanelPreview);
 
-        buttonGroupLook.add(jRadioButtonLookJava);
-        jRadioButtonLookJava.setText("Java");
-        jRadioButtonLookJava.setEnabled(false);
-        jRadioButtonLookJava.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookJavaItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookMac);
-        jRadioButtonLookMac.setText("Machintosh");
-        jRadioButtonLookMac.setEnabled(false);
-        jRadioButtonLookMac.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookMacItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookMetal);
-        jRadioButtonLookMetal.setText("Metal");
-        jRadioButtonLookMetal.setEnabled(false);
-        jRadioButtonLookMetal.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookMetalItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookWin);
-        jRadioButtonLookWin.setText("Windows style");
-        jRadioButtonLookWin.setEnabled(false);
-        jRadioButtonLookWin.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookWinItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookGtk);
-        jRadioButtonLookGtk.setText("GTK style");
-        jRadioButtonLookGtk.setEnabled(false);
-        jRadioButtonLookGtk.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookGtkItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookNimbus);
-        jRadioButtonLookNimbus.setText("Nimbus");
-        jRadioButtonLookNimbus.setEnabled(false);
-        jRadioButtonLookNimbus.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookNimbusItemStateChanged(evt);
-            }
-        });
-
-        jLabelLook.setText("Look & Feel:");
-
-        jLabelTheme.setText("Theme:");
-
-        buttonGroupTheme.add(jRadioButtonOcean);
-        jRadioButtonOcean.setText("Ocean");
-        jRadioButtonOcean.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonOceanItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonSteel);
-        jRadioButtonSteel.setText("Steel");
-        jRadioButtonSteel.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonSteelItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonAqua);
-        jRadioButtonAqua.setText("Aqua");
-        jRadioButtonAqua.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonAquaItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonCharcoal);
-        jRadioButtonCharcoal.setText("Charcoal");
-        jRadioButtonCharcoal.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonCharcoalItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonHighContrast);
-        jRadioButtonHighContrast.setText("High Contrast");
-        jRadioButtonHighContrast.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonHighContrastItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonEmerald);
-        jRadioButtonEmerald.setText("Emerald");
-        jRadioButtonEmerald.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonEmeraldItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupTheme.add(jRadioButtonRuby);
-        jRadioButtonRuby.setText("Ruby");
-        jRadioButtonRuby.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonRubyItemStateChanged(evt);
-            }
-        });
-
-        buttonGroupLook.add(jRadioButtonLookCWin);
-        jRadioButtonLookCWin.setText("Windows classic style");
-        jRadioButtonLookCWin.setEnabled(false);
-        jRadioButtonLookCWin.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookCWinItemStateChanged(evt);
-            }
-        });
-
-        jLabelBracket.setFont(new java.awt.Font("Tahoma", 0, 64)); // NOI18N
-        jLabelBracket.setText("{");
-
-        buttonGroupLook.add(jRadioButtonLookSynth);
-        jRadioButtonLookSynth.setText("Synth based");
-        jRadioButtonLookSynth.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonLookSynthItemStateChanged(evt);
-            }
-        });
-
-        jLabelArrow.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabelArrow.setText("----------------->");
-
-        jListLaf.setModel(listModel);
-        jListLaf.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListLaf.setEnabled(false);
-        jListLaf.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListLafValueChanged(evt);
-            }
-        });
-        jScrollPaneList.setViewportView(jListLaf);
-
-        jLabelFlatLaf.setText("Flat laf look & feel:");
-
-        javax.swing.GroupLayout jPanelLookLayout = new javax.swing.GroupLayout(jPanelLook);
-        jPanelLook.setLayout(jPanelLookLayout);
-        jPanelLookLayout.setHorizontalGroup(
-            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLookLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelLookLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonLookCWin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelBracket)
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelTheme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonOcean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonSteel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonCharcoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonAqua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonHighContrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonEmerald, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonRuby, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelLookLayout.createSequentialGroup()
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRadioButtonLookSynth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookJava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookMac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookMetal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookWin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookNimbus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonLookGtk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                .addContainerGap(261, Short.MAX_VALUE))
-        );
-        jPanelLookLayout.setVerticalGroup(
-            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLookLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLookLayout.createSequentialGroup()
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTheme)
-                            .addComponent(jLabelFlatLaf))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelLookLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonOcean)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonSteel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonAqua)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonCharcoal)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPaneList)))
-                    .addGroup(jPanelLookLayout.createSequentialGroup()
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelLookLayout.createSequentialGroup()
-                                .addComponent(jLabelLook)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonLookJava)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonLookMac)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonLookMetal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonLookWin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButtonLookCWin)
-                                    .addComponent(jRadioButtonHighContrast)))
-                            .addComponent(jLabelBracket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonLookGtk)
-                            .addComponent(jRadioButtonEmerald))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonLookNimbus)
-                            .addComponent(jRadioButtonRuby))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonLookSynth))
-                        .addContainerGap(206, Short.MAX_VALUE))))
-        );
-
-        jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
-
-        jLabel1.setText("Automatic add comments to those known locations:");
+        jLabelautocomment.setText("Automatic add comments to those known locations:");
 
         jCheckBoxC64ZeroPage.setSelected(true);
         jCheckBoxC64ZeroPage.setText("Zero page area ($00..$FF)");
@@ -915,7 +770,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("C64", jPanelC64Comm);
+        jTabbedPaneComm.addTab("C64", jPanelC64Comm);
 
         jCheckBoxC1541ZeroPage.setSelected(true);
         jCheckBoxC1541ZeroPage.setText("Zero page area ($00..$FF)");
@@ -1048,7 +903,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("C1541", jPanelC1541Comm);
+        jTabbedPaneComm.addTab("C1541", jPanelC1541Comm);
 
         javax.swing.GroupLayout jPanelC128CommLayout = new javax.swing.GroupLayout(jPanelC128Comm);
         jPanelC128Comm.setLayout(jPanelC128CommLayout);
@@ -1061,7 +916,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("C128", jPanelC128Comm);
+        jTabbedPaneComm.addTab("C128", jPanelC128Comm);
 
         jCheckBoxVic20StackArea.setSelected(true);
         jCheckBoxVic20StackArea.setText("Stack area ($100..$1FF)");
@@ -1291,10 +1146,10 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxVic20Via2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxVic20Color)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Vic20", jPanelVic20Comm);
+        jTabbedPaneComm.addTab("Vic20", jPanelVic20Comm);
 
         jCheckBoxPlus4ZeroPage.setSelected(true);
         jCheckBoxPlus4ZeroPage.setText("Zero page area ($00..$FF)");
@@ -1572,7 +1427,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Plus4", jPanelPlus4Comm);
+        jTabbedPaneComm.addTab("Plus4", jPanelPlus4Comm);
 
         javax.swing.GroupLayout jPanelCommentLayout = new javax.swing.GroupLayout(jPanelComment);
         jPanelComment.setLayout(jPanelCommentLayout);
@@ -1582,23 +1437,365 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCommentLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelautocomment, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jTabbedPaneComm, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanelCommentLayout.setVerticalGroup(
             jPanelCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCommentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelautocomment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPaneComm)
+                .addContainerGap())
         );
 
         jTabbedPaneOption.addTab("Comments", jPanelComment);
 
-        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.PAGE_START);
+        jLabelautocomment1.setText("Apply the output assembler syntax of:");
+
+        jComboBoxAssembler.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dasm", "TMPx", "CA65", "ACME", "KickAssembler" }));
+
+        javax.swing.GroupLayout jPanelDasmLayout = new javax.swing.GroupLayout(jPanelDasm);
+        jPanelDasm.setLayout(jPanelDasmLayout);
+        jPanelDasmLayout.setHorizontalGroup(
+            jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+        jPanelDasmLayout.setVerticalGroup(
+            jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneAssembler.addTab("Dasm", jPanelDasm);
+
+        javax.swing.GroupLayout jPanelTMPxLayout = new javax.swing.GroupLayout(jPanelTMPx);
+        jPanelTMPx.setLayout(jPanelTMPxLayout);
+        jPanelTMPxLayout.setHorizontalGroup(
+            jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+        jPanelTMPxLayout.setVerticalGroup(
+            jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneAssembler.addTab("TMPx", jPanelTMPx);
+
+        javax.swing.GroupLayout jPanelCA64Layout = new javax.swing.GroupLayout(jPanelCA64);
+        jPanelCA64.setLayout(jPanelCA64Layout);
+        jPanelCA64Layout.setHorizontalGroup(
+            jPanelCA64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+        jPanelCA64Layout.setVerticalGroup(
+            jPanelCA64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneAssembler.addTab("CA65", jPanelCA64);
+
+        javax.swing.GroupLayout jPanelAcmeLayout = new javax.swing.GroupLayout(jPanelAcme);
+        jPanelAcme.setLayout(jPanelAcmeLayout);
+        jPanelAcmeLayout.setHorizontalGroup(
+            jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+        jPanelAcmeLayout.setVerticalGroup(
+            jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneAssembler.addTab("ACME", jPanelAcme);
+
+        javax.swing.GroupLayout jPanelKickAssemblerLayout = new javax.swing.GroupLayout(jPanelKickAssembler);
+        jPanelKickAssembler.setLayout(jPanelKickAssemblerLayout);
+        jPanelKickAssemblerLayout.setHorizontalGroup(
+            jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+        jPanelKickAssemblerLayout.setVerticalGroup(
+            jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneAssembler.addTab("KickAssembler", jPanelKickAssembler);
+
+        javax.swing.GroupLayout jPanelDisassemblerLayout = new javax.swing.GroupLayout(jPanelDisassembler);
+        jPanelDisassembler.setLayout(jPanelDisassemblerLayout);
+        jPanelDisassemblerLayout.setHorizontalGroup(
+            jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDisassemblerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPaneAssembler)
+                    .addGroup(jPanelDisassemblerLayout.createSequentialGroup()
+                        .addComponent(jLabelautocomment1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelDisassemblerLayout.setVerticalGroup(
+            jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDisassemblerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelautocomment1)
+                    .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPaneAssembler)
+                .addContainerGap())
+        );
+
+        jTabbedPaneOption.addTab("Disassembler", jPanelDisassembler);
+
+        buttonGroupLook.add(jRadioButtonLookJava);
+        jRadioButtonLookJava.setText("Java");
+        jRadioButtonLookJava.setEnabled(false);
+        jRadioButtonLookJava.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookJavaItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookMac);
+        jRadioButtonLookMac.setText("Machintosh");
+        jRadioButtonLookMac.setEnabled(false);
+        jRadioButtonLookMac.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookMacItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookMetal);
+        jRadioButtonLookMetal.setText("Metal");
+        jRadioButtonLookMetal.setEnabled(false);
+        jRadioButtonLookMetal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookMetalItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookWin);
+        jRadioButtonLookWin.setText("Windows style");
+        jRadioButtonLookWin.setEnabled(false);
+        jRadioButtonLookWin.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookWinItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookGtk);
+        jRadioButtonLookGtk.setText("GTK style");
+        jRadioButtonLookGtk.setEnabled(false);
+        jRadioButtonLookGtk.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookGtkItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookNimbus);
+        jRadioButtonLookNimbus.setText("Nimbus");
+        jRadioButtonLookNimbus.setEnabled(false);
+        jRadioButtonLookNimbus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookNimbusItemStateChanged(evt);
+            }
+        });
+
+        jLabelLook.setText("Look & Feel:");
+
+        jLabelTheme.setText("Theme:");
+
+        buttonGroupTheme.add(jRadioButtonOcean);
+        jRadioButtonOcean.setText("Ocean");
+        jRadioButtonOcean.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonOceanItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonSteel);
+        jRadioButtonSteel.setText("Steel");
+        jRadioButtonSteel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonSteelItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonAqua);
+        jRadioButtonAqua.setText("Aqua");
+        jRadioButtonAqua.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAquaItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonCharcoal);
+        jRadioButtonCharcoal.setText("Charcoal");
+        jRadioButtonCharcoal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonCharcoalItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonHighContrast);
+        jRadioButtonHighContrast.setText("High Contrast");
+        jRadioButtonHighContrast.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonHighContrastItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonEmerald);
+        jRadioButtonEmerald.setText("Emerald");
+        jRadioButtonEmerald.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonEmeraldItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupTheme.add(jRadioButtonRuby);
+        jRadioButtonRuby.setText("Ruby");
+        jRadioButtonRuby.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonRubyItemStateChanged(evt);
+            }
+        });
+
+        buttonGroupLook.add(jRadioButtonLookCWin);
+        jRadioButtonLookCWin.setText("Windows classic style");
+        jRadioButtonLookCWin.setEnabled(false);
+        jRadioButtonLookCWin.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookCWinItemStateChanged(evt);
+            }
+        });
+
+        jLabelBracket.setFont(new java.awt.Font("Tahoma", 0, 64)); // NOI18N
+        jLabelBracket.setText("{");
+
+        buttonGroupLook.add(jRadioButtonLookSynth);
+        jRadioButtonLookSynth.setText("Synth based");
+        jRadioButtonLookSynth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonLookSynthItemStateChanged(evt);
+            }
+        });
+
+        jLabelArrow.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelArrow.setText("----------------->");
+
+        jListLaf.setModel(listModel);
+        jListLaf.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListLaf.setEnabled(false);
+        jListLaf.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListLafValueChanged(evt);
+            }
+        });
+        jScrollPaneList.setViewportView(jListLaf);
+
+        jLabelFlatLaf.setText("Flat laf look & feel:");
+
+        javax.swing.GroupLayout jPanelLookLayout = new javax.swing.GroupLayout(jPanelLook);
+        jPanelLook.setLayout(jPanelLookLayout);
+        jPanelLookLayout.setHorizontalGroup(
+            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLookLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addComponent(jRadioButtonLookCWin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelBracket)
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelTheme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonOcean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonSteel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonCharcoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonAqua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonHighContrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonEmerald, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonRuby, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jRadioButtonLookSynth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookJava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookMac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookMetal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookWin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookNimbus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonLookGtk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
+        );
+        jPanelLookLayout.setVerticalGroup(
+            jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLookLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelTheme)
+                            .addComponent(jLabelFlatLaf))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLookLayout.createSequentialGroup()
+                                .addComponent(jRadioButtonOcean)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonSteel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonAqua)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonCharcoal)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPaneList)))
+                    .addGroup(jPanelLookLayout.createSequentialGroup()
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelLookLayout.createSequentialGroup()
+                                .addComponent(jLabelLook)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonLookJava)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonLookMac)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonLookMetal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonLookWin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jRadioButtonLookCWin)
+                                    .addComponent(jRadioButtonHighContrast)))
+                            .addComponent(jLabelBracket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonLookGtk)
+                            .addComponent(jRadioButtonEmerald))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonLookNimbus)
+                            .addComponent(jRadioButtonRuby))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButtonLookSynth))
+                        .addContainerGap(205, Short.MAX_VALUE))))
+        );
+
+        jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
+
+        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.CENTER);
 
         jButtonLoad.setText("Load");
         jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -1639,21 +1836,20 @@ public class JOptionDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanelOption, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanelOption, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
-      if(!FileManager.instance.readOptionFile(FileManager.optionFile, option)) {
+      if(!FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option)) {
         JOptionPane.showMessageDialog(this, "Error reading the option file", "Loading error", JOptionPane.ERROR_MESSAGE);
       } else applyOption();
     }//GEN-LAST:event_jButtonLoadActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-       if (!FileManager.instance.writeOptionFile(FileManager.optionFile, option)) {
+       if (!FileManager.instance.writeOptionFile(FileManager.OPTION_FILE, option)) {
         JOptionPane.showMessageDialog(this, "Error writing the option file", "Saving error", JOptionPane.ERROR_MESSAGE);
       } else JOptionPane.showMessageDialog(this, "Saving done", "Saving result", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -2171,6 +2367,30 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.commentVic20KernalRom=jCheckBoxVic20KernalRom.isSelected();  
     }//GEN-LAST:event_jCheckBoxVic20KernalRomItemStateChanged
 
+    private void jSpinnerInstrSpacesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerInstrSpacesStateChanged
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numInstrTabs==0) jSpinnerInstrSpaces.setValue(1);
+      else option.numInstrSpaces=num;      
+    }//GEN-LAST:event_jSpinnerInstrSpacesStateChanged
+
+    private void jSpinnerInstrTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerInstrTabsStateChanged
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numInstrSpaces==0) jSpinnerInstrTabs.setValue(1);
+      else option.numInstrTabs=num;       
+    }//GEN-LAST:event_jSpinnerInstrTabsStateChanged
+
+    private void jSpinnerDataSpacesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDataSpacesStateChanged
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numDataTabs==0) jSpinnerDataSpaces.setValue(1);
+      else option.numDataSpaces=num;         
+    }//GEN-LAST:event_jSpinnerDataSpacesStateChanged
+
+    private void jSpinnerDataTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDataTabsStateChanged
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numDataSpaces==0) jSpinnerDataTabs.setValue(1);
+      else option.numDataTabs=num;       
+    }//GEN-LAST:event_jSpinnerDataTabsStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -2296,12 +2516,18 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxVic20_8kExp3;
     private javax.swing.JCheckBox jCheckC64BoxSid;
     private javax.swing.JCheckBox jCheckC64BoxVicII;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBoxAssembler;
     private javax.swing.JLabel jLabelAggregate;
     private javax.swing.JLabel jLabelArrow;
     private javax.swing.JLabel jLabelBracket;
+    private javax.swing.JLabel jLabelDataSep;
+    private javax.swing.JLabel jLabelDataSpace;
+    private javax.swing.JLabel jLabelDataTabs;
     private javax.swing.JLabel jLabelFlatLaf;
     private javax.swing.JLabel jLabelIllegalOpcodeStyle;
+    private javax.swing.JLabel jLabelInstrSep;
+    private javax.swing.JLabel jLabelInstrSpace;
+    private javax.swing.JLabel jLabelInstrTabs;
     private javax.swing.JLabel jLabelLanguage;
     private javax.swing.JLabel jLabelLook;
     private javax.swing.JLabel jLabelMaxLength;
@@ -2310,16 +2536,24 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelSIDfreqHi;
     private javax.swing.JLabel jLabelSIDfreqLo;
     private javax.swing.JLabel jLabelTheme;
+    private javax.swing.JLabel jLabelautocomment;
+    private javax.swing.JLabel jLabelautocomment1;
     private javax.swing.JList<String> jListLaf;
+    private javax.swing.JPanel jPanelAcme;
     private javax.swing.JPanel jPanelC128Comm;
     private javax.swing.JPanel jPanelC1541Comm;
     private javax.swing.JPanel jPanelC64Comm;
+    private javax.swing.JPanel jPanelCA64;
     private javax.swing.JPanel jPanelComment;
+    private javax.swing.JPanel jPanelDasm;
+    private javax.swing.JPanel jPanelDisassembler;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JPanel jPanelKickAssembler;
     private javax.swing.JPanel jPanelLook;
     private javax.swing.JPanel jPanelOption;
     private javax.swing.JPanel jPanelPlus4Comm;
     private javax.swing.JPanel jPanelPreview;
+    private javax.swing.JPanel jPanelTMPx;
     private javax.swing.JPanel jPanelVic20Comm;
     private javax.swing.JRadioButton jRadioButtonAqua;
     private javax.swing.JRadioButton jRadioButtonCharcoal;
@@ -2342,9 +2576,14 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonStyle2;
     private javax.swing.JRadioButton jRadioButtonStyle3;
     private javax.swing.JScrollPane jScrollPaneList;
+    private javax.swing.JSpinner jSpinnerDataSpaces;
+    private javax.swing.JSpinner jSpinnerDataTabs;
+    private javax.swing.JSpinner jSpinnerInstrSpaces;
+    private javax.swing.JSpinner jSpinnerInstrTabs;
     private javax.swing.JSpinner jSpinnerMaxAggregate;
     private javax.swing.JSpinner jSpinnerMaxLength;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPaneAssembler;
+    private javax.swing.JTabbedPane jTabbedPaneComm;
     private javax.swing.JTabbedPane jTabbedPaneOption;
     private javax.swing.JTextField jTextFieldInitSongs;
     private javax.swing.JTextField jTextFieldPlaySound;
@@ -2382,6 +2621,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       jTextFieldSidFreqHi.setText(option.sidFreqHiLabel);
       jSpinnerMaxLength.setValue(option.maxLabelLength);
       jSpinnerMaxAggregate.setValue(option.maxAggregate);
+      jSpinnerInstrSpaces.setValue(option.numInstrSpaces);
+      jSpinnerInstrTabs.setValue(option.numInstrTabs);
+      jSpinnerDataSpaces.setValue(option.numDataSpaces);
+      jSpinnerDataTabs.setValue(option.numDataTabs);
       
       actualLEF=option.getLafName();
       actualTheme=option.getMethalTheme();
