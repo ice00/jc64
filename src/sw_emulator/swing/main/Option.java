@@ -286,6 +286,9 @@ public class Option {
   /** Number of space in starting row of data */
   public int numDataTabs=0;
   
+  /** A label is on a sepatate line from instruction */
+  public boolean labelOnSepLine=true;
+  
   
   // comments C64
   

@@ -93,6 +93,7 @@ public class FileManager {
       option.numInstrTabs = in.readInt();
       option.numDataSpaces = in.readInt();
       option.numDataTabs = in.readInt();
+      option.labelOnSepLine = in.readBoolean();
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -214,6 +215,7 @@ public class FileManager {
       out.writeInt(option.numInstrTabs);
       out.writeInt(option.numDataSpaces);
       out.writeInt(option.numDataTabs);
+      out.writeBoolean(option.labelOnSepLine);
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);

@@ -353,7 +353,7 @@ public class M6510Dasm implements disassembler {
   /**
    * Set the memory dasm to use
    * 
-   * @param memory the memroy dasm
+   * @param memory the memory dasm
    */
   public void setMemory(MemoryDasm[] memory) {
     this.memory=memory;  
@@ -535,7 +535,7 @@ public class M6510Dasm implements disassembler {
    * @param start the start position in buffer
    * @param end the end position in buffer
    * @param pc the programn counter for start position 
-   * @return a string rapresentation of disasemble with comment
+   * @return a string rapresentation of disassemble with comment
    */
   public String cdasm(byte[] buffer, int start, int end, long pc) {
     StringBuilder result=new StringBuilder ("");            // resulting string
@@ -765,8 +765,14 @@ public class M6510Dasm implements disassembler {
           }  
             
           // add the label if it was declared by dasm or user           
-          if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
-          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
+          if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
+            result.append(mem.userLocation).append(":");
+            if (option.labelOnSepLine) result.append("\n");
+          }
+          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) {
+            result.append(mem.dasmLocation).append(":");
+            if (option.labelOnSepLine) result.append("\n");
+          }          
           
           // this is an instruction
           tmp=dasm(buffer); 
@@ -774,7 +780,7 @@ public class M6510Dasm implements disassembler {
           tmp2="";
           for (int i=tmp.length(); i<34; i++) // insert spaces
             tmp2+=" ";
-          result.append("      ").append(tmp).append(tmp2);
+          result.append(getInstrSpacesTabs(mem)).append(tmp).append(tmp2);
           
           tmp2=dcom();   
           
@@ -864,7 +870,7 @@ public class M6510Dasm implements disassembler {
             }
             
             if (counter==0) {
-               tmp2="  .byte ";
+               tmp2=this.getDataSpacesTabs()+".byte ";
                //desAsChar=new String[option.maxAggregate];
             }
             else {
@@ -1243,4 +1249,31 @@ public class M6510Dasm implements disassembler {
     }
     return result.append("\n").toString();
   }
+  
+  private static final String SPACES="                                       "; 
+  private static final String TABS="\t\t\t\t\t\t\t\t\t\t";
+  
+  /**
+   * Return spaces/tabs to use in start of instruction
+   * 
+   * @param mem the memory of this line
+   * @return the spaces/tabs
+   */
+  private String getInstrSpacesTabs(MemoryDasm mem) {
+    if (!option.labelOnSepLine) {
+      int num=0;  
+      if (mem.userLocation!=null && !"".equals(mem.userLocation)) num=mem.userLocation.length()+1;
+      else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) num=mem.dasmLocation.length()+1;
+      return SPACES.substring(0, option.maxLabelLength-num)+SPACES.substring(0, option.numInstrSpaces)+TABS.substring(0, option.numInstrTabs);
+    } else return SPACES.substring(0, option.numInstrSpaces)+TABS.substring(0, option.numInstrTabs);
+  }
+  
+  /**
+   * Return spaces/tabs to use in start of data area
+   * 
+   * @return the spaces/tabs
+   */
+  private String getDataSpacesTabs() {
+    return SPACES.substring(0, option.numDataSpaces)+TABS.substring(0, option.numDataTabs);
+  }  
 }
