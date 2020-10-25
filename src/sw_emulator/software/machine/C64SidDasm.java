@@ -45,6 +45,7 @@ public class C64SidDasm extends C64Dasm {
    */
   @Override
   public String dcom(int iType, int aType, long addr, long value) {
+    byte language=option.commentLanguage;  
     switch (aType) {
       case A_ZPG:
       case A_ZPX:

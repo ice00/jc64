@@ -70,7 +70,7 @@ public class FileDasm {
   public byte lang=C64Dasm.LANG_ENGLISH;
 
   /** Contains the data of input file */
-  public byte[] inB=new byte[0x20000];
+  public byte[] inB=new byte[0x66000];
 
   /** The output of disassembler */
   public String outB;
@@ -202,7 +202,6 @@ public class FileDasm {
     System.out.println("Disassemble the input file ...");
     if (isPSID()) {
       C64SidDasm sid=new C64SidDasm();
-      sid.language=lang;
       sid.setMemory(memoryDasm);
       outB=sid.cdasm(inB, sidPos, result, sidPC);
     } else
@@ -219,7 +218,6 @@ public class FileDasm {
          outB+=mus.cdasm(inB, ind3, txtA-1, ind3+musPC);
        } else {
            C64Dasm prg=new C64Dasm();
-           prg.language=lang;
            prg.setMemory(memoryDasm);
            int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
 

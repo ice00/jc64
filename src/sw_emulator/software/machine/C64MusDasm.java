@@ -26,7 +26,6 @@ package sw_emulator.software.machine;
 
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.math.Unsigned;
-import java.util.Locale;
 
 /**
  * Decode the voice music data as coded into 'mus' file used by sidplayer.

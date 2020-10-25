@@ -348,7 +348,7 @@ public class M6510Dasm implements disassembler {
   MemoryDasm[] memory;
   
   /** Option to use */
-  Option option;
+  protected Option option;
   
   /**
    * Set the memory dasm to use
@@ -359,6 +359,11 @@ public class M6510Dasm implements disassembler {
     this.memory=memory;  
   }
   
+   /**
+   * Set the option to use
+   * 
+   * @param option the option to use
+   */
   public void setOption(Option option) {
     this.option=option;
   }

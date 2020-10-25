@@ -198,25 +198,9 @@ public class Disassembly {
     int sidPC;        // PC value of start of sid program 
       
     C64SidDasm sid=new C64SidDasm();
-    sid.language=option.commentLanguage;
     sid.setMemory(memory);
-    sid.setOption(option);    
-    
-    ((C64Dasm)sid).language=option.commentLanguage;        
-    ((C64Dasm)sid).commentZeroPage=option.commentC64ZeroPage;
-    ((C64Dasm)sid).commentStackArea=option.commentC64StackArea;
-    ((C64Dasm)sid).comment200Area=option.commentC64_200Area;
-    ((C64Dasm)sid).comment300Area=option.commentC64_300Area;        
-    ((C64Dasm)sid).commentScreenArea=option.commentC64ScreenArea;
-    ((C64Dasm)sid).commentBasicFreeArea=option.commentC64BasicFreeArea;
-    ((C64Dasm)sid).commentBasicRom=option.commentC64BasicRom;
-    ((C64Dasm)sid).commentFreeRam=option.commentC64FreeRam;
-    ((C64Dasm)sid).commentVicII=option.commentC64VicII;
-    ((C64Dasm)sid).commentSid=option.commentC64Sid;
-    ((C64Dasm)sid).commentColorArea=option.commentC64ColorArea;
-    ((C64Dasm)sid).commentCia1=option.commentC64Cia1;
-    ((C64Dasm)sid).commentCia2=option.commentC64Cia2;
-    
+    sid.setOption(option);       
+  
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
     psidPAddr=Unsigned.done(inB[13])+Unsigned.done(inB[12])*256;    
@@ -340,35 +324,9 @@ public class Disassembly {
     switch (targetType) {
       case C64:
         prg=new C64Dasm();  
-        ((C64Dasm)prg).language=option.commentLanguage;        
-        ((C64Dasm)prg).commentZeroPage=option.commentC64ZeroPage;
-        ((C64Dasm)prg).commentStackArea=option.commentC64StackArea;
-        ((C64Dasm)prg).comment200Area=option.commentC64_200Area;
-        ((C64Dasm)prg).comment300Area=option.commentC64_300Area;        
-        ((C64Dasm)prg).commentScreenArea=option.commentC64ScreenArea;
-        ((C64Dasm)prg).commentBasicFreeArea=option.commentC64BasicFreeArea;
-        ((C64Dasm)prg).commentBasicRom=option.commentC64BasicRom;
-        ((C64Dasm)prg).commentFreeRam=option.commentC64FreeRam;
-        ((C64Dasm)prg).commentVicII=option.commentC64VicII;
-        ((C64Dasm)prg).commentSid=option.commentC64Sid;
-        ((C64Dasm)prg).commentColorArea=option.commentC64ColorArea;
-        ((C64Dasm)prg).commentCia1=option.commentC64Cia1;
-        ((C64Dasm)prg).commentCia2=option.commentC64Cia2;
         break;  
       case C1541:
-        prg=new C1541Dasm();   
-        ((C1541Dasm)prg).language=option.commentLanguage; 
-        ((C1541Dasm)prg).commentC1541ZeroPage=option.commentC1541ZeroPage;
-        ((C1541Dasm)prg).commentC1541StackArea=option.commentC64StackArea;
-        ((C1541Dasm)prg).commentC1541_200Area=option.commentC1541_200Area;
-        ((C1541Dasm)prg).commentC1541Buffer0=option.commentC1541Buffer0;
-        ((C1541Dasm)prg).commentC1541Buffer1=option.commentC1541Buffer1;
-        ((C1541Dasm)prg).commentC1541Buffer2=option.commentC1541Buffer2;
-        ((C1541Dasm)prg).commentC1541Buffer3=option.commentC1541Buffer3;
-        ((C1541Dasm)prg).commentC1541Buffer4=option.commentC1541Buffer4;
-        ((C1541Dasm)prg).commentC1541Via1=option.commentC1541Via1;
-        ((C1541Dasm)prg).commentC1541Via2=option.commentC1541Via2;
-        ((C1541Dasm)prg).commentC1541Kernal=option.commentC1541Kernal;        
+        prg=new C1541Dasm();     
         break;
       case C128:
         prg=new C128Dasm();  
@@ -376,54 +334,9 @@ public class Disassembly {
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
-        ((CVic20Dasm)prg).language=option.commentLanguage;          
-        ((CVic20Dasm)prg).commentVic20ZeroPage=option.commentVic20ZeroPage;
-        ((CVic20Dasm)prg).commentVic20StackArea=option.commentVic20StackArea;
-        ((CVic20Dasm)prg).commentVic20_200Area=option.commentVic20_200Area;
-        ((CVic20Dasm)prg).commentVic20_300Area=option.commentVic20_300Area;
-        ((CVic20Dasm)prg).commentVic20_400Area=option.commentVic20_400Area;
-        ((CVic20Dasm)prg).commentVic20Vic=option.commentVic20Vic;
-        ((CVic20Dasm)prg).commentVic20Via1=option.commentVic20Via1;
-        ((CVic20Dasm)prg).commentVic20Via2=option.commentVic20Via2;
-        ((CVic20Dasm)prg).commentVic20UserBasic=option.commentVic20UserBasic;
-        ((CVic20Dasm)prg).commentVic20Screen=option.commentVic20Screen;
-        ((CVic20Dasm)prg).commentVic20_8kExp1=option.commentVic20_8kExp1;
-        ((CVic20Dasm)prg).commentVic20_8kExp2=option.commentVic20_8kExp2;
-        ((CVic20Dasm)prg).commentVic20_8kExp3=option.commentVic20_8kExp3;
-        ((CVic20Dasm)prg).commentVic20Character=option.commentVic20Character;
-        ((CVic20Dasm)prg).commentVic20Color=option.commentVic20Color;
-        ((CVic20Dasm)prg).commentVic20Block2=option.commentVic20Block2;
-        ((CVic20Dasm)prg).commentVic20Block3=option.commentVic20Block3;
-        ((CVic20Dasm)prg).commentVic20Block4=option.commentVic20Block4;
-        ((CVic20Dasm)prg).commentVic20BasicRom=option.commentVic20BasicRom;
-        ((CVic20Dasm)prg).commentVic20KernalRom=option.commentVic20KernalRom;
         break;
       case PLUS4:
         prg=new CPlus4Dasm();  
-        ((CPlus4Dasm)prg).language=option.commentLanguage;    
-        ((CPlus4Dasm)prg).commentPlus4ZeroPage=option.commentPlus4ZeroPage;
-        ((CPlus4Dasm)prg).commentPlus4StackArea=option.commentPlus4StackArea;
-        ((CPlus4Dasm)prg).commentPlus4_200Area=option.commentPlus4_200Area;
-        ((CPlus4Dasm)prg).commentPlus4_300Area=option.commentPlus4_300Area;
-        ((CPlus4Dasm)prg).commentPlus4_400Area=option.commentPlus4_400Area;
-        ((CPlus4Dasm)prg).commentPlus4_500Area=option.commentPlus4_500Area;
-        ((CPlus4Dasm)prg).commentPlus4_600Area=option.commentPlus4_600Area;
-        ((CPlus4Dasm)prg).commentPlus4_700Area=option.commentPlus4_700Area;
-        ((CPlus4Dasm)prg).commentPlus4ColorArea=option.commentPlus4ColorArea;
-        ((CPlus4Dasm)prg).commentPlus4VideoArea=option.commentPlus4VideoArea;
-        ((CPlus4Dasm)prg).commentPlus4BasicRamP=option.commentPlus4BasicRamP;
-        ((CPlus4Dasm)prg).commentPlus4BasicRamN=option.commentPlus4BasicRamN; 
-        ((CPlus4Dasm)prg).commentPlus4Luminance=option.commentPlus4Luminance;
-        ((CPlus4Dasm)prg).commentPlus4ColorBitmap=option.commentPlus4ColorBitmap;
-        ((CPlus4Dasm)prg).commentPlus4GraphicData=option.commentPlus4GraphicData;
-        ((CPlus4Dasm)prg).commentPlus4BasicRom=option.commentPlus4BasicRom;
-        ((CPlus4Dasm)prg).commentPlus4BasicExt=option.commentPlus4BasicExt;
-        ((CPlus4Dasm)prg).commentPlus4Caracter=option.commentPlus4Caracter;
-        ((CPlus4Dasm)prg).commentPlus4Acia=option.commentPlus4Acia;
-        ((CPlus4Dasm)prg).commentPlus4_6529B_1=option.commentPlus4_6529B_1;
-        ((CPlus4Dasm)prg).commentPlus4_6529B_2=option.commentPlus4_6529B_2;
-        ((CPlus4Dasm)prg).commentPlus4Ted=option.commentPlus4Ted;
-        ((CPlus4Dasm)prg).commentPlus4Kernal=option.commentPlus4Kernal;  
         break;
       default:  
         prg=new M6510Dasm();
@@ -479,36 +392,10 @@ public class Disassembly {
       
     switch (targetType) {
       case C64:
-        prg=new C64Dasm();  
-        ((C64Dasm)prg).language=option.commentLanguage;
-        ((C64Dasm)prg).commentZeroPage=option.commentC64ZeroPage;
-        ((C64Dasm)prg).commentStackArea=option.commentC64StackArea;
-        ((C64Dasm)prg).comment200Area=option.commentC64_200Area;
-        ((C64Dasm)prg).comment300Area=option.commentC64_300Area;        
-        ((C64Dasm)prg).commentScreenArea=option.commentC64ScreenArea;
-        ((C64Dasm)prg).commentBasicFreeArea=option.commentC64BasicFreeArea;
-        ((C64Dasm)prg).commentBasicRom=option.commentC64BasicRom;
-        ((C64Dasm)prg).commentFreeRam=option.commentC64FreeRam;
-        ((C64Dasm)prg).commentVicII=option.commentC64VicII;
-        ((C64Dasm)prg).commentSid=option.commentC64Sid;
-        ((C64Dasm)prg).commentColorArea=option.commentC64ColorArea;
-        ((C64Dasm)prg).commentCia1=option.commentC64Cia1;
-        ((C64Dasm)prg).commentCia2=option.commentC64Cia2;        
+        prg=new C64Dasm();     
         break;  
       case C1541:
         prg=new C1541Dasm();   
-        ((C1541Dasm)prg).language=option.commentLanguage;      
-        ((C1541Dasm)prg).commentC1541ZeroPage=option.commentC1541ZeroPage;
-        ((C1541Dasm)prg).commentC1541StackArea=option.commentC64StackArea;
-        ((C1541Dasm)prg).commentC1541_200Area=option.commentC1541_200Area;
-        ((C1541Dasm)prg).commentC1541Buffer0=option.commentC1541Buffer0;
-        ((C1541Dasm)prg).commentC1541Buffer1=option.commentC1541Buffer1;
-        ((C1541Dasm)prg).commentC1541Buffer2=option.commentC1541Buffer2;
-        ((C1541Dasm)prg).commentC1541Buffer3=option.commentC1541Buffer3;
-        ((C1541Dasm)prg).commentC1541Buffer4=option.commentC1541Buffer4;
-        ((C1541Dasm)prg).commentC1541Via1=option.commentC1541Via1;
-        ((C1541Dasm)prg).commentC1541Via2=option.commentC1541Via2;
-        ((C1541Dasm)prg).commentC1541Kernal=option.commentC1541Kernal;
         break;
       case C128:
         prg=new C128Dasm();  
@@ -516,55 +403,9 @@ public class Disassembly {
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
-        ((CVic20Dasm)prg).language=option.commentLanguage;      
-        ((CVic20Dasm)prg).commentVic20ZeroPage=option.commentVic20ZeroPage;
-        ((CVic20Dasm)prg).commentVic20StackArea=option.commentVic20StackArea;
-        ((CVic20Dasm)prg).commentVic20_200Area=option.commentVic20_200Area;
-        ((CVic20Dasm)prg).commentVic20_300Area=option.commentVic20_300Area;
-        ((CVic20Dasm)prg).commentVic20_400Area=option.commentVic20_400Area;
-        ((CVic20Dasm)prg).commentVic20Vic=option.commentVic20Vic;
-        ((CVic20Dasm)prg).commentVic20Via1=option.commentVic20Via1;
-        ((CVic20Dasm)prg).commentVic20Via2=option.commentVic20Via2;
-        ((CVic20Dasm)prg).commentVic20UserBasic=option.commentVic20UserBasic;
-        ((CVic20Dasm)prg).commentVic20Screen=option.commentVic20Screen;
-        ((CVic20Dasm)prg).commentVic20_8kExp1=option.commentVic20_8kExp1;
-        ((CVic20Dasm)prg).commentVic20_8kExp2=option.commentVic20_8kExp2;
-        ((CVic20Dasm)prg).commentVic20_8kExp3=option.commentVic20_8kExp3;
-        ((CVic20Dasm)prg).commentVic20Character=option.commentVic20Character;
-        ((CVic20Dasm)prg).commentVic20Color=option.commentVic20Color;
-        ((CVic20Dasm)prg).commentVic20Block2=option.commentVic20Block2;
-        ((CVic20Dasm)prg).commentVic20Block3=option.commentVic20Block3;
-        ((CVic20Dasm)prg).commentVic20Block4=option.commentVic20Block4;
-        ((CVic20Dasm)prg).commentVic20BasicRom=option.commentVic20BasicRom;
-        ((CVic20Dasm)prg).commentVic20KernalRom=option.commentVic20KernalRom;
         break;
       case PLUS4:
-        prg=new CPlus4Dasm();  
-        ((CPlus4Dasm)prg).language=option.commentLanguage; 
-        ((CPlus4Dasm)prg).language=option.commentLanguage;    
-        ((CPlus4Dasm)prg).commentPlus4ZeroPage=option.commentPlus4ZeroPage;
-        ((CPlus4Dasm)prg).commentPlus4StackArea=option.commentPlus4StackArea;
-        ((CPlus4Dasm)prg).commentPlus4_200Area=option.commentPlus4_200Area;
-        ((CPlus4Dasm)prg).commentPlus4_300Area=option.commentPlus4_300Area;
-        ((CPlus4Dasm)prg).commentPlus4_400Area=option.commentPlus4_400Area;
-        ((CPlus4Dasm)prg).commentPlus4_500Area=option.commentPlus4_500Area;
-        ((CPlus4Dasm)prg).commentPlus4_600Area=option.commentPlus4_600Area;
-        ((CPlus4Dasm)prg).commentPlus4_700Area=option.commentPlus4_700Area;
-        ((CPlus4Dasm)prg).commentPlus4ColorArea=option.commentPlus4ColorArea;
-        ((CPlus4Dasm)prg).commentPlus4VideoArea=option.commentPlus4VideoArea;
-        ((CPlus4Dasm)prg).commentPlus4BasicRamP=option.commentPlus4BasicRamP;
-        ((CPlus4Dasm)prg).commentPlus4BasicRamN=option.commentPlus4BasicRamN; 
-        ((CPlus4Dasm)prg).commentPlus4Luminance=option.commentPlus4Luminance;
-        ((CPlus4Dasm)prg).commentPlus4ColorBitmap=option.commentPlus4ColorBitmap;
-        ((CPlus4Dasm)prg).commentPlus4GraphicData=option.commentPlus4GraphicData;
-        ((CPlus4Dasm)prg).commentPlus4BasicRom=option.commentPlus4BasicRom;
-        ((CPlus4Dasm)prg).commentPlus4BasicExt=option.commentPlus4BasicExt;
-        ((CPlus4Dasm)prg).commentPlus4Caracter=option.commentPlus4Caracter;
-        ((CPlus4Dasm)prg).commentPlus4Acia=option.commentPlus4Acia;
-        ((CPlus4Dasm)prg).commentPlus4_6529B_1=option.commentPlus4_6529B_1;
-        ((CPlus4Dasm)prg).commentPlus4_6529B_2=option.commentPlus4_6529B_2;
-        ((CPlus4Dasm)prg).commentPlus4Ted=option.commentPlus4Ted;
-        ((CPlus4Dasm)prg).commentPlus4Kernal=option.commentPlus4Kernal;        
+        prg=new CPlus4Dasm();       
         break;
       default:  
         prg=new M6510Dasm();
