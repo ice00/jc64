@@ -230,6 +230,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jComboBoxAssembler = new javax.swing.JComboBox<>();
         jTabbedPaneAssembler = new javax.swing.JTabbedPane();
         jPanelDasm = new javax.swing.JPanel();
+        jCheckBoxDasmF3Comp = new javax.swing.JCheckBox();
         jPanelTMPx = new javax.swing.JPanel();
         jPanelCA64 = new javax.swing.JPanel();
         jPanelAcme = new javax.swing.JPanel();
@@ -1473,15 +1474,28 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jComboBoxAssembler.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dasm", "TMPx", "CA65", "ACME", "KickAssembler" }));
 
+        jCheckBoxDasmF3Comp.setText("Make source compatible with -f3 option");
+        jCheckBoxDasmF3Comp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDasmF3CompActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDasmLayout = new javax.swing.GroupLayout(jPanelDasm);
         jPanelDasm.setLayout(jPanelDasmLayout);
         jPanelDasmLayout.setHorizontalGroup(
             jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 791, Short.MAX_VALUE)
+            .addGroup(jPanelDasmLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxDasmF3Comp, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanelDasmLayout.setVerticalGroup(
             jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
+            .addGroup(jPanelDasmLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxDasmF3Comp)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("Dasm", jPanelDasm);
@@ -2410,6 +2424,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.labelOnSepLine=jCheckBoxLabel.isSelected();
     }//GEN-LAST:event_jCheckBoxLabelActionPerformed
 
+    private void jCheckBoxDasmF3CompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDasmF3CompActionPerformed
+      option.dasmF3Comp=jCheckBoxDasmF3Comp.isSelected();
+    }//GEN-LAST:event_jCheckBoxDasmF3CompActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2485,6 +2503,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxC64ZeroPage;
     private javax.swing.JCheckBox jCheckBoxC64_200Area;
     private javax.swing.JCheckBox jCheckBoxC64_300Area;
+    private javax.swing.JCheckBox jCheckBoxDasmF3Comp;
     private javax.swing.JCheckBox jCheckBoxEraseDComm;
     private javax.swing.JCheckBox jCheckBoxErasePlus;
     private javax.swing.JCheckBox jCheckBoxLabel;
@@ -2675,6 +2694,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       }
       
       selectedTheme();
+      
+      //DASM
+      jCheckBoxDasmF3Comp.setSelected(option.dasmF3Comp);
       
       // apply comments C64
       jCheckBoxC64ZeroPage.setSelected(option.commentC64ZeroPage);

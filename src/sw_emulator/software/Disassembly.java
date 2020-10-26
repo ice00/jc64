@@ -364,10 +364,12 @@ public class Disassembly {
       prg.upperCase=option.opcodeUpperCaseSource;  
       tmp.append("  processor 6502\n\n");
 
-      tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");
-      tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
-      tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
-      tmp.append("\n");
+      if (option.dasmF3Comp) {
+        tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");
+        tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
+        tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
+        tmp.append("\n");
+      }  
       tmp.append("  .org $").append(ShortToExe(start)).append("\n\n");
       
       tmp.append(prg.csdasm(inB, 2, inB.length, start));
@@ -433,7 +435,7 @@ public class Disassembly {
       }
     
     // sort by asc memory address
-     Collections.sort(mpr.blocks, new Comparator<byte[]>() {
+    Collections.sort(mpr.blocks, new Comparator<byte[]>() {
         @Override
         public int compare(byte[] block2, byte[] block1)
         {
@@ -471,7 +473,7 @@ public class Disassembly {
       
 
       if (asSource) {
-        if (first) {
+        if (first && option.dasmF3Comp) {
           tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");        
           tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
           tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");

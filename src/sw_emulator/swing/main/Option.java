@@ -442,64 +442,67 @@ public class Option {
   public boolean commentPlus4Kernal=true;
   
   /** Vic20: Comment zero page */
-  public boolean commentVic20ZeroPage;
+  public boolean commentVic20ZeroPage=true;
   
   /** Vic20: Comment stack area */
-  public boolean commentVic20StackArea;
+  public boolean commentVic20StackArea=true;
   
   /** Vic20: Comment 200 area */
-  public boolean commentVic20_200Area;
+  public boolean commentVic20_200Area=true;
   
   /** Vic20: Comment 300 area */
-  public boolean commentVic20_300Area;
+  public boolean commentVic20_300Area=true;
   
   /** Vic20: Comment 400 area */
-  public boolean commentVic20_400Area;
+  public boolean commentVic20_400Area=true;
   
   /** Vic20: Comment Vic */
-  public boolean commentVic20Vic;
+  public boolean commentVic20Vic=true;
   
   /** Vic20: Comment Via 1 */
-  public boolean commentVic20Via1;
+  public boolean commentVic20Via1=true;
   
   /** Vic20: Comment Via 2 */
-  public boolean commentVic20Via2;
+  public boolean commentVic20Via2=true;
   
   /** Vic20: Comment user basic */
-  public boolean commentVic20UserBasic;
+  public boolean commentVic20UserBasic=false;;
   
   /** Vic20: Comment screen */
-  public boolean commentVic20Screen;
+  public boolean commentVic20Screen=true;
   
   /** Vic20: Comment 8k expansion 1 */
-  public boolean commentVic20_8kExp1;
+  public boolean commentVic20_8kExp1=false;;
   
   /** Vic20: Comment 8k expansion 2 */
-  public boolean commentVic20_8kExp2;
+  public boolean commentVic20_8kExp2=false;;
   
   /** Vic20: Comment 8k expansion 3 */
-  public boolean commentVic20_8kExp3;
+  public boolean commentVic20_8kExp3=false;;
   
   /** Vic20: Comment character */
-  public boolean commentVic20Character;
+  public boolean commentVic20Character=true;
   
   /** Vic20: Comment color */
-  public boolean commentVic20Color;
+  public boolean commentVic20Color=true;
   
   /** Vic20: Comment block 2 */
-  public boolean commentVic20Block2;
+  public boolean commentVic20Block2=false;;
   
   /** Vic20: Comment block 3 */
-  public boolean commentVic20Block3;
+  public boolean commentVic20Block3=false;;
   
   /** Vic20: Comment block 4 */
-  public boolean commentVic20Block4;
+  public boolean commentVic20Block4=false;;
   
   /** Vic20: Comment Basic rom */
-  public boolean commentVic20BasicRom;
+  public boolean commentVic20BasicRom=true;
   
   /** Vic20: Comment Kernal rom */
-  public boolean commentVic20KernalRom;
+  public boolean commentVic20KernalRom=true;
+  
+  /** DASM: compile source with f3 option */
+  public boolean dasmF3Comp=false;
   
   /**
    * Get the flat laf theme
