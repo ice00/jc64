@@ -284,7 +284,7 @@ public class C128Dasm extends M6510Dasm {
               case 0xE5: return "Current screen top margin";
               case 0xE6: return "Current screen left margin";
               case 0xE7: return "Current screen right margin";
-              case 0xE8: return "";    
+              case 0xE8:    
               case 0xE9: return "Input cursor log (row, column)"; 
               case 0xEA: return "End-of-line for input pointer";
               case 0xEB: return "Row where cursor lives";
@@ -308,9 +308,167 @@ public class C128Dasm extends M6510Dasm {
               case 0xFD:
               case 0xFE: return "Not used";
               case 0xFF: return "Basic Scratch";
+              
+              case 0x110: return "DOS Loop Counter";
+              case 0x111: return "DOS Filename 1 Len";
+              case 0x112: return "DOS Disk Drive 1";
+              case 0x113: return "DOS Filename 2 Len"; 
+              case 0x114: return "DOS Disk Drive 2";  
+              case 0x115: return "DOS Filename 2 Addr"; 
+              case 0x116:
+              case 0x117: return "BLOAD/BSAVE Starting Address";  
+              case 0x118:
+              case 0x119: return "BLOAD/BSAVE Ending Address";  
+              case 0x11B: return "DOS Logical Addr [00]";                 
+              case 0x11C: return "DOS Phys Addr [08]";
+              case 0x11D: return "DOS Sec. Addr [6F]";
+              case 0x11E: return "DOS Record Length";
+              case 0x120: return "DOS Disk ID";
+              case 0x122: return "DOS DSK ID FLG SPACE Used by PRINT USING";
+              case 0x123: return "Pointer to Begin. NO.";
+              case 0x124: return "Pointer to End NO.";
+              case 0x125: return "Dollar Flag";
+              case 0x126: return "Comma Flag, PLAY: VOXTUM flag";
+              case 0x127: return "Counter";
+              case 0x128: return "Sign Exponent";
+              case 0x129: return "Pointer to Exponent";
+              case 0x12A: return "# Of Digits Before Decimal Point";
+              case 0x12B: return "Justify Flag";
+              case 0x12C: return "# Of Pos Before Decimal Point (Field)";
+              case 0x12D: return "# Of Pos After Decimal Point (Field)";
+              case 0x12E: return "+/- Flag (Field)";
+              case 0x12F: return "Exponent Flag (Field)";
+              case 0x130: return "Switch";
+              case 0x131: return "Char Counter (Field)";
+              case 0x132: return "Sign No";
+              case 0x133: return "Blank/Star Flag";
+              case 0x134: return "Pointer to Begin of Field";
+              case 0x135: return "Length of Format";
+              case 0x136: return "Pointer to End Of Field";
+              case 0x2FC:
+              case 0x2FD: return "Function Execute Hook";
+              case 0x300:
+              case 0x301: return "Error Message Link [4D3F]";
+              case 0x302:
+              case 0x303: return "BASIC Warm Start Link	[4DC6]";
+              case 0x304:
+              case 0x305: return "Crunch BASIC Tokens Link [430D]";
+              case 0x306:
+              case 0x307: return "Print Tokens Link [5151]";
+              case 0x308:
+              case 0x309: return "Start New BASIC Code Link [4AA2]";
+              case 0x30A:
+              case 0x30B: return "Get Arithmetic Element Link [78DA]";
+              case 0x30C:
+              case 0x30D: return "Crunch FE Hook [4321]";
+              case 0x30E: 
+              case 0x30F: return "List FE Hook [51CD]";
+              case 0x310:
+              case 0x311: return "Execute FE Hook [4BA9]";
+              case 0x312:
+              case 0x313: return "Unused";
+              case 0x314:
+              case 0x315: return "IRQ Vector [FA65]";
+              case 0x316:
+              case 0x317: return "Break Interrupt Vector [B003]";
+              case 0x318:
+              case 0x319: return "NMI Interrupt Vector[FA40]";
+              case 0x31A:
+              case 0x31B: return "OPEN Vector [EFBD]";
+              case 0x31C:
+              case 0x31D: return "CLOSE Vector [F188]";
+              case 0x31E:
+              case 0x31F: return "Set Input Vector [F106]";
+              case 0x320:
+              case 0x321: return "Set Output Vector [F14C]";
+              case 0x322:
+              case 0x323: return "Restore I/O Vector [F226]";
+              case 0x324:
+              case 0x325: return "Input Vector [EF06]";
+              case 0x326:
+              case 0x327: return "Output Vector	[EF79]";
+              case 0x328:
+              case 0x329: return "Test STOP Key [F66E]";
+              case 0x32A:
+              case 0x32B: return "GET Vector [EEEB]";
+              case 0x32C:
+              case 0x32D: return "Abort I/O Vector [F222]";
+              case 0x32E:
+              case 0x32F: return "Machine Lang Monitor Link [B006]";
+              case 0x330:
+              case 0x331: return "LOAD Link [F26C]";
+              case 0x332:
+              case 0x333: return "SAVE Link [F54E]";
+              case 0x334:
+              case 0x335: return "Print Control Code Link [C7B9]";
+              case 0x336:
+              case 0x337: return "Print High ASCII Code Link [C805]";
+              case 0x338:
+              case 0x339: return "Print ESC Sequence Link [C9C1]";
+              case 0x33A:
+              case 0x33B: return "Keyscan Link [C5E1]";
+              case 0x33C:
+              case 0x33D: return "Store Key [C6AD]";
+              case 0x33E:
+              case 0x33F: return "Pointer to KBD Decoding Table: Unshifted [FA80/FD29]";
+              case 0x340:
+              case 0x341: return "Pointer to KBD Decoding Table: Shifted [FAD9/FD82]";
+              case 0x342:
+              case 0x343: return "Pointer to KBD Decoding Table: Commodore [FB32/FDDB]";
+              case 0x344:
+              case 0x345: return "Pointer to KBD Decoding Table: Control [FB8B/FE34] 1)";
+              case 0x346:
+              case 0x347: return "Pointer to KBD Decoding Table: Alt [FA80/FD29]";
+              case 0x348:
+              case 0x349: return "Pointer to KBD Decoding Table: Ascii/DIN [FB4E/FD29]";              
+              case 0x35E:
+              case 0x35F: 
+              case 0x360:
+              case 0x362: return "Bitmap Of Line Wraps";
+              case 0x386: return "CHRGOT Entry";
+              case 0x3D2:
+              case 0x3D3: 
+              case 0x3D4: return "Numeric Constant For BASIC";
+              case 0x3D5: return "Current Bank For SYS, POKE, PEEK";
+              case 0x3D6: 
+              case 0x3D7:
+              case 0x3D8: 
+              case 0x3D9: return "INSTR Work Values";
+              case 0x3DA: return "Bank Pointer For String/Number CONVERT RTN";
+              case 0x3DB: 
+              case 0x3DC:
+              case 0x3DE: return "Sprite: Work bytes for SSHAPE";
+              case 0x3DF: return "FAC#1 Overflow";
+              case 0x3E0: 
+              case 0x3E1: return "Sprite: Work bytes for SPRSAV";
+              case 0x3E2: return "Graphic Foreground/ Background Color Nybbles";
+              case 0x3E3: return "Graphic Foreground/ Multicolor 1 Color Nybbles";
               default:  
                 if ((addr>=0x19) && (addr<=0x23)) return "Stack for temporary strings";
                 if ((addr>=0x59) && (addr<=0x62)) return "Miscellaneous numeric work area";
+                if ((addr>=0x100) && (addr<=0x10F)) return "Tape Read Errors, Area to build filename in (16 bytes)";
+                if ((addr>=0x100) && (addr<=0x1FF)) return "System Stack";
+                if ((addr>=0x200) && (addr<=0x2A1)) return "BASIC & Monitor input buffer";
+                if ((addr>=0x2A2) && (addr<=0x2AE)) return "Bank Peek Subroutine (Kernal RAM)";
+                if ((addr>=0x2AF) && (addr<=0x2BD)) return "Bank Poke Subroutine";
+                if ((addr>=0x2BE) && (addr<=0x2CC)) return "Bank Compare Subroutine";
+                if ((addr>=0x2CD) && (addr<=0x2E2)) return "JSR to Another Bank";
+                if ((addr>=0x2E3) && (addr<=0x2FB)) return "JMP to Another Bank";
+                if ((addr>=0x34A) && (addr<=0x353)) return "IRQ Keyboard Buffer (10 Bytes)  FF = No key";
+                if ((addr>=0x354) && (addr<=0x35D)) return "Bitmap Of TAB Stops (10 Bytes)";
+                if ((addr>=0x362) && (addr<=0x36B)) return "Logical File Number Table";
+                if ((addr>=0x36C) && (addr<=0x375)) return "Device Number Table";
+                if ((addr>=0x376) && (addr<=0x37F)) return "Secondary Addresse Table";
+                if ((addr>=0x380) && (addr<=0x39E)) return "CHRGET Subroutine";
+                if ((addr>=0x39F) && (addr<=0x3AA)) return "Fetch From RAM Bank 0";
+                if ((addr>=0x3AB) && (addr<=0x3B6)) return "Fetch From RAM Bank 1";
+                if ((addr>=0x3B7) && (addr<=0x3BF)) return "Index1 Indirect Fetch From RAM Bank 1";
+                if ((addr>=0x3C0) && (addr<=0x3C8)) return "Index2 Indirect Fetch From RAM Bank 0";
+                if ((addr>=0x3C9) && (addr<=0x3D1)) return "Txtptr Fetch From RAM Bank 0";
+                if ((addr>=0x3F0) && (addr<=0x3F6)) return "DMA Link Code";
+                if ((addr>=0x400) && (addr<=0x7E7)) return "VIC 40-Column Text Screen";
+                if ((addr>=0x7E8) && (addr<=0x7fF)) return "Sprite Identity Pointers For Text Mode";
+                if ((addr>=0x800) && (addr<=0x9FF)) return "BASIC Pseudo Stack (gosub and loop addresses and commands)";
             }      
       }
     }  
