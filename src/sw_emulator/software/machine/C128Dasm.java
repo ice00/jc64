@@ -69,8 +69,8 @@ public class C128Dasm extends M6510Dasm {
             }     
           default:
             switch ((int)addr) {
-              case 0x00: return "I/O direction register";
-              case 0x01: return "I/O port";
+              case 0x00: return "6510 Data I/O direction register";
+              case 0x01: return "6510 Data I/O port";
               case 0x02: return "Token 'SEARCH' looks for, Bank Number, Jump to SYS Address";
               case 0x03: 
               case 0x04: return "SYS address, MLM register PC";
@@ -94,7 +94,8 @@ public class C128Dasm extends M6510Dasm {
               case 0x16: 
               case 0x17: return "Integer value";
               case 0x18: return "Pointer: temporary string stack";
-              case 0x19: return "Stack for temporary strings";        
+              case 0x19: return "Last Temp String Address";  
+              case 0x1B: return "Stack For Temp Strings";
               case 0x24:
               case 0x25: 
               case 0x26: 
@@ -179,7 +180,7 @@ public class C128Dasm extends M6510Dasm {
               case 0x7C: return "DS$ descriptor";
               case 0x7D: 
               case 0x7E: return "BASIC pseudo-stack pointer";
-              case 0x7F: return "Flag: 0 = direct mode";
+              case 0x7F: return "Flag: 0=direct mode";
               case 0x80:
               case 0x81: return "DOS, USING work flags";
               case 0x82: return "Stack pointer save for errors";              
@@ -188,10 +189,10 @@ public class C128Dasm extends M6510Dasm {
               case 0x85: return "Multicolor 2 (2)";
               case 0x86: return "Graphic foreground color (13)";
               case 0x87: 
-              case 0x88: 
+              case 0x88: return "Graphic scale factors X";
               case 0x89: 
-              case 0x8A: return "Graphic scale factors, X & Y";              
-              case 0x8B: 
+              case 0x8A: return "Graphic scale factors Y";              
+              case 0x8B: return "Stoppaint if not Background/Not same color";
               case 0x8C:
               case 0x8D:
               case 0x8E:
@@ -270,8 +271,8 @@ public class C128Dasm extends M6510Dasm {
               case 0xD7: return "40/80 columns: 0=40 column screen";
               case 0xD8: return "Graphics mode code";   
               case 0xD9: return "Character base: 0=ROM, 4=RAM";
-              case 0xDA:
-              case 0xDB:
+              case 0xDA: return "Pointers For MOVLIN/Temporary For TAB & LINE WRAP Routines";
+              case 0xDB: return "Another Temporary Place To Save A Reg.";
               case 0xDC:
               case 0xDD:
               case 0xDE:
@@ -443,6 +444,217 @@ public class C128Dasm extends M6510Dasm {
               case 0x3E1: return "Sprite: Work bytes for SPRSAV";
               case 0x3E2: return "Graphic Foreground/ Background Color Nybbles";
               case 0x3E3: return "Graphic Foreground/ Multicolor 1 Color Nybbles";
+              case 0xA00:
+              case 0xA01: return "Vector to Restart System (BASIC Warm) [4003]";
+              case 0xA02: return "KERNAL Warm/Cold Init'n Status Byte";
+              case 0xA03: return "PAL/NTSC System Flag";
+              case 0xA04: return "Flags RESET vs. NMI Status for init'n rtns";
+              case 0xA05: 
+              case 0xA06: return "Ptr to Bottom of Avail. Memory in System Bank";
+              case 0xA07: 
+              case 0xA08: return "Ptr to Top of Available Memory in System Bank";
+              case 0xA09: return "Tape Handler preserves IRQ Indirect here";
+              case 0xA0B: return "TOD Sense during tape operations";
+              case 0xA0C: return "CIA 1 Interrupt Log";
+              case 0xA0D: return "CIA 1 Timer Enabled";
+              case 0xA0F: return "RS-232 Enables";
+              case 0xA10: return "RS-232 Control Register";
+              case 0xA11: return "RS-232 Command Register";
+              case 0xA12: return "RS-232 User Baud Rate";
+              case 0xA14: return "RS-232 Status Register";
+              case 0xA15: return "RS-232 Number of Bits To Send";
+              case 0xA16: return "RS-232 Baud Rate Full Bit Time (Created by OPEN)";
+              case 0xA18: return "RS-232 Receive Pointer";
+              case 0xA19: return "RS-232 Input Pointer";
+              case 0xA1A: return "RS-232 Transmit Pointer";
+              case 0xA1B: return "RS-232 Send Pointer";
+              case 0xA1C:
+              case 0xA1D:
+              case 0xA1E:
+              case 0xA1F: return "Sleep Countdown, FFFF = disable";
+              case 0xA20: return "Keyboard Buffer Size (10)";
+              case 0xA21: return "Screen Freeze Flag";
+              case 0xA22: return "Key Repeat: 128 = all, 64 = none";
+              case 0xA23: return "Key Repeat Timing";
+              case 0xA24: return "Key Repeat Pause";
+              case 0xA25: return "Graphics / Text Toggle Latch";
+              case 0xA26: return "40-Col Cursor Mode";
+              case 0xA27:
+              case 0xA28:
+              case 0xA29:
+              case 0xA2A: return "40-Col Blink Values";
+              case 0xA2B: return "80-Col Cursor Mode";
+              case 0xA2C: return "40-Col Video $D018 Image";
+              case 0xA2D: return "VIC Bit-Map Base Pointer";
+              case 0xA2E:
+              case 0xA2F: return "80-Col Pages-Screen, Color";
+              case 0xA80: return "Compare Buffer (32 bytes)";
+              case 0xAA0:
+              case 0xAA1: return "MLM";
+              case 0xAAB: return "ASM/DIS";
+              case 0xAAC: return "For Assembler";
+              case 0xAAF: return "Byte Temp used all over";
+              case 0xAB0: return "Byte Temp used all over";
+              case 0xAB1: return "Byte Temp for Assembler";
+              case 0xAB2: return "Save .X here during Indirect Subroutine Calls";
+              case 0xAB3: return "Direction Indicator For 'TRANSFER'";
+              case 0xAB4: 
+              case 0xAB5: return "Parse Number Conversion";
+              case 0xAB7: return "Parse Number Conversion";
+              case 0xAC0: return "PAT Counter";
+              case 0xAC1:
+              case 0xAC2:
+              case 0xAC3:
+              case 0xAC4: return "ROM Physical Address Table";
+              case 0xAC5: return "Flag: KBD";
+              case 0x1131: return "Current X Position";
+              case 0x1133: return "Current Y Position";
+              case 0x1135: return "X-Coordinate Destination";
+              case 0x1137: return "Y-Coordinate Destination";
+              case 0x1139: return "Line Drawing Variables";
+              case 0x1149: return "Sign Of Angle";
+              case 0x114A: return "Sine Of Value Of Angle";
+              case 0x114C: return "Cosine of Value of Angle";
+              case 0x114E: return "Temps For Angle Distance Routines";
+              case 0x1150: return "CIRCLE Center, X Coordinate, BOX POINT 1 X-Coord.";
+              case 0x1152: return "CIRCLE Center, Y Coordinate, BOX POINT 1 Y-Coord.";
+              case 0x1154: return "X Radius, BOX Rotation Angle";
+              case 0x1156: return "Y Radius";
+              case 0x1158: return "CIRCLE Rotation Angle";
+              case 0x115A: return "BOX: Length of a side";
+              case 0x115C: return "Arc Angle Start";              
+              case 0x115E: return "Arc Angle End, Char's Col. Counter";
+              case 0x1160: return "X Radius * COS(Rotation Angle)";
+              case 0x1162: return "Y Radius * SIN(Rotation Angle)";
+              case 0x1164: return "X Radius * SIN(Rotation Angle)";
+              case 0x1166: return "Y Radius * COS(Rotation Angle)";
+              case 0x1168: return "HIGH BYTE: ADDR OF CHARROM For 'CHAR' CMD.";
+              case 0x1169: return "Temp For GSHAPE";
+              case 0x116A: return "SCALE Mode Flag";
+              case 0x116B: return "Double Width Flag";
+              case 0x116C: return "Box Fill Flag";
+              case 0x116D: return "Temp For Bit Mask";
+              case 0x116F: return "Trace Mode: FF = on";
+              case 0x1170:
+              case 0x1171:
+              case 0x1172:
+              case 0x1173: return "Renumbering Pointers";
+              case 0x1174:
+              case 0x1175:
+              case 0x1176:
+              case 0x1177: return "Directory Work Pointers";  
+              case 0x117A:
+              case 0x117B: return "Float-fixed Vector [849F]";
+              case 0x117C:
+              case 0x117D: return "Fixed-float Vector [793C]";
+              case 0x11E6: return "Sprite X-High Positions";
+              case 0x11E7:
+              case 0x11E8: return "Sprite Bumb Masks (sprite - backgnd)";
+              case 0x11E9:
+              case 0x11EA: return "Light Pen Values, X and Y";
+              case 0x11EB: return "CHRGEN ROM Page, Text Mode [D8]";
+              case 0x11EC: return "CHRGEN ROM Page, Graphics Mode [D0]";
+              case 0x11ED: return "Secondary Address For RECORD";
+              case 0x1200:
+              case 0x1201: return "Previous BASIC Line";
+              case 0x1202:
+              case 0x1203: return "Pointer: BASIC Statement for CONTINUE";
+              case 0x1204: return "PRINT USING Fill Symbol";
+              case 0x1205: return "PRINT USING Comma Symbol";
+              case 0x1206: return "PRINT USING D.P. Symbol";
+              case 0x1207: return "Print Using Monetary Symbol";
+              case 0x1208: return "Used by Error Trapping Routine - Last Err No";
+              case 0x1209:
+              case 0x120A: return "Line # of Last Error. FFFF if No Error";
+              case 0x120B:
+              case 0x120C: return "TRAP Address, FFFF=none";
+              case 0x120D: return "Hold Trap # of Tempor.";
+              case 0x1210:
+              case 0x1211: return "End of Basic, Bank 0";
+              case 0x1212: 
+              case 0x1213: return "Basic Program Limit [FF00]";
+              case 0x1214: 
+              case 0x1215: 
+              case 0x1216: 
+              case 0x1217: return "DO Work Pointers";
+              case 0x1218: 
+              case 0x1219:
+              case 0x121A: return "USR Program Jump [7D28]";
+              case 0x121B: 
+              case 0x121C: 
+              case 0x121D: 
+              case 0x121E:
+              case 0x121F: return "RND Seed Value";
+              case 0x1220: return "Degrees Per CIRCLE Segment";
+              case 0x1221: return "'Cold' or 'Warm' Reset Status";
+              case 0x1222: return "Sound Tempo";
+              case 0x1223:
+              case 0x1224: return "Remaining Note Length LO/HI, Voice 1";
+              case 0x1225:
+              case 0x1226: return "Remaining Note Length LO/HI, Voice 2";
+              case 0x1227:
+              case 0x1228: return "Remaining Note Length LO/HI, Voice 3";
+              case 0x1229:
+              case 0x122A: return "Note Length LO/HI";
+              case 0x122B: return "Octave";
+              case 0x122C: return "Flag: 01 = Sharp, FF = Flat";
+              case 0x122D:
+              case 0x122E: return "Pitch";
+              case 0x122F: return "Music Sequencer (Voice Number)";
+              case 0x1230: return "Wave";
+              case 0x1233: return "Flag: Play Dotted Note";
+              case 0x1234: 
+              case 0x1235: 
+              case 0x1236:
+              case 0x1237: return "Note Image";
+              case 0x1271:
+              case 0x1272:
+              case 0x1273:
+              case 0x1274: return "Note: xx, xx, volume";
+              case 0x1275: return "Previous Volume Image";
+              case 0x1276:
+              case 0x1277:
+              case 0x1278: return "Collision IRQ Task Table";
+              case 0x127F: return "Collision Mask";
+              case 0x1280: return "Collision Work Value";
+              case 0x1281: return "SOUND Voice";
+              case 0x1282: return "SOUND Time LO";
+              case 0x1285: 
+              case 0x1286:
+              case 0x1287: return "SOUND Time HI";
+              case 0x1288:
+              case 0x1289:
+              case 0x128A: return "SOUND Max LO";
+              case 0x128B: return "SOUND Max HI";
+              case 0x128E: return "SOUND Min LO";
+              case 0x1291: return "SOUND Min HI";
+              case 0x1294: return "SOUND Direction";
+              case 0x1297: return "SOUND Step LO";
+              case 0x129A: return "SOUND Step HI";
+              case 0x129B: return "SOUND Freq LO";
+              case 0x12A0: return "SOUND Freq HI";
+              case 0x12A3: return "Temp Time LO";
+              case 0x12A4: return "Temp Time HI";
+              case 0x12A5: return "Temp Max LO";
+              case 0x12A6: return "Temp Max HI";
+              case 0x12A7: return "Temp Min LO";
+              case 0x12A8: return "Temp Min HI";
+              case 0x12A9: return "Temp Direction";
+              case 0x12AA: return "Temp Step LO";
+              case 0x12AB: return "Temp Step HI";
+              case 0x12AC: return "Temp Freq LO";
+              case 0x12AD: return "Temp Freq HI";
+              case 0x12AE: return "Temp Pulse LO";
+              case 0x12AF: return "Temp Pulse HI";
+              case 0x12B0: return "Temp Waveform";
+              case 0x12B1: 
+              case 0x12B2: return "PEN/POT Work Values";
+              case 0x12B7:
+              case 0x12FA: 
+              case 0x12FB: return "Used BY SPRDEF & SAVSPR";
+              case 0x12FC: return "Sprite Number. Used BY SPRDEF & SAVSPR";
+              case 0x12FD: return "Used by BASIC IRQ to block all but one IRQ call";
+              
               default:  
                 if ((addr>=0x19) && (addr<=0x23)) return "Stack for temporary strings";
                 if ((addr>=0x59) && (addr<=0x62)) return "Miscellaneous numeric work area";
@@ -469,6 +681,31 @@ public class C128Dasm extends M6510Dasm {
                 if ((addr>=0x400) && (addr<=0x7E7)) return "VIC 40-Column Text Screen";
                 if ((addr>=0x7E8) && (addr<=0x7fF)) return "Sprite Identity Pointers For Text Mode";
                 if ((addr>=0x800) && (addr<=0x9FF)) return "BASIC Pseudo Stack (gosub and loop addresses and commands)";
+                if ((addr>=0xA40) && (addr<=0xA5A)) return "40/80 Pointer Swap (to E0-FA)";
+                if ((addr>=0xA60) && (addr<=0xA6D)) return "40/80 Data Swap (0354-0361)";
+                if ((addr>=0xB00) && (addr<=0xBBF)) return "Cassette Buffer";
+                if ((addr>=0xC00) && (addr<=0xDFF)) return "RS-232 Input, Output Buffers";
+                if ((addr>=0xE00) && (addr<=0xFFF)) return "System Sprites (56-63)";
+                if ((addr>=0x1000) && (addr<=0x1009)) return "Programmed Key Lenghts";
+                if ((addr>=0x100A) && (addr<=0x10FF)) return "Programmed Key Definitions";
+                if ((addr>=0x1100) && (addr<=0x1130)) return "DOS Command Staging Area";
+                if ((addr>=0x1131) && (addr<=0x116E)) return "Graphics Work Area";
+                if ((addr>=0x1178) && (addr<=0x1197)) return "Graphics Index";
+                if ((addr>=0x117E) && (addr<=0x11D5)) return "Sprite Motion Tables (8 x 11 bytes)";
+                if ((addr>=0x11D6) && (addr<=0x11E5)) return "Sprite X/Y Positions";
+                if ((addr>=0x11EE) && (addr<=0x11FF)) return "Unused";
+                if ((addr>=0x1239) && (addr<=0x123E)) return "Current Envelope Pattern";
+                if ((addr>=0x123F) && (addr<=0x1270)) return "AD(SR) Pattern";
+                if ((addr>=0x1249) && (addr<=0x1252)) return "(AD)SR Pattern";
+                if ((addr>=0x1253) && (addr<=0x125C)) return "Waveform Pattern";
+                if ((addr>=0x125D) && (addr<=0x1266)) return "Pulse Width Lo Pattern";
+                if ((addr>=0x1267) && (addr<=0x1270)) return "Pulse Width Hi Pattern";
+                if ((addr>=0x1279) && (addr<=0x127E)) return "Collision IRQ Address Tables";
+                if ((addr>=0x1800) && (addr<=0x1BFF)) return "Reserved for Key Functions";
+                if ((addr>=0x1C00) && (addr<=0x1FF7)) return "Video Color Matrix For Graphics Mode";
+                if ((addr>=0x1FF8) && (addr<=0x1FFF)) return "Sprite Identity Pointers For Graphics Mode";
+                if ((addr>=0x2000) && (addr<=0x3FFF)) return "Screen Memory For Graphics Mode";
+                if ((addr>=0x4000) && (addr<=0xCFFF)) return "BASIC ROM";
             }      
       }
     }  
