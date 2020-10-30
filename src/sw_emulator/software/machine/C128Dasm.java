@@ -468,8 +468,8 @@ public class C128Dasm extends M6510Dasm {
               case 0xA19: return "RS-232 Input Pointer";
               case 0xA1A: return "RS-232 Transmit Pointer";
               case 0xA1B: return "RS-232 Send Pointer";
-              case 0xA1C:
-              case 0xA1D:
+              case 0xA1C: return "Fast Serial Internal/External Flag";
+              case 0xA1D: return "Decrementing Jiffie Register";
               case 0xA1E:
               case 0xA1F: return "Sleep Countdown, FFFF = disable";
               case 0xA20: return "Keyboard Buffer Size (10)";
@@ -478,22 +478,36 @@ public class C128Dasm extends M6510Dasm {
               case 0xA23: return "Key Repeat Timing";
               case 0xA24: return "Key Repeat Pause";
               case 0xA25: return "Graphics / Text Toggle Latch";
-              case 0xA26: return "40-Col Cursor Mode";
-              case 0xA27:
-              case 0xA28:
-              case 0xA29:
-              case 0xA2A: return "40-Col Blink Values";
-              case 0xA2B: return "80-Col Cursor Mode";
-              case 0xA2C: return "40-Col Video $D018 Image";
+              case 0xA26: return "40-Col Cursor Mode/VIC Cursor Mode (Blinking, Solid)";
+              case 0xA27: return "VIC Cursor Disable";
+              case 0xA28: return "VIC Cursor Blink Counter";
+              case 0xA29: return "VIC Cursor Character Before Blink";
+              case 0xA2A: return "40-Col Blink Values/VIC Cursor Color Before Blink";
+              case 0xA2B: return "80-Col Cursor Mode/VDC Cursor Mode (when enabled)";
+              case 0xA2C: return "40-Col Video $D018 Image/VIC Text Screen/Character Base Pointer";
               case 0xA2D: return "VIC Bit-Map Base Pointer";
-              case 0xA2E:
-              case 0xA2F: return "80-Col Pages-Screen, Color";
+              case 0xA2E: return "80-Col Pages-Screen/VDC Text Screen Base ";
+              case 0xA2F: return "80-Col Pages-Screen/Color/VDC Attribute Base";
+              case 0xA30: return "Temporary Pointer to Last Line For LOOP4";
+              case 0xA31: return "Temporary For 80-Col Routines";
+              case 0xA32: return "Temporary For 80-Col Routines";
+              case 0xA33: return "VDC Cursor Color Before Blink";
+              case 0xA34: return "VIC Split Screen Raster Value";
+              case 0xA35: return "Save .X During Bank Operations";
+              case 0xA36: return "Counter for PAL Systems (Jiffie adjustment)";
+              case 0xA37: return "Save System Speed During Tape and Serial Ops";
+              case 0xA38: return "Save Sprite Enables During Tape and Serial Ops";
+              case 0xA39: return "Save Blanking Status During Tape Ops";
+              case 0xA3A: return "Flag set by user to resrv full control of VIC";
+              case 0xA3B: return "Hi byte:SA Of VIC Scrn (Use W/VMI to move scrn)";
+              case 0xA3C: 
+              case 0xA3D: return "8563 Block Fill";
               case 0xA80: return "Compare Buffer (32 bytes)";
               case 0xAA0:
               case 0xAA1: return "MLM";
               case 0xAAB: return "ASM/DIS";
               case 0xAAC: return "For Assembler";
-              case 0xAAF: return "Byte Temp used all over";
+              case 0xAAF: 
               case 0xAB0: return "Byte Temp used all over";
               case 0xAB1: return "Byte Temp for Assembler";
               case 0xAB2: return "Save .X here during Indirect Subroutine Calls";
@@ -501,12 +515,12 @@ public class C128Dasm extends M6510Dasm {
               case 0xAB4: 
               case 0xAB5: return "Parse Number Conversion";
               case 0xAB7: return "Parse Number Conversion";
-              case 0xAC0: return "PAT Counter";
+              case 0xAC0: return "PAT Counter/Current Function Key ROM Bank Being Polled";
               case 0xAC1:
               case 0xAC2:
               case 0xAC3:
-              case 0xAC4: return "ROM Physical Address Table";
-              case 0xAC5: return "Flag: KBD";
+              case 0xAC4: return "ROM Physical Address Table (IDS OF LOGGED-IN CARDS)";
+              case 0xAC5: return "Flag: KBD/Reserved For Foreign Screen Editors";
               case 0x1131: return "Current X Position";
               case 0x1133: return "Current Y Position";
               case 0x1135: return "X-Coordinate Destination";
@@ -518,13 +532,21 @@ public class C128Dasm extends M6510Dasm {
               case 0x114E: return "Temps For Angle Distance Routines";
               case 0x1150: return "CIRCLE Center, X Coordinate, BOX POINT 1 X-Coord.";
               case 0x1152: return "CIRCLE Center, Y Coordinate, BOX POINT 1 Y-Coord.";
+              case 0x1153: return "String Len";
               case 0x1154: return "X Radius, BOX Rotation Angle";
+              case 0x1155: return "String Pos'n Counter";
               case 0x1156: return "Y Radius";
-              case 0x1158: return "CIRCLE Rotation Angle";
+              case 0x1157: return "New String or Bit Map Byte";
+              case 0x1158: return "CIRCLE Rotation Angle/Placeholder";
+              case 0x1159: return "SHAPE Column Length";
               case 0x115A: return "BOX: Length of a side";
-              case 0x115C: return "Arc Angle Start";              
+              case 0x115B: return "SHAPE Row Length";
+              case 0x115C: return "Arc Angle Start";  
+              case 0x115D: return "Temp For Column Length";
               case 0x115E: return "Arc Angle End, Char's Col. Counter";
+              case 0x115F: return "Save SHAPE String Descriptor";
               case 0x1160: return "X Radius * COS(Rotation Angle)";
+              case 0x1161: return "Bit Index Into Byte";
               case 0x1162: return "Y Radius * SIN(Rotation Angle)";
               case 0x1164: return "X Radius * SIN(Rotation Angle)";
               case 0x1166: return "Y Radius * COS(Rotation Angle)";
@@ -537,11 +559,11 @@ public class C128Dasm extends M6510Dasm {
               case 0x116F: return "Trace Mode: FF = on";
               case 0x1170:
               case 0x1171:
-              case 0x1172:
+              case 0x1172: 
               case 0x1173: return "Renumbering Pointers";
               case 0x1174:
               case 0x1175:
-              case 0x1176:
+              case 0x1176: return "Directory Work Pointers/Graphic Temp Storage"; 
               case 0x1177: return "Directory Work Pointers";  
               case 0x117A:
               case 0x117B: return "Float-fixed Vector [849F]";
@@ -649,11 +671,709 @@ public class C128Dasm extends M6510Dasm {
               case 0x12B0: return "Temp Waveform";
               case 0x12B1: 
               case 0x12B2: return "PEN/POT Work Values";
-              case 0x12B7:
+              case 0x12B7: 
               case 0x12FA: 
               case 0x12FB: return "Used BY SPRDEF & SAVSPR";
-              case 0x12FC: return "Sprite Number. Used BY SPRDEF & SAVSPR";
+              case 0x12FC: return "Sprite Number/Used BY SPRDEF & SAVSPR";
               case 0x12FD: return "Used by BASIC IRQ to block all but one IRQ call";
+              
+              case 0x4000:
+              case 0x4001:
+              case 0x4002: return "COLD ENTRY";
+              case 0x4003:
+              case 0x4004:
+              case 0x4005: return "WARM ENTRY";
+              case 0x4006:
+              case 0x4007:
+              case 0x4008: return "IRQ ENTRY";
+              case 0x4009: return "Basic Restart";
+              case 0x4023: return "Basic Cold Start";
+              case 0x4045: return "Set-Up Basic Constants";
+              case 0x4112: return "Chime";
+              case 0x417A: return "Set Preconfig Registers";
+              case 0x4189: return "Registers For $D501";
+              case 0x418D: return "Init Sprite Movement Tabs";
+              case 0x419B: return "Print Startup Message";
+              case 0x41BB: return "Startup Message";
+              case 0x4251: return "Set Basic Links";
+              case 0x4267: return "Basic Links for $0300";
+              case 0x4279: return "Chrget For $0380";
+              case 0x42CE: return "Get From ($50) Bank1";
+              case 0x42D3: return "Get From ($3f) Bank1";
+              case 0x42D8: return "Get From ($52) Bank1";
+              case 0x42DD: return "Get From ($5c) Bank0";
+              case 0x42E2: return "Get From ($5c) Bank1";
+              case 0x42E7: return "Get From ($66) Bank1";
+              case 0x42EC: return "Get From ($61) Bank0";
+              case 0x4271: return "Get From ($70) Bank0";
+              case 0x42F6: return "Get From ($70) Bank1";
+              case 0x42FB: return "Get From ($50) Bank1";
+              case 0x4300: return "Get From ($61) Bank1";
+              case 0x4305: return "Get From ($24) Bank0";
+              case 0x430A: return "Crunch Tokens";
+              case 0x43CC: return "Move Down Input Buffer";
+              case 0x43E2: return "Check Keyword Match";
+              case 0x4417: return "Keywords - Non prefixed";
+              case 0x4609: return "Keywords - Prefix FE";
+              case 0x46C9: return "Keywords - Prefix CE";
+              case 0x46FC: return "Action Vectors";
+              case 0x47D8: return "Function Vectors";
+              case 0x4828: return "Defunct Vectors";
+              case 0x4846: return "Unimplemented Commands";
+              case 0x484B: return "Error Messages";
+              case 0x4A82: return "Find Message";
+              case 0x4A9F: return "Start New Basic Code";
+              case 0x4B34: return "Update Continue Pointer";
+              case 0x4B3F: return "Execute/Trace Statement";
+              case 0x4BCB: return "Perform [stop]";
+              case 0x4BCD: return "Perform [end]";
+              case 0x4BF7: return "Setup FN Reference";
+              case 0x4C86: return "Evaluate <or>";
+              case 0x4C89: return "Evaluate <and>";
+              case 0x4CB6: return "Evaluate <compare>";
+              case 0x4D2A: return "Print 'ready'";
+              case 0x4D2D: return "'ready.'";
+              case 0x4D37: return "Error or Ready";
+              case 0x4DCA: return "Print 'out of memory'";
+              case 0x4D3C: return "Error";
+              case 0x4DAF: return "Break Entry";
+              case 0x4DC3: return "Ready For Basic";
+              case 0x4DE2: return "Handle New Line";
+              case 0x4FAF: return "Rechain Lines";
+              case 0x4F82: return "Reset End-of-Basic";
+              case 0x4F93: return "Receive Input Line";
+              case 0x4FAA: return "Search B-Stack For Match";
+              case 0x4FFE: return "Move B-Stack Down";
+              case 0x5017: return "Check Memory Space";
+              case 0x5047: return "Copy B-Stack Pointer";
+              case 0x5050: return "Set B-Stack Pointer";
+              case 0x5059: return "Move B-Stack Up";
+              case 0x5064: return "Find Basic Line";
+              case 0x50A0: return "Get Fixed Pt Number";
+              case 0x50E2: return "Perform [list]";
+              case 0x5123: return "List Subroutine";
+              case 0x51D6: return "Perform [new]";
+              case 0x51F3: return "Set Up Run";
+              case 0x51F8: return "Perform [clr]";
+              case 0x5238: return "Clear Stack & Work Area";
+              case 0x5250: return "Pudef Characters";
+              case 0x5254: return "Back Up Text Pointer";
+              case 0x5262: return "Perform [return]";
+              case 0x528F: return "Perform [data/bend]";
+              case 0x529D: return "Perform [rem]";
+              case 0x52A2: return "Scan To Next Statement";
+              case 0x52A5: return "Scan To Next Line";
+              case 0x52C5: return "Perform [if]";
+              case 0x5320: return "Search/Skip Begin/Bend";
+              case 0x537C: return "Skip String Constant";
+              case 0x5391: return "Perform [else]";
+              case 0x53A3: return "Perform [on]";
+              case 0x53C6: return "Perform [let]";
+              case 0x54F6: return "Check String Location";
+              case 0x553A: return "Perform [print#]";
+              case 0x5540: return "Perform [cmd]";
+              case 0x555A: return "Perform [print]";
+              case 0x5600: return "Print Format Char";
+              case 0x5607: return "-print '<cursor right>'-";
+              case 0x5604: return "-print space-";
+              case 0x560A: return "-print '?'-";
+              case 0x5612: return "Perform [get]";                           
+              case 0x5635: return "Getkey";
+              case 0x5648: return "Perform [input#]";
+              case 0x5662: return "Perform [input]";
+              case 0x569C: return "Prompt & Input";
+              case 0x56A9: return "Perform [read]";
+              case 0x57F4: return "Perform [next]";
+              case 0x587B: return "Perform [dim]";
+              case 0x5885: return "Perform [sys]";
+              case 0x58B4: return "Perform [tron]";
+              case 0x58B7: return "Perform [troff]";
+              case 0x58BD: return "Perform [rreg]";
+              case 0x5901: return "Assign <mid$>";
+              case 0x5975: return "Perform [auto]";
+              case 0x5986: return "Perform [help]";
+              case 0x59AC: return "Insert Help Marker";
+              case 0x59CF: return "Perform [gosub]";
+              case 0x59DB: return "Perform [goto]";
+              case 0x5A15: return "Undef'd Statement";
+              case 0x5A1D: return "Put Sub To B-Stack";
+              case 0x5A3D: return "Perform [go]";
+              case 0x5A60: return "Perform [cont]";
+              case 0x5A9B: return "Perform [run]";
+              case 0x5ACA: return "Perform [restore]";
+              case 0x5AF0: return "Keywords To Renumber";
+              case 0x5AF8: return "Perform [renumber]";
+              case 0x5BAE: return "Renumber-Continued";
+              case 0x5BFB: return "Renumber Scan";
+              case 0x5D19: return "Convert Line Number";
+              case 0x5D68: return "Get Renumber Start";
+              case 0x5D75: return "Count Off Lines";
+              case 0x5D89: return "Add Renumber Inc";
+              case 0x5D99: return "Scan Ahead";
+              case 0x5DA7: return "Set Up Block Move";
+              case 0x5DC6: return "Block Move Down";
+              case 0x5DDF: return "Block Move Up";
+              case 0x5DEE: return "Check Block Limit";
+              case 0x5DF9: return "Perform [for]";
+              case 0x5E87: return "Perform [delete]";
+              case 0x5EFB: return "Get Line Number Range";
+              case 0x5F34: return "Perform [pudef]";
+              case 0x5F4D: return "Perform [trap]";
+              case 0x5F62: return "Perform [resume]";
+              case 0x5FB7: return "Reinstate Trap Point";
+              case 0x5FD8: return "Syntax Exit";
+              case 0x5FDB: return "Print 'can't resume'";
+              case 0x5FE0: return "Perform [do]";
+              case 0x6039: return "Perform [exit]";
+              case 0x608A: return "Perform [loop]";
+              case 0x60B4: return "Print 'loop not found'";
+              case 0x60B7: return "Print 'loop without do'";
+              case 0x60DB: return "Eval While/Until Argument";
+              case 0x60E1: return "Define Programmed Key";
+              case 0x610A: return "Perform [key]";
+              case 0x619D: return "'+chr$('";
+              case 0x61A8: return "Perform [paint]";
+              case 0x627C: return "Check Painting Split";
+              case 0x62B7: return "Perform [box]";
+              case 0x63F5: return "Authors";
+              case 0x642B: return "Perform [sshape]";
+              case 0x658D: return "Perform [gshape]";
+              case 0x668E: return "Perform [circle]";
+              case 0x6750: return "Draw Circle";
+              case 0x6797: return "Perform [draw]";
+              case 0x67D7: return "Perform [char]";
+              case 0x6955: return "Perform [locate]";
+              case 0x6960: return "Perform [scale]";
+              case 0x69D8: return "Scale Factor Constants";
+              case 0x608A: return "";
+              
+              case 0xAF00:
+              case 0xAF01:
+              case 0xAF02: return "Convert F.P. to Integer";
+              case 0xAF03:
+              case 0xAF04:
+              case 0xAF05: return "Convert Integer to F.P.";
+              case 0xAF06:
+              case 0xAF07:
+              case 0xAF08: return "Convert F.P. to ASCII String";
+              case 0xAF09:
+              case 0xAF0A:
+              case 0xAF0B: return "Convert ASCII String to F.P.";     
+              case 0xAF0C:
+              case 0xAF0D:
+              case 0xAF0E: return "Convert F.P. to an Address";   
+              case 0xAF0F:
+              case 0xAF10:
+              case 0xAF11: return "Convert Address to F.P.";   
+              case 0xAF12:
+              case 0xAF13:
+              case 0xAF14: return "MEM - FACC";
+              case 0xAF15:
+              case 0xAF16:
+              case 0xAF17: return "ARG - FACC";
+              case 0xAF18:
+              case 0xAF19:
+              case 0xAF1A: return "MEM + FACC";              
+              case 0xAF1B:
+              case 0xAF1C:
+              case 0xAF1D: return "ARG - FACC";
+              case 0xAF1E:
+              case 0xAF1F:
+              case 0xAF20: return "MEM * FACC";
+              case 0xAF21:
+              case 0xAF22: 
+              case 0xAF23: return "ARG * FACC";
+              case 0xAF24:
+              case 0xAF25:
+              case 0xAF26: return "MEM / FACC";
+              case 0xAF27:
+              case 0xAF28:
+              case 0xAF29: return "ARG / FACC";
+              case 0xAF2A: 
+              case 0xAF2B:
+              case 0xAF2C: return "Compute Natural LOG Of FACC";   
+              case 0xAF2D:
+              case 0xAF2E:     
+              case 0xAF2F: return "Perform BASIC INT On FACC";     
+              case 0xAF30:
+              case 0xAF31:     
+              case 0xAF32: return "Compute Square Root OF FACC";
+              case 0xAF33:
+              case 0xAF34:     
+              case 0xAF35: return "Negate FACC";
+              case 0xAF36:
+              case 0xAF37:     
+              case 0xAF38: return "Raise ARG to The Mem Power";   
+              case 0xAF39:
+              case 0xAF3A:     
+              case 0xAF3B: return "Raise ARG to The FACC Power"; 
+              case 0xAF3C:
+              case 0xAF3D:     
+              case 0xAF3E: return "Compute EXP Of FACC"; 
+              case 0xAF3F:
+              case 0xAF40:     
+              case 0xAF41: return "Compute COS Of FACC";   
+              case 0xAF42:
+              case 0xAF43:     
+              case 0xAF44: return "Compute SIN Of FACC";
+              case 0xAF45:
+              case 0xAF46:     
+              case 0xAF47: return "Compute TAN Of FACC";
+              case 0xAF48:
+              case 0xAF49:     
+              case 0xAF4A: return "Compute ATN Of FACC";
+              case 0xAF4B:
+              case 0xAF4C:     
+              case 0xAF4D: return "Round FACC";   
+              case 0xAF4E:
+              case 0xAF4F:     
+              case 0xAF50: return "Absolute Value Of FACC";
+              case 0xAF51:
+              case 0xAF52:     
+              case 0xAF53: return "Test Sign Of FACC";              
+              case 0xAF54:
+              case 0xAF55:     
+              case 0xAF56: return "Compare FACC With Memory";
+              case 0xAF57:
+              case 0xAF58:     
+              case 0xAF59: return "Generate Random F.P. Number";     
+              case 0xAF5A:
+              case 0xAF5B:     
+              case 0xAF5C: return "Move RAM MEM to ARG";      
+              case 0xAF5D:
+              case 0xAF5E:     
+              case 0xAF5F: return "Move ROM MEM to ARG"; 
+              case 0xAF60:
+              case 0xAF61:     
+              case 0xAF62: return "Move RAM MEM to FACC"; 
+              case 0xAF63:
+              case 0xAF64:     
+              case 0xAF65: return "Move ROM MEM to FACC";               
+              case 0xAF66:
+              case 0xAF67:     
+              case 0xAF68: return "Move FACC to MEM";               
+              case 0xAF69:
+              case 0xAF6A:     
+              case 0xAF6B: return "Move ARG to FACC";    
+              case 0xAF6C:
+              case 0xAF6D:     
+              case 0xAF6E: return "Move FACC to ARG";
+              
+              case 0xB000:
+              case 0xB001:     
+              case 0xB002: return "MONITOR Call Entry";
+              case 0xB003:
+              case 0xB004:     
+              case 0xB005: return "MONITOR Break Entry";
+              case 0xB006:
+              case 0xB007:     
+              case 0xB008: return "MONITOR Command Parser Entry";
+              
+              case 0xC000:
+              case 0xC001:     
+              case 0xC002: return "Initialize Editor & Screen";              
+              case 0xC003:
+              case 0xC004:     
+              case 0xC005: return "Display Charac in .A, Color";        
+              case 0xC006:
+              case 0xC007:     
+              case 0xC008: return "Get Key From IRQ Buffer";
+              case 0xC009:
+              case 0xC00A:     
+              case 0xC00B: return "Into A";
+              case 0xC00C:
+              case 0xC00D:     
+              case 0xC00E: return "Print Character In .A";
+              case 0xC00F:
+              case 0xC010:     
+              case 0xC011: return "Get # of Scrn Rows, Cols Into X & Y";    
+              case 0xC012:
+              case 0xC013:     
+              case 0xC014: return "Scan Keyboard Subroutine"; 
+              case 0xC015:
+              case 0xC016:     
+              case 0xC017: return "Handle Repeat Key & Store Decoded Key"; 
+              case 0xC018:
+              case 0xC019:     
+              case 0xC01A: return "Read Or Set CRSR Position In X, Y"; 
+              case 0xC01B:
+              case 0xC01C:     
+              case 0xC01D: return "Move 8563 Cursor Subroutine";
+              case 0xC01E:
+              case 0xC01F:     
+              case 0xC020: return "Execute ESC Function using chr in .A";
+              case 0xC021:
+              case 0xC022:     
+              case 0xC023: return "Redefine A Programmable Func'n Key";     
+              case 0xC024:
+              case 0xC025:     
+              case 0xC026: return "IRQ Entry";   
+              case 0xC027:
+              case 0xC028:     
+              case 0xC029: return "Initialize 80-Column Character Set";   
+              case 0xC02A:
+              case 0xC02B:     
+              case 0xC02C: return "Swap Editor Locals (in 40/80 change)";
+              case 0xC02D:
+              case 0xC02E:     
+              case 0xC02F: return "Set Top-Left or Bot-Right of Window";
+              
+              case 0xD000: return "Position X sprite 0";
+              case 0xD001: return "Position Y sprite 0";
+              case 0xD002: return "Position X sprite 1";
+              case 0xD003: return "Position Y sprite 1";
+              case 0xD004: return "Position X sprite 2";
+              case 0xD005: return "Position Y sprite 2";
+              case 0xD006: return "Position X sprite 3";
+              case 0xD007: return "Position Y sprite 3";
+              case 0xD008: return "Position X sprite 4";
+              case 0xD009: return "Position Y sprite 4";
+              case 0xD00A: return "Position X sprite 5";
+              case 0xD00B: return "Position Y sprite 5";
+              case 0xD00C: return "Position X sprite 6";
+              case 0xD00D: return "Position Y sprite 6";
+              case 0xD00E: return "Position X sprite 7";
+              case 0xD00F: return "Position Y sprite 7";
+              case 0xD010: return "Position X MSB sprites 0..7";
+              case 0xD011: return "VIC control register";
+              case 0xD012: return "Reading/Writing IRQ balance value";
+              case 0xD013: return "Positin X of optic pencil \"latch\"";
+              case 0xD014: return "Positin Y of optic pencil \"latch\"";
+              case 0xD015: return "Sprites Abilitator";
+              case 0xD016: return "VIC control register";
+              case 0xD017: return "(2X) vertical expansion (Y) sprite 0..7";
+              case 0xD018: return "VIC memory control register";
+              case 0xD019: return "Interrupt indicator register";
+              case 0xD01A: return "IRQ mask register";
+              case 0xD01B: return "Sprite-background screen priority";
+              case 0xD01C: return "Set multicolor mode for sprite 0..7";
+              case 0xD01D: return "(2X) horizontal expansion (X) sprite 0..7";
+              case 0xD01E: return "Animations contact";
+              case 0xD01F: return "Animation/background contact";
+              case 0xD020: return "Border color";
+              case 0xD021: return "Background 0 color";
+              case 0xD022: return "Background 1 color";
+              case 0xD023: return "Background 2 color";
+              case 0xD024: return "Background 3 color";
+              case 0xD025: return "Multicolor animation 0 register";
+              case 0xD026: return "Multicolor animation 1 register";
+              case 0xD027: return "Color sprite 0";
+              case 0xD028: return "Color sprite 1";
+              case 0xD029: return "Color sprite 2";
+              case 0xD02A: return "Color sprite 3";
+              case 0xD02B: return "Color sprite 4";
+              case 0xD02C: return "Color sprite 5";
+              case 0xD02D: return "Color sprite 6";
+              case 0xD02E: return "Color sprite 7";
+
+              case 0xD400: return "Voice 1: Frequency control (lo byte)";
+              case 0xD401: return "Voice 1: Frequency control (hi byte)";
+              case 0xD402: return "Voice 1: Wave form pulsation amplitude (lo byte)";
+              case 0xD403: return "Voice 1: Wave form pulsation amplitude (hi byte)";
+              case 0xD404: return "Voice 1: Control registers";
+              case 0xD405: return "Generator 1: Attack/Decay";
+              case 0xD406: return "Generator 1: Sustain/Release";
+              case 0xD407: return "Voice 2: Frequency control (lo byte)";
+              case 0xD408: return "Voice 2: Frequency control (hi byte)";
+              case 0xD409: return "Voice 2: Wave form pulsation amplitude (lo byte)";
+              case 0xD40A: return "Voice 2: Wave form pulsation amplitude (hi byte)";
+              case 0xD40B: return "Voice 2: Control registers";
+              case 0xD40C: return "Generator 2: Attack/Decay";
+              case 0xD40D: return "Generator 2: Sustain/Release";
+              case 0xD40E: return "Voice 3: Frequency control (lo byte)";
+              case 0xD40F: return "Voice 3: Frequency control (hi byte)";
+              case 0xD410: return "Voice 3: Wave form pulsation amplitude (lo byte)";
+              case 0xD411: return "Voice 3: Wave form pulsation amplitude (hi byte)";
+              case 0xD412: return "Voice 3: Control registers";
+              case 0xD413: return "Generator 3: Attack/Decay";
+              case 0xD414: return "Generator 3: Sustain/Release";
+              case 0xD415: return "Filter cut frequency: lo byte (bit 2-0)";
+              case 0xD416: return "Filter cut frequency: hi byte";
+              case 0xD417: return "Filter resonance control/voice input control";
+              case 0xD418: return "Select volume and filter mode";
+              case 0xD419: return "Analog/digital converter: Paddle 1";
+              case 0xD41A: return "Analog/digital converter: Paddle 2";
+              case 0xD41B: return "Random numbers generator oscillator 3";
+              case 0xD41C: return "Generator output";
+              
+              case 0xD500: return "Configuration Register (CR)";
+              case 0xD501: return "Preconfiguration Registers";
+              case 0xD505: return "Modality register";
+              case 0xD506: return "RAM Configuration Register (RCR)";
+              case 0xD507: return "Zero Page Pointer Lo";
+              case 0xD508: return "Zero Page Pointer Hi";
+              case 0xD509: return "Stack Page Pointer Lo";
+              case 0xD50A: return "Stack Page Pointer Hi";
+              case 0xD50B: return "MMU Version Register";
+              
+              case 0xD600: return "VDC 8563: Horizontal Total";
+              case 0xD601: return "VDC 8563: Horizontal Displayed";
+              case 0xD602: return "VDC 8563: Horizontal Sync Position";
+              case 0xD603: return "VDC 8563: Vert/Horiz. Sync Width";
+              case 0xD604: return "VDC 8563: Vertical Total";
+              case 0xD605: return "VDC 8563: Vertical Total Fine Adju";
+              case 0xD606: return "VDC 8563: Vertical Displayed";
+              case 0xD607: return "VDC 8563: Vertical Sync Position";
+              case 0xD608: return "VDC 8563: Interlace Mode";
+              case 0xD609: return "VDC 8563: Character Total Vertical";
+              case 0xD60A: return "VDC 8563: Cursor Mode/ Start Scan";
+              case 0xD60B: return "VDC 8563: Cursor End Scan";
+              case 0xD60C: return "VDC 8563: Display Start Adrs (Hi)";
+              case 0xD60D: return "VDC 8563: Display Start Adrs (Lo)";
+              case 0xD60E: return "VDC 8563: Cursor Position (Hi)";
+              case 0xD60F: return "VDC 8563: Cursor Position (Lo)";
+              case 0xD610: return "VDC 8563: Light Pen Veritcal";
+              case 0xD611: return "VDC 8563: Light Pen Horizontal";
+              case 0xD612: return "VDC 8563: Update Address (Hi)";
+              case 0xD613: return "VDC 8563: Update Address (Lo)";
+              case 0xD614: return "VDC 8563: Attribute Start Adrs (Hi)";
+              case 0xD615: return "VDC 8563: Attribute Start Adrs (Lo)";
+              case 0xD616: return "VDC 8563: Hz Chr Pxl Ttl/IChar Spc ";
+              case 0xD617: return "VDC 8563: Vert. Character Pxl Spc";
+              case 0xD618: return "VDC 8563: Block/Rvs Scr/V. Scroll";
+              case 0xD619: return "VDC 8563: Diff. Mode Sw/H. Scroll";
+              case 0xD61A: return "VDC 8563: ForeGround/BackGround Col";
+              case 0xD61B: return "VDC 8563: Row/Adrs. Incremen";
+              case 0xD61C: return "VDC 8563: Character Set Addrs/Ram";
+              case 0xD61D: return "VDC 8563: Underline Scan Line";
+              case 0xD61E: return "VDC 8563: Word Count (-1)";
+              case 0xD61F: return "VDC 8563: Data";
+              case 0xD620: return "VDC 8563: Block Copy Source (hi)";
+              case 0xD621: return "VDC 8563: Block Copy Source (lo)";
+              case 0xD622: return "VDC 8563: Display Enable Begin";
+              case 0xD623: return "VDC 8563: Display Enable End";
+              case 0xD624: return "VDC 8563: DRAM Refresh Rate";
+              
+              case 0xDC00: return "Data port A #1: keyboard, joystick, paddle, optical pencil";
+              case 0xDC01: return "Data port B #1: keyboard, joystick, paddle";
+              case 0xDC02: return "Data direction register port A #1";
+              case 0xDC03: return "Data direction register port B #1";
+              case 0xDC04: return "Timer A #1: Lo Byte";
+              case 0xDC05: return "Timer A #1: Hi Byte";
+              case 0xDC06: return "Timer B #1: Lo Byte";
+              case 0xDC07: return "Timer B #1: Hi Byte";
+              case 0xDC08: return "Day time clock #1: 1/10 second";
+              case 0xDC09: return "Day time clock #1: Second";
+              case 0xDC0A: return "Day time clock #1: Minutes";
+              case 0xDC0B: return "Day time clock #1: Hour+[indicator AM/PM]";
+              case 0xDC0C: return "Serial I/O data buffer synchronous #1";
+              case 0xDC0D: return "Interrupt control register CIA #1";
+              case 0xDC0E: return "Control register A of CIA #1";
+              case 0xDC0F: return "Control register B of CIA #1";
+
+              case 0xDD00: return "Data port A #2: serial bus, RS-232, VIC memory";
+              case 0xDD01: return "Data port B #2: user port, RS-232";
+              case 0xDD02: return "Data direction register port A #2";
+              case 0xDD03: return "Data direction register port A #2";
+              case 0xDD04: return "Timer A #2: Lo Byte";
+              case 0xDD05: return "Timer A #2: Hi Byte";
+              case 0xDD06: return "Timer B #2: Lo Byte";
+              case 0xDD07: return "Timer B #2: HI Byte";
+              case 0xDD08: return "Day time clock #2: 1/10 second";
+              case 0xDD09: return "Day time clock #2: seconds";
+              case 0xDD0A: return "Day time clock #2: minutes";
+              case 0xDD0B: return "Day time clock #2: Hour+[indicator AM/PM]";
+              case 0xDD0C: return "Serial I/O data buffer synchronous #2";
+              case 0xDD0D: return "Interrupt control register CIA #2";
+              case 0xDD0E: return "Control register A of CIA #2";
+              case 0xDD0F: return "Control register B of CIA #2";
+              
+              case 0xDF00: return "8726 DMA Controller: STATUS";
+              case 0xDF01: return "8726 DMA Controller: COMMAND";
+              case 0xDF02: return "8726 DMA Controller: HOST ADDRESS LOW";
+              case 0xDF03: return "8726 DMA Controller: HOST ADDRESS HIGH";
+              case 0xDF04: return "8726 DMA Controller: EXPANSION ADDRESS LOW";
+              case 0xDF05: return "8726 DMA Controller: EXPANSION ADDRESS HIGH";
+              case 0xDF06: return "8726 DMA Controller: EXPANSION BANK";
+              case 0xDF07: return "8726 DMA Controller: TRANSFER LENGTH LOW";
+              case 0xDF08: return "8726 DMA Controller: TRANSFER LENGTH HIGH";
+              case 0xDF09: return "8726 DMA Controller: INTERRUPT MASK REGISTER";
+              case 0xDF0A: return "8726 DMA Controller: VERSION, MAXIMUM MEMORY";
+              
+              case 0xFF47:
+              case 0xFF48:     
+              case 0xFF49: return "Set up Fast Serial Port for I/O";
+              case 0xFF4A:
+              case 0xFF4B:     
+              case 0xFF4C: return "Close All Logical Files for a device";  
+              case 0xFF4D:
+              case 0xFF4E:     
+              case 0xFF4F: return "Reconfigure System as a C64 (no return)";
+              case 0xFF50:
+              case 0xFF51:     
+              case 0xFF52: return "Initiate DMA Request to External RAM";
+              case 0xFF53:
+              case 0xFF54:     
+              case 0xFF55: return "Boot Load Program From Disk";
+              case 0xFF56:
+              case 0xFF57:     
+              case 0xFF58: return "Call All Function Cards' Cold Start";
+              case 0xFF59:
+              case 0xFF5A:     
+              case 0xFF5B: return "Search Tables For Given LA";
+              case 0xFF5C:
+              case 0xFF5D:     
+              case 0xFF5E: return "Search Tables For Given SA";
+              case 0xFF5F:
+              case 0xFF60:     
+              case 0xFF61: return "Switch Between 40 and 80 Columns (Editor)";
+              case 0xFF62:
+              case 0xFF63:     
+              case 0xFF64: return "Init 80-Col Character RAM (Editor)";
+              case 0xFF65:
+              case 0xFF66:     
+              case 0xFF67: return "Program Function Key (Editor)";
+              case 0xFF68:
+              case 0xFF69:     
+              case 0xFF6A: return "SET Bank For I/O Operations";
+              case 0xFF6B:
+              case 0xFF6C:     
+              case 0xFF6D: return "Lookup MMU Data For Given Bank";
+              case 0xFF6E:
+              case 0xFF6F:     
+              case 0xFF70: return "JSR to Any Bank, RTS to Calling Bank";
+              case 0xFF71:
+              case 0xFF72:     
+              case 0xFF73: return "JMP to Any Bank";
+              case 0xFF74:
+              case 0xFF75:     
+              case 0xFF76: return "LDA (FETVEC),Y FROM Any Bank";
+              case 0xFF77:
+              case 0xFF78:     
+              case 0xFF79: return "STA (STAVEC),Y to Any Bank";
+              case 0xFF7A:
+              case 0xFF7B:     
+              case 0xFF7C: return "CMP (CMPVEC),Y to Any Bank";
+              case 0xFF7D:
+              case 0xFF7E:     
+              case 0xFF7F: return "Print Immediate Utility";
+              case 0xFF80: return "Release Number Of KERNAL";
+              case 0xFF81:     
+              case 0xFF82: 
+              case 0xFF83: return "Init Editor & Display";
+              case 0xFF84:     
+              case 0xFF85: 
+              case 0xFF86: return "Init I/O Devices (ports, timers, etc.)";
+              case 0xFF87:     
+              case 0xFF88: 
+              case 0xFF89: return "Initialize RAM And Buffers For System";
+              case 0xFF8A:     
+              case 0xFF8B: 
+              case 0xFF8C: return "Restore Vectors to Initial System";
+              case 0xFF8D:     
+              case 0xFF8E: 
+              case 0xFF8F: return "Change Vectors For USER";
+              case 0xFF90:     
+              case 0xFF91: 
+              case 0xFF92: return "Control O.S. Message";
+              case 0xFF93:     
+              case 0xFF94: 
+              case 0xFF95: return "Send SA After LISTEN";
+              case 0xFF96:     
+              case 0xFF97: 
+              case 0xFF98: return "Send SA After TALK";
+              case 0xFF99:     
+              case 0xFF9A: 
+              case 0xFF9B: return "Set/Read Top Of System RAM";
+              case 0xFF9C:     
+              case 0xFF9D: 
+              case 0xFF9E: return "Set/Read Bottom Of System RAM";
+              case 0xFF9F:     
+              case 0xFFA0: 
+              case 0xFFA1: return "Scan Keyboard (Editor)";
+              case 0xFFA2:     
+              case 0xFFA3: 
+              case 0xFFA4: return "Set Timeout In IEEE (reserved)";
+              case 0xFFA5:     
+              case 0xFFA6: 
+              case 0xFFA7: return "Handshake Serial Byte In";
+              case 0xFFA8:     
+              case 0xFFA9: 
+              case 0xFFAA: return "Handshake Serial Byte Out";
+              case 0xFFAB:     
+              case 0xFFAC: 
+              case 0xFFAD: return "Send UNTALK Out Serial";
+              case 0xFFAE:     
+              case 0xFFAF: 
+              case 0xFFB0: return "Send UNLISTEN Out Serial";
+              case 0xFFB1:     
+              case 0xFFB2: 
+              case 0xFFB3: return "Send LISTEN Out Serial";
+              case 0xFFB4:     
+              case 0xFFB5: 
+              case 0xFFB6: return "Send TALK Out Serial";
+              case 0xFFB7:     
+              case 0xFFB8: 
+              case 0xFFB9: return "Return I/O Status Byte";
+              case 0xFFBA:     
+              case 0xFFBB: 
+              case 0xFFBC: return "Set LA, FA, SA";
+              case 0xFFBD:     
+              case 0xFFBE: 
+              case 0xFFBF: return "Set Length And File Name Address";
+              case 0xFFC0:     
+              case 0xFFC1: 
+              case 0xFFC2: return "OPEN Logical File";
+              case 0xFFC3:     
+              case 0xFFC4: 
+              case 0xFFC5: return "CLOSE Logical File";
+              case 0xFFC6:     
+              case 0xFFC7: 
+              case 0xFFC8: return "Set Channel In";
+              case 0xFFC9:     
+              case 0xFFCA: 
+              case 0xFFCB: return "Set Channel Out";
+              case 0xFFCC:     
+              case 0xFFCD: 
+              case 0xFFCE: return "Restore Default I/O Channel";
+              case 0xFFCF:     
+              case 0xFFD0: 
+              case 0xFFD1: return "INPUT From Channel";
+              case 0xFFD2:     
+              case 0xFFD3: 
+              case 0xFFD4: return "OUTPUT To Channel";
+              case 0xFFD5:     
+              case 0xFFD6: 
+              case 0xFFD7: return "LOAD From File";
+              case 0xFFD8:     
+              case 0xFFD9: 
+              case 0xFFDA: return "SAVE to File";
+              case 0xFFDB:     
+              case 0xFFDC: 
+              case 0xFFDD: return "Set Internal Clock";
+              case 0xFFDE:     
+              case 0xFFDF: 
+              case 0xFFE0: return "Read Internal Clock";
+              case 0xFFE1:     
+              case 0xFFE2: 
+              case 0xFFE3: return "Scan STOP Key";
+              case 0xFFE4:     
+              case 0xFFE5: 
+              case 0xFFE6: return "Read Buffered Data";
+              case 0xFFE7:     
+              case 0xFFE8: 
+              case 0xFFE9: return "Close All Files And Channels";
+              case 0xFFEA:     
+              case 0xFFEB: 
+              case 0xFFEC: return "Increment Internal Clock";
+              case 0xFFED:     
+              case 0xFFEE: 
+              case 0xFFEF: return "Return Screen Window Size (Editor)";
+              case 0xFFF0:     
+              case 0xFFF1: 
+              case 0xFFF2: return "Read/Set X,Y Cursor Coord (Editor)";
+              case 0xFFF3:     
+              case 0xFFF4: 
+              case 0xFFF5: return "Return I/O Base";
+              case 0xFFF8: 
+              case 0xFFF9: return "Operating System Vector (RAM1)";    
+              case 0xFFFA: 
+              case 0xFFFB: return "Processor NMI Vector";
+              case 0xFFFC:     
+              case 0xFFFD: return "Processor RESET Vector";
+              case 0xFFFE: 
+              case 0xFFFF: return "Processor IRQ/BRK Vector";
+              
               
               default:  
                 if ((addr>=0x19) && (addr<=0x23)) return "Stack for temporary strings";
@@ -701,11 +1421,12 @@ public class C128Dasm extends M6510Dasm {
                 if ((addr>=0x125D) && (addr<=0x1266)) return "Pulse Width Lo Pattern";
                 if ((addr>=0x1267) && (addr<=0x1270)) return "Pulse Width Hi Pattern";
                 if ((addr>=0x1279) && (addr<=0x127E)) return "Collision IRQ Address Tables";
-                if ((addr>=0x1800) && (addr<=0x1BFF)) return "Reserved for Key Functions";
+                if ((addr>=0x1300) && (addr<=0x17FF)) return "Application Program Area";
+                if ((addr>=0x1800) && (addr<=0x1BFF)) return "Application Program Area/Reserved for Key Functions";
                 if ((addr>=0x1C00) && (addr<=0x1FF7)) return "Video Color Matrix For Graphics Mode";
                 if ((addr>=0x1FF8) && (addr<=0x1FFF)) return "Sprite Identity Pointers For Graphics Mode";
                 if ((addr>=0x2000) && (addr<=0x3FFF)) return "Screen Memory For Graphics Mode";
-                if ((addr>=0x4000) && (addr<=0xCFFF)) return "BASIC ROM";
+                if ((addr>=0xD800) && (addr<=0xDBFF)) return "Color RAM (Nybbles)";
             }      
       }
     }  
