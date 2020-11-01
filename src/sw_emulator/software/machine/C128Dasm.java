@@ -845,7 +845,7 @@ public class C128Dasm extends M6510Dasm {
               case 0x6955: return "Perform [locate]";
               case 0x6960: return "Perform [scale]";
               case 0x69D8: return "Scale Factor Constants";
-              case 0x608A: return "";
+             // case 0x608A: return "";
               
               case 0xAF00:
               case 0xAF01:

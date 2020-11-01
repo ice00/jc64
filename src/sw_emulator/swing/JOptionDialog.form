@@ -14,6 +14,30 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupTheme">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmLabel">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmByte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxLabel">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxByte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupCa65Label">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupCa65Byte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxWord">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupC65Word">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupAcmeLabel">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupAcmeByte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmWord">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupAcmeWord">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -1669,10 +1693,62 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxDasmF3Comp" min="-2" pref="332" max="-2" attributes="0"/>
-                                  <EmptySpace pref="443" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jCheckBoxDasmF3Comp" alignment="0" min="-2" pref="332" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jLabelDasmLabelDeclaration" pref="133" max="32767" attributes="0"/>
+                                              <Component id="jLabelDasmByteDeclaration" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonDasmLabelName" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmLabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonDasmLabelNameColon" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmLabelNameColon" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonDasmDotByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmDotByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonDasmByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonDasmDcByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmDcByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonDasmDcBByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmDCBByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelDasmByteDeclaration1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDotWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmDotWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcWWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmDcWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="106" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1681,7 +1757,43 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxDasmF3Comp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="319" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonDasmLabelName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelDasmLabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelNameColon" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="jLabelDasmByteDeclaration" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotByte" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jRadioButtonDasmDcBByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDCBByte" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPaneDasmDcWord" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelDasmByteDeclaration1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcWWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotWord" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmWord" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="194" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1695,6 +1807,270 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxDasmF3CompActionPerformed"/>
                           </Events>
                         </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Byte declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmByte"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmLabelDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Label declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmLabelName">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmLabel"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmLabelNameColon">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmLabel"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcBByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmByteDeclaration1">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmWord"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmWord"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcWWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmWord"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                              <AccessibilityProperties>
+                                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+                              </AccessibilityProperties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; dc&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDCBByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcBByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; dc.b&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc.b&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc.b&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; dc.b&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; dc.w&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmLabelName">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelNameColon">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmLabelNameColon">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelTMPx">
@@ -1709,17 +2085,169 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="791" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelTmpxLabelDeclaration" pref="132" max="32767" attributes="0"/>
+                                              <Component id="jLabelTmpxByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonTmpxLabelName" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneTmpxByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jRadioButtonTmpxDotByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPaneTmpxDotWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                                      <Component id="jScrollPaneTmpxWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace pref="515" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelTmpxWordDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTmpxDotWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="352" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonTmpxLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxLabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelTmpxByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxWordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelTmpxLabelDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Label declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxLabelName">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxLabel"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxLabelName">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&#xa;    &lt;/p&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTmpxByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Byte declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTmpxWordDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxWord"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPanelCA64">
+                    <Container class="javax.swing.JPanel" name="jPanelCa65">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="CA65">
@@ -1731,15 +2259,236 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="791" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelCa65LabelDeclaration" max="32767" attributes="0"/>
+                                              <Component id="jLabelC65ByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonCa65LabelName" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneCa65LabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonC65DotByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneC65DotByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonC65Byte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneC65BytByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace pref="384" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelC65WordDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonC65DotWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneCa65DotWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonC65Word" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneC65Word" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="352" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelCa65LabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="jRadioButtonC65Byte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelC65ByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonC65DotByte" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jScrollPaneC65DotByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneC65BytByte" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonC65DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelC65WordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonC65Word" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneC65Word" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelCa65LabelDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Label declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonCa65LabelName">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65Label"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65LabelName">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneCa65LabelName">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelC65ByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Byte declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonC65DotByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65Byte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneC65DotByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneCa65DotByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonC65Byte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65Byte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneC65BytByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneC65BytByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byt&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byt&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byt&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byt&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelC65WordDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonC65DotWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupC65Word"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65DotWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneC65DotWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneC65Word">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneC65Word">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .dbyte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonC65Word">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupC65Word"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelAcme">
                       <Constraints>
@@ -1753,15 +2502,273 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="791" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelAcmeLabelDeclaration" pref="132" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonAcmeLabelName" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneAcmeLabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonAcmeLabelNameColon" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneAcmeLabelNameColon" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonAcmeMarkByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneAcmeMarkByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonAcmeMark8Byte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneAcmeMark8Byte" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelAcmeWordByteDeclaration" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMarkWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMarkByte1" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMark16Work" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMark8Byte1" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="381" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="352" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAcmeLabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="jRadioButtonAcmeMark8Byte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelAcmeByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jScrollPaneAcmeMarkByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="jRadioButtonAcmeMark16Work" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelAcmeWordByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jScrollPaneAcmeMark8Byte1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkByte1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelAcmeLabelDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Label declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeLabelName">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeLabel"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeLabelName">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeLabelName">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeLabelNameColon">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeLabel"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeLabelNameColon">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeLabelNameColon">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelAcmeByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Byte declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkByte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMark8Byte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeByte"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMark8Byte">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMark8Byte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt; !8&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !8&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !8&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; !8&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelAcmeWordByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeWord"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkByte1">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkWork">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMark16Work">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeWord"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMark8Byte1">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMark16Work">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt; !16&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelKickAssembler">
                       <Constraints>
@@ -1775,15 +2782,168 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="791" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelKickByteDeclaration" max="32767" attributes="0"/>
+                                              <Component id="jLabelKickLabelDeclaration" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonKickDotByte" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jRadioButtonKickLabelName" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickLabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="613" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelKickWordDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonKickDotWord" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxDotWord1" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="352" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelKickLabelDeclaration" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelKickByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonKickDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelKickWordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotWord1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelKickLabelDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Label declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickLabelName">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65Label"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickLabelName">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickCa65LabelName">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelKickByteDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Byte declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotByte">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxByte"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickWord">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickDotByte">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelKickWordDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word declaration:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotWord">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxWord"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotWord1">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickDotWord">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
