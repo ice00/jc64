@@ -1662,17 +1662,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBoxAssembler">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Dasm"/>
-                        <StringItem index="1" value="TMPx"/>
-                        <StringItem index="2" value="CA65"/>
-                        <StringItem index="3" value="ACME"/>
-                        <StringItem index="4" value="KickAssembler"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxAssemblerItemStateChanged"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -2088,36 +2080,29 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelTmpxLabelDeclaration" pref="132" max="32767" attributes="0"/>
-                                              <Component id="jLabelTmpxByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                      <Component id="jLabelTmpxWordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxLabelDeclaration" pref="131" max="32767" attributes="0"/>
+                                      <Component id="jLabelTmpxByteDeclaration" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonTmpxLabelName" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jRadioButtonTmpxLabelName" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxByte" min="-2" pref="93" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jRadioButtonTmpxDotByte" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jScrollPaneTmpxDotWord" min="-2" pref="93" max="-2" attributes="0"/>
-                                                      <Component id="jScrollPaneTmpxWord" min="-2" pref="93" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace pref="515" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxByte" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelTmpxWordDeclaration" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTmpxDotByte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxWord" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
                                           <Component id="jRadioButtonTmpxDotWord" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxDotWord" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace pref="611" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2262,33 +2247,27 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelCa65LabelDeclaration" max="32767" attributes="0"/>
-                                              <Component id="jLabelC65ByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                      <Component id="jLabelC65WordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelCa65LabelDeclaration" max="32767" attributes="0"/>
+                                      <Component id="jLabelC65ByteDeclaration" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonCa65LabelName" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jRadioButtonCa65LabelName" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneCa65LabelName" min="-2" pref="93" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jRadioButtonC65DotByte" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneC65DotByte" min="-2" pref="93" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonC65Byte" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneC65BytByte" min="-2" pref="93" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace pref="384" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneCa65LabelName" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelC65WordDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonC65DotByte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneC65DotByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonC65Byte" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneC65BytByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
                                           <Component id="jRadioButtonC65DotWord" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPaneCa65DotWord" min="-2" pref="93" max="-2" attributes="0"/>
@@ -2296,9 +2275,9 @@
                                           <Component id="jRadioButtonC65Word" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPaneC65Word" min="-2" pref="93" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace pref="479" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2307,21 +2286,26 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelCa65LabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="jRadioButtonC65Byte" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelC65ByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonC65DotByte" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelCa65LabelDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                          <Component id="jLabelC65ByteDeclaration" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneCa65LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                  <Component id="jRadioButtonC65Byte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonC65DotByte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPaneC65DotByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneC65BytByte" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jScrollPaneC65DotByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneC65BytByte" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2504,37 +2488,32 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jLabelAcmeLabelDeclaration" alignment="0" pref="145" max="32767" attributes="0"/>
+                                      <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabelAcmeWordByteDeclaration" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelAcmeLabelDeclaration" pref="132" max="32767" attributes="0"/>
-                                              <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonAcmeLabelName" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jRadioButtonAcmeLabelName" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneAcmeLabelName" min="-2" pref="93" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonAcmeLabelNameColon" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneAcmeLabelNameColon" min="-2" pref="93" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jRadioButtonAcmeMarkByte" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneAcmeMarkByte" min="-2" pref="93" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonAcmeMark8Byte" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneAcmeMark8Byte" min="-2" pref="93" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="jScrollPaneAcmeLabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeLabelNameColon" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeLabelNameColon" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabelAcmeWordByteDeclaration" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonAcmeMarkByte" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMarkByte" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMark8Byte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMark8Byte" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jRadioButtonAcmeMarkWord" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPaneAcmeMarkByte1" min="-2" pref="93" max="-2" attributes="0"/>
@@ -2544,7 +2523,7 @@
                                           <Component id="jScrollPaneAcmeMark8Byte1" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="381" max="32767" attributes="0"/>
+                                  <EmptySpace pref="463" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2553,35 +2532,39 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeLabelDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="jRadioButtonAcmeMark8Byte" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelAcmeByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonAcmeMarkByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                  <Component id="jRadioButtonAcmeMark8Byte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonAcmeMarkByte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPaneAcmeMarkByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                  <Component id="jRadioButtonAcmeMark16Work" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonAcmeMarkWord" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPaneAcmeMark8Byte1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMarkByte1" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jScrollPaneAcmeMarkByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="jRadioButtonAcmeMark16Work" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelAcmeWordByteDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonAcmeMarkWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelAcmeLabelDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                          <Component id="jLabelAcmeByteDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                          <Component id="jLabelAcmeWordByteDeclaration" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPaneAcmeMark8Byte1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkByte1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="215" max="32767" attributes="0"/>
                               </Group>

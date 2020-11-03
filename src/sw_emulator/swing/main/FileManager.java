@@ -34,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.MemoryDasm;
 
 /**
@@ -168,6 +169,8 @@ public class FileManager {
       option.commentVic20Block4 = in.readBoolean();
       option.commentVic20BasicRom = in.readBoolean();
       option.commentVic20KernalRom = in.readBoolean();
+                  
+      option.assembler = Name.valueOf(in.readUTF());
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -291,7 +294,9 @@ public class FileManager {
       out.writeBoolean(option.commentVic20Block3);
       out.writeBoolean(option.commentVic20Block4);
       out.writeBoolean(option.commentVic20BasicRom);
-      out.writeBoolean(option.commentVic20KernalRom);      
+      out.writeBoolean(option.commentVic20KernalRom); 
+      
+      out.writeUTF(option.assembler.getName());
       
       out.flush();
       out.close();

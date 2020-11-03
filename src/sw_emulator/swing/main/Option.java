@@ -95,6 +95,7 @@ import sw_emulator.swing.plaf.metal.RubyTheme;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.plaf.metal.OceanTheme;
 import javax.swing.plaf.metal.DefaultMetalTheme;
+import sw_emulator.software.Assembler.Name;
 import sw_emulator.swing.Shared;
 
 
@@ -503,6 +504,12 @@ public class Option {
   
   /** DASM: compile source with f3 option */
   public boolean dasmF3Comp=false;
+  
+  
+  // assembler
+  
+  /** Assember to use */
+  public Name assembler=Name.DASM;
   
   /**
    * Get the flat laf theme

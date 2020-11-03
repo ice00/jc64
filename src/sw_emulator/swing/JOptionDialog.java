@@ -29,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.UIManager;
+import sw_emulator.software.Assembler;
+import sw_emulator.software.Assembler.Name;
 
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.machine.C64Dasm;
@@ -66,6 +68,9 @@ public class JOptionDialog extends javax.swing.JDialog {
     public JOptionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        for (Name val: Assembler.Name.values()) {
+          jComboBoxAssembler.addItem(val.getName());
+        }
         Shared.framesList.add(this);
         platformeEnable();
     }
@@ -1577,7 +1582,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelautocomment1.setText("Apply the output assembler syntax of:");
 
-        jComboBoxAssembler.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dasm", "TMPx", "CA65", "ACME", "KickAssembler" }));
+        jComboBoxAssembler.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxAssemblerItemStateChanged(evt);
+            }
+        });
 
         jCheckBoxDasmF3Comp.setText("Make source compatible with -f3 option");
         jCheckBoxDasmF3Comp.addActionListener(new java.awt.event.ActionListener() {
@@ -1824,28 +1833,24 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addGroup(jPanelTMPxLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelTmpxWordDeclaration)
+                    .addComponent(jLabelTmpxLabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(jLabelTmpxByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTMPxLayout.createSequentialGroup()
-                        .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTmpxLabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jLabelTmpxByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jRadioButtonTmpxLabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTMPxLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonTmpxLabelName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneTmpxByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTMPxLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonTmpxDotByte)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPaneTmpxDotWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPaneTmpxWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(515, Short.MAX_VALUE))
+                        .addComponent(jScrollPaneTmpxByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelTMPxLayout.createSequentialGroup()
-                        .addComponent(jLabelTmpxWordDeclaration)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButtonTmpxDotByte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneTmpxWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelTMPxLayout.createSequentialGroup()
                         .addComponent(jRadioButtonTmpxDotWord)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneTmpxDotWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
         jPanelTMPxLayout.setVerticalGroup(
             jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1934,54 +1939,53 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addGroup(jPanelCa65Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelC65WordDeclaration)
+                    .addComponent(jLabelCa65LabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelC65ByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCa65Layout.createSequentialGroup()
-                        .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCa65LabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelC65ByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jRadioButtonCa65LabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCa65Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonCa65LabelName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneCa65LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCa65Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonC65DotByte)
-                                .addGap(3, 3, 3)
-                                .addComponent(jScrollPaneC65DotByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(jRadioButtonC65Byte)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneC65BytByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(384, Short.MAX_VALUE))
+                        .addComponent(jScrollPaneCa65LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelCa65Layout.createSequentialGroup()
-                        .addComponent(jLabelC65WordDeclaration)
+                        .addComponent(jRadioButtonC65DotByte)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPaneC65DotByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jRadioButtonC65Byte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneC65BytByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCa65Layout.createSequentialGroup()
                         .addComponent(jRadioButtonC65DotWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneCa65DotWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonC65Word)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPaneC65Word, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPaneC65Word, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(479, Short.MAX_VALUE))
         );
         jPanelCa65Layout.setVerticalGroup(
             jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCa65Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonCa65LabelName)
-                    .addComponent(jLabelCa65LabelDeclaration)
-                    .addComponent(jScrollPaneCa65LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jRadioButtonC65Byte)
+                    .addGroup(jPanelCa65Layout.createSequentialGroup()
+                        .addComponent(jLabelCa65LabelDeclaration)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabelC65ByteDeclaration))
+                    .addGroup(jPanelCa65Layout.createSequentialGroup()
                         .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelC65ByteDeclaration)
-                            .addComponent(jRadioButtonC65DotByte)))
-                    .addComponent(jScrollPaneC65DotByte)
-                    .addComponent(jScrollPaneC65BytByte))
+                            .addComponent(jRadioButtonCa65LabelName)
+                            .addComponent(jScrollPaneCa65LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jRadioButtonC65Byte)
+                                .addComponent(jRadioButtonC65DotByte))
+                            .addComponent(jScrollPaneC65DotByte)
+                            .addComponent(jScrollPaneC65BytByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButtonC65DotWord)
@@ -2068,32 +2072,29 @@ public class JOptionDialog extends javax.swing.JDialog {
             jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcmeLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabelAcmeLabelDeclaration, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(jLabelAcmeByteDeclaration, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAcmeWordByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                        .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAcmeLabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jLabelAcmeByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jRadioButtonAcmeLabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonAcmeLabelName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneAcmeLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButtonAcmeLabelNameColon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneAcmeLabelNameColon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonAcmeMarkByte)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneAcmeMarkByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButtonAcmeMark8Byte)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPaneAcmeLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonAcmeLabelNameColon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneAcmeLabelNameColon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                        .addComponent(jLabelAcmeWordByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRadioButtonAcmeMarkByte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneAcmeMarkByte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonAcmeMark8Byte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAcmeLayout.createSequentialGroup()
                         .addComponent(jRadioButtonAcmeMarkWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneAcmeMarkByte1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2101,36 +2102,39 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonAcmeMark16Work)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneAcmeMark8Byte1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
         );
         jPanelAcmeLayout.setVerticalGroup(
             jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcmeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonAcmeLabelName)
-                    .addComponent(jRadioButtonAcmeLabelNameColon)
-                    .addComponent(jLabelAcmeLabelDeclaration)
-                    .addComponent(jScrollPaneAcmeLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPaneAcmeLabelNameColon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jRadioButtonAcmeMark8Byte)
+                    .addGroup(jPanelAcmeLayout.createSequentialGroup()
                         .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAcmeByteDeclaration)
-                            .addComponent(jRadioButtonAcmeMarkByte)))
-                    .addComponent(jScrollPaneAcmeMarkByte)
-                    .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jRadioButtonAcmeMark16Work)
+                            .addComponent(jRadioButtonAcmeLabelName)
+                            .addComponent(jRadioButtonAcmeLabelNameColon)
+                            .addComponent(jScrollPaneAcmeLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPaneAcmeLabelNameColon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jRadioButtonAcmeMark8Byte)
+                                .addComponent(jRadioButtonAcmeMarkByte))
+                            .addComponent(jScrollPaneAcmeMarkByte)
+                            .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAcmeWordByteDeclaration)
-                            .addComponent(jRadioButtonAcmeMarkWord)))
-                    .addComponent(jScrollPaneAcmeMark8Byte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPaneAcmeMarkByte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jRadioButtonAcmeMark16Work)
+                                .addComponent(jRadioButtonAcmeMarkWord))
+                            .addComponent(jScrollPaneAcmeMark8Byte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPaneAcmeMarkByte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelAcmeLayout.createSequentialGroup()
+                        .addComponent(jLabelAcmeLabelDeclaration)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabelAcmeByteDeclaration)
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabelAcmeWordByteDeclaration)))
                 .addContainerGap(215, Short.MAX_VALUE))
         );
 
@@ -3104,6 +3108,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.dasmF3Comp=jCheckBoxDasmF3Comp.isSelected();
     }//GEN-LAST:event_jCheckBoxDasmF3CompActionPerformed
 
+    private void jComboBoxAssemblerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAssemblerItemStateChanged
+      option.assembler=Name.valueOf((String)jComboBoxAssembler.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxAssemblerItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3554,6 +3562,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxVic20_8kExp1.setSelected(option.commentVic20_8kExp1);
       jCheckBoxVic20_8kExp2.setSelected(option.commentVic20_8kExp2);
       jCheckBoxVic20_8kExp3.setSelected(option.commentVic20_8kExp3);
+      
+      
+      //assembler
+      jComboBoxAssembler.setSelectedItem(option.assembler);
     }
     
   /**
