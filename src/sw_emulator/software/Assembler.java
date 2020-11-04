@@ -103,6 +103,24 @@ public class Assembler {
       MARK_BYTE,          // !byte $xx 
       EIGHT_BYTE          //    !8 $xx     
    }    
+   
+   /**
+    * Word declaration type
+    *  -> .word $xxyy
+    *  -> word $xxyy
+    *  -> dc.w $xxyy
+    *  -> .dbyte $xxyy
+    *  -> !word $xxyy
+    *  -> !16 $xxyy
+    */
+   public enum Word {
+     DOT_WORD,            //  .word $xxyy
+     WORD,                //   word $xxyy
+     DC_W_WORD,           //   dc.w $xxyy
+     DOT_DBYTE,           // .dbyte $xxyy
+     MARK_WORD,           //  !word $xxyy
+     SIXTEEN_WORD         //    !16 $xxyy
+   }
 }
                
 
