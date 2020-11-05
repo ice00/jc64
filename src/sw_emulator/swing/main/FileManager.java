@@ -34,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.MemoryDasm;
 
@@ -97,6 +98,9 @@ public class FileManager {
       option.labelOnSepLine = in.readBoolean();
       
       option.dasmF3Comp = in.readBoolean();
+      option.dasmLabel = Assembler.Label.valueOf(in.readUTF());
+      option.dasmByte = Assembler.Byte.valueOf(in.readUTF());
+      option.dasmWord = Assembler.Word.valueOf(in.readUTF());
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -223,6 +227,9 @@ public class FileManager {
       out.writeBoolean(option.labelOnSepLine);
       
       out.writeBoolean(option.dasmF3Comp);
+      out.writeUTF(option.dasmLabel.name());
+      out.writeUTF(option.dasmByte.name());
+      out.writeUTF(option.dasmWord.name());
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);

@@ -38,6 +38,12 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupAcmeWord">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupKickLabel">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupKickByte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupKickWord">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -1628,15 +1634,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTabbedPaneAssembler" max="32767" attributes="0"/>
+                              <Component id="jTabbedPaneAssembler" min="-2" pref="802" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jLabelAutoComment" min="-2" pref="312" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jComboBoxAssembler" min="-2" pref="255" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1740,7 +1745,7 @@
                                           <Component id="jScrollPaneDasmDcWWord" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="106" max="32767" attributes="0"/>
+                                  <EmptySpace pref="120" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1811,6 +1816,9 @@
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotByteItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmByte">
                           <Properties>
@@ -1818,6 +1826,9 @@
                               <ComponentRef name="buttonGroupDasmByte"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmByteItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcByte">
                           <Properties>
@@ -1825,6 +1836,9 @@
                               <ComponentRef name="buttonGroupDasmByte"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcByteItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabelDasmLabelDeclaration">
                           <Properties>
@@ -1837,6 +1851,9 @@
                               <ComponentRef name="buttonGroupDasmLabel"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmLabelNameItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmLabelNameColon">
                           <Properties>
@@ -1845,6 +1862,9 @@
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmLabelNameColonItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcBByte">
                           <Properties>
@@ -1852,6 +1872,9 @@
                               <ComponentRef name="buttonGroupDasmByte"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcBByteItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabelDasmByteDeclaration1">
                           <Properties>
@@ -1865,6 +1888,9 @@
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotWordItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmWord">
                           <Properties>
@@ -1872,6 +1898,9 @@
                               <ComponentRef name="buttonGroupDasmWord"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmWordItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcWWord">
                           <Properties>
@@ -1879,6 +1908,9 @@
                               <ComponentRef name="buttonGroupDasmWord"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcWWordItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotByte">
                           <Properties>
@@ -2081,7 +2113,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelTmpxWordDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelTmpxLabelDeclaration" pref="131" max="32767" attributes="0"/>
+                                      <Component id="jLabelTmpxLabelDeclaration" max="32767" attributes="0"/>
                                       <Component id="jLabelTmpxByteDeclaration" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -2102,7 +2134,7 @@
                                           <Component id="jScrollPaneTmpxDotWord" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="611" max="32767" attributes="0"/>
+                                  <EmptySpace pref="532" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2277,7 +2309,7 @@
                                           <Component id="jScrollPaneC65DotDByteWord" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="478" max="32767" attributes="0"/>
+                                  <EmptySpace pref="408" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2331,6 +2363,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupCa65Label"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65LabelName">
@@ -2363,6 +2396,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupCa65Byte"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneC65DotByte">
@@ -2523,7 +2557,7 @@
                                           <Component id="jScrollPaneAcmeMark8Byte1" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="463" max="32767" attributes="0"/>
+                                  <EmptySpace pref="382" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2642,6 +2676,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupAcmeByte"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkByte">
@@ -2835,7 +2870,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonKickLabelName">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupCa65Label"/>
+                              <ComponentRef name="buttonGroupKickLabel"/>
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
@@ -2868,7 +2903,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotByte">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupTmpxByte"/>
+                              <ComponentRef name="buttonGroupKickByte"/>
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
@@ -2901,7 +2936,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotWord">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupTmpxWord"/>
+                              <ComponentRef name="buttonGroupKickWord"/>
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>

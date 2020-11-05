@@ -128,6 +128,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         buttonGroupAcmeByte = new javax.swing.ButtonGroup();
         buttonGroupDasmWord = new javax.swing.ButtonGroup();
         buttonGroupAcmeWord = new javax.swing.ButtonGroup();
+        buttonGroupKickLabel = new javax.swing.ButtonGroup();
+        buttonGroupKickByte = new javax.swing.ButtonGroup();
+        buttonGroupKickWord = new javax.swing.ButtonGroup();
         jPanelOption = new javax.swing.JPanel();
         jTabbedPaneOption = new javax.swing.JTabbedPane();
         jPanelPreview = new javax.swing.JPanel();
@@ -1599,28 +1602,73 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         buttonGroupDasmByte.add(jRadioButtonDasmDotByte);
         jRadioButtonDasmDotByte.setSelected(true);
+        jRadioButtonDasmDotByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmDotByteItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmByte.add(jRadioButtonDasmByte);
+        jRadioButtonDasmByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmByteItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmByte.add(jRadioButtonDasmDcByte);
+        jRadioButtonDasmDcByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmDcByteItemStateChanged(evt);
+            }
+        });
 
         jLabelDasmLabelDeclaration.setText("Label declaration:");
 
         buttonGroupDasmLabel.add(jRadioButtonDasmLabelName);
+        jRadioButtonDasmLabelName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmLabelNameItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmLabel.add(jRadioButtonDasmLabelNameColon);
         jRadioButtonDasmLabelNameColon.setSelected(true);
+        jRadioButtonDasmLabelNameColon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmLabelNameColonItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmByte.add(jRadioButtonDasmDcBByte);
+        jRadioButtonDasmDcBByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmDcBByteItemStateChanged(evt);
+            }
+        });
 
         jLabelDasmByteDeclaration1.setText("Word declaration:");
 
         buttonGroupDasmWord.add(jRadioButtonDasmDotWord);
         jRadioButtonDasmDotWord.setSelected(true);
+        jRadioButtonDasmDotWord.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmDotWordItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmWord.add(jRadioButtonDasmWord);
+        jRadioButtonDasmWord.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmWordItemStateChanged(evt);
+            }
+        });
 
         buttonGroupDasmWord.add(jRadioButtonDasmDcWWord);
+        jRadioButtonDasmDcWWord.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonDasmDcWWordItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneDasmDotByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneDasmDotByte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1747,7 +1795,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonDasmDcWWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneDasmDcWWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanelDasmLayout.setVerticalGroup(
             jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1834,7 +1882,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTmpxWordDeclaration)
-                    .addComponent(jLabelTmpxLabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(jLabelTmpxLabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTmpxByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1850,7 +1898,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonTmpxDotWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneTmpxDotWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(611, Short.MAX_VALUE))
+                .addContainerGap(532, Short.MAX_VALUE))
         );
         jPanelTMPxLayout.setVerticalGroup(
             jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1878,6 +1926,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelCa65LabelDeclaration.setText("Label declaration:");
 
         buttonGroupCa65Label.add(jRadioButtonCa65LabelName);
+        jRadioButtonCa65LabelName.setSelected(true);
 
         jScrollPaneCa65LabelName.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneCa65LabelName.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1890,6 +1939,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelC65ByteDeclaration.setText("Byte declaration:");
 
         buttonGroupCa65Byte.add(jRadioButtonC65DotByte);
+        jRadioButtonC65DotByte.setSelected(true);
 
         jScrollPaneC65DotByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneC65DotByte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1964,7 +2014,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonC65DotDByteWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneC65DotDByteWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
         jPanelCa65Layout.setVerticalGroup(
             jPanelCa65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2024,6 +2074,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelAcmeByteDeclaration.setText("Byte declaration:");
 
         buttonGroupAcmeByte.add(jRadioButtonAcmeMarkByte);
+        jRadioButtonAcmeMarkByte.setSelected(true);
 
         jScrollPaneAcmeMarkByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeMarkByte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -2102,7 +2153,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonAcmeMark16Work)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneAcmeMark8Byte1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jPanelAcmeLayout.setVerticalGroup(
             jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2142,7 +2193,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickLabelDeclaration.setText("Label declaration:");
 
-        buttonGroupCa65Label.add(jRadioButtonKickLabelName);
+        buttonGroupKickLabel.add(jRadioButtonKickLabelName);
         jRadioButtonKickLabelName.setSelected(true);
 
         jScrollPaneKickLabelName.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -2155,7 +2206,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickByteDeclaration.setText("Byte declaration:");
 
-        buttonGroupTmpxByte.add(jRadioButtonKickDotByte);
+        buttonGroupKickByte.add(jRadioButtonKickDotByte);
         jRadioButtonKickDotByte.setSelected(true);
 
         jScrollPaneKickDotByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -2168,7 +2219,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickWordDeclaration.setText("Word declaration:");
 
-        buttonGroupTmpxWord.add(jRadioButtonKickDotWord);
+        buttonGroupKickWord.add(jRadioButtonKickDotWord);
         jRadioButtonKickDotWord.setSelected(true);
 
         jScrollPaneKickDotWord.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -2239,13 +2290,12 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addGroup(jPanelDisassemblerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPaneAssembler)
+                    .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelDisassemblerLayout.createSequentialGroup()
                         .addComponent(jLabelAutoComment, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDisassemblerLayout.setVerticalGroup(
             jPanelDisassemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3112,6 +3162,42 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.assembler=Name.valueOf((String)jComboBoxAssembler.getSelectedItem());
     }//GEN-LAST:event_jComboBoxAssemblerItemStateChanged
 
+    private void jRadioButtonDasmLabelNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmLabelNameItemStateChanged
+      option.dasmLabel=Assembler.Label.NAME;
+    }//GEN-LAST:event_jRadioButtonDasmLabelNameItemStateChanged
+
+    private void jRadioButtonDasmLabelNameColonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmLabelNameColonItemStateChanged
+      option.dasmLabel=Assembler.Label.NAME_COLON;
+    }//GEN-LAST:event_jRadioButtonDasmLabelNameColonItemStateChanged
+
+    private void jRadioButtonDasmDotByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDotByteItemStateChanged
+      option.dasmByte=Assembler.Byte.DOT_BYTE;
+    }//GEN-LAST:event_jRadioButtonDasmDotByteItemStateChanged
+
+    private void jRadioButtonDasmByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmByteItemStateChanged
+      option.dasmByte=Assembler.Byte.BYTE;
+    }//GEN-LAST:event_jRadioButtonDasmByteItemStateChanged
+
+    private void jRadioButtonDasmDcByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcByteItemStateChanged
+      option.dasmByte=Assembler.Byte.DC_BYTE;
+    }//GEN-LAST:event_jRadioButtonDasmDcByteItemStateChanged
+
+    private void jRadioButtonDasmDcBByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcBByteItemStateChanged
+      option.dasmByte=Assembler.Byte.DC_B_BYTE;
+    }//GEN-LAST:event_jRadioButtonDasmDcBByteItemStateChanged
+
+    private void jRadioButtonDasmDotWordItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDotWordItemStateChanged
+      option.dasmWord=Assembler.Word.DOT_WORD;
+    }//GEN-LAST:event_jRadioButtonDasmDotWordItemStateChanged
+
+    private void jRadioButtonDasmWordItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmWordItemStateChanged
+      option.dasmWord=Assembler.Word.WORD;
+    }//GEN-LAST:event_jRadioButtonDasmWordItemStateChanged
+
+    private void jRadioButtonDasmDcWWordItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcWWordItemStateChanged
+      option.dasmWord=Assembler.Word.DC_W_WORD;
+    }//GEN-LAST:event_jRadioButtonDasmDcWWordItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3166,6 +3252,9 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupDasmLabel;
     private javax.swing.ButtonGroup buttonGroupDasmWord;
     private javax.swing.ButtonGroup buttonGroupIllegalOpcodeStyle;
+    private javax.swing.ButtonGroup buttonGroupKickByte;
+    private javax.swing.ButtonGroup buttonGroupKickLabel;
+    private javax.swing.ButtonGroup buttonGroupKickWord;
     private javax.swing.ButtonGroup buttonGroupLanguage;
     private javax.swing.ButtonGroup buttonGroupLook;
     private javax.swing.ButtonGroup buttonGroupOpcodeFormatting;
@@ -3484,8 +3573,47 @@ public class JOptionDialog extends javax.swing.JDialog {
       
       selectedTheme();
       
+      //assembler
+      jComboBoxAssembler.setSelectedItem(option.assembler);
+      
       //DASM
       jCheckBoxDasmF3Comp.setSelected(option.dasmF3Comp);
+      switch (option.dasmLabel) {
+        case NAME:
+          jRadioButtonDasmLabelName.setSelected(true);
+          break;
+        case NAME_COLON:
+          jRadioButtonDasmLabelNameColon.setSelected(true);  
+          break;  
+      }
+      
+      switch (option.dasmByte) {
+        case DOT_BYTE:  
+          jRadioButtonDasmDotByte.setSelected(true);
+          break;
+        case BYTE:
+          jRadioButtonDasmByte.setSelected(true);  
+          break;
+        case DC_BYTE:
+          jRadioButtonDasmDcByte.setSelected(true);   
+          break; 
+        case DC_B_BYTE:
+          jRadioButtonDasmDcBByte.setSelected(true);  
+          break;  
+      }
+      
+      switch (option.dasmWord) {
+        case DOT_WORD:  
+          jRadioButtonDasmDotWord.setSelected(true);
+          break;  
+        case WORD:  
+          jRadioButtonDasmWord.setSelected(true);
+          break;
+        case DC_W_WORD:  
+          jRadioButtonDasmDcWWord.setSelected(true);
+          break;
+            
+      }      
       
       // apply comments C64
       jCheckBoxC64ZeroPage.setSelected(option.commentC64ZeroPage);
@@ -3562,10 +3690,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxVic20_8kExp1.setSelected(option.commentVic20_8kExp1);
       jCheckBoxVic20_8kExp2.setSelected(option.commentVic20_8kExp2);
       jCheckBoxVic20_8kExp3.setSelected(option.commentVic20_8kExp3);
-      
-      
-      //assembler
-      jComboBoxAssembler.setSelectedItem(option.assembler);
+            
     }
     
   /**

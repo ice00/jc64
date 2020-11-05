@@ -95,6 +95,7 @@ import sw_emulator.swing.plaf.metal.RubyTheme;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.plaf.metal.OceanTheme;
 import javax.swing.plaf.metal.DefaultMetalTheme;
+import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.swing.Shared;
 
@@ -502,14 +503,25 @@ public class Option {
   /** Vic20: Comment Kernal rom */
   public boolean commentVic20KernalRom=true;
   
-  /** DASM: compile source with f3 option */
-  public boolean dasmF3Comp=false;
-  
   
   // assembler
   
   /** Assember to use */
   public Name assembler=Name.DASM;
+      
+  
+  /** DASM: compile source with f3 option */
+  public boolean dasmF3Comp=false;
+  
+  /** DASM: label declaration */
+  public Assembler.Label dasmLabel=Assembler.Label.NAME_COLON;
+  
+  /** DASM: byte declaration */
+  public Assembler.Byte dasmByte=Assembler.Byte.DOT_BYTE;
+  
+  /** DASM: word declaration */
+  public Assembler.Word dasmWord=Assembler.Word.DOT_WORD;
+  
   
   /**
    * Get the flat laf theme
