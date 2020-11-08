@@ -260,8 +260,17 @@ public class Option {
   /** Max length of a label */
   public int maxLabelLength=25;
     
-  /** Max aggregate for data row */
-  public int maxAggregate=8;
+  /** Max byte aggregate for data row */
+  public int maxByteAggregate=8;
+  
+  /** Max word aggregate for data row */
+  public int maxWordAggregate=4;  
+  
+  /** Max tribyte aggregate for data row */
+  public int maxTribyteAggregate=3;   
+  
+  /** Max long aggregate for data row */
+  public int maxLongAggregate=2; 
   
   
   /** Psid init song label to use as user defined */
@@ -514,13 +523,65 @@ public class Option {
   public boolean dasmF3Comp=false;
   
   /** DASM: label declaration */
-  public Assembler.Label dasmLabel=Assembler.Label.NAME_COLON;
+  public Assembler.Label dasmLabel=Assembler.Label.NAME_COLON;  
+  
+  /** DASM: comment declaration */
+  public Assembler.Comment dasmComment=Assembler.Comment.SEMICOLON; 
+  
+  /** DASM: block comment declaration */
+  public Assembler.BlockComment dasmBlockComment=Assembler.BlockComment.SEMICOLON; 
   
   /** DASM: byte declaration */
   public Assembler.Byte dasmByte=Assembler.Byte.DOT_BYTE;
   
   /** DASM: word declaration */
   public Assembler.Word dasmWord=Assembler.Word.DOT_WORD;
+  
+  
+  /** TMPx: label declaration */
+  public Assembler.Label tmpxLabel=Assembler.Label.NAME; 
+  
+  /** TMPx: comment declaration */
+  public Assembler.Comment tmpxComment=Assembler.Comment.SEMICOLON; 
+  
+  /** TMPX: block comment declaration */
+  public Assembler.BlockComment tmpxBlockComment=Assembler.BlockComment.SEMICOLON;  
+  
+  /** TMPX: byte declaration */
+  public Assembler.Byte tmpxByte=Assembler.Byte.DOT_BYTE;
+  
+  /** TMPX: word declaration */
+  public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
+  
+  
+  /** CA65: label declaration */
+  public Assembler.Label ca65Label=Assembler.Label.NAME_COLON; 
+  
+  /** CA65: byte declaration */
+  public Assembler.Byte ca65Byte=Assembler.Byte.DOT_BYTE;
+  
+  /** CA65: word declaration */
+  public Assembler.Word ca65Word=Assembler.Word.DOT_WORD;
+  
+ 
+  /** ACME: label declaration */
+  public Assembler.Label acmeLabel=Assembler.Label.NAME_COLON; 
+  
+  /** ACME: byte declaration */
+  public Assembler.Byte acmeByte=Assembler.Byte.MARK_BYTE;
+  
+  /** ACME: word declaration */
+  public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
+  
+  
+  /** KickAssembler: label declaration */
+  public Assembler.Label kickLabel=Assembler.Label.NAME_COLON; 
+  
+  /** KickAssembler: byte declaration */
+  public Assembler.Byte kickByte=Assembler.Byte.DOT_BYTE;
+  
+  /** KickAssembler: word declaration */
+  public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
   
   /**

@@ -26,6 +26,7 @@ package sw_emulator.software.cpu;
 
 import sw_emulator.math.Unsigned;
 import java.util.Locale;
+import sw_emulator.software.Assembler;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.main.Option;
 
@@ -350,6 +351,21 @@ public class M6510Dasm implements disassembler {
   /** Option to use */
   protected Option option;
   
+  /** Assembler label to use */
+  protected Assembler.Label aLabel;
+  
+  /** Assembler block comment to use */
+  protected Assembler.BlockComment aBlockComment; 
+  
+  /** Assembler line comment to use */
+  protected Assembler.Comment aComment; 
+  
+  /** Assembler byte type */
+  protected Assembler.Byte aByte;
+  
+  /** Assembler word type */
+  protected Assembler.Word aWord;
+  
   /**
    * Set the memory dasm to use
    * 
@@ -359,13 +375,43 @@ public class M6510Dasm implements disassembler {
     this.memory=memory;  
   }
   
-   /**
+  /**
    * Set the option to use
    * 
    * @param option the option to use
    */
   public void setOption(Option option) {
     this.option=option;
+    
+    switch (option.assembler) {
+      case DASM:
+        aLabel=option.dasmLabel;
+        aComment=option.dasmComment;
+        aBlockComment=option.dasmBlockComment;
+        aByte=option.dasmByte;
+        aWord=option.dasmWord;
+        break;
+      case TMPX:
+        aLabel=option.tmpxLabel;
+        aByte=option.tmpxByte;
+        aWord=option.tmpxWord;
+        break;  
+      case CA65:
+        aLabel=option.ca65Label;
+        aByte=option.ca65Byte;
+        aWord=option.ca65Word;  
+        break;  
+      case ACME:
+        aLabel=option.acmeLabel;
+        aByte=option.acmeByte;
+        aWord=option.acmeWord;
+        break;
+      case KICK:
+        aLabel=option.kickLabel;
+        aByte=option.kickByte;
+        aWord=option.kickWord;  
+        break;        
+    }
   }
 
   /**
@@ -681,7 +727,7 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
-            if (counter>option.maxAggregate-1) {
+            if (counter>option.maxByteAggregate-1) {
               // we already are above the limit, so split the line
               result.append("\n");
               counter=0;
@@ -862,7 +908,7 @@ public class M6510Dasm implements disassembler {
               } else result.append("\n");
             }  
             
-            if (counter>option.maxAggregate-1) {
+            if (counter>option.maxByteAggregate-1) {
               // we already are above the limit, so split the line
               //result.append(desAsChar.toString()+"\n");
               result.append("\n");
@@ -871,7 +917,7 @@ public class M6510Dasm implements disassembler {
             
             if (counter==0) {
                tmp2=this.getDataSpacesTabs()+".byte ";
-               //desAsChar=new String[option.maxAggregate];
+               //desAsChar=new String[option.maxByteAggregate];
             }
             else {
                tmp2=", ";

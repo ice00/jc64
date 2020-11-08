@@ -78,7 +78,7 @@ public class FileManager {
       option.eraseDComm = in.readBoolean();
       option.erasePlus = in.readBoolean();
       option.maxLabelLength = in.readInt();
-      option.maxAggregate = in.readInt();
+      option.maxByteAggregate = in.readInt();
       
       option.psidInitSongsLabel = in.readUTF();
       option.psidPlaySoundsLabel = in.readUTF();
@@ -97,10 +97,40 @@ public class FileManager {
       option.numDataTabs = in.readInt();
       option.labelOnSepLine = in.readBoolean();
       
+      option.maxWordAggregate = in.readInt();
+      option.maxTribyteAggregate = in.readInt();
+      option.maxLongAggregate = in.readInt();
+      
       option.dasmF3Comp = in.readBoolean();
       option.dasmLabel = Assembler.Label.valueOf(in.readUTF());
+      option.dasmComment = Assembler.Comment.valueOf(in.readUTF());
+      option.dasmBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.dasmByte = Assembler.Byte.valueOf(in.readUTF());
       option.dasmWord = Assembler.Word.valueOf(in.readUTF());
+      
+      option.tmpxLabel = Assembler.Label.valueOf(in.readUTF());
+      option.tmpxComment = Assembler.Comment.valueOf(in.readUTF());
+      option.tmpxBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.tmpxByte = Assembler.Byte.valueOf(in.readUTF());
+      option.tmpxWord = Assembler.Word.valueOf(in.readUTF());   
+      
+      option.ca65Label = Assembler.Label.valueOf(in.readUTF());
+      //option.ca65Comment = Assembler.Comment.valueOf(in.readUTF());
+      //option.ca65BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.ca65Byte = Assembler.Byte.valueOf(in.readUTF());
+      option.ca65Word = Assembler.Word.valueOf(in.readUTF());      
+ 
+      option.acmeLabel = Assembler.Label.valueOf(in.readUTF());
+      //option.acmeComment = Assembler.Comment.valueOf(in.readUTF());
+      //option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.acmeByte = Assembler.Byte.valueOf(in.readUTF());
+      option.acmeWord = Assembler.Word.valueOf(in.readUTF());  
+      
+      option.kickLabel = Assembler.Label.valueOf(in.readUTF());
+      //option.kickComment = Assembler.Comment.valueOf(in.readUTF());
+      //option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.kickByte = Assembler.Byte.valueOf(in.readUTF());
+      option.kickWord = Assembler.Word.valueOf(in.readUTF());      
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -207,7 +237,7 @@ public class FileManager {
       out.writeBoolean(option.eraseDComm);
       out.writeBoolean(option.erasePlus);
       out.writeInt(option.maxLabelLength);
-      out.writeInt(option.maxAggregate);
+      out.writeInt(option.maxByteAggregate);
       
       out.writeUTF(option.psidInitSongsLabel);
       out.writeUTF(option.psidPlaySoundsLabel);
@@ -226,10 +256,40 @@ public class FileManager {
       out.writeInt(option.numDataTabs);
       out.writeBoolean(option.labelOnSepLine);
       
+      out.writeInt(option.maxWordAggregate);
+      out.writeInt(option.maxTribyteAggregate);
+      out.writeInt(option.maxLongAggregate);
+      
       out.writeBoolean(option.dasmF3Comp);
       out.writeUTF(option.dasmLabel.name());
+      out.writeUTF(option.dasmComment.name());
+      out.writeUTF(option.dasmBlockComment.name());
       out.writeUTF(option.dasmByte.name());
       out.writeUTF(option.dasmWord.name());
+      
+      out.writeUTF(option.tmpxLabel.name());
+      out.writeUTF(option.tmpxComment.name());
+      out.writeUTF(option.tmpxBlockComment.name());
+      out.writeUTF(option.tmpxByte.name());
+      out.writeUTF(option.tmpxWord.name());    
+      
+      out.writeUTF(option.ca65Label.name());
+      //out.writeUTF(option.ca65Comment.name());
+      //out.writeUTF(option.ca65BlockComment.name());
+      out.writeUTF(option.ca65Byte.name());
+      out.writeUTF(option.ca65Word.name());  
+      
+      out.writeUTF(option.acmeLabel.name());
+      //out.writeUTF(option.acmeComment.name());
+      //out.writeUTF(option.acmeBlockComment.name());
+      out.writeUTF(option.acmeByte.name());
+      out.writeUTF(option.acmeWord.name());   
+      
+      out.writeUTF(option.kickLabel.name());
+      //out.writeUTF(option.kickComment.name());
+      //out.writeUTF(option.kickBlockComment.name());
+      out.writeUTF(option.kickByte.name());
+      out.writeUTF(option.kickWord.name());      
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);
