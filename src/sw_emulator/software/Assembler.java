@@ -36,6 +36,8 @@ import sw_emulator.swing.main.Option;
  * @author ice
  */
 public class Assembler {
+   private static final String SPACES="                                        ";  
+    
    /**
     * Action type
     */ 
@@ -102,20 +104,50 @@ public class Assembler {
     
       @Override
       public void flush(StringBuilder str) {
-      
+        // add the label if it was declared by dasm or user   
+        String label=null;
+        if (lastMem.userLocation!=null && !"".equals(lastMem.userLocation)) label=lastMem.userLocation;
+        else if (lastMem.dasmLocation!=null && !"".equals(lastMem.dasmLocation)) label=lastMem.dasmLocation;
+          
+        switch (aLabel) {
+          case NAME:
+            str.append(label);  
+            break; 
+          case NAME_COLON:
+            str.append(label).append(":");
+            break;
+        }
       }
     }    
    
    /**
     * Line comment
+    * 
+    *  -> ; xxx
+    *  -> /* xxx *\/
+    *  -> // xxx
     */
    public enum Comment implements ActionType {
       SEMICOLON,       // ; xxxx
-      CSTYLE;          // /* xxx */
+      CSTYLE,          // /* xxx */
+      DOUBLE_BAR;      // // xxx 
     
       @Override
       public void flush(StringBuilder str) {
-      
+        String comment=lastMem.dasmComment;
+        if (lastMem.userComment != null && !"".equals(lastMem.userComment)) comment=lastMem.userComment;
+        
+        switch (aComment) {
+          case SEMICOLON:
+            str.append("; ").append(comment).append("\n");
+            break;
+          case CSTYLE:
+            str.append("/* ").append(comment).append(" */\n");  
+            break;  
+          case DOUBLE_BAR:
+            str.append("// ").append(comment).append("\n");
+            break;
+        }
       }
     }  
    
@@ -125,15 +157,105 @@ public class Assembler {
     *  -> ; xxxx
     *  -> /\* xxx *\/
     *  -> if 0 xxx endif
+    *  -> .if 0 xxx .endif
+    *  -> .comment xxx .endc
     */
    public enum BlockComment implements ActionType {
       SEMICOLON,       // ; xxxx
       CSTYLE,          // /* xxx */ 
-      IF;              // if 0 xxx endif
+      IF,              // if 0 xxx endif
+      DOT_IF,          // .if 0 xxx .endif
+      COMMENT;         // .comment xxx .endc
     
       @Override
       public void flush(StringBuilder str) {
-      
+        // split by new line
+        String[] lines = lastMem.userBlockComment.split("\\r?\\n");  
+     
+        switch (aBlockComment) {
+          case SEMICOLON:    
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) str.append("\n");
+              else str.append(";").append(line).append("\n");   
+            }                      
+            break;         
+          case CSTYLE:
+            boolean isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append("/*\n\n");
+                else {
+                 str.append("\n*\\n\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append("/*\n");
+                  }
+                  str.append(";").append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append("\n*\\n");         
+            break;          
+          case IF:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append("endif\n\n");
+                else {
+                 str.append("if\n\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append("if\n");
+                  }
+                  str.append(";").append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append("endif\n");   
+            break;
+          case DOT_IF:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append(".endif\n\n");
+                else {
+                 str.append(".if\n\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append(".if\n");
+                  }
+                  str.append(";").append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append(".endif\n");    
+            break;  
+          case COMMENT:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append(".comment\n\n");
+                else {
+                 str.append(".endc\n\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append(".comment\n");
+                  }
+                  str.append(";").append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append(".endc\n");   
+            break;  
+        } 
       }
     }    
       
@@ -213,6 +335,10 @@ public class Assembler {
    
    /** Option to use */
    protected static Option option;
+         
+   /** Last used memory dasm */
+   protected static MemoryDasm lastMem=null;
+   
    
    /** Assembler label to use */
    protected static Assembler.Label aLabel;
@@ -231,42 +357,8 @@ public class Assembler {
    
    /** Actual type being processed */
    ActionType actualType=null;
-   
-   
-   public static void addCommentBlock(StringBuilder str, MemoryDasm mem) {
-     // split by new line
-     String[] lines = mem.userBlockComment.split("\\r?\\n");  
-     
-     switch (aBlockComment) {
-       case SEMICOLON:    
-         for (String line : lines) {
-           if ("".equals(line) || " ".equals(line)) str.append("\n");
-           else str.append(";").append(line).append("\n");   
-         }                      
-         break;         
-       case CSTYLE:
-         boolean isOpen=false;
-         for (String line : lines) {
-           if ("".equals(line) || " ".equals(line)) {
-             if (isOpen) str.append("/*\n\n");
-             else {
-               str.append("\n*\\n\n");
-               isOpen=false;
-             }
-           } else {
-               if (!isOpen) {
-                 isOpen=true;
-                 str.append("/*\n");
-               }
-               str.append(";").append(line).append("\n");
-           }   
-         }        
-         if (!isOpen) str.append("\n*\\n");         
-         break;          
-       case IF:
-         break;
-     }     
-   }
+
+  
   
    /**
     * Set the option to use
@@ -301,6 +393,7 @@ public class Assembler {
     */
    public void putValue(StringBuilder str, MemoryDasm mem) {
      ActionType type=actualType;  
+     lastMem=mem;
      
      // if there is a block comments use it
      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {
@@ -308,16 +401,32 @@ public class Assembler {
        actualType=aBlockComment;
        flush(str);
        actualType=type;
-     }
-     
+     }     
        
      // if this is a label then the type will change  
-     if (mem.userLocation!=null && !"".equals(mem.userLocation)) type=aLabel;
-     else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) type=aLabel;  
-              
+     if (!(lastMem.type=='+' || lastMem.type=='-')) {
+       if (mem.userLocation!=null && !"".equals(mem.userLocation)) type=aLabel;
+       else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) type=aLabel;  
+     }
+      
      // test if it change type  
      if (type!=actualType) {
        flush(str);              // write back previous data
+       
+       // we can have only one label in a memory row, so process it if this is the case
+       if (type==aLabel) {
+         int size=str.length();         
+         type.flush(str);             // write back the label         
+       
+         // check if there is a comment for the label
+         if (lastMem.userComment!=null) {
+           size=str.length()-size;      // get number of chars used  
+           str.append(SPACES.substring(0, SPACES.length()-size));
+           type=aComment;
+           type.flush(str);
+         } else str.append("\n");  // close label by going in a new line
+       }   
+              
        actualType=getType(mem);
      }  
           
