@@ -23,7 +23,10 @@
  */
 package sw_emulator.software;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
+import sw_emulator.math.Unsigned;
 import sw_emulator.swing.main.Option;
 
 /**
@@ -37,6 +40,49 @@ import sw_emulator.swing.main.Option;
  */
 public class Assembler {
    private static final String SPACES="                                        ";  
+   
+/**
+   * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
+   *
+   * @param value the byte value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected static String ByteToExe(int value) {
+    int tmp=value;
+    
+    if (value<0) return "??";
+    
+    String ret=Integer.toHexString(tmp);
+    if (ret.length()==1) ret="0"+ret;
+    return ret.toUpperCase(Locale.ENGLISH);
+  }
+
+  /**
+   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
+   *
+   * @param value the short value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected static String ShortToExe(int value) {
+    int tmp=value;
+
+    if (value<0) return "????";
+    
+    String ret=Integer.toHexString(tmp);
+    int len=ret.length();
+    switch (len) {
+      case 1:
+        ret="000"+ret;
+        break;
+     case 2:
+        ret="00"+ret;
+        break;
+     case 3:
+        ret="0"+ret;
+        break;
+    }
+    return ret.toUpperCase(Locale.ENGLISH);
+  }   
     
    /**
     * Action type
@@ -280,8 +326,50 @@ public class Assembler {
       
       @Override
       public void flush(StringBuilder str) {
+        MemoryDasm mem;
+        MemoryDasm memRel;
+        
+        // create starting command according to the kind of byte
+        switch (aByte) {
+          case DOT_BYTE:
+            str.append((" .byte "));
+            break;
+          case BYTE:
+            str.append((" byte "));
+            break;
+          case DC_BYTE:
+           str.append((" dc "));   
+            break;
+          case DC_B_BYTE:
+            str.append((" dc.b "));
+            break;
+          case BYT_BYTE:
+            str.append((" dc.b "));  
+            break;
+          case MARK_BYTE:
+            str.append((" !byte "));   
+            break;  
+          case EIGHT_BYTE:
+            str.append((" !8 "));  
+            break;  
+        }
+          
+        Iterator<MemoryDasm> iter=list.iterator();
+        while (iter.hasNext()) {
+          // accodate each bytes in the format choosed
+          mem=iter.next();
+          memRel=listRel.pop();
+          
+          if (mem.type=='<' || mem.type=='>') {           
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(mem.type).append(memRel.userLocation);
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(mem.type).append(memRel.dasmLocation);
+                 else str.append(mem.type).append("$").append(ShortToExe(memRel.address));
+          } else str.append("$").append(ByteToExe(Unsigned.done(mem.copy)));
+          if (listRel.size()>0) str.append(", ");                  
+        }
+        list.clear();
+      }  
       
-      }     
    }    
    
    /**
@@ -303,7 +391,60 @@ public class Assembler {
      
      @Override
      public void flush(StringBuilder str) {
-      
+       MemoryDasm memLow;
+       MemoryDasm memHigh;
+       MemoryDasm memRelLow;
+       MemoryDasm memRelHigh;
+        
+       // create starting command according to the kind of byte
+       switch (aWord) {
+         case DOT_WORD:
+           str.append((" .word "));  
+           break;
+         case WORD:
+           str.append((" word "));   
+           break;
+         case DC_W_WORD:
+           str.append((" dc.w "));  
+           break;
+         case DOT_DBYTE:
+           str.append((" .dbyte "));   
+           break;
+         case MARK_WORD:
+           str.append((" !word "));   
+           break;
+         case SIXTEEN_WORD:
+           str.append((" !16 "));  
+           break;  
+       }
+       
+       while (!list.isEmpty()) {
+         // if only 1 byte left, use byte coding
+         if (list.size()==1) aByte.flush(str);
+         else {
+           memLow=list.peek();
+           memRelLow=listRel.peek();
+           memHigh=list.peek();
+           memRelHigh=listRel.peek();
+           
+           if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
+             if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
+            else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                 else str.append("$").append(ShortToExe(memRelLow.address));  
+           } else {
+             // if annot make a word with relative locations, force all to be of byte type
+             if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  aByte.flush(str);
+             else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
+             
+             // remove the used elements
+             list.pop();
+             list.pop();
+             listRel.pop();
+             listRel.pop();
+           }
+           if (list.size()>=2) str.append(", ");
+         }
+       }
      } 
    }
    
@@ -330,8 +471,11 @@ public class Assembler {
       } 
    }    
    
-   /** Fifo list */
-   LinkedList<MemoryDasm> list=new LinkedList();
+   /** Fifo list  of memory locations */
+   protected static LinkedList<MemoryDasm> list=new LinkedList();
+   
+   /** Fifo list of related memory locations */
+   protected static LinkedList<MemoryDasm> listRel=new LinkedList();   
    
    /** Option to use */
    protected static Option option;
@@ -390,8 +534,9 @@ public class Assembler {
     * 
     * @param str the string builder where put result
     * @param mem the memory being processed
+    * @param memRel eventual memory related
     */
-   public void putValue(StringBuilder str, MemoryDasm mem) {
+   public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel) {
      ActionType type=actualType;  
      lastMem=mem;
      
@@ -432,6 +577,7 @@ public class Assembler {
           
      
      list.add(mem);
+     listRel.add(memRel);
      
      // we are processing bytes?
      if (actualType instanceof Byte) {
