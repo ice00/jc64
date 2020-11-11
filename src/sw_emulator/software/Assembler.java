@@ -133,10 +133,38 @@ public class Assembler {
     
      /**
       * Get the char of this data type
-      * 
+      *  -> ORG $xxyy
+      *  -> .ORG $xxyy
+      *  -> * = $xxyy
+      *  -> .pc $xxyy
       * @return the char
       */
      public abstract String getName();
+   }
+   
+   public enum Origin implements ActionType {
+      ORG,              //  ORG $xxyy
+      DOT_ORG,          // .ORG $xxyy
+      ASTERISK,         //  * = $xxyy
+      DOT_PC;           //  .pc $xxyy
+           
+      @Override
+      public void flush(StringBuilder str) {
+        switch (aOrigin) {
+          case ORG:
+              str.append("  org $").append(ShortToExe(lastPC)).append("\n\n");
+            break;
+          case DOT_ORG:
+              str.append("  .org $").append(ShortToExe(lastPC)).append("\n\n");
+            break;
+          case ASTERISK:
+              str.append("  *=").append(ShortToExe(lastPC)).append("\n\n");
+            break;
+          case DOT_PC:
+              str.append("  .pc $").append(ShortToExe(lastPC)).append("\n\n");
+            break;
+        }    
+      }
    }
    
    /**
@@ -146,7 +174,7 @@ public class Assembler {
     */
    public enum Label implements ActionType {
       NAME,               // xxxx
-      NAME_COLON;          // xxxx:
+      NAME_COLON;         // xxxx:
     
       @Override
       public void flush(StringBuilder str) {
@@ -365,7 +393,8 @@ public class Assembler {
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(mem.type).append(memRel.dasmLocation);
                  else str.append(mem.type).append("$").append(ShortToExe(memRel.address));
           } else str.append("$").append(ByteToExe(Unsigned.done(mem.copy)));
-          if (listRel.size()>0) str.append(", ");                  
+          if (listRel.size()>0) str.append(", ");  
+          else str.append("\n");
         }
         list.clear();
       }  
@@ -422,27 +451,30 @@ public class Assembler {
          // if only 1 byte left, use byte coding
          if (list.size()==1) aByte.flush(str);
          else {
-           memLow=list.peek();
-           memRelLow=listRel.peek();
-           memHigh=list.peek();
-           memRelHigh=listRel.peek();
+           memLow=list.pop();
+           memRelLow=listRel.pop();
+           memHigh=list.pop();
+           memRelHigh=listRel.pop();           
            
            if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
                  else str.append("$").append(ShortToExe(memRelLow.address));  
            } else {
-             // if annot make a word with relative locations, force all to be of byte type
-             if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  aByte.flush(str);
+             // if cannot make a word with relative locations, force all to be of byte type
+             if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
+               list.addFirst(memHigh);
+               list.addFirst(memLow);
+               listRel.addFirst(memRelHigh);
+               listRel.addFirst(memRelLow);
+               aByte.flush(str);
+             }
              else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
              
-             // remove the used elements
-             list.pop();
-             list.pop();
-             listRel.pop();
-             listRel.pop();
+             
            }
            if (list.size()>=2) str.append(", ");
+           else str.append("\n");
          }
        }
      } 
@@ -483,6 +515,12 @@ public class Assembler {
    /** Last used memory dasm */
    protected static MemoryDasm lastMem=null;
    
+   /** Last program counter */
+   protected static int lastPC=0;
+   
+   
+   /** Assembler origin to use */
+   protected static Assembler.Origin aOrigin; 
    
    /** Assembler label to use */
    protected static Assembler.Label aLabel;
@@ -508,6 +546,7 @@ public class Assembler {
     * Set the option to use
     * 
     * @param option the option to use
+    * @param aOrigin the origin type to use
     * @param aLabel the label type to use
     * @param aComment the comment type to use
     * @param aBlockComment the comment type to use
@@ -516,12 +555,14 @@ public class Assembler {
     * 
     */
    public void setOption(Option option, 
+                         Assembler.Origin aOrigin,
                          Assembler.Label aLabel,  
                          Assembler.Comment aComment, 
                          Assembler.BlockComment aBlockComment,
                          Assembler.Byte aByte, 
                          Assembler.Word aWord) {
      Assembler.option=option;
+     Assembler.aOrigin=aOrigin;
      Assembler.aLabel=aLabel;
      Assembler.aComment=aComment;
      Assembler.aBlockComment=aBlockComment;
@@ -603,6 +644,17 @@ public class Assembler {
    }
    
    /**
+    * Put the origin of PC
+    * 
+    * @param str the steam for output
+    * @param pc the program counter to set
+    */
+   public void setOrg(StringBuilder str, int pc) {
+     lastPC=pc;
+     aOrigin.flush(str);
+   }
+   
+   /**
     * Flush the actual data to the output stream
     * 
     * @param str the output stream
@@ -619,13 +671,13 @@ public class Assembler {
    private ActionType getType(MemoryDasm mem) {
      if (!mem.isData) return null;
      
-     switch (mem.type) {
-       case 'B':
-       case 'D':
-       case 'Y':
-       case 'R':
+     switch (mem.dataType) {
+       case BYTE_HEX:
+       case BYTE_DEC:
+       case BYTE_BIN:
+       case BYTE_CHAR:
          return aByte;
-       case 'W':
+       case WORD:
          return aWord;
            
      }

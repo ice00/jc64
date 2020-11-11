@@ -315,38 +315,29 @@ public class M6510Dasm implements disassembler {
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX
   };
 
-  /**
-   * Type of instruction (used to create comment)
-   */
+  /** Type of instruction (used to create comment) */
   public int iType=M_JAM;
 
-  /**
-   * Type of addressing used by instruction (used to create comment)
-   */
+  /** Type of addressing used by instruction (used to create comment) */
   public int aType=A_NUL;
 
-  /**
-   * Value of address (used to create comment)
-   */
+  /** Value of address (used to create comment) */
   public long addr=0;
 
-  /**
-   * Value of operation (used to create comment)
-   */
+  /** Value of operation (used to create comment) */
   public long value=0;
 
-  /**
-   * Last position pointer in buffer
-   */
+  /** Last position pointer in buffer */
   public int pos=0;
 
-  /**
-   * Last program counter value
-   */
+  /** Last program counter value */
   public long pc=0;
   
   /** Memory dasm to use */
   MemoryDasm[] memory;
+  
+  /** Assembler manager */
+  Assembler assembler=new Assembler();
   
   /** Option to use */
   protected Option option;
@@ -412,6 +403,8 @@ public class M6510Dasm implements disassembler {
         aWord=option.kickWord;  
         break;        
     }
+    
+    assembler.setOption(option, Assembler.Origin.DOT_ORG, aLabel, aComment, aBlockComment, aByte, aWord);
   }
 
   /**
@@ -593,8 +586,7 @@ public class M6510Dasm implements disassembler {
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
-    int counter=0;               // data aligment counter
-    
+        
     result.append(addConstants());
     
     this.pos=pos;;
@@ -604,16 +596,12 @@ public class M6510Dasm implements disassembler {
       isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
         if (isCode) {    
-          if (counter>0) {
-            // we were on data, so close it
-            result.append("\n");
-            counter=0;
-          }   
+          assembler.flush(result);
           
           // must put the org if we start from an garbage area
           if (wasGarbage) {
             wasGarbage=false;
-             result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+            assembler.setOrg(result, (int)pc);
           }
             
           // add block if user declare it
@@ -669,10 +657,10 @@ public class M6510Dasm implements disassembler {
           pc=this.pc;
         } else 
             if (mem.isGarbage) {
+              assembler.flush(result);
               wasGarbage=true;
               pos++;
-              pc++;
-              counter++;
+              pc++;              
             
               this.pos=pos;
               this.pc=pc; 
@@ -681,74 +669,13 @@ public class M6510Dasm implements disassembler {
             // must put the org if we start from an garbage area
             if (wasGarbage) {
               wasGarbage=false;
-               result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+              assembler.setOrg(result, (int)pc);
             }            
             
-            // add block if user declare it
-            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                
-              if (counter>0) {
-                // we where on a line with many bytes, so close it and start from 0
-                result.append("\n");
-                counter=0;
-              }                 
-              // split by new line
-              String[] lines = mem.userBlockComment.split("\\r?\\n");
-              for (String line : lines) {
-                if ("".equals(line) || " ".equals(line)) result.append("\n");
-                else result.append(";").append(line).append("\n");   
-              }  
-            }             
-            
-            // add the label if it was declared by dasm or user   
-            label=null;
-            if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
-            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
-            
-            // avoid to label a memory in table reference
-            if (mem.type=='+' || mem.type=='-') label=null;
-            
-            if (label!=null) {
-              if (counter>0) {
-                // we where on a line with many bytes, so close it and start from 0
-                result.append("\n");
-                counter=0;
-              }                 
-                
-              result.append(label).append(":");
-                        
-              if (mem.userComment!=null) {
-                tmp2="";
-                for (int i=label.length()+1; i<43; i++) // insert spaces
-                  tmp2+=" ";  
-                result.append(tmp2);
-                 
-                if (!"".equals(mem.userComment)) result.append(" ").append(mem.userComment).append("\n");
-                else result.append("\n");
-              } else result.append("\n");
-            }  
-            
-            if (counter>option.maxByteAggregate-1) {
-              // we already are above the limit, so split the line
-              result.append("\n");
-              counter=0;
-            }
-            
-            if (counter==0) tmp2="  .byte ";
-            else tmp2=", ";
-            
-            // this is a data declaration            
-            if (mem.type=='<' || mem.type=='>') {
-              // the byte is a reference
-              memRel=memory[mem.related];   
-              
-              if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) result.append(tmp2).append(mem.type).append(memRel.userLocation);
-              else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) result.append(tmp2).append(mem.type).append(memRel.dasmLocation);
-                   else result.append(tmp2).append(mem.type).append("$").append(ShortToExe(memRel.address));
-            } else result.append(tmp2).append("$").append(ByteToExe(Unsigned.done(buffer[pos])));
+            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related]: null); 
             
             pos++;
             pc++;
-            counter++;
             
             this.pos=pos;
             this.pc=pc;            
@@ -777,8 +704,7 @@ public class M6510Dasm implements disassembler {
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
-    int counter=0;               // data aligment counter
-     
+         
     result.append(addConstants());
     
     this.pos=pos;
@@ -788,16 +714,12 @@ public class M6510Dasm implements disassembler {
       isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
         if (isCode) {        
-          if (counter>0) {
-            // we were on data, so close it
-            result.append("\n");
-            counter=0;
-          }  
+          assembler.flush(result);
           
           // must put the org if we start from an garbage area
           if (wasGarbage) {
             wasGarbage=false;
-             result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+            assembler.setOrg(result, (int)pc);
           }             
                
           // add block if user declare it
@@ -849,101 +771,32 @@ public class M6510Dasm implements disassembler {
           pos=this.pos;
           pc=this.pc;
         } else if (mem.isGarbage) {
+              assembler.flush(result);
               wasGarbage=true;
               pos++;
               pc++;
-              counter++;
-            
+                          
               this.pos=pos;
               this.pc=pc; 
             } 
           else { 
             // must put the org if we start from an garbage area
-            if (wasGarbage) {
+            if (wasGarbage) {                
               wasGarbage=false;
-               result.append("  .org $").append(ShortToExe((int)pc)).append("\n\n");
+              assembler.setOrg(result, (int)pc);
             }   
             
-            // add block if user declare it
-            if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
-              if (counter>0) {
-                // we where on a line with many bytes, so close it and start from 0
-                result.append("\n");
-                counter=0;
-              } 
-                
-              // split by new line
-              String[] lines = mem.userBlockComment.split("\\r?\\n");
-              for (String line : lines) {
-                if ("".equals(line) || " ".equals(line)) result.append("\n");
-                else result.append(";").append(line).append("\n");   
-              }  
-            }             
-            
-            // add the label if it was declared by dasm or user   
-            label=null;
-            if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
-            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
-            
-            // avoid to label a memory in table reference
-            if (mem.type=='+' || mem.type=='-') label=null;
-            
-            if (label!=null) {
-              if (counter>0) {
-                // we where on a line with many bytes, so close it and start from 0
-                result.append("\n");
-                counter=0;
-              }   
-                
-              result.append(label).append(":");
-                        
-              if (mem.userComment!=null) {
-                tmp2="";
-                for (int i=label.length()+1; i<40; i++) // insert spaces
-                  tmp2+=" ";  
-                result.append(tmp2);
-                 
-                if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
-                else result.append("\n");
-              } else result.append("\n");
-            }  
-            
-            if (counter>option.maxByteAggregate-1) {
-              // we already are above the limit, so split the line
-              //result.append(desAsChar.toString()+"\n");
-              result.append("\n");
-              counter=0;
-            }
-            
-            if (counter==0) {
-               tmp2=this.getDataSpacesTabs()+".byte ";
-               //desAsChar=new String[option.maxByteAggregate];
-            }
-            else {
-               tmp2=", ";
-               //desAsChar[counter]=""+mem.copy;
-            }
-            
-            // this is a data declaration            
-            if (mem.type=='<' || mem.type=='>') {
-              // the byte is a reference
-              memRel=memory[mem.related];   
-              
-              if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) result.append(tmp2).append(mem.type).append(memRel.userLocation);
-              else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) result.append(tmp2).append(mem.type).append(memRel.dasmLocation);
-                   else result.append(tmp2).append(mem.type).append("$").append(ShortToExe(memRel.address));
-            } else result.append(tmp2).append("$").append(ByteToExe(Unsigned.done(buffer[pos])));
-            
+            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related]: null);            
             
             pos++;
             pc++;
-            counter++;
             
             this.pos=pos;
             this.pc=pc;            
           }  
         
     } 
+    assembler.flush(result);
     return result.toString();
   }  
 
