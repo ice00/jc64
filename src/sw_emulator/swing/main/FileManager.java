@@ -102,6 +102,7 @@ public class FileManager {
       option.maxLongAggregate = in.readInt();
       
       option.dasmF3Comp = in.readBoolean();
+      option.dasmOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.dasmLabel = Assembler.Label.valueOf(in.readUTF());
       option.dasmComment = Assembler.Comment.valueOf(in.readUTF());
       option.dasmBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
@@ -261,6 +262,7 @@ public class FileManager {
       out.writeInt(option.maxLongAggregate);
       
       out.writeBoolean(option.dasmF3Comp);
+      out.writeUTF(option.dasmOrigin.name());
       out.writeUTF(option.dasmLabel.name());
       out.writeUTF(option.dasmComment.name());
       out.writeUTF(option.dasmBlockComment.name());

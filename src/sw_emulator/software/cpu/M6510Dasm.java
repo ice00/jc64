@@ -342,6 +342,9 @@ public class M6510Dasm implements disassembler {
   /** Option to use */
   protected Option option;
   
+  /** Assembler origin to use */
+  protected Assembler.Origin aOrigin;
+  
   /** Assembler label to use */
   protected Assembler.Label aLabel;
   
@@ -376,6 +379,7 @@ public class M6510Dasm implements disassembler {
     
     switch (option.assembler) {
       case DASM:
+        aOrigin=option.dasmOrigin;
         aLabel=option.dasmLabel;
         aComment=option.dasmComment;
         aBlockComment=option.dasmBlockComment;
@@ -404,7 +408,7 @@ public class M6510Dasm implements disassembler {
         break;        
     }
     
-    assembler.setOption(option, Assembler.Origin.DOT_ORG, aLabel, aComment, aBlockComment, aByte, aWord);
+    assembler.setOption(option, aOrigin, aLabel, aComment, aBlockComment, aByte, aWord);
   }
 
   /**

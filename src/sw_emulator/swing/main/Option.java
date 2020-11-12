@@ -522,9 +522,12 @@ public class Option {
   /** DASM: compile source with f3 option */
   public boolean dasmF3Comp=false;
   
-  /** DASM: label declaration */
-  public Assembler.Label dasmLabel=Assembler.Label.NAME_COLON;  
+  /** DASM: origin declaration */
+  public Assembler.Origin dasmOrigin=Assembler.Origin.DOT_ORG;    
   
+  /** DASM: label declaration */
+  public Assembler.Label dasmLabel=Assembler.Label.NAME_COLON;    
+    
   /** DASM: comment declaration */
   public Assembler.Comment dasmComment=Assembler.Comment.SEMICOLON; 
   

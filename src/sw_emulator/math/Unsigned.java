@@ -39,9 +39,10 @@ public final class Unsigned {
    * @return the unsigned int of the value
    */
   public static final int done(byte value) {
-    int tmp=value;
-    if (tmp<0) tmp+=256;
-    return tmp;
+    //int tmp=value;
+    //if (tmp<0) tmp+=256;
+    //return tmp;
+    return (value & 0xFF);
   }
 
   /**
@@ -51,8 +52,9 @@ public final class Unsigned {
    * @return the unsigned int of the value
    */
   public static final int done(short value) {
-    int tmp=value;
-    if (tmp<0) tmp+=65438;
-    return tmp;
+    //int tmp=value;
+    //if (tmp<0) tmp+=65438;
+    //return tmp;
+    return (value & 0xFFFF);
   }
 }

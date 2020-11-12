@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.Option;
 
 /**
@@ -392,13 +393,34 @@ public class Assembler {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(mem.type).append(memRel.userLocation);
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(mem.type).append(memRel.dasmLocation);
                  else str.append(mem.type).append("$").append(ShortToExe(memRel.address));
-          } else str.append("$").append(ByteToExe(Unsigned.done(mem.copy)));
+          } else str.append(getByteType(mem.dataType, mem.copy));
           if (listRel.size()>0) str.append(", ");  
           else str.append("\n");
         }
         list.clear();
       }  
       
+      /**
+       * Return the byte represented as by the given type
+       * 
+       * @param dataType the type to use 
+       * @param value the byte value
+       * @return the converted string
+       */
+      private String getByteType(DataType dataType, byte value) {
+        switch (dataType)   {
+          case BYTE_DEC:
+            return ""+Unsigned.done(value);
+          case BYTE_BIN:
+            return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
+          case BYTE_CHAR:
+            //return "\""+(char)Unsigned.done(value)+"\"";
+            return "'"+(char)Unsigned.done(value);
+          case BYTE_HEX:
+          default:
+            return "$"+ByteToExe(Unsigned.done(value));
+        }
+      }
    }    
    
    /**
