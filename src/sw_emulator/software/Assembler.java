@@ -349,7 +349,7 @@ public class Assembler {
       BYTE,               //  byte $xx
       DC_BYTE,            //    dc $xx
       DC_B_BYTE,          //  dc.b $xx
-      BYT_BYTE,           //  .byt $xx
+      DOT_BYT_BYTE,       //  .byt $xx
       MARK_BYTE,          // !byte $xx 
       EIGHT_BYTE;         //    !8 $xx     
       
@@ -372,8 +372,8 @@ public class Assembler {
           case DC_B_BYTE:
             str.append((" dc.b "));
             break;
-          case BYT_BYTE:
-            str.append((" dc.b "));  
+          case DOT_BYT_BYTE:
+            str.append((" .byt.b "));  
             break;
           case MARK_BYTE:
             str.append((" !byte "));   

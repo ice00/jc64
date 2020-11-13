@@ -387,7 +387,10 @@ public class M6510Dasm implements disassembler {
         aWord=option.dasmWord;
         break;
       case TMPX:
+        aOrigin=option.tmpxOrigin;   
         aLabel=option.tmpxLabel;
+        aComment=option.tmpxComment;
+        aBlockComment=option.tmpxBlockComment;
         aByte=option.tmpxByte;
         aWord=option.tmpxWord;
         break;  
