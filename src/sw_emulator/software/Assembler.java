@@ -143,10 +143,45 @@ public class Assembler {
      public abstract String getName();
    }
    
+   /**
+    * Starting declaration
+    *  -> processor 6502
+    *  -> .cpu "6502"
+    *  -> .cpu 6502
+    */
+   public enum Starting implements ActionType {
+      PROC,             // processor 6502
+      DOT_CPU_A,        // .cpu "6502"
+      DOT_CPU;          // .cpu 6502
+       
+       
+      @Override
+      public void flush(StringBuilder str) {
+        switch (aStarting) {
+          case PROC:
+            str.append("  processor 6502\n\n");
+            break;
+          case DOT_CPU_A:
+            str.append(" .cpu \"6502\"\n\n");  
+            break;
+          case DOT_CPU:
+            str.append("  .cpu 6502\n\n");
+            break;
+        }  
+      }
+   } 
+   
+   /**
+    * Origin declaration
+    *  -> org $xxyy
+    *  -> .org $xxyy
+    *  -> *=$xxyy
+    *  -> .pc $xxyy
+    */
    public enum Origin implements ActionType {
-      ORG,              //  ORG $xxyy
-      DOT_ORG,          // .ORG $xxyy
-      ASTERISK,         //  * = $xxyy
+      ORG,              //  org $xxyy
+      DOT_ORG,          // .org $xxyy
+      ASTERISK,         //   *= $xxyy
       DOT_PC;           //  .pc $xxyy
            
       @Override
@@ -355,31 +390,33 @@ public class Assembler {
       
       @Override
       public void flush(StringBuilder str) {
+        if (list.isEmpty()) return; 
+        
         MemoryDasm mem;
         MemoryDasm memRel;
         
         // create starting command according to the kind of byte
         switch (aByte) {
           case DOT_BYTE:
-            str.append((" .byte "));
+            str.append(("  .byte "));
             break;
           case BYTE:
-            str.append((" byte "));
+            str.append(("  byte "));
             break;
           case DC_BYTE:
-           str.append((" dc "));   
+           str.append(("  dc "));   
             break;
           case DC_B_BYTE:
-            str.append((" dc.b "));
+            str.append(("  dc.b "));
             break;
           case DOT_BYT_BYTE:
-            str.append((" .byt.b "));  
+            str.append(("  .byt.b "));  
             break;
           case MARK_BYTE:
-            str.append((" !byte "));   
+            str.append(("  !byte "));   
             break;  
           case EIGHT_BYTE:
-            str.append((" !8 "));  
+            str.append(("  !8 "));  
             break;  
         }
           
@@ -441,7 +478,9 @@ public class Assembler {
      SIXTEEN_WORD;        //    !16 $xxyy
      
      @Override
-     public void flush(StringBuilder str) {
+     public void flush(StringBuilder str) {         
+       if (list.isEmpty()) return; 
+       
        MemoryDasm memLow;
        MemoryDasm memHigh;
        MemoryDasm memRelLow;
@@ -450,22 +489,22 @@ public class Assembler {
        // create starting command according to the kind of byte
        switch (aWord) {
          case DOT_WORD:
-           str.append((" .word "));  
+           str.append(("  .word "));  
            break;
          case WORD:
-           str.append((" word "));   
+           str.append(("  word "));   
            break;
          case DC_W_WORD:
-           str.append((" dc.w "));  
+           str.append(("  dc.w "));  
            break;
          case DOT_DBYTE:
-           str.append((" .dbyte "));   
+           str.append(("  .dbyte "));   
            break;
          case MARK_WORD:
-           str.append((" !word "));   
+           str.append(("  !word "));   
            break;
          case SIXTEEN_WORD:
-           str.append((" !16 "));  
+           str.append(("  !16 "));  
            break;  
        }
        
@@ -541,6 +580,9 @@ public class Assembler {
    protected static int lastPC=0;
    
    
+   /** Assembler starting to use */
+   protected static Assembler.Starting aStarting; 
+   
    /** Assembler origin to use */
    protected static Assembler.Origin aOrigin; 
    
@@ -568,6 +610,7 @@ public class Assembler {
     * Set the option to use
     * 
     * @param option the option to use
+    * @param aStarting the starting type to use 
     * @param aOrigin the origin type to use
     * @param aLabel the label type to use
     * @param aComment the comment type to use
@@ -577,12 +620,14 @@ public class Assembler {
     * 
     */
    public void setOption(Option option, 
+                         Assembler.Starting aStarting,
                          Assembler.Origin aOrigin,
                          Assembler.Label aLabel,  
                          Assembler.Comment aComment, 
                          Assembler.BlockComment aBlockComment,
                          Assembler.Byte aByte, 
                          Assembler.Word aWord) {
+     Assembler.aStarting=aStarting;  
      Assembler.option=option;
      Assembler.aOrigin=aOrigin;
      Assembler.aLabel=aLabel;
@@ -666,6 +711,15 @@ public class Assembler {
    }
    
    /**
+    * Put the starting string
+    * 
+    * @param str the steam for output
+    */
+   public void setStarting(StringBuilder str) {
+     aStarting.flush(str);
+   }   
+   
+   /**
     * Put the origin of PC
     * 
     * @param str the steam for output
@@ -673,7 +727,55 @@ public class Assembler {
     */
    public void setOrg(StringBuilder str, int pc) {
      lastPC=pc;
-     aOrigin.flush(str);
+      aOrigin.flush(str);
+   }
+   
+   /**
+    * Set a word and put to ouptput steam (it deletes anything that threre are in queue)
+    * 
+    * @param str the output stream
+    * @param low the low byte
+    * @param high the hight byte
+    * @param comment eventual comment to add
+    */
+   public void setWord(StringBuilder str, byte low, byte high, String comment) {
+     MemoryDasm lowMem=new MemoryDasm();
+     MemoryDasm highMem=new MemoryDasm();
+     
+     lowMem.copy=low;
+     lowMem.dataType=DataType.WORD;
+     lowMem.type='W';
+     lowMem.related=-1;
+     highMem.copy=high;
+     highMem.dataType=DataType.WORD;
+     highMem.type='W';
+     highMem.related=-1;
+     
+     list.clear();
+     listRel.clear();
+     list.add(lowMem);
+     listRel.add(null);
+     list.add(highMem);
+     listRel.add(null);
+     
+     int size=0;
+     
+     if (comment!=null) {
+       highMem.userComment=comment;
+       lastMem=highMem;
+       size=str.length();
+     }
+     
+     actualType=aWord;
+     flush(str);
+     actualType=null;
+     
+     if (comment!=null) {
+       str.deleteCharAt(str.length()-1);              // remove \n
+       size=str.length()-size;                      // get number of chars used  
+       str.append(SPACES.substring(0, SPACES.length()-size));
+       aComment.flush(str);  
+     }
    }
    
    /**

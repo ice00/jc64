@@ -337,28 +337,10 @@ public class M6510Dasm implements disassembler {
   MemoryDasm[] memory;
   
   /** Assembler manager */
-  Assembler assembler=new Assembler();
+  protected Assembler assembler=new Assembler();
   
   /** Option to use */
-  protected Option option;
-  
-  /** Assembler origin to use */
-  protected Assembler.Origin aOrigin;
-  
-  /** Assembler label to use */
-  protected Assembler.Label aLabel;
-  
-  /** Assembler block comment to use */
-  protected Assembler.BlockComment aBlockComment; 
-  
-  /** Assembler line comment to use */
-  protected Assembler.Comment aComment; 
-  
-  /** Assembler byte type */
-  protected Assembler.Byte aByte;
-  
-  /** Assembler word type */
-  protected Assembler.Word aWord;
+  protected Option option;    
   
   /**
    * Set the memory dasm to use
@@ -373,45 +355,11 @@ public class M6510Dasm implements disassembler {
    * Set the option to use
    * 
    * @param option the option to use
+   * @param assembler the assembler to use
    */
-  public void setOption(Option option) {
+  public void setOption(Option option, Assembler assembler) {
     this.option=option;
-    
-    switch (option.assembler) {
-      case DASM:
-        aOrigin=option.dasmOrigin;
-        aLabel=option.dasmLabel;
-        aComment=option.dasmComment;
-        aBlockComment=option.dasmBlockComment;
-        aByte=option.dasmByte;
-        aWord=option.dasmWord;
-        break;
-      case TMPX:
-        aOrigin=option.tmpxOrigin;   
-        aLabel=option.tmpxLabel;
-        aComment=option.tmpxComment;
-        aBlockComment=option.tmpxBlockComment;
-        aByte=option.tmpxByte;
-        aWord=option.tmpxWord;
-        break;  
-      case CA65:
-        aLabel=option.ca65Label;
-        aByte=option.ca65Byte;
-        aWord=option.ca65Word;  
-        break;  
-      case ACME:
-        aLabel=option.acmeLabel;
-        aByte=option.acmeByte;
-        aWord=option.acmeWord;
-        break;
-      case KICK:
-        aLabel=option.kickLabel;
-        aByte=option.kickByte;
-        aWord=option.kickWord;  
-        break;        
-    }
-    
-    assembler.setOption(option, aOrigin, aLabel, aComment, aBlockComment, aByte, aWord);
+    this.assembler=assembler;        
   }
 
   /**

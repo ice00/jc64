@@ -85,6 +85,30 @@ public class Disassembly {
   
   /** Memory dasm */
   public MemoryDasm[] memory;
+  
+  /** The assembler to use  */
+  protected Assembler assembler=new Assembler();
+  
+  /** Assembler starting to use */
+  protected Assembler.Starting aStarting;
+  
+  /** Assembler origin to use */
+  protected Assembler.Origin aOrigin;
+  
+  /** Assembler label to use */
+  protected Assembler.Label aLabel;
+  
+  /** Assembler block comment to use */
+  protected Assembler.BlockComment aBlockComment; 
+  
+  /** Assembler line comment to use */
+  protected Assembler.Comment aComment; 
+  
+  /** Assembler byte type */
+  protected Assembler.Byte aByte;
+  
+  /** Assembler word type */
+  protected Assembler.Word aWord;
     
   /**
    * Disassemble the given data
@@ -196,10 +220,12 @@ public class Disassembly {
     int psidPAddr;    // psid play address     
     int sidPos;       // Position in buffer of start of sid program     
     int sidPC;        // PC value of start of sid program 
+    
+    setupAssembler();
       
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
-    sid.setOption(option);       
+    sid.setOption(option, assembler );       
   
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
@@ -235,29 +261,31 @@ public class Disassembly {
     if (asSource) {
       sid.upperCase=option.opcodeUpperCaseSource;
         
-      tmp.append("  processor 6502\n\n");
+      assembler.setStarting(tmp);
       
       // calculate org for header
       int header=sidPC;   
       header-=sidPos;
       if (psidLAddr==0) header-=2;      
-      tmp.append("  .org $").append(ShortToExe(header)).append("\n\n");
+      assembler.setOrg(tmp, header);
       
       // create header of PSID
       if (inB[0]=='P') tmp.append("  .byte \"PSID\"\n");
       else tmp.append("  .byte \"RSID\"\n");
       
-      tmp.append("  .word $").append(ShortToExe(inB[0x04]+inB[0x05]*256)).append("         ; version\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x06]+inB[0x07]*256)).append("         ; data offset\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x08]+inB[0x09]*256)).append("         ; load address in CBM format\n");
+      assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
+      assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
+      assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");
+      
       tmp.append("  .byte >").append(option.psidInitSongsLabel).append("\n");
       tmp.append("  .byte <").append(option.psidInitSongsLabel).append("\n");
       tmp.append("  .byte >").append(option.psidPlaySoundsLabel).append("\n");
       tmp.append("  .byte <").append(option.psidPlaySoundsLabel).append("\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x0E]+inB[0x0F]*256)).append("         ; songs\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x10]+inB[0x12]*256)).append("         ; default song\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x12]+inB[0x13]*256)).append("         ; speed\n");
-      tmp.append("  .word $").append(ShortToExe(inB[0x14]+inB[0x15]*256)).append("         ; speed\n");
+      
+      assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
+      assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
+      assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
+      assembler.setWord(tmp, inB[0x14], inB[0x15], "speed");
    
       addString(tmp, 0x16, 0x36);
       addString(tmp, 0x36, 0x56);
@@ -265,19 +293,17 @@ public class Disassembly {
       
       // test if version > 1
       if (inB[0x07]>0x76) {
-        tmp.append("  .word $").append(ShortToExe(inB[0x76]+inB[0x77]*256)).append("         ; word flag\n");  
-        tmp.append("  .word $").append(ShortToExe(inB[0x78]+inB[0x79]*256)).append("         ; start and page length\n");  
-        tmp.append("  .word $").append(ShortToExe(inB[0x7A]+inB[0x7B]*256)).append("         ; second and third SID address \n");     
+        assembler.setWord(tmp, inB[0x76], inB[0x77], "word flag");
+        assembler.setWord(tmp, inB[0x78], inB[0x79], "start and page length");
+        assembler.setWord(tmp, inB[0x7A], inB[0x7B], "second and third SID address");      
       }
       tmp.append("\n");
       if (psidLAddr==0) {
-        tmp.append("                      ; read load address\n");  
-        tmp.append("  .byte <$").append(ShortToExe(inB[0x7C]+inB[0x7D]*256)).append("\n");
-        tmp.append("  .byte >$").append(ShortToExe(inB[0x7C]+inB[0x7D]*256)).append("\n");
-        psidLAddr=inB[0x7C]+inB[0x7D]*256;  // modify this value as used for org starting
+        assembler.setWord(tmp, inB[0x7C], inB[0x7D], "read load address"); 
+        psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
       }
       tmp.append("\n");
-      tmp.append("  .org $").append(ShortToExe(psidLAddr)).append("\n\n");
+      assembler.setOrg(tmp, psidLAddr);      
       
       tmp.append(sid.csdasm(inB, sidPos, inB.length, sidPC));
       source=tmp.toString();
@@ -320,6 +346,8 @@ public class Disassembly {
    */
   private void disassemlyPRG(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    
+    setupAssembler();
       
     switch (targetType) {
       case C64:
@@ -343,7 +371,7 @@ public class Disassembly {
     }      
     
     prg.setMemory(memory);
-    prg.setOption(option);
+    prg.setOption(option,  assembler);
     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      
     // calculate start/end address
@@ -362,15 +390,14 @@ public class Disassembly {
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
-      tmp.append("  processor 6502\n\n");
+      assembler.setStarting(tmp);
 
       if (option.dasmF3Comp) {
-        tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");
-        tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
-        tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
+        assembler.setOrg(tmp, start-2);
+        assembler.setWord(tmp, inB[0], inB[1], null);
         tmp.append("\n");
       }  
-      tmp.append("  .org $").append(ShortToExe(start)).append("\n\n");
+      assembler.setOrg(tmp, start);
       
       tmp.append(prg.csdasm(inB, 2, inB.length, start));
       source=tmp.toString();
@@ -391,6 +418,8 @@ public class Disassembly {
    */
   private void disassemlyMPR(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    
+    setupAssembler();
       
     switch (targetType) {
       case C64:
@@ -414,7 +443,7 @@ public class Disassembly {
     }
        
     prg.setMemory(memory);
-    prg.setOption(option);
+    prg.setOption(option,  assembler);
     
     if (mpr==null) return;
     
@@ -426,7 +455,7 @@ public class Disassembly {
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
-      tmp.append("  processor 6502\n\n");
+      assembler.setStarting(tmp);
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         
@@ -473,14 +502,13 @@ public class Disassembly {
       
 
       if (asSource) {
-        if (first && option.dasmF3Comp) {
-          tmp.append("  .org $").append(ShortToExe(start-2)).append("\n\n");        
-          tmp.append("  .byte ").append(Unsigned.done(inB[0])).append("\n");
-          tmp.append("  .byte ").append(Unsigned.done(inB[1])).append("\n");
+        if (first && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+          assembler.setOrg(tmp, start-2); 
+          assembler.setWord(tmp, inB[0], inB[1], null);
           tmp.append("\n");
           first=false;
         }
-        tmp.append("  .org $").append(ShortToExe(start)).append("\n\n");
+        assembler.setOrg(tmp, start);        
         tmp.append(prg.csdasm(inB, 2, inB.length, start));
       } else {    
           tmp.append(prg.cdasm(inB, 2, inB.length, start));
@@ -546,4 +574,46 @@ public class Disassembly {
       memory[i].copy=inB[i-start+offset];
     }  
   }  
+  
+  /**
+   * Set up the assembler
+   */
+  private void setupAssembler() {
+    switch (option.assembler) {
+      case DASM:
+        aStarting=option.dasmStarting;
+        aOrigin=option.dasmOrigin;
+        aLabel=option.dasmLabel;
+        aComment=option.dasmComment;
+        aBlockComment=option.dasmBlockComment;
+        aByte=option.dasmByte;
+        aWord=option.dasmWord;
+        break;
+      case TMPX:
+        aOrigin=option.tmpxOrigin;   
+        aLabel=option.tmpxLabel;
+        aComment=option.tmpxComment;
+        aBlockComment=option.tmpxBlockComment;
+        aByte=option.tmpxByte;
+        aWord=option.tmpxWord;
+        break;  
+      case CA65:
+        aLabel=option.ca65Label;
+        aByte=option.ca65Byte;
+        aWord=option.ca65Word;  
+        break;  
+      case ACME:
+        aLabel=option.acmeLabel;
+        aByte=option.acmeByte;
+        aWord=option.acmeWord;
+        break;
+      case KICK:
+        aLabel=option.kickLabel;
+        aByte=option.kickByte;
+        aWord=option.kickWord;  
+        break;        
+    }
+    
+    assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, aBlockComment, aByte, aWord);      
+  }
 }

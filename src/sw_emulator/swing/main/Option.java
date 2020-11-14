@@ -522,6 +522,9 @@ public class Option {
   /** DASM: compile source with f3 option */
   public boolean dasmF3Comp=false;
   
+  /** DASM: starting declaration */
+  public Assembler.Starting dasmStarting=Assembler.Starting.PROC; 
+  
   /** DASM: origin declaration */
   public Assembler.Origin dasmOrigin=Assembler.Origin.DOT_ORG;    
   
