@@ -110,24 +110,33 @@ public class FileManager {
       option.dasmByte = Assembler.Byte.valueOf(in.readUTF());
       option.dasmWord = Assembler.Word.valueOf(in.readUTF());
       
+      option.tmpxStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.tmpxOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.tmpxLabel = Assembler.Label.valueOf(in.readUTF());
       option.tmpxComment = Assembler.Comment.valueOf(in.readUTF());
       option.tmpxBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.tmpxByte = Assembler.Byte.valueOf(in.readUTF());
       option.tmpxWord = Assembler.Word.valueOf(in.readUTF());   
       
+      option.ca65Starting = Assembler.Starting.valueOf(in.readUTF());
+      option.ca65Origin = Assembler.Origin.valueOf(in.readUTF());
       option.ca65Label = Assembler.Label.valueOf(in.readUTF());
-      //option.ca65Comment = Assembler.Comment.valueOf(in.readUTF());
-      //option.ca65BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.ca65Comment = Assembler.Comment.valueOf(in.readUTF());
+      option.ca65BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.ca65Byte = Assembler.Byte.valueOf(in.readUTF());
       option.ca65Word = Assembler.Word.valueOf(in.readUTF());      
  
+      option.acmeStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.acmeOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.acmeLabel = Assembler.Label.valueOf(in.readUTF());
       //option.acmeComment = Assembler.Comment.valueOf(in.readUTF());
       //option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.acmeByte = Assembler.Byte.valueOf(in.readUTF());
       option.acmeWord = Assembler.Word.valueOf(in.readUTF());  
       
+      
+      //option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
+      //option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.kickLabel = Assembler.Label.valueOf(in.readUTF());
       //option.kickComment = Assembler.Comment.valueOf(in.readUTF());
       //option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
@@ -271,24 +280,32 @@ public class FileManager {
       out.writeUTF(option.dasmByte.name());
       out.writeUTF(option.dasmWord.name());
       
+      out.writeUTF(option.tmpxStarting.name());
+      out.writeUTF(option.tmpxOrigin.name());
       out.writeUTF(option.tmpxLabel.name());
       out.writeUTF(option.tmpxComment.name());
       out.writeUTF(option.tmpxBlockComment.name());
       out.writeUTF(option.tmpxByte.name());
       out.writeUTF(option.tmpxWord.name());    
       
+      out.writeUTF(option.ca65Starting.name());
+      out.writeUTF(option.ca65Origin.name());
       out.writeUTF(option.ca65Label.name());
-      //out.writeUTF(option.ca65Comment.name());
-      //out.writeUTF(option.ca65BlockComment.name());
+      out.writeUTF(option.ca65Comment.name());
+      out.writeUTF(option.ca65BlockComment.name());
       out.writeUTF(option.ca65Byte.name());
       out.writeUTF(option.ca65Word.name());  
       
+      out.writeUTF(option.acmeStarting.name());
+      out.writeUTF(option.acmeOrigin.name());
       out.writeUTF(option.acmeLabel.name());
       //out.writeUTF(option.acmeComment.name());
       //out.writeUTF(option.acmeBlockComment.name());
       out.writeUTF(option.acmeByte.name());
       out.writeUTF(option.acmeWord.name());   
       
+      //out.writeUTF(option.kickStarting.name());
+      //out.writeUTF(option.kickOrigin.name());
       out.writeUTF(option.kickLabel.name());
       //out.writeUTF(option.kickComment.name());
       //out.writeUTF(option.kickBlockComment.name());

@@ -544,6 +544,10 @@ public class Option {
   public Assembler.Word dasmWord=Assembler.Word.DOT_WORD;
   
   
+  
+  /** TMPX: starting declaration */
+  public Assembler.Starting tmpxStarting=Assembler.Starting.DOT_CPU_A; 
+  
   /** TMPx: origin declaration */
   public Assembler.Origin tmpxOrigin=Assembler.Origin.ASTERISK; 
   
@@ -562,6 +566,10 @@ public class Option {
   /** TMPX: word declaration */
   public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
   
+  
+  
+  /** CA65: starting declaration */
+  public Assembler.Starting ca65Starting=Assembler.Starting.DOT_SETCPU; 
   
   /** CA65: origin declaration */
   public Assembler.Origin ca65Origin=Assembler.Origin.DOT_ORG;
@@ -583,8 +591,20 @@ public class Option {
   
  
   
+  /** ACME: starting declaration */
+  public Assembler.Starting acmeStarting=Assembler.Starting.MARK_CPU; 
+  
+  /** ACME: origin declaration */
+  public Assembler.Origin acmeOrigin=Assembler.Origin.ASTERISK;
+  
   /** ACME: label declaration */
   public Assembler.Label acmeLabel=Assembler.Label.NAME_COLON; 
+  
+  /** ACME: comment declaration */
+ /// public Assembler.Comment acmeComment=Assembler.Comment.SEMICOLON; 
+  
+  /** ACME: block comment declaration */
+ /// public Assembler.BlockComment acmeBlockComment=Assembler.BlockComment.SEMICOLON; 
   
   /** ACME: byte declaration */
   public Assembler.Byte acmeByte=Assembler.Byte.MARK_BYTE;

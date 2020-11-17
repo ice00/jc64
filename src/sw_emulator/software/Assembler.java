@@ -148,11 +148,17 @@ public class Assembler {
     *  -> processor 6502
     *  -> .cpu "6502"
     *  -> .cpu 6502
+    *  -> .setcpu 6502x
+    *  -> .p02
+    *  -> !CPU 6510
     */
    public enum Starting implements ActionType {
       PROC,             // processor 6502
       DOT_CPU_A,        // .cpu "6502"
-      DOT_CPU;          // .cpu 6502
+      DOT_CPU,          // .cpu 6502
+      DOT_SETCPU,       // .setcpu 6502x
+      DOT_P02,          // .p02
+      MARK_CPU;         // !cpu 6510
        
        
       @Override
@@ -162,11 +168,20 @@ public class Assembler {
             str.append("  processor 6502\n\n");
             break;
           case DOT_CPU_A:
-            str.append(" .cpu \"6502\"\n\n");  
+            str.append("  .cpu \"6502\"\n\n");  
             break;
           case DOT_CPU:
             str.append("  .cpu 6502\n\n");
             break;
+          case DOT_SETCPU:
+            str.append("  .cpu 6502\n\n");
+            break; 
+          case DOT_P02:
+            str.append("  .p02\n\n");
+            break;    
+          case MARK_CPU:
+            str.append("  !cpu 6510\n\n");
+            break;     
         }  
       }
    } 
