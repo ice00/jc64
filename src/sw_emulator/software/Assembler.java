@@ -290,6 +290,7 @@ public class Assembler {
       CSTYLE,          // /* xxx */ 
       IF,              // if 0 xxx endif
       DOT_IF,          // .if 0 xxx .endif
+      MARK_IF,         // !if 0 { xxx }
       COMMENT;         // .comment xxx .endc
     
       @Override
@@ -329,13 +330,13 @@ public class Assembler {
               if ("".equals(line) || " ".equals(line)) {
                 if (isOpen) str.append("endif\n\n");
                 else {
-                 str.append("if\n\n");
+                 str.append("if 0\n");
                  isOpen=false;
                 }
               } else {
                   if (!isOpen) {
                     isOpen=true;
-                    str.append("if\n");
+                    str.append("if 0\n");
                   }
                   str.append(";").append(line).append("\n");
                 }   
@@ -348,18 +349,37 @@ public class Assembler {
               if ("".equals(line) || " ".equals(line)) {
                 if (isOpen) str.append(".endif\n\n");
                 else {
-                 str.append(".if\n\n");
+                 str.append(".if 0\n");
                  isOpen=false;
                 }
               } else {
                   if (!isOpen) {
                     isOpen=true;
-                    str.append(".if\n");
+                    str.append(".if 0\n");
                   }
                   str.append(";").append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append(".endif\n");    
+            break;  
+          case MARK_IF:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append("}\n\n");
+                else {
+                 str.append("!if 0 {\n\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append("!if 0 {\n");
+                  }
+                  str.append(";").append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append("}\n");    
             break;  
           case COMMENT:
             isOpen=false;

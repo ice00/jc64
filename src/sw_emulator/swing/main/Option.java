@@ -601,10 +601,10 @@ public class Option {
   public Assembler.Label acmeLabel=Assembler.Label.NAME_COLON; 
   
   /** ACME: comment declaration */
- /// public Assembler.Comment acmeComment=Assembler.Comment.SEMICOLON; 
+  public Assembler.Comment acmeComment=Assembler.Comment.SEMICOLON; 
   
   /** ACME: block comment declaration */
- /// public Assembler.BlockComment acmeBlockComment=Assembler.BlockComment.SEMICOLON; 
+  public Assembler.BlockComment acmeBlockComment=Assembler.BlockComment.SEMICOLON; 
   
   /** ACME: byte declaration */
   public Assembler.Byte acmeByte=Assembler.Byte.MARK_BYTE;
@@ -613,6 +613,8 @@ public class Option {
   public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
   
   
+  /** Kick: starting declaration */
+  public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU; 
   
   /** KickAssembler: label declaration */
   public Assembler.Label kickLabel=Assembler.Label.NAME_COLON; 

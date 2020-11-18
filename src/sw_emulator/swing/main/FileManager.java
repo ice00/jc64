@@ -129,13 +129,13 @@ public class FileManager {
       option.acmeStarting = Assembler.Starting.valueOf(in.readUTF());
       option.acmeOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.acmeLabel = Assembler.Label.valueOf(in.readUTF());
-      //option.acmeComment = Assembler.Comment.valueOf(in.readUTF());
-      //option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.acmeComment = Assembler.Comment.valueOf(in.readUTF());
+      option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.acmeByte = Assembler.Byte.valueOf(in.readUTF());
       option.acmeWord = Assembler.Word.valueOf(in.readUTF());  
       
       
-      //option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
       //option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.kickLabel = Assembler.Label.valueOf(in.readUTF());
       //option.kickComment = Assembler.Comment.valueOf(in.readUTF());
@@ -299,8 +299,8 @@ public class FileManager {
       out.writeUTF(option.acmeStarting.name());
       out.writeUTF(option.acmeOrigin.name());
       out.writeUTF(option.acmeLabel.name());
-      //out.writeUTF(option.acmeComment.name());
-      //out.writeUTF(option.acmeBlockComment.name());
+      out.writeUTF(option.acmeComment.name());
+      out.writeUTF(option.acmeBlockComment.name());
       out.writeUTF(option.acmeByte.name());
       out.writeUTF(option.acmeWord.name());   
       
