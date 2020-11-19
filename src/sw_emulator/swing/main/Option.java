@@ -616,8 +616,14 @@ public class Option {
   /** Kick: starting declaration */
   public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU; 
   
+  /** ACME: kick declaration */
+  public Assembler.Origin kickOrigin=Assembler.Origin.ASTERISK;
+  
   /** KickAssembler: label declaration */
   public Assembler.Label kickLabel=Assembler.Label.NAME_COLON; 
+  
+  /** KickAssembler: comment declaration */
+  public Assembler.Comment kickComment=Assembler.Comment.DOUBLE_BAR; 
   
   /** KickAssembler: byte declaration */
   public Assembler.Byte kickByte=Assembler.Byte.DOT_BYTE;

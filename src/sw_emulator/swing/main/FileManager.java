@@ -136,9 +136,9 @@ public class FileManager {
       
       
       option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
-      //option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
+      option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.kickLabel = Assembler.Label.valueOf(in.readUTF());
-      //option.kickComment = Assembler.Comment.valueOf(in.readUTF());
+      option.kickComment = Assembler.Comment.valueOf(in.readUTF());
       //option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.kickByte = Assembler.Byte.valueOf(in.readUTF());
       option.kickWord = Assembler.Word.valueOf(in.readUTF());      
@@ -304,10 +304,10 @@ public class FileManager {
       out.writeUTF(option.acmeByte.name());
       out.writeUTF(option.acmeWord.name());   
       
-      //out.writeUTF(option.kickStarting.name());
-      //out.writeUTF(option.kickOrigin.name());
+      out.writeUTF(option.kickStarting.name());
+      out.writeUTF(option.kickOrigin.name());
       out.writeUTF(option.kickLabel.name());
-      //out.writeUTF(option.kickComment.name());
+      out.writeUTF(option.kickComment.name());
       //out.writeUTF(option.kickBlockComment.name());
       out.writeUTF(option.kickByte.name());
       out.writeUTF(option.kickWord.name());      
