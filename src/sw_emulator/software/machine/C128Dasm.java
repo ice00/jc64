@@ -343,261 +343,261 @@ public class C128Dasm extends M6510Dasm {
               case 0x135: return "Lunghezza del formato";
               case 0x136: return "Puntatore a fine campo";
               case 0x2FC:
-              case 0x2FD: return "Function Execute Hook";
+              case 0x2FD: return "Funzione esegue hook";
               case 0x300:
-              case 0x301: return "Error Message Link [4D3F]";
+              case 0x301: return "Collegamento messaggio di errore [4D3F]";
               case 0x302:
-              case 0x303: return "BASIC Warm Start Link	[4DC6]";
+              case 0x303: return "Collegamento BASIC per avviamento a caldo	[4DC6]";
               case 0x304:
-              case 0x305: return "Crunch BASIC Tokens Link [430D]";
+              case 0x305: return "Collegamento ai token BASIC Crunch [430D]";
               case 0x306:
-              case 0x307: return "Print Tokens Link [5151]";
+              case 0x307: return "Link ai token di stampa [5151]";
               case 0x308:
-              case 0x309: return "Start New BASIC Code Link [4AA2]";
+              case 0x309: return "Avvia un nuovo collegamento al codice BASIC [4AA2]";
               case 0x30A:
-              case 0x30B: return "Get Arithmetic Element Link [78DA]";
+              case 0x30B: return "Ottieni collegamento elemento aritmetico [78DA]";
               case 0x30C:
               case 0x30D: return "Crunch FE Hook [4321]";
               case 0x30E: 
-              case 0x30F: return "List FE Hook [51CD]";
+              case 0x30F: return "Elenco FE Hook [51CD]";
               case 0x310:
-              case 0x311: return "Execute FE Hook [4BA9]";
+              case 0x311: return "Esegue FE Hook [4BA9]";
               case 0x312:
-              case 0x313: return "Unused";
+              case 0x313: return "Non usato";
               case 0x314:
-              case 0x315: return "IRQ Vector [FA65]";
+              case 0x315: return "Vettoree IRQ [FA65]";
               case 0x316:
-              case 0x317: return "Break Interrupt Vector [B003]";
+              case 0x317: return "Vettore Break Interrupt [B003]";
               case 0x318:
-              case 0x319: return "NMI Interrupt Vector[FA40]";
+              case 0x319: return "Vettore NMI Interrupt [FA40]";
               case 0x31A:
-              case 0x31B: return "OPEN Vector [EFBD]";
+              case 0x31B: return "Vettore OPEN [EFBD]";
               case 0x31C:
-              case 0x31D: return "CLOSE Vector [F188]";
+              case 0x31D: return "Vettore CLOSE [F188]";
               case 0x31E:
-              case 0x31F: return "Set Input Vector [F106]";
+              case 0x31F: return "Imposta vettore di input [F106]";
               case 0x320:
-              case 0x321: return "Set Output Vector [F14C]";
+              case 0x321: return "Imposta vettore di output [F14C]";
               case 0x322:
-              case 0x323: return "Restore I/O Vector [F226]";
+              case 0x323: return "Ripristina vettore I/O [F226]";
               case 0x324:
-              case 0x325: return "Input Vector [EF06]";
+              case 0x325: return "Vettore di input [EF06]";
               case 0x326:
-              case 0x327: return "Output Vector	[EF79]";
+              case 0x327: return "Vettore di output [EF79]";
               case 0x328:
-              case 0x329: return "Test STOP Key [F66E]";
+              case 0x329: return "Tasto STOP di prova [F66E]";
               case 0x32A:
-              case 0x32B: return "GET Vector [EEEB]";
+              case 0x32B: return "Vettore GET [EEEB]";
               case 0x32C:
-              case 0x32D: return "Abort I/O Vector [F222]";
+              case 0x32D: return "Vettore Abort I/O [F222]";
               case 0x32E:
-              case 0x32F: return "Machine Lang Monitor Link [B006]";
+              case 0x32F: return "Collegamento al monitor del linguaggio macchina [B006]";
               case 0x330:
-              case 0x331: return "LOAD Link [F26C]";
+              case 0x331: return "Collegamento LOAD [F26C]";
               case 0x332:
-              case 0x333: return "SAVE Link [F54E]";
+              case 0x333: return "Collegamento SAVE [F54E]";
               case 0x334:
-              case 0x335: return "Print Control Code Link [C7B9]";
+              case 0x335: return "Collegamento del codice di controllo della stampa [C7B9]";
               case 0x336:
-              case 0x337: return "Print High ASCII Code Link [C805]";
+              case 0x337: return "Stampa collegamento ad alto codice ASCII [C805]";
               case 0x338:
-              case 0x339: return "Print ESC Sequence Link [C9C1]";
+              case 0x339: return "Stampa collegamento sequenza ESC [C9C1]";
               case 0x33A:
-              case 0x33B: return "Keyscan Link [C5E1]";
+              case 0x33B: return "Collegamento Keyscan [C5E1]";
               case 0x33C:
-              case 0x33D: return "Store Key [C6AD]";
+              case 0x33D: return "Memorizza chiave [C6AD]";
               case 0x33E:
-              case 0x33F: return "Pointer to KBD Decoding Table: Unshifted [FA80/FD29]";
+              case 0x33F: return "Puntatore alla tabella di decodifica KBD: non spostato [FA80/FD29]";
               case 0x340:
-              case 0x341: return "Pointer to KBD Decoding Table: Shifted [FAD9/FD82]";
+              case 0x341: return "Puntatore alla tabella di decodifica KBD: spostato [FAD9/FD82]";
               case 0x342:
-              case 0x343: return "Pointer to KBD Decoding Table: Commodore [FB32/FDDB]";
+              case 0x343: return "Puntatore alla tabella di decodifica KBD: Commodore [FB32/FDDB]";
               case 0x344:
-              case 0x345: return "Pointer to KBD Decoding Table: Control [FB8B/FE34] 1)";
+              case 0x345: return "Puntatore alla tabella di decodifica KBD: controllo [FB8B/FE34] 1)";
               case 0x346:
-              case 0x347: return "Pointer to KBD Decoding Table: Alt [FA80/FD29]";
+              case 0x347: return "Puntatore alla tabella di decodifica KBD: Alt[FA80/FD29]";
               case 0x348:
-              case 0x349: return "Pointer to KBD Decoding Table: Ascii/DIN [FB4E/FD29]";              
+              case 0x349: return "Puntatore alla tabella di decodifica KBD: Ascii/DIN [FB4E/FD29]";              
               case 0x35E:
               case 0x35F: 
               case 0x360:
-              case 0x362: return "Bitmap Of Line Wraps";
-              case 0x386: return "CHRGOT Entry";
+              case 0x362: return "Bitmap di linee a capo";
+              case 0x386: return "Ingresso CHRGOT";
               case 0x3D2:
               case 0x3D3: 
-              case 0x3D4: return "Numeric Constant For BASIC";
-              case 0x3D5: return "Current Bank For SYS, POKE, PEEK";
+              case 0x3D4: return "Costante numerica per BASIC";
+              case 0x3D5: return "Banco corrente per SYS, POKE, PEEK";
               case 0x3D6: 
               case 0x3D7:
               case 0x3D8: 
-              case 0x3D9: return "INSTR Work Values";
-              case 0x3DA: return "Bank Pointer For String/Number CONVERT RTN";
+              case 0x3D9: return "Valori di lavoro INSTR";
+              case 0x3DA: return "Puntatore banca per stringa / numero CONVERT RTN";
               case 0x3DB: 
               case 0x3DC:
-              case 0x3DE: return "Sprite: Work bytes for SSHAPE";
-              case 0x3DF: return "FAC#1 Overflow";
+              case 0x3DE: return "Sprite: byte di lavoro per SSHAPE";
+              case 0x3DF: return "Overflow FAC#1";
               case 0x3E0: 
-              case 0x3E1: return "Sprite: Work bytes for SPRSAV";
-              case 0x3E2: return "Graphic Foreground/ Background Color Nybbles";
-              case 0x3E3: return "Graphic Foreground/ Multicolor 1 Color Nybbles";
+              case 0x3E1: return "Sprite: byte di lavoro per SPRSAV";
+              case 0x3E2: return "Colore di primo piano/sfondo grafico Nybbles";
+              case 0x3E3: return "Primo piano grafico / Multicolor 1 colore Nybbles";
               case 0xA00:
-              case 0xA01: return "Vector to Restart System (BASIC Warm) [4003]";
-              case 0xA02: return "KERNAL Warm/Cold Init'n Status Byte";
-              case 0xA03: return "PAL/NTSC System Flag";
-              case 0xA04: return "Flags RESET vs. NMI Status for init'n rtns";
+              case 0xA01: return "Vettore per riavviare il sistema (BASIC a caldo) [4003]";
+              case 0xA02: return "Byte di stato inizializzazione caldo/freddo KERNEL";
+              case 0xA03: return "Flag di sistema PAL/NTSC";
+              case 0xA04: return "Flags RESET rispetto allo stato NMI per init'n rtns";
               case 0xA05: 
-              case 0xA06: return "Ptr to Bottom of Avail. Memory in System Bank";
+              case 0xA06: return "Puntatore alla fine della memoria disponibile nel banco di sistema";
               case 0xA07: 
-              case 0xA08: return "Ptr to Top of Available Memory in System Bank";
-              case 0xA09: return "Tape Handler preserves IRQ Indirect here";
-              case 0xA0B: return "TOD Sense during tape operations";
-              case 0xA0C: return "CIA 1 Interrupt Log";
-              case 0xA0D: return "CIA 1 Timer Enabled";
-              case 0xA0F: return "RS-232 Enables";
-              case 0xA10: return "RS-232 Control Register";
-              case 0xA11: return "RS-232 Command Register";
-              case 0xA12: return "RS-232 User Baud Rate";
-              case 0xA14: return "RS-232 Status Register";
-              case 0xA15: return "RS-232 Number of Bits To Send";
-              case 0xA16: return "RS-232 Baud Rate Full Bit Time (Created by OPEN)";
-              case 0xA18: return "RS-232 Receive Pointer";
-              case 0xA19: return "RS-232 Input Pointer";
-              case 0xA1A: return "RS-232 Transmit Pointer";
-              case 0xA1B: return "RS-232 Send Pointer";
-              case 0xA1C: return "Fast Serial Internal/External Flag";
-              case 0xA1D: return "Decrementing Jiffie Register";
+              case 0xA08: return "Puntatore al'inizio della memoria disponibile nel banco di sistema";
+              case 0xA09: return "Il gestore del nastro conserva l'IRQ indiretto qui";
+              case 0xA0B: return "Rilevamento TOD durante le operazioni sul nastro";
+              case 0xA0C: return "Registro interruzioni CIA 1";
+              case 0xA0D: return "Timer CIA 1 abilitato";
+              case 0xA0F: return "Abilita RS-232";
+              case 0xA10: return "Registro di controllo RS-232";
+              case 0xA11: return "Registro dei comandi RS-232";
+              case 0xA12: return "Velocità di trasmissione utente RS-232";
+              case 0xA14: return "Registro di stato RS-232";
+              case 0xA15: return "Numero RS-232 di bit da inviare";
+              case 0xA16: return "Velocità di trasmissione RS-232 a tempo bit completo (creato da OPEN)";
+              case 0xA18: return "Puntatore di ricezione RS-232";
+              case 0xA19: return "Puntatore di ingresso RS-232";
+              case 0xA1A: return "Puntatore di trasmissione RS-232";
+              case 0xA1B: return "Puntatore di invio RS-232";
+              case 0xA1C: return "Flag interno/esterno seriale veloce";
+              case 0xA1D: return "Decremento del registro Jiffie";
               case 0xA1E:
-              case 0xA1F: return "Sleep Countdown, FFFF = disable";
-              case 0xA20: return "Keyboard Buffer Size (10)";
-              case 0xA21: return "Screen Freeze Flag";
-              case 0xA22: return "Key Repeat: 128 = all, 64 = none";
-              case 0xA23: return "Key Repeat Timing";
-              case 0xA24: return "Key Repeat Pause";
-              case 0xA25: return "Graphics / Text Toggle Latch";
-              case 0xA26: return "40-Col Cursor Mode/VIC Cursor Mode (Blinking, Solid)";
-              case 0xA27: return "VIC Cursor Disable";
-              case 0xA28: return "VIC Cursor Blink Counter";
-              case 0xA29: return "VIC Cursor Character Before Blink";
-              case 0xA2A: return "40-Col Blink Values/VIC Cursor Color Before Blink";
-              case 0xA2B: return "80-Col Cursor Mode/VDC Cursor Mode (when enabled)";
-              case 0xA2C: return "40-Col Video $D018 Image/VIC Text Screen/Character Base Pointer";
-              case 0xA2D: return "VIC Bit-Map Base Pointer";
-              case 0xA2E: return "80-Col Pages-Screen/VDC Text Screen Base ";
-              case 0xA2F: return "80-Col Pages-Screen/Color/VDC Attribute Base";
-              case 0xA30: return "Temporary Pointer to Last Line For LOOP4";
-              case 0xA31: return "Temporary For 80-Col Routines";
-              case 0xA32: return "Temporary For 80-Col Routines";
-              case 0xA33: return "VDC Cursor Color Before Blink";
-              case 0xA34: return "VIC Split Screen Raster Value";
-              case 0xA35: return "Save .X During Bank Operations";
-              case 0xA36: return "Counter for PAL Systems (Jiffie adjustment)";
-              case 0xA37: return "Save System Speed During Tape and Serial Ops";
-              case 0xA38: return "Save Sprite Enables During Tape and Serial Ops";
-              case 0xA39: return "Save Blanking Status During Tape Ops";
-              case 0xA3A: return "Flag set by user to resrv full control of VIC";
-              case 0xA3B: return "Hi byte:SA Of VIC Scrn (Use W/VMI to move scrn)";
+              case 0xA1F: return "Conto alla rovescia per sospensione, FFFF = disabilita";
+              case 0xA20: return "Dimensione buffer della tastiera(10)";
+              case 0xA21: return "Flag di blocco dello schermo";
+              case 0xA22: return "Ripetizione chiave: 128=tutti, 64=nessuno";
+              case 0xA23: return "Tempi di ripetizione dei tasti";
+              case 0xA24: return "Pausa ripetizione tasti";
+              case 0xA25: return "Attivazione/disattivazione grafica/testo";
+              case 0xA26: return "Modalità cursore a 40 colori/Modalità cursore VIC (lampeggiante, fisso)";
+              case 0xA27: return "Disabilitazione cursore VIC";
+              case 0xA28: return "Contatore di lampeggi del cursore VIC";
+              case 0xA29: return "Carattere del cursore VIC prima di lampeggiare";
+              case 0xA2A: return "Valori di lampeggio a 40 colonne / Colore cursore VIC prima di lampeggiare";
+              case 0xA2B: return "Modalità cursore a 80 colori/Modalità cursore VDC (se abilitata)";
+              case 0xA2C: return "Video a 40 colonne $D018 Immagine/Schermo di testo VIC/Puntatore base caratteri";
+              case 0xA2D: return "Puntatore base VIC Bit-Map";
+              case 0xA2E: return "Schermo di pagine a 80 colonne/base dello schermo di testo VDC ";
+              case 0xA2F: return "Base attributo 80 pagine schermo / colore / VDC";
+              case 0xA30: return "Puntatore temporaneo all'ultima riga per LOOP4";
+              case 0xA31: return "Temporaneo per routine a 80 colonne";
+              case 0xA32: return "Temporaneo per routine a 80 colonne";
+              case 0xA33: return "Colore cursore VDC prima di lampeggiare";
+              case 0xA34: return "Valore raster a schermo diviso VIC";
+              case 0xA35: return "Salva .X durante le operazioni sul banco";
+              case 0xA36: return "Contatore per sistemi PAL (regolazione Jiffie)";
+              case 0xA37: return "Risparmia velocità di sistema durante le operazioni su nastro e seriale";
+              case 0xA38: return "Salva abilitazioni Sprite durante operazioni su nastro e seriali";
+              case 0xA39: return "Salva stato di cancellazione durante le operazioni su nastro";
+              case 0xA3A: return "Flag impostato dall'utente per riservare il pieno controllo di VIC";
+              case 0xA3B: return "Byte alto: SA dello schermo VIC (usa W/VMI per spostare scrn)";
               case 0xA3C: 
-              case 0xA3D: return "8563 Block Fill";
-              case 0xA80: return "Compare Buffer (32 bytes)";
+              case 0xA3D: return "8563 Riempimento blocco";
+              case 0xA80: return "Buffer di confronto (32 byte)";
               case 0xAA0:
               case 0xAA1: return "MLM";
               case 0xAAB: return "ASM/DIS";
-              case 0xAAC: return "For Assembler";
+              case 0xAAC: return "Per assembler";
               case 0xAAF: 
-              case 0xAB0: return "Byte Temp used all over";
-              case 0xAB1: return "Byte Temp for Assembler";
-              case 0xAB2: return "Save .X here during Indirect Subroutine Calls";
-              case 0xAB3: return "Direction Indicator For 'TRANSFER'";
+              case 0xAB0: return "Byte temporaneo utilizzato dappertutto";
+              case 0xAB1: return "Byte temporaneo utilizzato per assembler";
+              case 0xAB2: return "Salva .X qui durante le chiamate indirette di subroutine";
+              case 0xAB3: return "Indicatore di direzione per \"TRASFERIMENTO\"";
               case 0xAB4: 
-              case 0xAB5: return "Parse Number Conversion";
-              case 0xAB7: return "Parse Number Conversion";
-              case 0xAC0: return "PAT Counter/Current Function Key ROM Bank Being Polled";
+              case 0xAB5: return "Conversione del numero di analisi";
+              case 0xAB7: return "Conversione del numero di analisi";
+              case 0xAC0: return "Tasto funzione contatore/corrente PAT Banca ROM in fase di polling";
               case 0xAC1:
               case 0xAC2:
               case 0xAC3:
-              case 0xAC4: return "ROM Physical Address Table (IDS OF LOGGED-IN CARDS)";
-              case 0xAC5: return "Flag: KBD/Reserved For Foreign Screen Editors";
-              case 0x1131: return "Current X Position";
-              case 0x1133: return "Current Y Position";
-              case 0x1135: return "X-Coordinate Destination";
-              case 0x1137: return "Y-Coordinate Destination";
-              case 0x1139: return "Line Drawing Variables";
-              case 0x1149: return "Sign Of Angle";
-              case 0x114A: return "Sine Of Value Of Angle";
-              case 0x114C: return "Cosine of Value of Angle";
-              case 0x114E: return "Temps For Angle Distance Routines";
-              case 0x1150: return "CIRCLE Center, X Coordinate, BOX POINT 1 X-Coord.";
-              case 0x1152: return "CIRCLE Center, Y Coordinate, BOX POINT 1 Y-Coord.";
-              case 0x1153: return "String Len";
-              case 0x1154: return "X Radius, BOX Rotation Angle";
-              case 0x1155: return "String Pos'n Counter";
-              case 0x1156: return "Y Radius";
-              case 0x1157: return "New String or Bit Map Byte";
-              case 0x1158: return "CIRCLE Rotation Angle/Placeholder";
-              case 0x1159: return "SHAPE Column Length";
-              case 0x115A: return "BOX: Length of a side";
-              case 0x115B: return "SHAPE Row Length";
-              case 0x115C: return "Arc Angle Start";  
-              case 0x115D: return "Temp For Column Length";
-              case 0x115E: return "Arc Angle End, Char's Col. Counter";
-              case 0x115F: return "Save SHAPE String Descriptor";
-              case 0x1160: return "X Radius * COS(Rotation Angle)";
-              case 0x1161: return "Bit Index Into Byte";
-              case 0x1162: return "Y Radius * SIN(Rotation Angle)";
-              case 0x1164: return "X Radius * SIN(Rotation Angle)";
-              case 0x1166: return "Y Radius * COS(Rotation Angle)";
-              case 0x1168: return "HIGH BYTE: ADDR OF CHARROM For 'CHAR' CMD.";
-              case 0x1169: return "Temp For GSHAPE";
-              case 0x116A: return "SCALE Mode Flag";
-              case 0x116B: return "Double Width Flag";
-              case 0x116C: return "Box Fill Flag";
-              case 0x116D: return "Temp For Bit Mask";
-              case 0x116F: return "Trace Mode: FF = on";
+              case 0xAC4: return "Tabella degli indirizzi fisici della ROM (ID DELLE CARTE LOGGATE)";
+              case 0xAC5: return "Flag: KBD/Riservato agli editor di schermi esterni";
+              case 0x1131: return "Posizione X attuale";
+              case 0x1133: return "Posizione Y attuale";
+              case 0x1135: return "Destinazione coordinata X";
+              case 0x1137: return "Destinazione coordinata Y";
+              case 0x1139: return "Variabili del disegno al tratto";
+              case 0x1149: return "Segno di angolo";
+              case 0x114A: return "Seno del valore dell'angolo";
+              case 0x114C: return "Coseno del valore dell'angolo";
+              case 0x114E: return "Temporanea per routine di distanza angolare";
+              case 0x1150: return "CIRCLE centro, coordinata X, BOX POINT 1 Coordinata X";
+              case 0x1152: return "CIRCLE centro, coordinata Y, BOX POINT 1 Coordinata Y";
+              case 0x1153: return "Lunghezza della stringa";
+              case 0x1154: return "Raggio X, angolo di rotazione BOX";
+              case 0x1155: return "posizione della stringa in contatore";
+              case 0x1156: return "Raggio Y";
+              case 0x1157: return "Nuovo byte di stringa o bit map";
+              case 0x1158: return "CIRCLE Angolo di rotazione/Segnaposto";
+              case 0x1159: return "SHAPE lunghezza della colonna";
+              case 0x115A: return "BOX: lunghezza di un lato";
+              case 0x115B: return "SHAPE Lunghezza riga";
+              case 0x115C: return "Inizio angolo arco";  
+              case 0x115D: return "Temporaneo per la lunghezza della colonna";
+              case 0x115E: return "Fine dell'angolo dell'arco, contatore della colonna del carattere";
+              case 0x115F: return "Salva il descrittore di stringa SHAPE";
+              case 0x1160: return "Raggio X * COS (angolo di rotazione)";
+              case 0x1161: return "Indice di bit in byte";
+              case 0x1162: return "Raggio Y * SIN (angolo di rotazione)";
+              case 0x1164: return "Raggio X * SIN (angolo di rotazione)";
+              case 0x1166: return "E raggio * COS (angolo di rotazione)";
+              case 0x1168: return "BYTE ALTO: INDIRIZZO DI CHARROM Per \"CHAR\" CMD.";
+              case 0x1169: return "Temporaneo per GSHAPE";
+              case 0x116A: return "Flag della modalità SCALE";
+              case 0x116B: return "Bandiera a doppia larghezza";
+              case 0x116C: return "Flag riempimento casella";
+              case 0x116D: return "Temporaneo per maschera bit";
+              case 0x116F: return "Modalità traccia: FF=attiva";
               case 0x1170:
               case 0x1171:
               case 0x1172: 
-              case 0x1173: return "Renumbering Pointers";
+              case 0x1173: return "Rinumerazione dei puntatori";
               case 0x1174:
               case 0x1175:
-              case 0x1176: return "Directory Work Pointers/Graphic Temp Storage"; 
-              case 0x1177: return "Directory Work Pointers";  
+              case 0x1176: return "Puntatori lavoro directory/Archiviazione grafica temporanea"; 
+              case 0x1177: return "Puntatori di lavoro della directory";  
               case 0x117A:
-              case 0x117B: return "Float-fixed Vector [849F]";
+              case 0x117B: return "Vettore virgola modibile/fisso [849F]";
               case 0x117C:
-              case 0x117D: return "Fixed-float Vector [793C]";
-              case 0x11E6: return "Sprite X-High Positions";
+              case 0x117D: return "Vettore fisso/virgola mobile [793C]";
+              case 0x11E6: return "Posizioni Sprite X-High";
               case 0x11E7:
-              case 0x11E8: return "Sprite Bumb Masks (sprite - backgnd)";
+              case 0x11E8: return "Maschere bumb sprite (sprite-sfondo)";
               case 0x11E9:
-              case 0x11EA: return "Light Pen Values, X and Y";
-              case 0x11EB: return "CHRGEN ROM Page, Text Mode [D8]";
-              case 0x11EC: return "CHRGEN ROM Page, Graphics Mode [D0]";
-              case 0x11ED: return "Secondary Address For RECORD";
+              case 0x11EA: return "Valori Light Pen, X e Y";
+              case 0x11EB: return "Pagina CHRGEN ROM, modalità testo [D8]";
+              case 0x11EC: return "Pagina CHRGEN ROM, modalità grafica [D0]";
+              case 0x11ED: return "Indirizzo secondario per RECORD";
               case 0x1200:
-              case 0x1201: return "Previous BASIC Line";
+              case 0x1201: return "Linea BASIC precedente";
               case 0x1202:
-              case 0x1203: return "Pointer: BASIC Statement for CONTINUE";
-              case 0x1204: return "PRINT USING Fill Symbol";
-              case 0x1205: return "PRINT USING Comma Symbol";
-              case 0x1206: return "PRINT USING D.P. Symbol";
-              case 0x1207: return "Print Using Monetary Symbol";
-              case 0x1208: return "Used by Error Trapping Routine - Last Err No";
+              case 0x1203: return "Puntatore: istruzione BASIC per CONTINUE";
+              case 0x1204: return "STAMPA UTILIZZANDO il simbolo di riempimento";
+              case 0x1205: return "STAMPA UTILIZZANDO il simbolo della virgola";
+              case 0x1206: return "STAMPA UTILIZZANDO D.P. Simbolo";
+              case 0x1207: return "Stampa utilizzando il simbolo monetario";
+              case 0x1208: return "Utilizzato dalla routine di cattura degli errori - ultimo numero di errore";
               case 0x1209:
-              case 0x120A: return "Line # of Last Error. FFFF if No Error";
+              case 0x120A: return "Numero riga dell'ultimo errore. FFFF se nessun errore";
               case 0x120B:
-              case 0x120C: return "TRAP Address, FFFF=none";
-              case 0x120D: return "Hold Trap # of Tempor.";
+              case 0x120C: return "Indirizzo TRAP, FFFF = nessuno";
+              case 0x120D: return "Mantieni trap numero di Tempor.";
               case 0x1210:
-              case 0x1211: return "End of Basic, Bank 0";
+              case 0x1211: return "Fine del Basic, banco 0";
               case 0x1212: 
-              case 0x1213: return "Basic Program Limit [FF00]";
+              case 0x1213: return "Limite del programma BASIC [FF00]";
               case 0x1214: 
               case 0x1215: 
               case 0x1216: 
-              case 0x1217: return "DO Work Pointers";
+              case 0x1217: return "puntatori lavoro DO";
               case 0x1218: 
               case 0x1219:
-              case 0x121A: return "USR Program Jump [7D28]";
+              case 0x121A: return "Salto del programma USR [7D28]";
               case 0x121B: 
               case 0x121C: 
               case 0x121D: 
