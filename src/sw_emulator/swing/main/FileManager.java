@@ -139,7 +139,7 @@ public class FileManager {
       option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.kickLabel = Assembler.Label.valueOf(in.readUTF());
       option.kickComment = Assembler.Comment.valueOf(in.readUTF());
-      //option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.kickByte = Assembler.Byte.valueOf(in.readUTF());
       option.kickWord = Assembler.Word.valueOf(in.readUTF());      
       
@@ -157,6 +157,27 @@ public class FileManager {
       option.commentC64Cia1 = in.readBoolean();
       option.commentC64Cia2 = in.readBoolean();
       option.commentC64KernalRom = in.readBoolean(); 
+      
+      option.commentC128ZeroPage = in.readBoolean();
+      option.commentC128StackArea = in.readBoolean();
+      option.commentC128_200Area = in.readBoolean(); 
+      option.commentC128_300Area = in.readBoolean(); 
+      option.commentC128ScreenArea = in.readBoolean(); 
+      
+      option.commentC128AppProgArea = in.readBoolean();  
+      option.commentC128BasicRom = in.readBoolean();  
+      option.commentC128Cia1 = in.readBoolean();
+      option.commentC128Cia2 = in.readBoolean();
+      option.commentC128Color = in.readBoolean();
+      option.commentC128DMA = in.readBoolean();  
+      option.commentC128KernalRom = in.readBoolean();
+      option.commentC128MMU = in.readBoolean();
+      option.commentC128ScreenMem = in.readBoolean();
+      option.commentC128UserBasic = in.readBoolean();
+      option.commentC128VDC = in.readBoolean();
+      option.commentC128VideoColor = in.readBoolean();  
+      option.commentC128VicII = in.readBoolean();
+      option.commentC128Sid = in.readBoolean();
       
       option.commentC1541ZeroPage = in.readBoolean();
       option.commentC1541StackArea = in.readBoolean();
@@ -308,7 +329,7 @@ public class FileManager {
       out.writeUTF(option.kickOrigin.name());
       out.writeUTF(option.kickLabel.name());
       out.writeUTF(option.kickComment.name());
-      //out.writeUTF(option.kickBlockComment.name());
+      out.writeUTF(option.kickBlockComment.name());
       out.writeUTF(option.kickByte.name());
       out.writeUTF(option.kickWord.name());      
       
@@ -326,6 +347,26 @@ public class FileManager {
       out.writeBoolean(option.commentC64Cia1);
       out.writeBoolean(option.commentC64Cia2);
       out.writeBoolean(option.commentC64KernalRom);
+      
+      out.writeBoolean(option.commentC128ZeroPage);
+      out.writeBoolean(option.commentC128StackArea);
+      out.writeBoolean(option.commentC128_200Area);
+      out.writeBoolean(option.commentC128_300Area);
+      out.writeBoolean(option.commentC128ScreenArea);
+      out.writeBoolean(option.commentC128AppProgArea);  
+      out.writeBoolean(option.commentC128BasicRom);  
+      out.writeBoolean(option.commentC128Cia1);
+      out.writeBoolean(option.commentC128Cia2);
+      out.writeBoolean(option.commentC128Color);
+      out.writeBoolean(option.commentC128DMA);  
+      out.writeBoolean(option.commentC128KernalRom);
+      out.writeBoolean(option.commentC128MMU);
+      out.writeBoolean(option.commentC128ScreenMem);
+      out.writeBoolean(option.commentC128UserBasic);
+      out.writeBoolean(option.commentC128VDC);
+      out.writeBoolean(option.commentC128VideoColor);
+      out.writeBoolean(option.commentC128VicII);
+      out.writeBoolean(option.commentC128Sid);
       
       out.writeBoolean(option.commentC1541ZeroPage);
       out.writeBoolean(option.commentC1541StackArea);

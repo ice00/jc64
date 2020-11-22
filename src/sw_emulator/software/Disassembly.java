@@ -590,6 +590,7 @@ public class Disassembly {
         aWord=option.dasmWord;
         break;
       case TMPX:
+        aStarting=option.tmpxStarting;  
         aOrigin=option.tmpxOrigin;   
         aLabel=option.tmpxLabel;
         aComment=option.tmpxComment;
@@ -598,16 +599,28 @@ public class Disassembly {
         aWord=option.tmpxWord;
         break;  
       case CA65:
+        aStarting=option.ca65Starting;  
+        aOrigin=option.ca65Origin;  
         aLabel=option.ca65Label;
+        aComment=option.ca65Comment;
+        aBlockComment=option.ca65BlockComment;
         aByte=option.ca65Byte;
-        aWord=option.ca65Word;  
+        aWord=option.ca65Word;         
         break;  
       case ACME:
+        aStarting=option.acmeStarting;  
+        aOrigin=option.acmeOrigin;    
         aLabel=option.acmeLabel;
+        aComment=option.acmeComment;
+        aBlockComment=option.acmeBlockComment;
         aByte=option.acmeByte;
         aWord=option.acmeWord;
         break;
       case KICK:
+        aStarting=option.kickStarting;  
+        aOrigin=option.kickOrigin;  
+        aComment=option.kickComment;
+        aBlockComment=option.kickBlockComment;
         aLabel=option.kickLabel;
         aByte=option.kickByte;
         aWord=option.kickWord;  

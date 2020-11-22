@@ -283,6 +283,7 @@ public class Assembler {
     *  -> /\* xxx *\/
     *  -> if 0 xxx endif
     *  -> .if 0 xxx .endif
+    *  -> .if (0) xxx .endif
     *  -> .comment xxx .endc
     */
    public enum BlockComment implements ActionType {
@@ -290,6 +291,7 @@ public class Assembler {
       CSTYLE,          // /* xxx */ 
       IF,              // if 0 xxx endif
       DOT_IF,          // .if 0 xxx .endif
+      DOT_IF_P,        // .if (0) xxx .endif
       MARK_IF,         // !if 0 { xxx }
       COMMENT;         // .comment xxx .endc
     
@@ -319,7 +321,7 @@ public class Assembler {
                     isOpen=true;
                     str.append("/*\n");
                   }
-                  str.append(";").append(line).append("\n");
+                  str.append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append("\n*\\n");         
@@ -338,7 +340,7 @@ public class Assembler {
                     isOpen=true;
                     str.append("if 0\n");
                   }
-                  str.append(";").append(line).append("\n");
+                  str.append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append("endif\n");   
@@ -357,11 +359,30 @@ public class Assembler {
                     isOpen=true;
                     str.append(".if 0\n");
                   }
-                  str.append(";").append(line).append("\n");
+                  str.append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append(".endif\n");    
             break;  
+          case DOT_IF_P:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append(".endif\n\n");
+                else {
+                 str.append(".if (0) {\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append(".if (0) {\n");
+                  }
+                  str.append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append("}\n");    
+            break;             
           case MARK_IF:
             isOpen=false;
             for (String line : lines) {
@@ -376,7 +397,7 @@ public class Assembler {
                     isOpen=true;
                     str.append("!if 0 {\n");
                   }
-                  str.append(";").append(line).append("\n");
+                  str.append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append("}\n");    
@@ -395,7 +416,7 @@ public class Assembler {
                     isOpen=true;
                     str.append(".comment\n");
                   }
-                  str.append(";").append(line).append("\n");
+                  str.append(line).append("\n");
                 }   
             }        
             if (!isOpen) str.append(".endc\n");   

@@ -346,6 +346,64 @@ public class Option {
   public boolean commentC64KernalRom=true; 
   
   
+  // comments C128
+  
+  /** C128: Comment zero page area */
+  public boolean commentC128ZeroPage=true;
+  
+  /** C128: Comment stack area */
+  public boolean commentC128StackArea=true;
+  
+  /** C128: Comment 200 area */
+  public boolean commentC128_200Area=true;
+  
+  /** C128: Comment 300 area */
+  public boolean commentC128_300Area=true;
+  
+  /** C128: Comment screen area */
+  public boolean commentC128ScreenArea=true; 
+  
+  /** C128: Comment application program area*/
+  public boolean commentC128AppProgArea;
+  
+  /** C128: Comment Basic rom */
+  public boolean commentC128BasicRom;
+  
+  /** C128: Comment CIA 1 */
+  public boolean commentC128Cia1;
+
+  /** C128: Comment CIA 2*/
+  public boolean commentC128Cia2;
+  
+  /** C128: Comment Color */
+  public boolean commentC128Color;
+
+  /** C128: Comment DMA */
+  public boolean commentC128DMA;
+  
+  /** C128: Comment Kernal rom */
+  public boolean commentC128KernalRom;
+
+  /** C128: Comment MMU */
+  public boolean commentC128MMU;
+
+  /** C128: Comment screen memory */
+  public boolean commentC128ScreenMem;
+  
+  /** C128: Comment user basic area */
+  public boolean commentC128UserBasic;
+  
+  /** C128: Comment VDC */
+  public boolean commentC128VDC;
+  
+  /** C128: Comment video color mem */
+  public boolean commentC128VideoColor;
+  
+  /** C128: Comment Vic II */
+  public boolean commentC128VicII;
+  
+  /** C128: Comment SID */
+  public boolean commentC128Sid;
   
   // comments C1541
   
@@ -624,6 +682,9 @@ public class Option {
   
   /** KickAssembler: comment declaration */
   public Assembler.Comment kickComment=Assembler.Comment.DOUBLE_BAR; 
+  
+  /** KickAssembler: block comment declaration */
+  public Assembler.BlockComment kickBlockComment=Assembler.BlockComment.SEMICOLON; 
   
   /** KickAssembler: byte declaration */
   public Assembler.Byte kickByte=Assembler.Byte.DOT_BYTE;
