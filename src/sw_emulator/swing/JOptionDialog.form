@@ -1130,37 +1130,30 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jCheckBoxC128BasicRom" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="jCheckBoxC128MMU" alignment="0" pref="378" max="32767" attributes="0"/>
-                                                      <Component id="jCheckBoxC128VDC" alignment="0" pref="378" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jCheckBoxC128MMU" alignment="0" pref="378" max="32767" attributes="0"/>
+                                              <Component id="jCheckBoxC128VDC" alignment="0" pref="378" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace pref="405" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="jCheckBoxC128ScreenMem" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128VideoColor" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128AppProgArea" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128UserBasic" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128_300Area" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128_200Area" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128StackArea" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128ZeroPage" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128ScreenArea" alignment="0" max="32767" attributes="0"/>
-                                                      </Group>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="jCheckBoxC128ScreenMem" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128VideoColor" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128AppProgArea" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128UserBasic" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128_300Area" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128_200Area" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128StackArea" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128ZeroPage" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128ScreenArea" alignment="0" max="32767" attributes="0"/>
                                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                                           <Component id="jCheckBoxC128Sid" alignment="1" max="32767" attributes="0"/>
                                                           <Component id="jCheckBoxC128VicII" alignment="1" min="-2" max="-2" attributes="0"/>
                                                       </Group>
+                                                      <Component id="jCheckBoxC128BasicRom" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1337,7 +1330,7 @@
                         <Component class="javax.swing.JCheckBox" name="jCheckBoxC128Sid">
                           <Properties>
                             <Property name="selected" type="boolean" value="true"/>
-                            <Property name="text" type="java.lang.String" value="SID chip ($D400..$D7FF)"/>
+                            <Property name="text" type="java.lang.String" value="SID chip ($D400..$D4FF)"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxC128SidItemStateChanged"/>

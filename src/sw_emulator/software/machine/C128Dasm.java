@@ -62,6 +62,27 @@ public class C128Dasm extends M6510Dasm {
       case A_IDX:
       case A_IDY:    
         // do not get comment if appropriate option is not selected  
+        if ((int)addr<=0xFF && !option.commentC128ZeroPage) return "";
+        if ((int)addr>=0x100 && (int)addr<=0x1FF && !option.commentC128StackArea) return "";
+        if ((int)addr>=0x200 && (int)addr<=0x2FF && !option.commentC128_200Area) return "";
+        if ((int)addr>=0x300 && (int)addr<=0x3FF && !option.commentC128_300Area) return "";
+        if ((int)addr>=0x400 && (int)addr<=0x7EF && !option.commentC128ScreenArea) return "";
+        if ((int)addr>=0x7F0 && (int)addr<=0x12FF && !option.commentC128UserBasic) return "";        
+        if ((int)addr>=0x1300 && (int)addr<=0xBFFF && !option.commentC128AppProgArea) return "";
+        if ((int)addr>=0x1C00 && (int)addr<=0x1FFF && !option.commentC128VideoColor) return "";
+        if ((int)addr>=0x2000 && (int)addr<=0x3FFF && !option.commentC128ScreenMem) return "";
+        if ((int)addr>=0x4000 && (int)addr<=0xCFFF && !option.commentC128BasicRom) return "";
+        if ((int)addr>=0xD000 && (int)addr<=0xD3FF && !option.commentC128VicII) return "";
+        if ((int)addr>=0xD400 && (int)addr<=0xD4FF && !option.commentC128Sid) return "";
+        if ((int)addr>=0xD500 && (int)addr<=0xD50B && !option.commentC128MMU) return "";
+        if ((int)addr>=0xD600 && (int)addr<=0xD624 && !option.commentC128VDC) return "";
+        if ((int)addr>=0xD800 && (int)addr<=0xDBFF && !option.commentC128Color) return "";
+        if ((int)addr>=0xDC00 && (int)addr<=0xDCFF && !option.commentC128Cia1) return "";
+        if ((int)addr>=0xDD00 && (int)addr<=0xDEFF && !option.commentC128Cia2) return "";
+        if ((int)addr>=0xDF00 && (int)addr<=0xDF0A && !option.commentC128DMA) return "";
+        if ((int)addr>=0xE000 && (int)addr<=0xFFFF && !option.commentC128KernalRom) return "";  
+          
+        // do not get comment if appropriate option is not selected  
         switch (language) {                       
           case LANG_ITALIAN:
             switch ((int)addr) {
