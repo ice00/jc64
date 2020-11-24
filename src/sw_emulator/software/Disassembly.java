@@ -624,7 +624,16 @@ public class Disassembly {
         aLabel=option.kickLabel;
         aByte=option.kickByte;
         aWord=option.kickWord;  
-        break;        
+        break; 
+      case TASS64:
+        aStarting=option.tass64Starting;
+        aOrigin=option.tass64Origin;
+        aComment=option.tass64Comment;
+        aBlockComment=option.tass64BlockComment;
+        aLabel=option.tass64Label;
+        aByte=option.tass64Byte;
+        aWord=option.tass64Word;
+        break;
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, aBlockComment, aByte, aWord);      

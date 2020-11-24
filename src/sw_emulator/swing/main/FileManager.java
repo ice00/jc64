@@ -133,15 +133,23 @@ public class FileManager {
       option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.acmeByte = Assembler.Byte.valueOf(in.readUTF());
       option.acmeWord = Assembler.Word.valueOf(in.readUTF());  
-      
-      
+            
       option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
       option.kickOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.kickLabel = Assembler.Label.valueOf(in.readUTF());
       option.kickComment = Assembler.Comment.valueOf(in.readUTF());
       option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.kickByte = Assembler.Byte.valueOf(in.readUTF());
-      option.kickWord = Assembler.Word.valueOf(in.readUTF());      
+      option.kickWord = Assembler.Word.valueOf(in.readUTF());    
+            
+      option.tass64Starting = Assembler.Starting.valueOf(in.readUTF());
+      option.tass64Origin = Assembler.Origin.valueOf(in.readUTF());
+      option.tass64Label = Assembler.Label.valueOf(in.readUTF());
+      option.tass64Comment = Assembler.Comment.valueOf(in.readUTF());
+      option.tass64BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.tass64Byte = Assembler.Byte.valueOf(in.readUTF());
+      option.tass64Word = Assembler.Word.valueOf(in.readUTF());
+      
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -332,6 +340,15 @@ public class FileManager {
       out.writeUTF(option.kickBlockComment.name());
       out.writeUTF(option.kickByte.name());
       out.writeUTF(option.kickWord.name());      
+      
+      out.writeUTF(option.tass64Starting.name());
+      out.writeUTF(option.tass64Origin.name());
+      out.writeUTF(option.tass64Label.name());
+      out.writeUTF(option.tass64Comment.name());
+      out.writeUTF(option.tass64BlockComment.name());
+      out.writeUTF(option.tass64Byte.name());
+      out.writeUTF(option.tass64Word.name());     
+      
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);

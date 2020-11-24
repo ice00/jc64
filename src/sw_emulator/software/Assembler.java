@@ -130,6 +130,12 @@ public class Assembler {
        public String getName() {
          return "KickAssembler";
        }
+     },     
+     TASS64 {
+       @Override
+       public String getName() {
+         return "64Tass";
+       }
      };        
     
      /**
@@ -293,7 +299,7 @@ public class Assembler {
       DOT_IF,          // .if 0 xxx .endif
       DOT_IF_P,        // .if (0) xxx .endif
       MARK_IF,         // !if 0 { xxx }
-      COMMENT;         // .comment xxx .endc
+      DOT_COMMENT;     // .comment xxx .endc
     
       @Override
       public void flush(StringBuilder str) {
@@ -402,7 +408,7 @@ public class Assembler {
             }        
             if (!isOpen) str.append("}\n");    
             break;  
-          case COMMENT:
+          case DOT_COMMENT:
             isOpen=false;
             for (String line : lines) {
               if ("".equals(line) || " ".equals(line)) {

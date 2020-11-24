@@ -693,6 +693,28 @@ public class Option {
   public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
   
+  /** 64Tass: starting declaration */
+  public Assembler.Starting tass64Starting=Assembler.Starting.DOT_CPU_A; 
+    
+  /** 64Tass: origin declaration */
+  public Assembler.Origin tass64Origin=Assembler.Origin.ASTERISK; 
+    
+  /** KickAssembler: label declaration */
+  public Assembler.Label tass64Label; /////////
+  
+  /** 64Tass: comment declaration */
+  public Assembler.Comment tass64Comment=Assembler.Comment.SEMICOLON; 
+  
+   /** 64Tass: block comment declaration */
+  public Assembler.BlockComment tass64BlockComment;  /////////
+  
+  /** 64Tass: byte declaration */
+  public Assembler.Byte tass64Byte;  /////////
+  
+  /** 64Tass: word declaration */
+  public Assembler.Word tass64Word;  /////////
+  
+  
   /**
    * Get the flat laf theme
    * 

@@ -84,6 +84,14 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupKickBlockComment">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Starting">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Origin">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Comment">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64BlockComment">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -1149,10 +1157,8 @@
                                                       <Component id="jCheckBoxC128StackArea" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="jCheckBoxC128ZeroPage" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="jCheckBoxC128ScreenArea" alignment="0" max="32767" attributes="0"/>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="jCheckBoxC128Sid" alignment="1" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxC128VicII" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
+                                                      <Component id="jCheckBoxC128Sid" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="jCheckBoxC128VicII" alignment="1" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jCheckBoxC128BasicRom" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2898,7 +2904,7 @@
                                               <Group type="102" attributes="0">
                                                   <Component id="jRadioButtonTmpxSemicolonComment" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName6" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneTmpxSemicolonComment" min="-2" pref="93" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
@@ -2912,7 +2918,7 @@
                                                           <Group type="102" attributes="0">
                                                               <Component id="jRadioButtonTmpxSemicolonBlockComment" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="jScrollPaneDasmLabelName7" min="-2" pref="93" max="-2" attributes="0"/>
+                                                              <Component id="jScrollPaneTmpxSemicolonBlockComment" min="-2" pref="93" max="-2" attributes="0"/>
                                                           </Group>
                                                           <Group type="102" attributes="0">
                                                               <Component id="jRadioButtonTmpxLabelName" min="-2" max="-2" attributes="0"/>
@@ -2929,7 +2935,7 @@
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonTmpxDotIfBlockComment" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName11" min="-2" pref="122" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneTmpxDotIfBlockComment" min="-2" pref="122" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -2941,14 +2947,14 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonTmpxAsterixOrigin" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName10" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneTmpxAsterixOrigin" min="-2" pref="93" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabelTmpxStartingDeclaration" min="-2" pref="127" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonTmpxDotCpuAStarting" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName16" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneTmpxDotCpuAStarting" min="-2" pref="93" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -2962,7 +2968,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName16" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotCpuAStarting" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="jLabelTmpxStartingDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonTmpxDotCpuAStarting" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -2970,7 +2976,7 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName10" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxAsterixOrigin" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="jLabelTmpxOriginDeclaration" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonTmpxAsterixOrigin" min="-2" max="-2" attributes="0"/>
@@ -2978,7 +2984,7 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxSemicolonComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="jLabelTmpxCommentDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonTmpxSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -2986,7 +2992,7 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="jLabelTmpxBlockCommentDeclaration" min="-2" pref="15" max="-2" attributes="0"/>
@@ -2994,7 +3000,7 @@
                                       <Component id="jRadioButtonTmpxSemicolonBlockComment" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jRadioButtonTmpxDotIfBlockComment" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName11" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxDotIfBlockComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -3136,7 +3142,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxSemicolonCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName6">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxSemicolonComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3172,7 +3178,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxSemicolonBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName7">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxSemicolonBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3208,7 +3214,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxAsterixOriginItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName10">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxAsterixOrigin">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3238,7 +3244,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotIfBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName11">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotIfBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3274,7 +3280,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotCpuAStartingItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName16">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotCpuAStarting">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3345,7 +3351,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jRadioButtonCa65DotBytByte" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneC65BytByte" max="32767" attributes="0"/>
+                                                  <Component id="jScrollPaneCa65DotBytByte" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jRadioButtonCa65DotDByteWord" min="-2" max="-2" attributes="0"/>
@@ -3358,9 +3364,9 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Component id="jLabeCa65StartingDeclaration" max="32767" attributes="0"/>
-                                              <Component id="jLabeCa65OriginDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelCa65OriginDeclaration" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jLabelCa65BlockCommentDeclaration" alignment="0" pref="128" max="32767" attributes="0"/>
-                                              <Component id="jLabeCa65CommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelCa65CommentDeclaration" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -3369,18 +3375,18 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="jRadioButtonCa65SemicolonComment" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPaneDasmLabelName13" max="32767" attributes="0"/>
+                                                          <Component id="jScrollPaneCa65SemicolonComment" max="32767" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="jRadioButtonCa65SemicolonBlockComment" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPaneDasmLabelName14" min="-2" pref="99" max="-2" attributes="0"/>
+                                                          <Component id="jScrollPaneCa65Comment" min="-2" pref="99" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Component id="jRadioButtonCa65DotOrigin" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmLabelName12" min="-2" pref="99" max="-2" attributes="0"/>
+                                                      <Component id="jScrollPaneCa65DotOrigin" min="-2" pref="99" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <Group type="102" attributes="0">
@@ -3424,23 +3430,23 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName12" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotOrigin" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="jLabeCa65OriginDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelCa65OriginDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonCa65DotOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName13" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65SemicolonComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="jLabeCa65CommentDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelCa65CommentDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonCa65SemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65Comment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                           <Component id="jLabelCa65BlockCommentDeclaration" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonCa65SemicolonBlockComment" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -3472,7 +3478,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="jRadioButtonCa65DotBytByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneC65BytByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotBytByte" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -3560,7 +3566,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneC65BytByte">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65DotBytByte">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3640,7 +3646,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabeCa65OriginDeclaration">
+                        <Component class="javax.swing.JLabel" name="jLabelCa65OriginDeclaration">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Origin:"/>
                           </Properties>
@@ -3656,7 +3662,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65DotOriginItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName12">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65DotOrigin">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3676,7 +3682,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JLabel" name="jLabeCa65CommentDeclaration">
+                        <Component class="javax.swing.JLabel" name="jLabelCa65CommentDeclaration">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Comment:"/>
                           </Properties>
@@ -3692,7 +3698,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65SemicolonCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName13">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65SemicolonComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3728,7 +3734,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65SemicolonBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName14">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65Comment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -3739,7 +3745,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneC65Comment">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneCa65Comment">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -3836,11 +3842,11 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jRadioButtonAcmeSemicolonBlockComment" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName20" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeSemicolonBlockComment" min="-2" pref="93" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonAcmeMarkIfBlockComment" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName21" pref="96" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMarkIfBlockComment" pref="96" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="385" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
@@ -3867,7 +3873,7 @@
                                                       <Group type="102" attributes="0">
                                                           <Component id="jRadioButtonAcmeSemicolonComment" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPaneDasmLabelName19" max="32767" attributes="0"/>
+                                                          <Component id="jScrollPaneAcmeSemicolonComment" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -3941,7 +3947,7 @@
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jScrollPaneDasmLabelName19" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeSemicolonComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonAcmeSemicolonComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -3949,10 +3955,10 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelAcmeBlockCommentDeclaration" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName20" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeMarkIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeSemicolonBlockComment" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName21" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkIfBlockComment" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -4261,7 +4267,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeSemicolonCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName19">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeSemicolonComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4297,7 +4303,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeSemicolonBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName20">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeSemicolonBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4327,7 +4333,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkIfBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName21">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkIfBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4374,21 +4380,21 @@
                                               <Group type="102" attributes="0">
                                                   <Component id="jRadioButtonKickSemicolonBlockComment" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName26" max="32767" attributes="0"/>
+                                                  <Component id="jScrollPaneKickSemicolonBlockComment" max="32767" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonKickCstyleBlockComment" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName27" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickCstyleBlockComment" min="-2" pref="93" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonDasmDotIfPBlockComment" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName28" min="-2" pref="116" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneDasmDotIfPBlockComment" min="-2" pref="116" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
                                                   <Component id="jRadioButtonKickLabelNameColon" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneKickLabelName" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickLabelNameColon" min="-2" pref="93" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -4400,7 +4406,7 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jRadioButtonKickDotCpuStarting" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmLabelName22" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickDotCpuStarting" min="-2" pref="93" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -4412,13 +4418,13 @@
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jRadioButtonKickAsterixOrigin" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPaneDasmLabelName24" max="32767" attributes="0"/>
+                                                          <Component id="jScrollPaneKickAsterixOrigin" max="32767" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" alignment="1" attributes="0">
                                                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                                           <Component id="jRadioButtonKickDoubleBarComment" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPaneDasmLabelName23" min="-2" pref="93" max="-2" attributes="0"/>
+                                                          <Component id="jScrollPaneKickDoubleBarComment" min="-2" pref="93" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -4426,7 +4432,7 @@
                                           <EmptySpace min="-2" pref="625" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonKickDotPcOrigin" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName25" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneKickDotPcOrigin" min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -4453,7 +4459,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName22" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickDotCpuStarting" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="jLabelKickStartingDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonKickDotCpuStarting" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -4468,9 +4474,9 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPaneDasmLabelName24" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickAsterixOrigin" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="jScrollPaneDasmLabelName25" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneKickDotPcOrigin" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonKickDotPcOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -4478,24 +4484,24 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelKickCommentDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonKickDoubleBarComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName23" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickDoubleBarComment" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName26" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonKickSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                                           <Component id="jRadioButtonDasmDotIfPBlockComment" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName28" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmDotIfPBlockComment" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmLabelName27" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabelKickBlockCommentDeclaration" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelKickLabelDeclaration" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneKickLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -4539,7 +4545,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickLabelName">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickLabelNameColon">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4550,7 +4556,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneKickCa65LabelNameColon">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickLabelNameColon">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -4641,7 +4647,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotCpuStartingItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName22">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotCpuStarting">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4652,7 +4658,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneKuckDotCpuStarting">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickDotCpuStarting">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -4677,7 +4683,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDoubleBarCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName23">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDoubleBarComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4713,7 +4719,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickAsterixOriginItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName24">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickAsterixOrigin">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4743,7 +4749,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotPcOriginItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName25">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotPcOrigin">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4779,7 +4785,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickSemicolonBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName26">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickSemicolonBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4809,7 +4815,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickCstyleBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName27">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickCstyleBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4839,7 +4845,7 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotIfPBlockCommentItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName28">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotIfPBlockComment">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -4855,6 +4861,319 @@
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;if 0&lt;/b&gt; xxx &lt;b&apos;&gt;endif&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanelTass64">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="64Tass">
+                            <Property name="tabTitle" type="java.lang.String" value="64Tass"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelTass64BlockCommentDeclaration" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmSemicolonBlockComment1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmLabelName6" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelTass64StartingDeclaration" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64DotCpuAStarting" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmTass64DotCpuAStarting" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelTass64OriginDeclaration" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64AsterixOrigin" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTass64ASterixOrigin" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelTass64CommentDeclaration" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64SemicolonComment" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTass64SemicolonComment" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDasmCstyleBlockComment1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneDasmLabelName7" min="-2" pref="93" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDasmIfBlockComment1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneDasmLabelName10" min="-2" pref="156" max="-2" attributes="0"/>
+                                  <EmptySpace pref="223" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelTass64StartingDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64DotCpuAStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jScrollPaneTass64ASterixOrigin" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelTass64OriginDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64AsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jScrollPaneTass64SemicolonComment" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelTass64CommentDeclaration" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTass64SemicolonComment" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                          <Component id="jRadioButtonDasmIfBlockComment1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmLabelName10" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Component id="jLabelTass64BlockCommentDeclaration" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPaneDasmLabelName6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmCstyleBlockComment1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPaneDasmLabelName7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmSemicolonBlockComment1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="230" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelTass64StartingDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Starting:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotCpuAStarting">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64Starting"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotCpuAStartingItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmTass64DotCpuAStarting">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotCpuAStarting">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.cpu&lt;/b&gt; &quot;6502&quot;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTass64OriginDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Origin:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64AsterixOrigin">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64Origin"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64AsterixOriginItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ASterixOrigin">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTass64AsterixOrigin">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;*=&lt;/b&gt;$xxyy&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTass64CommentDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Comment:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64SemicolonComment">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64Comment"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64SemicolonCommentItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64SemicolonComment">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTass64SemicolonComment">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTass64BlockCommentDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Block Comment:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmSemicolonBlockComment1">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64BlockComment"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmSemicolonBlockComment1ItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName6">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmSemicolonBlockComment1">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmCstyleBlockComment1">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64BlockComment"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmCstyleBlockComment1ItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName7">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmCstyleBlockComment1">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.if 0&lt;/b&gt; xxx &lt;b&apos;&gt;.fi&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmIfBlockComment1">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64BlockComment"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmIfBlockComment1ItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelName10">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmIfBlockComment1">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.comment&lt;/b&gt; xxx &lt;b&apos;&gt;.endc&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
