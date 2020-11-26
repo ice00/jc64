@@ -288,14 +288,17 @@ public class Assembler {
     *  -> ; xxxx
     *  -> /\* xxx *\/
     *  -> if 0 xxx endif
+    *  -> .if 0 xxx .fi
     *  -> .if 0 xxx .endif
     *  -> .if (0) xxx .endif
+    *  -> !if 0 { xxx }
     *  -> .comment xxx .endc
     */
    public enum BlockComment implements ActionType {
       SEMICOLON,       // ; xxxx
       CSTYLE,          // /* xxx */ 
       IF,              // if 0 xxx endif
+      DOT_IF_FI,       // .if 0 xxx .fi
       DOT_IF,          // .if 0 xxx .endif
       DOT_IF_P,        // .if (0) xxx .endif
       MARK_IF,         // !if 0 { xxx }
@@ -369,7 +372,26 @@ public class Assembler {
                 }   
             }        
             if (!isOpen) str.append(".endif\n");    
-            break;  
+            break; 
+          case DOT_IF_FI:
+            isOpen=false;
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) {
+                if (isOpen) str.append(".fi\n\n");
+                else {
+                 str.append(".if 0\n");
+                 isOpen=false;
+                }
+              } else {
+                  if (!isOpen) {
+                    isOpen=true;
+                    str.append(".if 0\n");
+                  }
+                  str.append(line).append("\n");
+                }   
+            }        
+            if (!isOpen) str.append(".fi\n");    
+            break;   
           case DOT_IF_P:
             isOpen=false;
             for (String line : lines) {

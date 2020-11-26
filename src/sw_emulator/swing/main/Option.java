@@ -700,19 +700,19 @@ public class Option {
   public Assembler.Origin tass64Origin=Assembler.Origin.ASTERISK; 
     
   /** KickAssembler: label declaration */
-  public Assembler.Label tass64Label; /////////
+  public Assembler.Label tass64Label=Assembler.Label.NAME_COLON;
   
   /** 64Tass: comment declaration */
   public Assembler.Comment tass64Comment=Assembler.Comment.SEMICOLON; 
   
    /** 64Tass: block comment declaration */
-  public Assembler.BlockComment tass64BlockComment;  /////////
+  public Assembler.BlockComment tass64BlockComment=Assembler.BlockComment.SEMICOLON;
   
   /** 64Tass: byte declaration */
-  public Assembler.Byte tass64Byte;  /////////
+  public Assembler.Byte tass64Byte=Assembler.Byte.DOT_BYTE;
   
   /** 64Tass: word declaration */
-  public Assembler.Word tass64Word;  /////////
+  public Assembler.Word tass64Word=Assembler.Word.DOT_WORD;
   
   
   /**
