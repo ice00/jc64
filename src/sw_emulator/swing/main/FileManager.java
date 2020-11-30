@@ -442,7 +442,7 @@ public class FileManager {
       out.writeBoolean(option.commentVic20BasicRom);
       out.writeBoolean(option.commentVic20KernalRom); 
       
-      out.writeUTF(option.assembler.getName());
+      out.writeUTF(option.assembler.name());
       
       out.flush();
       out.close();

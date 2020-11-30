@@ -456,6 +456,7 @@ public class Assembler {
    /**
     * Byte declaration type
     *  -> .byte $xx
+    *  -> .char $xx
     *  -> byte $xx
     *  -> dc $xx
     *  -> dc.b $xx
@@ -465,6 +466,7 @@ public class Assembler {
     */
    public enum Byte implements ActionType {
       DOT_BYTE,           // .byte $xx
+      DOT_CHAR,           // .char $xx
       BYTE,               //  byte $xx
       DC_BYTE,            //    dc $xx
       DC_B_BYTE,          //  dc.b $xx
@@ -484,6 +486,9 @@ public class Assembler {
           case DOT_BYTE:
             str.append(("  .byte "));
             break;
+          case DOT_CHAR:
+            str.append(("  .char "));
+            break;  
           case BYTE:
             str.append(("  byte "));
             break;
@@ -529,17 +534,32 @@ public class Assembler {
        * @return the converted string
        */
       private String getByteType(DataType dataType, byte value) {
-        switch (dataType)   {
-          case BYTE_DEC:
-            return ""+Unsigned.done(value);
-          case BYTE_BIN:
-            return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
-          case BYTE_CHAR:
-            //return "\""+(char)Unsigned.done(value)+"\"";
-            return "'"+(char)Unsigned.done(value);
-          case BYTE_HEX:
-          default:
-            return "$"+ByteToExe(Unsigned.done(value));
+        if (aByte==DOT_CHAR && value<0) {
+          switch (dataType)   {
+              case BYTE_DEC:
+                return "-"+Math.abs(value);
+              case BYTE_BIN:
+                return "-%"+Integer.toBinaryString((Math.abs(value) & 0xFF) + 0x100).substring(1);
+              case BYTE_CHAR:
+                //return "\""+(char)Unsigned.done(value)+"\"";
+                return "-'"+(char)Math.abs(value);
+              case BYTE_HEX:
+              default:
+                return "-$"+ByteToExe(Math.abs(value));
+           }            
+        } else {
+            switch (dataType)   {
+              case BYTE_DEC:
+                return ""+Unsigned.done(value);
+              case BYTE_BIN:
+                return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
+              case BYTE_CHAR:
+                //return "\""+(char)Unsigned.done(value)+"\"";
+                return "'"+(char)Unsigned.done(value);
+              case BYTE_HEX:
+              default:
+                return "$"+ByteToExe(Unsigned.done(value));
+           }
         }
       }
    }    
@@ -547,6 +567,7 @@ public class Assembler {
    /**
     * Word declaration type
     *  -> .word $xxyy
+    *  -> .sint $xxyy
     *  -> word $xxyy
     *  -> dc.w $xxyy
     *  -> .dbyte $xxyy
@@ -555,6 +576,7 @@ public class Assembler {
     */
    public enum Word implements ActionType {
      DOT_WORD,            //  .word $xxyy
+     DOT_SINT,            //  .sint $xxyy
      WORD,                //   word $xxyy
      DC_W_WORD,           //   dc.w $xxyy
      DOT_DBYTE,           // .dbyte $xxyy
@@ -575,6 +597,9 @@ public class Assembler {
          case DOT_WORD:
            str.append(("  .word "));  
            break;
+         case DOT_SINT:
+           str.append(("  .sint "));  
+           break;           
          case WORD:
            str.append(("  word "));   
            break;
@@ -614,9 +639,8 @@ public class Assembler {
                listRel.addFirst(memRelLow);
                aByte.flush(str);
              }
-             else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
-             
-             
+             else if (aWord==DOT_SINT && memHigh.copy<0) str.append("$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
+                  else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
            }
            if (list.size()>=2) str.append(", ");
            else str.append("\n");
