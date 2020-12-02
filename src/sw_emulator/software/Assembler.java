@@ -666,11 +666,51 @@ public class Assembler {
     */
    public enum Long implements ActionType  {
         ;      
-       @Override
+      @Override
       public void flush(StringBuilder str) {
       
       } 
    }    
+   
+   /**
+    * Mono sprite declaration type
+    * 
+    * -> [byte] $xx.
+    * -> [byte] %b..
+    * -> [.mac] %xx..
+    * -> [.mac] %b..
+    */ 
+   public enum MonoSprite implements ActionType {
+      BYTE_HEX,      // [byte] $xx..
+      BYTE_BIN,      // [byte] %b..
+      MACRO_HEX,     // [.mac] %xx..
+      MACRO_BIN      // [.mac] %b..
+      ;      
+      @Override
+      public void flush(StringBuilder str) {
+      
+      }   
+   }
+   
+   /**
+    * Multicolor sprite declaration type
+    * 
+    * -> [byte] $xx.
+    * -> [byte] %b..
+    * -> [.mac] %xx..
+    * -> [.mac] %b..
+    */ 
+   public enum MultiSprite implements ActionType {
+      BYTE_HEX,      // [byte] $xx..
+      BYTE_BIN,      // [byte] %b..
+      MACRO_HEX,     // [.mac] %xx..
+      MACRO_BIN      // [.mac] %b..
+      ;      
+      @Override
+      public void flush(StringBuilder str) {
+      
+      }   
+   } 
    
    /** Fifo list  of memory locations */
    protected static LinkedList<MemoryDasm> list=new LinkedList();
