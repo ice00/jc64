@@ -137,11 +137,21 @@ package sw_emulator.swing.main;
         public char getChar() {
           return 'I';
         }        
-    }   
+    }, 
+    MONO_SPRITE{
+        @Override
+        public char getChar() {
+          return 'O';
+        }        
+    }, 
+    COLOR_SPRITE{
+        @Override
+        public char getChar() {
+          return 'F';
+        }        
+    };
     
-    ;
-   
-    /**
+       /**
      * Get the char of this data type
      * 
      * @return the char

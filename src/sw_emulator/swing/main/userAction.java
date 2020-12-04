@@ -185,6 +185,15 @@ public interface userAction {
   /** Mark memory of text converted to petascii code data kind */
   public static final int MEM_MARKDATA_I = 53;   
   
+  /** Assemblate action for source */
+  public static final int SOURCE_ASS = 54; 
+  
+  /** Mark memory of text converted to monocromatic sprite data kind */
+  public static final int MEM_MARKDATA_O = 55;   
+  
+  /** Mark memory of text converted to multicolor sprite data kind */
+  public static final int MEM_MARKDATA_F = 56;  
+  
   /**
    * Execute the passed user action
    * 

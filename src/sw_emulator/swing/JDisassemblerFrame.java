@@ -232,6 +232,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorButton2 = new javax.swing.JToolBar.Separator();
         jButtonFindMem = new javax.swing.JButton();
         jButtonDisassemble = new javax.swing.JButton();
+        jButtonDisassemble1 = new javax.swing.JButton();
         jButtonFindDis = new javax.swing.JButton();
         jButtonExportAsDiss = new javax.swing.JButton();
         jButtonFindSource = new javax.swing.JButton();
@@ -362,6 +363,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuSource = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemDiss = new javax.swing.JMenuItem();
+        jMenuItemAssembly = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemFindDis = new javax.swing.JMenuItem();
         jMenuItemDissSaveAs = new javax.swing.JMenuItem();
@@ -469,7 +471,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData.add(jMenuItemStackWord);
         jPopupMenuData.add(jSeparatorPopUpMenu1);
 
-        jMenuItemSpriteMono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+        jMenuItemSpriteMono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/O.png"))); // NOI18N
         jMenuItemSpriteMono.setText("() Mark data as Monocromatic Sprite definitions");
         jMenuItemSpriteMono.setToolTipText("");
         jMenuItemSpriteMono.addActionListener(new java.awt.event.ActionListener() {
@@ -479,7 +481,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jPopupMenuData.add(jMenuItemSpriteMono);
 
-        jMenuItemSpriteMulti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
+        jMenuItemSpriteMulti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/F.png"))); // NOI18N
         jMenuItemSpriteMulti.setText("() Mark data as Multicolor Sprite definitions");
         jMenuItemSpriteMulti.setToolTipText("");
         jMenuItemSpriteMulti.addActionListener(new java.awt.event.ActionListener() {
@@ -916,6 +918,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBar.add(jButtonDisassemble);
 
+        jButtonDisassemble1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/assembler.png"))); // NOI18N
+        jButtonDisassemble1.setToolTipText("Assemblate");
+        jButtonDisassemble1.setFocusable(false);
+        jButtonDisassemble1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDisassemble1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDisassemble1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDisassemble1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonDisassemble1);
+
         jButtonFindDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/findd.png"))); // NOI18N
         jButtonFindDis.setToolTipText("Find a text in preview");
         jButtonFindDis.setFocusable(false);
@@ -1085,7 +1099,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jSplitPaneExternal.setRightComponent(jSplitPaneInternal);
 
-    jScrollPaneMemory.setPreferredSize(new java.awt.Dimension(170, 403));
+    jScrollPaneMemory.setPreferredSize(new java.awt.Dimension(200, 403));
 
     jTableMemory.setModel(dataTableModelMemory);
     jTableMemory.setDefaultRenderer(Integer.class, memoryTableCellRenderer);
@@ -1441,8 +1455,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jSubMenu.add(jMenuItemStackWord1);
     jSubMenu.add(jSeparator6);
 
-    jMenuItemSpriteMono1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
-    jMenuItemSpriteMono1.setText("() Mark data as Monocromatic Sprite definitions");
+    jMenuItemSpriteMono1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemSpriteMono1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/O.png"))); // NOI18N
+    jMenuItemSpriteMono1.setMnemonic('o');
+    jMenuItemSpriteMono1.setText("(O) Mark data as Monocromatic Sprite definitions");
     jMenuItemSpriteMono1.setToolTipText("");
     jMenuItemSpriteMono1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1451,8 +1467,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jSubMenu.add(jMenuItemSpriteMono1);
 
-    jMenuItemSpriteMulti1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
-    jMenuItemSpriteMulti1.setText("() Mark data as Multicolor Sprite definitions");
+    jMenuItemSpriteMulti1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemSpriteMulti1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/F.png"))); // NOI18N
+    jMenuItemSpriteMulti1.setMnemonic('f');
+    jMenuItemSpriteMulti1.setText("(F) Mark data as Multicolor Sprite definitions");
     jMenuItemSpriteMulti1.setToolTipText("");
     jMenuItemSpriteMulti1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1654,9 +1672,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuSource.add(jMenuItem1);
 
-    jMenuItemDiss.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemDiss.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemDiss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exec.png"))); // NOI18N
-    jMenuItemDiss.setMnemonic('d');
+    jMenuItemDiss.setMnemonic('e');
     jMenuItemDiss.setText("Disassemble");
     jMenuItemDiss.setToolTipText("");
     jMenuItemDiss.addActionListener(new java.awt.event.ActionListener() {
@@ -1665,6 +1683,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuSource.add(jMenuItemDiss);
+
+    jMenuItemAssembly.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemAssembly.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/assembler.png"))); // NOI18N
+    jMenuItemAssembly.setMnemonic('t');
+    jMenuItemAssembly.setText("Assemblate");
+    jMenuItemAssembly.setToolTipText("");
+    jMenuItemAssembly.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemAssemblyActionPerformed(evt);
+        }
+    });
+    jMenuSource.add(jMenuItemAssembly);
     jMenuSource.add(jSeparator1);
 
     jMenuItemFindDis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -2335,11 +2365,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemByteChar1ActionPerformed
 
     private void jMenuItemSpriteMonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMonoActionPerformed
-        
+      execute(MEM_MARKDATA_O);  
     }//GEN-LAST:event_jMenuItemSpriteMonoActionPerformed
 
     private void jMenuItemSpriteMultiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMultiActionPerformed
-       
+      execute(MEM_MARKDATA_F); 
     }//GEN-LAST:event_jMenuItemSpriteMultiActionPerformed
 
     private void jMenuItemTextPetascii1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTextPetascii1ActionPerformed
@@ -2359,12 +2389,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemTribyte1ActionPerformed
 
     private void jMenuItemSpriteMono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMono1ActionPerformed
-       
+      execute(MEM_MARKDATA_O); 
     }//GEN-LAST:event_jMenuItemSpriteMono1ActionPerformed
 
     private void jMenuItemSpriteMulti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpriteMulti1ActionPerformed
-      
+      execute(MEM_MARKDATA_F);
     }//GEN-LAST:event_jMenuItemSpriteMulti1ActionPerformed
+
+    private void jButtonDisassemble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisassemble1ActionPerformed
+      execute(SOURCE_ASS);
+    }//GEN-LAST:event_jButtonDisassemble1ActionPerformed
+
+    private void jMenuItemAssemblyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAssemblyActionPerformed
+      execute(SOURCE_ASS);
+    }//GEN-LAST:event_jMenuItemAssemblyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2415,6 +2453,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonConfigure;
     private javax.swing.JButton jButtonDisassemble;
+    private javax.swing.JButton jButtonDisassemble1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonExportAsDiss;
     private javax.swing.JButton jButtonExportAsSource;
@@ -2445,6 +2484,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemAddComment;
     private javax.swing.JMenuItem jMenuItemAddress;
     private javax.swing.JMenuItem jMenuItemAddress1;
+    private javax.swing.JMenuItem jMenuItemAssembly;
     private javax.swing.JMenuItem jMenuItemByteBin;
     private javax.swing.JMenuItem jMenuItemByteBin1;
     private javax.swing.JMenuItem jMenuItemByteChar;
@@ -2585,7 +2625,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         break;
       case SOURCE_DISASS:
         disassembly();
-        break;            
+        break;        
+      case SOURCE_ASS:
+        assembly();
+        break;        
       case SOURCE_EXPASDIS:
         exportAs(rSyntaxTextAreaDis.getText());  
         break;        
@@ -2675,7 +2718,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;  
        case MEM_MARKDATA_I:  
          markAsData(DataType.PETASCII_TEXT);  
-         break;           
+         break;     
+       case MEM_MARKDATA_O:  
+         markAsData(DataType.MONO_SPRITE);  
+         break;        
+       case MEM_MARKDATA_F:  
+         markAsData(DataType.COLOR_SPRITE);  
+         break;          
        case MEM_MARKGARB:
          markAsGarbage();  
          break;        
@@ -3660,5 +3709,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }    
     
     return addr;
+  }
+
+  /**
+   * Assemblate back the source to binary
+   */
+  private void assembly() {
+    // to code
   }
 }
