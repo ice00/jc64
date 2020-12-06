@@ -601,6 +601,12 @@ public class Option {
   /** DASM: word declaration */
   public Assembler.Word dasmWord=Assembler.Word.DOT_WORD;
   
+  /** Assembler mono color sprite*/
+  public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
+   
+  /** Asembler multi color sprite */
+  public Assembler.MultiSprite dasmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  
   
   
   /** TMPX: starting declaration */

@@ -84,6 +84,20 @@ public class Assembler {
     }
     return ret.toUpperCase(Locale.ENGLISH);
   }   
+  
+  /**
+   * Convert an 8 bit 0/1 string to multicolor dots
+   * @param bin the bin to convert
+   * @return the converted peace
+   */
+  protected static String BinToMulti(String bin) {
+    String p0=bin.substring(0, 2).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
+    String p1=bin.substring(2, 4).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
+    String p2=bin.substring(4, 6).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
+    String p3=bin.substring(6, 8).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
+    
+    return p0+p1+p2+p3;
+  }
     
    /**
     * Action type
@@ -95,6 +109,13 @@ public class Assembler {
       * @param str the output stream
       */   
       void flush(StringBuilder str);
+      
+      /** 
+       * Setting up the action type if this is the case
+       * 
+       * @param str the output stream
+       */
+      default void setting(StringBuilder str) {};
    } 
     
    /** 
@@ -267,6 +288,11 @@ public class Assembler {
       public void flush(StringBuilder str) {
         String comment=lastMem.dasmComment;
         if (lastMem.userComment != null && !"".equals(lastMem.userComment)) comment=lastMem.userComment;
+        
+        if ("".equals(lastMem.userComment)) {
+          str.append("\n");
+          return;
+        }
         
         switch (aComment) {
           case SEMICOLON:
@@ -688,8 +714,99 @@ public class Assembler {
       ;      
       @Override
       public void flush(StringBuilder str) {
-      
+        if (list.isEmpty()) return; 
+        
+        // we must receive a list of 3 or 1 final byte (if 2, uses as bytes)
+        if (list.size()>=3) {    
+          MemoryDasm mem1=list.pop(); 
+          MemoryDasm mem2=list.pop();
+          MemoryDasm mem3=list.pop(); 
+          StringBuilder tmp;
+          String tmpS;
+           
+          // add a dasm comment with pixels
+          mem3.dasmComment=Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*")+
+                           Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*")+
+                           Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*");
+          lastMem=mem3;
+          
+          // now we have one row of 3 bytes
+          switch (aMonoSprite) {
+            case BYTE_HEX:
+              mem1=mem1.clone();
+              mem2=mem2.clone();
+              mem3=mem3.clone();
+              mem1.dataType=DataType.BYTE_HEX;
+              mem2.dataType=DataType.BYTE_HEX;
+              mem3.dataType=DataType.BYTE_HEX;
+              list.push(mem3);
+              list.push(mem2);
+              list.push(mem1);
+              tmp=new StringBuilder();
+              aByte.flush(tmp);  
+              tmpS=tmp.toString();
+              str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
+              break;
+            case BYTE_BIN:
+              mem1=mem1.clone();
+              mem2=mem2.clone();
+              mem3=mem3.clone();
+              mem1.dataType=DataType.BYTE_BIN;
+              mem2.dataType=DataType.BYTE_BIN;
+              mem3.dataType=DataType.BYTE_BIN;
+              list.push(mem3);
+              list.push(mem2);
+              list.push(mem1);
+              tmp=new StringBuilder();
+              aByte.flush(tmp); 
+              tmpS=tmp.toString();
+              str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
+              break;
+            case MACRO_HEX:
+              str.append("  MonoSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO_BIN:
+              str.append("  MonoSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;  
+            }
+          aComment.flush(str);
+        } else {
+            // force to be as byte
+            aByte.flush(str);
+          }            
       }   
+      
+     /** 
+      * Setting up the action type if this is the case
+      * 
+      * @param str the output stream
+      */
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aMonoSprite) {
+         case MACRO_HEX:
+         case MACRO_BIN:
+           str.append(
+             "  .mac MonoSpriteLine \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "  .endm \n\n"
+           );
+       }
+     };
    }
    
    /**
@@ -701,15 +818,106 @@ public class Assembler {
     * -> [.mac] %b..
     */ 
    public enum MultiSprite implements ActionType {
-      BYTE_HEX,      // [byte] $xx..
-      BYTE_BIN,      // [byte] %b..
-      MACRO_HEX,     // [.mac] %xx..
-      MACRO_BIN      // [.mac] %b..
-      ;      
-      @Override
-      public void flush(StringBuilder str) {
+     BYTE_HEX,      // [byte] $xx..
+     BYTE_BIN,      // [byte] %b..
+     MACRO_HEX,     // [.mac] %xx..
+     MACRO_BIN      // [.mac] %b..
+     ;      
+     @Override
+     public void flush(StringBuilder str) {
+        if (list.isEmpty()) return; 
+        
+        // we must receive a list of 3 or 1 final byte (if 2, uses as bytes)
+        if (list.size()>=3) {    
+          MemoryDasm mem1=list.pop(); 
+          MemoryDasm mem2=list.pop();
+          MemoryDasm mem3=list.pop(); 
+          StringBuilder tmp;
+          String tmpS;
+           
+          // add a dasm comment with pixels
+          mem3.dasmComment=BinToMulti(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))+
+                           BinToMulti(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))+
+                           BinToMulti(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1));
+          lastMem=mem3;
+          
+          // now we have one row of 3 bytes
+          switch (aMonoSprite) {
+            case BYTE_HEX:
+              mem1=mem1.clone();
+              mem2=mem2.clone();
+              mem3=mem3.clone();
+              mem1.dataType=DataType.BYTE_HEX;
+              mem2.dataType=DataType.BYTE_HEX;
+              mem3.dataType=DataType.BYTE_HEX;
+              list.push(mem3);
+              list.push(mem2);
+              list.push(mem1);
+              tmp=new StringBuilder();
+              aByte.flush(tmp);  
+              tmpS=tmp.toString();
+              str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
+              break;
+            case BYTE_BIN:
+              mem1=mem1.clone();
+              mem2=mem2.clone();
+              mem3=mem3.clone();
+              mem1.dataType=DataType.BYTE_BIN;
+              mem2.dataType=DataType.BYTE_BIN;
+              mem3.dataType=DataType.BYTE_BIN;
+              list.push(mem3);
+              list.push(mem2);
+              list.push(mem1);
+              tmp=new StringBuilder();
+              aByte.flush(tmp); 
+              tmpS=tmp.toString();
+              str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
+              break;
+            case MACRO_HEX:
+              str.append("  MultiSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO_BIN:
+              str.append("  MultiSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;  
+            }
+          aComment.flush(str);
+        } else {
+            // force to be as byte
+            aByte.flush(str);
+          }    
+     }   
       
-      }   
+     /** 
+      * Setting up the action type if this is the case
+      * 
+      * @param str the output stream
+      */
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aMonoSprite) {
+         case MACRO_HEX:
+         case MACRO_BIN:
+           str.append(
+             " .mac MultiSpriteLine \n" +
+             "    .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             " .endm \n\n"
+           );
+       }
+     };      
    } 
    
    /** Fifo list  of memory locations */
@@ -749,10 +957,27 @@ public class Assembler {
    /** Assembler word type */
    protected static Assembler.Word aWord;
    
+   /** Assembler mono color sprite*/
+   protected static Assembler.MonoSprite aMonoSprite;
+   
+   /** Asembler multi color sprite */
+   protected static Assembler.MultiSprite aMultiSprite;
+              
    /** Actual type being processed */
    ActionType actualType=null;
 
-  
+   /** True if this ia a block of monoscromatic sprite */
+   boolean isMonoSpriteBlock=false;
+   
+   /** Actual size of monocromatic sprite block */
+   int sizeMonoSpriteBlock=0;
+   
+   /** True if this is a block of multicolor sprite */
+   boolean isMultiSpriteBlock=false;
+   
+   /** Actual size of multicolor sprite block */
+   int sizeMultiSpriteBlock=0;
+   
   
    /**
     * Set the option to use
@@ -764,8 +989,9 @@ public class Assembler {
     * @param aComment the comment type to use
     * @param aBlockComment the comment type to use
     * @param aByte the byte type to use
-    * @param aWord the word type tp use
-    * 
+    * @param aWord the word type to use
+    * @param aMonoSprite the mono sprite type to use
+    * @param aMultiSprite the numti sprite type to use
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -774,7 +1000,9 @@ public class Assembler {
                          Assembler.Comment aComment, 
                          Assembler.BlockComment aBlockComment,
                          Assembler.Byte aByte, 
-                         Assembler.Word aWord) {
+                         Assembler.Word aWord,                         
+                         Assembler.MonoSprite aMonoSprite,
+                         Assembler.MultiSprite aMultiSprite) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
      Assembler.aOrigin=aOrigin;
@@ -783,6 +1011,15 @@ public class Assembler {
      Assembler.aBlockComment=aBlockComment;
      Assembler.aByte=aByte;
      Assembler.aWord=aWord;
+     
+     Assembler.aMonoSprite=aMonoSprite;
+     Assembler.aMultiSprite=aMultiSprite;
+     
+      
+     isMonoSpriteBlock=false;
+     sizeMonoSpriteBlock=0;
+     isMultiSpriteBlock=false;
+     sizeMultiSpriteBlock=0;
    } 
    
    /**
@@ -829,7 +1066,13 @@ public class Assembler {
        }   
               
        actualType=getType(mem);
-     }  
+     } else {
+       type=getType(mem);
+       if (type!=actualType) {
+          flush(str);              // write back previous data
+          actualType=type;
+       }
+     } 
           
      
      list.add(mem);
@@ -854,8 +1097,23 @@ public class Assembler {
      if (actualType instanceof Long) {
        // look if it is time to aggregate data
        if (list.size()==option.maxLongAggregate*4) actualType.flush(str);         
-     }         
-     
+     } else
+     // we are processing mono sprite?    
+     if (actualType instanceof MonoSprite) {
+       if ((sizeMonoSpriteBlock % 3)==0) actualType.flush(str);
+       else if (sizeMonoSpriteBlock>=64) {
+         actualType.flush(str);
+         sizeMonoSpriteBlock=0;
+       }
+     } else
+     // we are processing multi sprite?    
+     if (actualType instanceof MultiSprite) {
+       if ((sizeMultiSpriteBlock % 3)==0) actualType.flush(str);
+       else if (sizeMultiSpriteBlock>=64) {
+         actualType.flush(str);
+         sizeMultiSpriteBlock=0;
+       }
+     }
    }
    
    /**
@@ -875,7 +1133,26 @@ public class Assembler {
     */
    public void setOrg(StringBuilder str, int pc) {
      lastPC=pc;
-      aOrigin.flush(str);
+     aOrigin.flush(str);
+   }
+   
+   /**
+    * Put macros if they are used based onto assembler and user option
+    * 
+    * @param str the stream for output
+    * @param memory the actual memory
+    */
+   public void setMacro(StringBuilder str, MemoryDasm[] memory) {
+     boolean hasMonoSprite=false;
+     boolean hasMultiSprite=false;
+     
+     for (MemoryDasm mem:memory) {
+       if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
+       if (mem.dataType==DataType.MULTI_SPRITE) hasMultiSprite=true;
+     }
+     
+     if (hasMonoSprite) aMonoSprite.setting(str);
+     if (hasMultiSprite) aMultiSprite.setting(str);
    }
    
    /**
@@ -919,7 +1196,7 @@ public class Assembler {
      actualType=null;
      
      if (comment!=null) {
-       str.deleteCharAt(str.length()-1);              // remove \n
+       str.deleteCharAt(str.length()-1);            // remove \n
        size=str.length()-size;                      // get number of chars used  
        str.append(SPACES.substring(0, SPACES.length()-size));
        aComment.flush(str);  
@@ -936,25 +1213,46 @@ public class Assembler {
    }
    
    /**
-    * Get the tyoe for this location
-    * @param mem
-    * @return 
+    * Get the type for this location
+    * @param mem the memory to analize
+    * @return the location type
     */
-   private ActionType getType(MemoryDasm mem) {
-     if (!mem.isData) return null;
+   private ActionType getType(MemoryDasm mem) {     
+     if (!mem.isData) {
+       isMonoSpriteBlock=false;
+       isMultiSpriteBlock=false;   
+       return null;
+     }
      
      switch (mem.dataType) {
        case BYTE_HEX:
        case BYTE_DEC:
        case BYTE_BIN:
        case BYTE_CHAR:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;        
          return aByte;
        case WORD:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
          return aWord;
-           
+       case MONO_SPRITE:
+         if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
+         isMonoSpriteBlock=true;  
+         isMultiSpriteBlock=false;
+         sizeMonoSpriteBlock++;
+         return aMonoSprite;
+       case MULTI_SPRITE:
+         if (!isMultiSpriteBlock) sizeMultiSpriteBlock=0; 
+         isMultiSpriteBlock=true; 
+         isMonoSpriteBlock=false;
+         sizeMultiSpriteBlock++;
+         return aMultiSprite;  
      }
      
      // default is of Byte type
+     isMonoSpriteBlock=false;
+     isMultiSpriteBlock=false; 
      return aByte;
    }   
 }

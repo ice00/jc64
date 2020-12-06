@@ -2723,7 +2723,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          markAsData(DataType.MONO_SPRITE);  
          break;        
        case MEM_MARKDATA_F:  
-         markAsData(DataType.COLOR_SPRITE);  
+         markAsData(DataType.MULTI_SPRITE);  
          break;          
        case MEM_MARKGARB:
          markAsGarbage();  

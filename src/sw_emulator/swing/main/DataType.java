@@ -144,7 +144,7 @@ package sw_emulator.swing.main;
           return 'O';
         }        
     }, 
-    COLOR_SPRITE{
+    MULTI_SPRITE{
         @Override
         public char getChar() {
           return 'F';

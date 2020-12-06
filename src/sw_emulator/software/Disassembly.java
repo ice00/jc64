@@ -109,6 +109,12 @@ public class Disassembly {
   
   /** Assembler word type */
   protected Assembler.Word aWord;
+  
+   /** Assembler mono color sprite*/
+   protected static Assembler.MonoSprite aMonoSprite;
+   
+   /** Asembler multi color sprite */
+   protected static Assembler.MultiSprite aMultiSprite;
     
   /**
    * Disassemble the given data
@@ -262,6 +268,7 @@ public class Disassembly {
       sid.upperCase=option.opcodeUpperCaseSource;
         
       assembler.setStarting(tmp);
+      assembler.setMacro(tmp, memory);
       
       // calculate org for header
       int header=sidPC;   
@@ -391,6 +398,7 @@ public class Disassembly {
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
       assembler.setStarting(tmp);
+      assembler.setMacro(tmp, memory);
 
       if (option.dasmF3Comp) {
         assembler.setOrg(tmp, start-2);
@@ -456,6 +464,7 @@ public class Disassembly {
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
       assembler.setStarting(tmp);
+      assembler.setMacro(tmp, memory);
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         
@@ -588,6 +597,8 @@ public class Disassembly {
         aBlockComment=option.dasmBlockComment;
         aByte=option.dasmByte;
         aWord=option.dasmWord;
+        aMonoSprite=option.dasmMonoSprite;
+        aMultiSprite=option.dasmMultiSprite;
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -636,6 +647,8 @@ public class Disassembly {
         break;
     }
     
-    assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, aBlockComment, aByte, aWord);      
+    assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
+                        aBlockComment, aByte, aWord,
+                        aMonoSprite, aMultiSprite);      
   }
 }

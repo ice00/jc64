@@ -110,6 +110,9 @@ public class FileManager {
       option.dasmByte = Assembler.Byte.valueOf(in.readUTF());
       option.dasmWord = Assembler.Word.valueOf(in.readUTF());
       
+      option.dasmMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.dasmMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      
       option.tmpxStarting = Assembler.Starting.valueOf(in.readUTF());
       option.tmpxOrigin = Assembler.Origin.valueOf(in.readUTF());
       option.tmpxLabel = Assembler.Label.valueOf(in.readUTF());
@@ -308,6 +311,9 @@ public class FileManager {
       out.writeUTF(option.dasmBlockComment.name());
       out.writeUTF(option.dasmByte.name());
       out.writeUTF(option.dasmWord.name());
+      
+      out.writeUTF(option.dasmMonoSprite.name());
+      out.writeUTF(option.dasmMultiSprite.name());
       
       out.writeUTF(option.tmpxStarting.name());
       out.writeUTF(option.tmpxOrigin.name());
