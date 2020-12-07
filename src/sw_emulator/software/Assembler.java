@@ -289,7 +289,7 @@ public class Assembler {
         String comment=lastMem.dasmComment;
         if (lastMem.userComment != null && !"".equals(lastMem.userComment)) comment=lastMem.userComment;
         
-        if ("".equals(lastMem.userComment)) {
+        if ("".equals(comment)) {
           str.append("\n");
           return;
         }
@@ -705,12 +705,16 @@ public class Assembler {
     * -> [byte] %b..
     * -> [.mac] %xx..
     * -> [.mac] %b..
+    * -> [.macro] %xx..
+    * -> [.macro] %b..     
     */ 
    public enum MonoSprite implements ActionType {
       BYTE_HEX,      // [byte] $xx..
       BYTE_BIN,      // [byte] %b..
       MACRO_HEX,     // [.mac] %xx..
-      MACRO_BIN      // [.mac] %b..
+      MACRO_BIN,     // [.mac] %b..
+      MACRO1_HEX,    // [.macro] %xx..
+      MACRO1_BIN     // [.macro] %b..
       ;      
       @Override
       public void flush(StringBuilder str) {
@@ -782,6 +786,26 @@ public class Assembler {
                listRel.pop();
                listRel.pop();  
                break;  
+            case MACRO1_HEX:
+              str.append("  MonoSpriteLine ($")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append(")  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO1_BIN:
+              str.append("  MonoSpriteLine (")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append(")  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break; 
             }
           aComment.flush(str);
         } else {
@@ -805,6 +829,15 @@ public class Assembler {
              "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
              "  .endm \n\n"
            );
+           break;
+         case MACRO1_HEX:
+         case MACRO1_BIN:
+           str.append(
+             "  .macro MonoSpriteLine (tribyte) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  }\n\n"
+           );               
+           break;  
        }
      };
    }
@@ -821,7 +854,9 @@ public class Assembler {
      BYTE_HEX,      // [byte] $xx..
      BYTE_BIN,      // [byte] %b..
      MACRO_HEX,     // [.mac] %xx..
-     MACRO_BIN      // [.mac] %b..
+     MACRO_BIN,     // [.mac] %b..
+     MACRO1_HEX,    // [.macro] %xx..
+     MACRO1_BIN     // [.macro] %b..    
      ;      
      @Override
      public void flush(StringBuilder str) {
@@ -842,7 +877,7 @@ public class Assembler {
           lastMem=mem3;
           
           // now we have one row of 3 bytes
-          switch (aMonoSprite) {
+          switch (aMultiSprite) {
             case BYTE_HEX:
               mem1=mem1.clone();
               mem2=mem2.clone();
@@ -893,6 +928,26 @@ public class Assembler {
                listRel.pop();
                listRel.pop();  
                break;  
+            case MACRO1_HEX:
+              str.append("  MultiSpriteLine ($")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append(")  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO1_BIN:
+              str.append("  MultiSpriteLine (")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append(")  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break; 
             }
           aComment.flush(str);
         } else {
@@ -916,6 +971,15 @@ public class Assembler {
              "    .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
              " .endm \n\n"
            );
+           break;
+         case MACRO1_HEX:
+         case MACRO1_BIN:
+           str.append(
+             "  .macro MultiSpriteLine (tribyte) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  }\n\n"
+           );               
+           break;  
        }
      };      
    } 
@@ -1134,7 +1198,7 @@ public class Assembler {
    public void setOrg(StringBuilder str, int pc) {
      lastPC=pc;
      aOrigin.flush(str);
-   }
+   }      
    
    /**
     * Put macros if they are used based onto assembler and user option
@@ -1201,6 +1265,17 @@ public class Assembler {
        str.append(SPACES.substring(0, SPACES.length()-size));
        aComment.flush(str);  
      }
+   }
+   
+   /**
+    * Set the comment if present 
+    * 
+    * @param str the stream to use
+    * @param mem the memory with comment
+    */
+   public void setComment(StringBuilder str, MemoryDasm mem) {
+     lastMem=mem;
+     aComment.flush(str);
    }
    
    /**

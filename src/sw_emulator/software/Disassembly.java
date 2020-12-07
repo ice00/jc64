@@ -635,6 +635,8 @@ public class Disassembly {
         aLabel=option.kickLabel;
         aByte=option.kickByte;
         aWord=option.kickWord;  
+        aMonoSprite=option.kickMonoSprite;
+        aMultiSprite=option.kickMultiSprite;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;

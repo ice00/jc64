@@ -144,6 +144,9 @@ public class FileManager {
       option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.kickByte = Assembler.Byte.valueOf(in.readUTF());
       option.kickWord = Assembler.Word.valueOf(in.readUTF());    
+      
+      option.kickMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.kickMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
             
       option.tass64Starting = Assembler.Starting.valueOf(in.readUTF());
       option.tass64Origin = Assembler.Origin.valueOf(in.readUTF());
@@ -345,7 +348,10 @@ public class FileManager {
       out.writeUTF(option.kickComment.name());
       out.writeUTF(option.kickBlockComment.name());
       out.writeUTF(option.kickByte.name());
-      out.writeUTF(option.kickWord.name());      
+      out.writeUTF(option.kickWord.name());     
+      
+      out.writeUTF(option.kickMonoSprite.name());
+      out.writeUTF(option.kickMultiSprite.name());
       
       out.writeUTF(option.tass64Starting.name());
       out.writeUTF(option.tass64Origin.name());

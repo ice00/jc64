@@ -708,11 +708,12 @@ public class M6510Dasm implements disassembler {
           tmp2=dcom();   
           
           // if there is a user comment, then use it
-          if (mem.userComment!=null) {
-               if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
-               else result.append("\n");
-          }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
-                  else result.append("\n");
+          //if (mem.userComment!=null) {
+          //     if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
+          //     else result.append("\n");
+          //}  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
+          //        else result.append("\n");
+          assembler.setComment(result, mem);
           
           // always add a carriage return after a RTS, RTI or JMP
           if (iType==M_JMP || iType==M_RTS || iType==M_RTI) result.append("\n");          

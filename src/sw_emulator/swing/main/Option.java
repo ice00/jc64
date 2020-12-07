@@ -698,6 +698,12 @@ public class Option {
   /** KickAssembler: word declaration */
   public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
+  /** Kick Assembler mono color sprite*/
+  public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;
+   
+  /** Kick Asembler multi color sprite */
+  public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
+  
   
   /** 64Tass: starting declaration */
   public Assembler.Starting tass64Starting=Assembler.Starting.DOT_CPU_A; 
