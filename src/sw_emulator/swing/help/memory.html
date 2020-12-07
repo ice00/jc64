@@ -9,8 +9,8 @@
   <p>The file menu is dedicated to the memory area, and so have many voices:<br></p>
   <p align="center"><img src="./memory1.png"></p>  
   <p align="center"><img src="./memory2.png"></p>    
-  <h2>Clear dasm automatic comment</h2>
-  <p>During the disassemble phase, the Dasm engine is able to add some comments to common C64 memory locations used by the instruction being executed.<br>
+  <h2>Clear disassembly automatic comment</h2>
+  <p>During the disassemble phase, the disassembly engine is able to add some comments to common memory locations (based onto the choosed platform) used by the instruction being executed.<br>
     So, for example, if the address of an load/store instruction is $D400, the automatic comment appended to that memory area will be "Voice 1: Frequency control (lo byte)"<br>
     You can use those comments to easy search for some text (eg. "Frequency control"), however if you don't need it, you can use this menu function to erase the comments and leave them blank to all the memory location you had delected<br>
     Please, note that as soon as you will regenerate the source code, the DASM will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a Dasm automatic comment.
@@ -18,8 +18,8 @@
   
   <h2>Clear user comment</h2>
  <p>This is a shortcut function for make your comment to that location as blank (e.g you can enter the comment and modify it to be empty, but this fastest).</p>
- <h2>Clear dasm automatic label</h2>
- <p>The Dasm engine is able to detect all the memory location used into the program area and label them as "W" + the hex representation of the memory area.<br>
+ <h2>Clear disassembly automatic label</h2>
+ <p>The disassembly engine is able to detect all the memory location used into the program area and label them as "W" + the hex representation of the memory area.<br>
   This command will erase that association, but if it still present into the source it will be recreated at next Dasm source regeneration. So why this function is present?<br>
   The answer is simple: at the beginning all memory locations are not marked as code/data, so the engine use them as code (by default in option). <br>
   In this phase that could be a data area that if managed as code refers to a givem memory location and so that will be labeled. 
@@ -40,7 +40,7 @@
    <p align="center"><img src="./memory5.png"></p>  
    
    <h2>Add user label</h2> 
-   <p>The user can add label to a memory location in data or code area and if there was a Dasm automatic generated one in that position, the user will be used instead of the other.<br>
+   <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user will be used instead of the other.<br>
    You cannot insert label with less than 5 chars and a option let you specify the max one to use (as some assembler has a limit in his length). <br>
    The program will search if the label was already present into the code, so you cannot create duplicates.
    As we had seen, Dasm generate labels only for memory locations inside the binary data, but a user can add a label even in the outside area (so as a constant).<br>
@@ -54,7 +54,19 @@
    <p>The selected area will be marked as code (so color will be green)</p>
    
    <h2>Mark as data</h2>
-   <p>The selected area will be marked as data (so color will be light blue)</p>
+   <p>The selected area will be marked as data (so color will be light blue).<br>
+   Note that you can enhance the classification by selecting the kind in a sub menu. The disassembly engine in that case apply a different decoding of the data.
+   </p>
+   
+   <h2>Mark data as Byte (HEX)</h2>
+   This marks the data as byte and format it as hexadecimal number. According with the selected assembler and his possible variants the format could be:<br>
+   <a>.byte $12</a> or <a>!byte $F4</a>
+   
+   <h2>Mark data as Byte (DEC)</h2>
+   
+   <h2>Mark data as Byte (BIN)</h2>
+   
+   <h2>Mark data as Byte (CHAR)</h2>
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>

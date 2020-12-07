@@ -674,7 +674,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jToolBar.add(jSeparatorButton1);
 
         jButtonClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser.png"))); // NOI18N
-        jButtonClearDMem.setToolTipText("Erase dasm automatic comment");
+        jButtonClearDMem.setToolTipText("Erase daisassembly automatic comment");
         jButtonClearDMem.setFocusable(false);
         jButtonClearDMem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonClearDMem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -698,7 +698,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jToolBar.add(jButtonClearUMem);
 
         jButtonClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser2.png"))); // NOI18N
-        jButtonClearDLabel.setToolTipText("Erase dasm automatic label");
+        jButtonClearDLabel.setToolTipText("Erase disassembly automatic label");
         jButtonClearDLabel.setFocusable(false);
         jButtonClearDLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonClearDLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1238,7 +1238,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemClearDMem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser.png"))); // NOI18N
     jMenuItemClearDMem.setMnemonic('a');
-    jMenuItemClearDMem.setText("Clear dasm automatic comment");
+    jMenuItemClearDMem.setText("Clear disassembly automatic comment");
     jMenuItemClearDMem.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemClearDMemActionPerformed(evt);
@@ -1260,7 +1260,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemClearDLabel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/eraser2.png"))); // NOI18N
     jMenuItemClearDLabel.setMnemonic('r');
-    jMenuItemClearDLabel.setText("Clear dasm automatic label");
+    jMenuItemClearDLabel.setText("Clear disassembly automatic label");
     jMenuItemClearDLabel.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemClearDLabelActionPerformed(evt);
@@ -1446,7 +1446,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemStackWord1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemStackWord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/S.png"))); // NOI18N
     jMenuItemStackWord1.setMnemonic('s');
-    jMenuItemStackWord1.setText("(S) Mark data as Stack Work");
+    jMenuItemStackWord1.setText("(S) Mark data as Stack Word");
     jMenuItemStackWord1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemStackWord1ActionPerformed(evt);

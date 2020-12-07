@@ -23,12 +23,37 @@
     <li>UB: the user global comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the global comment itself</li>
     <li>RE: it indicates that the location is related to another, so it can contains the value +, -, < and >. By passing with the mouse over it will show the related address.</li>
    </ul>
+  
+  The RE area shows even the kind of data selected (it is hidden if there are +, - < and >) according with a char:
+  <ul>
+    <li><a>B</a> data marked as Byte (Hex)</li>
+    <li><a>D</a> data marked as Byte (Decimal)</li>
+    <li><a>Y</a> data marked as Byte (Binary)</li>
+    <li><a>R</a> data marked as Byte (Char)</li>
+    <li><a>W</a> data marked as Word</li>
+    <li><a>P</a> data marked as Word Swapped</li>
+    <li><a>E</a> data marked as Tribyte</li>
+    <li><a>L</a> data marked as Long</li>
+    <li><a>A</a> data marked as Address</li>
+    <li><a>S</a> data marked as Stack Word</li>
+    <li><a>O</a> data marked as Monocromatic Sprite definitions</li>
+    <li><a>F</a> data marked as Multicolor Sprite definitions</li>
+    <li><a>T</a> data marked as Text</li>
+    <li><a>N</a> data marked as Text with number of byte before</li>
+    <li><a>Z</a> data marked as Text terminated with 0</li>
+    <li><a>M</a> data marked as Text with high bit 1</li>
+    <li><a>H</a> data marked as Text with high bit and shiffed</li>
+    <li><a>C</a> data marked as Text converted to screen code</li>
+    <li><a>I</a> data marked as Text coverted to petscii code</li>
+  </ul>
+  
    The colors instead could be:
     <ul>
      <li>White: this indicates that the memory address is outside the binary data read from the file. Assigning label or comments to this area works different from the inside area (all other colors means an area inside the binary file)</li>
      <li>Light gray: this area are undefined, or in other words, we did not say if it is a code to execute or a data to being read by other codes. Disassembler threats code and data area in different manner. In option, you can select if an undefined area must be used as code or as data by default, but during your analysis you must declare the right type as soon as you understand the code.</li>
      <li>Light blue: this area is of data.</li>
-     <li>Green: this are is of code.</li>
+     <li>Green: this area is of code.</li>
+     <li>Red: this area is of junk</li>
     </ul>
   </p>
   

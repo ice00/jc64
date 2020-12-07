@@ -392,7 +392,7 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser.png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="Clear dasm automatic comment"/>
+                <Property name="text" type="java.lang.String" value="Clear disassembly automatic comment"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemClearDMemActionPerformed"/>
@@ -422,7 +422,7 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/eraser2.png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="114"/>
-                <Property name="text" type="java.lang.String" value="Clear dasm automatic label"/>
+                <Property name="text" type="java.lang.String" value="Clear disassembly automatic label"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemClearDLabelActionPerformed"/>
@@ -680,7 +680,7 @@
                       <Image iconType="3" name="/sw_emulator/swing/icons/mini/S.png"/>
                     </Property>
                     <Property name="mnemonic" type="int" value="115"/>
-                    <Property name="text" type="java.lang.String" value="(S) Mark data as Stack Work"/>
+                    <Property name="text" type="java.lang.String" value="(S) Mark data as Stack Word"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemStackWord1ActionPerformed"/>
@@ -1319,7 +1319,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/sw_emulator/swing/icons/eraser.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Erase dasm automatic comment"/>
+            <Property name="toolTipText" type="java.lang.String" value="Erase daisassembly automatic comment"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -1347,7 +1347,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/sw_emulator/swing/icons/eraser2.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Erase dasm automatic label"/>
+            <Property name="toolTipText" type="java.lang.String" value="Erase disassembly automatic label"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
