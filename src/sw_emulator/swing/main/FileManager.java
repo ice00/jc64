@@ -127,7 +127,10 @@ public class FileManager {
       option.ca65Comment = Assembler.Comment.valueOf(in.readUTF());
       option.ca65BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.ca65Byte = Assembler.Byte.valueOf(in.readUTF());
-      option.ca65Word = Assembler.Word.valueOf(in.readUTF());      
+      option.ca65Word = Assembler.Word.valueOf(in.readUTF());     
+      
+      option.ca65MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.ca65MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
  
       option.acmeStarting = Assembler.Starting.valueOf(in.readUTF());
       option.acmeOrigin = Assembler.Origin.valueOf(in.readUTF());
@@ -336,6 +339,9 @@ public class FileManager {
       out.writeUTF(option.ca65BlockComment.name());
       out.writeUTF(option.ca65Byte.name());
       out.writeUTF(option.ca65Word.name());  
+      
+      out.writeUTF(option.ca65MonoSprite.name());
+      out.writeUTF(option.ca65MultiSprite.name());
       
       out.writeUTF(option.acmeStarting.name());
       out.writeUTF(option.acmeOrigin.name());

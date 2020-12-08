@@ -616,7 +616,9 @@ public class Disassembly {
         aComment=option.ca65Comment;
         aBlockComment=option.ca65BlockComment;
         aByte=option.ca65Byte;
-        aWord=option.ca65Word;         
+        aWord=option.ca65Word; 
+        aMonoSprite=option.ca65MonoSprite;
+        aMultiSprite=option.ca65MultiSprite;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  

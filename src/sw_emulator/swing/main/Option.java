@@ -653,6 +653,13 @@ public class Option {
   /** CA65: word declaration */
   public Assembler.Word ca65Word=Assembler.Word.DOT_WORD;
   
+  
+  /** CA65: mono color sprite*/
+  public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
+   
+  /** CA65: multi color sprite */
+  public Assembler.MultiSprite ca65MultiSprite=Assembler.MultiSprite.MACRO3_BIN;
+  
  
   
   /** ACME: starting declaration */
