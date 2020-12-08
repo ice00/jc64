@@ -652,6 +652,8 @@ public class Disassembly {
         aLabel=option.tass64Label;
         aByte=option.tass64Byte;
         aWord=option.tass64Word;
+        aMonoSprite=option.tass64MonoSprite;
+        aMultiSprite=option.tass64MultiSprite;
         break;
     }
     

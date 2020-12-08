@@ -630,7 +630,6 @@ public class Option {
   /** TMPX: word declaration */
   public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
   
-  
   /** TMPx: mono color sprite*/
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
    
@@ -659,7 +658,6 @@ public class Option {
   
   /** CA65: word declaration */
   public Assembler.Word ca65Word=Assembler.Word.DOT_WORD;
-  
   
   /** CA65: mono color sprite*/
   public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
@@ -690,12 +688,12 @@ public class Option {
   /** ACME: word declaration */
   public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
   
-  
   /** ACME: mono color sprite*/
   public Assembler.MonoSprite acmeMonoSprite=Assembler.MonoSprite.MACRO2_BIN;
    
   /** ACME: multi color sprite */
   public Assembler.MultiSprite acmeMultiSprite=Assembler.MultiSprite.MACRO2_BIN;
+  
   
   
   /** Kick: starting declaration */
@@ -726,6 +724,7 @@ public class Option {
   public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
   
   
+  
   /** 64Tass: starting declaration */
   public Assembler.Starting tass64Starting=Assembler.Starting.DOT_CPU_A; 
     
@@ -746,6 +745,12 @@ public class Option {
   
   /** 64Tass: word declaration */
   public Assembler.Word tass64Word=Assembler.Word.DOT_WORD;
+  
+  /** 64Tass: mono color sprite*/
+  public Assembler.MonoSprite tass64MonoSprite=Assembler.MonoSprite.MACRO4_BIN;
+   
+  /** 64Tass: multi color sprite */
+  public Assembler.MultiSprite tass64MultiSprite=Assembler.MultiSprite.MACRO4_BIN;
   
   
   /**
