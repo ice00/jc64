@@ -626,6 +626,8 @@ public class Disassembly {
         aBlockComment=option.acmeBlockComment;
         aByte=option.acmeByte;
         aWord=option.acmeWord;
+        aMonoSprite=option.acmeMonoSprite;
+        aMultiSprite=option.acmeMultiSprite;
         break;
       case KICK:
         aStarting=option.kickStarting;  

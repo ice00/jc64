@@ -240,10 +240,10 @@ public class Option {
   public byte illegalOpcodeMode = M6510Dasm.MODE1;
         
   /** Uper case for opcode in preview */
-  public boolean  opcodeUpperCasePreview = true;
+  public boolean opcodeUpperCasePreview = true;
   
   /** Uper case for opcode in source */
-  public boolean  opcodeUpperCaseSource = false;  
+  public boolean opcodeUpperCaseSource = false;  
   
   /** Language for comment  */
   public byte commentLanguage = C64Dasm.LANG_ENGLISH;
@@ -675,6 +675,13 @@ public class Option {
   
   /** ACME: word declaration */
   public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
+  
+  
+  /** ACME: mono color sprite*/
+  public Assembler.MonoSprite acmeMonoSprite=Assembler.MonoSprite.MACRO2_BIN;
+   
+  /** ACME: multi color sprite */
+  public Assembler.MultiSprite acmeMultiSprite=Assembler.MultiSprite.MACRO2_BIN;
   
   
   /** Kick: starting declaration */

@@ -709,13 +709,18 @@ public class Assembler {
     * -> [.macro] %b..     
     */ 
    public enum MonoSprite implements ActionType {
-      BYTE_HEX,      // [byte] $xx..
-      BYTE_BIN,      // [byte] %b..
-      MACRO_HEX,     // [.mac] %xx..
-      MACRO_BIN,     // [.mac] %b..
-      MACRO1_HEX,    // [.macro] %xx..
-      MACRO1_BIN     // [.macro] %b..
-      ;      
+     BYTE_HEX,      // [byte] $xx..
+     BYTE_BIN,      // [byte] %b..
+     TWENTYFOUR_HEX,// !24 $xx..
+     TWENTYFOUR_BIN,// !24 %b..      
+     MACRO_HEX,     // [.mac] %xx..
+     MACRO_BIN,     // [.mac] %b..
+     MACRO1_HEX,    // [.macro] %xx..
+     MACRO1_BIN,    // [.macro] %b..
+     MACRO2_HEX,    // [.macro] %xx..
+     MACRO2_BIN     // [.macro] %b..      
+     ;      
+     
       @Override
       public void flush(StringBuilder str) {
         if (list.isEmpty()) return; 
@@ -766,6 +771,26 @@ public class Assembler {
               tmpS=tmp.toString();
               str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
               break;
+            case TWENTYFOUR_HEX:
+              str.append("  !24 $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case TWENTYFOUR_BIN:
+              str.append("  !24 %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;                
             case MACRO_HEX:
               str.append("  MonoSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -806,6 +831,26 @@ public class Assembler {
                listRel.pop();
                listRel.pop();  
                break; 
+            case MACRO2_HEX:
+              str.append("  +MonoSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO2_BIN:
+              str.append("  +MonoSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;                 
             }
           aComment.flush(str);
         } else {
@@ -838,6 +883,14 @@ public class Assembler {
              "  }\n\n"
            );               
            break;  
+         case MACRO2_HEX:
+         case MACRO2_BIN:
+           str.append(
+             "  .macro MonoSpriteLine tribyte {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  }\n\n"
+           );               
+           break; 
        }
      };
    }
@@ -847,16 +900,24 @@ public class Assembler {
     * 
     * -> [byte] $xx.
     * -> [byte] %b..
+    * -> !24 $xx..
+    * -> !24 %b..
     * -> [.mac] %xx..
     * -> [.mac] %b..
+    * -> [.macro] %b.. 
+    * -> [.macro] %xx..
     */ 
    public enum MultiSprite implements ActionType {
      BYTE_HEX,      // [byte] $xx..
      BYTE_BIN,      // [byte] %b..
+     TWENTYFOUR_HEX,// !24 $xx..
+     TWENTYFOUR_BIN,// !24 %b..
      MACRO_HEX,     // [.mac] %xx..
      MACRO_BIN,     // [.mac] %b..
      MACRO1_HEX,    // [.macro] %xx..
-     MACRO1_BIN     // [.macro] %b..    
+     MACRO1_BIN,    // [.macro] %b.. 
+     MACRO2_HEX,    // [.macro] %xx..
+     MACRO2_BIN     // [.macro] %b..      
      ;      
      @Override
      public void flush(StringBuilder str) {
@@ -908,6 +969,26 @@ public class Assembler {
               tmpS=tmp.toString();
               str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
               break;
+            case TWENTYFOUR_HEX:
+              str.append("  !24 $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case TWENTYFOUR_BIN:
+              str.append("  !24 %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;               
             case MACRO_HEX:
               str.append("  MultiSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -948,6 +1029,26 @@ public class Assembler {
                listRel.pop();
                listRel.pop();  
                break; 
+            case MACRO2_HEX:
+              str.append("  +MultiSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO2_BIN:
+              str.append("  +MultiSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;                 
             }
           aComment.flush(str);
         } else {
@@ -963,7 +1064,7 @@ public class Assembler {
       */
      @Override
      public void setting(StringBuilder str) {
-       switch (aMonoSprite) {
+       switch (aMultiSprite) {
          case MACRO_HEX:
          case MACRO_BIN:
            str.append(
@@ -980,6 +1081,14 @@ public class Assembler {
              "  }\n\n"
            );               
            break;  
+         case MACRO2_HEX:
+         case MACRO2_BIN:
+           str.append(
+             "  .macro MultiSpriteLine tribyte {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  }\n\n"
+           );               
+           break;                        
        }
      };      
    } 
