@@ -559,6 +559,12 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneAcmeMacroBinMultiSprite = new javax.swing.JTextPane();
         jScrollPaneAcmeMacroBinMonoSprite = new javax.swing.JScrollPane();
         jTextPaneAcmeMacroBinMonoSprite = new javax.swing.JTextPane();
+        jRadioButtonAcmeMark08Byte = new javax.swing.JRadioButton();
+        jScrollPaneAcmeMark08Byte = new javax.swing.JScrollPane();
+        jTextPaneAcmeMark08Byte = new javax.swing.JTextPane();
+        jRadioButtonAcmeMarkByByte = new javax.swing.JRadioButton();
+        jScrollPaneAcmeMarkByByte = new javax.swing.JScrollPane();
+        jTextPaneAcmeMarkByByte = new javax.swing.JTextPane();
         jPanelKickAssembler = new javax.swing.JPanel();
         jLabelKickLabelDeclaration = new javax.swing.JLabel();
         jRadioButtonKickLabelNameColon = new javax.swing.JRadioButton();
@@ -3472,6 +3478,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelAcmeLabelDeclaration.setText("Label:");
 
         buttonGroupAcmeLabel.add(jRadioButtonAcmeLabelName);
+        jRadioButtonAcmeLabelName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeLabelNameItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeLabelName.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeLabelName.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3483,6 +3494,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         buttonGroupAcmeLabel.add(jRadioButtonAcmeLabelNameColon);
         jRadioButtonAcmeLabelNameColon.setSelected(true);
+        jRadioButtonAcmeLabelNameColon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeLabelNameColonItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeLabelNameColon.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeLabelNameColon.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3495,7 +3511,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelAcmeByteDeclaration.setText("Byte:");
 
         buttonGroupAcmeByte.add(jRadioButtonAcmeMarkByte);
-        jRadioButtonAcmeMarkByte.setSelected(true);
+        jRadioButtonAcmeMarkByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMarkByteItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeMarkByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeMarkByte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3506,6 +3526,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneAcmeMarkByte.setViewportView(jTextPaneAcmeMarkByte);
 
         buttonGroupAcmeByte.add(jRadioButtonAcmeMark8Byte);
+        jRadioButtonAcmeMark8Byte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMark8ByteItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeMark8Byte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeMark8Byte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3519,6 +3544,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         buttonGroupAcmeWord.add(jRadioButtonAcmeMarkWord);
         jRadioButtonAcmeMarkWord.setSelected(true);
+        jRadioButtonAcmeMarkWord.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMarkWordItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeMarkWord.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeMarkWord.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3529,6 +3559,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneAcmeMarkWord.setViewportView(jTextPaneAcmeMarkWord);
 
         buttonGroupAcmeWord.add(jRadioButtonAcmeMark16Word);
+        jRadioButtonAcmeMark16Word.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMark16WordItemStateChanged(evt);
+            }
+        });
 
         jScrollPaneAcmeMark16Word.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAcmeMark16Word.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -3751,6 +3786,37 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneAcmeMacroBinMonoSprite.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>[.mac] </b> <font color='red'>%b..</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMacroBinMonoSprite.setViewportView(jTextPaneAcmeMacroBinMonoSprite);
 
+        buttonGroupAcmeByte.add(jRadioButtonAcmeMark08Byte);
+        jRadioButtonAcmeMark08Byte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMark08ByteItemStateChanged(evt);
+            }
+        });
+
+        jScrollPaneAcmeMark08Byte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneAcmeMark08Byte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextPaneAcmeMark08Byte.setEditable(false);
+        jTextPaneAcmeMark08Byte.setContentType("text/html"); // NOI18N
+        jTextPaneAcmeMark08Byte.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b> !08</b> <font color='red'>$xx</font><br>\n     <b> !08</b> <font color='blue'>dd</font><br>\n     <b> !08</b> <font color='green'>%bb</font><br>\n     <b> !08</b> <font color='purple'>'c'</font>\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneAcmeMark08Byte.setViewportView(jTextPaneAcmeMark08Byte);
+
+        buttonGroupAcmeByte.add(jRadioButtonAcmeMarkByByte);
+        jRadioButtonAcmeMarkByByte.setSelected(true);
+        jRadioButtonAcmeMarkByByte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonAcmeMarkByByteItemStateChanged(evt);
+            }
+        });
+
+        jScrollPaneAcmeMarkByByte.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneAcmeMarkByByte.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextPaneAcmeMarkByByte.setEditable(false);
+        jTextPaneAcmeMarkByByte.setContentType("text/html"); // NOI18N
+        jTextPaneAcmeMarkByByte.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b> !by</b> <font color='red'>$xx</font><br>\n     <b> !by</b> <font color='blue'>dd</font><br>\n     <b> !by</b> <font color='green'>%bb</font><br>\n     <b> !by</b> <font color='purple'>'c'</font>\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneAcmeMarkByByte.setViewportView(jTextPaneAcmeMarkByByte);
+
         javax.swing.GroupLayout jPanelAcmeLayout = new javax.swing.GroupLayout(jPanelAcme);
         jPanelAcme.setLayout(jPanelAcmeLayout);
         jPanelAcmeLayout.setHorizontalGroup(
@@ -3812,6 +3878,10 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelAcmeLayout.createSequentialGroup()
+                        .addComponent(jRadioButtonAcmeMark08Byte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneAcmeMark08Byte))
+                    .addGroup(jPanelAcmeLayout.createSequentialGroup()
                         .addComponent(jRadioButtonAcmeMacroHexMonoSprite)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneAcmeMacroHexMonoSprite))
@@ -3820,16 +3890,21 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneAcmeMacroHexMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelAcmeLayout.createSequentialGroup()
+                            .addComponent(jRadioButtonAcmeMacroBinMultiSprite)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPaneAcmeMacroBinMultiSprite))
+                        .addGroup(jPanelAcmeLayout.createSequentialGroup()
+                            .addComponent(jRadioButtonAcmeMacroBinMonoSprite)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPaneAcmeMacroBinMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonAcmeMacroBinMultiSprite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPaneAcmeMacroBinMultiSprite))
-                    .addGroup(jPanelAcmeLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonAcmeMacroBinMonoSprite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPaneAcmeMacroBinMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(475, 475, 475))
+                        .addComponent(jRadioButtonAcmeMarkByByte)
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPaneAcmeMarkByByte, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(224, 224, 224))
         );
         jPanelAcmeLayout.setVerticalGroup(
             jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3869,7 +3944,13 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonAcmeMarkByte)
                     .addComponent(jScrollPaneAcmeMarkByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonAcmeMark8Byte)
-                    .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneAcmeMark8Byte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jRadioButtonAcmeMark08Byte)
+                        .addComponent(jScrollPaneAcmeMark08Byte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jRadioButtonAcmeMarkByByte)
+                            .addComponent(jScrollPaneAcmeMarkByByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelAcmeWordByteDeclaration)
@@ -5939,6 +6020,38 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.ca65MultiSprite=Assembler.MultiSprite.MACRO3_HEX;   
     }//GEN-LAST:event_jRadioButtonCa65MacroBinMultiSpriteItemStateChanged
 
+    private void jRadioButtonAcmeMark08ByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMark08ByteItemStateChanged
+      option.acmeByte=Assembler.Byte.ZEROEIGHT_BYTE;
+    }//GEN-LAST:event_jRadioButtonAcmeMark08ByteItemStateChanged
+
+    private void jRadioButtonAcmeMarkByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkByteItemStateChanged
+      option.acmeByte=Assembler.Byte.BYTE;
+    }//GEN-LAST:event_jRadioButtonAcmeMarkByteItemStateChanged
+
+    private void jRadioButtonAcmeMark8ByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMark8ByteItemStateChanged
+      option.acmeByte=Assembler.Byte.EIGHT_BYTE;
+    }//GEN-LAST:event_jRadioButtonAcmeMark8ByteItemStateChanged
+
+    private void jRadioButtonAcmeMarkByByteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkByByteItemStateChanged
+      option.acmeByte=Assembler.Byte.MARK_BY_BYTE;
+    }//GEN-LAST:event_jRadioButtonAcmeMarkByByteItemStateChanged
+
+    private void jRadioButtonAcmeMarkWordItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkWordItemStateChanged
+      option.acmeWord=Assembler.Word.WORD;
+    }//GEN-LAST:event_jRadioButtonAcmeMarkWordItemStateChanged
+
+    private void jRadioButtonAcmeMark16WordItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMark16WordItemStateChanged
+      option.acmeWord=Assembler.Word.SIXTEEN_WORD;
+    }//GEN-LAST:event_jRadioButtonAcmeMark16WordItemStateChanged
+
+    private void jRadioButtonAcmeLabelNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeLabelNameItemStateChanged
+      option.acmeLabel=Assembler.Label.NAME;
+    }//GEN-LAST:event_jRadioButtonAcmeLabelNameItemStateChanged
+
+    private void jRadioButtonAcmeLabelNameColonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeLabelNameColonItemStateChanged
+      option.acmeLabel=Assembler.Label.NAME_COLON;
+    }//GEN-LAST:event_jRadioButtonAcmeLabelNameColonItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -6240,8 +6353,10 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonAcmeMacroBinMultiSprite;
     private javax.swing.JRadioButton jRadioButtonAcmeMacroHexMonoSprite;
     private javax.swing.JRadioButton jRadioButtonAcmeMacroHexMultiSprite;
+    private javax.swing.JRadioButton jRadioButtonAcmeMark08Byte;
     private javax.swing.JRadioButton jRadioButtonAcmeMark16Word;
     private javax.swing.JRadioButton jRadioButtonAcmeMark8Byte;
+    private javax.swing.JRadioButton jRadioButtonAcmeMarkByByte;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkByte;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkCpuStarting;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkIfBlockComment;
@@ -6359,8 +6474,10 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneAcmeMacroBinMultiSprite;
     private javax.swing.JScrollPane jScrollPaneAcmeMacroHexMonoSprite;
     private javax.swing.JScrollPane jScrollPaneAcmeMacroHexMultiSprite;
+    private javax.swing.JScrollPane jScrollPaneAcmeMark08Byte;
     private javax.swing.JScrollPane jScrollPaneAcmeMark16Word;
     private javax.swing.JScrollPane jScrollPaneAcmeMark8Byte;
+    private javax.swing.JScrollPane jScrollPaneAcmeMarkByByte;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkByte;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkIfBlockComment;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkWord;
@@ -6475,8 +6592,10 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JTextPane jTextPaneAcmeMacroBinMultiSprite;
     private javax.swing.JTextPane jTextPaneAcmeMacroHexMonoSprite;
     private javax.swing.JTextPane jTextPaneAcmeMacroHexMultiSprite;
+    private javax.swing.JTextPane jTextPaneAcmeMark08Byte;
     private javax.swing.JTextPane jTextPaneAcmeMark16Word;
     private javax.swing.JTextPane jTextPaneAcmeMark8Byte;
+    private javax.swing.JTextPane jTextPaneAcmeMarkByByte;
     private javax.swing.JTextPane jTextPaneAcmeMarkByte;
     private javax.swing.JTextPane jTextPaneAcmeMarkCpuStarting;
     private javax.swing.JTextPane jTextPaneAcmeMarkIfBlockComment;
@@ -6983,6 +7102,12 @@ public class JOptionDialog extends javax.swing.JDialog {
       case EIGHT_BYTE:  
         jRadioButtonAcmeMark8Byte.setSelected(true);  
         break;
+      case MARK_BY_BYTE:  
+        jRadioButtonAcmeMarkByByte.setSelected(true);
+        break; 
+      case ZEROEIGHT_BYTE:  
+        jRadioButtonAcmeMark08Byte.setSelected(true);  
+        break;   
     }
     
     switch (option.acmeWord) {

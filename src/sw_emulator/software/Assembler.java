@@ -493,12 +493,14 @@ public class Assembler {
    public enum Byte implements ActionType {
       DOT_BYTE,           // .byte $xx
       DOT_CHAR,           // .char $xx
-      BYTE,               //  byte $xx
+      BYTE,               //  byte $xx      
       DC_BYTE,            //    dc $xx
       DC_B_BYTE,          //  dc.b $xx
       DOT_BYT_BYTE,       //  .byt $xx
       MARK_BYTE,          // !byte $xx 
-      EIGHT_BYTE;         //    !8 $xx     
+      MARK_BY_BYTE,        //  !by $xx
+      EIGHT_BYTE,         //    !8 $xx   
+      ZEROEIGHT_BYTE;     //   !08 $xx   //   !08 $xx   
       
       @Override
       public void flush(StringBuilder str) {
@@ -524,6 +526,9 @@ public class Assembler {
           case DC_B_BYTE:
             str.append(("  dc.b "));
             break;
+          case MARK_BY_BYTE:
+            str.append(("  !by "));  
+            break;  
           case DOT_BYT_BYTE:
             str.append(("  .byt.b "));  
             break;
@@ -533,6 +538,9 @@ public class Assembler {
           case EIGHT_BYTE:
             str.append(("  !8 "));  
             break;  
+          case ZEROEIGHT_BYTE:
+            str.append(("  !8 "));  
+            break;    
         }
           
         Iterator<MemoryDasm> iter=list.iterator();
@@ -713,14 +721,16 @@ public class Assembler {
      BYTE_BIN,      // [byte] %b..
      TWENTYFOUR_HEX,// !24 $xx..
      TWENTYFOUR_BIN,// !24 %b..      
-     MACRO_HEX,     // [.mac] %xx..
-     MACRO_BIN,     // [.mac] %b..
-     MACRO1_HEX,    // [.macro] %xx..
-     MACRO1_BIN,    // [.macro] %b..
-     MACRO2_HEX,    // [.macro] %xx..
-     MACRO2_BIN,     // [.macro] %b..     
-     MACRO3_HEX,    // [.macro] %xx..
-     MACRO3_BIN,    // [.macro] %b..
+     MACRO_HEX,     // [.mac] %xx..   (Dasm)
+     MACRO_BIN,     // [.mac] %b..    (Dasm)
+     MACRO1_HEX,    // [.macro] %xx.. (Kick assembler)
+     MACRO1_BIN,    // [.macro] %b..  (Kick assembler)
+     MACRO2_HEX,    // [.macro] %xx.. (Acme)
+     MACRO2_BIN,    // [.macro] %b..  (Acme) 
+     MACRO3_HEX,    // [.macro] %xx.. (CA65)
+     MACRO3_BIN,    // [.macro] %b..  (CA65)
+     MACRO4_HEX,    // [.macro] %xx.. (TMPx)
+     MACRO4_BIN,    // [.macro] %b..  (TMPx)
      ;      
      
       @Override
@@ -854,7 +864,27 @@ public class Assembler {
                listRel.pop();
                listRel.pop();
                listRel.pop();  
-               break;                 
+               break;    
+            case MACRO4_HEX:
+              str.append("  #MonoSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO4_BIN:
+              str.append("  #MonoSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;               
             }
           aComment.flush(str);
         } else {
@@ -890,8 +920,8 @@ public class Assembler {
          case MACRO2_HEX:
          case MACRO2_BIN:
            str.append(
-             "  .macro MonoSpriteLine tribyte {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  !macro MonoSpriteLine tribyte {\n" +
+             "     !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
              "  }\n\n"
            );               
            break; 
@@ -902,7 +932,15 @@ public class Assembler {
              "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
              "  .endmacro\n\n"
            );               
-           break;           
+           break;    
+         case MACRO4_HEX:
+         case MACRO4_BIN:
+           str.append(
+             "MonoSpriteLine .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "  .endm\n\n"
+           );           
+           break;             
        }
      };
    }
@@ -924,14 +962,16 @@ public class Assembler {
      BYTE_BIN,      // [byte] %b..
      TWENTYFOUR_HEX,// !24 $xx..
      TWENTYFOUR_BIN,// !24 %b..
-     MACRO_HEX,     // [.mac] %xx..
-     MACRO_BIN,     // [.mac] %b..
-     MACRO1_HEX,    // [.macro] %xx..
-     MACRO1_BIN,    // [.macro] %b.. 
-     MACRO2_HEX,    // [.macro] %xx..
-     MACRO2_BIN,     // [.macro] %b..   
-     MACRO3_HEX,    // [.macro] %xx..
-     MACRO3_BIN,    // [.macro] %b..
+     MACRO_HEX,     // [.mac] %xx..   (Dasm)
+     MACRO_BIN,     // [.mac] %b..    (Dasm)
+     MACRO1_HEX,    // [.macro] %xx.. (Kick assembler)
+     MACRO1_BIN,    // [.macro] %b..  (Kick assembler)
+     MACRO2_HEX,    // [.macro] %xx.. (Acme)
+     MACRO2_BIN,    // [.macro] %b..  (Acme) 
+     MACRO3_HEX,    // [.macro] %xx.. (CA65)
+     MACRO3_BIN,    // [.macro] %b..  (CA65)
+     MACRO4_HEX,    // [.macro] %xx.. (TMPx)
+     MACRO4_BIN,    // [.macro] %b..  (TMPx)
      ;      
      @Override
      public void flush(StringBuilder str) {
@@ -1064,8 +1104,28 @@ public class Assembler {
                listRel.pop();
                listRel.pop();
                listRel.pop();  
-               break;                 
-            }
+               break;   
+            case MACRO4_HEX:
+              str.append("  #MultiSpriteLine $")
+                           .append(ByteToExe(Unsigned.done(mem1.copy)))
+                           .append(ByteToExe(Unsigned.done(mem2.copy)))
+                           .append(ByteToExe(Unsigned.done(mem3.copy)))
+                           .append("  ");
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();
+              break;
+            case MACRO4_BIN:
+              str.append("  #MultiSpriteLine %")
+                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                           .append("  ");
+               listRel.pop();
+               listRel.pop();
+               listRel.pop();  
+               break;               
+            }          
           aComment.flush(str);
         } else {
             // force to be as byte
@@ -1100,8 +1160,8 @@ public class Assembler {
          case MACRO2_HEX:
          case MACRO2_BIN:
            str.append(
-             "  .macro MultiSpriteLine tribyte {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  !macro MultiSpriteLine tribyte {\n" +
+             "     !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
              "  }\n\n"
            );               
            break;      
@@ -1111,7 +1171,14 @@ public class Assembler {
              "  .macro MultiSpriteLine tribyte \n" +
              "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
              "  .endmacro\n\n"
-           );               
+           );  
+         case MACRO4_HEX:
+         case MACRO4_BIN:
+           str.append(
+             "MultiSpriteLine .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "  .endm\n\n"
+           );           
            break;            
        }
      };      
