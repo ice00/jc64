@@ -631,6 +631,13 @@ public class Option {
   public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
   
   
+  /** TMPx: mono color sprite*/
+  public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
+   
+  /** TMPx: multi color sprite */
+  public Assembler.MultiSprite tmpxMultiSprite=Assembler.MultiSprite.MACRO4_BIN;
+  
+  
   
   /** CA65: starting declaration */
   public Assembler.Starting ca65Starting=Assembler.Starting.DOT_SETCPU; 

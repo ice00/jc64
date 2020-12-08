@@ -608,6 +608,8 @@ public class Disassembly {
         aBlockComment=option.tmpxBlockComment;
         aByte=option.tmpxByte;
         aWord=option.tmpxWord;
+        aMonoSprite=option.tmpxMonoSprite;
+        aMultiSprite=option.tmpxMultiSprite;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
