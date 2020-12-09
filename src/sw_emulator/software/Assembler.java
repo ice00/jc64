@@ -687,8 +687,11 @@ public class Assembler {
     * Tribyte declaration type
     */
    public enum Tribyte implements ActionType {
-
-        ;
+     MACRO_TRIBYTE,            //  [.mac] $xxyyzz
+     DOT_LINT_TRIBYTE,         //   .lint $xxyyzz
+     DOT_LONG_TRIBYTE,         //   .long $xxyyzz
+     MARK_TWENTYFOUR_TRIBYTE   //     !24 $xxyyzz
+     ;
      @Override
      public void flush(StringBuilder str) {
       
