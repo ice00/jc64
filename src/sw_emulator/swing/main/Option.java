@@ -634,7 +634,7 @@ public class Option {
   public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
   
   /** TMPX: tribyte declaration */
-  public Assembler.Tribyte tmpxTribyte=Assembler.Tribyte.MACRO_TRIBYTE; 
+  public Assembler.Tribyte tmpxTribyte=Assembler.Tribyte.MACRO4_TRIBYTE; 
   
   /** TMPx: mono color sprite*/
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
@@ -666,7 +666,7 @@ public class Option {
   public Assembler.Word ca65Word=Assembler.Word.DOT_WORD;
   
   /** CA65: tribyte declaration */
-  public Assembler.Tribyte ca65Tribyte=Assembler.Tribyte.MACRO_TRIBYTE;  
+  public Assembler.Tribyte ca65Tribyte=Assembler.Tribyte.MACRO3_TRIBYTE;  
   
   /** CA65: mono color sprite*/
   public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
@@ -697,7 +697,7 @@ public class Option {
   /** ACME: word declaration */
   public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
   
-  /** kick: tribyte declaration */
+  /** ACME: tribyte declaration */
   public Assembler.Tribyte acmeTribyte=Assembler.Tribyte.MARK_TWENTYFOUR_TRIBYTE; 
   
   /** ACME: mono color sprite*/
@@ -730,7 +730,7 @@ public class Option {
   public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
   /** kick: tribyte declaration */
-  public Assembler.Tribyte kickTribyte=Assembler.Tribyte.MACRO_TRIBYTE; 
+  public Assembler.Tribyte kickTribyte=Assembler.Tribyte.MACRO1_TRIBYTE; 
   
   /** Kick Assembler mono color sprite*/
   public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;

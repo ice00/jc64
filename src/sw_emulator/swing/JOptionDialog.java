@@ -753,10 +753,10 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneTass64MacroBinMonoSprite = new javax.swing.JScrollPane();
         jTextPaneTass64MacroBinMonoSprite = new javax.swing.JTextPane();
         jLabelTass64TribyteDeclaration = new javax.swing.JLabel();
-        jRadioButtonTass64LongTribyte = new javax.swing.JRadioButton();
+        jRadioButtonDotTass64LongTribyte = new javax.swing.JRadioButton();
         jScrollPaneTass64DotLongTribyte = new javax.swing.JScrollPane();
         jTextPaneTass64DotLongTribyte = new javax.swing.JTextPane();
-        jRadioButtonTass64LintTribyte = new javax.swing.JRadioButton();
+        jRadioButtonTass64DotLintTribyte = new javax.swing.JRadioButton();
         jScrollPaneTass64DotLintTribyte = new javax.swing.JScrollPane();
         jTextPaneTass64DotLintTribyte = new javax.swing.JTextPane();
         jPanelLook = new javax.swing.JPanel();
@@ -5156,11 +5156,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelTass64TribyteDeclaration.setText("Tribyte:");
 
-        buttonGroupTass64Tribyte.add(jRadioButtonTass64LongTribyte);
-        jRadioButtonTass64LongTribyte.setSelected(true);
-        jRadioButtonTass64LongTribyte.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupTass64Tribyte.add(jRadioButtonDotTass64LongTribyte);
+        jRadioButtonDotTass64LongTribyte.setSelected(true);
+        jRadioButtonDotTass64LongTribyte.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonTass64LongTribyteItemStateChanged(evt);
+                jRadioButtonDotTass64LongTribyteItemStateChanged(evt);
             }
         });
 
@@ -5172,10 +5172,10 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneTass64DotLongTribyte.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .long</b> <font color='red'>$xxyyzz</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneTass64DotLongTribyte.setViewportView(jTextPaneTass64DotLongTribyte);
 
-        buttonGroupTass64Tribyte.add(jRadioButtonTass64LintTribyte);
-        jRadioButtonTass64LintTribyte.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupTass64Tribyte.add(jRadioButtonTass64DotLintTribyte);
+        jRadioButtonTass64DotLintTribyte.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonTass64LintTribyteItemStateChanged(evt);
+                jRadioButtonTass64DotLintTribyteItemStateChanged(evt);
             }
         });
 
@@ -5198,7 +5198,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTass64StartingDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTass64OriginDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTass64CommentDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelTass64BlockCommentDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(jLabelTass64BlockCommentDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTass64LabelDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTass64ByteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTass64WordDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -5216,49 +5216,43 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonTass64LabelNameColon)
                     .addComponent(jRadioButtonTass64DotByte)
                     .addComponent(jRadioButtonTass64DotWord)
-                    .addComponent(jRadioButtonTass64LongTribyte)
+                    .addComponent(jRadioButtonDotTass64LongTribyte)
                     .addComponent(jRadioButtonTass64ByteHexMonoSprite)
                     .addComponent(jRadioButtonTass64ByteHexMultiSprite))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTass64Layout.createSequentialGroup()
-                                .addComponent(jScrollPaneTass64DotByte)
-                                .addGap(2, 2, 2))
-                            .addGroup(jPanelTass64Layout.createSequentialGroup()
-                                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPaneTass64LabelName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPaneTass64SemicolonBlockComment, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPaneTass64SemicolonComment)
-                                    .addComponent(jScrollPaneTass64ASterixOrigin, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPaneDasmTass64DotCpuAStarting, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTass64Layout.createSequentialGroup()
-                                .addComponent(jScrollPaneTass64DotWord)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanelTass64Layout.createSequentialGroup()
-                            .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPaneTass64ByteHexMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPaneTass64ByteHexMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(1, 1, 1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTass64Layout.createSequentialGroup()
+                        .addComponent(jScrollPaneTass64DotWord)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanelTass64Layout.createSequentialGroup()
-                        .addComponent(jScrollPaneTass64DotLongTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)))
+                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneTass64ASterixOrigin)
+                            .addComponent(jScrollPaneDasmTass64DotCpuAStarting)
+                            .addComponent(jScrollPaneTass64DotLongTribyte, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(jScrollPaneTass64SemicolonBlockComment)
+                            .addComponent(jScrollPaneTass64SemicolonComment)
+                            .addComponent(jScrollPaneTass64ByteHexMonoSprite)
+                            .addComponent(jScrollPaneTass64ByteHexMultiSprite))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTass64Layout.createSequentialGroup()
+                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPaneTass64LabelName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneTass64DotByte))
+                        .addGap(2, 2, 2)))
                 .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButtontass64DotIfFiBlockComment)
                     .addComponent(jRadioButtonTass64DotCharByte)
                     .addComponent(jRadioButtonTass64DotSintWord)
-                    .addComponent(jRadioButtonTass64LintTribyte)
+                    .addComponent(jRadioButtonTass64DotLintTribyte)
                     .addComponent(jRadioButtonTass64ByteBinMonoSprite)
                     .addComponent(jRadioButtonTass64ByteBinMultiSprite))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneTass64DotIfFiBlockComment, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneTass64DotIfFiBlockComment, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(jScrollPaneTass64DotCharByte)
                     .addComponent(jScrollPaneTass64DotSintWord)
-                    .addComponent(jScrollPaneTass64DotLintTribyte, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jScrollPaneTass64ByteBinMonoSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneTass64DotLintTribyte, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneTass64ByteBinMonoSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(jScrollPaneTass64ByteBinMultiSprite))
                 .addGap(8, 8, 8)
                 .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5303,52 +5297,40 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonTass64SemicolonComment)
                     .addComponent(jScrollPaneTass64SemicolonComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTass64Layout.createSequentialGroup()
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelTass64BlockCommentDeclaration)
-                            .addComponent(jRadioButtonTass64SemicolonBlockComment)
-                            .addComponent(jScrollPaneTass64SemicolonBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelTass64LabelDeclaration)
-                            .addComponent(jRadioButtonTass64LabelNameColon)
-                            .addComponent(jScrollPaneTass64LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelTass64ByteDeclaration)
-                            .addComponent(jRadioButtonTass64DotByte)
-                            .addComponent(jScrollPaneTass64DotByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelTass64WordDeclaration)
-                            .addComponent(jRadioButtonTass64DotWord)
-                            .addComponent(jScrollPaneTass64DotWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelTass64Layout.createSequentialGroup()
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jRadioButtontass64DotIfFiBlockComment)
-                            .addComponent(jScrollPaneTass64DotIfFiBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonTass64DotCommentBlockComment)
-                            .addComponent(jScrollPaneTass64DotComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jRadioButtonTass64DotCharByte)
-                            .addComponent(jScrollPaneTass64DotCharByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jRadioButtonTass64DotSintWord)
-                            .addComponent(jScrollPaneTass64DotSintWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelTass64BlockCommentDeclaration)
+                    .addComponent(jRadioButtonTass64SemicolonBlockComment)
+                    .addComponent(jScrollPaneTass64SemicolonBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtontass64DotIfFiBlockComment)
+                    .addComponent(jScrollPaneTass64DotIfFiBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTass64DotCommentBlockComment)
+                    .addComponent(jScrollPaneTass64DotComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jLabelTass64TribyteDeclaration)
-                        .addComponent(jRadioButtonTass64LongTribyte)
-                        .addComponent(jScrollPaneTass64DotLongTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelTass64Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jRadioButtonTass64LintTribyte)
-                            .addComponent(jScrollPaneTass64DotLintTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelTass64LabelDeclaration)
+                    .addComponent(jRadioButtonTass64LabelNameColon)
+                    .addComponent(jScrollPaneTass64LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelTass64ByteDeclaration)
+                    .addComponent(jRadioButtonTass64DotByte)
+                    .addComponent(jScrollPaneTass64DotByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTass64DotCharByte)
+                    .addComponent(jScrollPaneTass64DotCharByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelTass64WordDeclaration)
+                    .addComponent(jRadioButtonTass64DotWord)
+                    .addComponent(jScrollPaneTass64DotWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTass64DotSintWord)
+                    .addComponent(jScrollPaneTass64DotSintWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelTass64TribyteDeclaration)
+                    .addComponent(jRadioButtonDotTass64LongTribyte)
+                    .addComponent(jScrollPaneTass64DotLongTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTass64DotLintTribyte)
+                    .addComponent(jScrollPaneTass64DotLintTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanelTass64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelTass64MonoSpriteDeclaration)
@@ -5371,7 +5353,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneTass64MacroHexMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonTass64MacroBinMultiSprite)
                     .addComponent(jScrollPaneTass64MacroBinMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("64Tass", jPanelTass64);
@@ -6786,32 +6768,32 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonTass64MacroBinMultiSpriteItemStateChanged
 
     private void jRadioButtonDasmMacroTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmMacroTribyteItemStateChanged
-      
+      option.dasmTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
     }//GEN-LAST:event_jRadioButtonDasmMacroTribyteItemStateChanged
 
     private void jRadioButtonTmpxMacroTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxMacroTribyteItemStateChanged
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jRadioButtonTmpxMacroTribyteItemStateChanged
 
     private void jRadioButtonCa65MacroTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65MacroTribyteItemStateChanged
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jRadioButtonCa65MacroTribyteItemStateChanged
 
     private void jRadioButtonAcmeMarkTwentyfourTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkTwentyfourTribyteItemStateChanged
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_jRadioButtonAcmeMarkTwentyfourTribyteItemStateChanged
 
     private void jRadioButtonKickMacroTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMacroTribyteItemStateChanged
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jRadioButtonKickMacroTribyteItemStateChanged
 
-    private void jRadioButtonTass64LongTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64LongTribyteItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonTass64LongTribyteItemStateChanged
+    private void jRadioButtonDotTass64LongTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDotTass64LongTribyteItemStateChanged
+       
+    }//GEN-LAST:event_jRadioButtonDotTass64LongTribyteItemStateChanged
 
-    private void jRadioButtonTass64LintTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64LintTribyteItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonTass64LintTribyteItemStateChanged
+    private void jRadioButtonTass64DotLintTribyteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotLintTribyteItemStateChanged
+  
+    }//GEN-LAST:event_jRadioButtonTass64DotLintTribyteItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -7195,6 +7177,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonDasmSemicolonBlockComment;
     private javax.swing.JRadioButton jRadioButtonDasmSemicolonComment;
     private javax.swing.JRadioButton jRadioButtonDasmWord;
+    private javax.swing.JRadioButton jRadioButtonDotTass64LongTribyte;
     private javax.swing.JRadioButton jRadioButtonEmerald;
     private javax.swing.JRadioButton jRadioButtonHighContrast;
     private javax.swing.JRadioButton jRadioButtonKickAsterixOrigin;
@@ -7240,11 +7223,10 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonTass64DotCharByte;
     private javax.swing.JRadioButton jRadioButtonTass64DotCommentBlockComment;
     private javax.swing.JRadioButton jRadioButtonTass64DotCpuAStarting;
+    private javax.swing.JRadioButton jRadioButtonTass64DotLintTribyte;
     private javax.swing.JRadioButton jRadioButtonTass64DotSintWord;
     private javax.swing.JRadioButton jRadioButtonTass64DotWord;
     private javax.swing.JRadioButton jRadioButtonTass64LabelNameColon;
-    private javax.swing.JRadioButton jRadioButtonTass64LintTribyte;
-    private javax.swing.JRadioButton jRadioButtonTass64LongTribyte;
     private javax.swing.JRadioButton jRadioButtonTass64MacroBinMonoSprite;
     private javax.swing.JRadioButton jRadioButtonTass64MacroBinMultiSprite;
     private javax.swing.JRadioButton jRadioButtonTass64MacroHexMonoSprite;
@@ -7751,8 +7733,14 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DC_W_WORD:  
         jRadioButtonDasmDcWWord.setSelected(true);
         break;          
-    }   
+    }  
     
+    switch (option.dasmTribyte) {
+      case MACRO_TRIBYTE:  
+        jRadioButtonDasmMacroTribyte.setSelected(true);
+        break;  
+    }
+     
     switch (option.dasmMonoSprite) {
       case BYTE_HEX:
         jRadioButtonDasmByteHexMonoSprite.setSelected(true);
@@ -7832,6 +7820,12 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonTmpxDotWord.setSelected(true);
         break;           
     }     
+    
+    switch (option.tmpxTribyte) {
+      case MACRO4_TRIBYTE:  
+        jRadioButtonTmpxMacroTribyte.setSelected(true);
+        break;  
+    }
     
     switch (option.tmpxMonoSprite) {
       case BYTE_HEX:
@@ -7917,7 +7911,28 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DOT_DBYTE:
         jRadioButtonCa65DotDByteWord.setSelected(true);  
         break;  
-    }         
+    }    
+    
+    switch (option.ca65Tribyte) {
+      case MACRO3_TRIBYTE:  
+        jRadioButtonCa65MacroTribyte.setSelected(true);
+        break;  
+    }
+    
+    switch (option.ca65MonoSprite) {
+      case BYTE_HEX:
+        jRadioButtonCa65ByteHexMonoSprite.setSelected(true);
+        break;
+      case BYTE_BIN:
+        jRadioButtonCa65ByteBinMonoSprite.setSelected(true);
+        break;
+      case MACRO_HEX:
+        jRadioButtonCa65MacroHexMonoSprite.setSelected(true);
+        break;  
+      case MACRO_BIN:
+        jRadioButtonCa65MacroBinMonoSprite.setSelected(true);
+        break;  
+    }
     
     switch (option.ca65MultiSprite) {
       case BYTE_HEX:
@@ -7998,6 +8013,12 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonAcmeMark16Word.setSelected(true);  
         break;  
     }    
+    
+    switch (option.acmeTribyte) {
+      case MARK_TWENTYFOUR_TRIBYTE:  
+        jRadioButtonAcmeMarkTwentyfourTribyte.setSelected(true);
+        break;  
+    }
 
     switch (option.acmeMonoSprite) {
       case BYTE_HEX:
@@ -8082,8 +8103,14 @@ public class JOptionDialog extends javax.swing.JDialog {
     switch (option.kickWord) {
       case DOT_WORD:  
         jRadioButtonKickDotWord.setSelected(true);
-        break;       
+        break;                  
     }  
+    
+    switch (option.kickTribyte) {
+      case MACRO1_TRIBYTE:  
+        jRadioButtonKickMacroTribyte.setSelected(true);
+        break;  
+    }
     
     switch (option.kickMonoSprite) {
       case BYTE_HEX:
@@ -8172,6 +8199,15 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DOT_SINT:
         jRadioButtonTass64DotSintWord.setSelected(true);  
         break;  
+    }        
+    
+    switch (option.tass64Tribyte) {
+      case DOT_LONG_TRIBYTE:  
+        jRadioButtonDotTass64LongTribyte.setSelected(true);
+        break;  
+      case DOT_LINT_TRIBYTE:  
+        jRadioButtonTass64DotLintTribyte.setSelected(true);
+        break;   
     }    
     
     switch (option.tass64MonoSprite) {

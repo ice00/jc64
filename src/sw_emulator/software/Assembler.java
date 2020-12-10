@@ -673,7 +673,7 @@ public class Assembler {
                listRel.addFirst(memRelLow);
                aByte.flush(str);
              }
-             else if (aWord==DOT_SINT && memHigh.copy<0) str.append("$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
+             else if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
                   else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
            }
            if (list.size()>=2) str.append(", ");
@@ -687,15 +687,322 @@ public class Assembler {
     * Tribyte declaration type
     */
    public enum Tribyte implements ActionType {
-     MACRO_TRIBYTE,            //  [.mac] $xxyyzz
+     MACRO_TRIBYTE,            //  [.mac] $xxyyzz    (DASM)
+     MACRO1_TRIBYTE,           //  [.mac] $xxyyzz    (KickAssembler)
+     MACRO3_TRIBYTE,           //  [.mac] $xxyyzz    (CA65) 
+     MACRO4_TRIBYTE,           //  [.mac] $xxyyzz    (TMPx)
      DOT_LINT_TRIBYTE,         //   .lint $xxyyzz
      DOT_LONG_TRIBYTE,         //   .long $xxyyzz
      MARK_TWENTYFOUR_TRIBYTE   //     !24 $xxyyzz
      ;
      @Override
      public void flush(StringBuilder str) {
-      
+       if (list.isEmpty()) return; 
+       
+       if (list.size()<=2) {
+         aByte.flush(str);
+         return;
+       }
+       
+       MemoryDasm mem;
+       
+       Iterator<MemoryDasm> iter=list.iterator();
+       while (iter.hasNext()) {
+         mem=iter.next();
+         // we cannot handle memory reference inside tribyte
+         if (mem.type=='<' || mem.type=='>') {
+           // force all to be as byte even if this breaks layout
+           aByte.flush(str);
+           return;
+         }
+       }              
+       
+       // we have a min of 1 or a max of 8 tribyte, so use the right call for macro
+       int index=(int)(list.size()/3);
+        
+       // create starting command according to the kind of byte
+       switch (aTribyte) {
+         case MACRO_TRIBYTE:
+         case MACRO3_TRIBYTE:    
+           str.append("  Tribyte").append(index).append(" ");  
+           break;
+         case MACRO1_TRIBYTE:
+           str.append("  Tribyte").append(index).append(" (");   // must close the )
+           break;           
+         case MACRO4_TRIBYTE:
+           str.append("  #Tribyte").append(index).append(" ");  
+           break;
+         case DOT_LINT_TRIBYTE:
+           str.append(("  .lint "));   
+           break;
+         case DOT_LONG_TRIBYTE:
+           str.append(("  .long "));   
+           break;
+         case MARK_TWENTYFOUR_TRIBYTE:
+           str.append(("  !24 "));  
+           break;  
+       }
+       
+       MemoryDasm mem1;
+       MemoryDasm mem2;
+       MemoryDasm mem3;
+       
+       while (!list.isEmpty()) {
+         // if only 1 or 2 bytes left, use byte coding
+         if (list.size()<=2) aByte.flush(str);
+         else {
+           mem1=list.pop();
+           mem2=list.pop();
+           mem3=list.pop();
+           listRel.pop();
+           listRel.pop();
+           listRel.pop();
+           if (aTribyte==DOT_LINT_TRIBYTE && mem1.copy<0) {
+              str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
+                              .append(ByteToExe(Unsigned.done(mem2.copy)))
+                              .append(ByteToExe(Unsigned.done(mem3.copy)));;
+           } else {
+               str.append("$").append(ByteToExe(Unsigned.done(mem1.copy)))
+                              .append(ByteToExe(Unsigned.done(mem2.copy)))
+                              .append(ByteToExe(Unsigned.done(mem3.copy)));
+           }
+           if (list.size()>=3) str.append(", ");
+           else if (aTribyte==MACRO1_TRIBYTE) str.append(")\n");
+                else str.append("\n");
+         }
+       }   
      } 
+     
+     /** 
+      * Setting up the action type if this is the case
+      * 
+      * @param str the output stream
+      */
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aTribyte) {
+         case MACRO_TRIBYTE:
+           str.append(
+             "  .mac Tribyte1 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "  .endm \n\n"+
+             "  .mac Tribyte2 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +                     
+             "  .endm \n\n"+
+             "  .mac Tribyte3 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
+             "  .endm \n\n"+         
+             "  .mac Tribyte4 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
+             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" +                              
+             "  .endm \n\n"+                     
+             "  .mac Tribyte5 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
+             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" +                              
+             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" +                              
+             "  .endm \n\n"+
+             "  .mac Tribyte6 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
+             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
+             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
+             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
+             "  .endm \n\n" +             
+             "  .mac Tribyte7 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
+             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
+             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
+             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
+             "     .byte {7} >> 16, ( {7} >> 8) & 255,  {7} & 255\n" +        
+             "  .endm \n\n"+       
+             "  .mac Tribyte8 \n" +
+             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
+             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
+             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
+             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
+             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
+             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
+             "     .byte {8} >> 16, ( {8} >> 8) & 255,  {8} & 255\n" +        
+             "  .endm \n\n"                   
+           );
+           break;
+         case MACRO1_TRIBYTE:
+           str.append(
+             "  .macro Tribyte1 (tribyte) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  }\n\n"+
+             "  .macro Tribyte2 (tribyte, tribyte2) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "  }\n\n"+
+              "  .macro Tribyte3 (tribyte, tribyte2, tribyte3) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +        
+             "  }\n\n"+
+             "  .macro Tribyte4 (tribyte, tribyte2, tribyte3, tribyte4) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +          
+             "  }\n\n"+ 
+             "  .macro Tribyte5 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
+             "  }\n\n"+        
+             "  .macro Tribyte6 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
+             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +                      
+             "  }\n\n"+  
+             "  .macro Tribyte7 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
+             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +     
+             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +           
+             "  }\n\n"+      
+             "  .macro Tribyte8 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8) {\n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
+             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +     
+             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +     
+             "     .byte tribyte8 >> 16, ( tribyte8 >> 8) & 255,  tribyte8 & 255\n" +              
+             "  }\n\n"                     
+           );               
+           break;       
+         case MACRO3_TRIBYTE:
+            str.append(
+             "  .macro Tribyte1 tribyte \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "  .endmacro\n\n"+
+             "  .macro Tribyte1 tribyte, tribyte2 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "  .endmacro\n\n"+                    
+             "  .macro Tribyte3 tribyte, tribyte2, tribyte3 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +          
+             "  .endmacro\n\n"+                     
+             "  .macro Tribyte4 tribyte, tribyte2, tribyte3, tribyte4 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +        
+             "  .endmacro\n\n"+                       
+             "  .macro Tribyte5 tribyte, tribyte2, tribyte3, tribyte4, tribyte5 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
+             "  .endmacro\n\n"+  
+             "  .macro Tribyte6 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
+             "  .endmacro\n\n"+  
+             "  .macro Tribyte7 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +    
+             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +                     
+             "  .endmacro\n\n"+  
+             "  .macro Tribyte8 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8 \n" +
+             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
+             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
+             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
+             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
+             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +    
+             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +
+             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +        
+             "  .endmacro\n\n"                   
+           );               
+           break;   
+         case MACRO4_TRIBYTE:         
+           str.append(
+             "Tribyte1 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "  .endm\n\n"+
+             "Tribyte2 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +        
+             "  .endm\n\n"+     
+             "Tribyte3 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +          
+             "  .endm\n\n"+   
+             "Tribyte4 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +
+             "     .byte \\4 >> 16, ( \\4 >> 8) & 255,  \\4 & 255\n" +        
+             "  .endm\n\n"+       
+             "Tribyte5 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +
+             "     .byte \\4 >> 16, ( \\4 >> 8) & 255,  \\4 & 255\n" + 
+             "     .byte \\5 >> 16, ( \\5 >> 8) & 255,  \\5 & 255\n" +         
+             "  .endm\n\n"+    
+             "Tribyte6 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +
+             "     .byte \\4 >> 16, ( \\4 >> 8) & 255,  \\4 & 255\n" + 
+             "     .byte \\5 >> 16, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 16, ( \\6 >> 8) & 255,  \\6 & 255\n" + 
+             "  .endm\n\n"+   
+             "Tribyte7 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +
+             "     .byte \\4 >> 16, ( \\4 >> 8) & 255,  \\4 & 255\n" + 
+             "     .byte \\5 >> 16, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 16, ( \\6 >> 8) & 255,  \\6 & 255\n" +
+             "     .byte \\7 >> 16, ( \\7 >> 8) & 255,  \\7 & 255\n" +        
+             "  .endm\n\n"+    
+             "Tribyte8 .macro \n" +
+             "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 16, ( \\2 >> 8) & 255,  \\2 & 255\n" +     
+             "     .byte \\3 >> 16, ( \\3 >> 8) & 255,  \\3 & 255\n" +
+             "     .byte \\4 >> 16, ( \\4 >> 8) & 255,  \\4 & 255\n" + 
+             "     .byte \\5 >> 16, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 16, ( \\6 >> 8) & 255,  \\6 & 255\n" +
+             "     .byte \\7 >> 16, ( \\7 >> 8) & 255,  \\7 & 255\n" +  
+             "     .byte \\8 >> 16, ( \\8 >> 8) & 255,  \\8 & 255\n" +       
+             "  .endm\n\n"                    
+           );                      
+           break;             
+       }
+     };     
    }   
    
    /**
@@ -1224,6 +1531,9 @@ public class Assembler {
    /** Assembler word type */
    protected static Assembler.Word aWord;
    
+   /** Assembler tribyte type */
+   protected static Assembler.Tribyte aTribyte;
+   
    /** Assembler mono color sprite*/
    protected static Assembler.MonoSprite aMonoSprite;
    
@@ -1257,6 +1567,7 @@ public class Assembler {
     * @param aBlockComment the comment type to use
     * @param aByte the byte type to use
     * @param aWord the word type to use
+    * @param aTribyte the tribyte type to use
     * @param aMonoSprite the mono sprite type to use
     * @param aMultiSprite the numti sprite type to use
     */
@@ -1267,7 +1578,8 @@ public class Assembler {
                          Assembler.Comment aComment, 
                          Assembler.BlockComment aBlockComment,
                          Assembler.Byte aByte, 
-                         Assembler.Word aWord,                         
+                         Assembler.Word aWord,         
+                         Assembler.Tribyte aTribyte,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite) {
      Assembler.aStarting=aStarting;  
@@ -1278,7 +1590,7 @@ public class Assembler {
      Assembler.aBlockComment=aBlockComment;
      Assembler.aByte=aByte;
      Assembler.aWord=aWord;
-     
+     Assembler.aTribyte=aTribyte;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
      
@@ -1412,14 +1724,17 @@ public class Assembler {
    public void setMacro(StringBuilder str, MemoryDasm[] memory) {
      boolean hasMonoSprite=false;
      boolean hasMultiSprite=false;
+     boolean hasTribyte=false;
      
      for (MemoryDasm mem:memory) {
        if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
        if (mem.dataType==DataType.MULTI_SPRITE) hasMultiSprite=true;
+       if (mem.dataType==DataType.TRIBYTE) hasTribyte=true;
      }
      
      if (hasMonoSprite) aMonoSprite.setting(str);
      if (hasMultiSprite) aMultiSprite.setting(str);
+     if (hasTribyte) aTribyte.setting(str);
    }
    
    /**
@@ -1514,6 +1829,10 @@ public class Assembler {
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
          return aWord;
+       case TRIBYTE:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         return aTribyte;           
        case MONO_SPRITE:
          if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
          isMonoSpriteBlock=true;  

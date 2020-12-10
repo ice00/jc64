@@ -6640,7 +6640,7 @@
                                       <Component id="jLabelTass64StartingDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64OriginDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64CommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelTass64BlockCommentDeclaration" alignment="0" pref="139" max="32767" attributes="0"/>
+                                      <Component id="jLabelTass64BlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64LabelDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64ByteDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64WordDeclaration" alignment="0" max="32767" attributes="0"/>
@@ -6661,61 +6661,51 @@
                                       <Component id="jRadioButtonTass64LabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotByte" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonTass64LongTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDotTass64LongTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jScrollPaneTass64DotByte" max="32767" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="jScrollPaneTass64LabelName" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneTass64SemicolonComment" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneTass64ASterixOrigin" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="0" pref="100" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jScrollPaneTass64DotWord" max="32767" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jScrollPaneTass64ByteHexMonoSprite" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneTass64ByteHexMultiSprite" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jScrollPaneTass64DotWord" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jScrollPaneTass64DotLongTribyte" min="-2" pref="101" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneTass64ASterixOrigin" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64DotLongTribyte" alignment="0" pref="112" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64SemicolonComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64ByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64ByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jScrollPaneTass64LabelName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneTass64DotByte" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotCharByte" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotSintWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonTass64LintTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotLintTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneTass64DotIfFiBlockComment" alignment="0" pref="100" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotIfFiBlockComment" alignment="0" pref="90" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotCharByte" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotSintWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneTass64DotLintTribyte" alignment="0" pref="100" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneTass64ByteBinMonoSprite" alignment="0" pref="100" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotLintTribyte" alignment="0" pref="90" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTass64ByteBinMonoSprite" alignment="0" pref="90" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64ByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -6773,65 +6763,44 @@
                                       <Component id="jScrollPaneTass64SemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jLabelTass64BlockCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jLabelTass64LabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTass64LabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64LabelName" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jLabelTass64ByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jLabelTass64WordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTass64DotCommentBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jRadioButtonTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jRadioButtonTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64BlockCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotCommentBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotComment" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                                          <Component id="jLabelTass64TribyteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonTass64LongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneTass64DotLongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="jRadioButtonTass64LintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTass64DotLintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64LabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64LabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64LabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64ByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64WordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64TribyteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDotTass64LongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotLongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotLintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotLintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -6857,7 +6826,7 @@
                                       <Component id="jRadioButtonTass64MacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTass64MacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                                  <EmptySpace pref="138" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -7492,7 +7461,7 @@
                             <Property name="text" type="java.lang.String" value="Tribyte:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64LongTribyte">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDotTass64LongTribyte">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTass64Tribyte"/>
@@ -7500,7 +7469,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64LongTribyteItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDotTass64LongTribyteItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotLongTribyte">
@@ -7523,14 +7492,14 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64LintTribyte">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotLintTribyte">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTass64Tribyte"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64LintTribyteItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotLintTribyteItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotLintTribyte">
