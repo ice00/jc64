@@ -46,6 +46,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.JTableHeader;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 import org.fife.rsta.ui.search.FindDialog;
@@ -245,6 +246,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         rSyntaxTextAreaSource = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
         jScrollPaneMemory = new javax.swing.JScrollPane();
         jTableMemory = new javax.swing.JTable() {
+            String[] hh={"Memory address location in Hex",
+                "Disassembler automatic comment",
+                "User manual comment",
+                "Disassembler automatic label",
+                "User manual label",
+                "User global comment",
+                "Related location and data type"};
+            @Override protected JTableHeader createDefaultTableHeader() {
+                return new JTableHeader(columnModel) {
+                    @Override public String getToolTipText(MouseEvent e) {
+                        int col = columnAtPoint(e.getPoint());
+                        int index = columnModel.getColumnIndexAtX(e.getPoint().x);
+                        int realIndex = columnModel.getColumn(index).getModelIndex();
+                        return hh[realIndex];
+                    }
+                };
+            }
 
             //Implement table cell tool tips.
             public String getToolTipText(MouseEvent e) {
