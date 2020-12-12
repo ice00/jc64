@@ -308,6 +308,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
                                 else tip="#"+memory.type+"$"+ShortToExe(mem.address);
                             }
+                        } else if (memory.dataType!=null) {
+                            tip=memory.dataType.getDescription();
                         }
                         break;
                     }
