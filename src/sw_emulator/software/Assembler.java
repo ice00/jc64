@@ -1797,6 +1797,17 @@ public class Assembler {
    }
    
    /**
+    * Set the block comment if present 
+    * 
+    * @param str the stream to use
+    * @param mem the memory with block comment
+    */
+   public void setBlockComment(StringBuilder str, MemoryDasm mem) {
+     lastMem=mem;
+     aBlockComment.flush(str);
+   }   
+   
+   /**
     * Flush the actual data to the output stream
     * 
     * @param str the output stream

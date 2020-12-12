@@ -271,6 +271,10 @@ public class Disassembly {
     if (asSource) {
       sid.upperCase=option.opcodeUpperCaseSource;
         
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(tmp, mem);
+      
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
       
@@ -401,6 +405,11 @@ public class Disassembly {
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(tmp, mem);
+
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
 
@@ -467,6 +476,11 @@ public class Disassembly {
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
+      
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(tmp, mem);
+
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
     } else {    
@@ -670,5 +684,18 @@ public class Disassembly {
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
                         aBlockComment, aByte, aWord, aTribyte,
                         aMonoSprite, aMultiSprite);      
+  }
+  
+  /**
+   * Get the assembler description
+   * 
+   * @return the assembler description
+   */
+  public String getAssemblerDescription() {
+    return  "****************************\n"+
+            "  JC64dis vesrion 0.9\n"+
+            "  \n"+
+            "  Source in "+option.assembler.getName()+" format\n"+
+            "****************************\n";        
   }
 }

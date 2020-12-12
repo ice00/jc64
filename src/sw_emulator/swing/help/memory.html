@@ -13,21 +13,21 @@
   <p>During the disassemble phase, the disassembly engine is able to add some comments to common memory locations (based onto the choosed platform) used by the instruction being executed.<br>
     So, for example, if the address of an load/store instruction is $D400, the automatic comment appended to that memory area will be "Voice 1: Frequency control (lo byte)"<br>
     You can use those comments to easy search for some text (eg. "Frequency control"), however if you don't need it, you can use this menu function to erase the comments and leave them blank to all the memory location you had delected<br>
-    Please, note that as soon as you will regenerate the source code, the DASM will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a Dasm automatic comment.
+    Please, note that as soon as you will regenerate the source code, the disassembler will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a disassembler automatic comment.
   </p>
   
   <h2>Clear user comment</h2>
  <p>This is a shortcut function for make your comment to that location as blank (e.g you can enter the comment and modify it to be empty, but this fastest).</p>
  <h2>Clear disassembly automatic label</h2>
  <p>The disassembly engine is able to detect all the memory location used into the program area and label them as "W" + the hex representation of the memory area.<br>
-  This command will erase that association, but if it still present into the source it will be recreated at next Dasm source regeneration. So why this function is present?<br>
+  This command will erase that association, but if it still present into the source it will be recreated at next disassembler source regeneration. So why this function is present?<br>
   The answer is simple: at the beginning all memory locations are not marked as code/data, so the engine use them as code (by default in option). <br>
   In this phase that could be a data area that if managed as code refers to a givem memory location and so that will be labeled. 
   When you will mark that area as code, the label is still associated, so it could appars when it is utilizated as data.
  </p>
  
   <h2>Add user comment</h2> 
-  <p>This function let you add a comment to the selected memory area. The comment is used over a Dasm automatic one and in source appears in the line where there is the code.</p>
+  <p>This function let you add a comment to the selected memory area. The comment is used over a disassembler automatic one and in source appears in the line where there is the code.</p>
   <p align="center"><img src="./memory3.png"></p> 
   <p>Note instead that a comment into the data area will appears only if there is a label and it will be after the label declaration (this let to merge more bytes to one row).</p>
   
@@ -43,7 +43,7 @@
    <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user will be used instead of the other.<br>
    You cannot insert label with less than 5 chars and a option let you specify the max one to use (as some assembler has a limit in his length). <br>
    The program will search if the label was already present into the code, so you cannot create duplicates.
-   As we had seen, Dasm generate labels only for memory locations inside the binary data, but a user can add a label even in the outside area (so as a constant).<br>
+   As we had seen, disassembler generate labels only for memory locations inside the binary data, but a user can add a label even in the outside area (so as a constant).<br>
    This is for mark up external routine (like the KERNAL one) or memory area where to copy some code/data.<br><br>
    The engine of source generation processes the memory outside the binary data first, so block comments and label declaration will appears into the source into the initial area, then it process the internal memory area.<br>
    During the constant declaration even user comment are shoed:
@@ -60,32 +60,41 @@
    
    <h2>Mark data as Byte (HEX)</h2>
    This marks the data as byte and format it as hexadecimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
-   <a>.byte $12</a> or <a>!byte $F4</a><br>
+   <b>.byte $12</b> or <b>!byte $F4</b><br>
    This is the method used when you select the data type without a further classification.
    
    <h2>Mark data as Byte (DEC)</h2>
    This marks the data as byte and format it as decimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
-   <a>.byte 18</a> or <a>!byte 244</a>
+   <b>.byte 18</b> or <b>!byte 244</b>
    
    <h2>Mark data as Byte (BIN)</h2>
    This marks the data as byte and format it as decimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
-   <a>.byte 18</a> or <a>!byte 244</a>
+   <b>.byte 18</b> or <b>!byte 244</b>
    
    <h2>Mark data as Byte (CHAR)</h2>
    This marks the data as byte and format it as character. According with the selected assembler and his possible variants the format could be many, for example:<br>
-   <a>.byte 'A</a> or <a>!byte 'Z</a>
+   <b>.byte 'A</b> or <b>!byte 'Z</b>
+   
+   <h2>Mark data as Word</h2>
+   This marks the data as word and format it as hexadecimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <a>.word $1234</a> or <a>!word $1234</a><br>
+   The data <i><$xxyy</i> are equivalent to the bytes <i>$yy, $xx</i>, so if those bytes are of a memory relative location (low/high), the word is replaced by the associate label, so those are equivalent:<br>
+   <b>.byte &lt;Label, &gt;Label</b> and <b>.word Label</b>
+   
+   <h2>Mark data as Monocromatic spite definitions</h2>
+   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes.
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
    <p align="center"><img src="./memory7.png"></p>   
-   <p>Using this function you can create such relation: you need to positionate to the element you want to make point to another, then into the given table you can choose one address (that can have a label, but if it is not present Dasm engine will create one for it). At this point the label of this address will not be used and instead will be used the one that are associated with the offest for it.<br>
+   <p>Using this function you can create such relation: you need to positionate to the element you want to make point to another, then into the given table you can choose one address (that can have a label, but if it is not present, disassembler engine will create one for it). At this point the label of this address will not be used and instead will be used the one that are associated with the offest for it.<br>
    You will see that now the RE column will have a + inside it and the tool tip will gives the address + offset. </p>
    <p align="center"><img src="./memory8.png"></p> 
-   <p>You should note that the Dasm engine will create in automatic a such relation in one particular case: where there is a self modified code!<br>
+   <p>You should note that the disassembler engine will create in automatic a such relation in one particular case: where there is a self modified code!<br>
    A common way to save raster line or write compact code is to modify the low/high byte of the address of an LDA or STA instruction. 
    In this case you cannot create a label to that memory location as it is inside the code, so you must refer to it as another (usually labelling where the instruction start) plus an offset:</p>
    <p align="center"><img src="./memory9.png"></p> 
-   <p>You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when Dasm engine create a relation to part that where not marked as code and then you mark as data.  </p>
+   <p>You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when disassembler engine create a relation to part that where not marked as code and then you mark as data.  </p>
   
    <h2>Assign the selected address as -</h2>
    <p>In some cases even having a pointer that refers to a label that is ahead can be usefull, so this create (in the same manner of plus) a minus relation<br>
