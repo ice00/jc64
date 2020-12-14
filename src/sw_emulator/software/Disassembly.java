@@ -112,6 +112,9 @@ public class Disassembly {
   
   /** Assembler tribyte type */
   protected Assembler.Tribyte aTribyte;
+  
+  /** Assembler long type */
+  protected Assembler.Long aLong; 
    
   
    /** Assembler mono color sprite*/
@@ -616,6 +619,7 @@ public class Disassembly {
         aByte=option.dasmByte;
         aWord=option.dasmWord;
         aTribyte=option.dasmTribyte;
+        aLong=option.dasmLong;
         aMonoSprite=option.dasmMonoSprite;
         aMultiSprite=option.dasmMultiSprite;
         break;
@@ -628,6 +632,7 @@ public class Disassembly {
         aByte=option.tmpxByte;
         aWord=option.tmpxWord;
         aTribyte=option.tmpxTribyte;
+        aLong=option.tmpxLong;
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
         break;  
@@ -640,6 +645,7 @@ public class Disassembly {
         aByte=option.ca65Byte;
         aWord=option.ca65Word; 
         aTribyte=option.ca65Tribyte;
+        aLong=option.ca65Long;
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
         break;  
@@ -652,6 +658,7 @@ public class Disassembly {
         aByte=option.acmeByte;
         aWord=option.acmeWord;
         aTribyte=option.acmeTribyte;
+        aLong=option.acmeLong;
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
         break;
@@ -664,6 +671,7 @@ public class Disassembly {
         aByte=option.kickByte;
         aWord=option.kickWord;  
         aTribyte=option.kickTribyte;
+        aLong=option.kickLong;
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
         break; 
@@ -676,13 +684,14 @@ public class Disassembly {
         aByte=option.tass64Byte;
         aWord=option.tass64Word;
         aTribyte=option.tass64Tribyte;
+        aLong=option.tass64Long;
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
         break;
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
-                        aBlockComment, aByte, aWord, aTribyte,
+                        aBlockComment, aByte, aWord, aTribyte, aLong,
                         aMonoSprite, aMultiSprite);      
   }
   

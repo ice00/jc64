@@ -1009,11 +1009,28 @@ public class Assembler {
     * Long declaration type
     */
    public enum Long implements ActionType  {
+     LONG,                 //   long $xxyyzzkk
+     DOT_LONG,             //  .long $xxyyzzkk
+     DOT_DC_L_LONG,        //  .dc.l $xxyyzzkk    
+     DOT_DWORD_LONG,       // .dword $xxyyzzkk
+     DOT_DLINT_LONG,       // .dlint $xxyyzzkk
+     MARK_THIRTYTWO_LONG,  //    !32 $xxyyzzkk
+     MACRO_LONG            // [.mac] $xxyyzzkk
         ;      
       @Override
       public void flush(StringBuilder str) {
       
       } 
+      
+     /** 
+      * Setting up the action type if this is the case
+      * 
+      * @param str the output stream
+      */
+     @Override
+     public void setting(StringBuilder str) {
+          
+     }
    }    
    
    /**
@@ -1533,6 +1550,9 @@ public class Assembler {
    
    /** Assembler tribyte type */
    protected static Assembler.Tribyte aTribyte;
+     
+   /** Assembler lobg type */
+   protected static Assembler.Long aLong;  
    
    /** Assembler mono color sprite*/
    protected static Assembler.MonoSprite aMonoSprite;
@@ -1567,6 +1587,7 @@ public class Assembler {
     * @param aBlockComment the comment type to use
     * @param aByte the byte type to use
     * @param aWord the word type to use
+    * @param aLong the long type to use
     * @param aTribyte the tribyte type to use
     * @param aMonoSprite the mono sprite type to use
     * @param aMultiSprite the numti sprite type to use
@@ -1580,6 +1601,7 @@ public class Assembler {
                          Assembler.Byte aByte, 
                          Assembler.Word aWord,         
                          Assembler.Tribyte aTribyte,
+                         Assembler.Long aLong,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite) {
      Assembler.aStarting=aStarting;  
@@ -1591,6 +1613,7 @@ public class Assembler {
      Assembler.aByte=aByte;
      Assembler.aWord=aWord;
      Assembler.aTribyte=aTribyte;
+     Assembler.aLong=aLong;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
      
@@ -1725,16 +1748,19 @@ public class Assembler {
      boolean hasMonoSprite=false;
      boolean hasMultiSprite=false;
      boolean hasTribyte=false;
+     boolean hasLong=false;
      
      for (MemoryDasm mem:memory) {
        if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
        if (mem.dataType==DataType.MULTI_SPRITE) hasMultiSprite=true;
        if (mem.dataType==DataType.TRIBYTE) hasTribyte=true;
+       if (mem.dataType==DataType.LONG) hasLong=true;
      }
      
      if (hasMonoSprite) aMonoSprite.setting(str);
      if (hasMultiSprite) aMultiSprite.setting(str);
      if (hasTribyte) aTribyte.setting(str);
+     if (hasLong) aLong.setting(str);
    }
    
    /**
@@ -1843,7 +1869,11 @@ public class Assembler {
        case TRIBYTE:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
-         return aTribyte;           
+         return aTribyte;  
+       case LONG:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         return aLong;        
        case MONO_SPRITE:
          if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
          isMonoSpriteBlock=true;  

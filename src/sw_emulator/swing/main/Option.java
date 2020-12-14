@@ -604,6 +604,9 @@ public class Option {
   /** DASM: tribyte declaration */
   public Assembler.Tribyte dasmTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
   
+  /** DASM: long declaration */
+  public Assembler.Long dasmLong=Assembler.Long.DOT_LONG; 
+  
   /** Assembler mono color sprite*/
   public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
    
@@ -635,6 +638,9 @@ public class Option {
   
   /** TMPX: tribyte declaration */
   public Assembler.Tribyte tmpxTribyte=Assembler.Tribyte.MACRO4_TRIBYTE; 
+  
+  /** TMPX: long declaration */
+  public Assembler.Long tmpxLong=Assembler.Long.MACRO_LONG; 
   
   /** TMPx: mono color sprite*/
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
@@ -668,6 +674,9 @@ public class Option {
   /** CA65: tribyte declaration */
   public Assembler.Tribyte ca65Tribyte=Assembler.Tribyte.MACRO3_TRIBYTE;  
   
+  /** CA65: long declaration */
+  public Assembler.Long ca65Long=Assembler.Long.DOT_DWORD_LONG; 
+  
   /** CA65: mono color sprite*/
   public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
    
@@ -700,6 +709,9 @@ public class Option {
   /** ACME: tribyte declaration */
   public Assembler.Tribyte acmeTribyte=Assembler.Tribyte.MARK_TWENTYFOUR_TRIBYTE; 
   
+  /** ACME: long declaration */
+  public Assembler.Long acmeLong=Assembler.Long.MARK_THIRTYTWO_LONG; 
+  
   /** ACME: mono color sprite*/
   public Assembler.MonoSprite acmeMonoSprite=Assembler.MonoSprite.MACRO2_BIN;
    
@@ -729,13 +741,16 @@ public class Option {
   /** KickAssembler: word declaration */
   public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
-  /** kick: tribyte declaration */
+  /** kickAssembler: tribyte declaration */
   public Assembler.Tribyte kickTribyte=Assembler.Tribyte.MACRO1_TRIBYTE; 
   
-  /** Kick Assembler mono color sprite*/
+  /** Kick: long declaration */
+  public Assembler.Long kickLong=Assembler.Long.DOT_DWORD_LONG; 
+  
+  /** KickAssembler: mono color sprite*/
   public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;
    
-  /** Kick Asembler multi color sprite */
+  /** KickAsembler: multi color sprite */
   public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
   
   
@@ -752,7 +767,7 @@ public class Option {
   /** 64Tass: comment declaration */
   public Assembler.Comment tass64Comment=Assembler.Comment.SEMICOLON; 
   
-   /** 64Tass: block comment declaration */
+  /** 64Tass: block comment declaration */
   public Assembler.BlockComment tass64BlockComment=Assembler.BlockComment.SEMICOLON;
   
   /** 64Tass: byte declaration */
@@ -763,6 +778,9 @@ public class Option {
   
   /** 64Tass: tribyte declaration */
   public Assembler.Tribyte tass64Tribyte=Assembler.Tribyte.DOT_LONG_TRIBYTE; 
+  
+  /** 64Tass: long declaration */
+  public Assembler.Long tass64Long=Assembler.Long.DOT_DWORD_LONG; 
   
   /** 64Tass: mono color sprite*/
   public Assembler.MonoSprite tass64MonoSprite=Assembler.MonoSprite.MACRO4_BIN;
