@@ -1015,11 +1015,89 @@ public class Assembler {
      DOT_DWORD_LONG,       // .dword $xxyyzzkk
      DOT_DLINT_LONG,       // .dlint $xxyyzzkk
      MARK_THIRTYTWO_LONG,  //    !32 $xxyyzzkk
-     MACRO_LONG            // [.mac] $xxyyzzkk
+     MACRO4_LONG           // [.mac] $xxyyzzkk  (TMPx)
         ;      
-      @Override
-      public void flush(StringBuilder str) {
-      
+     @Override
+     public void flush(StringBuilder str) {
+       if (list.isEmpty()) return; 
+       
+       if (list.size()<=3) {
+         aByte.flush(str);
+         return;
+       }
+       
+       MemoryDasm mem;
+       
+       Iterator<MemoryDasm> iter=list.iterator();
+       while (iter.hasNext()) {
+         mem=iter.next();
+         // we cannot handle memory reference inside long
+         if (mem.type=='<' || mem.type=='>') {
+           // force all to be as byte even if this breaks layout
+           aByte.flush(str);
+           return;
+         }
+       }  
+                    
+       switch (aLong) {
+         case LONG:
+           str.append(("  long "));  
+           break;             
+         case DOT_LONG:
+           str.append(("  .long "));   
+           break;    
+         case DOT_DC_L_LONG:
+           str.append(("  .dc.l "));   
+           break;  
+         case DOT_DWORD_LONG:
+           str.append(("  .dword "));  
+           break;  
+         case DOT_DLINT_LONG:
+           str.append(("  .dlint "));  
+           break;            
+         case MARK_THIRTYTWO_LONG:
+           str.append(("  !32 "));  
+           break;                                  
+         case MACRO4_LONG: 
+           // we have a min of 1 or a max of 8 tribyte, so use the right call for macro
+           int index=(int)(list.size()/4);
+        
+           str.append("  #Long").append(index).append(" ");  
+           break;  
+       }
+        
+       MemoryDasm mem1;
+       MemoryDasm mem2;
+       MemoryDasm mem3;
+       MemoryDasm mem4;
+       
+       while (!list.isEmpty()) {
+         // if only 1..3 bytes left, use byte coding
+         if (list.size()<=3) aByte.flush(str);
+         else {
+           mem1=list.pop();
+           mem2=list.pop();
+           mem3=list.pop();
+           mem4=list.pop();
+           listRel.pop();
+           listRel.pop();
+           listRel.pop();
+           listRel.pop();
+           if (aLong==DOT_DLINT_LONG && mem1.copy<0) {
+              str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
+                              .append(ByteToExe(Unsigned.done(mem2.copy)))
+                              .append(ByteToExe(Unsigned.done(mem3.copy)))
+                              .append(ByteToExe(Unsigned.done(mem4.copy)));
+           } else {
+               str.append("$").append(ByteToExe(Unsigned.done(mem1.copy)))
+                              .append(ByteToExe(Unsigned.done(mem2.copy)))
+                              .append(ByteToExe(Unsigned.done(mem3.copy)))
+                              .append(ByteToExe(Unsigned.done(mem4.copy)));
+           }
+           if (list.size()>=4) str.append(", ");
+           else str.append("\n");
+         }
+       }   
       } 
       
      /** 
@@ -1029,7 +1107,64 @@ public class Assembler {
       */
      @Override
      public void setting(StringBuilder str) {
-          
+       switch (aLong) {  
+         case MACRO4_LONG:         
+           str.append(
+             "Long1 .macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "  .endm\n\n"+
+             "Long2 .macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +       
+             "  .endm\n\n"+   
+             "Long3 .macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +          
+             "  .endm\n\n"+    
+             "Long4 .macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
+             "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +         
+             "  .endm\n\n"+     
+             "Long5 .macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
+             "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +    
+             "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" +         
+             "  .endm\n\n"+      
+             "Long6.macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
+             "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +    
+             "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 24, (\\6 >> 16) & 255, ( \\6 >> 8) & 255,  \\6 & 255\n" +         
+             "  .endm\n\n"+  
+             "Long7.macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
+             "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +    
+             "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 24, (\\6 >> 16) & 255, ( \\6 >> 8) & 255,  \\6 & 255\n" +        
+             "     .byte \\7 >> 24, (\\7 >> 16) & 255, ( \\7 >> 8) & 255,  \\7 & 255\n" +           
+             "  .endm\n\n"+    
+             "Long8.macro \n" +
+             "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
+             "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
+             "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
+             "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +    
+             "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
+             "     .byte \\6 >> 24, (\\6 >> 16) & 255, ( \\6 >> 8) & 255,  \\6 & 255\n" +        
+             "     .byte \\7 >> 24, (\\7 >> 16) & 255, ( \\7 >> 8) & 255,  \\7 & 255\n" +  
+             "     .byte \\8 >> 24, (\\8 >> 16) & 255, ( \\8 >> 8) & 255,  \\8 & 255\n" +         
+             "  .endm\n\n"                  
+           );
+           break;
+       }
      }
    }    
    

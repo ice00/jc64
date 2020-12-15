@@ -7018,7 +7018,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonTass64DotDlintLongItemStateChanged
 
     private void jRadioButtonTmpxMacroLongItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxMacroLongItemStateChanged
-      option.tmpxLong=Assembler.Long.MACRO_LONG; 
+      option.tmpxLong=Assembler.Long.MACRO4_LONG; 
     }//GEN-LAST:event_jRadioButtonTmpxMacroLongItemStateChanged
 
     /**
@@ -8103,7 +8103,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     }
     
     switch (option.tmpxLong) {
-      case MACRO_LONG:  
+      case MACRO4_LONG:  
         jRadioButtonTmpxMacroLong.setSelected(true);
         break;  
     }
