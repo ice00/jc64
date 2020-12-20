@@ -29,7 +29,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Vector;
@@ -55,6 +57,7 @@ import org.fife.rsta.ui.search.SearchListener;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.memory.memoryState;
@@ -134,6 +137,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Find dialog for disassembly */
   FindDialog findDialogDis;
   
+  /** Compiler */
+  Compiler compiler=new Compiler();
+  
   
     /**
      * Creates new form JFrameDisassembler
@@ -165,7 +171,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
         optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
-        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");          
+        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");  
+        compiler.setOption(option);               
     }
 
     /**
@@ -3735,6 +3742,31 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Assemblate back the source to binary
    */
   private void assembly() {
-    // to code
+    File inputFile=new File("/tmp/input.s");
+    File outputFile=new File("/tmp/output.exe");
+    
+    if (disassembly.source==null || "".equals(disassembly.source)) {
+       JOptionPane.showMessageDialog(this, "There is no source to assemble", "Warning",
+        JOptionPane.WARNING_MESSAGE);
+       return;
+    }    
+    
+    try {
+       PrintWriter out=new PrintWriter(inputFile);
+       out.write(disassembly.source);
+       out.flush();
+       out.close();
+    } catch (Exception e) {
+        System.err.println(e);
+      }
+      
+    String res=compiler.compile(inputFile, outputFile);
+    
+    JTextArea textArea = new JTextArea(50, 50);
+    textArea.setText(res);
+    textArea.setEditable(false);
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    JOptionPane.showMessageDialog(this, scrollPane, "Result of DASM compilatation", JOptionPane.INFORMATION_MESSAGE);
+    
   }
 }

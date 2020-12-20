@@ -142,6 +142,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxLong">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmWordSwapped">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxWordSwapped">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -799,7 +803,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabelautocomment" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneComm" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneComm" pref="570" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -880,7 +884,7 @@
                                   <Component id="jCheckBoxC64Cia2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC64KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                                  <EmptySpace pref="213" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1070,7 +1074,7 @@
                                   <Component id="jCheckBoxC1541Via2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC1541Kernal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="282" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1264,7 +1268,7 @@
                                   <Component id="jCheckBoxC128DMA" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC128KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="43" max="32767" attributes="0"/>
+                                  <EmptySpace pref="98" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1740,29 +1744,27 @@
                                               <Component id="jCheckBoxPlus4BasicRom" min="-2" pref="382" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxPlus4BasicExt" min="-2" pref="382" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxPlus4Caracter" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="jCheckBoxPlus4_400Area" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxPlus4_500Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="jCheckBoxPlus4ZeroPage" pref="373" max="32767" attributes="0"/>
-                                                          <Component id="jCheckBoxPlus4StackArea" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="jCheckBoxPlus4_300Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jCheckBoxPlus4Ted" min="-2" pref="382" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxPlus4Kernal" min="-2" pref="382" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxPlus4_6529B_1" min="-2" pref="382" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxPlus4_6529B_2" min="-2" pref="382" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxPlus4Acia" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
-                                                  </Group>
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jCheckBoxPlus4_400Area" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jCheckBoxPlus4_500Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
                                               </Group>
+                                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jCheckBoxPlus4ZeroPage" pref="373" max="32767" attributes="0"/>
+                                                  <Component id="jCheckBoxPlus4StackArea" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="jCheckBoxPlus4_300Area" alignment="0" min="-2" pref="396" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace pref="393" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jCheckBoxPlus4Ted" min="-2" pref="382" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4Kernal" min="-2" pref="382" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4_6529B_1" min="-2" pref="382" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4_6529B_2" min="-2" pref="382" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxPlus4Acia" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1772,30 +1774,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jCheckBoxPlus4ZeroPage" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4StackArea" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4_200Area" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4_300Area" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4_400Area" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jCheckBoxPlus4Acia" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4_6529B_1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4_6529B_2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4Ted" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxPlus4Kernal" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="jCheckBoxPlus4ZeroPage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4StackArea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4_200Area" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4_300Area" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4_400Area" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxPlus4_500Area" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1822,7 +1809,17 @@
                                   <Component id="jCheckBoxPlus4BasicExt" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxPlus4Caracter" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="66" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4Acia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4_6529B_1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4_6529B_2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4Ted" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxPlus4Kernal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2066,7 +2063,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" pref="518" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" pref="573" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2101,65 +2098,82 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxDasmF3Comp" min="-2" pref="332" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelDasmWordSwappedDeclaration" min="-2" pref="139" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDotDcSWordSwapped" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmDotDcSWordSwapped" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelDasmTribyteDeclaration" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jLabelDasmByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmLabelDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmWordDeclaration" alignment="1" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmStarting" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmOriginDeclaration" alignment="0" pref="137" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jLabelDasmBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabelDasmTribyteDeclaration" max="32767" attributes="0"/>
+                                                      <Group type="102" attributes="0">
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="jLabelDasmByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmLabelDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmWordDeclaration" alignment="1" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmStarting" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmOriginDeclaration" alignment="0" pref="137" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jLabelDasmBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="jLabelDasmLongDeclaration" max="32767" attributes="0"/>
                                                   </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jRadioButtonDasmProcStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmDotOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmDotLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabelDasmMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                                      <Component id="jLabelDasmMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneDasmLabelName15" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName8" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmDotByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmDotWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmMacroTribyte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jScrollPaneDasmDotLong" min="-2" pref="126" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="jLabelDasmLongDeclaration" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonDasmProcStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmDotOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmDotLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelDasmMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <Component id="jLabelDasmMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName15" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName8" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmDotByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmDotWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jScrollPaneDasmDotLong" min="-2" pref="126" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -2229,11 +2243,6 @@
                                           <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxDasmF3Comp" min="-2" pref="332" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2306,6 +2315,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelDasmWordSwappedDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotDcSWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotDcSWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelDasmTribyteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -2318,7 +2333,7 @@
                                       <Component id="jScrollPaneDasmLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelDasmLongDeclaration" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jLabelDasmLongDeclaration" alignment="1" pref="37" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -3297,6 +3312,42 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmWordSwappedDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word swapped:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotDcSWordSwapped">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmWordSwapped"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotDcSWordSwappedItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotDcSWordSwapped">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotDcSWordSwapped">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .dc.s&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$yyxx&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelTMPx">
@@ -3313,15 +3364,22 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelTmpxByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelTmpxWordDeclaration" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelTmpxWordDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxByteDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="742" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelTmpxWordSwappedDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonTmpxMacroWordSwapped" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxMacroWordSwapped" max="32767" attributes="0"/>
+                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabelTmpxLongDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -3470,6 +3528,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTmpxWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelTmpxTribyteDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -3504,7 +3568,7 @@
                                       <Component id="jRadioButtonTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                                  <EmptySpace pref="97" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3520,6 +3584,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxLabel"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByte">
@@ -3552,6 +3617,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxByte"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxWord">
@@ -3584,6 +3650,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxWord"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotWord">
@@ -3616,6 +3683,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxComment"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxSemicolonCommentItemStateChanged"/>
@@ -3651,6 +3719,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxBlockComment"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxSemicolonBlockCommentItemStateChanged"/>
@@ -3686,6 +3755,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxOrigin"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxAsterixOriginItemStateChanged"/>
@@ -3751,6 +3821,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxStarting"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotCpuAStartingItemStateChanged"/>
@@ -3971,6 +4042,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxMonoSprite"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxMacroBinMonoSpriteItemStateChanged"/>
@@ -3981,6 +4053,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxMultiSprite"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxMacroBinMultiSpriteItemStateChanged"/>
@@ -4072,7 +4145,6 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxLong"/>
                             </Property>
-                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxMacroLongItemStateChanged"/>
@@ -4094,6 +4166,42 @@
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzzkk&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTmpxWordSwappedDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Word Swapped:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxMacroWordSwapped">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxWordSwapped"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxMacroWordSwappedItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroWordSwapped">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxMacroWordSwapped">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$yyxx&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -4305,7 +4413,7 @@
                                       <Component id="jRadioButtonCa65DotLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneCa65DotDWordLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                                  <EmptySpace pref="90" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="2" attributes="0">
@@ -7052,7 +7160,7 @@
                                       <Component id="jRadioButtonTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="68" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelTass64MonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -7958,7 +8066,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="332" max="32767" attributes="0"/>
+                                  <EmptySpace pref="387" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
