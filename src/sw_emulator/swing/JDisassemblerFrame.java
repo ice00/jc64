@@ -3766,7 +3766,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     textArea.setText(res);
     textArea.setEditable(false);
     JScrollPane scrollPane = new JScrollPane(textArea);
-    JOptionPane.showMessageDialog(this, scrollPane, "Result of DASM compilatation", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this, scrollPane, "Result of "+option.assembler.getName()+" compilatation", JOptionPane.INFORMATION_MESSAGE);
     
   }
 }

@@ -179,8 +179,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jPanelOption" min="-2" pref="622" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="jPanelOption" pref="718" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -198,6 +198,9 @@
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="Options" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[831, 842]"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -803,7 +806,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabelautocomment" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneComm" pref="570" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneComm" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -884,7 +887,7 @@
                                   <Component id="jCheckBoxC64Cia2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC64KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="213" max="32767" attributes="0"/>
+                                  <EmptySpace pref="254" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1074,7 +1077,7 @@
                                   <Component id="jCheckBoxC1541Via2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC1541Kernal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="282" max="32767" attributes="0"/>
+                                  <EmptySpace pref="323" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1268,7 +1271,7 @@
                                   <Component id="jCheckBoxC128DMA" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC128KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="98" max="32767" attributes="0"/>
+                                  <EmptySpace pref="139" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2063,7 +2066,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" pref="573" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" pref="614" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2333,7 +2336,7 @@
                                       <Component id="jScrollPaneDasmLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelDasmLongDeclaration" alignment="1" pref="37" max="32767" attributes="0"/>
+                                      <Component id="jLabelDasmLongDeclaration" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -3568,7 +3571,7 @@
                                       <Component id="jRadioButtonTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="138" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4413,7 +4416,7 @@
                                       <Component id="jRadioButtonCa65DotLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneCa65DotDWordLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                                  <EmptySpace pref="131" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="2" attributes="0">
@@ -7160,7 +7163,7 @@
                                       <Component id="jRadioButtonTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                                  <EmptySpace pref="109" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelTass64MonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -8066,7 +8069,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="387" max="32767" attributes="0"/>
+                                  <EmptySpace pref="428" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

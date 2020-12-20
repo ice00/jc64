@@ -236,7 +236,7 @@ public class Assembler {
               str.append("  .org $").append(ShortToExe(lastPC)).append("\n\n");
             break;
           case ASTERISK:
-              str.append("  *=").append(ShortToExe(lastPC)).append("\n\n");
+              str.append("  *=$").append(ShortToExe(lastPC)).append("\n\n");
             break;
           case DOT_PC:
               str.append("  .pc $").append(ShortToExe(lastPC)).append("\n\n");
