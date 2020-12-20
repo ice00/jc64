@@ -81,8 +81,25 @@
    The data <i><$xxyy</i> are equivalent to the bytes <i>$yy, $xx</i>, so if those bytes are of a memory relative location (low/high), the word is replaced by the associate label, so those are equivalent:<br>
    <b>.byte &lt;Label, &gt;Label</b> and <b>.word Label</b>
    
+   <h2>Mark data as Tribyte</h2>
+   This marks the data as tribyte and format it as hexadecimal number. As not all the assembler supports tribyte, it will be used macro in that case.<br>
+   Eventual memory address pointers (#<, #>) in one of the tribyte are not supported.
+   
+   <h2>Mark data as Long</h2>
+   This marks the data as long and format it as hexadecimal number. As not all the assembler supports tribyte, it will be used macro in that case.<br>
+   Eventual memory address pointers (#<, #>) in one of the long are not supported.
+   
    <h2>Mark data as Monocromatic spite definitions</h2>
-   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes.
+   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of line of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
+   For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
+   Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes. Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
+   
+   <h2>Mark data as Multicolor spite definitions</h2>
+   This marks data as of a molticolor spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of line of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
+   For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
+   Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes.  Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
