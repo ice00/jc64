@@ -604,16 +604,19 @@ public class Option {
   /** DASM: word declaration */
   public Assembler.Word dasmWord=Assembler.Word.DOT_WORD;
   
+  /** DASM: word swapped declaration */
+  public Assembler.WordSwapped dasmWordSwapped=Assembler.WordSwapped.DC_DOT_S_WORD_SWAPPED;
+  
   /** DASM: tribyte declaration */
   public Assembler.Tribyte dasmTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
   
   /** DASM: long declaration */
   public Assembler.Long dasmLong=Assembler.Long.DOT_LONG; 
   
-  /** Assembler mono color sprite*/
+  /** DASM: Assembler mono color sprite*/
   public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
    
-  /** Asembler multi color sprite */
+  /** DASM: Asembler multi color sprite */
   public Assembler.MultiSprite dasmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
   
   
@@ -638,6 +641,9 @@ public class Option {
   
   /** TMPX: word declaration */
   public Assembler.Word tmpxWord=Assembler.Word.DOT_WORD;
+  
+  /** TMPX: word swapped declaration */
+  public Assembler.WordSwapped tmpxWordSwapped=Assembler.WordSwapped.MACRO4_WORD_SWAPPED; 
   
   /** TMPX: tribyte declaration */
   public Assembler.Tribyte tmpxTribyte=Assembler.Tribyte.MACRO4_TRIBYTE; 
@@ -674,6 +680,9 @@ public class Option {
   /** CA65: word declaration */
   public Assembler.Word ca65Word=Assembler.Word.DOT_WORD;
   
+  /** CA65: word swapped declaration */
+  public Assembler.WordSwapped ca65WordSwapped=Assembler.WordSwapped.DOT_DTYB;
+  
   /** CA65: tribyte declaration */
   public Assembler.Tribyte ca65Tribyte=Assembler.Tribyte.MACRO3_TRIBYTE;  
   
@@ -708,6 +717,9 @@ public class Option {
   
   /** ACME: word declaration */
   public Assembler.Word acmeWord=Assembler.Word.MARK_WORD;  
+  
+  /** ACME: word swapped declaration */
+  public Assembler.WordSwapped acmeWordSwapped=Assembler.WordSwapped.MACRO2_WORD_SWAPPED; 
   
   /** ACME: tribyte declaration */
   public Assembler.Tribyte acmeTribyte=Assembler.Tribyte.MARK_TWENTYFOUR_TRIBYTE; 
@@ -744,6 +756,9 @@ public class Option {
   /** KickAssembler: word declaration */
   public Assembler.Word kickWord=Assembler.Word.DOT_WORD;  
   
+  /** KickAssembler: word swapped declaration */
+  public Assembler.WordSwapped kickWordSwapped=Assembler.WordSwapped.MACRO1_WORD_SWAPPED;    
+  
   /** kickAssembler: tribyte declaration */
   public Assembler.Tribyte kickTribyte=Assembler.Tribyte.MACRO1_TRIBYTE; 
   
@@ -778,6 +793,9 @@ public class Option {
   
   /** 64Tass: word declaration */
   public Assembler.Word tass64Word=Assembler.Word.DOT_WORD;
+  
+  /** 64Tass: word swapped declaration */
+  public Assembler.WordSwapped tass64WordSwapped=Assembler.WordSwapped.MACRO4_WORD_SWAPPED;
   
   /** 64Tass: tribyte declaration */
   public Assembler.Tribyte tass64Tribyte=Assembler.Tribyte.DOT_LONG_TRIBYTE; 

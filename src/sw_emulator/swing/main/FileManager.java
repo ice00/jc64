@@ -109,7 +109,8 @@ public class FileManager {
       option.dasmComment = Assembler.Comment.valueOf(in.readUTF());
       option.dasmBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.dasmByte = Assembler.Byte.valueOf(in.readUTF());
-      option.dasmWord = Assembler.Word.valueOf(in.readUTF());   
+      option.dasmWord = Assembler.Word.valueOf(in.readUTF());
+      option.dasmWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF());
       option.dasmTribyte = Assembler.Tribyte.valueOf(in.readUTF()); 
       option.dasmLong = Assembler.Long.valueOf(in.readUTF());
       option.dasmMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -122,6 +123,7 @@ public class FileManager {
       option.tmpxBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.tmpxByte = Assembler.Byte.valueOf(in.readUTF());
       option.tmpxWord = Assembler.Word.valueOf(in.readUTF());
+      option.tmpxWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF());
       option.tmpxTribyte = Assembler.Tribyte.valueOf(in.readUTF());
       option.tmpxLong = Assembler.Long.valueOf(in.readUTF());
       option.tmpxMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -133,7 +135,8 @@ public class FileManager {
       option.ca65Comment = Assembler.Comment.valueOf(in.readUTF());
       option.ca65BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.ca65Byte = Assembler.Byte.valueOf(in.readUTF());
-      option.ca65Word = Assembler.Word.valueOf(in.readUTF());     
+      option.ca65Word = Assembler.Word.valueOf(in.readUTF()); 
+      option.ca65WordSwapped = Assembler.WordSwapped.valueOf(in.readUTF());
       option.ca65Tribyte = Assembler.Tribyte.valueOf(in.readUTF());
       option.ca65Long = Assembler.Long.valueOf(in.readUTF());
       option.ca65MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -145,7 +148,8 @@ public class FileManager {
       option.acmeComment = Assembler.Comment.valueOf(in.readUTF());
       option.acmeBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.acmeByte = Assembler.Byte.valueOf(in.readUTF());
-      option.acmeWord = Assembler.Word.valueOf(in.readUTF());  
+      option.acmeWord = Assembler.Word.valueOf(in.readUTF()); 
+      option.acmeWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
       option.acmeTribyte = Assembler.Tribyte.valueOf(in.readUTF());
       option.acmeLong = Assembler.Long.valueOf(in.readUTF());
       option.acmeMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -158,6 +162,7 @@ public class FileManager {
       option.kickBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.kickByte = Assembler.Byte.valueOf(in.readUTF());
       option.kickWord = Assembler.Word.valueOf(in.readUTF());   
+      option.kickWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
       option.kickTribyte = Assembler.Tribyte.valueOf(in.readUTF());
       option.kickLong = Assembler.Long.valueOf(in.readUTF());
       option.kickMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -170,6 +175,7 @@ public class FileManager {
       option.tass64BlockComment = Assembler.BlockComment.valueOf(in.readUTF());
       option.tass64Byte = Assembler.Byte.valueOf(in.readUTF());
       option.tass64Word = Assembler.Word.valueOf(in.readUTF());
+      option.tass64WordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
       option.tass64Tribyte = Assembler.Tribyte.valueOf(in.readUTF());
       option.tass64Long = Assembler.Long.valueOf(in.readUTF());
       option.tass64MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
@@ -333,7 +339,8 @@ public class FileManager {
       out.writeUTF(option.dasmComment.name());
       out.writeUTF(option.dasmBlockComment.name());
       out.writeUTF(option.dasmByte.name());
-      out.writeUTF(option.dasmWord.name());    
+      out.writeUTF(option.dasmWord.name());   
+      out.writeUTF(option.dasmWordSwapped.name());
       out.writeUTF(option.dasmTribyte.name());
       out.writeUTF(option.dasmLong.name());
       out.writeUTF(option.dasmMonoSprite.name());
@@ -345,7 +352,8 @@ public class FileManager {
       out.writeUTF(option.tmpxComment.name());
       out.writeUTF(option.tmpxBlockComment.name());
       out.writeUTF(option.tmpxByte.name());
-      out.writeUTF(option.tmpxWord.name());    
+      out.writeUTF(option.tmpxWord.name());
+      out.writeUTF(option.tmpxWordSwapped.name());
       out.writeUTF(option.tmpxTribyte.name());
       out.writeUTF(option.tmpxLong.name());
       out.writeUTF(option.tmpxMonoSprite.name());
@@ -357,7 +365,8 @@ public class FileManager {
       out.writeUTF(option.ca65Comment.name());
       out.writeUTF(option.ca65BlockComment.name());
       out.writeUTF(option.ca65Byte.name());
-      out.writeUTF(option.ca65Word.name());   
+      out.writeUTF(option.ca65Word.name()); 
+      out.writeUTF(option.ca65WordSwapped.name());
       out.writeUTF(option.ca65Tribyte.name());
       out.writeUTF(option.ca65Long.name());
       out.writeUTF(option.ca65MonoSprite.name());
@@ -369,7 +378,8 @@ public class FileManager {
       out.writeUTF(option.acmeComment.name());
       out.writeUTF(option.acmeBlockComment.name());
       out.writeUTF(option.acmeByte.name());
-      out.writeUTF(option.acmeWord.name());  
+      out.writeUTF(option.acmeWord.name()); 
+      out.writeUTF(option.acmeWordSwapped.name()); 
       out.writeUTF(option.acmeTribyte.name()); 
       out.writeUTF(option.acmeLong.name());
       out.writeUTF(option.acmeMonoSprite.name());
@@ -381,7 +391,8 @@ public class FileManager {
       out.writeUTF(option.kickComment.name());
       out.writeUTF(option.kickBlockComment.name());
       out.writeUTF(option.kickByte.name());
-      out.writeUTF(option.kickWord.name()); 
+      out.writeUTF(option.kickWord.name());
+      out.writeUTF(option.kickWordSwapped.name());
       out.writeUTF(option.kickTribyte.name());
       out.writeUTF(option.kickLong.name());
       out.writeUTF(option.kickMonoSprite.name());
@@ -393,7 +404,8 @@ public class FileManager {
       out.writeUTF(option.tass64Comment.name());
       out.writeUTF(option.tass64BlockComment.name());
       out.writeUTF(option.tass64Byte.name());
-      out.writeUTF(option.tass64Word.name());    
+      out.writeUTF(option.tass64Word.name());
+      out.writeUTF(option.tass64WordSwapped.name());
       out.writeUTF(option.tass64Tribyte.name()); 
       out.writeUTF(option.tass64Long.name());
       out.writeUTF(option.tass64MonoSprite.name());

@@ -110,6 +110,9 @@ public class Disassembly {
   /** Assembler word type */
   protected Assembler.Word aWord;
   
+  /** Assembler word swapped type */
+  protected Assembler.WordSwapped aWordSwapped;
+  
   /** Assembler tribyte type */
   protected Assembler.Tribyte aTribyte;
   
@@ -618,6 +621,7 @@ public class Disassembly {
         aBlockComment=option.dasmBlockComment;
         aByte=option.dasmByte;
         aWord=option.dasmWord;
+        aWordSwapped=option.dasmWordSwapped;
         aTribyte=option.dasmTribyte;
         aLong=option.dasmLong;
         aMonoSprite=option.dasmMonoSprite;
@@ -631,6 +635,7 @@ public class Disassembly {
         aBlockComment=option.tmpxBlockComment;
         aByte=option.tmpxByte;
         aWord=option.tmpxWord;
+        aWordSwapped=option.tmpxWordSwapped;
         aTribyte=option.tmpxTribyte;
         aLong=option.tmpxLong;
         aMonoSprite=option.tmpxMonoSprite;
@@ -644,6 +649,7 @@ public class Disassembly {
         aBlockComment=option.ca65BlockComment;
         aByte=option.ca65Byte;
         aWord=option.ca65Word; 
+        aWordSwapped=option.ca65WordSwapped;
         aTribyte=option.ca65Tribyte;
         aLong=option.ca65Long;
         aMonoSprite=option.ca65MonoSprite;
@@ -657,6 +663,7 @@ public class Disassembly {
         aBlockComment=option.acmeBlockComment;
         aByte=option.acmeByte;
         aWord=option.acmeWord;
+        aWordSwapped=option.acmeWordSwapped;
         aTribyte=option.acmeTribyte;
         aLong=option.acmeLong;
         aMonoSprite=option.acmeMonoSprite;
@@ -670,6 +677,7 @@ public class Disassembly {
         aLabel=option.kickLabel;
         aByte=option.kickByte;
         aWord=option.kickWord;  
+        aWordSwapped=option.kickWordSwapped;
         aTribyte=option.kickTribyte;
         aLong=option.kickLong;
         aMonoSprite=option.kickMonoSprite;
@@ -683,6 +691,7 @@ public class Disassembly {
         aLabel=option.tass64Label;
         aByte=option.tass64Byte;
         aWord=option.tass64Word;
+        aWordSwapped=option.tass64WordSwapped;
         aTribyte=option.tass64Tribyte;
         aLong=option.tass64Long;
         aMonoSprite=option.tass64MonoSprite;
@@ -691,7 +700,8 @@ public class Disassembly {
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
-                        aBlockComment, aByte, aWord, aTribyte, aLong,
+                        aBlockComment, aByte, aWord, aWordSwapped,
+                        aTribyte, aLong,
                         aMonoSprite, aMultiSprite);      
   }
   

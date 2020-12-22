@@ -684,6 +684,36 @@ public class Assembler {
    }
    
    /**
+    * Word swapped declaration type
+    *  -> .
+    *  -> 
+    *  ->
+    *  -> 
+    *  -> 
+    *  -> 
+    *  ->
+    */
+   public enum WordSwapped implements ActionType {
+     DC_DOT_S_WORD_SWAPPED,
+     DOT_DTYB,
+     MACRO1_WORD_SWAPPED,           //  [.mac] $yyxx    (KickAssembler)
+     MACRO2_WORD_SWAPPED,           //  [.mac] $yyxx    (Acme)
+     MACRO4_WORD_SWAPPED,           //  [.mac] $yyxx    (TMPx / Tass64)
+        ;
+
+        @Override
+        public void flush(StringBuilder str) {
+            
+        }
+
+        @Override
+        public void setting(StringBuilder str) {
+          
+        }
+       
+   }
+   
+   /**
     * Tribyte declaration type
     */
    public enum Tribyte implements ActionType {
@@ -1683,6 +1713,9 @@ public class Assembler {
    /** Assembler word type */
    protected static Assembler.Word aWord;
    
+   /** Assembler word swapped type */
+   protected static Assembler.WordSwapped aWordSwapped;
+   
    /** Assembler tribyte type */
    protected static Assembler.Tribyte aTribyte;
      
@@ -1722,6 +1755,7 @@ public class Assembler {
     * @param aBlockComment the comment type to use
     * @param aByte the byte type to use
     * @param aWord the word type to use
+    * @param aWordSwapped the word swapped type to use
     * @param aLong the long type to use
     * @param aTribyte the tribyte type to use
     * @param aMonoSprite the mono sprite type to use
@@ -1735,6 +1769,7 @@ public class Assembler {
                          Assembler.BlockComment aBlockComment,
                          Assembler.Byte aByte, 
                          Assembler.Word aWord,         
+                         Assembler.WordSwapped aWordSwapped,         
                          Assembler.Tribyte aTribyte,
                          Assembler.Long aLong,
                          Assembler.MonoSprite aMonoSprite,
@@ -1747,6 +1782,7 @@ public class Assembler {
      Assembler.aBlockComment=aBlockComment;
      Assembler.aByte=aByte;
      Assembler.aWord=aWord;
+     Assembler.aWordSwapped=aWordSwapped;
      Assembler.aTribyte=aTribyte;
      Assembler.aLong=aLong;
      Assembler.aMonoSprite=aMonoSprite;
@@ -1825,6 +1861,11 @@ public class Assembler {
        // look if it is time to aggregate data
        if (list.size()==option.maxWordAggregate*2) actualType.flush(str);         
      } else
+     // we are processing word swapped?    
+     if (actualType instanceof WordSwapped) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxWordAggregate*2) actualType.flush(str);         
+     } else         
      // we are processing tribyte?    
      if (actualType instanceof Tribyte) {
        // look if it is time to aggregate data
@@ -1882,18 +1923,21 @@ public class Assembler {
    public void setMacro(StringBuilder str, MemoryDasm[] memory) {
      boolean hasMonoSprite=false;
      boolean hasMultiSprite=false;
+     boolean hasWordSwapped=false;
      boolean hasTribyte=false;
      boolean hasLong=false;
      
      for (MemoryDasm mem:memory) {
        if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
        if (mem.dataType==DataType.MULTI_SPRITE) hasMultiSprite=true;
+       if (mem.dataType==DataType.SWAPPED) hasWordSwapped=true;
        if (mem.dataType==DataType.TRIBYTE) hasTribyte=true;
        if (mem.dataType==DataType.LONG) hasLong=true;
      }
      
      if (hasMonoSprite) aMonoSprite.setting(str);
      if (hasMultiSprite) aMultiSprite.setting(str);
+     if (hasWordSwapped) aWordSwapped.setting(str);
      if (hasTribyte) aTribyte.setting(str);
      if (hasLong) aLong.setting(str);
    }
