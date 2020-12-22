@@ -3742,14 +3742,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Assemblate back the source to binary
    */
   private void assembly() {
-    File inputFile=new File("/tmp/input.s");
-    File outputFile=new File("/tmp/output.exe");
+    File inputFile=new File(option.tmpPath+File.separator+"input.s");
+    File outputFile=new File(option.tmpPath+File.separator+"output.prg");        
     
     if (disassembly.source==null || "".equals(disassembly.source)) {
-       JOptionPane.showMessageDialog(this, "There is no source to assemble", "Warning",
-        JOptionPane.WARNING_MESSAGE);
+       JOptionPane.showMessageDialog(this, "There is no source to assemble",
+               "Warning", JOptionPane.WARNING_MESSAGE);
        return;
     }    
+    
+    if (option.tmpPath==null || "".equals(option.tmpPath)) {
+       JOptionPane.showMessageDialog(this, "Select a temporary path for the assembler outputs", "Warning",
+        JOptionPane.WARNING_MESSAGE);
+       return;            
+     }
     
     try {
        PrintWriter out=new PrintWriter(inputFile);

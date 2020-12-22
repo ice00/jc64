@@ -272,6 +272,9 @@ public class Option {
   /** Max long aggregate for data row */
   public int maxLongAggregate=2; 
   
+  /** Temporary path */
+  public String tmpPath="";
+  
   
   /** Psid init song label to use as user defined */
   public String psidInitSongsLabel = "initSongs";

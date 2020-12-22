@@ -100,6 +100,7 @@ public class FileManager {
       option.maxWordAggregate = in.readInt();
       option.maxTribyteAggregate = in.readInt();
       option.maxLongAggregate = in.readInt();
+      option.tmpPath = in.readUTF();
       
       option.dasmF3Comp = in.readBoolean();
       option.dasmStarting = Assembler.Starting.valueOf(in.readUTF());
@@ -323,6 +324,7 @@ public class FileManager {
       out.writeInt(option.maxWordAggregate);
       out.writeInt(option.maxTribyteAggregate);
       out.writeInt(option.maxLongAggregate);
+      out.writeUTF(option.tmpPath);
       
       out.writeBoolean(option.dasmF3Comp);
       out.writeUTF(option.dasmStarting.name());

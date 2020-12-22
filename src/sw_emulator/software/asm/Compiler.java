@@ -109,7 +109,7 @@ public class Compiler {
     args[2]="-o"+output.getAbsolutePath();
     
     try {
-      fileStream = new PrintStream("/tmp/tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
       System.setOut(fileStream);
       //System.setErr(fileStream);  
         
@@ -124,7 +124,7 @@ public class Compiler {
     //System.setErr(orgStream);
     
     try {
-       result = new String(Files.readAllBytes(Paths.get("/tmp/tmp.tmp")), StandardCharsets.UTF_8);
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -153,7 +153,7 @@ public class Compiler {
     args[2]=output.getAbsolutePath();  
     
     try {
-      fileStream = new PrintStream("/tmp/tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
       System.setOut(fileStream);
       
      // install security manager to avoid System.exit() call from lib
@@ -181,7 +181,7 @@ public class Compiler {
     System.setOut(orgStream);
     
     try {
-       result = new String(Files.readAllBytes(Paths.get("/tmp/tmp.tmp")), StandardCharsets.UTF_8);
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -221,7 +221,7 @@ public class Compiler {
     args[1]=input.getAbsolutePath();
     
     try {
-      fileStream = new PrintStream("/tmp/tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
       System.setOut(fileStream);
       System.setErr(fileStream);  
         
@@ -236,7 +236,7 @@ public class Compiler {
     System.setErr(orgStream);
     
     try {
-       result = new String(Files.readAllBytes(Paths.get("/tmp/tmp.tmp")), StandardCharsets.UTF_8);
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -264,7 +264,7 @@ public class Compiler {
     args[1]=input.getAbsolutePath();
     
     try {
-      fileStream = new PrintStream("/tmp/tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
       System.setOut(fileStream);
       System.setErr(fileStream);  
         
@@ -279,7 +279,7 @@ public class Compiler {
     System.setErr(orgStream);
     
     try {
-       result = new String(Files.readAllBytes(Paths.get("/tmp/tmp.tmp")), StandardCharsets.UTF_8);
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -305,10 +305,10 @@ public class Compiler {
    
     args[0]="";
     args[1]=input.getAbsolutePath();    
-    args[2]="-o"+output.getAbsolutePath();
+    args[2]="-o"+output.getAbsolutePath();   
    
     try {
-      fileStream = new PrintStream("/tmp/tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
       System.setOut(fileStream);
       System.setErr(fileStream);  
         
@@ -323,7 +323,7 @@ public class Compiler {
     System.setErr(orgStream);
     
     try {
-       result = new String(Files.readAllBytes(Paths.get("/tmp/tmp.tmp")), StandardCharsets.UTF_8);
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
     } catch (Exception e) {
         System.err.println(e);
       }   
