@@ -685,32 +685,253 @@ public class Assembler {
    
    /**
     * Word swapped declaration type
-    *  -> .
-    *  -> 
-    *  ->
-    *  -> 
-    *  -> 
-    *  -> 
-    *  ->
+    *  -> dc.s $yyxx
+    *  -> .dtyb $yyxx
+    *  -> [.mac] $yyxx
     */
    public enum WordSwapped implements ActionType {
-     DC_DOT_S_WORD_SWAPPED,
-     DOT_DTYB,
+     DC_DOT_S_WORD_SWAPPED,         //    dc.s $yyxx
+     DOT_DTYB,                      //   .dtyb $yyxx
      MACRO1_WORD_SWAPPED,           //  [.mac] $yyxx    (KickAssembler)
      MACRO2_WORD_SWAPPED,           //  [.mac] $yyxx    (Acme)
      MACRO4_WORD_SWAPPED,           //  [.mac] $yyxx    (TMPx / Tass64)
         ;
 
-        @Override
-        public void flush(StringBuilder str) {
-            
-        }
-
-        @Override
-        public void setting(StringBuilder str) {
-          
-        }
+     @Override
+     public void flush(StringBuilder str) {
+       if (list.isEmpty()) return; 
        
+       MemoryDasm memLow;
+       MemoryDasm memHigh;
+       MemoryDasm memRelLow;
+       MemoryDasm memRelHigh;
+       
+       // we have a min of 1 or a max of 8 word swapped, so use the right call for macro
+       int index=(int)(list.size()/2);
+        
+       // create starting command according to the kind of byte
+       switch (aWordSwapped) {
+         case DC_DOT_S_WORD_SWAPPED:
+           str.append(("  dc.s "));  
+           break;
+         case DOT_DTYB:
+           str.append(("  .dtyb "));  
+           break;           
+         case MACRO1_WORD_SWAPPED:
+           str.append("  Swapped").append(index).append(" (");   // must close the )
+           break;
+         case MACRO2_WORD_SWAPPED:
+           str.append("  +Swapped").append(index).append(" ");  
+           break;
+         case MACRO4_WORD_SWAPPED:
+           str.append("  #Tribyte").append(index).append(" ");    
+           break;
+       }
+       
+       while (!list.isEmpty()) {
+         // if only 1 byte left, use byte coding
+         if (list.size()==1) aByte.flush(str);
+         else {
+           memLow=list.pop();
+           memRelLow=listRel.pop();
+           memHigh=list.pop();
+           memRelHigh=listRel.pop();           
+           
+           if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
+             if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
+            else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                 else str.append("$").append(ShortToExe(memRelLow.address));  
+           } else {
+             // if cannot make a word with relative locations, force all to be of byte type
+             if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
+               list.addFirst(memHigh);
+               list.addFirst(memLow);
+               listRel.addFirst(memRelHigh);
+               listRel.addFirst(memRelLow);
+               aByte.flush(str);
+             }
+             else str.append("$").append(ByteToExe(Unsigned.done(memLow.copy))).append(ByteToExe(Unsigned.done(memHigh.copy)));                            
+           }
+           if (list.size()>=2) str.append(", ");
+           else if (aWordSwapped==MACRO1_WORD_SWAPPED) str.append(")\n");
+                else str.append("\n");
+         }
+       }
+     }
+
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aWordSwapped) {
+         case MACRO1_WORD_SWAPPED:
+           str.append(
+             "  .macro Swapped1 (twobyte) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "  }\n\n"+
+             "  .macro Swapped2 (twobyte, twobyte2) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" +        
+             "  }\n\n"+
+             "  .macro Swapped3 (twobyte, twobyte2, twobyte3) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" +         
+             "  }\n\n"+
+             "  .macro Swapped4 (twobyte, twobyte2, twobyte3, twobyte4) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +          
+             "  }\n\n"+
+             "  .macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +                      
+             "  }\n\n"+      
+             "  .macro Swapped6 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" +                      
+             "  }\n\n"+    
+             "  .macro Swapped7 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
+             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +                      
+             "  }\n\n"+     
+             "  .macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8) {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
+             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +  
+             "     .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n" +                    
+             "  }\n\n"                   
+           );                                  
+           break;       
+         case MACRO2_WORD_SWAPPED:
+           str.append(
+             "  !macro Swapped1 twobyte {\n" +
+             "     !byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "  }\n\n"+
+             "  !macro Swapped2 twobyte, twobyte2 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" +        
+             "  }\n\n"+
+             "  !macro Swapped3 twobyte, twobyte2, twobyte3 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" +         
+             "  }\n\n"+
+             "  !macro Swapped4 twobyte, twobyte2, twobyte3, twobyte4 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +          
+             "  }\n\n"+
+             "  !macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +                      
+             "  }\n\n"+      
+             "  !macro Swapped6 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" +                      
+             "  }\n\n"+    
+             "  !macro Swapped7 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
+             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +                      
+             "  }\n\n"+     
+             "  !macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n" +
+             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
+             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
+             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
+             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
+             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
+             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
+             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +  
+             "     .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n" +                    
+             "  }\n\n"                   
+           );                                  
+           break;            
+         case MACRO4_WORD_SWAPPED:
+           str.append(
+             "Swapped1 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "  .endm\n\n"+
+             "Swapped2 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +        
+             "  .endm\n\n"+
+             "Swapped3 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +                     
+             "  .endm\n\n"+
+             "Swapped4 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +     
+             "     .byte \\4 & 255, ( \\4 >> 8) & 255\n" +                       
+             "  .endm\n\n"+
+             "Swapped5 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +     
+             "     .byte \\4 & 255, ( \\4 >> 8) & 255\n" + 
+             "     .byte \\5 & 255, ( \\5 >> 8) & 255\n" +                     
+             "  .endm\n\n"+     
+             "Swapped6 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +     
+             "     .byte \\4 & 255, ( \\4 >> 8) & 255\n" + 
+             "     .byte \\5 & 255, ( \\5 >> 8) & 255\n" +     
+             "     .byte \\6 & 255, ( \\6 >> 8) & 255\n" +                      
+             "  .endm\n\n"+      
+             "Swapped7 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +     
+             "     .byte \\4 & 255, ( \\4 >> 8) & 255\n" + 
+             "     .byte \\5 & 255, ( \\5 >> 8) & 255\n" +     
+             "     .byte \\6 & 255, ( \\6 >> 8) & 255\n" +  
+             "     .byte \\7 & 255, ( \\7 >> 8) & 255\n" +         
+             "  .endm\n\n"+    
+             "Swapped8 .macro \n" +
+             "     .byte \\1 & 255, ( \\1 >> 8) & 255\n" +
+             "     .byte \\2 & 255, ( \\2 >> 8) & 255\n" +   
+             "     .byte \\3 & 255, ( \\3 >> 8) & 255\n" +     
+             "     .byte \\4 & 255, ( \\4 >> 8) & 255\n" + 
+             "     .byte \\5 & 255, ( \\5 >> 8) & 255\n" +     
+             "     .byte \\6 & 255, ( \\6 >> 8) & 255\n" +  
+             "     .byte \\7 & 255, ( \\7 >> 8) & 255\n" +  
+             "     .byte \\8 & 255, ( \\8 >> 8) & 255\n" +                     
+             "  .endm\n\n"                 
+           );                                  
+           break;                                                       
+          }
+        }       
    }
    
    /**
@@ -2045,6 +2266,10 @@ public class Assembler {
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
          return aWord;
+       case SWAPPED:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         return aWordSwapped;       
        case TRIBYTE:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   

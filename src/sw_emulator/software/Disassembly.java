@@ -379,7 +379,6 @@ public class Disassembly {
         break;
       case C128:
         prg=new C128Dasm();  
-        ((C128Dasm)prg).language=option.commentLanguage;
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
@@ -457,7 +456,6 @@ public class Disassembly {
         break;
       case C128:
         prg=new C128Dasm();  
-        ((C128Dasm)prg).language=option.commentLanguage;
         break;
       case VIC20:
         prg=new CVic20Dasm(); 
