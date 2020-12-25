@@ -637,6 +637,7 @@ public class M6510Dasm implements disassembler {
           }  
         
     } 
+    assembler.flush(result);
     return result.toString();
   }
   

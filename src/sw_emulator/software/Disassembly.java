@@ -120,11 +120,14 @@ public class Disassembly {
   protected Assembler.Long aLong; 
    
   
-   /** Assembler mono color sprite*/
+   /** Assembler mono color sprite type */
    protected static Assembler.MonoSprite aMonoSprite;
    
-   /** Asembler multi color sprite */
+   /** Asembler multi color sprite type */
    protected static Assembler.MultiSprite aMultiSprite;
+   
+   /** Asembler text type */
+   protected static Assembler.Text aText;
     
   /**
    * Disassemble the given data
@@ -624,6 +627,7 @@ public class Disassembly {
         aLong=option.dasmLong;
         aMonoSprite=option.dasmMonoSprite;
         aMultiSprite=option.dasmMultiSprite;
+        aText=option.dasmText;
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -638,6 +642,7 @@ public class Disassembly {
         aLong=option.tmpxLong;
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
+        //aText=option.tmpxText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
@@ -652,6 +657,7 @@ public class Disassembly {
         aLong=option.ca65Long;
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
+        //aText=option.ca65Text;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -666,6 +672,7 @@ public class Disassembly {
         aLong=option.acmeLong;
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
+        //aText=option.acmeText;
         break;
       case KICK:
         aStarting=option.kickStarting;  
@@ -680,6 +687,7 @@ public class Disassembly {
         aLong=option.kickLong;
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
+        //aText=option.kick/Text;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -694,13 +702,14 @@ public class Disassembly {
         aLong=option.tass64Long;
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
+        //aText=option.tass64Text;
         break;
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong,
-                        aMonoSprite, aMultiSprite);      
+                        aMonoSprite, aMultiSprite, aText);      
   }
   
   /**

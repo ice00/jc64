@@ -613,11 +613,14 @@ public class Option {
   /** DASM: long declaration */
   public Assembler.Long dasmLong=Assembler.Long.DOT_LONG; 
   
-  /** DASM: Assembler mono color sprite*/
+  /** DASM: mono color sprite declaration */
   public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
    
-  /** DASM: Asembler multi color sprite */
+  /** DASM: multi color sprite declaration */
   public Assembler.MultiSprite dasmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  
+  /** DASM: text declaration */
+  public Assembler.Text dasmText=Assembler.Text.DOT_BYTE_TEXT;
   
   
   

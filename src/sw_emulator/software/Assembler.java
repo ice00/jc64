@@ -489,6 +489,7 @@ public class Assembler {
     *  -> -byt $xx
     *  -> !byte $xx
     *  -> !8 $xx
+    *  -> !08 $xx
     */
    public enum Byte implements ActionType {
       DOT_BYTE,           // .byte $xx
@@ -500,7 +501,7 @@ public class Assembler {
       MARK_BYTE,          // !byte $xx 
       MARK_BY_BYTE,        //  !by $xx
       EIGHT_BYTE,         //    !8 $xx   
-      ZEROEIGHT_BYTE;     //   !08 $xx   //   !08 $xx   
+      ZEROEIGHT_BYTE;     //   !08 $xx   
       
       @Override
       public void flush(StringBuilder str) {
@@ -1897,6 +1898,105 @@ public class Assembler {
      };      
    } 
    
+   /**
+    * Text declaration type
+    *  -> .byte "xxx"
+    *  -> byte "xxx"
+    *  -> dc "xxx"
+    *  -> dc.b "xxx"
+    *  -> .byt "xxx"
+    *  -> !text "xxx"
+    *  -> .text "xxx"
+    *  -> 
+    *  -> 
+    */
+   public enum Text implements ActionType {
+      DOT_BYTE_TEXT,      // .byte "xxx"
+      BYTE_TEXT,          //  byte "xxx"
+      DC_BYTE_TEXT,       //    dc "xxx"
+      DC_B_BYTE_TEXT,     //  dc.b "xxx"
+      DOT_BYT_BYTE_TEXT,  //  .byt "xxx"
+      MARK_TEXT,          // !text "xxx"
+      DOT_TEXT            // .text "xxx"
+      ;
+
+      @Override
+      public void flush(StringBuilder str) {
+        if (list.isEmpty()) return;
+        
+        boolean isString=false;
+        boolean isFirst=true;
+        
+        switch (aText) {
+          case DOT_BYTE_TEXT:
+            str.append(("  .byte "));
+            break;
+          case BYTE_TEXT:
+            str.append(("  byte "));  
+            break;
+          case DC_BYTE_TEXT:
+            str.append(("  dc "));  
+            break;
+          case DC_B_BYTE_TEXT:
+            str.append(("  dc.b "));  
+            break;
+          case MARK_TEXT:
+            str.append(("  !text "));  
+            break;
+          case DOT_TEXT:
+            str.append(("  .text "));   
+            break;  
+        }       
+        
+        MemoryDasm mem;
+      
+        while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          listRel.pop();
+          
+          // not all char can be converted in string
+          switch (mem.copy & 0xFF) {
+              case 0x00:
+              case 0x0A:
+              case 0x22:
+                if (isString) {
+                  str.append("\"");
+                  isString=false;  
+                }
+                if (isFirst) {
+                  str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                  isFirst=false;
+                } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));                
+                break;  
+              default:
+                if ((mem.copy & 0xFF)>127) {                    
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));                                       
+                } else {                  
+                    if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                    } else if (!isString) {
+                             str.append(", \"");
+                             isString=true;  
+                           }  
+                   }  
+                str.append((char)(mem.copy & 0xFF)); 
+          }
+                                  
+          if (listRel.isEmpty()) str.append("\"\n");
+        }
+      }
+   }
+   
    /** Fifo list  of memory locations */
    protected static LinkedList<MemoryDasm> list=new LinkedList();
    
@@ -1943,11 +2043,14 @@ public class Assembler {
    /** Assembler lobg type */
    protected static Assembler.Long aLong;  
    
-   /** Assembler mono color sprite*/
+   /** Assembler mono color sprite type */
    protected static Assembler.MonoSprite aMonoSprite;
    
-   /** Asembler multi color sprite */
+   /** Assembler multi color sprite type */
    protected static Assembler.MultiSprite aMultiSprite;
+   
+   /** Assembler text type */
+   protected static Assembler.Text aText;
               
    /** Actual type being processed */
    ActionType actualType=null;
@@ -1980,7 +2083,8 @@ public class Assembler {
     * @param aLong the long type to use
     * @param aTribyte the tribyte type to use
     * @param aMonoSprite the mono sprite type to use
-    * @param aMultiSprite the numti sprite type to use
+    * @param aMultiSprite the multi sprite type to use
+    * @param aText the text type to use
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -1994,7 +2098,8 @@ public class Assembler {
                          Assembler.Tribyte aTribyte,
                          Assembler.Long aLong,
                          Assembler.MonoSprite aMonoSprite,
-                         Assembler.MultiSprite aMultiSprite) {
+                         Assembler.MultiSprite aMultiSprite,
+                         Assembler.Text aText) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
      Assembler.aOrigin=aOrigin;
@@ -2008,6 +2113,7 @@ public class Assembler {
      Assembler.aLong=aLong;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
+     Assembler.aText=aText;
      
       
      isMonoSpriteBlock=false;
@@ -2290,6 +2396,10 @@ public class Assembler {
          isMonoSpriteBlock=false;
          sizeMultiSpriteBlock++;
          return aMultiSprite;  
+       case TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         return aText;   
      }
      
      // default is of Byte type
