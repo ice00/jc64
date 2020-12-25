@@ -2337,6 +2337,33 @@ public class Assembler {
    }
    
    /**
+    * Set a text and put to ouptput steam (it deletes anything that threre are in queue)
+    * 
+    * @param str the output stream
+    * @param text the text to add
+    */
+   public void setText(StringBuilder str, String text) {
+     MemoryDasm mem;     
+     
+     list.clear();
+     listRel.clear();
+          
+     int size=0;
+     
+     for (char val: text.toCharArray()) {
+       mem=new MemoryDasm();
+       mem.copy=(byte)val;
+       mem.dataType=DataType.TEXT;
+       list.add(mem);
+       listRel.add(null);
+     }
+       
+     actualType=aText;
+     flush(str);
+     actualType=null;          
+   }
+   
+   /**
     * Set the comment if present 
     * 
     * @param str the stream to use

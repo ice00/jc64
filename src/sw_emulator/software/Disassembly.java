@@ -294,8 +294,8 @@ public class Disassembly {
       assembler.setOrg(tmp, header);
       
       // create header of PSID
-      if (inB[0]=='P') tmp.append("  .byte \"PSID\"\n");
-      else tmp.append("  .byte \"RSID\"\n");
+      if (inB[0]=='P') assembler.setText(tmp, "PSID");
+      else assembler.setText(tmp, "RSID");
       
       assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
       assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
@@ -348,18 +348,12 @@ public class Disassembly {
    * @param end  end address
    */
   private void addString(StringBuilder tmp, int start, int end) {
-    boolean exit=false;
-    tmp.append("  .byte \"");
+    String str="";
+    
     for (int i=start; i<end; i++) {
-      if (inB[i]==0) {
-        if (exit) tmp.append(",0");
-        else {
-          tmp.append("\",0");
-          exit=true;
-        }
-      } else tmp.append((char)inB[i]);
+      str+=(char)inB[i];
     }
-    tmp.append("\n");
+    assembler.setText(tmp, str);
   }
   
   /**
