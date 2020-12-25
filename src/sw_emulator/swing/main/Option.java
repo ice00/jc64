@@ -266,6 +266,12 @@ public class Option {
   /** Max word aggregate for data row */
   public int maxWordAggregate=4;  
   
+  /** Max word swapped aggregate for data row */
+  public int maxSwappedAggregate=4;
+  
+  /** Max text aggregate for data row */
+  public int maxTextAggregate=4;
+  
   /** Max tribyte aggregate for data row */
   public int maxTribyteAggregate=3;   
   

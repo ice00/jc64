@@ -499,7 +499,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData.add(jSeparatorPopUpMenu1);
 
         jMenuItemSpriteMono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/O.png"))); // NOI18N
-        jMenuItemSpriteMono.setText("() Mark data as Monocromatic Sprite definitions");
+        jMenuItemSpriteMono.setText("(O) Mark data as Monocromatic Sprite definitions");
         jMenuItemSpriteMono.setToolTipText("");
         jMenuItemSpriteMono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,7 +509,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData.add(jMenuItemSpriteMono);
 
         jMenuItemSpriteMulti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/F.png"))); // NOI18N
-        jMenuItemSpriteMulti.setText("() Mark data as Multicolor Sprite definitions");
+        jMenuItemSpriteMulti.setText("(F) Mark data as Multicolor Sprite definitions");
         jMenuItemSpriteMulti.setToolTipText("");
         jMenuItemSpriteMulti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

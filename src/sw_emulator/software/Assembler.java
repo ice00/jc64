@@ -41,6 +41,16 @@ import sw_emulator.swing.main.Option;
  */
 public class Assembler {
    private static final String SPACES="                                        ";  
+   private static final String TABS="\t\t\t\t\t\t\t\t\t\t";
+   
+  /**
+   * Return spaces/tabs to use in start of data area
+   * 
+   * @return the spaces/tabs
+   */
+  protected static String getDataSpacesTabs() {
+    return SPACES.substring(0, option.numDataSpaces)+TABS.substring(0, option.numDataTabs);
+  } 
    
 /**
    * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
@@ -192,22 +202,22 @@ public class Assembler {
       public void flush(StringBuilder str) {
         switch (aStarting) {
           case PROC:
-            str.append("  processor 6502\n\n");
+            str.append(getDataSpacesTabs()).append("processor 6502\n\n");
             break;
           case DOT_CPU_A:
-            str.append("  .cpu \"6502\"\n\n");  
+            str.append(getDataSpacesTabs()).append(".cpu \"6502\"\n\n");  
             break;
           case DOT_CPU:
-            str.append("  .cpu 6502\n\n");
+            str.append(getDataSpacesTabs()).append(".cpu 6502\n\n");
             break;
           case DOT_SETCPU:
-            str.append("  .cpu 6502\n\n");
+            str.append(getDataSpacesTabs()).append(".cpu 6502\n\n");
             break; 
           case DOT_P02:
-            str.append("  .p02\n\n");
+            str.append(getDataSpacesTabs()).append(".p02\n\n");
             break;    
           case MARK_CPU:
-            str.append("  !cpu 6510\n\n");
+            str.append(getDataSpacesTabs()).append("!cpu 6510\n\n");
             break;     
         }  
       }
@@ -230,16 +240,16 @@ public class Assembler {
       public void flush(StringBuilder str) {
         switch (aOrigin) {
           case ORG:
-              str.append("  org $").append(ShortToExe(lastPC)).append("\n\n");
+              str.append(getDataSpacesTabs()).append("org $").append(ShortToExe(lastPC)).append("\n\n");
             break;
           case DOT_ORG:
-              str.append("  .org $").append(ShortToExe(lastPC)).append("\n\n");
+              str.append(getDataSpacesTabs()).append(".org $").append(ShortToExe(lastPC)).append("\n\n");
             break;
           case ASTERISK:
-              str.append("  *=$").append(ShortToExe(lastPC)).append("\n\n");
+              str.append(getDataSpacesTabs()).append("*=$").append(ShortToExe(lastPC)).append("\n\n");
             break;
           case DOT_PC:
-              str.append("  .pc $").append(ShortToExe(lastPC)).append("\n\n");
+              str.append(getDataSpacesTabs()).append(".pc $").append(ShortToExe(lastPC)).append("\n\n");
             break;
         }    
       }
@@ -289,7 +299,7 @@ public class Assembler {
         String comment=lastMem.dasmComment;
         if (lastMem.userComment != null && !"".equals(lastMem.userComment)) comment=lastMem.userComment;
         
-        if ("".equals(comment)) {
+        if (comment==null || "".equals(comment)) {
           str.append("\n");
           return;
         }
@@ -513,34 +523,34 @@ public class Assembler {
         // create starting command according to the kind of byte
         switch (aByte) {
           case DOT_BYTE:
-            str.append(("  .byte "));
+            str.append(getDataSpacesTabs()).append((".byte "));
             break;
           case DOT_CHAR:
-            str.append(("  .char "));
+            str.append(getDataSpacesTabs()).append((".char "));
             break;  
           case BYTE:
-            str.append(("  byte "));
+            str.append(getDataSpacesTabs()).append(("byte "));
             break;
           case DC_BYTE:
-           str.append(("  dc "));   
+            str.append(getDataSpacesTabs()).append(("dc "));   
             break;
           case DC_B_BYTE:
-            str.append(("  dc.b "));
+            str.append(getDataSpacesTabs()).append(("dc.b "));
             break;
           case MARK_BY_BYTE:
-            str.append(("  !by "));  
+            str.append(getDataSpacesTabs()).append(("!by "));  
             break;  
           case DOT_BYT_BYTE:
-            str.append(("  .byt.b "));  
+            str.append(getDataSpacesTabs()).append((".byt.b "));  
             break;
           case MARK_BYTE:
-            str.append(("  !byte "));   
+            str.append(getDataSpacesTabs()).append(("!byte "));   
             break;  
           case EIGHT_BYTE:
-            str.append(("  !8 "));  
+            str.append(getDataSpacesTabs()).append(("!8 "));  
             break;  
           case ZEROEIGHT_BYTE:
-            str.append(("  !8 "));  
+            str.append(getDataSpacesTabs()).append(("!8 "));  
             break;    
         }
           
@@ -630,25 +640,25 @@ public class Assembler {
        // create starting command according to the kind of byte
        switch (aWord) {
          case DOT_WORD:
-           str.append(("  .word "));  
+           str.append(getDataSpacesTabs()).append((".word "));  
            break;
          case DOT_SINT:
-           str.append(("  .sint "));  
+           str.append(getDataSpacesTabs()).append((".sint "));  
            break;           
          case WORD:
-           str.append(("  word "));   
+           str.append(getDataSpacesTabs()).append(("word "));   
            break;
          case DC_W_WORD:
-           str.append(("  dc.w "));  
+           str.append(getDataSpacesTabs()).append(("dc.w "));  
            break;
          case DOT_DBYTE:
-           str.append(("  .dbyte "));   
+           str.append(getDataSpacesTabs()).append((".dbyte "));   
            break;
          case MARK_WORD:
-           str.append(("  !word "));   
+           str.append(getDataSpacesTabs()).append(("!word "));   
            break;
          case SIXTEEN_WORD:
-           str.append(("  !16 "));  
+           str.append(getDataSpacesTabs()).append(("!16 "));  
            break;  
        }
        
@@ -713,19 +723,19 @@ public class Assembler {
        // create starting command according to the kind of byte
        switch (aWordSwapped) {
          case DC_DOT_S_WORD_SWAPPED:
-           str.append(("  dc.s "));  
+           str.append(getDataSpacesTabs()).append("dc.s ");  
            break;
          case DOT_DTYB:
-           str.append(("  .dtyb "));  
+           str.append(getDataSpacesTabs()).append(".dtyb ");  
            break;           
          case MACRO1_WORD_SWAPPED:
-           str.append("  Swapped").append(index).append(" (");   // must close the )
+           str.append(getDataSpacesTabs()).append("Swapped").append(index).append(" (");   // must close the )
            break;
          case MACRO2_WORD_SWAPPED:
-           str.append("  +Swapped").append(index).append(" ");  
+           str.append(getDataSpacesTabs()).append("+Swapped").append(index).append(" ");  
            break;
          case MACRO4_WORD_SWAPPED:
-           str.append("  #Tribyte").append(index).append(" ");    
+           str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");    
            break;
        }
        
@@ -976,22 +986,22 @@ public class Assembler {
        switch (aTribyte) {
          case MACRO_TRIBYTE:
          case MACRO3_TRIBYTE:    
-           str.append("  Tribyte").append(index).append(" ");  
+           str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" ");  
            break;
          case MACRO1_TRIBYTE:
-           str.append("  Tribyte").append(index).append(" (");   // must close the )
+           str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" (");   // must close the )
            break;           
          case MACRO4_TRIBYTE:
-           str.append("  #Tribyte").append(index).append(" ");  
+           str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");  
            break;
          case DOT_LINT_TRIBYTE:
-           str.append(("  .lint "));   
+           str.append(getDataSpacesTabs()).append((".lint "));   
            break;
          case DOT_LONG_TRIBYTE:
-           str.append(("  .long "));   
+           str.append(getDataSpacesTabs()).append((".long "));   
            break;
          case MARK_TWENTYFOUR_TRIBYTE:
-           str.append(("  !24 "));  
+           str.append(getDataSpacesTabs()).append(("!24 "));  
            break;  
        }
        
@@ -1293,28 +1303,28 @@ public class Assembler {
                     
        switch (aLong) {
          case LONG:
-           str.append(("  long "));  
+           str.append(getDataSpacesTabs()).append("long ");  
            break;             
          case DOT_LONG:
-           str.append(("  .long "));   
+           str.append(getDataSpacesTabs()).append(".long ");   
            break;    
          case DOT_DC_L_LONG:
-           str.append(("  .dc.l "));   
+           str.append(getDataSpacesTabs()).append(".dc.l ");   
            break;  
          case DOT_DWORD_LONG:
-           str.append(("  .dword "));  
+           str.append(getDataSpacesTabs()).append(".dword ");  
            break;  
          case DOT_DLINT_LONG:
-           str.append(("  .dlint "));  
+           str.append(getDataSpacesTabs()).append(".dlint ");  
            break;            
          case MARK_THIRTYTWO_LONG:
-           str.append(("  !32 "));  
+           str.append(getDataSpacesTabs()).append("!32 ");  
            break;                                  
          case MACRO4_LONG: 
            // we have a min of 1 or a max of 8 tribyte, so use the right call for macro
            int index=(int)(list.size()/4);
         
-           str.append("  #Long").append(index).append(" ");  
+           str.append(getDataSpacesTabs()).append("#Long").append(index).append(" ");  
            break;  
        }
         
@@ -1498,7 +1508,7 @@ public class Assembler {
               str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
               break;
             case TWENTYFOUR_HEX:
-              str.append("  !24 $")
+              str.append(getDataSpacesTabs()).append("!24 $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1508,7 +1518,7 @@ public class Assembler {
               listRel.pop();
               break;
             case TWENTYFOUR_BIN:
-              str.append("  !24 %")
+              str.append(getDataSpacesTabs()).append("!24 %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1519,7 +1529,7 @@ public class Assembler {
                break;                
             case MACRO_HEX:
             case MACRO3_HEX:    
-              str.append("  MonoSpriteLine $")
+              str.append(getDataSpacesTabs()).append("MonoSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1530,7 +1540,7 @@ public class Assembler {
               break;
             case MACRO_BIN:
             case MACRO3_BIN:    
-              str.append("  MonoSpriteLine %")
+              str.append(getDataSpacesTabs()).append("MonoSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1540,7 +1550,7 @@ public class Assembler {
                listRel.pop();  
                break;  
             case MACRO1_HEX:
-              str.append("  MonoSpriteLine ($")
+              str.append(getDataSpacesTabs()).append("MonoSpriteLine ($")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1550,7 +1560,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO1_BIN:
-              str.append("  MonoSpriteLine (")
+              str.append(getDataSpacesTabs()).append("MonoSpriteLine (")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1560,7 +1570,7 @@ public class Assembler {
                listRel.pop();  
                break; 
             case MACRO2_HEX:
-              str.append("  +MonoSpriteLine $")
+              str.append(getDataSpacesTabs()).append("+MonoSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1570,7 +1580,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO2_BIN:
-              str.append("  +MonoSpriteLine %")
+              str.append(getDataSpacesTabs()).append("+MonoSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1580,7 +1590,7 @@ public class Assembler {
                listRel.pop();  
                break;    
             case MACRO4_HEX:
-              str.append("  #MonoSpriteLine $")
+              str.append(getDataSpacesTabs()).append("#MonoSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1590,7 +1600,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO4_BIN:
-              str.append("  #MonoSpriteLine %")
+              str.append(getDataSpacesTabs()).append("#MonoSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1738,7 +1748,7 @@ public class Assembler {
               str.append(tmpS.substring(0, tmpS.length()-1)).append("  ");
               break;
             case TWENTYFOUR_HEX:
-              str.append("  !24 $")
+              str.append(getDataSpacesTabs()).append("!24 $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1748,7 +1758,7 @@ public class Assembler {
               listRel.pop();
               break;
             case TWENTYFOUR_BIN:
-              str.append("  !24 %")
+              str.append(getDataSpacesTabs()).append("!24 %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1759,7 +1769,7 @@ public class Assembler {
                break;               
             case MACRO_HEX:
             case MACRO3_HEX:    
-              str.append("  MultiSpriteLine $")
+              str.append(getDataSpacesTabs()).append("MultiSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1770,7 +1780,7 @@ public class Assembler {
               break;
             case MACRO_BIN:
             case MACRO3_BIN:    
-              str.append("  MultiSpriteLine %")
+              str.append(getDataSpacesTabs()).append("MultiSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1780,7 +1790,7 @@ public class Assembler {
                listRel.pop();  
                break;  
             case MACRO1_HEX:
-              str.append("  MultiSpriteLine ($")
+              str.append(getDataSpacesTabs()).append("MultiSpriteLine ($")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1790,7 +1800,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO1_BIN:
-              str.append("  MultiSpriteLine (")
+              str.append(getDataSpacesTabs()).append("MultiSpriteLine (")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1800,7 +1810,7 @@ public class Assembler {
                listRel.pop();  
                break; 
             case MACRO2_HEX:
-              str.append("  +MultiSpriteLine $")
+              str.append(getDataSpacesTabs()).append("+MultiSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1810,7 +1820,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO2_BIN:
-              str.append("  +MultiSpriteLine %")
+              str.append(getDataSpacesTabs()).append("+MultiSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1820,7 +1830,7 @@ public class Assembler {
                listRel.pop();  
                break;   
             case MACRO4_HEX:
-              str.append("  #MultiSpriteLine $")
+              str.append(getDataSpacesTabs()).append("#MultiSpriteLine $")
                            .append(ByteToExe(Unsigned.done(mem1.copy)))
                            .append(ByteToExe(Unsigned.done(mem2.copy)))
                            .append(ByteToExe(Unsigned.done(mem3.copy)))
@@ -1830,7 +1840,7 @@ public class Assembler {
               listRel.pop();
               break;
             case MACRO4_BIN:
-              str.append("  #MultiSpriteLine %")
+              str.append(getDataSpacesTabs()).append("#MultiSpriteLine %")
                            .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                            .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                            .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
@@ -1929,22 +1939,22 @@ public class Assembler {
         
         switch (aText) {
           case DOT_BYTE_TEXT:
-            str.append(("  .byte "));
+            str.append(getDataSpacesTabs()).append((".byte "));
             break;
           case BYTE_TEXT:
-            str.append(("  byte "));  
+            str.append(getDataSpacesTabs()).append(("byte "));  
             break;
           case DC_BYTE_TEXT:
-            str.append(("  dc "));  
+            str.append(getDataSpacesTabs()).append(("dc "));  
             break;
           case DC_B_BYTE_TEXT:
-            str.append(("  dc.b "));  
+            str.append(getDataSpacesTabs()).append(("dc.b "));  
             break;
           case MARK_TEXT:
-            str.append(("  !text "));  
+            str.append(getDataSpacesTabs()).append(("!text "));  
             break;
           case DOT_TEXT:
-            str.append(("  .text "));   
+            str.append(getDataSpacesTabs()).append((".text "));   
             break;  
         }       
         
@@ -1988,11 +1998,15 @@ public class Assembler {
                              str.append(", \"");
                              isString=true;  
                            }  
-                   }  
-                str.append((char)(mem.copy & 0xFF)); 
+                  str.append((char)(mem.copy & 0xFF)); 
+                }  
+                
           }
                                   
-          if (listRel.isEmpty()) str.append("\"\n");
+          if (listRel.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+          }
         }
       }
    }
@@ -2191,7 +2205,7 @@ public class Assembler {
      // we are processing word swapped?    
      if (actualType instanceof WordSwapped) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxWordAggregate*2) actualType.flush(str);         
+       if (list.size()==option.maxSwappedAggregate*2) actualType.flush(str);         
      } else         
      // we are processing tribyte?    
      if (actualType instanceof Tribyte) {
@@ -2217,8 +2231,13 @@ public class Assembler {
        else if (sizeMultiSpriteBlock>=64) {
          actualType.flush(str);
          sizeMultiSpriteBlock=0;
-       }
-     }
+       } 
+     }else
+       // we are processing text?
+       if (actualType instanceof Text) {
+         // look if it is time to aggregate data
+         if (list.size()==option.maxTextAggregate) actualType.flush(str);         
+       }      
    }
    
    /**
@@ -2407,6 +2426,7 @@ public class Assembler {
      isMultiSpriteBlock=false; 
      return aByte;
    }   
+
 }
                
 

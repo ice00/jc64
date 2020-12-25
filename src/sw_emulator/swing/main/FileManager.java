@@ -100,6 +100,8 @@ public class FileManager {
       option.maxWordAggregate = in.readInt();
       option.maxTribyteAggregate = in.readInt();
       option.maxLongAggregate = in.readInt();
+      option.maxSwappedAggregate = in.readInt();
+      option.maxTextAggregate = in.readInt();
       option.tmpPath = in.readUTF();
       
       option.dasmF3Comp = in.readBoolean();
@@ -331,6 +333,8 @@ public class FileManager {
       out.writeInt(option.maxWordAggregate);
       out.writeInt(option.maxTribyteAggregate);
       out.writeInt(option.maxLongAggregate);
+      out.writeInt(option.maxSwappedAggregate);
+      out.writeInt(option.maxTextAggregate);
       out.writeUTF(option.tmpPath);
       
       out.writeBoolean(option.dasmF3Comp);
