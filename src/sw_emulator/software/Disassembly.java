@@ -299,13 +299,9 @@ public class Disassembly {
       
       assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
       assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
-      assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");
-      
-      tmp.append("  .byte >").append(option.psidInitSongsLabel).append("\n");
-      tmp.append("  .byte <").append(option.psidInitSongsLabel).append("\n");
-      tmp.append("  .byte >").append(option.psidPlaySoundsLabel).append("\n");
-      tmp.append("  .byte <").append(option.psidPlaySoundsLabel).append("\n");
-      
+      assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");      
+      assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
+      assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);
       assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
       assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
       assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
@@ -636,7 +632,7 @@ public class Disassembly {
         aLong=option.tmpxLong;
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
-        //aText=option.tmpxText;
+        aText=option.tmpxText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  

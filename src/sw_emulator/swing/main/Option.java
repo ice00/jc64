@@ -657,14 +657,17 @@ public class Option {
   /** TMPX: tribyte declaration */
   public Assembler.Tribyte tmpxTribyte=Assembler.Tribyte.MACRO4_TRIBYTE; 
   
-  /** TMPX: long declaration */
+  /** TMPX: long declaration type */
   public Assembler.Long tmpxLong=Assembler.Long.MACRO4_LONG; 
   
-  /** TMPx: mono color sprite*/
+  /** TMPx: mono color sprite declaration type */
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
    
-  /** TMPx: multi color sprite */
+  /** TMPx: multi color sprite declaration type */
   public Assembler.MultiSprite tmpxMultiSprite=Assembler.MultiSprite.MACRO4_BIN;
+  
+   /** TMPx: text declaration type */
+  public Assembler.Text tmpxText=Assembler.Text.DOT_TEXT;
   
   
   
