@@ -509,6 +509,7 @@ public class Assembler {
     *  -> byte $xx
     *  -> dc $xx
     *  -> dc.b $xx
+    *  ->  .by $xx
     *  -> -byt $xx
     *  -> !byte $xx
     *  -> !8 $xx
@@ -521,6 +522,7 @@ public class Assembler {
       DC_BYTE,            //    dc $xx
       DC_B_BYTE,          //  dc.b $xx
       DOT_BYT_BYTE,       //  .byt $xx
+      DOT_BY_BYTE,        //   .by $xx
       MARK_BYTE,          // !byte $xx 
       MARK_BY_BYTE,        //  !by $xx
       EIGHT_BYTE,         //    !8 $xx   
@@ -540,6 +542,9 @@ public class Assembler {
             break;
           case DOT_CHAR:
             str.append(getDataSpacesTabs()).append((".char "));
+            break;  
+          case DOT_BY_BYTE:
+            str.append(getDataSpacesTabs()).append((".by "));
             break;  
           case BYTE:
             str.append(getDataSpacesTabs()).append(("byte "));
@@ -625,6 +630,7 @@ public class Assembler {
    /**
     * Word declaration type
     *  -> .word $xxyy
+    *  ->   .wo $xxyy
     *  -> .sint $xxyy
     *  -> word $xxyy
     *  -> dc.w $xxyy
@@ -634,6 +640,7 @@ public class Assembler {
     */
    public enum Word implements ActionType {
      DOT_WORD,            //  .word $xxyy
+     DOT_WO_WORD,         //    .wo $xxyy
      DOT_SINT,            //  .sint $xxyy
      WORD,                //   word $xxyy
      DC_W_WORD,           //   dc.w $xxyy
@@ -655,6 +662,9 @@ public class Assembler {
          case DOT_WORD:
            str.append(getDataSpacesTabs()).append((".word "));  
            break;
+         case DOT_WO_WORD:
+           str.append(getDataSpacesTabs()).append((".wo "));  
+           break;  
          case DOT_SINT:
            str.append(getDataSpacesTabs()).append((".sint "));  
            break;           
@@ -1286,6 +1296,7 @@ public class Assembler {
    public enum Long implements ActionType  {
      LONG,                 //   long $xxyyzzkk
      DOT_LONG,             //  .long $xxyyzzkk
+     DOT_DW_LONG,          //    .dw $xxyyzzkk         
      DOT_DC_L_LONG,        //  .dc.l $xxyyzzkk    
      DOT_DWORD_LONG,       // .dword $xxyyzzkk
      DOT_DLINT_LONG,       // .dlint $xxyyzzkk
@@ -1327,6 +1338,9 @@ public class Assembler {
          case DOT_DWORD_LONG:
            str.append(getDataSpacesTabs()).append(".dword ");  
            break;  
+         case DOT_DW_LONG:
+           str.append(getDataSpacesTabs()).append(".dw ");  
+           break;    
          case DOT_DLINT_LONG:
            str.append(getDataSpacesTabs()).append(".dlint ");  
            break;            
