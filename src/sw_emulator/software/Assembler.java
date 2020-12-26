@@ -185,6 +185,7 @@ public class Assembler {
     *  -> processor 6502
     *  -> .cpu "6502"
     *  -> .cpu 6502
+    *  -> .cpu _6502 
     *  -> .setcpu 6502x
     *  -> .p02
     *  -> !CPU 6510
@@ -193,6 +194,7 @@ public class Assembler {
       PROC,             // processor 6502
       DOT_CPU_A,        // .cpu "6502"
       DOT_CPU,          // .cpu 6502
+      DOT_CPU_UND,      // .cpu _6502
       DOT_SETCPU,       // .setcpu 6502x
       DOT_P02,          // .p02
       MARK_CPU;         // !cpu 6510
@@ -210,8 +212,11 @@ public class Assembler {
           case DOT_CPU:
             str.append(getDataSpacesTabs()).append(".cpu 6502\n\n");
             break;
+          case DOT_CPU_UND:
+            str.append(getDataSpacesTabs()).append(".cpu _6502\n\n");
+            break;  
           case DOT_SETCPU:
-            str.append(getDataSpacesTabs()).append(".cpu 6502\n\n");
+            str.append(getDataSpacesTabs()).append(".setcpu 6502x\n\n");
             break; 
           case DOT_P02:
             str.append(getDataSpacesTabs()).append(".p02\n\n");
@@ -321,7 +326,8 @@ public class Assembler {
    /**
     * Block comment
     * 
-    *  -> ; xxxx
+    *  -> ; xxx
+    *  -> // xxx
     *  -> /\* xxx *\/
     *  -> if 0 xxx endif
     *  -> .if 0 xxx .fi
@@ -331,7 +337,8 @@ public class Assembler {
     *  -> .comment xxx .endc
     */
    public enum BlockComment implements ActionType {
-      SEMICOLON,       // ; xxxx
+      SEMICOLON,       // ; xxx
+      DOUBLE_BAR,      // // xxx
       CSTYLE,          // /* xxx */ 
       IF,              // if 0 xxx endif
       DOT_IF_FI,       // .if 0 xxx .fi
@@ -351,14 +358,20 @@ public class Assembler {
               if ("".equals(line) || " ".equals(line)) str.append("\n");
               else str.append(";").append(line).append("\n");   
             }                      
-            break;         
+            break;  
+         case DOUBLE_BAR:    
+            for (String line : lines) {
+              if ("".equals(line) || " ".equals(line)) str.append("\n");
+              else str.append("//").append(line).append("\n");   
+            }                      
+            break;           
           case CSTYLE:
             boolean isOpen=false;
             for (String line : lines) {
               if ("".equals(line) || " ".equals(line)) {
                 if (isOpen) str.append("/*\n\n");
                 else {
-                 str.append("\n*\\n\n");
+                 str.append("\n*/\n\n");
                  isOpen=false;
                 }
               } else {
@@ -369,7 +382,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append("\n*\\n");         
+            if (isOpen) str.append("*/\n");         
             break;          
           case IF:
             isOpen=false;
@@ -388,7 +401,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append("endif\n");   
+            if (isOpen) str.append("endif\n");   
             break;
           case DOT_IF:
             isOpen=false;
@@ -407,7 +420,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append(".endif\n");    
+            if (isOpen) str.append(".endif\n");    
             break; 
           case DOT_IF_FI:
             isOpen=false;
@@ -426,7 +439,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append(".fi\n");    
+            if (isOpen) str.append(".fi\n");    
             break;   
           case DOT_IF_P:
             isOpen=false;
@@ -445,7 +458,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append("}\n");    
+            if (isOpen) str.append("}\n");    
             break;             
           case MARK_IF:
             isOpen=false;
@@ -464,7 +477,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append("}\n");    
+            if (isOpen) str.append("}\n");    
             break;  
           case DOT_COMMENT:
             isOpen=false;
@@ -483,7 +496,7 @@ public class Assembler {
                   str.append(line).append("\n");
                 }   
             }        
-            if (!isOpen) str.append(".endc\n");   
+            if (isOpen) str.append(".endc\n");   
             break;  
         } 
       }
@@ -600,7 +613,7 @@ public class Assembler {
                 return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
               case BYTE_CHAR:
                 //return "\""+(char)Unsigned.done(value)+"\"";
-                return "'"+(char)Unsigned.done(value);
+                return "'"+(char)Unsigned.done(value)+(option.assembler==Assembler.Name.KICK ? "'":"");
               case BYTE_HEX:
               default:
                 return "$"+ByteToExe(Unsigned.done(value));
@@ -1932,11 +1945,12 @@ public class Assembler {
 
       @Override
       public void flush(StringBuilder str) {
-        if (list.isEmpty()) return;
-        
+        if (list.isEmpty()) return;        
         boolean isString=false;
         boolean isFirst=true;
-        
+        boolean isSpecial=false;
+        int position=0;
+               
         switch (aText) {
           case DOT_BYTE_TEXT:
             str.append(getDataSpacesTabs()).append((".byte "));
@@ -1966,21 +1980,15 @@ public class Assembler {
           listRel.pop();
           
           // not all char can be converted in string
-          switch (mem.copy & 0xFF) {
-              case 0x00:
-              case 0x0A:
-              case 0x22:
-                if (isString) {
-                  str.append("\"");
-                  isString=false;  
-                }
-                if (isFirst) {
-                  str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
-                  isFirst=false;
-                } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));                
-                break;  
-              default:
-                if ((mem.copy & 0xFF)>127) {                    
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -1988,9 +1996,9 @@ public class Assembler {
                   if (isFirst) {
                     str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));                                       
-                } else {                  
-                    if (isFirst) {
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
                       isFirst=false;
                       isString=true;
                       str.append("\"");
@@ -1998,14 +2006,48 @@ public class Assembler {
                              str.append(", \"");
                              isString=true;  
                            }  
-                  str.append((char)(mem.copy & 0xFF)); 
-                }  
-                
-          }
-                                  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
+              break;  
+              
+            case KICK:
+              if (isFirst) {
+                position=str.length();
+                str.append("@\"");
+                isString=true;
+                isFirst=false;  
+              }    
+              if ((val<=0x02) ||
+                  (val==0x0A) ||
+                  (val==0x0C) ||    
+                  (val==0x0D) ||
+                  (val==0x0E) ||        
+                  (val==0x0F) ||         
+                  (val==0x40) ||
+                  (val==0x5B) ||
+                  (val==0x5D) ||
+                  (val>=0x61 && val<=0x7A) ||
+                  (val==0x7F) ||
+                  (val==0xA0) ||
+                  (val==0xA3)                         
+                 ) {
+                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                isSpecial=true;
+              } else if (val==0x22) {
+                       str.append("\\\"");
+                       isSpecial=true;
+                     }
+                else if (val==0x5C) { 
+                       str.append("\\\\");
+                       isSpecial=true;
+                     }
+                else str.append((char)(mem.copy & 0xFF));                
+              break;  
+          }                                  
           if (listRel.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
+            if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
         }
       }

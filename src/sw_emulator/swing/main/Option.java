@@ -748,7 +748,7 @@ public class Option {
   
   
   /** Kick: starting declaration */
-  public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU; 
+  public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU_UND; 
   
   /** ACME: kick declaration */
   public Assembler.Origin kickOrigin=Assembler.Origin.ASTERISK;
@@ -760,7 +760,7 @@ public class Option {
   public Assembler.Comment kickComment=Assembler.Comment.DOUBLE_BAR; 
   
   /** KickAssembler: block comment declaration */
-  public Assembler.BlockComment kickBlockComment=Assembler.BlockComment.SEMICOLON; 
+  public Assembler.BlockComment kickBlockComment=Assembler.BlockComment.DOUBLE_BAR; 
   
   /** KickAssembler: byte declaration */
   public Assembler.Byte kickByte=Assembler.Byte.DOT_BYTE;
@@ -782,6 +782,9 @@ public class Option {
    
   /** KickAsembler: multi color sprite */
   public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
+    
+  /** Kick: text declaration type */
+  public Assembler.Text kickText=Assembler.Text.DOT_TEXT;
   
   
   

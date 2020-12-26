@@ -195,6 +195,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         buttonGroupTass64WaordSwapped = new javax.swing.ButtonGroup();
         buttonGroupDasmText = new javax.swing.ButtonGroup();
         buttonGroupTmpxText = new javax.swing.ButtonGroup();
+        buttonGroupKickText = new javax.swing.ButtonGroup();
         jPanelOption = new javax.swing.JPanel();
         jTabbedPaneOption = new javax.swing.JTabbedPane();
         jPanelPreview = new javax.swing.JPanel();
@@ -712,9 +713,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneKickDotWord = new javax.swing.JScrollPane();
         jTextPaneKickDotWord = new javax.swing.JTextPane();
         jLabelKickStartingDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotCpuStarting = new javax.swing.JRadioButton();
-        jScrollPaneKickDotCpuStarting = new javax.swing.JScrollPane();
-        jTextPaneKickDotCpuStarting = new javax.swing.JTextPane();
+        jRadioButtonKickDotCpuUndStarting = new javax.swing.JRadioButton();
+        jScrollPaneKickDotCpuUndStarting = new javax.swing.JScrollPane();
+        jTextPaneKickDotCpuUndStarting = new javax.swing.JTextPane();
         jLabelKickCommentDeclaration = new javax.swing.JLabel();
         jRadioButtonKickDoubleBarComment = new javax.swing.JRadioButton();
         jScrollPaneKickDoubleBarComment = new javax.swing.JScrollPane();
@@ -727,9 +728,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneKickDotPcOrigin = new javax.swing.JScrollPane();
         jTextPaneKickDotPcOrigin = new javax.swing.JTextPane();
         jLabelKickBlockCommentDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickSemicolonBlockComment = new javax.swing.JRadioButton();
-        jScrollPaneKickSemicolonBlockComment = new javax.swing.JScrollPane();
-        jTextPaneKickSemicolonBlockComment = new javax.swing.JTextPane();
+        jRadioButtonKickDoubleBarBlockComment = new javax.swing.JRadioButton();
+        jScrollPaneKickDoubleBarBlockComment = new javax.swing.JScrollPane();
+        jTextPaneKickDoubleBarBlockComment = new javax.swing.JTextPane();
         jRadioButtonKickCstyleBlockComment = new javax.swing.JRadioButton();
         jScrollPaneKickCstyleBlockComment = new javax.swing.JScrollPane();
         jTextPaneKickCstyleBlockComment = new javax.swing.JTextPane();
@@ -774,6 +775,10 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonKickMacroWordSwapped = new javax.swing.JRadioButton();
         jScrollPaneKickMacroWordSwapped = new javax.swing.JScrollPane();
         jTextPaneKickMacroWordSwapped = new javax.swing.JTextPane();
+        jLabelKickTextDeclaration = new javax.swing.JLabel();
+        jRadioButtonKickDotText = new javax.swing.JRadioButton();
+        jScrollPaneKickDotText = new javax.swing.JScrollPane();
+        jTextPaneKickDotText = new javax.swing.JTextPane();
         jPanelTass64 = new javax.swing.JPanel();
         jLabelTass64StartingDeclaration = new javax.swing.JLabel();
         jRadioButtonTass64DotCpuAStarting = new javax.swing.JRadioButton();
@@ -3268,6 +3273,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelTmpxWordDeclaration.setText("Word:");
 
         buttonGroupTmpxWord.add(jRadioButtonTmpxDotWord);
+        jRadioButtonTmpxDotWord.setSelected(true);
         jRadioButtonTmpxDotWord.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButtonTmpxDotWordItemStateChanged(evt);
@@ -3551,7 +3557,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelTmpxTextDeclaration.setText("Text:");
 
-        buttonGroupTmpxWord.add(jRadioButtonTmpxDotText);
+        buttonGroupTmpxText.add(jRadioButtonTmpxDotText);
         jRadioButtonTmpxDotText.setSelected(true);
         jRadioButtonTmpxDotText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -4933,21 +4939,21 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickStartingDeclaration.setText("Starting:");
 
-        buttonGroupKickStarting.add(jRadioButtonKickDotCpuStarting);
-        jRadioButtonKickDotCpuStarting.setSelected(true);
-        jRadioButtonKickDotCpuStarting.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickStarting.add(jRadioButtonKickDotCpuUndStarting);
+        jRadioButtonKickDotCpuUndStarting.setSelected(true);
+        jRadioButtonKickDotCpuUndStarting.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotCpuStartingItemStateChanged(evt);
+                jRadioButtonKickDotCpuUndStartingItemStateChanged(evt);
             }
         });
 
-        jScrollPaneKickDotCpuStarting.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneKickDotCpuStarting.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDotCpuUndStarting.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDotCpuUndStarting.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneKickDotCpuStarting.setEditable(false);
-        jTextPaneKickDotCpuStarting.setContentType("text/html"); // NOI18N
-        jTextPaneKickDotCpuStarting.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>.cpu</b> 6502\n    </p>\n  </body>\n</html>\n");
-        jScrollPaneKickDotCpuStarting.setViewportView(jTextPaneKickDotCpuStarting);
+        jTextPaneKickDotCpuUndStarting.setEditable(false);
+        jTextPaneKickDotCpuUndStarting.setContentType("text/html"); // NOI18N
+        jTextPaneKickDotCpuUndStarting.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>.cpu</b> _6502\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneKickDotCpuUndStarting.setViewportView(jTextPaneKickDotCpuUndStarting);
 
         jLabelKickCommentDeclaration.setText("Comment:");
 
@@ -4964,7 +4970,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneKickDoubleBarComment.setEditable(false);
         jTextPaneKickDoubleBarComment.setContentType("text/html"); // NOI18N
-        jTextPaneKickDoubleBarComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>;</b> xxx\n    </p>\n  </body>\n</html>\n");
+        jTextPaneKickDoubleBarComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>//</b> xxx\n    </p>\n  </body>\n</html>\n");
         jScrollPaneKickDoubleBarComment.setViewportView(jTextPaneKickDoubleBarComment);
 
         jLabelKickOriginDeclaration.setText("Origin:");
@@ -5002,21 +5008,21 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickBlockCommentDeclaration.setText("Block Comment:");
 
-        buttonGroupKickBlockComment.add(jRadioButtonKickSemicolonBlockComment);
-        jRadioButtonKickSemicolonBlockComment.setSelected(true);
-        jRadioButtonKickSemicolonBlockComment.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickBlockComment.add(jRadioButtonKickDoubleBarBlockComment);
+        jRadioButtonKickDoubleBarBlockComment.setSelected(true);
+        jRadioButtonKickDoubleBarBlockComment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickSemicolonBlockCommentItemStateChanged(evt);
+                jRadioButtonKickDoubleBarBlockCommentItemStateChanged(evt);
             }
         });
 
-        jScrollPaneKickSemicolonBlockComment.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneKickSemicolonBlockComment.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDoubleBarBlockComment.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDoubleBarBlockComment.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneKickSemicolonBlockComment.setEditable(false);
-        jTextPaneKickSemicolonBlockComment.setContentType("text/html"); // NOI18N
-        jTextPaneKickSemicolonBlockComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>;</b> xxx\n    </p>\n  </body>\n</html>\n");
-        jScrollPaneKickSemicolonBlockComment.setViewportView(jTextPaneKickSemicolonBlockComment);
+        jTextPaneKickDoubleBarBlockComment.setEditable(false);
+        jTextPaneKickDoubleBarBlockComment.setContentType("text/html"); // NOI18N
+        jTextPaneKickDoubleBarBlockComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>//</b> xxx\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneKickDoubleBarBlockComment.setViewportView(jTextPaneKickDoubleBarBlockComment);
 
         buttonGroupKickBlockComment.add(jRadioButtonKickCstyleBlockComment);
         jRadioButtonKickCstyleBlockComment.addItemListener(new java.awt.event.ItemListener() {
@@ -5045,7 +5051,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneDasmDotIfPBlockComment.setEditable(false);
         jTextPaneDasmDotIfPBlockComment.setContentType("text/html"); // NOI18N
-        jTextPaneDasmDotIfPBlockComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>if 0</b> xxx <b'>endif</b>\n    </p>\n  </body>\n</html>\n");
+        jTextPaneDasmDotIfPBlockComment.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>if (0)</b> {xxx}\n    </p>\n  </body>\n</html>\n");
         jScrollPaneDasmDotIfPBlockComment.setViewportView(jTextPaneDasmDotIfPBlockComment);
 
         jLabelKickMultiSpriteDeclaration.setText("Multicolor sprite:");
@@ -5223,16 +5229,34 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneKickMacroWordSwapped.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>[.mac]</b> <font color='red'>$yyxx</font><br>\n    </p>\n  </body>\n</html>\n");
         jScrollPaneKickMacroWordSwapped.setViewportView(jTextPaneKickMacroWordSwapped);
 
+        jLabelKickTextDeclaration.setText("Text:");
+
+        buttonGroupKickText.add(jRadioButtonKickDotText);
+        jRadioButtonKickDotText.setSelected(true);
+        jRadioButtonKickDotText.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonKickDotTextItemStateChanged(evt);
+            }
+        });
+
+        jScrollPaneKickDotText.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDotText.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextPaneKickDotText.setEditable(false);
+        jTextPaneKickDotText.setContentType("text/html"); // NOI18N
+        jTextPaneKickDotText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneKickDotText.setViewportView(jTextPaneKickDotText);
+
         javax.swing.GroupLayout jPanelKickAssemblerLayout = new javax.swing.GroupLayout(jPanelKickAssembler);
         jPanelKickAssembler.setLayout(jPanelKickAssemblerLayout);
         jPanelKickAssemblerLayout.setHorizontalGroup(
             jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
-                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelKickAssemblerLayout.createSequentialGroup()
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelKickWordSwappedDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelKickAssemblerLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelKickStartingDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -5245,72 +5269,82 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jLabelKickTribyteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelKickMonoSpriteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelKickMultiSpriteDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelKickLongDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonKickDotCpuStarting)
-                    .addComponent(jRadioButtonKickAsterixOrigin)
-                    .addComponent(jRadioButtonKickDoubleBarComment)
-                    .addComponent(jRadioButtonKickSemicolonBlockComment)
-                    .addComponent(jRadioButtonKickLabelNameColon)
-                    .addComponent(jRadioButtonKickDotByte)
-                    .addComponent(jRadioButtonKickDotWord)
-                    .addComponent(jRadioButtonKickMacroWordSwapped)
-                    .addComponent(jRadioButtonKickMacroTribyte)
-                    .addComponent(jRadioButtonKickDwordLong)
-                    .addComponent(jRadioButtonKickByteHexMonoSprite)
-                    .addComponent(jRadioButtonKickByteHexMultiSprite))
+                            .addComponent(jLabelKickLongDeclaration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelKickTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneKickDwordLong, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jRadioButtonKickDotText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneKickDotText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPaneKickMacroWordSwapped, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickDotCpuStarting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickAsterixOrigin, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickDoubleBarComment, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickSemicolonBlockComment, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickLabelNameColon, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickDotByte, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickDotWord, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickMacroTribyte, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickByteHexMultiSprite, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelKickAssemblerLayout.createSequentialGroup()
-                                .addComponent(jScrollPaneKickByteHexMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonKickDotCpuUndStarting)
+                            .addComponent(jRadioButtonKickAsterixOrigin)
+                            .addComponent(jRadioButtonKickDoubleBarComment)
+                            .addComponent(jRadioButtonKickDoubleBarBlockComment)
+                            .addComponent(jRadioButtonKickLabelNameColon)
+                            .addComponent(jRadioButtonKickDotByte)
+                            .addComponent(jRadioButtonKickDotWord)
+                            .addComponent(jRadioButtonKickMacroWordSwapped)
+                            .addComponent(jRadioButtonKickMacroTribyte)
+                            .addComponent(jRadioButtonKickDwordLong)
+                            .addComponent(jRadioButtonKickByteHexMonoSprite)
+                            .addComponent(jRadioButtonKickByteHexMultiSprite))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonKickDotPcOrigin)
-                            .addComponent(jRadioButtonKickByteBinMonoSprite)
-                            .addComponent(jRadioButtonKickByteBinMultiSprite)
-                            .addComponent(jRadioButtonKickCstyleBlockComment, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneKickDotPcOrigin)
-                            .addComponent(jScrollPaneKickCstyleBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPaneKickByteBinMonoSprite)
-                            .addComponent(jScrollPaneKickByteBinMultiSprite))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonDasmDotIfPBlockComment)
-                            .addComponent(jRadioButtonKickMacroHexMonoSprite)
-                            .addComponent(jRadioButtonKickMacroHexMultiSprite))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneDasmDotIfPBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPaneKickMacroHexMonoSprite)
-                            .addComponent(jScrollPaneKickMacroHexMultiSprite))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonKickMacroBinMonoSprite)
-                            .addComponent(jRadioButtonKickMacroBinMultiSprite, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPaneKickMacroBinMonoSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(jScrollPanekickMacroBinMultiSprite))
-                        .addGap(114, 114, 114))))
+                            .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                                .addComponent(jScrollPaneKickDwordLong, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPaneKickMacroWordSwapped, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDotCpuUndStarting, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickAsterixOrigin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDoubleBarComment, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDoubleBarBlockComment, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickLabelNameColon, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDotByte, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDotWord, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickMacroTribyte, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickByteHexMultiSprite, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelKickAssemblerLayout.createSequentialGroup()
+                                        .addComponent(jScrollPaneKickByteHexMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonKickDotPcOrigin)
+                                    .addComponent(jRadioButtonKickByteBinMonoSprite)
+                                    .addComponent(jRadioButtonKickByteBinMultiSprite)
+                                    .addComponent(jRadioButtonKickCstyleBlockComment, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneKickDotPcOrigin)
+                                    .addComponent(jScrollPaneKickCstyleBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPaneKickByteBinMonoSprite)
+                                    .addComponent(jScrollPaneKickByteBinMultiSprite))
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonDasmDotIfPBlockComment)
+                                    .addComponent(jRadioButtonKickMacroHexMonoSprite)
+                                    .addComponent(jRadioButtonKickMacroHexMultiSprite))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPaneDasmDotIfPBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPaneKickMacroHexMonoSprite)
+                                    .addComponent(jScrollPaneKickMacroHexMultiSprite))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonKickMacroBinMonoSprite)
+                                    .addComponent(jRadioButtonKickMacroBinMultiSprite, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPaneKickMacroBinMonoSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(jScrollPanekickMacroBinMultiSprite))
+                                .addGap(114, 114, 114))))))
         );
         jPanelKickAssemblerLayout.setVerticalGroup(
             jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5318,8 +5352,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickStartingDeclaration)
-                    .addComponent(jRadioButtonKickDotCpuStarting)
-                    .addComponent(jScrollPaneKickDotCpuStarting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButtonKickDotCpuUndStarting)
+                    .addComponent(jScrollPaneKickDotCpuUndStarting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickOriginDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5337,8 +5371,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabelKickBlockCommentDeclaration)
-                            .addComponent(jRadioButtonKickSemicolonBlockComment)
-                            .addComponent(jScrollPaneKickSemicolonBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jRadioButtonKickDoubleBarBlockComment)
+                            .addComponent(jScrollPaneKickDoubleBarBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabelKickLabelDeclaration)
@@ -5403,7 +5437,12 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneKickMacroHexMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonKickMacroBinMultiSprite)
                     .addComponent(jScrollPanekickMacroBinMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(98, 98, 98))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelKickTextDeclaration)
+                    .addComponent(jRadioButtonKickDotText)
+                    .addComponent(jScrollPaneKickDotText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(159, 159, 159))
         );
 
         jTabbedPaneAssembler.addTab("KickAssembler", jPanelKickAssembler);
@@ -7018,9 +7057,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.acmeBlockComment=Assembler.BlockComment.MARK_IF;
     }//GEN-LAST:event_jRadioButtonAcmeMarkIfBlockCommentItemStateChanged
 
-    private void jRadioButtonKickDotCpuStartingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotCpuStartingItemStateChanged
-      option.kickStarting=Assembler.Starting.DOT_CPU;
-    }//GEN-LAST:event_jRadioButtonKickDotCpuStartingItemStateChanged
+    private void jRadioButtonKickDotCpuUndStartingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotCpuUndStartingItemStateChanged
+      option.kickStarting=Assembler.Starting.DOT_CPU_UND;
+    }//GEN-LAST:event_jRadioButtonKickDotCpuUndStartingItemStateChanged
 
     private void jRadioButtonKickDoubleBarCommentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDoubleBarCommentItemStateChanged
       option.kickComment=Assembler.Comment.DOUBLE_BAR;
@@ -7034,9 +7073,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.kickOrigin=Assembler.Origin.DOT_PC;  
     }//GEN-LAST:event_jRadioButtonKickDotPcOriginItemStateChanged
 
-    private void jRadioButtonKickSemicolonBlockCommentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickSemicolonBlockCommentItemStateChanged
-      option.kickBlockComment=Assembler.BlockComment.SEMICOLON;
-    }//GEN-LAST:event_jRadioButtonKickSemicolonBlockCommentItemStateChanged
+    private void jRadioButtonKickDoubleBarBlockCommentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDoubleBarBlockCommentItemStateChanged
+      option.kickBlockComment=Assembler.BlockComment.DOUBLE_BAR;
+    }//GEN-LAST:event_jRadioButtonKickDoubleBarBlockCommentItemStateChanged
 
     private void jRadioButtonKickCstyleBlockCommentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickCstyleBlockCommentItemStateChanged
       option.kickBlockComment=Assembler.BlockComment.CSTYLE;
@@ -7513,6 +7552,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.tmpxText=Assembler.Text.DOT_TEXT;
     }//GEN-LAST:event_jRadioButtonTmpxDotTextItemStateChanged
 
+    private void jRadioButtonKickDotTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextItemStateChanged
+      option.kickText=Assembler.Text.DOT_TEXT;
+    }//GEN-LAST:event_jRadioButtonKickDotTextItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -7605,6 +7648,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupKickMultiSprite;
     private javax.swing.ButtonGroup buttonGroupKickOrigin;
     private javax.swing.ButtonGroup buttonGroupKickStarting;
+    private javax.swing.ButtonGroup buttonGroupKickText;
     private javax.swing.ButtonGroup buttonGroupKickTribyte;
     private javax.swing.ButtonGroup buttonGroupKickWord;
     private javax.swing.ButtonGroup buttonGroupKickWordSwapped;
@@ -7793,6 +7837,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelKickMultiSpriteDeclaration;
     private javax.swing.JLabel jLabelKickOriginDeclaration;
     private javax.swing.JLabel jLabelKickStartingDeclaration;
+    private javax.swing.JLabel jLabelKickTextDeclaration;
     private javax.swing.JLabel jLabelKickTribyteDeclaration;
     private javax.swing.JLabel jLabelKickWordDeclaration;
     private javax.swing.JLabel jLabelKickWordSwappedDeclaration;
@@ -7948,9 +7993,11 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonKickByteHexMultiSprite;
     private javax.swing.JRadioButton jRadioButtonKickCstyleBlockComment;
     private javax.swing.JRadioButton jRadioButtonKickDotByte;
-    private javax.swing.JRadioButton jRadioButtonKickDotCpuStarting;
+    private javax.swing.JRadioButton jRadioButtonKickDotCpuUndStarting;
     private javax.swing.JRadioButton jRadioButtonKickDotPcOrigin;
+    private javax.swing.JRadioButton jRadioButtonKickDotText;
     private javax.swing.JRadioButton jRadioButtonKickDotWord;
+    private javax.swing.JRadioButton jRadioButtonKickDoubleBarBlockComment;
     private javax.swing.JRadioButton jRadioButtonKickDoubleBarComment;
     private javax.swing.JRadioButton jRadioButtonKickDwordLong;
     private javax.swing.JRadioButton jRadioButtonKickLabelNameColon;
@@ -7960,7 +8007,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonKickMacroHexMultiSprite;
     private javax.swing.JRadioButton jRadioButtonKickMacroTribyte;
     private javax.swing.JRadioButton jRadioButtonKickMacroWordSwapped;
-    private javax.swing.JRadioButton jRadioButtonKickSemicolonBlockComment;
     private javax.swing.JRadioButton jRadioButtonLangEnglish;
     private javax.swing.JRadioButton jRadioButtonLangItalian;
     private javax.swing.JRadioButton jRadioButtonLookCWin;
@@ -8108,9 +8154,11 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneKickByteHexMultiSprite;
     private javax.swing.JScrollPane jScrollPaneKickCstyleBlockComment;
     private javax.swing.JScrollPane jScrollPaneKickDotByte;
-    private javax.swing.JScrollPane jScrollPaneKickDotCpuStarting;
+    private javax.swing.JScrollPane jScrollPaneKickDotCpuUndStarting;
     private javax.swing.JScrollPane jScrollPaneKickDotPcOrigin;
+    private javax.swing.JScrollPane jScrollPaneKickDotText;
     private javax.swing.JScrollPane jScrollPaneKickDotWord;
+    private javax.swing.JScrollPane jScrollPaneKickDoubleBarBlockComment;
     private javax.swing.JScrollPane jScrollPaneKickDoubleBarComment;
     private javax.swing.JScrollPane jScrollPaneKickDwordLong;
     private javax.swing.JScrollPane jScrollPaneKickLabelNameColon;
@@ -8119,7 +8167,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneKickMacroHexMultiSprite;
     private javax.swing.JScrollPane jScrollPaneKickMacroTribyte;
     private javax.swing.JScrollPane jScrollPaneKickMacroWordSwapped;
-    private javax.swing.JScrollPane jScrollPaneKickSemicolonBlockComment;
     private javax.swing.JScrollPane jScrollPaneList;
     private javax.swing.JScrollPane jScrollPaneTass64ASterixOrigin;
     private javax.swing.JScrollPane jScrollPaneTass64ByteBinMonoSprite;
@@ -8271,9 +8318,11 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JTextPane jTextPaneKickByteHexMultiSprite;
     private javax.swing.JTextPane jTextPaneKickCstyleBlockComment;
     private javax.swing.JTextPane jTextPaneKickDotByte;
-    private javax.swing.JTextPane jTextPaneKickDotCpuStarting;
+    private javax.swing.JTextPane jTextPaneKickDotCpuUndStarting;
     private javax.swing.JTextPane jTextPaneKickDotPcOrigin;
+    private javax.swing.JTextPane jTextPaneKickDotText;
     private javax.swing.JTextPane jTextPaneKickDotWord;
+    private javax.swing.JTextPane jTextPaneKickDoubleBarBlockComment;
     private javax.swing.JTextPane jTextPaneKickDoubleBarComment;
     private javax.swing.JTextPane jTextPaneKickDwordLong;
     private javax.swing.JTextPane jTextPaneKickLabelNameColon;
@@ -8283,7 +8332,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JTextPane jTextPaneKickMacroHexMultiSprite;
     private javax.swing.JTextPane jTextPaneKickMacroTribyte;
     private javax.swing.JTextPane jTextPaneKickMacroWordSwapped;
-    private javax.swing.JTextPane jTextPaneKickSemicolonBlockComment;
     private javax.swing.JTextPane jTextPaneTass64AsterixOrigin;
     private javax.swing.JTextPane jTextPaneTass64ByteBinMonoSprite;
     private javax.swing.JTextPane jTextPaneTass64ByteBinMultiSprite;
@@ -8400,7 +8448,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       selectedTheme();
       
       //assembler
-      jComboBoxAssembler.setSelectedItem(option.assembler);
+      jComboBoxAssembler.setSelectedItem(null);
+      jComboBoxAssembler.setSelectedItem(option.assembler.getName());      
+
       
       applyOptionDasm();
       applyOptionTmpx();
@@ -8946,8 +8996,8 @@ public class JOptionDialog extends javax.swing.JDialog {
    */
   private void applyOptionKickAssembler() {
     switch (option.kickStarting) {
-      case DOT_CPU:
-        jRadioButtonKickDotCpuStarting.setSelected(true);   
+      case DOT_CPU_UND:
+        jRadioButtonKickDotCpuUndStarting.setSelected(true);   
         break;
     }
     
@@ -8973,8 +9023,8 @@ public class JOptionDialog extends javax.swing.JDialog {
     }  
     
     switch (option.kickBlockComment) {
-      case SEMICOLON:
-        jRadioButtonKickSemicolonBlockComment.setSelected(true);
+      case DOUBLE_BAR:
+        jRadioButtonKickDoubleBarBlockComment.setSelected(true);
         break;
       case CSTYLE:
         jRadioButtonKickCstyleBlockComment.setSelected(true);  
@@ -9042,6 +9092,12 @@ public class JOptionDialog extends javax.swing.JDialog {
       case MACRO1_BIN:
         jRadioButtonKickMacroBinMultiSprite.setSelected(true);
         break;  
+    }     
+    
+    switch (option.kickText) {
+      case DOT_TEXT:  
+        jRadioButtonKickDotText.setSelected(true);
+        break;           
     }     
   }
   
