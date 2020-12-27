@@ -216,7 +216,7 @@ public class Assembler {
             str.append(getDataSpacesTabs()).append(".cpu _6502\n\n");
             break;  
           case DOT_SETCPU:
-            str.append(getDataSpacesTabs()).append(".setcpu 6502x\n\n");
+            str.append(getDataSpacesTabs()).append(".setcpu \"6502x\"\n\n");
             break; 
           case DOT_P02:
             str.append(getDataSpacesTabs()).append(".p02\n\n");
@@ -559,7 +559,7 @@ public class Assembler {
             str.append(getDataSpacesTabs()).append(("!by "));  
             break;  
           case DOT_BYT_BYTE:
-            str.append(getDataSpacesTabs()).append((".byt.b "));  
+            str.append(getDataSpacesTabs()).append((".byt "));  
             break;
           case MARK_BYTE:
             str.append(getDataSpacesTabs()).append(("!byte "));   
@@ -568,7 +568,7 @@ public class Assembler {
             str.append(getDataSpacesTabs()).append(("!8 "));  
             break;  
           case ZEROEIGHT_BYTE:
-            str.append(getDataSpacesTabs()).append(("!8 "));  
+            str.append(getDataSpacesTabs()).append(("!08 "));  
             break;    
         }
           
@@ -1065,170 +1065,165 @@ public class Assembler {
       */
      @Override
      public void setting(StringBuilder str) {
+       String spaces=getDataSpacesTabs(); 
+       
        switch (aTribyte) {
          case MACRO_TRIBYTE:
-           str.append(
-             "  .mac Tribyte1 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "  .endm \n\n"+
-             "  .mac Tribyte2 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +                     
-             "  .endm \n\n"+
-             "  .mac Tribyte3 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
-             "  .endm \n\n"+         
-             "  .mac Tribyte4 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
-             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" +                              
-             "  .endm \n\n"+                     
-             "  .mac Tribyte5 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" +  
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" +                              
-             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" +                              
-             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" +                              
-             "  .endm \n\n"+
-             "  .mac Tribyte6 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
-             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
-             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
-             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
-             "  .endm \n\n" +             
-             "  .mac Tribyte7 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
-             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
-             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
-             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
-             "     .byte {7} >> 16, ( {7} >> 8) & 255,  {7} & 255\n" +        
-             "  .endm \n\n"+       
-             "  .mac Tribyte8 \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "     .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n" + 
-             "     .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n" + 
-             "     .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n" + 
-             "     .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n" + 
-             "     .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n" +
-             "     .byte {8} >> 16, ( {8} >> 8) & 255,  {8} & 255\n" +        
-             "  .endm \n\n"                   
-           );
+           str.append(spaces).append(".mac Tribyte1 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte2 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte3 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte4 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
+              .append(spaces).append(" .endm \n\n")
+              .append(spaces).append(".mac Tribyte5 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
+              .append(spaces).append("  .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte6 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
+              .append(spaces).append("  .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n")
+              .append(spaces).append("  .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte7 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n") 
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
+              .append(spaces).append("  .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n")
+              .append(spaces).append("  .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n")
+              .append(spaces).append("  .byte {7} >> 16, ( {7} >> 8) & 255,  {7} & 255\n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Tribyte8 \n")
+              .append(spaces).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(spaces).append("  .byte {2} >> 16, ( {2} >> 8) & 255,  {2} & 255\n")
+              .append(spaces).append("  .byte {3} >> 16, ( {3} >> 8) & 255,  {3} & 255\n")
+              .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
+              .append(spaces).append("  .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n")
+              .append(spaces).append("  .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n")
+              .append(spaces).append("  .byte {8} >> 16, ( {8} >> 8) & 255,  {8} & 255\n")
+              .append(spaces).append(".endm \n\n");
            break;
          case MACRO1_TRIBYTE:
-           str.append(
-             "  .macro Tribyte1 (tribyte) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  }\n\n"+
-             "  .macro Tribyte2 (tribyte, tribyte2) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "  }\n\n"+
-              "  .macro Tribyte3 (tribyte, tribyte2, tribyte3) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +        
-             "  }\n\n"+
-             "  .macro Tribyte4 (tribyte, tribyte2, tribyte3, tribyte4) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +          
-             "  }\n\n"+ 
-             "  .macro Tribyte5 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
-             "  }\n\n"+        
-             "  .macro Tribyte6 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
-             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +                      
-             "  }\n\n"+  
-             "  .macro Tribyte7 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
-             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +     
-             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +           
-             "  }\n\n"+      
-             "  .macro Tribyte8 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +       
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +  
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +  
-             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +     
-             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +     
-             "     .byte tribyte8 >> 16, ( tribyte8 >> 8) & 255,  tribyte8 & 255\n" +              
-             "  }\n\n"                     
-           );               
+           str.append(spaces).append(".macro Tribyte1 (tribyte) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte2 (tribyte, tribyte2) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte3 (tribyte, tribyte2, tribyte3) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte4 (tribyte, tribyte2, tribyte3, tribyte4) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+              .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")          
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte5 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")       
+              .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")  
+              .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")         
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte6 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+              .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")  
+              .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")  
+              .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte7 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")       
+              .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")  
+              .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")  
+              .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")                      
+              .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")           
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Tribyte8 (tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8) {\n")
+              .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+              .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+              .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
+              .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")
+              .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")
+              .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")
+              .append(spaces).append("  .byte tribyte8 >> 16, ( tribyte8 >> 8) & 255,  tribyte8 & 255\n")
+              .append(spaces).append("}\n\n");               
            break;       
          case MACRO3_TRIBYTE:
-            str.append(
-             "  .macro Tribyte1 tribyte \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  .endmacro\n\n"+
-             "  .macro Tribyte1 tribyte, tribyte2 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "  .endmacro\n\n"+                    
-             "  .macro Tribyte3 tribyte, tribyte2, tribyte3 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" +          
-             "  .endmacro\n\n"+                     
-             "  .macro Tribyte4 tribyte, tribyte2, tribyte3, tribyte4 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +        
-             "  .endmacro\n\n"+                       
-             "  .macro Tribyte5 tribyte, tribyte2, tribyte3, tribyte4, tribyte5 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
-             "  .endmacro\n\n"+  
-             "  .macro Tribyte6 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +         
-             "  .endmacro\n\n"+  
-             "  .macro Tribyte7 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +    
-             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +                     
-             "  .endmacro\n\n"+  
-             "  .macro Tribyte8 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8 \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "     .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n" +        
-             "     .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n" + 
-             "     .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n" +   
-             "     .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n" +    
-             "     .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n" +
-             "     .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n" +        
-             "  .endmacro\n\n"                   
-           );               
+            str.append(spaces).append(".macro Tribyte1 tribyte \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte1 tribyte, tribyte2 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte3 tribyte, tribyte2, tribyte3 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")          
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte4 tribyte, tribyte2, tribyte3, tribyte4 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")        
+               .append(spaces).append(".endmacro\n\n")                       
+               .append(spaces).append(".macro Tribyte5 tribyte, tribyte2, tribyte3, tribyte4, tribyte5 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+               .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
+               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte6 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+               .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
+               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")         
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte7 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
+               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
+               .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")                     
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Tribyte8 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8 \n")
+               .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
+               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
+               .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")        
+               .append(spaces).append(".endmacro\n\n");               
            break;   
          case MACRO4_TRIBYTE:         
            str.append(
@@ -1536,102 +1531,108 @@ public class Assembler {
               break;
             case TWENTYFOUR_HEX:
               str.append(getDataSpacesTabs()).append("!24 $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break;                
             case MACRO_HEX:
             case MACRO3_HEX:    
-              str.append(getDataSpacesTabs()).append("MonoSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+              str.append(getDataSpacesTabs())
+                 .append("MonoSpriteLine $")
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO_BIN:
             case MACRO3_BIN:    
-              str.append(getDataSpacesTabs()).append("MonoSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+              str.append(getDataSpacesTabs())
+                 .append("MonoSpriteLine %")
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break;  
             case MACRO1_HEX:
-              str.append(getDataSpacesTabs()).append("MonoSpriteLine ($")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append(")  ");
+              str.append(getDataSpacesTabs())
+                 .append((option.kickColonMacro ? ":":""))
+                 .append("MonoSpriteLine($")
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append(")  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO1_BIN:
-              str.append(getDataSpacesTabs()).append("MonoSpriteLine (")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append(")  ");
+              str.append(getDataSpacesTabs())
+                 .append((option.kickColonMacro ? ":":""))     
+                 .append("MonoSpriteLine(%")
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append(")  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break;    
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
@@ -1654,35 +1655,27 @@ public class Assembler {
        switch (aMonoSprite) {
          case MACRO_HEX:
          case MACRO_BIN:
-           str.append(
-             "  .mac MonoSpriteLine \n" +
-             "     .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             "  .endm \n\n"
-           );
+           str.append(getDataSpacesTabs()).append(".mac MonoSpriteLine \n")
+              .append(getDataSpacesTabs()).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(getDataSpacesTabs()).append(".endm \n\n");          
            break;
          case MACRO1_HEX:
          case MACRO1_BIN:
-           str.append(
-             "  .macro MonoSpriteLine (tribyte) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  }\n\n"
-           );               
+           str.append(getDataSpacesTabs()).append(".macro MonoSpriteLine (tribyte) {\n")
+              .append(getDataSpacesTabs()).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("}\n\n");
            break;  
          case MACRO2_HEX:
          case MACRO2_BIN:
-           str.append(
-             "  !macro MonoSpriteLine tribyte {\n" +
-             "     !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  }\n\n"
-           );               
+           str.append(getDataSpacesTabs()).append("!macro MonoSpriteLine tribyte {\n")
+              .append(getDataSpacesTabs()).append("  !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("}\n\n");               
            break; 
          case MACRO3_HEX:
          case MACRO3_BIN:
-           str.append(
-             "  .macro MonoSpriteLine tribyte \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  .endmacro\n\n"
-           );               
+           str.append(getDataSpacesTabs()).append(".macro MonoSpriteLine tribyte \n")
+              .append(getDataSpacesTabs()).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append(".endmacro\n\n");                         
            break;    
          case MACRO4_HEX:
          case MACRO4_BIN:
@@ -1776,20 +1769,20 @@ public class Assembler {
               break;
             case TWENTYFOUR_HEX:
               str.append(getDataSpacesTabs()).append("!24 $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
@@ -1797,10 +1790,10 @@ public class Assembler {
             case MACRO_HEX:
             case MACRO3_HEX:    
               str.append(getDataSpacesTabs()).append("MultiSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
@@ -1808,70 +1801,74 @@ public class Assembler {
             case MACRO_BIN:
             case MACRO3_BIN:    
               str.append(getDataSpacesTabs()).append("MultiSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break;  
             case MACRO1_HEX:
-              str.append(getDataSpacesTabs()).append("MultiSpriteLine ($")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append(")  ");
+              str.append(getDataSpacesTabs())
+                 .append((option.kickColonMacro ? ":":""))     
+                 .append("MultiSpriteLine($")
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append(")  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO1_BIN:
-              str.append(getDataSpacesTabs()).append("MultiSpriteLine (")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append(")  ");
+              str.append(getDataSpacesTabs())
+                 .append((option.kickColonMacro ? ":":""))       
+                 .append("MultiSpriteLine(%")
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append(")  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
                break;   
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine $")
-                           .append(ByteToExe(Unsigned.done(mem1.copy)))
-                           .append(ByteToExe(Unsigned.done(mem2.copy)))
-                           .append(ByteToExe(Unsigned.done(mem3.copy)))
-                           .append("  ");
+                 .append(ByteToExe(Unsigned.done(mem1.copy)))
+                 .append(ByteToExe(Unsigned.done(mem2.copy)))
+                 .append(ByteToExe(Unsigned.done(mem3.copy)))
+                 .append("  ");
               listRel.pop();
               listRel.pop();
               listRel.pop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine %")
-                           .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
-                           .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
-                           .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
-                           .append("  ");
+                 .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
+                 .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
+                 .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
+                 .append("  ");
                listRel.pop();
                listRel.pop();
                listRel.pop();  
@@ -1894,35 +1891,27 @@ public class Assembler {
        switch (aMultiSprite) {
          case MACRO_HEX:
          case MACRO_BIN:
-           str.append(
-             " .mac MultiSpriteLine \n" +
-             "    .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n" +
-             " .endm \n\n"
-           );
+           str.append(getDataSpacesTabs()).append(".mac MultiSpriteLine \n")
+              .append(getDataSpacesTabs()).append("  .byte {1} >> 16, ( {1} >> 8) & 255,  {1} & 255\n")
+              .append(getDataSpacesTabs()).append(".endm \n\n");
            break;
          case MACRO1_HEX:
          case MACRO1_BIN:
-           str.append(
-             "  .macro MultiSpriteLine (tribyte) {\n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  }\n\n"
-           );               
+           str.append(getDataSpacesTabs()).append(".macro MultiSpriteLine (tribyte) {\n")
+              .append(getDataSpacesTabs()).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("}\n\n");               
            break;  
          case MACRO2_HEX:
          case MACRO2_BIN:
-           str.append(
-             "  !macro MultiSpriteLine tribyte {\n" +
-             "     !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  }\n\n"
-           );               
+           str.append(getDataSpacesTabs()).append("!macro MultiSpriteLine tribyte {\n")
+              .append(getDataSpacesTabs()).append("  !byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("}\n\n");           
            break;      
          case MACRO3_HEX:
          case MACRO3_BIN:
-           str.append(
-             "  .macro MultiSpriteLine tribyte \n" +
-             "     .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n" +
-             "  .endmacro\n\n"
-           );  
+           str.append(getDataSpacesTabs()).append(".macro MultiSpriteLine tribyte \n")
+              .append(getDataSpacesTabs()).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append(".endmacro\n\n");  
          case MACRO4_HEX:
          case MACRO4_BIN:
            str.append(
@@ -2016,10 +2005,10 @@ public class Assembler {
                       isFirst=false;
                       isString=true;
                       str.append("\"");
-                    } else if (!isString) {
-                             str.append(", \"");
-                             isString=true;  
-                           }  
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
                   str.append((char)(mem.copy & 0xFF));  
                 }                  
               break;  
@@ -2056,6 +2045,32 @@ public class Assembler {
                        isSpecial=true;
                      }
                 else str.append((char)(mem.copy & 0xFF));                
+              break; 
+            case TASS64:
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
               break;  
           }                                  
           if (listRel.isEmpty()) { 

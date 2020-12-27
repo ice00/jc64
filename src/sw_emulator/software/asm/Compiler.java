@@ -215,10 +215,12 @@ public class Compiler {
     orgStream = System.out;
     
     String result="No result obtained!!";
-    String[] args=new String[2];
+    String[] args=new String[4];
     
-    args[0]="-o"+output.getAbsolutePath();
-    args[1]=input.getAbsolutePath();
+    args[0]="";
+    args[1]="-o";
+    args[2]=output.getAbsolutePath();
+    args[3]=input.getAbsolutePath();
     
     try {
       fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
@@ -237,6 +239,10 @@ public class Compiler {
     
     try {
        result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
+       if ("".equals(result)) result="Compilation done";
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -258,10 +264,11 @@ public class Compiler {
     orgStream = System.out;
     
     String result="No result obtained!!";
-    String[] args=new String[2];
+    String[] args=new String[3];
     
-    args[0]="-o"+output.getAbsolutePath();
-    args[1]=input.getAbsolutePath();
+    args[0]="";
+    args[1]="-o"+output.getAbsolutePath();
+    args[2]=input.getAbsolutePath();
     
     try {
       fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
@@ -280,6 +287,9 @@ public class Compiler {
     
     try {
        result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
     } catch (Exception e) {
         System.err.println(e);
       }   
@@ -324,6 +334,10 @@ public class Compiler {
     
     try {
        result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
+       if (pos==0) result="Compilation done";
     } catch (Exception e) {
         System.err.println(e);
       }   

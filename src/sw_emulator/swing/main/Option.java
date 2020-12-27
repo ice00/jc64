@@ -270,7 +270,7 @@ public class Option {
   public int maxSwappedAggregate=4;
   
   /** Max text aggregate for data row */
-  public int maxTextAggregate=4;
+  public int maxTextAggregate=32;
   
   /** Max tribyte aggregate for data row */
   public int maxTribyteAggregate=3;   
@@ -747,6 +747,9 @@ public class Option {
   
   
   
+  /** Kick: colon macro */
+  public boolean kickColonMacro=false;
+  
   /** Kick: starting declaration */
   public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU_UND; 
   
@@ -823,6 +826,9 @@ public class Option {
    
   /** 64Tass: multi color sprite */
   public Assembler.MultiSprite tass64MultiSprite=Assembler.MultiSprite.MACRO4_BIN;
+  
+  /** 64Tass: text declaration type */
+  public Assembler.Text tass64Text=Assembler.Text.DOT_TEXT;
   
   
   /**

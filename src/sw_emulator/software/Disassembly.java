@@ -692,7 +692,7 @@ public class Disassembly {
         aLong=option.tass64Long;
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
-        //aText=option.tass64Text;
+        aText=option.tass64Text;
         break;
     }
     
