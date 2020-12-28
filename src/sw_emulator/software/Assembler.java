@@ -656,7 +656,9 @@ public class Assembler {
        MemoryDasm memHigh;
        MemoryDasm memRelLow;
        MemoryDasm memRelHigh;
-        
+     
+       int pos1=str.length();  // store initial position
+       
        // create starting command according to the kind of byte
        switch (aWord) {
          case DOT_WORD:
@@ -685,9 +687,18 @@ public class Assembler {
            break;  
        }
        
+       int pos2=str.length();   // store final position
+       boolean isFirst=true;       // true if this is the first output
+       
        while (!list.isEmpty()) {
          // if only 1 byte left, use byte coding
-         if (list.size()==1) aByte.flush(str);
+         if (list.size()==1) {
+           if (isFirst) {
+              str.replace(pos1, pos2, "");
+              isFirst=false;                    
+           }  
+           aByte.flush(str);
+         }
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
@@ -696,20 +707,28 @@ public class Assembler {
            
            if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
-            else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                 else str.append("$").append(ShortToExe(memRelLow.address));  
+             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                  else str.append("$").append(ShortToExe(memRelLow.address));  
+             isFirst=false;
            } else {
-             // if cannot make a word with relative locations, force all to be of byte type
-             if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
-               list.addFirst(memHigh);
-               list.addFirst(memLow);
-               listRel.addFirst(memRelHigh);
-               listRel.addFirst(memRelLow);
-               aByte.flush(str);
+               // if cannot make a word with relative locations, force all to be of byte type
+               if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
+                 list.addFirst(memHigh);
+                 list.addFirst(memLow);
+                 listRel.addFirst(memRelHigh);
+                 listRel.addFirst(memRelLow);
+                 if (isFirst) {
+                   str.replace(pos1, pos2, "");
+                   isFirst=false;
+                 }
+                 aByte.flush(str);
+               }
+               else {
+                 if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
+                 else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
+                 isFirst=false;  
+               }    
              }
-             else if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));  
-                  else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
-           }
            if (list.size()>=2) str.append(", ");
            else str.append("\n");
          }
@@ -742,6 +761,8 @@ public class Assembler {
        
        // we have a min of 1 or a max of 8 word swapped, so use the right call for macro
        int index=(int)(list.size()/2);
+       
+       int pos1=str.length();      // store initial position
         
        // create starting command according to the kind of byte
        switch (aWordSwapped) {
@@ -762,9 +783,18 @@ public class Assembler {
            break;
        }
        
+       int pos2=str.length();      // store final position
+       boolean isFirst=true;       // true if this is the first output
+       
        while (!list.isEmpty()) {
          // if only 1 byte left, use byte coding
-         if (list.size()==1) aByte.flush(str);
+         if (list.size()==1) {
+           if (isFirst) {
+             str.replace(pos1, pos2, "");
+             isFirst=false;                    
+           }  
+           aByte.flush(str);
+         }
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
@@ -773,8 +803,9 @@ public class Assembler {
            
            if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
-            else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                 else str.append("$").append(ShortToExe(memRelLow.address));  
+             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                  else str.append("$").append(ShortToExe(memRelLow.address)); 
+             isFirst=false;
            } else {
              // if cannot make a word with relative locations, force all to be of byte type
              if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
@@ -782,9 +813,16 @@ public class Assembler {
                list.addFirst(memLow);
                listRel.addFirst(memRelHigh);
                listRel.addFirst(memRelLow);
+               if (isFirst) {
+                 str.replace(pos1, pos2, "");
+                 isFirst=false;
+               }
                aByte.flush(str);
              }
-             else str.append("$").append(ByteToExe(Unsigned.done(memLow.copy))).append(ByteToExe(Unsigned.done(memHigh.copy)));                            
+             else {
+               str.append("$").append(ByteToExe(Unsigned.done(memLow.copy))).append(ByteToExe(Unsigned.done(memHigh.copy)));
+               isFirst=false;
+             }                            
            }
            if (list.size()>=2) str.append(", ");
            else if (aWordSwapped==MACRO1_WORD_SWAPPED) str.append(")\n");
