@@ -647,7 +647,7 @@ public class Disassembly {
         aLong=option.ca65Long;
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
-        //aText=option.ca65Text;
+        aText=option.ca65Text;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -662,7 +662,7 @@ public class Disassembly {
         aLong=option.acmeLong;
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
-        //aText=option.acmeText;
+        aText=option.acmeText;
         break;
       case KICK:
         aStarting=option.kickStarting;  

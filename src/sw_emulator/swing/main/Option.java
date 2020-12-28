@@ -631,7 +631,7 @@ public class Option {
   
   
   /** TMPX: starting declaration */
-  public Assembler.Starting tmpxStarting=Assembler.Starting.DOT_CPU_A; 
+  public Assembler.Starting tmpxStarting=Assembler.Starting.FAKE; 
   
   /** TMPx: origin declaration */
   public Assembler.Origin tmpxOrigin=Assembler.Origin.ASTERISK; 
@@ -707,6 +707,9 @@ public class Option {
   /** CA65: multi color sprite */
   public Assembler.MultiSprite ca65MultiSprite=Assembler.MultiSprite.MACRO3_BIN;
   
+  /** CA65: text declaration */
+  public Assembler.Text ca65Text=Assembler.Text.DOT_BYTE_TEXT;
+  
  
   
   /** ACME: starting declaration */
@@ -744,6 +747,9 @@ public class Option {
    
   /** ACME: multi color sprite */
   public Assembler.MultiSprite acmeMultiSprite=Assembler.MultiSprite.MACRO2_BIN;
+  
+  /** ACME: text declaration */
+  public Assembler.Text acmeText=Assembler.Text.MARK_TEXT;
   
   
   

@@ -145,6 +145,7 @@ public class FileManager {
       option.ca65Long = Assembler.Long.valueOf(in.readUTF());
       option.ca65MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.ca65MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.ca65Text = Assembler.Text.valueOf(in.readUTF());
  
       option.acmeStarting = Assembler.Starting.valueOf(in.readUTF());
       option.acmeOrigin = Assembler.Origin.valueOf(in.readUTF());
@@ -158,6 +159,7 @@ public class FileManager {
       option.acmeLong = Assembler.Long.valueOf(in.readUTF());
       option.acmeMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.acmeMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.acmeText = Assembler.Text.valueOf(in.readUTF());
             
       option.kickColonMacro = in.readBoolean();
       option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
@@ -381,6 +383,7 @@ public class FileManager {
       out.writeUTF(option.ca65Long.name());
       out.writeUTF(option.ca65MonoSprite.name());
       out.writeUTF(option.ca65MultiSprite.name());
+      out.writeUTF(option.ca65Text.name());
       
       out.writeUTF(option.acmeStarting.name());
       out.writeUTF(option.acmeOrigin.name());
@@ -394,6 +397,7 @@ public class FileManager {
       out.writeUTF(option.acmeLong.name());
       out.writeUTF(option.acmeMonoSprite.name());
       out.writeUTF(option.acmeMultiSprite.name());
+      out.writeUTF(option.acmeText.name());
       
       out.writeBoolean(option.kickColonMacro);
       out.writeUTF(option.kickStarting.name());

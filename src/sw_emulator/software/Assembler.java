@@ -183,6 +183,7 @@ public class Assembler {
    /**
     * Starting declaration
     *  -> processor 6502
+    *  -> cpu = 6502
     *  -> .cpu "6502"
     *  -> .cpu 6502
     *  -> .cpu _6502 
@@ -192,6 +193,7 @@ public class Assembler {
     */
    public enum Starting implements ActionType {
       PROC,             // processor 6502
+      FAKE,             //  cpu = 6502
       DOT_CPU_A,        // .cpu "6502"
       DOT_CPU,          // .cpu 6502
       DOT_CPU_UND,      // .cpu _6502
@@ -206,6 +208,9 @@ public class Assembler {
           case PROC:
             str.append(getDataSpacesTabs()).append("processor 6502\n\n");
             break;
+          case FAKE:
+            str.append(getDataSpacesTabs()).append("cpu = 6502\n\n");
+            break;            
           case DOT_CPU_A:
             str.append(getDataSpacesTabs()).append(".cpu \"6502\"\n\n");  
             break;
@@ -1965,22 +1970,26 @@ public class Assembler {
    /**
     * Text declaration type
     *  -> .byte "xxx"
+    *  -> .byt "xxx"
     *  -> byte "xxx"
     *  -> dc "xxx"
     *  -> dc.b "xxx"
     *  -> .byt "xxx"
     *  -> !text "xxx"
     *  -> .text "xxx"
-    *  -> 
-    *  -> 
+    *  -> !tx "xxx"
+    *  -> !raw "xxx" 
     */
    public enum Text implements ActionType {
       DOT_BYTE_TEXT,      // .byte "xxx"
+      DOT_BYT_TEXT,       //  .byt "xxx"
       BYTE_TEXT,          //  byte "xxx"
       DC_BYTE_TEXT,       //    dc "xxx"
       DC_B_BYTE_TEXT,     //  dc.b "xxx"
       DOT_BYT_BYTE_TEXT,  //  .byt "xxx"
       MARK_TEXT,          // !text "xxx"
+      MARK_TX_TEXT,       //   !tx "xxx"
+      MARK_RAW_TEXT,      //  !raw "xxx"
       DOT_TEXT            // .text "xxx"
       ;
 
@@ -1991,11 +2000,16 @@ public class Assembler {
         boolean isFirst=true;
         boolean isSpecial=false;
         int position=0;
+        
+        int pos1=str.length();
                
         switch (aText) {
           case DOT_BYTE_TEXT:
             str.append(getDataSpacesTabs()).append((".byte "));
             break;
+          case DOT_BYT_TEXT:
+            str.append(getDataSpacesTabs()).append((".byt "));
+            break;  
           case BYTE_TEXT:
             str.append(getDataSpacesTabs()).append(("byte "));  
             break;
@@ -2008,17 +2022,26 @@ public class Assembler {
           case MARK_TEXT:
             str.append(getDataSpacesTabs()).append(("!text "));  
             break;
+          case MARK_TX_TEXT:
+            str.append(getDataSpacesTabs()).append(("!tx "));  
+            break; 
+          case MARK_RAW_TEXT:
+            str.append(getDataSpacesTabs()).append(("!raw "));  
+            break;            
           case DOT_TEXT:
             str.append(getDataSpacesTabs()).append((".text "));   
             break;  
         }       
         
+        int pos2=str.length();
+        
         MemoryDasm mem;
+        MemoryDasm memRel;
       
         while (!list.isEmpty()) {
           // accodate each bytes in the format choosed
           mem=list.pop();
-          listRel.pop();
+          memRel=listRel.pop();
           
           // not all char can be converted in string
           
@@ -2049,8 +2072,91 @@ public class Assembler {
                         }  
                   str.append((char)(mem.copy & 0xFF));  
                 }                  
+              break;
+            case TMPX:
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
               break;  
-              
+            case CA65:
+              if ( (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }     
+              break;
+            case ACME:                
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val==0x5C) ||
+                   (val>127) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
+              break;              
             case KICK:
               if (isFirst) {
                 position=str.length();
