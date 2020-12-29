@@ -3017,18 +3017,99 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm mem;   
       
     int rows[]=jTableMemory.getSelectedRows();
+
+    switch (dataType) {
+      case ZERO_TEXT:
+        // we must find area that terminate with a 0
+        int pos;
+        for (pos=rows.length-1; pos>=0; pos--) {
+          if (project.memory[rows[pos]].copy==0) break;  
+        }
+
+        if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.ZERO_TEXT)) {
+          int lastRow=rows[pos];  
+          for (int i=pos; i>=0; i--) {
+            if (lastRow-rows[i]>1) break;
+            lastRow=rows[i];
+          
+            mem= project.memory[rows[i]];
+            mem.isData=true;
+            mem.isCode=false;
+            mem.isGarbage=false;
+            mem.dataType=dataType;
+            if (option.eraseDComm) mem.dasmComment=null;
+            if (option.erasePlus && mem.type=='+') {
+              mem.related=-1;
+              mem.type=' ';
+            }  
+          }          
+        } else JOptionPane.showMessageDialog(this, "This area is not zero terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
+        break;
+      case NUM_TEXT:
+        if (rows.length==0) break;
         
-    for (int i=0; i<rows.length; i++) {
-      mem= project.memory[rows[i]];
-      mem.isData=true;
-      mem.isCode=false;
-      mem.isGarbage=false;
-      mem.dataType=dataType;
-      if (option.eraseDComm) mem.dasmComment=null;
-      if (option.erasePlus && mem.type=='+') {
-        mem.related=-1;
-        mem.type=' ';
-      }
+        boolean over=false;
+        boolean few=false;
+        int num=project.memory[rows[0]].copy;
+        
+        if (num>=rows.length) few=true;        
+        if (project.memory[rows[0]].dataType==DataType.NUM_TEXT) over=true;
+
+        int lastRow=rows[0];
+        for (pos=1; pos<num; pos++) {            
+          if (project.memory[rows[pos]].dataType==DataType.NUM_TEXT) {
+            over=true;
+            break;
+          }  
+          if (rows[pos]-lastRow>1) {
+            few=true;  
+            break;
+          }
+          lastRow=rows[pos];
+        }
+        
+        if (over) {
+          JOptionPane.showMessageDialog(this, "Overlapping area for text definition", "Warning", JOptionPane.WARNING_MESSAGE);
+          break;
+        }  
+        
+        if (few) {
+          JOptionPane.showMessageDialog(this, "Too few elements for a string of "+num+" chars", "Warning", JOptionPane.WARNING_MESSAGE);
+          break;  
+        }
+        
+        if (pos>0) {
+          for (int i=0; i<=pos; i++) {
+            mem= project.memory[rows[i]];
+            mem.isData=true;
+            mem.isCode=false;
+            mem.isGarbage=false;
+            mem.dataType=dataType;
+            if (option.eraseDComm) mem.dasmComment=null;
+            if (option.erasePlus && mem.type=='+') {
+              mem.related=-1;
+              mem.type=' ';
+            }  
+          }  
+        }
+        
+        break;  
+      default:              
+        for (int i=0; i<rows.length; i++) {
+          mem= project.memory[rows[i]];
+          mem.isData=true;
+          mem.isCode=false;
+          mem.isGarbage=false;
+          if (mem.dataType==DataType.ZERO_TEXT) removeType(rows[i], DataType.ZERO_TEXT);
+          if (mem.dataType==DataType.NUM_TEXT) removeType(rows[i], DataType.NUM_TEXT);
+          mem.dataType=dataType;
+          if (option.eraseDComm) mem.dasmComment=null;
+          if (option.erasePlus && mem.type=='+') {
+            mem.related=-1;
+            mem.type=' ';
+          }
+        }
+       break;
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -3036,6 +3117,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     for (int i=0; i<rows.length; i++) {
       jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
     }
+  }
+  
+  /**
+   * Remove text type that are above or below this point
+   * 
+   * @param pos the position
+   * @param type the type to remove
+   */
+  private void removeType(int pos, DataType type) {
+    if (pos==0) return;
+    for (int i=pos-1; i>=0; i--) {
+      if (project.memory[i].dataType==type) project.memory[i].dataType=DataType.NONE;
+      else break;
+    }
+    
+    if (pos==0xFFFF) return;
+    for (int i=pos+1; i<0xFFFF; i++) {
+      if (project.memory[i].dataType==type) project.memory[i].dataType=DataType.NONE;
+      else break;  
+    }        
   }
 
   /**
