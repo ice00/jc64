@@ -2242,8 +2242,12 @@ public class Assembler {
 
      @Override
      public void flush(StringBuilder str) {
+       if (list.isEmpty()) return;    
+         
        boolean isString=false;
        boolean isFirst=true;  
+       
+       int pos1=str.length();
          
        switch (aNumText) {
          case DOT_PTEXT_NUMTEXT:
@@ -2266,8 +2270,16 @@ public class Assembler {
            break;  
        }  
        
+       int pos2=str.length();
+       
        MemoryDasm mem;
        MemoryDasm memRel;
+       
+       if (option.assembler==Assembler.Name.TMPX)  {
+         // this byte is calculated by instruction
+         list.pop();
+         listRel.pop();
+       }
       
         while (!list.isEmpty()) {
           // accodate each bytes in the format choosed
@@ -2309,6 +2321,37 @@ public class Assembler {
                   }     
               }
               break;
+            case TMPX:
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
+              break;  
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -2337,6 +2380,8 @@ public class Assembler {
        
        boolean isString=false;
        boolean isFirst=true;
+       
+      int pos1=str.length(); 
          
        switch (aZeroText) {
          case DOT_NULL_ZEROTEXT:
@@ -2358,6 +2403,8 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append(("dc.b "));  
            break;   
        }
+       
+       int pos2=str.length();
        
        MemoryDasm mem;
        MemoryDasm memRel;
@@ -2397,6 +2444,42 @@ public class Assembler {
                   str.append((char)(mem.copy & 0xFF));  
                 }                  
               break;
+           case TMPX:
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              if (list.size()==1) {
+                  // terminating 0 is ommitted
+                list.pop();
+                listRel.pop();
+              }
+              break;    
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");

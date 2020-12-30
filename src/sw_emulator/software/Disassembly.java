@@ -641,8 +641,8 @@ public class Disassembly {
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
         aText=option.tmpxText;
-        //aNumText=option.tmpxNumText;
-        //aZeroText=option.tmpxZeroText;
+        aNumText=option.tmpxNumText;
+        aZeroText=option.tmpxZeroText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  

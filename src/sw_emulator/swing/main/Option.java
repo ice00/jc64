@@ -631,7 +631,7 @@ public class Option {
   /** DASM: text with num chars declaration */
   public Assembler.NumText dasmNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
   
-  /** DASM: text declaration */
+  /** DASM: text null terminated declaration */
   public Assembler.ZeroText dasmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
   
   
@@ -671,8 +671,14 @@ public class Option {
   /** TMPx: multi color sprite declaration type */
   public Assembler.MultiSprite tmpxMultiSprite=Assembler.MultiSprite.MACRO4_BIN;
   
-   /** TMPx: text declaration type */
+  /** TMPx: text declaration type */
   public Assembler.Text tmpxText=Assembler.Text.DOT_TEXT;
+  
+  /** TMPx: text with num chars declaration */
+  public Assembler.NumText tmpxNumText=Assembler.NumText.DOT_PTEXT_NUMTEXT;
+  
+  /** TMPx: text null temrianted declaration */
+  public Assembler.ZeroText tmpxZeroText=Assembler.ZeroText.DOT_NULL_ZEROTEXT;
   
   
   
