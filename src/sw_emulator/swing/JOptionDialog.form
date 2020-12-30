@@ -168,6 +168,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupCa65Text">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmNumText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmZeroText">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -2198,119 +2202,117 @@
                                   <Component id="jCheckBoxDasmF3Comp" min="-2" pref="332" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelDasmZeroTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelDasmTribyteDeclaration" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabelDasmTribyteDeclaration" max="32767" attributes="0"/>
-                                                      <Group type="102" attributes="0">
-                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="jLabelDasmByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmLabelDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmWordDeclaration" alignment="1" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmStarting" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmOriginDeclaration" alignment="0" pref="137" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="jLabelDasmBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="jLabelDasmLongDeclaration" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="jLabelDasmByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmLabelDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmWordDeclaration" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmStarting" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmOriginDeclaration" alignment="0" pref="137" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelDasmBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jRadioButtonDasmProcStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmDotOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmDotLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabelDasmMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                      <Component id="jLabelDasmMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPaneDasmLabelName15" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLabelName8" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLabelName1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLabelName3" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLabelName" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmDotByte" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmDotWord" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jScrollPaneDasmDotLong" min="-2" pref="126" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
+                                              <Component id="jLabelDasmLongDeclaration" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmProcStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotLong" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="153" pref="153" max="-2" attributes="0"/>
-                                                          <Component id="jRadioButtonDasmDotByteText" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="jLabelDasmTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmDotByteText" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabelDasmWordSwappedDeclaration" min="-2" pref="139" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonDasmDcDotSWordSwapped" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmDcDotSWordSwapped" max="32767" attributes="0"/>
-                                              </Group>
+                                          <Component id="jLabelDasmWordSwappedDeclaration" min="-2" pref="139" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcDotSWordSwapped" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabelDasmMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelDasmMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelDasmTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelDasmNumTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="153" pref="153" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmDotByteZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotByteText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDotByteNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPaneDasmLabelName15" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelName8" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelName1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelName3" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmLabelName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotWord" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcDotSWordSwapped" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmMacroTribyte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotLong" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteNumText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteZeroText" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonDasmByteZeroText" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmByteZeroText" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcZeroText" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonDasmOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmCstyleComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonDasmLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jRadioButtonDasmOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmCstyleComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonDasmLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                               <Component id="jRadioButtonDasmByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonDasmByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmByteText" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPaneDasmLabelNameColon" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLabelName4" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmCstyleComment" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPaneDasmLabelName9" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmCstyleComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName4" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelNameColon" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLong" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
                                               <Component id="jScrollPaneDasmByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPaneDasmByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmLong" min="-2" pref="126" max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneDasmWord" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneDasmByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2320,57 +2322,56 @@
                                               <Component id="jRadioButtonDasmDcLLong" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonDasmMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonDasmMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="jScrollPaneDasmDcWWord" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmDcLLong" alignment="0" pref="114" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="jScrollPaneDasmLabelName5" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmMacroHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jScrollPaneDasmDcByte" min="-2" pref="114" max="-2" attributes="0"/>
-                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jRadioButtonDasmDcBByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jRadioButtonDasmMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jScrollPaneDasmMacroBinMonoSprite" pref="102" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPaneDasmDCBByte" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jRadioButtonDasmDcText" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jRadioButtonDasmByteText" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonDasmByteNumText" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmByteText" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmByteNumText" min="-2" pref="125" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonDasmDcText" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmMacroHexMonoSprite1" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonDasmDcDotBText" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmDcDotBText" min="-2" pref="102" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcNumText" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPaneDasmLabelName5" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcByte" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcWWord" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcLLong" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmMacroHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmMacroHexMonoSprite1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcNumText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcZeroText" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcDotBZeroText" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneDasmDcDotBZeroText" min="-2" pref="102" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmDcBByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcDotBText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcDotBNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneDasmDCBByte" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneDasmMacroBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmDcDotBText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneDasmDcDotBNumText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2463,7 +2464,7 @@
                                       <Component id="jRadioButtonDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcLLong" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelDasmMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -2498,6 +2499,30 @@
                                       <Component id="jScrollPaneDasmMacroHexMonoSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcDotBText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcDotBText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelDasmNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotByteNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmByteNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcDotBNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcDotBNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelDasmZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotByteZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmByteZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcDotBZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcDotBZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -3498,6 +3523,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupDasmText"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotByteTextItemStateChanged"/>
@@ -3604,7 +3630,259 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotB">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotBText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc.b&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmNumTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text #num char:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotByteNumText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmNumText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotByteNumTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotByteNumText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotByteNumText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmByteNumText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmNumText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmByteNumTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmByteNumText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByteNumText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcNumText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmNumText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcNumTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcNumText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcNumText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcDotBNumText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmNumText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcDotBNumTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcDotBNumText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotBNumText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc.b&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmZeroTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text 0 terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotByteZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmZeroText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotByteZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotByteZeroText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotByteZeroText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmByteZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmZeroText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmByteZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmByteZeroText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByteText2">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmZeroText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcZeroText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcZeroText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcDotBZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmZeroText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcDotBZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcDotBZeroText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotB2">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -6600,7 +6878,6 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupDasmText"/>
                             </Property>
-                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkTextItemStateChanged"/>

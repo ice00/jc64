@@ -628,6 +628,11 @@ public class Option {
   /** DASM: text declaration */
   public Assembler.Text dasmText=Assembler.Text.DOT_BYTE_TEXT;
   
+  /** DASM: text with num chars declaration */
+  public Assembler.NumText dasmNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  
+  /** DASM: text declaration */
+  public Assembler.ZeroText dasmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
   
   
   /** TMPX: starting declaration */

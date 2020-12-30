@@ -128,6 +128,12 @@ public class Disassembly {
    
    /** Asembler text type */
    protected static Assembler.Text aText;
+   
+   /** Asembler text with number of chars type */
+   protected static Assembler.NumText aNumText;   
+   
+   /** Asembler text zero terminated type */
+   protected static Assembler.ZeroText aZeroText;   
     
   /**
    * Disassemble the given data
@@ -618,6 +624,8 @@ public class Disassembly {
         aMonoSprite=option.dasmMonoSprite;
         aMultiSprite=option.dasmMultiSprite;
         aText=option.dasmText;
+        aNumText=option.dasmNumText;
+        aZeroText=option.dasmZeroText;
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -633,6 +641,8 @@ public class Disassembly {
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
         aText=option.tmpxText;
+        //aNumText=option.tmpxNumText;
+        //aZeroText=option.tmpxZeroText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
@@ -648,6 +658,8 @@ public class Disassembly {
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
         aText=option.ca65Text;
+        //aNumText=option.ca65NumText;
+        //aZeroText=option.ca65ZeroText;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -663,6 +675,8 @@ public class Disassembly {
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
         aText=option.acmeText;
+        //aNumText=option.acmeNumText;
+        //aZeroText=option.acmeZeroText;
         break;
       case KICK:
         aStarting=option.kickStarting;  
@@ -678,6 +692,8 @@ public class Disassembly {
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
         aText=option.kickText;
+        //aNumText=option.kickNumText;
+        //aZeroText=option.kickZeroText;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -693,13 +709,16 @@ public class Disassembly {
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
         aText=option.tass64Text;
+        //aNumText=option.tass64NumText;
+        //aZeroText=option.tass64ZeroText;
         break;
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong,
-                        aMonoSprite, aMultiSprite, aText);      
+                        aMonoSprite, aMultiSprite, 
+                        aText, aNumText, aZeroText);      
   }
   
   /**

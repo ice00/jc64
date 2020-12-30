@@ -3056,17 +3056,19 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (project.memory[rows[0]].dataType==DataType.NUM_TEXT) over=true;
 
         int lastRow=rows[0];
-        for (pos=1; pos<num; pos++) {            
-          if (project.memory[rows[pos]].dataType==DataType.NUM_TEXT) {
-            over=true;
-            break;
-          }  
-          if (rows[pos]-lastRow>1) {
-            few=true;  
-            break;
+        if (num>0 && !few) {
+          for (pos=1; pos<num; pos++) {            
+            if (project.memory[rows[pos]].dataType==DataType.NUM_TEXT) {
+              over=true;
+              break;
+            }  
+            if (rows[pos]-lastRow>1) {
+              few=true;  
+              break;
+            }
+            lastRow=rows[pos];
           }
-          lastRow=rows[pos];
-        }
+        } else pos=0;
         
         if (over) {
           JOptionPane.showMessageDialog(this, "Overlapping area for text definition", "Warning", JOptionPane.WARNING_MESSAGE);

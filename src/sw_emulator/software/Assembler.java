@@ -1995,7 +1995,8 @@ public class Assembler {
 
       @Override
       public void flush(StringBuilder str) {
-        if (list.isEmpty()) return;        
+        if (list.isEmpty()) return;    
+        
         boolean isString=false;
         boolean isFirst=true;
         boolean isSpecial=false;
@@ -2217,7 +2218,7 @@ public class Assembler {
                 }   
               break;  
           }                                  
-          if (listRel.isEmpty()) { 
+          if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
@@ -2225,6 +2226,187 @@ public class Assembler {
         }
       }
    }
+   
+   
+   /**
+    * Text with number of chars
+    */
+   public enum NumText implements ActionType {
+     DOT_PTEXT_NUMTEXT,       // -> .ptext "xxxx"
+     DOT_TEXT_P_NUMTEXT,      // -> .text n"xxxx" 
+     DOT_BYTE_NUMTEXT,        // -> .byte "xxx"
+     BYTE_NUMTEXT,            // ->  byte "xxx"
+     DC_NUMTEXT,              // ->    dc "xxx"
+     DC_DOT_B_NUMTEXT         // ->  dc.b "xxx"
+     ;     
+
+     @Override
+     public void flush(StringBuilder str) {
+       boolean isString=false;
+       boolean isFirst=true;  
+         
+       switch (aNumText) {
+         case DOT_PTEXT_NUMTEXT:
+           str.append(getDataSpacesTabs()).append((".ptext "));
+           break; 
+         case DOT_TEXT_P_NUMTEXT:
+           str.append(getDataSpacesTabs()).append((".text p"));
+           break;  
+         case DOT_BYTE_NUMTEXT:
+           str.append(getDataSpacesTabs()).append((".byte "));
+           break;
+         case BYTE_NUMTEXT:
+           str.append(getDataSpacesTabs()).append(("byte "));  
+           break;
+         case DC_NUMTEXT:
+           str.append(getDataSpacesTabs()).append(("dc "));  
+           break;
+         case DC_DOT_B_NUMTEXT:
+           str.append(getDataSpacesTabs()).append(("dc.b "));  
+           break;  
+       }  
+       
+       MemoryDasm mem;
+       MemoryDasm memRel;
+      
+        while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          memRel=listRel.pop();
+          
+          // not all char can be converted in string
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if (isFirst) {  
+               str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+               isFirst=false;                   
+              } else {  
+                  if ( (val==0x00) ||
+                       (val==0x0A) ||
+                       (val==0x22) ||
+                       (val>127)    
+                     )  {
+                      if (isString) {
+                        str.append("\"");
+                        isString=false;  
+                      }
+                      if (isFirst) {
+                        str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                        isFirst=false;
+                      } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else {
+                    if (isFirst) {
+                         isFirst=false;
+                         isString=true;
+                         str.append("\"");
+                    } else if (!isString) {
+                             str.append(", \"");
+                             isString=true;  
+                           }  
+                     str.append((char)(mem.copy & 0xFF));  
+                  }     
+              }
+              break;
+          }   
+          if (list.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+
+          }
+       }     
+     }       
+   }   
+   
+   /**
+    * Text terminated with zero
+    */
+   public enum ZeroText implements ActionType {
+     DOT_NULL_ZEROTEXT,       // -> .null "xxxx"
+     DOT_TEXT_N_ZEROTEXT,     // -> -text n"xxxx" 
+     DOT_BYTE_ZEROTEXT,       // -> .byte "xxx"
+     BYTE_ZEROTEXT,           // ->  byte "xxx"
+     DC_BYTE_ZEROTEXT,        // ->    dc "xxx"
+     DC_B_BYTE_ZEROTEXT       // ->  dc.b "xxx"
+     ;
+
+     @Override
+     public void flush(StringBuilder str) {
+       if (list.isEmpty()) return;  
+       
+       boolean isString=false;
+       boolean isFirst=true;
+         
+       switch (aZeroText) {
+         case DOT_NULL_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append((".null "));
+           break; 
+         case DOT_TEXT_N_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append((".text n"));
+           break;  
+         case DOT_BYTE_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append((".byte "));
+           break;
+         case BYTE_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append(("byte "));  
+           break;
+         case DC_BYTE_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append(("dc "));  
+           break;
+         case DC_B_BYTE_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append(("dc.b "));  
+           break;   
+       }
+       
+       MemoryDasm mem;
+       MemoryDasm memRel;
+      
+        while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          memRel=listRel.pop();
+          
+          // not all char can be converted in string
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
+              break;
+          }   
+          if (list.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+
+          }
+       }     
+     }
+   }
+
    
    /** Fifo list  of memory locations */
    protected static LinkedList<MemoryDasm> list=new LinkedList();
@@ -2280,6 +2462,12 @@ public class Assembler {
    
    /** Assembler text type */
    protected static Assembler.Text aText;
+   
+   /** Assembler text with num char type */
+   protected static Assembler.NumText aNumText;   
+   
+   /** Assembler zero text type */
+   protected static Assembler.ZeroText aZeroText;
               
    /** Actual type being processed */
    ActionType actualType=null;
@@ -2296,7 +2484,9 @@ public class Assembler {
    /** Actual size of multicolor sprite block */
    int sizeMultiSpriteBlock=0;
    
-  
+   /** Memory dasm with num or chars */
+   MemoryDasm numText;
+     
    /**
     * Set the option to use
     * 
@@ -2314,6 +2504,8 @@ public class Assembler {
     * @param aMonoSprite the mono sprite type to use
     * @param aMultiSprite the multi sprite type to use
     * @param aText the text type to use
+    * @param aNumText the text with number of char before
+    * @param aZeroText the text with 0 terminated char
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -2328,7 +2520,10 @@ public class Assembler {
                          Assembler.Long aLong,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite,
-                         Assembler.Text aText) {
+                         Assembler.Text aText,
+                         Assembler.NumText aNumText,
+                         Assembler.ZeroText aZeroText
+                         ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
      Assembler.aOrigin=aOrigin;
@@ -2343,7 +2538,8 @@ public class Assembler {
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
      Assembler.aText=aText;
-     
+     Assembler.aNumText=aNumText;
+     Assembler.aZeroText=aZeroText;
       
      isMonoSpriteBlock=false;
      sizeMonoSpriteBlock=0;
@@ -2447,12 +2643,26 @@ public class Assembler {
          actualType.flush(str);
          sizeMultiSpriteBlock=0;
        } 
-     }else
-       // we are processing text?
-       if (actualType instanceof Text) {
-         // look if it is time to aggregate data
-         if (list.size()==option.maxTextAggregate) actualType.flush(str);         
-       }      
+     } else
+     // we are processing text?
+     if (actualType instanceof Text) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
+     } else
+     // we are processing text?
+     if (actualType instanceof NumText) {
+       if (numText==null) numText=mem;
+       // look if it is time to aggregate data
+       if (list.size()==numText.copy+1) {
+         actualType.flush(str);
+         numText=null;
+       }         
+     } else
+     // we are processing text?
+     if (actualType instanceof ZeroText) {
+       // look if it is time to aggregate data
+       if (mem.copy==0) actualType.flush(str);         
+     }    
    }
    
    /**
@@ -2660,45 +2870,63 @@ public class Assembler {
        case BYTE_BIN:
        case BYTE_CHAR:
          isMonoSpriteBlock=false;
-         isMultiSpriteBlock=false;        
+         isMultiSpriteBlock=false;    
+         numText=null;
          return aByte;
        case WORD:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
+         numText=null;
          return aWord;
        case SWAPPED:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
+         numText=null;
          return aWordSwapped;       
        case TRIBYTE:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
+         numText=null;
          return aTribyte;  
        case LONG:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
+         numText=null;
          return aLong;        
        case MONO_SPRITE:
          if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
          isMonoSpriteBlock=true;  
          isMultiSpriteBlock=false;
          sizeMonoSpriteBlock++;
+         numText=null;
          return aMonoSprite;
        case MULTI_SPRITE:
          if (!isMultiSpriteBlock) sizeMultiSpriteBlock=0; 
          isMultiSpriteBlock=true; 
          isMonoSpriteBlock=false;
          sizeMultiSpriteBlock++;
+         numText=null;
          return aMultiSprite;  
        case TEXT:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
-         return aText;   
+         return aText; 
+       case NUM_TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         return aNumText;     
+       case ZERO_TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aZeroText;         
+         
      }
      
      // default is of Byte type
      isMonoSpriteBlock=false;
      isMultiSpriteBlock=false; 
+     numText=null;
      return aByte;
    }   
 
