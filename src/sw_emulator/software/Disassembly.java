@@ -658,8 +658,8 @@ public class Disassembly {
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
         aText=option.ca65Text;
-        //aNumText=option.ca65NumText;
-        //aZeroText=option.ca65ZeroText;
+        aNumText=option.ca65NumText;
+        aZeroText=option.ca65ZeroText;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  

@@ -721,6 +721,12 @@ public class Option {
   /** CA65: text declaration */
   public Assembler.Text ca65Text=Assembler.Text.DOT_BYTE_TEXT;
   
+  /** CA65: text with num chars declaration */
+  public Assembler.NumText ca65NumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  
+  /** CA65: text null temrianted declaration */
+  public Assembler.ZeroText ca65ZeroText=Assembler.ZeroText.DOT_ASCIIZ_ZEROTEXT;
+  
  
   
   /** ACME: starting declaration */

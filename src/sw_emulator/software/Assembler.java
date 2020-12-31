@@ -2235,6 +2235,7 @@ public class Assembler {
      DOT_PTEXT_NUMTEXT,       // -> .ptext "xxxx"
      DOT_TEXT_P_NUMTEXT,      // -> .text n"xxxx" 
      DOT_BYTE_NUMTEXT,        // -> .byte "xxx"
+     DOT_BYT_NUMTEXT,         // ->  .byt "xxx"
      BYTE_NUMTEXT,            // ->  byte "xxx"
      DC_NUMTEXT,              // ->    dc "xxx"
      DC_DOT_B_NUMTEXT         // ->  dc.b "xxx"
@@ -2259,6 +2260,9 @@ public class Assembler {
          case DOT_BYTE_NUMTEXT:
            str.append(getDataSpacesTabs()).append((".byte "));
            break;
+         case DOT_BYT_NUMTEXT:
+           str.append(getDataSpacesTabs()).append((".byt "));
+           break;           
          case BYTE_NUMTEXT:
            str.append(getDataSpacesTabs()).append(("byte "));  
            break;
@@ -2352,6 +2356,36 @@ public class Assembler {
                   str.append((char)(mem.copy & 0xFF));  
                 }                  
               break;  
+            case CA65:
+              if (isFirst) {  
+               str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+               isFirst=false;                   
+              } else {  
+                  if ( (val==0x0A) ||
+                       (val==0x22) ||
+                       (val>127)    
+                     )  {
+                    if (isString) {
+                      str.append("\"");
+                      isString=false;  
+                    }
+                    if (isFirst) {
+                      str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                      isFirst=false;
+                    } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else {
+                      if (isFirst) {
+                          isFirst=false;
+                          isString=true;
+                          str.append("\"");
+                     } else if (!isString) {
+                              str.append(", \"");
+                              isString=true;  
+                            }  
+                      str.append((char)(mem.copy & 0xFF));  
+                    }    
+              }
+              break;  
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -2366,12 +2400,13 @@ public class Assembler {
     * Text terminated with zero
     */
    public enum ZeroText implements ActionType {
-     DOT_NULL_ZEROTEXT,       // -> .null "xxxx"
-     DOT_TEXT_N_ZEROTEXT,     // -> -text n"xxxx" 
-     DOT_BYTE_ZEROTEXT,       // -> .byte "xxx"
-     BYTE_ZEROTEXT,           // ->  byte "xxx"
-     DC_BYTE_ZEROTEXT,        // ->    dc "xxx"
-     DC_B_BYTE_ZEROTEXT       // ->  dc.b "xxx"
+     DOT_NULL_ZEROTEXT,       // ->   .null "xxxx"
+     DOT_TEXT_N_ZEROTEXT,     // ->   -text n"xxxx" 
+     DOT_BYTE_ZEROTEXT,       // ->   .byte "xxx"
+     DOT_ASCIIZ_ZEROTEXT,     // -> .asciiz "xxx"
+     BYTE_ZEROTEXT,           // ->    byte "xxx"
+     DC_BYTE_ZEROTEXT,        // ->      dc "xxx"
+     DC_B_BYTE_ZEROTEXT       // ->    dc.b "xxx"
      ;
 
      @Override
@@ -2393,6 +2428,9 @@ public class Assembler {
          case DOT_BYTE_ZEROTEXT:
            str.append(getDataSpacesTabs()).append((".byte "));
            break;
+         case DOT_ASCIIZ_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append((".asciiz "));
+           break;           
          case BYTE_ZEROTEXT:
            str.append(getDataSpacesTabs()).append(("byte "));  
            break;
@@ -2479,7 +2517,38 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
               }
-              break;    
+              break; 
+            case CA65:
+              if ( (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              if (list.size()==1) {
+                  // terminating 0 is ommitted
+                list.pop();
+                listRel.pop();
+              }
+              break;  
+              
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
