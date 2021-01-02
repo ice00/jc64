@@ -675,8 +675,8 @@ public class Disassembly {
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
         aText=option.acmeText;
-        //aNumText=option.acmeNumText;
-        //aZeroText=option.acmeZeroText;
+        aNumText=option.acmeNumText;
+        aZeroText=option.acmeZeroText;
         break;
       case KICK:
         aStarting=option.kickStarting;  

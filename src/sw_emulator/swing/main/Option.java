@@ -768,6 +768,11 @@ public class Option {
   /** ACME: text declaration */
   public Assembler.Text acmeText=Assembler.Text.MARK_TEXT;
   
+  /** ACME: text with num chars declaration */
+  public Assembler.NumText acmeNumText=Assembler.NumText.MARK_TEXT_NUMTEXT;
+  
+  /** ACME: text null temrianted declaration */
+  public Assembler.ZeroText acmeZeroText=Assembler.ZeroText.MARK_TEXT_ZEROTEXT;
   
   
   /** Kick: colon macro */
