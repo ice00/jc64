@@ -692,8 +692,8 @@ public class Disassembly {
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
         aText=option.kickText;
-        //aNumText=option.kickNumText;
-        //aZeroText=option.kickZeroText;
+        aNumText=option.kickNumText;
+        aZeroText=option.kickZeroText;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -728,7 +728,7 @@ public class Disassembly {
    */
   public String getAssemblerDescription() {
     return  "****************************\n"+
-            "  JC64dis vesrion 0.9\n"+
+            "  JC64dis version 0.9\n"+
             "  \n"+
             "  Source in "+option.assembler.getName()+" format\n"+
             "****************************\n";        

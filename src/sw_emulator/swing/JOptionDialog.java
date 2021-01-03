@@ -209,6 +209,8 @@ public class JOptionDialog extends javax.swing.JDialog {
         buttonGroupAcmeZeroText = new javax.swing.ButtonGroup();
         buttonGroupTmpxZeroText = new javax.swing.ButtonGroup();
         buttonGroupTass64Long = new javax.swing.ButtonGroup();
+        buttonGroupKickNumText = new javax.swing.ButtonGroup();
+        buttonGroupKickZeroText = new javax.swing.ButtonGroup();
         jPanelOption = new javax.swing.JPanel();
         jTabbedPaneOption = new javax.swing.JTabbedPane();
         jPanelPreview = new javax.swing.JPanel();
@@ -884,6 +886,14 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneKickDotDwLong = new javax.swing.JScrollPane();
         jTextPaneKickDotDwLong = new javax.swing.JTextPane();
         jCheckBoxKickColonMacro = new javax.swing.JCheckBox();
+        jLabelKickNumTextDeclaration = new javax.swing.JLabel();
+        jRadioButtonKickDotTextNumText = new javax.swing.JRadioButton();
+        jScrollPaneKickDotTextNumText = new javax.swing.JScrollPane();
+        jTextPaneKickDotTextNumText = new javax.swing.JTextPane();
+        jLabelKickZeroTextDeclaration = new javax.swing.JLabel();
+        jRadioButtonKickDotTextZeroText = new javax.swing.JRadioButton();
+        jScrollPaneKickDotTextZeroText = new javax.swing.JScrollPane();
+        jTextPaneKickDotTextZeroText = new javax.swing.JTextPane();
         jPanelTass64 = new javax.swing.JPanel();
         jLabelTass64StartingDeclaration = new javax.swing.JLabel();
         jRadioButtonTass64DotCpuAStarting = new javax.swing.JRadioButton();
@@ -3086,7 +3096,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneDasmDcDotBText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>dc.b</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneDasmDcDotBText.setViewportView(jTextPaneDasmDcDotBText);
 
-        jLabelDasmNumTextDeclaration.setText("Text #num char:");
+        jLabelDasmNumTextDeclaration.setText("Text #num chars:");
 
         buttonGroupDasmNumText.add(jRadioButtonDasmDotByteNumText);
         jRadioButtonDasmDotByteNumText.setSelected(true);
@@ -3834,7 +3844,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneTmpxDotText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneTmpxDotText.setViewportView(jTextPaneTmpxDotText);
 
-        jLabelTmpxNumTextDeclaration.setText("Text #num char :");
+        jLabelTmpxNumTextDeclaration.setText("Text #num chars:");
 
         buttonGroupTmpxNumText.add(jRadioButtonTmpxPTextNumText);
         jRadioButtonTmpxPTextNumText.setSelected(true);
@@ -4454,7 +4464,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneCa65DotBytText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>.byt</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneCa65DotBytText.setViewportView(jTextPaneCa65DotBytText);
 
-        jLabelCa65NumTextDeclaration.setText("Text #num char:");
+        jLabelCa65NumTextDeclaration.setText("Text #num chars:");
 
         buttonGroupCa65NumText.add(jRadioButtonCa65DotByteNumText);
         jRadioButtonCa65DotByteNumText.setSelected(true);
@@ -5175,7 +5185,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneAcmeMarkRawText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>!raw</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkRawText.setViewportView(jTextPaneAcmeMarkRawText);
 
-        jLabelAcmeNumTextDeclaration.setText("Text #num char:");
+        jLabelAcmeNumTextDeclaration.setText("Text #num chars:");
 
         buttonGroupAcmeNumText.add(jRadioButtonAcmeMarkNumText);
         jRadioButtonAcmeMarkNumText.setSelected(true);
@@ -5949,6 +5959,42 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelKickNumTextDeclaration.setText("Text #num chars:");
+
+        buttonGroupKickNumText.add(jRadioButtonKickDotTextNumText);
+        jRadioButtonKickDotTextNumText.setSelected(true);
+        jRadioButtonKickDotTextNumText.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonKickDotTextNumTextItemStateChanged(evt);
+            }
+        });
+
+        jScrollPaneKickDotTextNumText.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDotTextNumText.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextPaneKickDotTextNumText.setEditable(false);
+        jTextPaneKickDotTextNumText.setContentType("text/html"); // NOI18N
+        jTextPaneKickDotTextNumText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneKickDotTextNumText.setViewportView(jTextPaneKickDotTextNumText);
+
+        jLabelKickZeroTextDeclaration.setText("Text 0 terminated:");
+
+        buttonGroupKickZeroText.add(jRadioButtonKickDotTextZeroText);
+        jRadioButtonKickDotTextZeroText.setSelected(true);
+        jRadioButtonKickDotTextZeroText.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButtonKickDotTextZeroTextItemStateChanged(evt);
+            }
+        });
+
+        jScrollPaneKickDotTextZeroText.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneKickDotTextZeroText.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextPaneKickDotTextZeroText.setEditable(false);
+        jTextPaneKickDotTextZeroText.setContentType("text/html"); // NOI18N
+        jTextPaneKickDotTextZeroText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneKickDotTextZeroText.setViewportView(jTextPaneKickDotTextZeroText);
+
         javax.swing.GroupLayout jPanelKickAssemblerLayout = new javax.swing.GroupLayout(jPanelKickAssembler);
         jPanelKickAssembler.setLayout(jPanelKickAssemblerLayout);
         jPanelKickAssemblerLayout.setHorizontalGroup(
@@ -6060,7 +6106,20 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGap(34, 34, 34))))
             .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBoxKickColonMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxKickColonMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                        .addComponent(jLabelKickNumTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonKickDotTextNumText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneKickDotTextNumText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
+                        .addComponent(jLabelKickZeroTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonKickDotTextZeroText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneKickDotTextZeroText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelKickAssemblerLayout.setVerticalGroup(
@@ -6173,7 +6232,17 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jLabelKickTextDeclaration)
                             .addComponent(jRadioButtonKickDotText)
                             .addComponent(jScrollPaneKickDotText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelKickNumTextDeclaration)
+                    .addComponent(jRadioButtonKickDotTextNumText)
+                    .addComponent(jScrollPaneKickDotTextNumText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelKickZeroTextDeclaration)
+                    .addComponent(jRadioButtonKickDotTextZeroText)
+                    .addComponent(jScrollPaneKickDotTextZeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("KickAssembler", jPanelKickAssembler);
@@ -8464,6 +8533,14 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.acmeZeroText=Assembler.ZeroText.MARK_RAW_ZEROTEXT; 
     }//GEN-LAST:event_jRadioButtonAcmeMarkRawZeroTextItemStateChanged
 
+    private void jRadioButtonKickDotTextNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextNumTextItemStateChanged
+      option.kickNumText=Assembler.NumText.DOT_TEXT_NUMTEXT;   
+    }//GEN-LAST:event_jRadioButtonKickDotTextNumTextItemStateChanged
+
+    private void jRadioButtonKickDotTextZeroTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextZeroTextItemStateChanged
+      option.kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT; 
+    }//GEN-LAST:event_jRadioButtonKickDotTextZeroTextItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -8563,12 +8640,14 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupKickLong;
     private javax.swing.ButtonGroup buttonGroupKickMonoSprite;
     private javax.swing.ButtonGroup buttonGroupKickMultiSprite;
+    private javax.swing.ButtonGroup buttonGroupKickNumText;
     private javax.swing.ButtonGroup buttonGroupKickOrigin;
     private javax.swing.ButtonGroup buttonGroupKickStarting;
     private javax.swing.ButtonGroup buttonGroupKickText;
     private javax.swing.ButtonGroup buttonGroupKickTribyte;
     private javax.swing.ButtonGroup buttonGroupKickWord;
     private javax.swing.ButtonGroup buttonGroupKickWordSwapped;
+    private javax.swing.ButtonGroup buttonGroupKickZeroText;
     private javax.swing.ButtonGroup buttonGroupLanguage;
     private javax.swing.ButtonGroup buttonGroupLook;
     private javax.swing.ButtonGroup buttonGroupOpcodeFormatting;
@@ -8765,12 +8844,14 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelKickLongDeclaration;
     private javax.swing.JLabel jLabelKickMonoSpriteDeclaration;
     private javax.swing.JLabel jLabelKickMultiSpriteDeclaration;
+    private javax.swing.JLabel jLabelKickNumTextDeclaration;
     private javax.swing.JLabel jLabelKickOriginDeclaration;
     private javax.swing.JLabel jLabelKickStartingDeclaration;
     private javax.swing.JLabel jLabelKickTextDeclaration;
     private javax.swing.JLabel jLabelKickTribyteDeclaration;
     private javax.swing.JLabel jLabelKickWordDeclaration;
     private javax.swing.JLabel jLabelKickWordSwappedDeclaration;
+    private javax.swing.JLabel jLabelKickZeroTextDeclaration;
     private javax.swing.JLabel jLabelLanguage;
     private javax.swing.JLabel jLabelLook;
     private javax.swing.JLabel jLabelMaxByte;
@@ -8953,6 +9034,8 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonKickDotDwLong;
     private javax.swing.JRadioButton jRadioButtonKickDotPcOrigin;
     private javax.swing.JRadioButton jRadioButtonKickDotText;
+    private javax.swing.JRadioButton jRadioButtonKickDotTextNumText;
+    private javax.swing.JRadioButton jRadioButtonKickDotTextZeroText;
     private javax.swing.JRadioButton jRadioButtonKickDotWoWord;
     private javax.swing.JRadioButton jRadioButtonKickDotWord;
     private javax.swing.JRadioButton jRadioButtonKickDoubleBarBlockComment;
@@ -9142,6 +9225,8 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneKickDotDwLong;
     private javax.swing.JScrollPane jScrollPaneKickDotPcOrigin;
     private javax.swing.JScrollPane jScrollPaneKickDotText;
+    private javax.swing.JScrollPane jScrollPaneKickDotTextNumText;
+    private javax.swing.JScrollPane jScrollPaneKickDotTextZeroText;
     private javax.swing.JScrollPane jScrollPaneKickDotWoWord;
     private javax.swing.JScrollPane jScrollPaneKickDotWord;
     private javax.swing.JScrollPane jScrollPaneKickDoubleBarBlockComment;
@@ -9334,6 +9419,8 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JTextPane jTextPaneKickDotDwLong;
     private javax.swing.JTextPane jTextPaneKickDotPcOrigin;
     private javax.swing.JTextPane jTextPaneKickDotText;
+    private javax.swing.JTextPane jTextPaneKickDotTextNumText;
+    private javax.swing.JTextPane jTextPaneKickDotTextZeroText;
     private javax.swing.JTextPane jTextPaneKickDotWoWord;
     private javax.swing.JTextPane jTextPaneKickDotWord;
     private javax.swing.JTextPane jTextPaneKickDoubleBarBlockComment;
@@ -10228,7 +10315,19 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DOT_TEXT:  
         jRadioButtonKickDotText.setSelected(true);
         break;           
-    }     
+    }   
+    
+    switch (option.kickNumText) {
+      case DOT_TEXT_NUMTEXT:  
+        jRadioButtonKickDotTextNumText.setSelected(true);
+        break;           
+    }  
+     
+    switch (option.kickZeroText) {
+      case DOT_TEXT_ZEROTEXT:  
+        jRadioButtonKickDotTextZeroText.setSelected(true);
+        break;           
+    }   
   }
   
   /**

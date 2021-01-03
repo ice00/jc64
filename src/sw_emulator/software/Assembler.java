@@ -2232,16 +2232,17 @@ public class Assembler {
     * Text with number of chars
     */
    public enum NumText implements ActionType {
-     DOT_PTEXT_NUMTEXT,       // -> .ptext "xxxx"
-     DOT_TEXT_P_NUMTEXT,      // -> .text n"xxxx" 
-     DOT_BYTE_NUMTEXT,        // -> .byte "xxx"
-     DOT_BYT_NUMTEXT,         // ->  .byt "xxx"
-     MARK_TEXT_NUMTEXT,       // -> !text "xxx"
-     MARK_TX_NUMTEXT,         // ->   !tx "xxx"
-     MARK_RAW_NUMTEXT,        // ->  !raw "xxx"    
-     BYTE_NUMTEXT,            // ->  byte "xxx"
-     DC_NUMTEXT,              // ->    dc "xxx"
-     DC_DOT_B_NUMTEXT         // ->  dc.b "xxx"
+     DOT_PTEXT_NUMTEXT,       // -> .ptext "xxx"
+     DOT_TEXT_NUMTEXT,        // ->  .text "xxx"
+     DOT_TEXT_P_NUMTEXT,      // -> .text n"xxx" 
+     DOT_BYTE_NUMTEXT,        // ->  .byte "xxx"
+     DOT_BYT_NUMTEXT,         // ->   .byt "xxx"
+     MARK_TEXT_NUMTEXT,       // ->  !text "xxx"
+     MARK_TX_NUMTEXT,         // ->    !tx "xxx"
+     MARK_RAW_NUMTEXT,        // ->   !raw "xxx"    
+     BYTE_NUMTEXT,            // ->   byte "xxx"
+     DC_NUMTEXT,              // ->     dc "xxx"
+     DC_DOT_B_NUMTEXT         // ->   dc.b "xxx"
      ;     
 
      @Override
@@ -2257,6 +2258,9 @@ public class Assembler {
          case DOT_PTEXT_NUMTEXT:
            str.append(getDataSpacesTabs()).append((".ptext "));
            break; 
+         case DOT_TEXT_NUMTEXT:
+           str.append(getDataSpacesTabs()).append((".text "));
+           break;   
          case DOT_TEXT_P_NUMTEXT:
            str.append(getDataSpacesTabs()).append((".text p"));
            break;  
@@ -2431,11 +2435,36 @@ public class Assembler {
                   } 
               }
               break;  
+            case KICK:
+              if (isFirst) {
+                str.append("@\"\\$").append(ByteToExe(Unsigned.done(mem.copy)));
+                isString=true;
+                isFirst=false; 
+              } else {   
+                  if ((val<=0x02) ||
+                      (val==0x0A) ||
+                      (val==0x0C) ||    
+                      (val==0x0D) ||
+                      (val==0x0E) ||        
+                      (val==0x0F) ||         
+                      (val==0x40) ||
+                      (val==0x5B) ||
+                      (val==0x5D) ||
+                      (val>=0x61 && val<=0x7A) ||
+                      (val==0x7F) ||
+                      (val==0xA0) ||
+                      (val==0xA3)                         
+                    ) {
+                  str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                } else if (val==0x22) str.append("\\\"");
+                  else if (val==0x5C) str.append("\\\\");
+                  else str.append((char)(mem.copy & 0xFF));     
+                }
+              break;              
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
-
           }
        }     
      }       
@@ -2445,8 +2474,9 @@ public class Assembler {
     * Text terminated with zero
     */
    public enum ZeroText implements ActionType {
-     DOT_NULL_ZEROTEXT,       // ->   .null "xxxx"
-     DOT_TEXT_N_ZEROTEXT,     // ->   -text n"xxxx" 
+     DOT_NULL_ZEROTEXT,       // ->   .null "xxx"
+     DOT_TEXT_ZEROTEXT,       // ->   -text "xxx" 
+     DOT_TEXT_N_ZEROTEXT,     // ->   -text n"xxx" 
      DOT_BYTE_ZEROTEXT,       // ->   .byte "xxx"
      DOT_ASCIIZ_ZEROTEXT,     // -> .asciiz "xxx"
      BYTE_ZEROTEXT,           // ->    byte "xxx"
@@ -2470,6 +2500,9 @@ public class Assembler {
          case DOT_NULL_ZEROTEXT:
            str.append(getDataSpacesTabs()).append((".null "));
            break; 
+         case DOT_TEXT_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append((".text "));
+           break;   
          case DOT_TEXT_N_ZEROTEXT:
            str.append(getDataSpacesTabs()).append((".text n"));
            break;  
@@ -2637,7 +2670,37 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
               }
-              break;     
+              break;  
+            case KICK:
+              if (isFirst) {
+                str.append("@\"");
+                isString=true;
+                isFirst=false;  
+              }    
+              if ((val<=0x00) ||
+                  (val<=0x02) ||
+                  (val==0x0A) ||
+                  (val==0x0C) ||    
+                  (val==0x0D) ||
+                  (val==0x0E) ||        
+                  (val==0x0F) ||         
+                  (val==0x40) ||
+                  (val==0x5B) ||
+                  (val==0x5D) ||
+                  (val>=0x61 && val<=0x7A) ||
+                  (val==0x7F) ||
+                  (val==0xA0) ||
+                  (val==0xA3)                         
+                 ) {
+                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+              } else if (val==0x22) {
+                       str.append("\\\"");
+                     }
+                else if (val==0x5C) { 
+                       str.append("\\\\");
+                     }
+                else str.append((char)(mem.copy & 0xFF));                
+              break;               
           }   
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");

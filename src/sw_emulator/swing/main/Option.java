@@ -817,6 +817,12 @@ public class Option {
   /** Kick: text declaration type */
   public Assembler.Text kickText=Assembler.Text.DOT_TEXT;
   
+  /** Kick: text with num chars declaration */
+  public Assembler.NumText kickNumText=Assembler.NumText.DOT_TEXT_NUMTEXT;
+  
+  /** Kick: text null temrianted declaration */
+  public Assembler.ZeroText kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT;
+  
   
   
   /** 64Tass: starting declaration */

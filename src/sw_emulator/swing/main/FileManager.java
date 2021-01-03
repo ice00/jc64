@@ -166,6 +166,8 @@ public class FileManager {
       option.acmeMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.acmeMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
       option.acmeText = Assembler.Text.valueOf(in.readUTF());
+      option.acmeNumText = Assembler.NumText.valueOf(in.readUTF());
+      option.acmeZeroText = Assembler.ZeroText.valueOf(in.readUTF());
             
       option.kickColonMacro = in.readBoolean();
       option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
@@ -181,6 +183,8 @@ public class FileManager {
       option.kickMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.kickMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
       option.kickText = Assembler.Text.valueOf(in.readUTF());
+      option.kickNumText = Assembler.NumText.valueOf(in.readUTF());
+      option.kickZeroText = Assembler.ZeroText.valueOf(in.readUTF());
             
       option.tass64Starting = Assembler.Starting.valueOf(in.readUTF());
       option.tass64Origin = Assembler.Origin.valueOf(in.readUTF());
@@ -410,6 +414,8 @@ public class FileManager {
       out.writeUTF(option.acmeMonoSprite.name());
       out.writeUTF(option.acmeMultiSprite.name());
       out.writeUTF(option.acmeText.name());
+      out.writeUTF(option.acmeNumText.name());
+      out.writeUTF(option.acmeZeroText.name());
       
       out.writeBoolean(option.kickColonMacro);
       out.writeUTF(option.kickStarting.name());
@@ -425,6 +431,8 @@ public class FileManager {
       out.writeUTF(option.kickMonoSprite.name());
       out.writeUTF(option.kickMultiSprite.name());
       out.writeUTF(option.kickText.name());
+      out.writeUTF(option.kickNumText.name());
+      out.writeUTF(option.kickZeroText.name());   
       
       out.writeUTF(option.tass64Starting.name());
       out.writeUTF(option.tass64Origin.name());
