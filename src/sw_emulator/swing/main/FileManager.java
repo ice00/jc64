@@ -562,7 +562,8 @@ public class FileManager {
       project.file=in.readUTF();
       project.description=in.readUTF();
       project.fileType=FileType.valueOf(in.readUTF());
-      project.targetType=TargetType.valueOf(in.readUTF());  // version 1
+      if (version>0) project.targetType=TargetType.valueOf(in.readUTF());  
+      else project.targetType=TargetType.C64;  
       
       int size=in.readInt();      
       project.inB=new byte[size];
