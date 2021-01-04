@@ -864,6 +864,12 @@ public class Option {
   /** 64Tass: text declaration type */
   public Assembler.Text tass64Text=Assembler.Text.DOT_TEXT;
   
+  /** 64Tass: text with num chars declaration */
+  public Assembler.NumText tass64NumText=Assembler.NumText.DOT_PTEXT_NUMTEXT;
+  
+  /** 64Tass: text null temrianted declaration */
+  public Assembler.ZeroText tass64ZeroText=Assembler.ZeroText.DOT_NULL_ZEROTEXT;
+  
   
   /**
    * Get the flat laf theme

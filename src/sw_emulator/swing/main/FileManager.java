@@ -199,6 +199,8 @@ public class FileManager {
       option.tass64MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.tass64MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
       option.tass64Text = Assembler.Text.valueOf(in.readUTF());
+      option.tass64NumText = Assembler.NumText.valueOf(in.readUTF());
+      option.tass64ZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -447,6 +449,8 @@ public class FileManager {
       out.writeUTF(option.tass64MonoSprite.name());
       out.writeUTF(option.tass64MultiSprite.name());   
       out.writeUTF(option.tass64Text.name());
+      out.writeUTF(option.tass64NumText.name());
+      out.writeUTF(option.tass64ZeroText.name());       
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);

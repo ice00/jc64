@@ -2295,7 +2295,7 @@ public class Assembler {
        MemoryDasm mem;
        MemoryDasm memRel;
        
-       if (option.assembler==Assembler.Name.TMPX)  {
+       if (option.assembler==Assembler.Name.TMPX || option.assembler==Assembler.Name.TASS64)  {
          // this byte is calculated by instruction
          list.pop();
          listRel.pop();
@@ -2460,6 +2460,32 @@ public class Assembler {
                   else if (val==0x5C) str.append("\\\\");
                   else str.append((char)(mem.copy & 0xFF));     
                 }
+              break;    
+            case TASS64:
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
               break;              
           }   
           if (list.isEmpty()) { 
@@ -2700,6 +2726,37 @@ public class Assembler {
                        str.append("\\\\");
                      }
                 else str.append((char)(mem.copy & 0xFF));                
+              break;         
+            case TASS64:
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              if (list.size()==1) {
+                  // terminating 0 is ommitted
+                list.pop();
+                listRel.pop();
+              }
               break;               
           }   
           if (list.isEmpty()) { 
