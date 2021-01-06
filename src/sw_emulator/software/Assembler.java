@@ -1496,6 +1496,109 @@ public class Assembler {
    }    
    
    /**
+    * Address declaration type
+    *  -> .word $xxyy
+    *  ->   .wo $xxyy
+    *  -> word $xxyy
+    *  -> dc.w $xxyy
+    *  -> .addr $xxyy
+    *  -> !word $xxyy
+    *  -> !16 $xxyy
+    */
+   public enum Address implements ActionType {
+     DOT_WORD_ADDR,            //  .word $xxyy
+     DOT_WO_WORD_ADDR,         //    .wo $xxyy
+     WORD_ADDR,                //   word $xxyy
+     DOT_ADDR_ADDR,            //  .addr $xxyy
+     DC_W_ADDR,                //   dc.w $xxyy
+     MARK_WORD_ADDR,           //  !word $xxyy
+     SIXTEEN_WORD_ADDR;        //    !16 $xxyy//    !16 $xxyy
+     
+     @Override
+     public void flush(StringBuilder str) {         
+       if (list.isEmpty()) return; 
+       
+       MemoryDasm memLow;
+       MemoryDasm memHigh;
+       MemoryDasm memRelLow;
+       MemoryDasm memRelHigh;
+     
+       int pos1=str.length();  // store initial position
+       
+       // create starting command according to the kind of byte
+       switch (aAddress) {
+         case DOT_WORD_ADDR:
+           str.append(getDataSpacesTabs()).append((".word "));  
+           break;
+         case DOT_WO_WORD_ADDR:
+           str.append(getDataSpacesTabs()).append((".wo "));  
+           break;           
+         case WORD_ADDR:
+           str.append(getDataSpacesTabs()).append(("word "));   
+           break;
+         case DC_W_ADDR:
+           str.append(getDataSpacesTabs()).append(("dc.w "));  
+           break;
+         case DOT_ADDR_ADDR:
+           str.append(getDataSpacesTabs()).append((".addr "));   
+           break;
+         case MARK_WORD_ADDR:
+           str.append(getDataSpacesTabs()).append(("!word "));   
+           break;
+         case SIXTEEN_WORD_ADDR:
+           str.append(getDataSpacesTabs()).append(("!16 "));  
+           break;  
+       }
+       
+       int pos2=str.length();   // store final position
+       boolean isFirst=true;       // true if this is the first output
+       
+       while (!list.isEmpty()) {
+         // if only 1 byte left, use byte coding
+         if (list.size()==1) {
+           if (isFirst) {
+              str.replace(pos1, pos2, "");
+              isFirst=false;                    
+           }  
+           aByte.flush(str);
+         }
+         else {
+           memLow=list.pop();
+           memRelLow=listRel.pop();
+           memHigh=list.pop();
+           memRelHigh=listRel.pop();           
+           
+           if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
+             if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
+             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                  else str.append("$").append(ShortToExe(memRelLow.address));  
+             isFirst=false;
+           } else {
+               // if cannot make a word with relative locations, force all to be of byte type
+               if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
+                 list.addFirst(memHigh);
+                 list.addFirst(memLow);
+                 listRel.addFirst(memRelHigh);
+                 listRel.addFirst(memRelLow);
+                 if (isFirst) {
+                   str.replace(pos1, pos2, "");
+                   isFirst=false;
+                 }
+                 aByte.flush(str);
+               }
+               else {
+                 str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
+                 isFirst=false;  
+               }    
+             }
+           if (list.size()>=2) str.append(", ");
+           else str.append("\n");
+         }
+       }
+     } 
+   }   
+   
+   /**
     * Mono sprite declaration type
     * 
     * -> [byte] $xx.
@@ -2812,8 +2915,11 @@ public class Assembler {
    /** Assembler tribyte type */
    protected static Assembler.Tribyte aTribyte;
      
-   /** Assembler lobg type */
+   /** Assembler long type */
    protected static Assembler.Long aLong;  
+   
+   /** Assembler address type */
+   protected static Assembler.Address aAddress;    
    
    /** Assembler mono color sprite type */
    protected static Assembler.MonoSprite aMonoSprite;
@@ -2860,8 +2966,9 @@ public class Assembler {
     * @param aByte the byte type to use
     * @param aWord the word type to use
     * @param aWordSwapped the word swapped type to use
-    * @param aLong the long type to use
     * @param aTribyte the tribyte type to use
+    * @param aLong the long type to use
+    * @param aAddress the address type to use
     * @param aMonoSprite the mono sprite type to use
     * @param aMultiSprite the multi sprite type to use
     * @param aText the text type to use
@@ -2879,6 +2986,7 @@ public class Assembler {
                          Assembler.WordSwapped aWordSwapped,         
                          Assembler.Tribyte aTribyte,
                          Assembler.Long aLong,
+                         Assembler.Address aAddress,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite,
                          Assembler.Text aText,
@@ -2896,6 +3004,7 @@ public class Assembler {
      Assembler.aWordSwapped=aWordSwapped;
      Assembler.aTribyte=aTribyte;
      Assembler.aLong=aLong;
+     Assembler.aAddress=aAddress;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
      Assembler.aText=aText;
@@ -2989,6 +3098,11 @@ public class Assembler {
        // look if it is time to aggregate data
        if (list.size()==option.maxLongAggregate*4) actualType.flush(str);         
      } else
+     // we are processing address?    
+     if (actualType instanceof Address) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxAddressAggregate*2) actualType.flush(str);         
+     } else    
      // we are processing mono sprite?    
      if (actualType instanceof MonoSprite) {
        if ((sizeMonoSpriteBlock % 3)==0) actualType.flush(str);
@@ -3253,7 +3367,12 @@ public class Assembler {
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
          numText=null;
-         return aLong;        
+         return aLong;      
+       case ADDRESS:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aAddress;    
        case MONO_SPRITE:
          if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
          isMonoSpriteBlock=true;  

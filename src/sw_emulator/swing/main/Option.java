@@ -278,6 +278,12 @@ public class Option {
   /** Max long aggregate for data row */
   public int maxLongAggregate=2; 
   
+  /** Max address aggregate for data row */
+  public int maxAddressAggregate=4;   
+  
+  /** Max stack word aggregate for data row */
+  public int maxStackWordAggregate=4;  
+  
   /** Temporary path */
   public String tmpPath="";
   
@@ -619,6 +625,9 @@ public class Option {
   /** DASM: long declaration */
   public Assembler.Long dasmLong=Assembler.Long.DOT_LONG; 
   
+  /** DASM: address declaration */
+  public Assembler.Address dasmAddress=Assembler.Address.DOT_WORD_ADDR;
+  
   /** DASM: mono color sprite declaration */
   public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
    
@@ -664,6 +673,9 @@ public class Option {
   
   /** TMPX: long declaration type */
   public Assembler.Long tmpxLong=Assembler.Long.MACRO4_LONG; 
+  
+  /** TMPX: address declaration */
+  public Assembler.Address tmpxAddress=Assembler.Address.DOT_ADDR_ADDR;
   
   /** TMPx: mono color sprite declaration type */
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
@@ -712,6 +724,9 @@ public class Option {
   /** CA65: long declaration */
   public Assembler.Long ca65Long=Assembler.Long.DOT_DWORD_LONG; 
   
+  /** CA65: address declaration */
+  public Assembler.Address ca65Address=Assembler.Address.DOT_ADDR_ADDR;
+  
   /** CA65: mono color sprite*/
   public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
    
@@ -758,6 +773,9 @@ public class Option {
   
   /** ACME: long declaration */
   public Assembler.Long acmeLong=Assembler.Long.MARK_THIRTYTWO_LONG; 
+  
+  /** ACME: address declaration */
+  public Assembler.Address acmeAddress=Assembler.Address.MARK_WORD_ADDR;
   
   /** ACME: mono color sprite*/
   public Assembler.MonoSprite acmeMonoSprite=Assembler.MonoSprite.MACRO2_BIN;
@@ -808,6 +826,9 @@ public class Option {
   /** Kick: long declaration */
   public Assembler.Long kickLong=Assembler.Long.DOT_DWORD_LONG; 
   
+  /** KickAssembler: address declaration */
+  public Assembler.Address kickAddress=Assembler.Address.DOT_WORD_ADDR;  
+  
   /** KickAssembler: mono color sprite*/
   public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;
    
@@ -854,6 +875,9 @@ public class Option {
   
   /** 64Tass: long declaration */
   public Assembler.Long tass64Long=Assembler.Long.DOT_DWORD_LONG; 
+  
+  /** 64Tass: Address declaration */
+  public Assembler.Address tass64Address=Assembler.Address.DOT_ADDR_ADDR;
   
   /** 64Tass: mono color sprite*/
   public Assembler.MonoSprite tass64MonoSprite=Assembler.MonoSprite.MACRO4_BIN;
