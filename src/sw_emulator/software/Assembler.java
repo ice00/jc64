@@ -622,8 +622,14 @@ public class Assembler {
               case BYTE_BIN:
                 return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
               case BYTE_CHAR:
-                //return "\""+(char)Unsigned.done(value)+"\"";
-                return "'"+(char)Unsigned.done(value)+(option.assembler==Assembler.Name.KICK ? "'":"");
+                switch (option.assembler) {
+                  case KICK:
+                    return "'"+(char)Unsigned.done(value)+"'";      
+                  case TASS64:
+                    return "\""+(char)Unsigned.done(value)+"\"";
+                  default:
+                    return "'"+(char)Unsigned.done(value); 
+                }  
               case BYTE_HEX:
               default:
                 return "$"+ByteToExe(Unsigned.done(value));
