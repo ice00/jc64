@@ -3093,9 +3093,33 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               mem.type=' ';
             }  
           }  
-        }
-        
+        }        
         break;  
+      case HIGH_TEXT:
+        // we must find area that terminate with a 8 bit at 1
+        for (pos=rows.length-1; pos>=0; pos--) {
+          if ((project.memory[rows[pos]].copy & 0x80)!=0) break;  
+        }
+
+        if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.HIGH_TEXT)) {
+          lastRow=rows[pos];  
+          for (int i=pos; i>=0; i--) {
+            if (lastRow-rows[i]>1) break;
+            lastRow=rows[i];
+          
+            mem= project.memory[rows[i]];
+            mem.isData=true;
+            mem.isCode=false;
+            mem.isGarbage=false;
+            mem.dataType=dataType;
+            if (option.eraseDComm) mem.dasmComment=null;
+            if (option.erasePlus && mem.type=='+') {
+              mem.related=-1;
+              mem.type=' ';
+            }  
+          }          
+        } else JOptionPane.showMessageDialog(this, "This area is not high bit terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
+        break;        
       default:              
         for (int i=0; i<rows.length; i++) {
           mem= project.memory[rows[i]];
@@ -3104,6 +3128,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           mem.isGarbage=false;
           if (mem.dataType==DataType.ZERO_TEXT) removeType(rows[i], DataType.ZERO_TEXT);
           if (mem.dataType==DataType.NUM_TEXT) removeType(rows[i], DataType.NUM_TEXT);
+          if (mem.dataType==DataType.HIGH_TEXT) removeType(rows[i], DataType.HIGH_TEXT);
           mem.dataType=dataType;
           if (option.eraseDComm) mem.dasmComment=null;
           if (option.erasePlus && mem.type=='+') {

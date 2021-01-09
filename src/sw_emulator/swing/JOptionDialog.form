@@ -220,6 +220,18 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupKickStackWord">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDasmHighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTmpxHighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupCa65HighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupAcmeHighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupKickHighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64HighText">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -244,9 +256,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
               <Component id="jPanelOption" min="-2" pref="817" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -254,7 +266,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="jPanelOption" pref="771" max="32767" attributes="0"/>
+              <Component id="jPanelOption" pref="818" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -536,7 +548,7 @@
                               <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="212" max="32767" attributes="0"/>
+                          <EmptySpace pref="259" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1066,7 +1078,7 @@
                                   <Component id="jCheckBoxC64Cia2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC64KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="307" max="32767" attributes="0"/>
+                                  <EmptySpace pref="354" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1256,7 +1268,7 @@
                                   <Component id="jCheckBoxC1541Via2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC1541Kernal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="376" max="32767" attributes="0"/>
+                                  <EmptySpace pref="423" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1450,7 +1462,7 @@
                                   <Component id="jCheckBoxC128DMA" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC128KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="192" max="32767" attributes="0"/>
+                                  <EmptySpace pref="239" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2245,7 +2257,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" pref="714" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2306,7 +2318,11 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabelDasmStackWordDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <EmptySpace min="10" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabelDasmHighTextDeclaration" min="-2" pref="146" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2327,6 +2343,7 @@
                                       <Component id="jRadioButtonDasmDotByteText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDotByteNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDotByteZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotByteHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2347,6 +2364,7 @@
                                       <Component id="jScrollPaneDasmDotByteText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneDasmDotByteNumText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneDasmDotByteZeroText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteHighText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2363,35 +2381,45 @@
                                       <Component id="jRadioButtonDasmByteText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmByteNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmByteZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmByteHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName9" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmCstyleComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelName4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLabelNameColon" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmLong" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmWordAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteNumText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneDasmByteZeroText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonDasmIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcWWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcLLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcWWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneDasmLabelName9" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmCstyleComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelName4" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLabelNameColon" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmLong" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneDasmWordAddress" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteNumText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneDasmByteZeroText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcWWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcLLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcWWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonDasmDcZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jScrollPaneDasmByteHighText" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcHighText" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2405,6 +2433,7 @@
                                       <Component id="jScrollPaneDasmMacroHexMonoSprite1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcNumText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcZeroText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcZeroHighText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2414,6 +2443,7 @@
                                       <Component id="jRadioButtonDasmDcDotBText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcDotBNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcDotBZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcDotBHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -2423,6 +2453,7 @@
                                       <Component id="jScrollPaneDasmDcDotBText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcDotBNumText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcDotBZeroText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcDotBHighText" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                               </Group>
@@ -2597,6 +2628,18 @@
                                       <Component id="jScrollPaneDasmDcZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcDotBZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcDotBZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelDasmHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDotByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDotByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcZeroHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcDotBHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneDasmDcDotBHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -3896,7 +3939,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByteText2">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByteZeroText">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -3956,7 +3999,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotB2">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotBZeroText">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -4097,6 +4140,132 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelDasmHighTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDotByteHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmHighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDotByteHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDotByteHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDotByteZeroText1">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmByteHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmHighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmByteHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmByteHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmByteHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmHighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcZeroHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcZeroHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcDotBHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupDasmHighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcDotBHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcDotBHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneDasmDcDotBHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dc.b&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelTMPx">
@@ -4113,109 +4282,78 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabelTmpxZeroTextDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonTmpxDotNullNumText" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneTmpxDotNullNumText" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabelTmpxWordSwappedDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                          <Component id="jLabelTmpxLongDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                                              <Component id="jLabelTmpxLabelDeclaration" alignment="1" min="-2" pref="137" max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                  <Component id="jLabelTmpxBlockCommentDeclaration" pref="137" max="32767" attributes="0"/>
-                                                                  <Component id="jLabelTmpxCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="jLabelTmpxOriginDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="jLabelTmpxStartingDeclaration" alignment="0" max="32767" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
-                                                          <Component id="jLabelTmpxMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                          <Component id="jLabelTmpxMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                          <Component id="jLabelTmpxTribyteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                                      <Component id="jLabelTmpxNumTextDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelTmpxWordSwappedDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelTmpxLongDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabelTmpxLabelDeclaration" alignment="1" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="jLabelTmpxBlockCommentDeclaration" pref="137" max="32767" attributes="0"/>
+                                                      <Component id="jLabelTmpxCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelTmpxOriginDeclaration" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabelTmpxStartingDeclaration" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jRadioButtonTmpxFakeStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxMacroLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxDotText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jScrollPaneTmpxDotText" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxFakeStarting" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxSemicolonComment" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxByte" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxWord" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxDotWord" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxMacroLong" alignment="0" pref="137" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxAsterixOrigin" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxDotTextNumText" max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="jLabelTmpxMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelTmpxMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelTmpxTribyteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelTmpxByteDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <Component id="jLabelTmpxWordDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <Component id="jLabelTmpxTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jLabelTmpxNumTextDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelTmpxAddressDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="151" pref="151" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxDotAddrAddress" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxDotAddrAddress" min="-2" pref="137" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jLabelTmpxZeroTextDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelTmpxHigTextDeclaration" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelTmpxStackWordDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="151" pref="151" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonTmpxDotRdaStackWord" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneTmpxDotRtaStackWord" min="-2" pref="137" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonTmpxDotShiftZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotRdaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxMacroLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxFakeStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPaneTmpxFakeStarting" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxAsterixOrigin" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxSemicolonComment" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxWord" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotWord" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxMacroTribyte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxMacroLong" alignment="0" pref="149" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotTextNumText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotNullZeroText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotShiftHighText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotAddrAddress" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotRtaStackWord" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -4252,7 +4390,18 @@
                                           <Component id="jScrollPaneTmpxMacroBinMonoSprite" min="-2" pref="107" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelTmpxStackWordDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxAddressDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxByteDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxWordDeclaration" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelTmpxTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4381,10 +4530,16 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelTmpxZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonTmpxDotNullNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneTmpxDotNullNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTmpxHigTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotShiftZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="46" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5106,7 +5261,7 @@
                             <Property name="text" type="java.lang.String" value="Text 0 terminated:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotNullNumText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotNullZeroText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxZeroText"/>
@@ -5114,10 +5269,10 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotNullNumTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotNullZeroTextItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotNullNumText">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotNullZeroText">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -5128,7 +5283,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotNullNumText">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotNullZeroText">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -5212,6 +5367,45 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTmpxHigTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiftZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTmpxHighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiftZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotShiftHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shift&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[66, 20]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelCa65">
@@ -5228,7 +5422,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelCa65StackWordDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelC65AddressDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabeCa65StartingDeclaration" alignment="0" max="32767" attributes="0"/>
@@ -5238,11 +5432,11 @@
                                       <Component id="jLabelCa65LabelDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelC65ByteDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelC65WordDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelCa65WordSwappedDeclaration" alignment="0" pref="139" max="32767" attributes="0"/>
+                                      <Component id="jLabelCa65WordSwappedDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelCa65TribyteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelC65LongDeclaration" alignment="0" pref="139" max="32767" attributes="0"/>
+                                      <Component id="jLabelC65LongDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelCa65MultiSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabelCa65MonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                               <Component id="jLabelCa65TextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
@@ -5251,6 +5445,7 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="jLabelCa65HighTextDeclaration" alignment="0" pref="139" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -5271,28 +5466,37 @@
                                       <Component id="jRadioButtonCa65DotByteText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonCa65DotByteNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonCa65DotAsciizZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonCa65DotByteHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmLabelName17" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotOrigin" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65SemicolonComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65Comment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65LabelName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneC65DotByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotDbytWordSwapped" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65MacroTribyte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotDWordLong" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotAddrAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65MacroStackWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65ByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65ByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotByteText" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotByteNumText" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneCa65DotAsciizZeroText" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneDasmLabelName17" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotOrigin" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65SemicolonComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65Comment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65LabelName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneC65DotByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotDbytWordSwapped" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65MacroTribyte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotDWordLong" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotAddrAddress" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65MacroStackWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65ByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65ByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotByteText" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotByteNumText" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneCa65DotAsciizZeroText" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jScrollPaneCa65DotByteHighText" min="-2" pref="146" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jRadioButtonCa65DotSetcpuStarting" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonCa65DotBytByte" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -5301,57 +5505,43 @@
                                       <Component id="jRadioButtonCa65ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonCa65DotBytText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonCa65DotBytNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonCa65DotBytHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPaneDasmLabelName18" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneCa65DotBytByte" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneC65DotDByteWord" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jScrollPaneCa65DotBytText" pref="125" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPaneDasmByteBinMultiSprite1" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jScrollPaneCa65ByteBinMonoSprite" max="32767" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonCa65MacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonCa65MacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Component id="jScrollPaneDasmLabelName18" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotBytByte" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneC65DotDByteWord" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65ByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneDasmByteBinMultiSprite1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotBytText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotBytNumText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotBytHighText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonCa65MacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonCa65MacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPaneCa65MacroHexMultiSprite" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneCa65MacroHexMonoSprite" min="-2" pref="111" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonCa65MacroBinMultiSprite" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jScrollPaneCa65MacroHexMultiSprite" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneCa65MacroHexMonoSprite" min="-2" pref="111" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jRadioButtonCa65MacroBinMultiSprite" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneCa65MacroBinMultiSprite" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jRadioButtonCa65MacroBinMonoSprite" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPaneCa65MacroBinMonoSprite" min="-2" pref="101" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneCa65MacroBinMultiSprite" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jScrollPaneCa65DotBytNumText" min="-2" pref="125" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jRadioButtonCa65MacroBinMonoSprite" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneCa65MacroBinMonoSprite" min="-2" pref="101" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5496,7 +5686,15 @@
                                       <Component id="jRadioButtonCa65DotAsciizZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneCa65DotAsciizZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelCa65HighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonCa65DotByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotByteHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonCa65DotBytHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneCa65DotBytHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="55" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -6441,6 +6639,72 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelCa65HighTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonCa65DotByteHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65HighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65DotByteHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65DotByteHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneCa65DotByteHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonCa65DotBytHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupCa65HighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65DotBytHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65DotBytHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneCa65DotBytHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;.byt&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelAcme">
@@ -6458,43 +6722,52 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelAcmeStartingDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelScmeOriginDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelAcmeCommentDeclaration1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelAcmeBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelAcmeLabelDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelAcmeWordDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeWordSwappedDeclaration" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeTribyteDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeLongDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeAddressDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeWordSwappedDeclaration2" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeMonoSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelAcmeMultiSpriteDeclaration" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeNumTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <Component id="jLabelAcmeZeroTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonAcmeMarkCpuStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkTwentyfourTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkThirtytwoLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMacroWordSwapped2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcme24HexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcme24HexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelAcmeStartingDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelScmeOriginDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeCommentDeclaration1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeLabelDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeWordDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeWordSwappedDeclaration" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeTribyteDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeLongDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeAddressDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeStackWordDeclaration" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeMonoSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelAcmeMultiSpriteDeclaration" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeNumTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="jLabelAcmeZeroTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonAcmeMarkCpuStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkTwentyfourTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkThirtytwoLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcme24HexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcme24HexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelAcmeHighTextDeclaration" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMarkHighText" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -6507,49 +6780,61 @@
                                       <Component id="jScrollPaneAcmeMarkWord" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeTwentyfourTribyte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkThirtytwoLong" alignment="0" pref="127" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkThirtytwoLong" alignment="0" pref="117" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkWordAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMacroWordSwapped2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMacroStackWord" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcme24HexMonoSprite" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkNumText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkZeroText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkHighText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonAcmeMarkIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMark8Byte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMark16Word" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMark16WordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcme24BinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcme24BinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkTxText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkTxNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkTxZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneAcmeMarkIfBlockComment" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMark16Word" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMark16WordAddress" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcme24BinMonoSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcme24BinMultiSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkTxText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkTxNumText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkTxZeroText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonAcmeMark08Byte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkRawText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkRawNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonAcmeMarkIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMark8Byte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMark16Word" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMark16WordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcme24BinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcme24BinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkTxText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkTxNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkTxZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneAcmeMarkIfBlockComment" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMark16Word" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMark16WordAddress" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcme24BinMonoSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcme24BinMultiSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMarkTxText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMarkTxNumText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneAcmeMarkTxZeroText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonAcmeMark08Byte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkRawText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkRawNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonAcmeMarkTxHighZeroText" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPaneAcmeMarkTxHighText" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMarkRawHighText" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -6559,6 +6844,7 @@
                                       <Component id="jScrollPaneAcmeMarkRawText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkRawNumText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkRawHighText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -6680,9 +6966,9 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jLabelAcmeWordSwappedDeclaration2" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMacroWordSwapped2" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMacroWordSwapped2" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAcmeStackWordDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -6738,7 +7024,17 @@
                                       <Component id="jRadioButtonAcmeMarkZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelAcmeZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jScrollPaneAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkTxHighZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAcmeHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="45" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -7785,7 +8081,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkTxText2">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkTxZeroText">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -7890,12 +8186,12 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JLabel" name="jLabelAcmeWordSwappedDeclaration2">
+                        <Component class="javax.swing.JLabel" name="jLabelAcmeStackWordDeclaration">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Stack Word:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMacroWordSwapped2">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMacroStackWord">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupAcmeStackWord"/>
@@ -7903,10 +8199,10 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMacroWordSwapped2ItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMacroStackWordItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMacroWordSwapped2">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMacroStackWord">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -7917,11 +8213,107 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMacroWordSwapped2">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMacroStackWord">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelAcmeHighTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeHighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkTxHighZeroText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeHighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkTxHighZeroTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkTxHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkTxHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;!tx&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkRawHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupAcmeHighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkRawHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkRawHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkRawHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;!raw&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -7960,92 +8352,102 @@
                                       <Component id="jLabelKickTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                       <Component id="jLabelKickNumTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                       <Component id="jLabelKickZeroTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="jLabelKickHighTextDeclaration" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonKickDotCpuUndStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDoubleBarComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDoubleBarBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotTextHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonKickDotTextZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDoubleBarBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDoubleBarComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotCpuUndStarting" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneKickDotCpuUndStarting" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickAsterixOrigin" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDoubleBarComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDoubleBarBlockComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickLabelNameColon" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDwordLong" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotWordAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickMacroStackWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickByteHexMonoSprite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneKickByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotTextNumText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotTextZeroText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneKickDotCpuUndStarting" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickAsterixOrigin" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDoubleBarComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDoubleBarBlockComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickLabelNameColon" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickMacroTribyte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDwordLong" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotWordAddress" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickMacroStackWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickByteHexMonoSprite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneKickByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotTextNumText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotTextZeroText" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonKickDotPcOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickDotByByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickDotWoWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickDotDwLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickDotWoWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneKickDotPcOrigin" alignment="0" pref="109" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickCstyleBlockComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotByByte" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotWoWord" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotDwLong" alignment="0" pref="109" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickDotWoWordAddress" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonDasmDotIfPBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneDasmDotIfPBlockComment" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickMacroHexMonoSprite" alignment="0" pref="115" max="32767" attributes="0"/>
+                                              <Component id="jScrollPaneKickMacroHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jRadioButtonKickMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPaneKickMacroBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPanekickMacroBinMultiSprite" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jScrollPaneKickDotTextHighText" min="-2" pref="141" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonKickDotPcOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotByByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotWoWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotDwLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotWoWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneKickDotPcOrigin" alignment="0" pref="114" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickCstyleBlockComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotByByte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotWoWord" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotDwLong" alignment="0" pref="114" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickDotWoWordAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonDasmDotIfPBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneDasmDotIfPBlockComment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickMacroHexMonoSprite" alignment="0" pref="120" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneKickMacroHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonKickMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPaneKickMacroBinMonoSprite" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPanekickMacroBinMultiSprite" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
@@ -8210,7 +8612,13 @@
                                       <Component id="jRadioButtonKickDotTextZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelKickHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickDotTextHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneKickDotTextHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="19" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -9226,6 +9634,42 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelKickHighTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotTextHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupKickHighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotTextHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneKickDotTextHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jPanelTass64">
@@ -9243,7 +9687,8 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelTass64StackWordDeclaration" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                      <Component id="jLabelTass64HighTextDeclaration" max="32767" attributes="0"/>
+                                      <Component id="jLabelTass64StackWordDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64StartingDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64OriginDeclaration" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabelTass64CommentDeclaration" alignment="0" max="32767" attributes="0"/>
@@ -9280,9 +9725,11 @@
                                       <Component id="jRadioButtonTass64DotText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPaneTass64DotShiftHighText" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotRtaStackWord" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64ASterixOrigin" alignment="0" max="32767" attributes="0"/>
@@ -9293,7 +9740,7 @@
                                       <Component id="jScrollPaneTass64DotWord" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64MacroWordSwapped" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotLongTribyte" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneTass64DotDwordLong" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotDwordLong" alignment="0" pref="133" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotAddrAddress" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64ByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64ByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
@@ -9301,7 +9748,7 @@
                                       <Component id="jScrollPaneTass64DotPTextNumText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotNullZeroText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jRadioButtonTass64DotCommentBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotCharByte" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -9312,6 +9759,7 @@
                                       <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotTextPNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTass64DotTextNZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotTextSHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -9325,6 +9773,7 @@
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jScrollPaneTass64DotTextSHighText" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPaneTass64DotTextNZeroText" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPaneTass64DotTextPNumChar" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPaneTass64DotCharByte" max="32767" attributes="0"/>
@@ -9493,7 +9942,15 @@
                                       <Component id="jRadioButtonTass64DotTextNZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotTextNZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelTass64HighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTass64DotTextSHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneTass64DotTextSHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="51" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -10228,7 +10685,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotDlintLong">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupTass64Word"/>
+                              <ComponentRef name="buttonGroupTass64Long"/>
                             </Property>
                           </Properties>
                           <Events>
@@ -10358,7 +10815,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .long&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .ptext&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -10388,7 +10845,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .lint&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text p&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -10424,7 +10881,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .long&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .null&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -10454,7 +10911,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .lint&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text n&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -10527,6 +10984,72 @@
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .addr&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="jLabelTass64HighTextDeclaration">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotShiftHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64HighText"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotShiftHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotShiftHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotShiftHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shift&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextSHighText">
+                          <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroupTass64HighText"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextSHighTextItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextSHighText">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextSHighText">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text s&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -10652,7 +11175,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="481" max="32767" attributes="0"/>
+                                  <EmptySpace pref="528" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
