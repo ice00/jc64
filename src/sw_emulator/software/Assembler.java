@@ -784,7 +784,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append(".dtyb ");  
            break;           
          case MACRO1_WORD_SWAPPED:
-           str.append(getDataSpacesTabs()).append("Swapped").append(index).append(" (");   // must close the )
+           str.append(getDataSpacesTabs()).append("Swapped").append(index).append("(");   // must close the )
            break;
          case MACRO2_WORD_SWAPPED:
            str.append(getDataSpacesTabs()).append("+Swapped").append(index).append(" ");  
@@ -844,118 +844,116 @@ public class Assembler {
 
      @Override
      public void setting(StringBuilder str) {
+       String spaces=getDataSpacesTabs(); 
+         
        switch (aWordSwapped) {
          case MACRO1_WORD_SWAPPED:
-           str.append(
-             "  .macro Swapped1 (twobyte) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "  }\n\n"+
-             "  .macro Swapped2 (twobyte, twobyte2) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" +        
-             "  }\n\n"+
-             "  .macro Swapped3 (twobyte, twobyte2, twobyte3) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" +         
-             "  }\n\n"+
-             "  .macro Swapped4 (twobyte, twobyte2, twobyte3, twobyte4) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +          
-             "  }\n\n"+
-             "  .macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +                      
-             "  }\n\n"+      
-             "  .macro Swapped6 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" +                      
-             "  }\n\n"+    
-             "  .macro Swapped7 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
-             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +                      
-             "  }\n\n"+     
-             "  .macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8) {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
-             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +  
-             "     .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n" +                    
-             "  }\n\n"                   
-           );                                  
+           str.append(spaces).append(".macro Swapped1 (twobyte) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped2 (twobyte, twobyte2) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped3 (twobyte, twobyte2, twobyte3) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped4 (twobyte, twobyte2, twobyte3, twobyte4) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")        
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")      
+              .append(spaces).append(".macro Swapped6 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped7 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8) {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n")                    
+              .append(spaces).append("}\n\n");                                  
            break;       
          case MACRO2_WORD_SWAPPED:
-           str.append(
-             "  !macro Swapped1 twobyte {\n" +
-             "     !byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "  }\n\n"+
-             "  !macro Swapped2 twobyte, twobyte2 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" +        
-             "  }\n\n"+
-             "  !macro Swapped3 twobyte, twobyte2, twobyte3 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" +         
-             "  }\n\n"+
-             "  !macro Swapped4 twobyte, twobyte2, twobyte3, twobyte4 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +          
-             "  }\n\n"+
-             "  !macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +                      
-             "  }\n\n"+      
-             "  !macro Swapped6 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" +                      
-             "  }\n\n"+    
-             "  !macro Swapped7 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
-             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +                      
-             "  }\n\n"+     
-             "  !macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n" +
-             "     .byte twobyte & 255, ( twobyte >> 8) & 255\n" +
-             "     .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n" + 
-             "     .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n" + 
-             "     .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n" +  
-             "     .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n" +  
-             "     .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n" + 
-             "     .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n" +  
-             "     .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n" +                    
-             "  }\n\n"                   
-           );                                  
+           str.append(spaces).append("!macro Swapped1 twobyte {\n")
+              .append(spaces).append("   !byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped2 twobyte, twobyte2 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n")        
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped3 twobyte, twobyte2, twobyte3 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n")         
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped4 twobyte, twobyte2, twobyte3, twobyte4 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")          
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped6 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped7 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n")                      
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n")
+              .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n")  
+              .append(spaces).append("   .byte twobyte8 & 255, ( twobyte8 >> 8) & 255\n")                    
+              .append(spaces).append("}\n\n");                                  
            break;            
          case MACRO4_WORD_SWAPPED:
            str.append(
@@ -1061,7 +1059,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" ");  
            break;
          case MACRO1_TRIBYTE:
-           str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" (");   // must close the )
+           str.append(getDataSpacesTabs()).append("Tribyte").append(index).append("(");   // must close the )
            break;           
          case MACRO4_TRIBYTE:
            str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");  
@@ -1167,6 +1165,7 @@ public class Assembler {
               .append(spaces).append("  .byte {4} >> 16, ( {4} >> 8) & 255,  {4} & 255\n")
               .append(spaces).append("  .byte {5} >> 16, ( {5} >> 8) & 255,  {5} & 255\n")
               .append(spaces).append("  .byte {6} >> 16, ( {6} >> 8) & 255,  {6} & 255\n")
+              .append(spaces).append("  .byte {7} >> 16, ( {7} >> 8) & 255,  {7} & 255\n")    
               .append(spaces).append("  .byte {8} >> 16, ( {8} >> 8) & 255,  {8} & 255\n")
               .append(spaces).append(".endm \n\n");
            break;
@@ -1255,7 +1254,8 @@ public class Assembler {
                .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
                .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
                .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
-               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")         
+               .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")  
+               .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")      
                .append(spaces).append(".endmacro\n\n")
                .append(spaces).append(".macro Tribyte7 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7 \n")
                .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
@@ -1263,7 +1263,8 @@ public class Assembler {
                .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
                .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
                .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
-               .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")                     
+               .append(spaces).append("  .byte tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")  
+               .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")    
                .append(spaces).append(".endmacro\n\n")
                .append(spaces).append(".macro Tribyte8 tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8 \n")
                .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
@@ -1271,7 +1272,8 @@ public class Assembler {
                .append(spaces).append("  .byte tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
                .append(spaces).append("  .byte tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
                .append(spaces).append("  .byte tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
-               .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")        
+               .append(spaces).append("  .byte tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n") 
+               .append(spaces).append("  .byte tribyte8 >> 16, ( tribyte8 >> 8) & 255,  tribyte8 & 255\n")     
                .append(spaces).append(".endmacro\n\n");               
            break;   
          case MACRO4_TRIBYTE:         
@@ -1328,7 +1330,7 @@ public class Assembler {
              "     .byte \\7 >> 16, ( \\7 >> 8) & 255,  \\7 & 255\n" +  
              "     .byte \\8 >> 16, ( \\8 >> 8) & 255,  \\8 & 255\n" +       
              "  .endm\n\n"                    
-           );                      
+           );                       
            break;             
        }
      };     
@@ -1439,7 +1441,7 @@ public class Assembler {
       * @param str the output stream
       */
      @Override
-     public void setting(StringBuilder str) {
+     public void setting(StringBuilder str) {        
        switch (aLong) {  
          case MACRO4_LONG:         
            str.append(
@@ -1468,7 +1470,7 @@ public class Assembler {
              "     .byte \\4 >> 24, (\\4 >> 16) & 255, ( \\4 >> 8) & 255,  \\4 & 255\n" +    
              "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" +         
              "  .endm\n\n"+      
-             "Long6.macro \n" +
+             "Long6 .macro \n" +
              "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
              "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
              "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
@@ -1476,7 +1478,7 @@ public class Assembler {
              "     .byte \\5 >> 24, (\\5 >> 16) & 255, ( \\5 >> 8) & 255,  \\5 & 255\n" + 
              "     .byte \\6 >> 24, (\\6 >> 16) & 255, ( \\6 >> 8) & 255,  \\6 & 255\n" +         
              "  .endm\n\n"+  
-             "Long7.macro \n" +
+             "Long7 .macro \n" +
              "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
              "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
              "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
@@ -1485,7 +1487,7 @@ public class Assembler {
              "     .byte \\6 >> 24, (\\6 >> 16) & 255, ( \\6 >> 8) & 255,  \\6 & 255\n" +        
              "     .byte \\7 >> 24, (\\7 >> 16) & 255, ( \\7 >> 8) & 255,  \\7 & 255\n" +           
              "  .endm\n\n"+    
-             "Long8.macro \n" +
+             "Long8 .macro \n" +
              "     .byte \\1 >> 24, (\\1 >> 16) & 255, ( \\1 >> 8) & 255,  \\1 & 255\n" +
              "     .byte \\2 >> 24, (\\2 >> 16) & 255, ( \\2 >> 8) & 255,  \\2 & 255\n" +  
              "     .byte \\3 >> 24, (\\3 >> 16) & 255, ( \\3 >> 8) & 255,  \\3 & 255\n" +      
@@ -2876,6 +2878,319 @@ public class Assembler {
        }     
      }
    }
+   
+   /**
+    * Stack Word
+    */
+   public enum StackWord implements ActionType {
+      DOT_RTA_STACKWORD,        // ->   .rta $xxyy
+      MACRO_STACKWORD,          // -> [.mac] $xxyyzz    (DASM)
+      MACRO1_STACKWORD,         // -> [.mac] $xxyyzz    (KickAssembler)
+      MACRO2_STACKWORD,         // -> [.mac] $xxyyzz    (Acme)
+      MACRO3_STACKWORD          // -> [.mac] $xxyyzz    (CA65) 
+      ;
+
+      @Override
+      public void flush(StringBuilder str) {
+       if (list.isEmpty()) return; 
+       
+       MemoryDasm memLow;
+       MemoryDasm memHigh;
+       MemoryDasm memRelLow;
+       MemoryDasm memRelHigh;
+     
+       int pos1=str.length();  // store initial position
+       int index=(int)(list.size()/2);
+       
+       // create starting command according to the kind of byte
+       switch (aStackWord) {
+         case DOT_RTA_STACKWORD:
+           str.append(getDataSpacesTabs()).append((".rta "));  
+           break;
+         case MACRO_STACKWORD:
+         case MACRO3_STACKWORD:     
+           str.append(getDataSpacesTabs()).append("Stack").append(index).append(" ");  
+           break;           
+         case MACRO1_STACKWORD:
+           str.append(getDataSpacesTabs()).append("Stack").append(index).append("(");   // must close the )
+           break;
+         case MACRO2_STACKWORD:
+           str.append(getDataSpacesTabs()).append("+Stack").append(index).append(" ");  
+           break;
+       }
+       
+       int pos2=str.length();   // store final position
+       boolean isFirst=true;       // true if this is the first output
+       
+       while (!list.isEmpty()) {
+         // if only 1 byte left, use byte coding
+         if (list.size()==1) {
+           if (isFirst) {
+              str.replace(pos1, pos2, "");
+              isFirst=false;                    
+           }  
+           aByte.flush(str);
+         }
+         else {
+           memLow=list.pop();
+           memRelLow=listRel.pop();
+           memHigh=list.pop();
+           memRelHigh=listRel.pop();           
+           
+           if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
+             if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation).append("+1");
+             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation).append("+1");
+                  else str.append("$").append(ShortToExe(memRelLow.address+1));  
+             isFirst=false;
+           } else {
+               // if cannot make a word with relative locations, force all to be of byte type
+               if (memLow.type=='<' || memLow.type=='>' || memHigh.type=='>' || memHigh.type=='<')  {
+                 list.addFirst(memHigh);
+                 list.addFirst(memLow);
+                 listRel.addFirst(memRelHigh);
+                 listRel.addFirst(memRelLow);
+                 if (isFirst) {
+                   str.replace(pos1, pos2, "");
+                   isFirst=false;
+                 }
+                 aByte.flush(str);
+               }
+               else {
+                 str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe((Unsigned.done(memLow.copy)+1)& 0xFF));                            
+                 isFirst=false;  
+               }    
+             }
+           if (list.size()>=2) str.append(", ");
+           else if (aStackWord==MACRO1_STACKWORD) str.append(")\n");
+           else str.append("\n");
+         }
+       }           
+      }
+
+      @Override
+      public void setting(StringBuilder str) {
+        String spaces=getDataSpacesTabs();           
+          
+        switch (aStackWord) {
+         case MACRO_STACKWORD:
+           str.append(spaces).append(".mac Stack1 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack2 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack3 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack4 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1 \n")
+              .append(spaces).append(" .endm \n\n")
+              .append(spaces).append(".mac Stack5 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack6 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack7 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n") 
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1, {7}-1 \n")
+              .append(spaces).append(".endm \n\n")
+              .append(spaces).append(".mac Stack8 \n")
+              .append(spaces).append("  .word {1}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1, {7}-1 \n")
+              .append(spaces).append("  .word {1}-1, {2}-1, {3}-1, {4}-1, {5}-1, {6}-1, {7}-1, {8}-1 \n")     
+              .append(spaces).append(".endm \n\n");
+           break;            
+         case MACRO1_STACKWORD:
+           str.append(spaces).append(".macro Stack1 (twobyte) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack2 (twobyte, twobyte2) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack3 (twobyte, twobyte2, twobyte3) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack4 (twobyte, twobyte2, twobyte3, twobyte4) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack6 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack7 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append(".macro Stack8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8) {\n")
+              .append(spaces).append("   .word twobyte-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")
+              .append(spaces).append("   .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1, twobyte8-1\n")
+              .append(spaces).append("}\n\n");                                  
+           break;       
+         case MACRO2_STACKWORD:
+           str.append(spaces).append("!macro Stack1 twobyte {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack2 twobyte, twobyte2 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack3 twobyte, twobyte2, twobyte3 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack4 twobyte, twobyte2, twobyte3, twobyte4 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack5 twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack6 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack7 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")
+              .append(spaces).append("}\n\n")
+              .append(spaces).append("!macro Stack8 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n")
+              .append(spaces).append("   !word twobyte-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")
+              .append(spaces).append("   !word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1, twobyte8-1\n")
+              .append(spaces).append("}\n\n");                                  
+           break;            
+          case MACRO3_STACKWORD:
+            str.append(spaces).append(".macro Stack1 twobyte \n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack2 twobyte, twobyte2 \n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack3 twobyte, twobyte2, twobyte3 \n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")   
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack4 twobyte, twobyte2, twobyte3, twobyte4 \n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")          
+               .append(spaces).append(".endmacro\n\n")                       
+               .append(spaces).append(".macro Stack5 twobyte, twobyte2, twobyte3, twobyte4, twobyte5\n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack6 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6\n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")     
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack7 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7\n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")   
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")   
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")   
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")    
+               .append(spaces).append(".endmacro\n\n")
+               .append(spaces).append(".macro Stack8 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8\n")
+               .append(spaces).append("  .word twobyte-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1\n")
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")   
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")  
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")     
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")   
+               .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1, twobyte8-1\n")      
+               .append(spaces).append(".endmacro\n\n");               
+           break;                                                      
+          }
+        }            
+   }
 
    
    /** Fifo list  of memory locations */
@@ -2925,7 +3240,10 @@ public class Assembler {
    protected static Assembler.Long aLong;  
    
    /** Assembler address type */
-   protected static Assembler.Address aAddress;    
+   protected static Assembler.Address aAddress;   
+   
+   /** Assembler stack word type */
+   protected static Assembler.StackWord aStackWord;   
    
    /** Assembler mono color sprite type */
    protected static Assembler.MonoSprite aMonoSprite;
@@ -2975,6 +3293,7 @@ public class Assembler {
     * @param aTribyte the tribyte type to use
     * @param aLong the long type to use
     * @param aAddress the address type to use
+    * @param aStackWord the stack word type to use
     * @param aMonoSprite the mono sprite type to use
     * @param aMultiSprite the multi sprite type to use
     * @param aText the text type to use
@@ -2993,6 +3312,7 @@ public class Assembler {
                          Assembler.Tribyte aTribyte,
                          Assembler.Long aLong,
                          Assembler.Address aAddress,
+                         Assembler.StackWord aStackWord,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite,
                          Assembler.Text aText,
@@ -3011,6 +3331,7 @@ public class Assembler {
      Assembler.aTribyte=aTribyte;
      Assembler.aLong=aLong;
      Assembler.aAddress=aAddress;
+     Assembler.aStackWord=aStackWord;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
      Assembler.aText=aText;
@@ -3108,6 +3429,11 @@ public class Assembler {
      if (actualType instanceof Address) {
        // look if it is time to aggregate data
        if (list.size()==option.maxAddressAggregate*2) actualType.flush(str);         
+     } else
+     // we are processing address?    
+     if (actualType instanceof StackWord) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxStackWordAggregate*2) actualType.flush(str);         
      } else    
      // we are processing mono sprite?    
      if (actualType instanceof MonoSprite) {
@@ -3178,6 +3504,7 @@ public class Assembler {
      boolean hasWordSwapped=false;
      boolean hasTribyte=false;
      boolean hasLong=false;
+     boolean hasStack=false;
      
      for (MemoryDasm mem:memory) {
        if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
@@ -3185,6 +3512,7 @@ public class Assembler {
        if (mem.dataType==DataType.SWAPPED) hasWordSwapped=true;
        if (mem.dataType==DataType.TRIBYTE) hasTribyte=true;
        if (mem.dataType==DataType.LONG) hasLong=true;
+       if (mem.dataType==DataType.STACK) hasStack=true;
      }
      
      if (hasMonoSprite) aMonoSprite.setting(str);
@@ -3192,6 +3520,7 @@ public class Assembler {
      if (hasWordSwapped) aWordSwapped.setting(str);
      if (hasTribyte) aTribyte.setting(str);
      if (hasLong) aLong.setting(str);
+     if (hasStack) aStackWord.setting(str);
    }
    
    /**
@@ -3378,7 +3707,12 @@ public class Assembler {
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
          numText=null;
-         return aAddress;    
+         return aAddress; 
+       case STACK:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aStackWord;  
        case MONO_SPRITE:
          if (!isMonoSpriteBlock) sizeMonoSpriteBlock=0;  
          isMonoSpriteBlock=true;  

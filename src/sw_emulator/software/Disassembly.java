@@ -122,6 +122,8 @@ public class Disassembly {
   /** Assembler address type */
   protected Assembler.Address aAddress; 
    
+  /** Assembler stack word type */
+  protected Assembler.StackWord aStackWord; 
   
    /** Assembler mono color sprite type */
    protected static Assembler.MonoSprite aMonoSprite;
@@ -625,6 +627,7 @@ public class Disassembly {
         aTribyte=option.dasmTribyte;
         aLong=option.dasmLong;
         aAddress=option.dasmAddress;
+        aStackWord=option.dasmStackWord;
         aMonoSprite=option.dasmMonoSprite;
         aMultiSprite=option.dasmMultiSprite;
         aText=option.dasmText;
@@ -643,6 +646,7 @@ public class Disassembly {
         aTribyte=option.tmpxTribyte;
         aLong=option.tmpxLong;
         aAddress=option.tmpxAddress;
+        aStackWord=option.tmpxStackWord;
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
         aText=option.tmpxText;
@@ -661,6 +665,7 @@ public class Disassembly {
         aTribyte=option.ca65Tribyte;
         aLong=option.ca65Long;
         aAddress=option.ca65Address;
+        aStackWord=option.ca65StackWord;
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
         aText=option.ca65Text;
@@ -679,6 +684,7 @@ public class Disassembly {
         aTribyte=option.acmeTribyte;
         aLong=option.acmeLong;
         aAddress=option.acmeAddress;
+        aStackWord=option.acmeStackWord;
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
         aText=option.acmeText;
@@ -697,6 +703,7 @@ public class Disassembly {
         aTribyte=option.kickTribyte;
         aLong=option.kickLong;
         aAddress=option.kickAddress;
+        aStackWord=option.kickStackWord;
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
         aText=option.kickText;
@@ -715,6 +722,7 @@ public class Disassembly {
         aTribyte=option.tass64Tribyte;
         aLong=option.tass64Long;
         aAddress=option.tass64Address;
+        aStackWord=option.tass64StackWord;
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
         aText=option.tass64Text;
@@ -725,7 +733,7 @@ public class Disassembly {
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
                         aBlockComment, aByte, aWord, aWordSwapped,
-                        aTribyte, aLong, aAddress,
+                        aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
                         aText, aNumText, aZeroText);      
   }

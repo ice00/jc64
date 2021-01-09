@@ -628,6 +628,9 @@ public class Option {
   /** DASM: address declaration */
   public Assembler.Address dasmAddress=Assembler.Address.DOT_WORD_ADDR;
   
+  /** DASM: stack words declaration */
+  public Assembler.StackWord dasmStackWord=Assembler.StackWord.MACRO_STACKWORD;
+  
   /** DASM: mono color sprite declaration */
   public Assembler.MonoSprite dasmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
    
@@ -676,6 +679,9 @@ public class Option {
   
   /** TMPX: address declaration */
   public Assembler.Address tmpxAddress=Assembler.Address.DOT_ADDR_ADDR;
+  
+  /** TMPX: stack word declaration */
+  public Assembler.StackWord tmpxStackWord=Assembler.StackWord.DOT_RTA_STACKWORD; 
   
   /** TMPx: mono color sprite declaration type */
   public Assembler.MonoSprite tmpxMonoSprite=Assembler.MonoSprite.MACRO4_BIN;
@@ -727,6 +733,9 @@ public class Option {
   /** CA65: address declaration */
   public Assembler.Address ca65Address=Assembler.Address.DOT_ADDR_ADDR;
   
+  /** CA65: stack word declaration */
+  public Assembler.StackWord ca65StackWord=Assembler.StackWord.MACRO3_STACKWORD; 
+  
   /** CA65: mono color sprite*/
   public Assembler.MonoSprite ca65MonoSprite=Assembler.MonoSprite.MACRO3_BIN;
    
@@ -776,6 +785,9 @@ public class Option {
   
   /** ACME: address declaration */
   public Assembler.Address acmeAddress=Assembler.Address.MARK_WORD_ADDR;
+  
+  /** ACME: stack word declaration */
+  public Assembler.StackWord acmeStackWord=Assembler.StackWord.MACRO2_STACKWORD;
   
   /** ACME: mono color sprite*/
   public Assembler.MonoSprite acmeMonoSprite=Assembler.MonoSprite.MACRO2_BIN;
@@ -827,7 +839,10 @@ public class Option {
   public Assembler.Long kickLong=Assembler.Long.DOT_DWORD_LONG; 
   
   /** KickAssembler: address declaration */
-  public Assembler.Address kickAddress=Assembler.Address.DOT_WORD_ADDR;  
+  public Assembler.Address kickAddress=Assembler.Address.DOT_WORD_ADDR; 
+  
+  /** KickAssembler: stack word declaration */
+  public Assembler.StackWord kickStackWord=Assembler.StackWord.MACRO1_STACKWORD;  
   
   /** KickAssembler: mono color sprite*/
   public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;
@@ -835,13 +850,13 @@ public class Option {
   /** KickAsembler: multi color sprite */
   public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
     
-  /** Kick: text declaration type */
+  /** KickAsembler: text declaration type */
   public Assembler.Text kickText=Assembler.Text.DOT_TEXT;
   
-  /** Kick: text with num chars declaration */
+  /** KickAsembler: text with num chars declaration */
   public Assembler.NumText kickNumText=Assembler.NumText.DOT_TEXT_NUMTEXT;
   
-  /** Kick: text null temrianted declaration */
+  /** KickAsembler: text null temrianted declaration */
   public Assembler.ZeroText kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT;
   
   
@@ -878,6 +893,9 @@ public class Option {
   
   /** 64Tass: Address declaration */
   public Assembler.Address tass64Address=Assembler.Address.DOT_ADDR_ADDR;
+  
+  /** 64Tass: Stack Word declaration */
+  public Assembler.StackWord tass64StackWord=Assembler.StackWord.DOT_RTA_STACKWORD;  
   
   /** 64Tass: mono color sprite*/
   public Assembler.MonoSprite tass64MonoSprite=Assembler.MonoSprite.MACRO4_BIN;
