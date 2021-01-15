@@ -2631,7 +2631,7 @@ public class Assembler {
        boolean isString=false;
        boolean isFirst=true;
        
-      int pos1=str.length(); 
+       int pos1=str.length(); 
          
        switch (aZeroText) {
          case DOT_NULL_ZEROTEXT:
@@ -2898,7 +2898,244 @@ public class Assembler {
 
       @Override
       public void flush(StringBuilder str) {
-     
+      if (list.isEmpty()) return;  
+       
+       boolean isString=false;
+       boolean isFirst=true;
+       
+       int pos1=str.length(); 
+         
+       switch (aHighText) {
+         case DOT_SHIFT_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append((".shift "));
+           break;   
+         case DOT_TEXT_S_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append((".text s"));
+           break;  
+         case DOT_BYTE_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append((".byte "));
+           break;
+         case DOT_BYT_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append((".byt "));
+           break;     
+         case MARK_TEXT_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("!text "));
+           break;   
+         case MARK_TX_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("!tx "));
+           break; 
+         case MARK_RAW_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("!raw "));
+           break;            
+         case BYTE_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("byte "));  
+           break;
+         case DC_BYTE_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("dc "));  
+           break;
+         case DC_B_BYTE_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("dc.b "));  
+           break;   
+       }
+       
+       int pos2=str.length();
+       
+       MemoryDasm mem;
+       MemoryDasm memRel;
+       while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          memRel=listRel.pop();
+          
+          // not all char can be converted in string
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }  
+              break;
+           case TMPX:
+              if (list.size()==1) {
+                // terminating has 1 converted to 0
+                mem=list.pop();
+                listRel.pop();
+                str.append((char)(mem.copy & 0x7F));  
+              } 
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              break; 
+            case CA65:
+              if ( (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              break;  
+           case ACME:                
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val==0x5C) ||
+                   (val>127) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }  
+              break;  
+            case KICK:
+              if (isFirst) {
+                str.append("@\"");
+                isString=true;
+                isFirst=false;  
+              }    
+              if ((val<=0x00) ||
+                  (val<=0x02) ||
+                  (val==0x0A) ||
+                  (val==0x0C) ||    
+                  (val==0x0D) ||
+                  (val==0x0E) ||        
+                  (val==0x0F) ||         
+                  (val==0x40) ||
+                  (val==0x5B) ||
+                  (val==0x5D) ||
+                  (val>=0x61 && val<=0x7A) ||
+                  (val==0x7F) ||
+                  (val==0xA0) ||
+                  (val==0xA3)                         
+                 ) {
+                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+              } else if (val==0x22) {
+                       str.append("\\\"");
+                     }
+                else if (val==0x5C) { 
+                       str.append("\\\\");
+                     }
+                else str.append((char)(mem.copy & 0xFF));                
+              break;         
+            case TASS64:                
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }            
+              if (list.size()==1) {
+                // terminating has 1 converted to 0
+                mem=list.pop();
+                listRel.pop();
+                str.append((char)(mem.copy & 0x7F));  
+              }
+              break;               
+          }   
+          if (list.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+
+          }
+        }
       }
        
    }
@@ -3495,11 +3732,16 @@ public class Assembler {
          numText=null;
        }         
      } else
-     // we are processing text?
+     // we are processing zero text?
      if (actualType instanceof ZeroText) {
        // look if it is time to aggregate data
        if (mem.copy==0) actualType.flush(str);         
-     }    
+     } else
+     // we are processing high text?
+     if (actualType instanceof HighText) {
+       // look if it is time to aggregate data
+       if ((mem.copy & 0X80) !=0) actualType.flush(str);         
+     }   
    }
    
    /**
@@ -3770,7 +4012,11 @@ public class Assembler {
          isMultiSpriteBlock=false;   
          numText=null;
          return aZeroText;         
-         
+       case HIGH_TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aHighText;       
      }
      
      // default is of Byte type

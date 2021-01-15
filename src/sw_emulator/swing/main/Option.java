@@ -928,7 +928,7 @@ public class Option {
   public Assembler.ZeroText tass64ZeroText=Assembler.ZeroText.DOT_NULL_ZEROTEXT;
   
   /** 64Tass: text terminated with high bit 1 declaration */
-  public Assembler.HighText tass64HighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
+  public Assembler.HighText tass64HighText=Assembler.HighText.DOT_SHIFT_HIGHTEXT;
   
   
   /**

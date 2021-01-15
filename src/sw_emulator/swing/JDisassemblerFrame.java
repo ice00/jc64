@@ -3095,10 +3095,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           }  
         }        
         break;  
-      case HIGH_TEXT:
-        // we must find area that terminate with a 8 bit at 1
-        for (pos=rows.length-1; pos>=0; pos--) {
-          if ((project.memory[rows[pos]].copy & 0x80)!=0) break;  
+      case HIGH_TEXT:       
+        if ((project.memory[rows[0]].copy & 0x80)!=0) {
+          JOptionPane.showMessageDialog(this, "Area can not start with high bit", "Warning", JOptionPane.WARNING_MESSAGE);
+          break;
+        }
+        for (pos=1; pos<rows.length; pos++) {
+          if ((project.memory[rows[pos]].copy & 0x80)!=0) break;    
         }
 
         if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.HIGH_TEXT)) {
