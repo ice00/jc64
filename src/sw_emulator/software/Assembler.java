@@ -2879,6 +2879,30 @@ public class Assembler {
      }
    }
    
+      
+   /**
+    * Text terminated with high bit 1
+    */
+   public enum HighText implements ActionType {
+      DOT_BYTE_HIGHTEXT,       // ->   .byte "xxx"
+      DOT_BYT_HIGHTEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_S_HIGHTEXT,     // ->  .text s"xxx"
+      BYTE_HIGHTEXT,           // ->    byte "xxx"
+      MARK_TEXT_HIGHTEXT,      // ->   !text "xxx"      
+      MARK_TX_HIGHTEXT,        // ->     !tx "xxx"
+      MARK_RAW_HIGHTEXT,       // ->    !raw "xxx"
+      DC_BYTE_HIGHTEXT,        // ->      dc "xxx"
+      DC_B_BYTE_HIGHTEXT,      // ->    dc.b "xxx"
+      DOT_SHIFT_HIGHTEXT       // ->  .shift "xxx"
+      ;
+
+      @Override
+      public void flush(StringBuilder str) {
+     
+      }
+       
+   }
+   
    /**
     * Stack Word
     */
@@ -3259,6 +3283,9 @@ public class Assembler {
    
    /** Assembler zero text type */
    protected static Assembler.ZeroText aZeroText;
+   
+   /** Assembler high text type */
+   protected static Assembler.HighText aHighText;
               
    /** Actual type being processed */
    ActionType actualType=null;
@@ -3299,6 +3326,7 @@ public class Assembler {
     * @param aText the text type to use
     * @param aNumText the text with number of char before
     * @param aZeroText the text with 0 terminated char
+    * @param aHighText the text with high 1 terminated bit
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -3317,7 +3345,8 @@ public class Assembler {
                          Assembler.MultiSprite aMultiSprite,
                          Assembler.Text aText,
                          Assembler.NumText aNumText,
-                         Assembler.ZeroText aZeroText
+                         Assembler.ZeroText aZeroText,
+                         Assembler.HighText aHighText
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -3337,6 +3366,7 @@ public class Assembler {
      Assembler.aText=aText;
      Assembler.aNumText=aNumText;
      Assembler.aZeroText=aZeroText;
+     Assembler.aHighText=aHighText;
       
      isMonoSpriteBlock=false;
      sizeMonoSpriteBlock=0;

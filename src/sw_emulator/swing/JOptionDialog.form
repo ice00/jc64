@@ -2257,7 +2257,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" pref="714" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4315,7 +4315,7 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButtonTmpxDotShiftZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTmpxDotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTmpxPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonTmpxDotText" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -4536,7 +4536,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelTmpxHigTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonTmpxDotShiftZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="46" max="32767" attributes="0"/>
@@ -5372,7 +5372,7 @@
                             <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiftZeroText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiftHighText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupTmpxHighText"/>
@@ -5380,7 +5380,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiftZeroTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiftHighTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftHighText">
@@ -6829,7 +6829,7 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jRadioButtonAcmeMarkTxHighZeroText" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonAcmeMarkTxHighText" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPaneAcmeMarkTxHighText" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -7029,7 +7029,7 @@
                                       <Component id="jScrollPaneAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkTxHighZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelAcmeHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -8258,14 +8258,14 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkTxHighZeroText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkTxHighText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupAcmeHighText"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkTxHighZeroTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkTxHighTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkTxHighText">

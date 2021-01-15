@@ -139,6 +139,9 @@ public class Disassembly {
    
    /** Asembler text zero terminated type */
    protected static Assembler.ZeroText aZeroText;   
+   
+   /** Asembler text terminated with high bit 1 */
+   protected static Assembler.HighText aHighText;  
     
   /**
    * Disassemble the given data
@@ -633,6 +636,7 @@ public class Disassembly {
         aText=option.dasmText;
         aNumText=option.dasmNumText;
         aZeroText=option.dasmZeroText;
+        aHighText=option.dasmHighText;   
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -652,6 +656,7 @@ public class Disassembly {
         aText=option.tmpxText;
         aNumText=option.tmpxNumText;
         aZeroText=option.tmpxZeroText;
+        aHighText=option.tmpxHighText;   
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
@@ -671,6 +676,7 @@ public class Disassembly {
         aText=option.ca65Text;
         aNumText=option.ca65NumText;
         aZeroText=option.ca65ZeroText;
+        aHighText=option.ca65HighText; 
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -690,6 +696,7 @@ public class Disassembly {
         aText=option.acmeText;
         aNumText=option.acmeNumText;
         aZeroText=option.acmeZeroText;
+        aHighText=option.acmeHighText;
         break;
       case KICK:
         aStarting=option.kickStarting;  
@@ -709,6 +716,7 @@ public class Disassembly {
         aText=option.kickText;
         aNumText=option.kickNumText;
         aZeroText=option.kickZeroText;
+        aHighText=option.kickHighText;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -728,6 +736,7 @@ public class Disassembly {
         aText=option.tass64Text;
         aNumText=option.tass64NumText;
         aZeroText=option.tass64ZeroText;
+        aHighText=option.tass64HighText;
         break;
     }
     
@@ -735,7 +744,7 @@ public class Disassembly {
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
-                        aText, aNumText, aZeroText);      
+                        aText, aNumText, aZeroText, aHighText);      
   }
   
   /**

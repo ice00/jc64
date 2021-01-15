@@ -646,6 +646,9 @@ public class Option {
   /** DASM: text null terminated declaration */
   public Assembler.ZeroText dasmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
   
+  /** DASM: text terminated with high bit 1 declaration */
+  public Assembler.HighText dasmHighText=Assembler.HighText.DC_BYTE_HIGHTEXT;
+  
   
   /** TMPX: starting declaration */
   public Assembler.Starting tmpxStarting=Assembler.Starting.FAKE; 
@@ -697,6 +700,9 @@ public class Option {
   
   /** TMPx: text null temrianted declaration */
   public Assembler.ZeroText tmpxZeroText=Assembler.ZeroText.DOT_NULL_ZEROTEXT;
+  
+  /** TMPX: text terminated with high bit 1 declaration */
+  public Assembler.HighText tmpxHighText=Assembler.HighText.DOT_SHIFT_HIGHTEXT;
   
   
   
@@ -751,6 +757,9 @@ public class Option {
   /** CA65: text null temrianted declaration */
   public Assembler.ZeroText ca65ZeroText=Assembler.ZeroText.DOT_ASCIIZ_ZEROTEXT;
   
+  /** CA65: text terminated with high bit 1 declaration */
+  public Assembler.HighText ca65HighText=Assembler.HighText.DOT_BYT_HIGHTEXT;
+  
  
   
   /** ACME: starting declaration */
@@ -803,6 +812,9 @@ public class Option {
   
   /** ACME: text null temrianted declaration */
   public Assembler.ZeroText acmeZeroText=Assembler.ZeroText.MARK_TEXT_ZEROTEXT;
+  
+  /** ACME: text terminated with high bit 1 declaration */
+  public Assembler.HighText acmeHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
   
   
   /** Kick: colon macro */
@@ -859,6 +871,9 @@ public class Option {
   /** KickAsembler: text null temrianted declaration */
   public Assembler.ZeroText kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT;
   
+  /** KickAsembler: text terminated with high bit 1 declaration */
+  public Assembler.HighText kickHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
+  
   
   
   /** 64Tass: starting declaration */
@@ -911,6 +926,9 @@ public class Option {
   
   /** 64Tass: text null temrianted declaration */
   public Assembler.ZeroText tass64ZeroText=Assembler.ZeroText.DOT_NULL_ZEROTEXT;
+  
+  /** 64Tass: text terminated with high bit 1 declaration */
+  public Assembler.HighText tass64HighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
   
   
   /**
