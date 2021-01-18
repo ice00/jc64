@@ -3022,8 +3022,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case ZERO_TEXT:
         // we must find area that terminate with a 0
         int pos;
-        for (pos=rows.length-1; pos>=0; pos--) {
-          if (project.memory[rows[pos]].copy==0) break;  
+        for (pos=1; pos<rows.length; pos++) {
+          if (project.memory[rows[pos]].copy==0) break;    
         }
 
         if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.ZERO_TEXT)) {
