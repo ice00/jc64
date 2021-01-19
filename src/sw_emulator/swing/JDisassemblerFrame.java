@@ -3122,7 +3122,35 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }  
           }          
         } else JOptionPane.showMessageDialog(this, "This area is not high bit terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
-        break;        
+        break; 
+      case SHIFT_TEXT:
+        // we must find area that are not with bit 0 at 1
+        for (pos=0; pos<rows.length; pos++) {
+          if ((project.memory[rows[pos]].copy & 0x01)!=0) break;    
+        }
+        
+        if (pos==0)  {
+          JOptionPane.showMessageDialog(this, "This area start with wrong low bit", "Warning", JOptionPane.WARNING_MESSAGE);  
+        } else {
+        
+          lastRow=rows[pos-1];  
+          for (int i=pos-1; i>=0; i--) {
+            if (lastRow-rows[i]>1) break;
+            lastRow=rows[i];
+          
+            mem= project.memory[rows[i]];
+            mem.isData=true;
+            mem.isCode=false;
+            mem.isGarbage=false;
+            mem.dataType=dataType;
+            if (option.eraseDComm) mem.dasmComment=null;
+            if (option.erasePlus && mem.type=='+') {
+              mem.related=-1;
+              mem.type=' ';
+            }  
+          }          
+        }
+        break;  
       default:              
         for (int i=0; i<rows.length; i++) {
           mem= project.memory[rows[i]];
