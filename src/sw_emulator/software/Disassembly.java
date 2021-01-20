@@ -142,6 +142,9 @@ public class Disassembly {
    
    /** Asembler text terminated with high bit 1 */
    protected static Assembler.HighText aHighText;  
+   
+   /** Asembler text left shifted */
+   protected static Assembler.ShiftText aShiftText;  
     
   /**
    * Disassemble the given data
@@ -637,6 +640,7 @@ public class Disassembly {
         aNumText=option.dasmNumText;
         aZeroText=option.dasmZeroText;
         aHighText=option.dasmHighText;   
+        aShiftText=option.dasmShiftText; 
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -656,7 +660,8 @@ public class Disassembly {
         aText=option.tmpxText;
         aNumText=option.tmpxNumText;
         aZeroText=option.tmpxZeroText;
-        aHighText=option.tmpxHighText;   
+        aHighText=option.tmpxHighText;
+        aShiftText=option.tmpxShiftText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
@@ -677,6 +682,7 @@ public class Disassembly {
         aNumText=option.ca65NumText;
         aZeroText=option.ca65ZeroText;
         aHighText=option.ca65HighText; 
+        aShiftText=option.ca65ShiftText;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -697,6 +703,7 @@ public class Disassembly {
         aNumText=option.acmeNumText;
         aZeroText=option.acmeZeroText;
         aHighText=option.acmeHighText;
+        aShiftText=option.acmeShiftText;
         break;
       case KICK:
         aStarting=option.kickStarting;  
@@ -717,6 +724,7 @@ public class Disassembly {
         aNumText=option.kickNumText;
         aZeroText=option.kickZeroText;
         aHighText=option.kickHighText;
+        aShiftText=option.kickShiftText;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -737,6 +745,7 @@ public class Disassembly {
         aNumText=option.tass64NumText;
         aZeroText=option.tass64ZeroText;
         aHighText=option.tass64HighText;
+        aShiftText=option.tass64ShiftText;
         break;
     }
     
@@ -744,7 +753,7 @@ public class Disassembly {
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
-                        aText, aNumText, aZeroText, aHighText);      
+                        aText, aNumText, aZeroText, aHighText, aShiftText);      
   }
   
   /**

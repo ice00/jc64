@@ -3141,6 +3141,28 @@ public class Assembler {
    }
    
    /**
+    * Text left shifted
+    */
+   public enum ShiftText implements ActionType {
+      DOT_BYTE_SHIFTTEXT,       // ->   .byte "xxx"
+      DOT_BYT_SHIFTTEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_L_SHIFTTEXT,     // ->  .text l"xxx"
+      BYTE_SHIFTTEXT,           // ->    byte "xxx"
+      MARK_TEXT_SHIFTTEXT,      // ->   !text "xxx"      
+      MARK_TX_SHIFTTEXT,        // ->     !tx "xxx"
+      MARK_RAW_SHIFTTEXT,       // ->    !raw "xxx"
+      DC_BYTE_SHIFTTEXT,        // ->      dc "xxx"
+      DC_B_BYTE_SHIFTTEXT,      // ->    dc.b "xxx"
+      DOT_SHIFTL_SHIFTTEXT      // -> .shiftl "xxx"
+      ;
+
+        @Override
+        public void flush(StringBuilder str) {
+            
+        }
+   }  
+   
+   /**
     * Stack Word
     */
    public enum StackWord implements ActionType {
@@ -3523,6 +3545,9 @@ public class Assembler {
    
    /** Assembler high text type */
    protected static Assembler.HighText aHighText;
+   
+   /** Assembler left shift text type */
+   protected static Assembler.ShiftText aShiftText;  
               
    /** Actual type being processed */
    ActionType actualType=null;
@@ -3564,6 +3589,7 @@ public class Assembler {
     * @param aNumText the text with number of char before
     * @param aZeroText the text with 0 terminated char
     * @param aHighText the text with high 1 terminated bit
+    * @param aShiftText the text left shifted
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -3583,7 +3609,8 @@ public class Assembler {
                          Assembler.Text aText,
                          Assembler.NumText aNumText,
                          Assembler.ZeroText aZeroText,
-                         Assembler.HighText aHighText
+                         Assembler.HighText aHighText,
+                         Assembler.ShiftText aShiftText
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -3604,6 +3631,7 @@ public class Assembler {
      Assembler.aNumText=aNumText;
      Assembler.aZeroText=aZeroText;
      Assembler.aHighText=aHighText;
+     Assembler.aShiftText=aShiftText;
       
      isMonoSpriteBlock=false;
      sizeMonoSpriteBlock=0;

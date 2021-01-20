@@ -242,6 +242,8 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64ShiftText">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupCa65ShiftText">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -1007,8 +1009,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabelautocomment" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneComm" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTabbedPaneComm" min="-2" pref="588" max="-2" attributes="0"/>
+                          <EmptySpace pref="177" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1088,7 +1090,7 @@
                                   <Component id="jCheckBoxC64Cia2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC64KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="321" max="32767" attributes="0"/>
+                                  <EmptySpace pref="231" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1278,7 +1280,7 @@
                                   <Component id="jCheckBoxC1541Via2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC1541Kernal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="390" max="32767" attributes="0"/>
+                                  <EmptySpace pref="300" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1472,7 +1474,7 @@
                                   <Component id="jCheckBoxC128DMA" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxC128KernalRom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="206" max="32767" attributes="0"/>
+                                  <EmptySpace pref="116" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -6872,6 +6874,7 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupCa65HighText"/>
                             </Property>
+                            <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonCa65DotByteHighTextItemStateChanged"/>
@@ -6935,7 +6938,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonCa65DotByteShiftText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupCa65HighText"/>
+                              <ComponentRef name="buttonGroupCa65ShiftText"/>
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
@@ -6966,7 +6969,7 @@
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonCa65DotBytShiftText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="buttonGroupCa65HighText"/>
+                              <ComponentRef name="buttonGroupCa65ShiftText"/>
                             </Property>
                           </Properties>
                           <Events>

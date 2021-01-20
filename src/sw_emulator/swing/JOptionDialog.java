@@ -236,6 +236,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         buttonGroupAcmeShiftText = new javax.swing.ButtonGroup();
         buttonGroupKickShiftText = new javax.swing.ButtonGroup();
         buttonGroupTass64ShiftText = new javax.swing.ButtonGroup();
+        buttonGroupCa65ShiftText = new javax.swing.ButtonGroup();
         jPanelOption = new javax.swing.JPanel();
         jTabbedPaneOption = new javax.swing.JTabbedPane();
         jPanelPreview = new javax.swing.JPanel();
@@ -1856,7 +1857,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC64Cia2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC64KernalRom)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C64", jPanelC64Comm);
@@ -1989,7 +1990,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC1541Via2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC1541Kernal)
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C1541", jPanelC1541Comm);
@@ -2219,7 +2220,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC128DMA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC128KernalRom)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C128", jPanelC128Comm);
@@ -2742,8 +2743,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelautocomment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPaneComm)
-                .addContainerGap())
+                .addComponent(jTabbedPaneComm, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Comments", jPanelComment);
@@ -5117,6 +5118,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelCa65HighTextDeclaration.setText("Text '1' terminated:");
 
         buttonGroupCa65HighText.add(jRadioButtonCa65DotByteHighText);
+        jRadioButtonCa65DotByteHighText.setSelected(true);
         jRadioButtonCa65DotByteHighText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButtonCa65DotByteHighTextItemStateChanged(evt);
@@ -5148,7 +5150,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelCa65ShiftTextDeclaration.setText("Text left shifted:");
 
-        buttonGroupCa65HighText.add(jRadioButtonCa65DotByteShiftText);
+        buttonGroupCa65ShiftText.add(jRadioButtonCa65DotByteShiftText);
         jRadioButtonCa65DotByteShiftText.setSelected(true);
         jRadioButtonCa65DotByteShiftText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -5164,7 +5166,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneCa65DotByteShiftText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .byte</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneCa65DotByteShiftText.setViewportView(jTextPaneCa65DotByteShiftText);
 
-        buttonGroupCa65HighText.add(jRadioButtonCa65DotBytShiftText);
+        buttonGroupCa65ShiftText.add(jRadioButtonCa65DotBytShiftText);
         jRadioButtonCa65DotBytShiftText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButtonCa65DotBytShiftTextItemStateChanged(evt);
@@ -9903,19 +9905,19 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonTass64DotTextSHighTextItemStateChanged
 
     private void jRadioButtonDasmDotByteShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDotByteShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonDasmDotByteShiftTextItemStateChanged
 
     private void jRadioButtonDasmByteShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmByteShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmShiftText=Assembler.ShiftText.BYTE_SHIFTTEXT;  
     }//GEN-LAST:event_jRadioButtonDasmByteShiftTextItemStateChanged
 
     private void jRadioButtonDasmDcShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmShiftText=Assembler.ShiftText.DC_BYTE_SHIFTTEXT; 
     }//GEN-LAST:event_jRadioButtonDasmDcShiftTextItemStateChanged
 
     private void jRadioButtonDasmDcDotBShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcDotBShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmShiftText=Assembler.ShiftText.DC_B_BYTE_SHIFTTEXT;  
     }//GEN-LAST:event_jRadioButtonDasmDcDotBShiftTextItemStateChanged
 
     private void jRadioButtonTmpxDotShiflShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotShiflShiftTextItemStateChanged
@@ -10030,6 +10032,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupCa65MultiSprite;
     private javax.swing.ButtonGroup buttonGroupCa65NumText;
     private javax.swing.ButtonGroup buttonGroupCa65Origin;
+    private javax.swing.ButtonGroup buttonGroupCa65ShiftText;
     private javax.swing.ButtonGroup buttonGroupCa65StackWord;
     private javax.swing.ButtonGroup buttonGroupCa65Starting;
     private javax.swing.ButtonGroup buttonGroupCa65Text;
@@ -11441,6 +11444,21 @@ public class JOptionDialog extends javax.swing.JDialog {
         break;  
       case DC_B_BYTE_HIGHTEXT:
         jRadioButtonDasmDcDotBHighText.setSelected(true);
+        break;  
+    }
+    
+    switch (option.dasmShiftText) {
+      case DOT_BYTE_SHIFTTEXT:
+        jRadioButtonDasmDotByteShiftText.setSelected(true);
+        break;
+      case BYTE_SHIFTTEXT:
+        jRadioButtonDasmByteShiftText.setSelected(true);
+        break;
+      case DC_BYTE_SHIFTTEXT:
+        jRadioButtonDasmDcShiftText.setSelected(true);
+        break;  
+      case DC_B_BYTE_SHIFTTEXT:
+        jRadioButtonDasmDcDotBShiftText.setSelected(true);
         break;  
     }
   }

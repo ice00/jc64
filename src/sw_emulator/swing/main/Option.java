@@ -647,7 +647,10 @@ public class Option {
   public Assembler.ZeroText dasmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
   
   /** DASM: text terminated with high bit 1 declaration */
-  public Assembler.HighText dasmHighText=Assembler.HighText.DC_BYTE_HIGHTEXT;
+  public Assembler.HighText dasmHighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  
+  /** DASM: text left shifted declaration */
+  public Assembler.ShiftText dasmShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
   
   
   /** TMPX: starting declaration */
@@ -704,6 +707,9 @@ public class Option {
   /** TMPX: text terminated with high bit 1 declaration */
   public Assembler.HighText tmpxHighText=Assembler.HighText.DOT_SHIFT_HIGHTEXT;
   
+  /** TMPX: text left shifted declaration */
+  public Assembler.ShiftText tmpxShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT;
+  
   
   
   /** CA65: starting declaration */
@@ -758,7 +764,10 @@ public class Option {
   public Assembler.ZeroText ca65ZeroText=Assembler.ZeroText.DOT_ASCIIZ_ZEROTEXT;
   
   /** CA65: text terminated with high bit 1 declaration */
-  public Assembler.HighText ca65HighText=Assembler.HighText.DOT_BYT_HIGHTEXT;
+  public Assembler.HighText ca65HighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  
+  /** CA65: text left shifted declaration */
+  public Assembler.ShiftText ca65ShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
   
  
   
@@ -815,6 +824,9 @@ public class Option {
   
   /** ACME: text terminated with high bit 1 declaration */
   public Assembler.HighText acmeHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
+  
+  /** ACME: text left shift declaration */
+  public Assembler.ShiftText acmeShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT; 
   
   
   /** Kick: colon macro */
@@ -874,6 +886,8 @@ public class Option {
   /** KickAsembler: text terminated with high bit 1 declaration */
   public Assembler.HighText kickHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
   
+  /** KickAsembler: text left shifted declaration */
+  public Assembler.ShiftText kickShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT; 
   
   
   /** 64Tass: starting declaration */
@@ -929,6 +943,9 @@ public class Option {
   
   /** 64Tass: text terminated with high bit 1 declaration */
   public Assembler.HighText tass64HighText=Assembler.HighText.DOT_SHIFT_HIGHTEXT;
+  
+  /** 64Tass: text left shifted declaration */
+  public Assembler.ShiftText tass64ShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT; 
   
   
   /**
