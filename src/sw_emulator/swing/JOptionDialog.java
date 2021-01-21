@@ -1012,7 +1012,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneKickMacroWordSwapped = new javax.swing.JScrollPane();
         jTextPaneKickMacroWordSwapped = new javax.swing.JTextPane();
         jLabelKickTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotText = new javax.swing.JRadioButton();
+        jRadioButtonKickMarkText = new javax.swing.JRadioButton();
         jScrollPaneKickDotText = new javax.swing.JScrollPane();
         jTextPaneKickDotText = new javax.swing.JTextPane();
         jRadioButtonKickDotByByte = new javax.swing.JRadioButton();
@@ -1026,11 +1026,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneKickDotDwLong = new javax.swing.JTextPane();
         jCheckBoxKickColonMacro = new javax.swing.JCheckBox();
         jLabelKickNumTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotTextNumText = new javax.swing.JRadioButton();
+        jRadioButtonKickMarkTextNumText = new javax.swing.JRadioButton();
         jScrollPaneKickDotTextNumText = new javax.swing.JScrollPane();
         jTextPaneKickDotTextNumText = new javax.swing.JTextPane();
         jLabelKickZeroTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotTextZeroText = new javax.swing.JRadioButton();
+        jRadioButtonKickMarkTextZeroText = new javax.swing.JRadioButton();
         jScrollPaneKickDotTextZeroText = new javax.swing.JScrollPane();
         jTextPaneKickDotTextZeroText = new javax.swing.JTextPane();
         jLabelKickAddressDeclaration = new javax.swing.JLabel();
@@ -1045,11 +1045,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneKickMacroStackWord = new javax.swing.JScrollPane();
         jTextPaneKickMacroStackWord = new javax.swing.JTextPane();
         jLabelKickHighTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotTextHighText = new javax.swing.JRadioButton();
+        jRadioButtonKickMarkTextHighText = new javax.swing.JRadioButton();
         jScrollPaneKickDotTextHighText = new javax.swing.JScrollPane();
         jTextPaneKickDotTextHighText = new javax.swing.JTextPane();
         jLabelKickShiftTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonKickDotTextShiftText = new javax.swing.JRadioButton();
+        jRadioButtonKickMarkTextShiftText = new javax.swing.JRadioButton();
         jScrollPaneKickDotTextShiftText = new javax.swing.JScrollPane();
         jTextPaneKickDotTextShiftText = new javax.swing.JTextPane();
         jPanelTass64 = new javax.swing.JPanel();
@@ -5848,7 +5848,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneAcmeMarkText.setEditable(false);
         jTextPaneAcmeMarkText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneAcmeMarkText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkText.setViewportView(jTextPaneAcmeMarkText);
 
         buttonGroupAcmeText.add(jRadioButtonAcmeMarkTxText);
@@ -5896,7 +5896,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneAcmeMarkNumText.setEditable(false);
         jTextPaneAcmeMarkNumText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkNumText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneAcmeMarkNumText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkNumText.setViewportView(jTextPaneAcmeMarkNumText);
 
         buttonGroupAcmeNumText.add(jRadioButtonAcmeMarkTxNumText);
@@ -5944,7 +5944,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneAcmeMarkZeroText.setEditable(false);
         jTextPaneAcmeMarkZeroText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkZeroText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneAcmeMarkZeroText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkZeroText.setViewportView(jTextPaneAcmeMarkZeroText);
 
         buttonGroupAcmeZeroText.add(jRadioButtonAcmeMarkTxZeroText);
@@ -6043,7 +6043,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneAcmeMarkHighText.setEditable(false);
         jTextPaneAcmeMarkHighText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkHighText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneAcmeMarkHighText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkHighText.setViewportView(jTextPaneAcmeMarkHighText);
 
         buttonGroupAcmeHighText.add(jRadioButtonAcmeMarkTxHighText);
@@ -6091,7 +6091,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jTextPaneAcmeMarkShiftText.setEditable(false);
         jTextPaneAcmeMarkShiftText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkShiftText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneAcmeMarkShiftText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneAcmeMarkShiftText.setViewportView(jTextPaneAcmeMarkShiftText);
 
         buttonGroupAcmeShiftText.add(jRadioButtonAcmeMarkTxShiftText);
@@ -6783,11 +6783,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickTextDeclaration.setText("Text:");
 
-        buttonGroupKickText.add(jRadioButtonKickDotText);
-        jRadioButtonKickDotText.setSelected(true);
-        jRadioButtonKickDotText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickText.add(jRadioButtonKickMarkText);
+        jRadioButtonKickMarkText.setSelected(true);
+        jRadioButtonKickMarkText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotTextItemStateChanged(evt);
+                jRadioButtonKickMarkTextItemStateChanged(evt);
             }
         });
 
@@ -6853,11 +6853,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickNumTextDeclaration.setText("Text #num chars:");
 
-        buttonGroupKickNumText.add(jRadioButtonKickDotTextNumText);
-        jRadioButtonKickDotTextNumText.setSelected(true);
-        jRadioButtonKickDotTextNumText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickNumText.add(jRadioButtonKickMarkTextNumText);
+        jRadioButtonKickMarkTextNumText.setSelected(true);
+        jRadioButtonKickMarkTextNumText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotTextNumTextItemStateChanged(evt);
+                jRadioButtonKickMarkTextNumTextItemStateChanged(evt);
             }
         });
 
@@ -6871,11 +6871,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickZeroTextDeclaration.setText("Text 0 terminated:");
 
-        buttonGroupKickZeroText.add(jRadioButtonKickDotTextZeroText);
-        jRadioButtonKickDotTextZeroText.setSelected(true);
-        jRadioButtonKickDotTextZeroText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickZeroText.add(jRadioButtonKickMarkTextZeroText);
+        jRadioButtonKickMarkTextZeroText.setSelected(true);
+        jRadioButtonKickMarkTextZeroText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotTextZeroTextItemStateChanged(evt);
+                jRadioButtonKickMarkTextZeroTextItemStateChanged(evt);
             }
         });
 
@@ -6940,11 +6940,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickHighTextDeclaration.setText("Text '1' terminated:");
 
-        buttonGroupKickHighText.add(jRadioButtonKickDotTextHighText);
-        jRadioButtonKickDotTextHighText.setSelected(true);
-        jRadioButtonKickDotTextHighText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickHighText.add(jRadioButtonKickMarkTextHighText);
+        jRadioButtonKickMarkTextHighText.setSelected(true);
+        jRadioButtonKickMarkTextHighText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotTextHighTextItemStateChanged(evt);
+                jRadioButtonKickMarkTextHighTextItemStateChanged(evt);
             }
         });
 
@@ -6958,11 +6958,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelKickShiftTextDeclaration.setText("Text left shifted:");
 
-        buttonGroupKickShiftText.add(jRadioButtonKickDotTextShiftText);
-        jRadioButtonKickDotTextShiftText.setSelected(true);
-        jRadioButtonKickDotTextShiftText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupKickShiftText.add(jRadioButtonKickMarkTextShiftText);
+        jRadioButtonKickMarkTextShiftText.setSelected(true);
+        jRadioButtonKickMarkTextShiftText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonKickDotTextShiftTextItemStateChanged(evt);
+                jRadioButtonKickMarkTextShiftTextItemStateChanged(evt);
             }
         });
 
@@ -6988,7 +6988,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
                         .addComponent(jLabelKickShiftTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonKickDotTextShiftText)
+                        .addComponent(jRadioButtonKickMarkTextShiftText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneKickDotTextShiftText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -7014,10 +7014,10 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jLabelKickHighTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonKickDotTextHighText)
-                            .addComponent(jRadioButtonKickDotTextZeroText)
-                            .addComponent(jRadioButtonKickDotTextNumText)
-                            .addComponent(jRadioButtonKickDotText)
+                            .addComponent(jRadioButtonKickMarkTextHighText)
+                            .addComponent(jRadioButtonKickMarkTextZeroText)
+                            .addComponent(jRadioButtonKickMarkTextNumText)
+                            .addComponent(jRadioButtonKickMarkText)
                             .addComponent(jRadioButtonKickByteHexMultiSprite)
                             .addComponent(jRadioButtonKickByteHexMonoSprite)
                             .addComponent(jRadioButtonKickMacroStackWord)
@@ -7213,27 +7213,27 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabelKickTextDeclaration)
-                            .addComponent(jRadioButtonKickDotText)
+                            .addComponent(jRadioButtonKickMarkText)
                             .addComponent(jScrollPaneKickDotText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickNumTextDeclaration)
-                    .addComponent(jRadioButtonKickDotTextNumText)
+                    .addComponent(jRadioButtonKickMarkTextNumText)
                     .addComponent(jScrollPaneKickDotTextNumText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickZeroTextDeclaration)
-                    .addComponent(jRadioButtonKickDotTextZeroText)
+                    .addComponent(jRadioButtonKickMarkTextZeroText)
                     .addComponent(jScrollPaneKickDotTextZeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickHighTextDeclaration)
-                    .addComponent(jRadioButtonKickDotTextHighText)
+                    .addComponent(jRadioButtonKickMarkTextHighText)
                     .addComponent(jScrollPaneKickDotTextHighText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelKickShiftTextDeclaration)
-                    .addComponent(jRadioButtonKickDotTextShiftText)
+                    .addComponent(jRadioButtonKickMarkTextShiftText)
                     .addComponent(jScrollPaneKickDotTextShiftText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -9548,9 +9548,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         option.kickByte=Assembler.Byte.DOT_BY_BYTE;
     }//GEN-LAST:event_jRadioButtonKickDotByByteItemStateChanged
 
-    private void jRadioButtonKickDotTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextItemStateChanged
-        option.kickText=Assembler.Text.DOT_TEXT;
-    }//GEN-LAST:event_jRadioButtonKickDotTextItemStateChanged
+    private void jRadioButtonKickMarkTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMarkTextItemStateChanged
+        option.kickText=Assembler.Text.MARK_TEXT;
+    }//GEN-LAST:event_jRadioButtonKickMarkTextItemStateChanged
 
     private void jRadioButtonKickMacroWordSwappedItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMacroWordSwappedItemStateChanged
         option.kickWordSwapped=Assembler.WordSwapped.MACRO1_WORD_SWAPPED;
@@ -9756,13 +9756,13 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.acmeZeroText=Assembler.ZeroText.MARK_RAW_ZEROTEXT; 
     }//GEN-LAST:event_jRadioButtonAcmeMarkRawZeroTextItemStateChanged
 
-    private void jRadioButtonKickDotTextNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextNumTextItemStateChanged
-      option.kickNumText=Assembler.NumText.DOT_TEXT_NUMTEXT;   
-    }//GEN-LAST:event_jRadioButtonKickDotTextNumTextItemStateChanged
+    private void jRadioButtonKickMarkTextNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMarkTextNumTextItemStateChanged
+      option.kickNumText=Assembler.NumText.MARK_TEXT_NUMTEXT;   
+    }//GEN-LAST:event_jRadioButtonKickMarkTextNumTextItemStateChanged
 
-    private void jRadioButtonKickDotTextZeroTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextZeroTextItemStateChanged
-      option.kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT; 
-    }//GEN-LAST:event_jRadioButtonKickDotTextZeroTextItemStateChanged
+    private void jRadioButtonKickMarkTextZeroTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMarkTextZeroTextItemStateChanged
+      option.kickZeroText=Assembler.ZeroText.MARK_TEXT_ZEROTEXT; 
+    }//GEN-LAST:event_jRadioButtonKickMarkTextZeroTextItemStateChanged
 
     private void jRadioButtonTass64DotPTextNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotPTextNumTextItemStateChanged
       option.tass64NumText=Assembler.NumText.DOT_PTEXT_NUMTEXT;          
@@ -9892,9 +9892,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.acmeHighText=Assembler.HighText.MARK_RAW_HIGHTEXT;   
     }//GEN-LAST:event_jRadioButtonAcmeMarkRawHighTextItemStateChanged
 
-    private void jRadioButtonKickDotTextHighTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextHighTextItemStateChanged
+    private void jRadioButtonKickMarkTextHighTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMarkTextHighTextItemStateChanged
       option.kickHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;  
-    }//GEN-LAST:event_jRadioButtonKickDotTextHighTextItemStateChanged
+    }//GEN-LAST:event_jRadioButtonKickMarkTextHighTextItemStateChanged
 
     private void jRadioButtonTass64DotShiftHighTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotShiftHighTextItemStateChanged
       option.tass64HighText=Assembler.HighText.DOT_SHIFT_HIGHTEXT;
@@ -9921,39 +9921,39 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonDasmDcDotBShiftTextItemStateChanged
 
     private void jRadioButtonTmpxDotShiflShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotShiflShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.tmpxShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT; 
     }//GEN-LAST:event_jRadioButtonTmpxDotShiflShiftTextItemStateChanged
 
     private void jRadioButtonCa65DotByteShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotByteShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65ShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT; 
     }//GEN-LAST:event_jRadioButtonCa65DotByteShiftTextItemStateChanged
 
     private void jRadioButtonCa65DotBytShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotBytShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65ShiftText=Assembler.ShiftText.DOT_BYT_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonCa65DotBytShiftTextItemStateChanged
 
     private void jRadioButtonAcmeMarkShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.acmeShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonAcmeMarkShiftTextItemStateChanged
 
     private void jRadioButtonAcmeMarkTxShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkTxShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.acmeShiftText=Assembler.ShiftText.MARK_TX_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonAcmeMarkTxShiftTextItemStateChanged
 
     private void jRadioButtonAcmeMarkRawShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkRawShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.acmeShiftText=Assembler.ShiftText.MARK_RAW_SHIFTTEXT; 
     }//GEN-LAST:event_jRadioButtonAcmeMarkRawShiftTextItemStateChanged
 
-    private void jRadioButtonKickDotTextShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextShiftTextItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonKickDotTextShiftTextItemStateChanged
+    private void jRadioButtonKickMarkTextShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickMarkTextShiftTextItemStateChanged
+      option.kickShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT;
+    }//GEN-LAST:event_jRadioButtonKickMarkTextShiftTextItemStateChanged
 
     private void jRadioButtonTass64DotShiftlShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotShiftlShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.tass64ShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonTass64DotShiftlShiftTextItemStateChanged
 
     private void jRadioButtonTass64DotTextLShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotTextLShiftTextItemStateChanged
-        // TODO add your handling code here:
+      option.tass64ShiftText=Assembler.ShiftText.DOT_TEXT_L_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonTass64DotTextLShiftTextItemStateChanged
 
     /**
@@ -10528,11 +10528,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonKickDotCpuUndStarting;
     private javax.swing.JRadioButton jRadioButtonKickDotDwLong;
     private javax.swing.JRadioButton jRadioButtonKickDotPcOrigin;
-    private javax.swing.JRadioButton jRadioButtonKickDotText;
-    private javax.swing.JRadioButton jRadioButtonKickDotTextHighText;
-    private javax.swing.JRadioButton jRadioButtonKickDotTextNumText;
-    private javax.swing.JRadioButton jRadioButtonKickDotTextShiftText;
-    private javax.swing.JRadioButton jRadioButtonKickDotTextZeroText;
     private javax.swing.JRadioButton jRadioButtonKickDotWoWord;
     private javax.swing.JRadioButton jRadioButtonKickDotWoWordAddress;
     private javax.swing.JRadioButton jRadioButtonKickDotWord;
@@ -10548,6 +10543,11 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonKickMacroStackWord;
     private javax.swing.JRadioButton jRadioButtonKickMacroTribyte;
     private javax.swing.JRadioButton jRadioButtonKickMacroWordSwapped;
+    private javax.swing.JRadioButton jRadioButtonKickMarkText;
+    private javax.swing.JRadioButton jRadioButtonKickMarkTextHighText;
+    private javax.swing.JRadioButton jRadioButtonKickMarkTextNumText;
+    private javax.swing.JRadioButton jRadioButtonKickMarkTextShiftText;
+    private javax.swing.JRadioButton jRadioButtonKickMarkTextZeroText;
     private javax.swing.JRadioButton jRadioButtonLangEnglish;
     private javax.swing.JRadioButton jRadioButtonLangItalian;
     private javax.swing.JRadioButton jRadioButtonLookCWin;
@@ -11595,6 +11595,12 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonTmpxDotShiftHighText.setSelected(true);
         break;           
     }    
+    
+    switch (option.tmpxShiftText) {
+      case DOT_SHIFTL_SHIFTTEXT:  
+        jRadioButtonTmpxDotShiflShiftText.setSelected(true);
+        break;           
+    }     
   }
 
   /**
@@ -11744,6 +11750,15 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonCa65DotBytHighText.setSelected(true);
         break;  
     } 
+    
+    switch (option.ca65ShiftText) {
+      case DOT_BYTE_SHIFTTEXT:
+        jRadioButtonCa65DotByteShiftText.setSelected(true);
+        break;
+      case DOT_BYT_SHIFTTEXT:
+        jRadioButtonCa65DotBytShiftText.setSelected(true);
+        break;  
+    }    
   }
   
   /**
@@ -11920,6 +11935,18 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonAcmeMarkRawHighText.setSelected(true);
         break;       
     }
+    
+    switch (option.acmeShiftText) {
+      case MARK_TEXT_SHIFTTEXT:
+        jRadioButtonAcmeMarkShiftText.setSelected(true);
+        break;
+      case MARK_TX_SHIFTTEXT:
+        jRadioButtonAcmeMarkTxShiftText.setSelected(true);
+        break;  
+      case MARK_RAW_SHIFTTEXT:
+        jRadioButtonAcmeMarkRawShiftText.setSelected(true);
+        break;       
+    }   
   }
   
   /**
@@ -12052,26 +12079,32 @@ public class JOptionDialog extends javax.swing.JDialog {
     }     
     
     switch (option.kickText) {
-      case DOT_TEXT:  
-        jRadioButtonKickDotText.setSelected(true);
+      case MARK_TEXT:  
+        jRadioButtonKickMarkText.setSelected(true);
         break;           
     }   
     
     switch (option.kickNumText) {
-      case DOT_TEXT_NUMTEXT:  
-        jRadioButtonKickDotTextNumText.setSelected(true);
+      case MARK_TEXT_NUMTEXT:  
+        jRadioButtonKickMarkTextNumText.setSelected(true);
         break;           
     }  
      
     switch (option.kickZeroText) {
-      case DOT_TEXT_ZEROTEXT:  
-        jRadioButtonKickDotTextZeroText.setSelected(true);
+      case MARK_TEXT_ZEROTEXT:  
+        jRadioButtonKickMarkTextZeroText.setSelected(true);
         break;           
     }   
     
     switch (option.kickHighText) {
       case MARK_TEXT_HIGHTEXT:  
-        jRadioButtonKickDotTextHighText.setSelected(true);
+        jRadioButtonKickMarkTextHighText.setSelected(true);
+        break;           
+    }
+    
+    switch (option.kickShiftText) {
+      case MARK_TEXT_SHIFTTEXT:  
+        jRadioButtonKickMarkTextShiftText.setSelected(true);
         break;           
     }
   }
@@ -12231,7 +12264,16 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DOT_TEXT_S_HIGHTEXT:
         jRadioButtonTass64DotTextSHighText.setSelected(true);
         break;  
-    }    
+    }   
+    
+    switch (option.tass64ShiftText) {
+      case DOT_SHIFTL_SHIFTTEXT:
+        jRadioButtonTass64DotShiftlShiftText.setSelected(true);
+        break;
+      case DOT_TEXT_L_SHIFTTEXT:
+        jRadioButtonTass64DotShiftlShiftText.setSelected(true);
+        break;  
+    }     
   }   
 
   /**

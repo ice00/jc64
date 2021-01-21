@@ -8186,7 +8186,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -8282,7 +8282,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -8378,7 +8378,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -8576,7 +8576,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -8672,7 +8672,7 @@
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; !text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -8762,7 +8762,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabelKickShiftTextDeclaration" min="-2" pref="147" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonKickDotTextShiftText" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonKickMarkTextShiftText" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPaneKickDotTextShiftText" min="-2" pref="141" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -8790,10 +8790,10 @@
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonKickDotTextHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonKickDotTextZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonKickDotTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonKickDotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMarkTextHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMarkTextZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMarkTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMarkText" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonKickByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonKickByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jRadioButtonKickMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -9026,7 +9026,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
                                               <Component id="jLabelKickTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonKickDotText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonKickMarkText" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="jScrollPaneKickDotText" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -9034,25 +9034,25 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelKickNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMarkTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelKickZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotTextZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMarkTextZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelKickHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotTextHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMarkTextHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabelKickShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonKickDotTextShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMarkTextShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -9768,7 +9768,7 @@
                             <Property name="text" type="java.lang.String" value="Text:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickMarkText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupKickText"/>
@@ -9776,7 +9776,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMarkTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotText">
@@ -9902,7 +9902,7 @@
                             <Property name="text" type="java.lang.String" value="Text #num chars:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotTextNumText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickMarkTextNumText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupKickNumText"/>
@@ -9910,7 +9910,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextNumTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMarkTextNumTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotTextNumText">
@@ -9938,7 +9938,7 @@
                             <Property name="text" type="java.lang.String" value="Text 0 terminated:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotTextZeroText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickMarkTextZeroText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupKickZeroText"/>
@@ -9946,7 +9946,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextZeroTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMarkTextZeroTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotTextZeroText">
@@ -10076,7 +10076,7 @@
                             <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotTextHighText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickMarkTextHighText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupKickHighText"/>
@@ -10084,7 +10084,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextHighTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMarkTextHighTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotTextHighText">
@@ -10112,7 +10112,7 @@
                             <Property name="text" type="java.lang.String" value="Text left shifted:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickDotTextShiftText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonKickMarkTextShiftText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupKickShiftText"/>
@@ -10120,7 +10120,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickDotTextShiftTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMarkTextShiftTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneKickDotTextShiftText">

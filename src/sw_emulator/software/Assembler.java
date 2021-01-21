@@ -3146,6 +3146,7 @@ public class Assembler {
    public enum ShiftText implements ActionType {
       DOT_BYTE_SHIFTTEXT,       // ->   .byte "xxx"
       DOT_BYT_SHIFTTEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_SHIFTTEXT,       // ->   .text "xxx"
       DOT_TEXT_L_SHIFTTEXT,     // ->  .text l"xxx"
       BYTE_SHIFTTEXT,           // ->    byte "xxx"
       MARK_TEXT_SHIFTTEXT,      // ->   !text "xxx"      
