@@ -26,6 +26,7 @@ package sw_emulator.swing;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -46,6 +47,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.JTableHeader;
@@ -172,7 +174,99 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
         optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
         optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");  
-        compiler.setOption(option);               
+        compiler.setOption(option);   
+                
+        jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
+          MouseEvent last;  
+            
+          private Timer timer = new Timer(300, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              // timer has gone off, so treat as a single click
+              singleClick();
+              timer.stop();
+            }
+          });
+
+	  @Override
+	  public void mouseClicked(MouseEvent e) {
+            last=e;
+	    // Check if timer is running 
+	    // to know if there was an earlier click
+            if (timer.isRunning()) {
+              // There was an earlier click so we'll treat it as a double click
+              timer.stop();
+             doubleClick();
+          } else {
+              // (Re)start the timer and wait for 2nd click      	
+              timer.restart();
+            }
+	}
+          
+        /**
+         * Single click on table
+         */ 
+	protected void singleClick() {
+          int row=jTableMemory.rowAtPoint(last.getPoint());
+          int col= jTableMemory.columnAtPoint(last.getPoint());
+          
+          switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
+            case UC:    // user comment
+              if (option.clickUcEdit) addComment(row);
+              break;  
+            case UL:     // user label
+              if (option.clickUlEdit) addLabel(row);  
+              break;
+            case UB:     // user global comment
+              if (option.clickUbEdit) addBlock(row);   
+              break;
+            case DC:     // automatic comment
+              if (option.clickDcErase) {
+                MemoryDasm mem= project.memory[row];
+                if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
+                dataTableModelMemory.fireTableDataChanged();  
+              }                 
+              break;  
+            case DL:     // automatic label
+              if (option.clickDlErase) {
+                MemoryDasm mem= project.memory[row];
+                if (mem.dasmLocation!=null) mem.dasmLocation=null;
+                dataTableModelMemory.fireTableDataChanged();  
+              }  
+              break;  
+          }
+	}
+
+        /**
+         * Double click on table
+         */
+	protected void doubleClick() {
+	  int actual;  
+        
+          // get the address in hex format
+          int addr=jTableMemory.getSelectedRow();
+          int pos=0;        
+
+          // scan all lines for the memory location
+          try {
+            String preview=rSyntaxTextAreaDis.getText();
+            String lines[] = preview.split("\\r?\\n");
+            for (String line: lines) {
+              actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
+              if (actual==addr) {      
+                // set preview in the find position  
+                rSyntaxTextAreaDis.setCaretPosition(pos);
+                rSyntaxTextAreaDis.requestFocusInWindow();
+                break;
+              } else {
+                  pos+=line.length()+1;
+                }
+            }
+          } catch (Exception e) {
+              System.err.println();  
+            }  
+        }             
+      });
     }
 
     /**
@@ -1146,11 +1240,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
 
-    jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jTableMemoryMouseClicked(evt);
-        }
-    });
     jScrollPaneMemory.setViewportView(jTableMemory);
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
@@ -2201,35 +2290,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           System.err.println(e);;
         }  
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseReleased
-
-    private void jTableMemoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMouseClicked
-      if (evt.getClickCount() == 2) {  
-        int actual;  
-        
-        // get the address in hex format
-        int addr=jTableMemory.getSelectedRow();
-        int pos=0;        
-
-        // scan all lines for the memory location
-        try {
-          String preview=rSyntaxTextAreaDis.getText();
-          String lines[] = preview.split("\\r?\\n");
-          for (String line: lines) {
-            actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
-            if (actual==addr) {      
-              // set preview in the find position  
-              rSyntaxTextAreaDis.setCaretPosition(pos);
-              rSyntaxTextAreaDis.requestFocusInWindow();
-              break;
-            } else {
-                pos+=line.length()+1;
-              }
-          }
-        } catch (Exception e) {
-            System.err.println();  
-          }  
-      }
-    }//GEN-LAST:event_jTableMemoryMouseClicked
 
     private void jButtonMergeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMergeActionPerformed
       execute(PROJ_MERGE);
@@ -3330,6 +3390,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void addComment() {
     int row=jTableMemory.getSelectedRow();
+    addComment(row);
+  }
+  
+   /**
+   * Add a user label to the given row
+   * 
+   * @param row the row to use
+   */
+  private void addComment(int row) {
     if (row<0) {
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
@@ -3338,21 +3407,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm mem= project.memory[row];
     String comment=JOptionPane.showInputDialog(this, "Insert the comment for the selected memory location", mem.userComment);
     
-    System.err.println("###"+project.memory[0].userComment+"###"+savedProject.memory[0].userComment);
-    
     if (comment!=null) mem.userComment=comment;  
-    
-      System.err.println("###"+project.memory[0].userComment+"###"+savedProject.memory[0].userComment);
     
     dataTableModelMemory.fireTableDataChanged(); 
     jTableMemory.setRowSelectionInterval(row, row); 
-  }
+  } 
 
   /**
    * Add a user label to the selected memory address
    */
   private void addLabel() {
     int row=jTableMemory.getSelectedRow();
+    
+    addLabel(row);
+  }
+  
+  /**
+   * Add a user label to the selected memory address
+   * 
+   * @param row the row to use
+   */
+  private void addLabel(int row) {
     if (row<0) {
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
@@ -3397,7 +3472,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       mem.userLocation=label;
       dataTableModelMemory.fireTableDataChanged(); 
       jTableMemory.setRowSelectionInterval(row, row); 
-    }
+    }      
   }
   
   /**
@@ -3471,24 +3546,34 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void addBlock() {
     int row=jTableMemory.getSelectedRow();
+        
+    addBlock(row);
+  }
+  
+  /**
+   * Add a block for comment
+   * 
+   * @param row the row to use
+   */
+  private void addBlock(int row) {
     if (row<0) {
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
     }
       
     MemoryDasm mem= project.memory[row];
-    JTextArea area=new JTextArea(20,20);
+    JTextArea area=new JTextArea(20,40);
     area.setText(mem.userBlockComment);
     area.setFont(new Font("monospaced", Font.PLAIN, 12));
 
     JScrollPane scrollPane = new JScrollPane(area);
     
-    if (JOptionPane.showConfirmDialog(null, scrollPane, "Add a multi-lines block comment", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+    if (JOptionPane.showConfirmDialog(null, scrollPane, "Add a multi lines block comment", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
       mem.userBlockComment=area.getText();
       if ("".equals(mem.userBlockComment)) mem.userBlockComment=null;
       dataTableModelMemory.fireTableDataChanged();  
       jTableMemory.setRowSelectionInterval(row, row); 
-    }              
+    }       
   }
 
   /**

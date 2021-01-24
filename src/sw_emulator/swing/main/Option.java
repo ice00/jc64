@@ -315,6 +315,21 @@ public class Option {
   /** A label is on a sepatate line from instruction */
   public boolean labelOnSepLine=true;
   
+  /** Click on UC column edit user comment */
+  public boolean clickUcEdit=false;
+  
+  /** Click on UB column edit user global comment */
+  public boolean clickUbEdit=false;
+  
+  /** Click on UL column edit user label */
+  public boolean clickUlEdit=false;
+  
+  /** Click on DC column erase dasm comment */
+  public boolean clickDcErase=false;
+  
+  /** Click on DL column erase dasm lable */
+  public boolean clickDlErase=false;
+  
   
   // comments C64
   

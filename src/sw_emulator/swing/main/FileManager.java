@@ -96,6 +96,11 @@ public class FileManager {
       option.numDataSpaces = in.readInt();
       option.numDataTabs = in.readInt();
       option.labelOnSepLine = in.readBoolean();
+      option.clickDcErase = in.readBoolean();
+      option.clickDlErase = in.readBoolean();
+      option.clickUbEdit = in.readBoolean();
+      option.clickUcEdit = in.readBoolean();
+      option.clickUlEdit = in.readBoolean();
       
       option.maxWordAggregate = in.readInt();
       option.maxTribyteAggregate = in.readInt();
@@ -372,6 +377,11 @@ public class FileManager {
       out.writeInt(option.numDataSpaces);
       out.writeInt(option.numDataTabs);
       out.writeBoolean(option.labelOnSepLine);
+      out.writeBoolean(option.clickDcErase);
+      out.writeBoolean(option.clickDlErase);
+      out.writeBoolean(option.clickUbEdit);
+      out.writeBoolean(option.clickUcEdit);
+      out.writeBoolean(option.clickUlEdit);             
       
       out.writeInt(option.maxWordAggregate);
       out.writeInt(option.maxTribyteAggregate);
