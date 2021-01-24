@@ -82,24 +82,49 @@
    <b>.byte &lt;Label, &gt;Label</b> and <b>.word Label</b>
    
    <h2>Mark data as Tribyte</h2>
-   This marks the data as tribyte and format it as hexadecimal number. As not all the assembler supports tribyte, it will be used macro in that case.<br>
-   Eventual memory address pointers (#<, #>) in one of the tribyte are not supported.
+   This marks the data as tribyte and format it as hexadecimal number. As not all the assemblers support tribyte, it will be used macro in that case.<br>
+   Eventual memory address pointers (#&lt;, #&gt;) in one of the tribyte are not supported.
    
    <h2>Mark data as Long</h2>
-   This marks the data as long and format it as hexadecimal number. As not all the assembler supports tribyte, it will be used macro in that case.<br>
-   Eventual memory address pointers (#<, #>) in one of the long are not supported.
+   This marks the data as long and format it as hexadecimal number. As not all the assembler supports long it will be used macro in that case.<br>
+   Eventual memory address pointers (#&lt;, #&gt;) in one of the long are not supported.
+   
+   <h2>Mark data as Address</h2>
+   This marks the data as of an address. Essentially it is equals to a Word declaration, unless for assembler that explicitely support it.
+   
+   <h2>Mark data as Stack Word</h2>
+   A stack word is like a word but decremented by 1. It's used to push two addresses to the stack and executing an RTS. As not all the assemblers support it, in that case a macro is used.
    
    <h2>Mark data as Monocromatic spite definitions</h2>
-   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of line of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of lines of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
    The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
    For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
    Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes. Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
    
    <h2>Mark data as Multicolor spite definitions</h2>
-   This marks data as of a molticolor spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of line of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   This marks data as of a molticolor spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of lines of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
    The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
    For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
    Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes.  Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
+   
+   <h2>Mark data as Text</h2>
+   This marks data as of text. If the byte cannot be converted into text it is addes as a HEX byte if the assembler support them, otherwise the text is forced to be as bytes.
+   
+   <h2>Mark data as Text with number of byte before</h2>
+   This marks the data as text, but the first byte gives the length of the string. So if you not select the right number of chars according with the first byte, the data is not marked.
+   As some assemblers has special instruction for this mode, the length is so obmitted into the source.
+   
+   <h2>Mark data as Text terminated with 0</h2>
+   This marks the data as text that terminate when there is a zero. So, only when you select an area that has a zero then the area is marked.
+   As some assemblers has special instruction for this mode, the final zero is obmittted into the source.
+   
+   <h2>Mark data as Text terminated with high bit at 1</h2>
+   This mark the data as text that terminate when there is the high bit at one. So, only when you select an area that has a high bit with 1 then the area is marked.
+   As some assemblers has special instruction for this mode, the final 1 high bit is obmittted into the source.
+   
+   <h2>Mark data as Text left shifted</h2>
+   This marks the data as of a left shifted bytes, so low bit is always 0 (you cannot select an area with low bit at 1 for this kind).
+   As some assemblers support this syntax, the byte is right shifted when converted into the source, while all the others simply acts it as normal text.
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
@@ -130,8 +155,7 @@
   <p> If you press Ok without select an location and there was already a mapped one, the program will ask you if it has to remove the association.<br>
    The RE column will show an < sign in that location and the tool tip will show the value of it</p>
    
-   </p>
-   
+    
    <h2>Assign the selected address as #> </h2>
    <p>This function is the analoge of the previous but operates with the high part of an address. </p>
   

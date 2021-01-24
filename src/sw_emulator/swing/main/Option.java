@@ -875,19 +875,19 @@ public class Option {
   public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
     
   /** KickAsembler: text declaration type */
-  public Assembler.Text kickText=Assembler.Text.MARK_TEXT;
+  public Assembler.Text kickText=Assembler.Text.DOT_TEXT;
   
   /** KickAsembler: text with num chars declaration */
-  public Assembler.NumText kickNumText=Assembler.NumText.MARK_TEXT_NUMTEXT;
+  public Assembler.NumText kickNumText=Assembler.NumText.DOT_TEXT_NUMTEXT;
   
   /** KickAsembler: text null temrianted declaration */
-  public Assembler.ZeroText kickZeroText=Assembler.ZeroText.MARK_TEXT_ZEROTEXT;
+  public Assembler.ZeroText kickZeroText=Assembler.ZeroText.DOT_TEXT_ZEROTEXT;
   
   /** KickAsembler: text terminated with high bit 1 declaration */
-  public Assembler.HighText kickHighText=Assembler.HighText.MARK_TEXT_HIGHTEXT;
+  public Assembler.HighText kickHighText=Assembler.HighText.DOT_TEXT_HIGHTEXT;
   
   /** KickAsembler: text left shifted declaration */
-  public Assembler.ShiftText kickShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT; 
+  public Assembler.ShiftText kickShiftText=Assembler.ShiftText.DOT_TEXT_SHIFTTEXT; 
   
   
   /** 64Tass: starting declaration */

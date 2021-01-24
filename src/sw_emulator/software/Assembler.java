@@ -337,7 +337,7 @@ public class Assembler {
     *  -> if 0 xxx endif
     *  -> .if 0 xxx .fi
     *  -> .if 0 xxx .endif
-    *  -> .if (0) xxx .endif
+    *  -> #if UNDEF xxx #endif
     *  -> !if 0 { xxx }
     *  -> .comment xxx .endc
     */
@@ -348,9 +348,9 @@ public class Assembler {
       IF,              // if 0 xxx endif
       DOT_IF_FI,       // .if 0 xxx .fi
       DOT_IF,          // .if 0 xxx .endif
-      DOT_IF_P,        // .if (0) xxx .endif
+      SHARP_IF,        // #if UNDEF xxx #endif
       MARK_IF,         // !if 0 { xxx }
-      DOT_COMMENT;     // .comment xxx .endc
+      DOT_COMMENT;     // .comment xxx .endc// .comment xxx .endc
     
       @Override
       public void flush(StringBuilder str) {
@@ -446,24 +446,24 @@ public class Assembler {
             }        
             if (isOpen) str.append(".fi\n");    
             break;   
-          case DOT_IF_P:
+          case SHARP_IF:
             isOpen=false;
             for (String line : lines) {
               if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append(".endif\n\n");
+                if (isOpen) str.append("#endif\n\n");
                 else {
-                 str.append(".if (0) {\n");
+                 str.append("#if UNDEF \n");
                  isOpen=false;
                 }
               } else {
                   if (!isOpen) {
                     isOpen=true;
-                    str.append(".if (0) {\n");
+                    str.append("#if UNDEF \n");
                   }
                   str.append(line).append("\n");
                 }   
             }        
-            if (isOpen) str.append("}\n");    
+            if (isOpen) str.append("#endif\n");    
             break;             
           case MARK_IF:
             isOpen=false;
@@ -2886,6 +2886,7 @@ public class Assembler {
    public enum HighText implements ActionType {
       DOT_BYTE_HIGHTEXT,       // ->   .byte "xxx"
       DOT_BYT_HIGHTEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_HIGHTEXT,       // ->   .text "xxx"
       DOT_TEXT_S_HIGHTEXT,     // ->  .text s"xxx"
       BYTE_HIGHTEXT,           // ->    byte "xxx"
       MARK_TEXT_HIGHTEXT,      // ->   !text "xxx"      
@@ -2908,7 +2909,10 @@ public class Assembler {
        switch (aHighText) {
          case DOT_SHIFT_HIGHTEXT:
            str.append(getDataSpacesTabs()).append((".shift "));
-           break;   
+           break;  
+         case DOT_TEXT_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append((".text "));
+           break;            
          case DOT_TEXT_S_HIGHTEXT:
            str.append(getDataSpacesTabs()).append((".text s"));
            break;  
@@ -3244,7 +3248,38 @@ public class Assembler {
                   str.append((char)(mem.copy & 0xFF));  
                 }                  
               break;
-              
+            case TMPX:
+              val>>=1;
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }                  
+              break;    
             case CA65:
               if ( (val==0x0A) ||
                    (val==0x22) ||
@@ -3331,8 +3366,34 @@ public class Assembler {
                      }
                 else str.append((char)(mem.copy & 0xFF));                
               break; 
-              
-              }                                  
+            case TASS64:
+              val>>=1;  
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }   
+              break;  
+            }                                  
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");

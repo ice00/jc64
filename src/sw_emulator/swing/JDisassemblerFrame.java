@@ -558,7 +558,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jPopupMenuData.add(jMenuItemtextHighOne);
 
         jMenuItemtextShifted.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/H.png"))); // NOI18N
-        jMenuItemtextShifted.setText("(H) Mark data as Text shifted and high bit 1");
+        jMenuItemtextShifted.setText("(H) Mark data as Text left shifted");
         jMenuItemtextShifted.setToolTipText("");
         jMenuItemtextShifted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1556,7 +1556,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemtextShifted1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemtextShifted1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/H.png"))); // NOI18N
     jMenuItemtextShifted1.setMnemonic('h');
-    jMenuItemtextShifted1.setText("(H) Mark data as Text shifted and high bit 1");
+    jMenuItemtextShifted1.setText("(H) Mark data as Text left shifted");
     jMenuItemtextShifted1.setToolTipText("");
     jMenuItemtextShifted1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
