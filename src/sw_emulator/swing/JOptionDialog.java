@@ -612,7 +612,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonDasmBytePetasciiText = new javax.swing.JRadioButton();
         jScrollPaneDasmBytePetAsciiText = new javax.swing.JScrollPane();
         jTextPaneDasmBytePetasciiText = new javax.swing.JTextPane();
-        jRadioButtonDasmDcPetasciText = new javax.swing.JRadioButton();
+        jRadioButtonDasmDcPetasciiText = new javax.swing.JRadioButton();
         jScrollPaneDasmDcZeroPetasciiText = new javax.swing.JScrollPane();
         jTextPaneDasmDcZeroPetasciText = new javax.swing.JTextPane();
         jRadioButtonDasmDcDotBPetasciiText = new javax.swing.JRadioButton();
@@ -1001,13 +1001,13 @@ public class JOptionDialog extends javax.swing.JDialog {
         jScrollPaneAcmeMarkRawShiftText = new javax.swing.JScrollPane();
         jTextPaneAcmeMarkRawShiftText = new javax.swing.JTextPane();
         jLabelAcmeScreenTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonAcmeMarkSctScreenText = new javax.swing.JRadioButton();
+        jRadioButtonAcmeMarkScrScreenText = new javax.swing.JRadioButton();
         jScrollPaneAcmeMarkScrScreenText = new javax.swing.JScrollPane();
         jTextPaneAcmeMarkScrScreenText = new javax.swing.JTextPane();
         jLabelAcmePetasciiTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonAcmeMarkPetPetsciiText = new javax.swing.JRadioButton();
-        jScrollPaneAcmeMarkPetPetsciiText = new javax.swing.JScrollPane();
-        jTextPaneAcmeMarkPetPetsciiText = new javax.swing.JTextPane();
+        jRadioButtonAcmeMarkPetPetasciiText = new javax.swing.JRadioButton();
+        jScrollPaneAcmeMarkPetPetasciiText = new javax.swing.JScrollPane();
+        jTextPaneAcmeMarkPetPetasciiText = new javax.swing.JTextPane();
         jPanelKickAssembler = new javax.swing.JPanel();
         jLabelKickLabelDeclaration = new javax.swing.JLabel();
         jRadioButtonKickLabelNameColon = new javax.swing.JRadioButton();
@@ -1764,7 +1764,6 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxDlErase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -3876,10 +3875,10 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTextPaneDasmBytePetasciiText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>byte</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneDasmBytePetAsciiText.setViewportView(jTextPaneDasmBytePetasciiText);
 
-        buttonGroupDasmPetsciiText.add(jRadioButtonDasmDcPetasciText);
-        jRadioButtonDasmDcPetasciText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupDasmPetsciiText.add(jRadioButtonDasmDcPetasciiText);
+        jRadioButtonDasmDcPetasciiText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonDasmDcPetasciTextItemStateChanged(evt);
+                jRadioButtonDasmDcPetasciiTextItemStateChanged(evt);
             }
         });
 
@@ -4049,7 +4048,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addGroup(jPanelDasmLayout.createSequentialGroup()
                         .addComponent(jScrollPaneDasmBytePetAsciiText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonDasmDcPetasciText)))
+                        .addComponent(jRadioButtonDasmDcPetasciiText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDasmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneDasmLabelName5)
@@ -4284,7 +4283,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneDasmDotBytePetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonDasmBytePetasciiText)
                     .addComponent(jScrollPaneDasmBytePetAsciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonDasmDcPetasciText)
+                    .addComponent(jRadioButtonDasmDcPetasciiText)
                     .addComponent(jScrollPaneDasmDcZeroPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonDasmDcDotBPetasciiText)
                     .addComponent(jScrollPaneDasmDcDotBPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -6579,11 +6578,11 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelAcmeScreenTextDeclaration.setText("Text to screen code:");
 
-        buttonGroupAcmeScreenText.add(jRadioButtonAcmeMarkSctScreenText);
-        jRadioButtonAcmeMarkSctScreenText.setSelected(true);
-        jRadioButtonAcmeMarkSctScreenText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupAcmeScreenText.add(jRadioButtonAcmeMarkScrScreenText);
+        jRadioButtonAcmeMarkScrScreenText.setSelected(true);
+        jRadioButtonAcmeMarkScrScreenText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonAcmeMarkSctScreenTextItemStateChanged(evt);
+                jRadioButtonAcmeMarkScrScreenTextItemStateChanged(evt);
             }
         });
 
@@ -6597,21 +6596,21 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelAcmePetasciiTextDeclaration.setText("Text to petascii code:");
 
-        buttonGroupAcmePetsciiText.add(jRadioButtonAcmeMarkPetPetsciiText);
-        jRadioButtonAcmeMarkPetPetsciiText.setSelected(true);
-        jRadioButtonAcmeMarkPetPetsciiText.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupAcmePetsciiText.add(jRadioButtonAcmeMarkPetPetasciiText);
+        jRadioButtonAcmeMarkPetPetasciiText.setSelected(true);
+        jRadioButtonAcmeMarkPetPetasciiText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonAcmeMarkPetPetsciiTextItemStateChanged(evt);
+                jRadioButtonAcmeMarkPetPetasciiTextItemStateChanged(evt);
             }
         });
 
-        jScrollPaneAcmeMarkPetPetsciiText.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneAcmeMarkPetPetsciiText.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPaneAcmeMarkPetPetasciiText.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneAcmeMarkPetPetasciiText.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneAcmeMarkPetPetsciiText.setEditable(false);
-        jTextPaneAcmeMarkPetPetsciiText.setContentType("text/html"); // NOI18N
-        jTextPaneAcmeMarkPetPetsciiText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !pet</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
-        jScrollPaneAcmeMarkPetPetsciiText.setViewportView(jTextPaneAcmeMarkPetPetsciiText);
+        jTextPaneAcmeMarkPetPetasciiText.setEditable(false);
+        jTextPaneAcmeMarkPetPetasciiText.setContentType("text/html"); // NOI18N
+        jTextPaneAcmeMarkPetPetasciiText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> !pet</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneAcmeMarkPetPetasciiText.setViewportView(jTextPaneAcmeMarkPetPetasciiText);
 
         javax.swing.GroupLayout jPanelAcmeLayout = new javax.swing.GroupLayout(jPanelAcme);
         jPanelAcme.setLayout(jPanelAcmeLayout);
@@ -6662,8 +6661,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonAcmeMarkZeroText)
                     .addComponent(jRadioButtonAcmeMarkHighText)
                     .addComponent(jRadioButtonAcmeMarkShiftText)
-                    .addComponent(jRadioButtonAcmeMarkSctScreenText)
-                    .addComponent(jRadioButtonAcmeMarkPetPetsciiText))
+                    .addComponent(jRadioButtonAcmeMarkScrScreenText)
+                    .addComponent(jRadioButtonAcmeMarkPetPetasciiText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneAcmeLabelMarkCpuStarting)
@@ -6686,7 +6685,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneAcmeMarkHighText)
                     .addComponent(jScrollPaneAcmeMarkShiftText)
                     .addComponent(jScrollPaneAcmeMarkScrScreenText)
-                    .addComponent(jScrollPaneAcmeMarkPetPetsciiText))
+                    .addComponent(jScrollPaneAcmeMarkPetPetasciiText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButtonAcmeMarkIfBlockComment)
@@ -6914,12 +6913,12 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jScrollPaneAcmeMarkScrScreenText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonAcmeMarkSctScreenText)
+                    .addComponent(jRadioButtonAcmeMarkScrScreenText)
                     .addComponent(jLabelAcmeScreenTextDeclaration))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAcmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jScrollPaneAcmeMarkPetPetsciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonAcmeMarkPetPetsciiText)
+                    .addComponent(jScrollPaneAcmeMarkPetPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonAcmeMarkPetPetasciiText)
                     .addComponent(jLabelAcmePetasciiTextDeclaration))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -8695,7 +8694,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelAutoComment)
                     .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE))
+                .addComponent(jTabbedPaneAssembler))
         );
 
         jTabbedPaneOption.addTab("Disassembler", jPanelDisassembler);
@@ -10551,83 +10550,83 @@ public class JOptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonTass64DotTextLShiftTextItemStateChanged
 
     private void jRadioButtonDasmDotByteScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDotByteScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonDasmDotByteScreenTextItemStateChanged
 
     private void jRadioButtonDasmByteScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmByteScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmScreenText=Assembler.ScreenText.BYTE_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonDasmByteScreenTextItemStateChanged
 
     private void jRadioButtonDasmDcScreentTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcScreentTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmScreenText=Assembler.ScreenText.DC_BYTE_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonDasmDcScreentTextItemStateChanged
 
     private void jRadioButtonDasmDcDotBScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcDotBScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmScreenText=Assembler.ScreenText.DC_B_BYTE_SCREENTEXT;  
     }//GEN-LAST:event_jRadioButtonDasmDcDotBScreenTextItemStateChanged
 
     private void jRadioButtonDasmDotBytePetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDotBytePetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonDasmDotBytePetasciiTextItemStateChanged
 
     private void jRadioButtonDasmBytePetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmBytePetasciiTextItemStateChanged
-        // TODO add your handling code here:
+     option.dasmPetasciiText=Assembler.PetasciiText.BYTE_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonDasmBytePetasciiTextItemStateChanged
 
-    private void jRadioButtonDasmDcPetasciTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcPetasciTextItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonDasmDcPetasciTextItemStateChanged
+    private void jRadioButtonDasmDcPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcPetasciiTextItemStateChanged
+      option.dasmPetasciiText=Assembler.PetasciiText.DC_BYTE_PETASCIITEXT; 
+    }//GEN-LAST:event_jRadioButtonDasmDcPetasciiTextItemStateChanged
 
     private void jRadioButtonDasmDcDotBPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDasmDcDotBPetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.dasmPetasciiText=Assembler.PetasciiText.DC_B_BYTE_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonDasmDcDotBPetasciiTextItemStateChanged
 
     private void jRadioButtonTmpxDotScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.tmpxScreenText=Assembler.ScreenText.DOT_SCREEN_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonTmpxDotScreenTextItemStateChanged
 
     private void jRadioButtonTmpxDotPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotPetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.tmpxPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonTmpxDotPetasciiTextItemStateChanged
 
     private void jRadioButtonCa65DotByteScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotByteScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65ScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonCa65DotByteScreenTextItemStateChanged
 
     private void jRadioButtonCa65DotBytScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotBytScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65ScreenText=Assembler.ScreenText.DOT_BYT_SCREENTEXT;  
     }//GEN-LAST:event_jRadioButtonCa65DotBytScreenTextItemStateChanged
 
     private void jRadioButtonCa65DotBytePetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotBytePetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65PetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonCa65DotBytePetasciiTextItemStateChanged
 
     private void jRadioButtonCa65DotBytPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonCa65DotBytPetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.ca65PetasciiText=Assembler.PetasciiText.DOT_BYT_PETASCIITEXT; 
     }//GEN-LAST:event_jRadioButtonCa65DotBytPetasciiTextItemStateChanged
 
-    private void jRadioButtonAcmeMarkSctScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkSctScreenTextItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAcmeMarkSctScreenTextItemStateChanged
+    private void jRadioButtonAcmeMarkScrScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkScrScreenTextItemStateChanged
+      option.acmeScreenText=Assembler.ScreenText.MARK_SCR_SCREENTEXT;
+    }//GEN-LAST:event_jRadioButtonAcmeMarkScrScreenTextItemStateChanged
 
-    private void jRadioButtonAcmeMarkPetPetsciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkPetPetsciiTextItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAcmeMarkPetPetsciiTextItemStateChanged
+    private void jRadioButtonAcmeMarkPetPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonAcmeMarkPetPetasciiTextItemStateChanged
+      option.acmePetasciiText=Assembler.PetasciiText.MARK_PET_PETASCIITEXT;
+    }//GEN-LAST:event_jRadioButtonAcmeMarkPetPetasciiTextItemStateChanged
 
     private void jRadioButtonKickDotTextScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.kickScreenText=Assembler.ScreenText.DOT_TEXT_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonKickDotTextScreenTextItemStateChanged
 
     private void jRadioButtonKickDotTextPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonKickDotTextPetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.kickPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT; 
     }//GEN-LAST:event_jRadioButtonKickDotTextPetasciiTextItemStateChanged
 
     private void jRadioButtonTass64DotTextScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotTextScreenTextItemStateChanged
-        // TODO add your handling code here:
+      option.tass64ScreenText=Assembler.ScreenText.DOT_TEXT_SCREENTEXT; 
     }//GEN-LAST:event_jRadioButtonTass64DotTextScreenTextItemStateChanged
 
     private void jRadioButtonTass64DotTextPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTass64DotTextPetasciiTextItemStateChanged
-        // TODO add your handling code here:
+      option.tass64PetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonTass64DotTextPetasciiTextItemStateChanged
 
     private void jCheckBoxUbEditItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxUbEditItemStateChanged
@@ -11131,13 +11130,13 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonAcmeMarkHighText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkIfBlockComment;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkNumText;
-    private javax.swing.JRadioButton jRadioButtonAcmeMarkPetPetsciiText;
+    private javax.swing.JRadioButton jRadioButtonAcmeMarkPetPetasciiText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkRawHighText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkRawNumText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkRawShiftText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkRawText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkRawZeroText;
-    private javax.swing.JRadioButton jRadioButtonAcmeMarkSctScreenText;
+    private javax.swing.JRadioButton jRadioButtonAcmeMarkScrScreenText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkShiftText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkText;
     private javax.swing.JRadioButton jRadioButtonAcmeMarkThirtytwoLong;
@@ -11217,7 +11216,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonDasmDcHighText;
     private javax.swing.JRadioButton jRadioButtonDasmDcLLong;
     private javax.swing.JRadioButton jRadioButtonDasmDcNumText;
-    private javax.swing.JRadioButton jRadioButtonDasmDcPetasciText;
+    private javax.swing.JRadioButton jRadioButtonDasmDcPetasciiText;
     private javax.swing.JRadioButton jRadioButtonDasmDcScreentText;
     private javax.swing.JRadioButton jRadioButtonDasmDcShiftText;
     private javax.swing.JRadioButton jRadioButtonDasmDcText;
@@ -11391,7 +11390,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneAcmeMarkHighText;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkIfBlockComment;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkNumText;
-    private javax.swing.JScrollPane jScrollPaneAcmeMarkPetPetsciiText;
+    private javax.swing.JScrollPane jScrollPaneAcmeMarkPetPetasciiText;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkRawHighText;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkRawNumText;
     private javax.swing.JScrollPane jScrollPaneAcmeMarkRawShiftText;
@@ -11655,7 +11654,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JTextPane jTextPaneAcmeMarkHighText;
     private javax.swing.JTextPane jTextPaneAcmeMarkIfBlockComment;
     private javax.swing.JTextPane jTextPaneAcmeMarkNumText;
-    private javax.swing.JTextPane jTextPaneAcmeMarkPetPetsciiText;
+    private javax.swing.JTextPane jTextPaneAcmeMarkPetPetasciiText;
     private javax.swing.JTextPane jTextPaneAcmeMarkRawHighText;
     private javax.swing.JTextPane jTextPaneAcmeMarkRawNumText;
     private javax.swing.JTextPane jTextPaneAcmeMarkRawShiftText;
@@ -12249,6 +12248,36 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonDasmDcDotBShiftText.setSelected(true);
         break;  
     }
+    
+    switch (option.dasmScreenText) {
+      case DOT_BYTE_SCREENTEXT:
+        jRadioButtonDasmDotByteScreenText.setSelected(true);
+        break;
+      case BYTE_SCREENTEXT:
+        jRadioButtonDasmByteScreenText.setSelected(true);
+        break;
+      case DC_BYTE_SCREENTEXT:
+        jRadioButtonDasmDcScreentText.setSelected(true);
+        break;  
+      case DC_B_BYTE_SCREENTEXT:
+        jRadioButtonDasmDcDotBScreenText.setSelected(true);
+        break;  
+    }  
+    
+    switch (option.dasmPetasciiText) {
+      case DOT_BYTE_PETASCIITEXT:
+        jRadioButtonDasmDotBytePetasciiText.setSelected(true);
+        break;
+      case BYTE_PETASCIITEXT:
+        jRadioButtonDasmBytePetasciiText.setSelected(true);
+        break;
+      case DC_BYTE_PETASCIITEXT:
+        jRadioButtonDasmDcPetasciiText.setSelected(true);
+        break;  
+      case DC_B_BYTE_PETASCIITEXT:
+        jRadioButtonDasmDcDotBPetasciiText.setSelected(true);
+        break;  
+    }   
   }
 
   /**
@@ -12387,6 +12416,18 @@ public class JOptionDialog extends javax.swing.JDialog {
     switch (option.tmpxShiftText) {
       case DOT_SHIFTL_SHIFTTEXT:  
         jRadioButtonTmpxDotShiflShiftText.setSelected(true);
+        break;           
+    }  
+    
+    switch (option.tmpxScreenText) {
+      case DOT_TEXT_SCREENTEXT:  
+        jRadioButtonTmpxDotScreenText.setSelected(true);
+        break;           
+    } 
+        
+    switch (option.tmpxPetasciiText) {
+      case DOT_TEXT_PETASCIITEXT:  
+        jRadioButtonTmpxDotPetasciiText.setSelected(true);
         break;           
     }     
   }
@@ -12547,6 +12588,24 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonCa65DotBytShiftText.setSelected(true);
         break;  
     }    
+    
+    switch (option.ca65ScreenText) {
+      case DOT_BYTE_SCREENTEXT:
+        jRadioButtonCa65DotByteScreenText.setSelected(true);
+        break;
+      case DOT_BYT_SCREENTEXT:
+        jRadioButtonCa65DotBytScreenText.setSelected(true);
+        break;  
+    }  
+    
+    switch (option.ca65PetasciiText) {
+      case DOT_BYTE_PETASCIITEXT:
+        jRadioButtonCa65DotBytePetasciiText.setSelected(true);
+        break;
+      case DOT_BYT_PETASCIITEXT:
+        jRadioButtonCa65DotBytPetasciiText.setSelected(true);
+        break;  
+    }   
   }
   
   /**
@@ -12735,6 +12794,18 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonAcmeMarkRawShiftText.setSelected(true);
         break;       
     }   
+    
+    switch (option.acmeScreenText) {
+      case MARK_SCR_SCREENTEXT:
+        jRadioButtonAcmeMarkScrScreenText.setSelected(true);
+        break;
+    } 
+
+    switch (option.acmePetasciiText) {
+      case MARK_PET_PETASCIITEXT:
+        jRadioButtonAcmeMarkPetPetasciiText.setSelected(true);
+        break;
+    }    
   }
   
   /**
@@ -12893,6 +12964,18 @@ public class JOptionDialog extends javax.swing.JDialog {
     switch (option.kickShiftText) {
       case DOT_TEXT_SHIFTTEXT:  
         jRadioButtonKickDotTextShiftText.setSelected(true);
+        break;           
+    }
+    
+    switch (option.kickScreenText) {
+      case DOT_TEXT_SCREENTEXT:  
+        jRadioButtonKickDotTextScreenText.setSelected(true);
+        break;           
+    }
+    
+    switch (option.kickPetasciiText) {
+      case DOT_TEXT_PETASCIITEXT:  
+        jRadioButtonKickDotTextPetasciiText.setSelected(true);
         break;           
     }
   }
@@ -13061,7 +13144,19 @@ public class JOptionDialog extends javax.swing.JDialog {
       case DOT_TEXT_L_SHIFTTEXT:
         jRadioButtonTass64DotShiftlShiftText.setSelected(true);
         break;  
-    }     
+    } 
+
+    switch (option.tass64ScreenText) {
+      case DOT_TEXT_SCREENTEXT:  
+        jRadioButtonTass64DotTextScreenText.setSelected(true);
+        break;           
+    }
+    
+    switch (option.tass64PetasciiText) {
+      case DOT_TEXT_PETASCIITEXT:  
+        jRadioButtonTass64DotTextPetasciiText.setSelected(true);
+        break;           
+    }
   }   
 
   /**

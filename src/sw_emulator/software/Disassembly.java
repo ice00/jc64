@@ -125,26 +125,32 @@ public class Disassembly {
   /** Assembler stack word type */
   protected Assembler.StackWord aStackWord; 
   
-   /** Assembler mono color sprite type */
-   protected static Assembler.MonoSprite aMonoSprite;
+  /** Assembler mono color sprite type */
+  protected static Assembler.MonoSprite aMonoSprite;
    
-   /** Asembler multi color sprite type */
-   protected static Assembler.MultiSprite aMultiSprite;
+  /** Asembler multi color sprite type */
+  protected static Assembler.MultiSprite aMultiSprite;
    
-   /** Asembler text type */
-   protected static Assembler.Text aText;
+  /** Asembler text type */
+  protected static Assembler.Text aText;
    
-   /** Asembler text with number of chars type */
-   protected static Assembler.NumText aNumText;   
+  /** Asembler text with number of chars type */
+  protected static Assembler.NumText aNumText;   
    
-   /** Asembler text zero terminated type */
-   protected static Assembler.ZeroText aZeroText;   
+  /** Asembler text zero terminated type */
+  protected static Assembler.ZeroText aZeroText;   
    
-   /** Asembler text terminated with high bit 1 */
-   protected static Assembler.HighText aHighText;  
+  /** Asembler text terminated with high bit 1 */
+  protected static Assembler.HighText aHighText;  
    
-   /** Asembler text left shifted */
-   protected static Assembler.ShiftText aShiftText;  
+  /** Asembler text left shifted */
+  protected static Assembler.ShiftText aShiftText;  
+   
+  /** Asembler text to screen code */
+  protected static Assembler.ScreenText aScreenText;    
+  
+  /** Asembler text to screen code */
+  protected static Assembler.PetasciiText aPetasciiText; 
     
   /**
    * Disassemble the given data
@@ -641,6 +647,8 @@ public class Disassembly {
         aZeroText=option.dasmZeroText;
         aHighText=option.dasmHighText;   
         aShiftText=option.dasmShiftText; 
+        aScreenText=option.dasmScreenText; 
+        aPetasciiText=option.dasmPetasciiText;
         break;
       case TMPX:
         aStarting=option.tmpxStarting;  
@@ -662,6 +670,8 @@ public class Disassembly {
         aZeroText=option.tmpxZeroText;
         aHighText=option.tmpxHighText;
         aShiftText=option.tmpxShiftText;
+        aScreenText=option.tmpxScreenText; 
+        aPetasciiText=option.tmpxPetasciiText;
         break;  
       case CA65:
         aStarting=option.ca65Starting;  
@@ -683,6 +693,8 @@ public class Disassembly {
         aZeroText=option.ca65ZeroText;
         aHighText=option.ca65HighText; 
         aShiftText=option.ca65ShiftText;
+        aScreenText=option.ca65ScreenText; 
+        aPetasciiText=option.ca65PetasciiText;
         break;  
       case ACME:
         aStarting=option.acmeStarting;  
@@ -704,7 +716,9 @@ public class Disassembly {
         aZeroText=option.acmeZeroText;
         aHighText=option.acmeHighText;
         aShiftText=option.acmeShiftText;
-        break;
+        aScreenText=option.acmeScreenText; 
+        aPetasciiText=option.acmePetasciiText;
+        break;        
       case KICK:
         aStarting=option.kickStarting;  
         aOrigin=option.kickOrigin;  
@@ -725,6 +739,8 @@ public class Disassembly {
         aZeroText=option.kickZeroText;
         aHighText=option.kickHighText;
         aShiftText=option.kickShiftText;
+        aScreenText=option.kickScreenText; 
+        aPetasciiText=option.kickPetasciiText;
         break; 
       case TASS64:
         aStarting=option.tass64Starting;
@@ -746,6 +762,8 @@ public class Disassembly {
         aZeroText=option.tass64ZeroText;
         aHighText=option.tass64HighText;
         aShiftText=option.tass64ShiftText;
+        aScreenText=option.tass64ScreenText; 
+        aPetasciiText=option.tass64PetasciiText;
         break;
     }
     
@@ -753,7 +771,8 @@ public class Disassembly {
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
-                        aText, aNumText, aZeroText, aHighText, aShiftText);      
+                        aText, aNumText, aZeroText, aHighText, aShiftText,
+                        aScreenText, aPetasciiText);      
   }
   
   /**

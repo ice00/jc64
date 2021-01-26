@@ -527,7 +527,6 @@
                           <Component id="jCheckBoxDlErase" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCheckBoxLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -2359,7 +2358,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" pref="814" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2547,7 +2546,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jScrollPaneDasmBytePetAsciiText" min="-2" pref="125" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonDasmDcPetasciText" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmDcPetasciiText" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -2810,7 +2809,7 @@
                                       <Component id="jScrollPaneDasmDotBytePetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmBytePetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmBytePetAsciiText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonDasmDcPetasciText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonDasmDcPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcZeroPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonDasmDcDotBPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneDasmDcDotBPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -4758,14 +4757,14 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcPetasciText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonDasmDcPetasciiText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupDasmPetsciiText"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcPetasciTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDasmDcPetasciiTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmDcZeroPetasciiText">
@@ -7683,8 +7682,8 @@
                                       <Component id="jRadioButtonAcmeMarkZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeMarkHighText" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonAcmeMarkShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkSctScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkPetPetsciiText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkScrScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkPetPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -7708,7 +7707,7 @@
                                       <Component id="jScrollPaneAcmeMarkHighText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkShiftText" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPaneAcmeMarkScrScreenText" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPaneAcmeMarkPetPetsciiText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkPetPetasciiText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -7978,13 +7977,13 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jScrollPaneAcmeMarkScrScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkSctScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkScrScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelAcmeScreenTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jScrollPaneAcmeMarkPetPetsciiText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButtonAcmeMarkPetPetsciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPaneAcmeMarkPetPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonAcmeMarkPetPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelAcmePetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -9372,7 +9371,7 @@
                             <Property name="text" type="java.lang.String" value="Text to screen code:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkSctScreenText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkScrScreenText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupAcmeScreenText"/>
@@ -9380,7 +9379,7 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkSctScreenTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkScrScreenTextItemStateChanged"/>
                           </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkScrScreenText">
@@ -9408,7 +9407,7 @@
                             <Property name="text" type="java.lang.String" value="Text to petascii code:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkPetPetsciiText">
+                        <Component class="javax.swing.JRadioButton" name="jRadioButtonAcmeMarkPetPetasciiText">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroupAcmePetsciiText"/>
@@ -9416,10 +9415,10 @@
                             <Property name="selected" type="boolean" value="true"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkPetPetsciiTextItemStateChanged"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonAcmeMarkPetPetasciiTextItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkPetPetsciiText">
+                        <Container class="javax.swing.JScrollPane" name="jScrollPaneAcmeMarkPetPetasciiText">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -9430,7 +9429,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkPetPetsciiText">
+                            <Component class="javax.swing.JTextPane" name="jTextPaneAcmeMarkPetPetasciiText">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                                 <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>

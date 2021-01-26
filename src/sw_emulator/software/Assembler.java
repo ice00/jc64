@@ -3404,6 +3404,45 @@ public class Assembler {
    }  
    
    /**
+    * Text to screen code
+    */
+   public enum ScreenText implements ActionType {
+      DOT_BYTE_SCREENTEXT,       // ->   .byte "xxx"
+      DOT_BYT_SCREENTEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_SCREENTEXT,       // ->   .text "xxx"
+      DOT_SCREEN_SCREENTEXT,     // -> .screen "xxx"
+      BYTE_SCREENTEXT,           // ->    byte "xxx"
+      MARK_SCR_SCREENTEXT,       // ->    !scr "xxx"
+      DC_BYTE_SCREENTEXT,        // ->      dc "xxx"
+      DC_B_BYTE_SCREENTEXT       // ->    dc.b "xxx"
+      ;
+
+      @Override
+      public void flush(StringBuilder str) {
+    
+      }
+   }  
+   
+   /**
+    * Text to pewtascii code
+    */
+   public enum PetasciiText implements ActionType {
+      DOT_BYTE_PETASCIITEXT,       // ->   .byte "xxx"
+      DOT_BYT_PETASCIITEXT,        // ->   .byt  "xxx"
+      DOT_TEXT_PETASCIITEXT,       // ->   .text "xxx"
+      BYTE_PETASCIITEXT,           // ->    byte "xxx"
+      MARK_PET_PETASCIITEXT,       // ->    !pet "xxx"
+      DC_BYTE_PETASCIITEXT,        // ->      dc "xxx"
+      DC_B_BYTE_PETASCIITEXT       // ->    dc.b "xxx"
+      ;
+
+      @Override
+      public void flush(StringBuilder str) {
+    
+      }
+   }  
+   
+   /**
     * Stack Word
     */
    public enum StackWord implements ActionType {
@@ -3789,7 +3828,13 @@ public class Assembler {
    
    /** Assembler left shift text type */
    protected static Assembler.ShiftText aShiftText;  
-              
+   
+   /** Assembler text to screen code type */
+   protected static Assembler.ScreenText aScreenText;  
+   
+   /** Assembler text to petascii code type */
+   protected static Assembler.PetasciiText aPetasciiText; 
+   
    /** Actual type being processed */
    ActionType actualType=null;
 
@@ -3831,6 +3876,8 @@ public class Assembler {
     * @param aZeroText the text with 0 terminated char
     * @param aHighText the text with high 1 terminated bit
     * @param aShiftText the text left shifted
+    * @param aScreenText the text to screen code
+    * @param aPetasciiText the text to petascii code
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -3851,7 +3898,9 @@ public class Assembler {
                          Assembler.NumText aNumText,
                          Assembler.ZeroText aZeroText,
                          Assembler.HighText aHighText,
-                         Assembler.ShiftText aShiftText
+                         Assembler.ShiftText aShiftText,
+                         Assembler.ScreenText aScreenText,
+                         Assembler.PetasciiText aPetasciiText
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -3873,6 +3922,8 @@ public class Assembler {
      Assembler.aZeroText=aZeroText;
      Assembler.aHighText=aHighText;
      Assembler.aShiftText=aShiftText;
+     Assembler.aScreenText=aScreenText;
+     Assembler.aPetasciiText=aPetasciiText;
       
      isMonoSpriteBlock=false;
      sizeMonoSpriteBlock=0;

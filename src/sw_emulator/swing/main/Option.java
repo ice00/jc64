@@ -667,6 +667,12 @@ public class Option {
   /** DASM: text left shifted declaration */
   public Assembler.ShiftText dasmShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
   
+  /** DASM: text to screen code declaration */
+  public Assembler.ScreenText dasmScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT; 
+  
+  /** DASM: text to petascii code declaration */
+  public Assembler.PetasciiText dasmPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT; 
+  
   
   /** TMPX: starting declaration */
   public Assembler.Starting tmpxStarting=Assembler.Starting.FAKE; 
@@ -725,6 +731,11 @@ public class Option {
   /** TMPX: text left shifted declaration */
   public Assembler.ShiftText tmpxShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT;
   
+  /** TMPx: text to screen code declaration type */
+  public Assembler.ScreenText tmpxScreenText=Assembler.ScreenText.DOT_SCREEN_SCREENTEXT;  
+  
+  /** TMPX: text to petascii code declaration */
+  public Assembler.PetasciiText tmpxPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
   
   
   /** CA65: starting declaration */
@@ -784,7 +795,12 @@ public class Option {
   /** CA65: text left shifted declaration */
   public Assembler.ShiftText ca65ShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
   
- 
+  /** CA65: text to screen code declaration */
+  public Assembler.ScreenText ca65ScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT;
+  
+  /** CA65: text to petascii code declaration */
+  public Assembler.PetasciiText ca65PetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT;
+  
   
   /** ACME: starting declaration */
   public Assembler.Starting acmeStarting=Assembler.Starting.MARK_CPU; 
@@ -843,14 +859,20 @@ public class Option {
   /** ACME: text left shift declaration */
   public Assembler.ShiftText acmeShiftText=Assembler.ShiftText.MARK_TEXT_SHIFTTEXT; 
   
+  /** ACME: text to screen code declaration */
+  public Assembler.ScreenText acmeScreenText=Assembler.ScreenText.MARK_SCR_SCREENTEXT;
   
-  /** Kick: colon macro */
+  /** ACME: text to petascii code declaration */
+  public Assembler.PetasciiText acmePetasciiText=Assembler.PetasciiText.MARK_PET_PETASCIITEXT;
+  
+  
+  /** KickAssembler: colon macro */
   public boolean kickColonMacro=false;
   
-  /** Kick: starting declaration */
+  /** KickAssembler: starting declaration */
   public Assembler.Starting kickStarting=Assembler.Starting.DOT_CPU_UND; 
   
-  /** ACME: kick declaration */
+  /** KickAssembler: kick declaration */
   public Assembler.Origin kickOrigin=Assembler.Origin.ASTERISK;
   
   /** KickAssembler: label declaration */
@@ -903,6 +925,12 @@ public class Option {
   
   /** KickAsembler: text left shifted declaration */
   public Assembler.ShiftText kickShiftText=Assembler.ShiftText.DOT_TEXT_SHIFTTEXT; 
+  
+  /** KickAsembler: text to screen code declaration */
+  public Assembler.ScreenText kickScreenText=Assembler.ScreenText.DOT_SCREEN_SCREENTEXT;
+  
+  /** KickAsembler: text to petascii code declaration */
+  public Assembler.PetasciiText kickPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
   
   
   /** 64Tass: starting declaration */
@@ -961,6 +989,12 @@ public class Option {
   
   /** 64Tass: text left shifted declaration */
   public Assembler.ShiftText tass64ShiftText=Assembler.ShiftText.DOT_SHIFTL_SHIFTTEXT; 
+  
+  /** 64Tass: text to screen code declaration */
+  public Assembler.ScreenText tass64ScreenText=Assembler.ScreenText.DOT_TEXT_SCREENTEXT;
+  
+  /** 64Tass: text to petascii code declaration */
+  public Assembler.PetasciiText tass64PetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
   
   
   /**

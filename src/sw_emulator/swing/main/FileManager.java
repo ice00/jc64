@@ -131,6 +131,8 @@ public class FileManager {
       option.dasmZeroText = Assembler.ZeroText.valueOf(in.readUTF());
       option.dasmHighText = Assembler.HighText.valueOf(in.readUTF());
       option.dasmShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.dasmScreenText = Assembler.ScreenText.valueOf(in.readUTF());
+      option.dasmPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
       
       option.tmpxStarting = Assembler.Starting.valueOf(in.readUTF());
       option.tmpxOrigin = Assembler.Origin.valueOf(in.readUTF());
@@ -151,6 +153,8 @@ public class FileManager {
       option.tmpxZeroText = Assembler.ZeroText.valueOf(in.readUTF());
       option.tmpxHighText = Assembler.HighText.valueOf(in.readUTF());
       option.tmpxShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.tmpxScreenText = Assembler.ScreenText.valueOf(in.readUTF());   
+      option.tmpxPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
       
       option.ca65Starting = Assembler.Starting.valueOf(in.readUTF());
       option.ca65Origin = Assembler.Origin.valueOf(in.readUTF());
@@ -171,6 +175,8 @@ public class FileManager {
       option.ca65ZeroText = Assembler.ZeroText.valueOf(in.readUTF());
       option.ca65HighText = Assembler.HighText.valueOf(in.readUTF());
       option.ca65ShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.ca65ScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
+      option.ca65PetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
  
       option.acmeStarting = Assembler.Starting.valueOf(in.readUTF());
       option.acmeOrigin = Assembler.Origin.valueOf(in.readUTF());
@@ -191,6 +197,8 @@ public class FileManager {
       option.acmeZeroText = Assembler.ZeroText.valueOf(in.readUTF());
       option.acmeHighText = Assembler.HighText.valueOf(in.readUTF());
       option.acmeShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.acmeScreenText = Assembler.ScreenText.valueOf(in.readUTF());  
+      option.acmePetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
             
       option.kickColonMacro = in.readBoolean();
       option.kickStarting = Assembler.Starting.valueOf(in.readUTF());
@@ -212,6 +220,8 @@ public class FileManager {
       option.kickZeroText = Assembler.ZeroText.valueOf(in.readUTF());
       option.kickHighText = Assembler.HighText.valueOf(in.readUTF());
       option.kickShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.kickScreenText = Assembler.ScreenText.valueOf(in.readUTF());
+      option.kickPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
             
       option.tass64Starting = Assembler.Starting.valueOf(in.readUTF());
       option.tass64Origin = Assembler.Origin.valueOf(in.readUTF());
@@ -232,6 +242,8 @@ public class FileManager {
       option.tass64ZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
       option.tass64HighText = Assembler.HighText.valueOf(in.readUTF()); 
       option.tass64ShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.tass64ScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
+      option.tass64PetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());
       
       option.commentC64ZeroPage = in.readBoolean();
       option.commentC64StackArea = in.readBoolean();
@@ -412,6 +424,8 @@ public class FileManager {
       out.writeUTF(option.dasmZeroText.name());
       out.writeUTF(option.dasmHighText.name());
       out.writeUTF(option.dasmShiftText.name());
+      out.writeUTF(option.dasmScreenText.name());
+      out.writeUTF(option.dasmPetasciiText.name());
       
       out.writeUTF(option.tmpxStarting.name());
       out.writeUTF(option.tmpxOrigin.name());
@@ -432,6 +446,8 @@ public class FileManager {
       out.writeUTF(option.tmpxZeroText.name());
       out.writeUTF(option.tmpxHighText.name());
       out.writeUTF(option.tmpxShiftText.name());
+      out.writeUTF(option.tmpxScreenText.name());
+      out.writeUTF(option.tmpxPetasciiText.name());
       
       out.writeUTF(option.ca65Starting.name());
       out.writeUTF(option.ca65Origin.name());
@@ -452,6 +468,8 @@ public class FileManager {
       out.writeUTF(option.ca65ZeroText.name());
       out.writeUTF(option.ca65HighText.name());
       out.writeUTF(option.ca65ShiftText.name());
+      out.writeUTF(option.ca65ScreenText.name());
+      out.writeUTF(option.ca65PetasciiText.name());
       
       out.writeUTF(option.acmeStarting.name());
       out.writeUTF(option.acmeOrigin.name());
@@ -472,6 +490,8 @@ public class FileManager {
       out.writeUTF(option.acmeZeroText.name());
       out.writeUTF(option.acmeHighText.name());
       out.writeUTF(option.acmeShiftText.name());
+      out.writeUTF(option.acmeScreenText.name());
+      out.writeUTF(option.acmePetasciiText.name());
       
       out.writeBoolean(option.kickColonMacro);
       out.writeUTF(option.kickStarting.name());
@@ -493,6 +513,8 @@ public class FileManager {
       out.writeUTF(option.kickZeroText.name());  
       out.writeUTF(option.kickHighText.name());
       out.writeUTF(option.kickShiftText.name());
+      out.writeUTF(option.kickScreenText.name());
+      out.writeUTF(option.kickPetasciiText.name());
       
       out.writeUTF(option.tass64Starting.name());
       out.writeUTF(option.tass64Origin.name());
@@ -513,6 +535,8 @@ public class FileManager {
       out.writeUTF(option.tass64ZeroText.name()); 
       out.writeUTF(option.tass64HighText.name());
       out.writeUTF(option.tass64ShiftText.name());
+      out.writeUTF(option.tass64ScreenText.name());
+      out.writeUTF(option.tass64PetasciiText.name());
       
       out.writeBoolean(option.commentC64ZeroPage);
       out.writeBoolean(option.commentC64StackArea);
