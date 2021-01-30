@@ -302,7 +302,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="jPanelOption" pref="838" max="32767" attributes="0"/>
+              <Component id="jPanelOption" pref="907" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -460,6 +460,7 @@
                                       <Component id="jCheckBoxOpcodeFormattingSource" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxOpcodeFormattingPreview" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCheckBoxLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jCheckBoxForceCompilation" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -527,6 +528,9 @@
                           <Component id="jCheckBoxDlErase" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCheckBoxLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBoxForceCompilation" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="2" attributes="0">
@@ -609,7 +613,7 @@
                               <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="200" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1063,6 +1067,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxDlEraseItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxForceCompilation">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Force compilation at every modification"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxForceCompilationActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -5095,7 +5107,7 @@
                                       <Component id="jRadioButtonTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -12599,7 +12611,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="548" max="32767" attributes="0"/>
+                                  <EmptySpace pref="617" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

@@ -2017,7 +2017,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemClearDMemActionPerformed
 
     private void jButtonClearDMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearDMemActionPerformed
-       execute(MEM_CLEARDCOM);
+      execute(MEM_CLEARDCOM);
     }//GEN-LAST:event_jButtonClearDMemActionPerformed
 
     private void jButtonClearUMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearUMemActionPerformed
@@ -2735,102 +2735,135 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         break;        
       case MEM_CLEARDCOM:
         clearDasmComment();
+        if (option.forceCompilation) disassembly();
         break;
        case MEM_CLEARUCOM:
         clearUserComment();
+        if (option.forceCompilation) disassembly();
         break;    
        case MEM_ADDCOMM:
          addComment();
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_ADDLABEL:
          addLabel();
+         if (option.forceCompilation) disassembly();
          break;      
        case MEM_ADDLABELOP:
          addLabelOp();
+         if (option.forceCompilation) disassembly();
          break;                   
        case MEM_MARKCODE:
          markAsCode();  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_MARKDATA:
          markAsData(DataType.NONE);  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_MARKDATA_B:
          markAsData(DataType.BYTE_HEX);      
+         if (option.forceCompilation) disassembly();
          break;      
        case MEM_MARKDATA_D:
          markAsData(DataType.BYTE_DEC);      
+         if (option.forceCompilation) disassembly();
          break;           
        case MEM_MARKDATA_Y:
          markAsData(DataType.BYTE_BIN);      
+         if (option.forceCompilation) disassembly();
          break; 
        case MEM_MARKDATA_R:
          markAsData(DataType.BYTE_CHAR);      
+         if (option.forceCompilation) disassembly();
          break;          
        case MEM_MARKDATA_W:  
          markAsData(DataType.WORD);  
+         if (option.forceCompilation) disassembly();
          break;  
        case MEM_MARKDATA_P:  
          markAsData(DataType.SWAPPED);  
+         if (option.forceCompilation) disassembly();
          break;      
        case MEM_MARKDATA_E:  
          markAsData(DataType.TRIBYTE);   
+         if (option.forceCompilation) disassembly();
          break;         
        case MEM_MARKDATA_L:  
          markAsData(DataType.LONG);   
+         if (option.forceCompilation) disassembly();
          break;          
        case MEM_MARKDATA_A:  
          markAsData(DataType.ADDRESS);     
+         if (option.forceCompilation) disassembly();
          break;         
        case MEM_MARKDATA_S:  
          markAsData(DataType.STACK);      
+         if (option.forceCompilation) disassembly();
          break;           
        case MEM_MARKDATA_T: 
          markAsData(DataType.TEXT);  
+         if (option.forceCompilation) disassembly();
          break;           
        case MEM_MARKDATA_N:  
          markAsData(DataType.NUM_TEXT);    
+         if (option.forceCompilation) disassembly();
          break;           
        case MEM_MARKDATA_Z: 
          markAsData(DataType.ZERO_TEXT);   
+         if (option.forceCompilation) disassembly();
          break;   
        case MEM_MARKDATA_M:  
          markAsData(DataType.HIGH_TEXT);   
+         if (option.forceCompilation) disassembly();
          break;            
        case MEM_MARKDATA_H:  
          markAsData(DataType.SHIFT_TEXT);   
+         if (option.forceCompilation) disassembly();
          break;           
        case MEM_MARKDATA_C:  
          markAsData(DataType.SCREEN_TEXT);  
+         if (option.forceCompilation) disassembly();
          break;  
        case MEM_MARKDATA_I:  
          markAsData(DataType.PETASCII_TEXT);  
+         if (option.forceCompilation) disassembly();
          break;     
        case MEM_MARKDATA_O:  
          markAsData(DataType.MONO_SPRITE);  
+         if (option.forceCompilation) disassembly();
          break;        
        case MEM_MARKDATA_F:  
          markAsData(DataType.MULTI_SPRITE);  
+         if (option.forceCompilation) disassembly();
          break;          
        case MEM_MARKGARB:
          markAsGarbage();  
+         if (option.forceCompilation) disassembly();
          break;        
        case MEM_ADDBLOCK:
          addBlock();
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_CLEARDLABEL:
          clearDLabel();  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_LOW:
          memLow();  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_HIGH:
          memHigh();  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_PLUS:
          memPlus();  
+         if (option.forceCompilation) disassembly();
          break;
        case MEM_MINUS:
          memMinus();  
+         if (option.forceCompilation) disassembly();
          break;         
          
        case HELP_CONTENTS: 
@@ -3081,11 +3114,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case ZERO_TEXT:
         // we must find area that terminate with a 0
         int pos;
+        boolean fount=false;
         for (pos=1; pos<rows.length; pos++) {
-          if (project.memory[rows[pos]].copy==0) break;    
+          if (project.memory[rows[pos]].copy==0) {
+            fount=true;  
+            break;
+          }    
         }
 
-        if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.ZERO_TEXT)) {
+        if (fount) {
           int lastRow=rows[pos];  
           for (int i=pos; i>=0; i--) {
             if (lastRow-rows[i]>1) break;

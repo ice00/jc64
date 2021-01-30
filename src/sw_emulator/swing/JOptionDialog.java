@@ -310,6 +310,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxUlEdit = new javax.swing.JCheckBox();
         jCheckBoxDcErase = new javax.swing.JCheckBox();
         jCheckBoxDlErase = new javax.swing.JCheckBox();
+        jCheckBoxForceCompilation = new javax.swing.JCheckBox();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -1610,6 +1611,13 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jCheckBoxForceCompilation.setText("Force compilation at every modification");
+        jCheckBoxForceCompilation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxForceCompilationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -1708,7 +1716,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxOpcodeFormattingSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxOpcodeFormattingPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBoxLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jCheckBoxLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxForceCompilation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1764,6 +1773,9 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxDlErase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxForceCompilation)
+                .addGap(8, 8, 8)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -1831,7 +1843,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Option", jPanelPreview);
@@ -5000,7 +5012,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpxPetasciiTextDeclaration)
                     .addComponent(jRadioButtonTmpxDotPetasciiText)
                     .addComponent(jScrollPaneTmpxDotPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("TMPx", jPanelTMPx);
@@ -8936,7 +8948,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonLookSynth))
-                        .addContainerGap(548, Short.MAX_VALUE))))
+                        .addContainerGap(617, Short.MAX_VALUE))))
         );
 
         jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
@@ -8982,7 +8994,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jPanelOption, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE))
+                .addComponent(jPanelOption, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE))
         );
 
         pack();
@@ -10648,6 +10660,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.clickDlErase=jCheckBoxDlErase.isSelected();  
     }//GEN-LAST:event_jCheckBoxDlEraseItemStateChanged
 
+    private void jCheckBoxForceCompilationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxForceCompilationActionPerformed
+      option.forceCompilation=jCheckBoxForceCompilation.isSelected();
+    }//GEN-LAST:event_jCheckBoxForceCompilationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -10878,6 +10894,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxDlErase;
     private javax.swing.JCheckBox jCheckBoxEraseDComm;
     private javax.swing.JCheckBox jCheckBoxErasePlus;
+    private javax.swing.JCheckBox jCheckBoxForceCompilation;
     private javax.swing.JCheckBox jCheckBoxKickColonMacro;
     private javax.swing.JCheckBox jCheckBoxLabel;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
@@ -11918,6 +11935,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxUbEdit.setSelected(option.clickUbEdit);
       jCheckBoxUcEdit.setSelected(option.clickUcEdit);
       jCheckBoxUlEdit.setSelected(option.clickUlEdit);
+      jCheckBoxForceCompilation.setSelected(option.forceCompilation);
       
       actualLEF=option.getLafName();
       actualTheme=option.getMethalTheme();

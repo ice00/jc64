@@ -101,6 +101,7 @@ public class FileManager {
       option.clickUbEdit = in.readBoolean();
       option.clickUcEdit = in.readBoolean();
       option.clickUlEdit = in.readBoolean();
+      option.forceCompilation = in.readBoolean();
       
       option.maxWordAggregate = in.readInt();
       option.maxTribyteAggregate = in.readInt();
@@ -393,7 +394,8 @@ public class FileManager {
       out.writeBoolean(option.clickDlErase);
       out.writeBoolean(option.clickUbEdit);
       out.writeBoolean(option.clickUcEdit);
-      out.writeBoolean(option.clickUlEdit);             
+      out.writeBoolean(option.clickUlEdit);   
+      out.writeBoolean(option.forceCompilation); 
       
       out.writeInt(option.maxWordAggregate);
       out.writeInt(option.maxTribyteAggregate);

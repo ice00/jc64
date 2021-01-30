@@ -330,6 +330,9 @@ public class Option {
   /** Click on DL column erase dasm lable */
   public boolean clickDlErase=false;
   
+  /** Force compilation */
+  public boolean forceCompilation=false;
+  
   
   // comments C64
   
