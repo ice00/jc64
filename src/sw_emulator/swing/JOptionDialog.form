@@ -302,7 +302,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="jPanelOption" pref="918" max="32767" attributes="0"/>
+              <Component id="jPanelOption" pref="838" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -609,7 +609,7 @@
                               <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="240" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1826,7 +1826,7 @@
                                   <Component id="jCheckBoxVic20BasicRom" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxVic20KernalRom" min="-2" pref="23" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="93" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2114,7 +2114,7 @@
                                   <Component id="jCheckBoxPlus4Ted" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBoxPlus4Kernal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="24" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5095,7 +5095,7 @@
                                       <Component id="jRadioButtonTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                                  <EmptySpace pref="42" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -6413,7 +6413,7 @@
                                       <Component id="jRadioButtonCa65DotBytPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneCa65DotBytPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                                  <EmptySpace pref="51" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -7986,7 +7986,7 @@
                                       <Component id="jRadioButtonAcmeMarkPetPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelAcmePetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                                  <EmptySpace pref="41" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -9565,34 +9565,33 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jScrollPaneKickMacroHexMultiSprite" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <Component id="jScrollPaneKickMacroHexMonoSprite" min="-2" pref="112" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPaneKickMacroHexMonoSprite" min="-2" pref="125" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonKickMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jScrollPanekickMacroBinMultiSprite" max="32767" attributes="0"/>
-                                              <Component id="jScrollPaneKickMacroBinMonoSprite" min="-2" pref="121" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jRadioButtonDasmSharpIfPBlockComment" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPaneDasmSharpIfPBlockComment" min="-2" pref="115" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneDasmSharpIfPBlockComment" max="32767" attributes="0"/>
                                       </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jRadioButtonKickMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPanekickMacroBinMultiSprite" max="32767" attributes="0"/>
+                                      <Component id="jScrollPaneKickMacroBinMonoSprite" min="-2" pref="121" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                                   <Component id="jCheckBoxKickColonMacro" min="-2" pref="332" max="-2" attributes="0"/>
-                                  <EmptySpace pref="453" max="32767" attributes="0"/>
+                                  <EmptySpace pref="456" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -9767,7 +9766,7 @@
                                       <Component id="jRadioButtonKickDotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneKickDotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                                  <EmptySpace pref="17" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -11238,7 +11237,7 @@
                                       <Component id="jRadioButtonTass64DotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPaneTass64DotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="55" max="32767" attributes="0"/>
+                                  <EmptySpace pref="47" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -12600,7 +12599,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="628" max="32767" attributes="0"/>
+                                  <EmptySpace pref="548" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

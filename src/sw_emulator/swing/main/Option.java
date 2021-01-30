@@ -927,7 +927,7 @@ public class Option {
   public Assembler.ShiftText kickShiftText=Assembler.ShiftText.DOT_TEXT_SHIFTTEXT; 
   
   /** KickAsembler: text to screen code declaration */
-  public Assembler.ScreenText kickScreenText=Assembler.ScreenText.DOT_SCREEN_SCREENTEXT;
+  public Assembler.ScreenText kickScreenText=Assembler.ScreenText.DOT_TEXT_SCREENTEXT;
   
   /** KickAsembler: text to petascii code declaration */
   public Assembler.PetasciiText kickPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;

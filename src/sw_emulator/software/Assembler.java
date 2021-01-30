@@ -2170,9 +2170,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2182,7 +2182,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;
             case TMPX:
@@ -2213,7 +2213,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;  
             case CA65:
@@ -2226,9 +2226,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2238,15 +2238,14 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }     
               break;
             case ACME:                
               if ( (val==0x00) ||
                    (val==0x0A) ||
                    (val==0x0D) ||
-                   (val==0x22) ||
-                   (val==0x5C) ||
+                   (val==0x22) ||                  
                    (val>127) 
                  )  {
                   if (isString) {
@@ -2254,9 +2253,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2266,7 +2265,8 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                 if  (val==0x5C) str.append("\\");
+                 str.append((char)val);  
                 }                  
               break;              
             case KICK:
@@ -2290,7 +2290,7 @@ public class Assembler {
                   (val==0xA0) ||
                   (val==0xA3)                         
                  ) {
-                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
                        str.append("\\\"");
@@ -2300,7 +2300,7 @@ public class Assembler {
                        str.append("\\\\");
                        isSpecial=true;
                      }
-                else str.append((char)(mem.copy & 0xFF));                
+                else str.append((char)val);                
               break; 
             case TASS64:
               if ( (val==0x0A) ||
@@ -2313,9 +2313,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2325,7 +2325,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               break;  
           }                                  
@@ -2423,7 +2423,7 @@ public class Assembler {
           switch (option.assembler) {
             case DASM:
               if (isFirst) {  
-               str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+               str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
                   if ( (val==0x00) ||
@@ -2436,9 +2436,9 @@ public class Assembler {
                         isString=false;  
                       }
                       if (isFirst) {
-                        str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                        str.append("$").append(ByteToExe(val)); 
                         isFirst=false;
-                      } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                      } else str.append(", $").append(ByteToExe(val));      
                   } else {
                     if (isFirst) {
                          isFirst=false;
@@ -2448,7 +2448,7 @@ public class Assembler {
                              str.append(", \"");
                              isString=true;  
                            }  
-                     str.append((char)(mem.copy & 0xFF));  
+                     str.append((char)val);  
                   }     
               }
               break;
@@ -2480,12 +2480,12 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;  
             case CA65:
               if (isFirst) {  
-               str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+               str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
                   if ( (val==0x0A) ||
@@ -2497,9 +2497,9 @@ public class Assembler {
                       isString=false;  
                     }
                     if (isFirst) {
-                      str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                      str.append("$").append(ByteToExe(val)); 
                       isFirst=false;
-                    } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                    } else str.append(", $").append(ByteToExe(val));      
                   } else {
                       if (isFirst) {
                           isFirst=false;
@@ -2509,20 +2509,19 @@ public class Assembler {
                               str.append(", \"");
                               isString=true;  
                             }  
-                      str.append((char)(mem.copy & 0xFF));  
+                      str.append((char)val);  
                     }    
               }
               break;  
             case ACME:   
               if (isFirst) {  
-               str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+               str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
                   if ( (val==0x00) ||
                        (val==0x0A) ||
                        (val==0x0D) ||
                        (val==0x22) ||
-                       (val==0x5C) ||
                        (val>127) 
                      )  {
                     if (isString) {
@@ -2530,9 +2529,9 @@ public class Assembler {
                        isString=false;  
                     }
                     if (isFirst) {
-                      str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                      str.append("$").append(ByteToExe(val)); 
                       isFirst=false;
-                    } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                    } else str.append(", $").append(ByteToExe(val));      
                 } else {
                    if (isFirst) {
                         isFirst=false;
@@ -2542,7 +2541,8 @@ public class Assembler {
                             str.append(", \"");
                             isString=true;  
                           }  
-                    str.append((char)(mem.copy & 0xFF));  
+                   if  (val==0x5C) str.append("\\");
+                   str.append((char)val);  
                   } 
               }
               break;  
@@ -2566,10 +2566,10 @@ public class Assembler {
                       (val==0xA0) ||
                       (val==0xA3)                         
                     ) {
-                  str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                  str.append("\\$").append(ByteToExe(val));   
                 } else if (val==0x22) str.append("\\\"");
                   else if (val==0x5C) str.append("\\\\");
-                  else str.append((char)(mem.copy & 0xFF));     
+                  else str.append((char)val);     
                 }
               break;    
             case TASS64:
@@ -2583,9 +2583,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2595,7 +2595,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               break;              
           }   
@@ -2694,9 +2694,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2706,7 +2706,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;
            case TMPX:
@@ -2737,7 +2737,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               if (list.size()==1) {
                   // terminating 0 is ommitted
@@ -2755,9 +2755,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2767,7 +2767,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               if (list.size()==1) {
                   // terminating 0 is ommitted
@@ -2780,7 +2780,6 @@ public class Assembler {
                    (val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val==0x5C) ||
                    (val>127) 
                  )  {
                   if (isString) {
@@ -2788,9 +2787,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2800,7 +2799,8 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  if  (val==0x5C) str.append("\\");
+                  str.append((char)val);  
                 }  
               if (list.size()==1) {
                   // terminating 0 is ommitted
@@ -2829,14 +2829,14 @@ public class Assembler {
                   (val==0xA0) ||
                   (val==0xA3)                         
                  ) {
-                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                str.append("\\$").append(ByteToExe(val));   
               } else if (val==0x22) {
                        str.append("\\\"");
                      }
                 else if (val==0x5C) { 
                        str.append("\\\\");
                      }
-                else str.append((char)(mem.copy & 0xFF));                
+                else str.append(val);                
               break;         
             case TASS64:
               if ( (val==0x0A) ||
@@ -2849,9 +2849,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2861,7 +2861,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               if (list.size()==1) {
                   // terminating 0 is ommitted
@@ -2966,9 +2966,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -2978,7 +2978,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }  
               break;
            case TMPX:
@@ -3015,7 +3015,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               break; 
             case CA65:
@@ -3028,9 +3028,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3040,7 +3040,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               break;  
            case ACME:                
@@ -3048,7 +3048,6 @@ public class Assembler {
                    (val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val==0x5C) ||
                    (val>127) 
                  )  {
                   if (isString) {
@@ -3056,9 +3055,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3068,7 +3067,8 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  if  (val==0x5C) str.append("\\");
+                  str.append((char)val);  
                 }  
               break;  
             case KICK:
@@ -3092,14 +3092,14 @@ public class Assembler {
                   (val==0xA0) ||
                   (val==0xA3)                         
                  ) {
-                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                str.append("\\$").append(ByteToExe(val));   
               } else if (val==0x22) {
                        str.append("\\\"");
                      }
                 else if (val==0x5C) { 
                        str.append("\\\\");
                      }
-                else str.append((char)(mem.copy & 0xFF));                
+                else str.append((char)val);                
               break;         
             case TASS64:                
               if ( (val==0x0A) ||
@@ -3112,9 +3112,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3124,7 +3124,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }            
               if (list.size()==1) {
                 // terminating has 1 converted to 0
@@ -3233,9 +3233,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3245,7 +3245,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;
             case TMPX:
@@ -3277,7 +3277,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }                  
               break;    
             case CA65:
@@ -3290,9 +3290,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3302,7 +3302,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }     
               break;
             case ACME:                
@@ -3310,7 +3310,6 @@ public class Assembler {
                    (val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val==0x5C) ||
                    (val>127) 
                  )  {
                   if (isString) {
@@ -3318,9 +3317,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3330,7 +3329,8 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  if  (val==0x5C) str.append("\\");
+                  str.append((char)val);  
                 }                  
               break;              
             case KICK:
@@ -3354,7 +3354,7 @@ public class Assembler {
                   (val==0xA0) ||
                   (val==0xA3)                         
                  ) {
-                str.append("\\$").append(ByteToExe(Unsigned.done(mem.copy)));   
+                str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
                        str.append("\\\"");
@@ -3364,7 +3364,7 @@ public class Assembler {
                        str.append("\\\\");
                        isSpecial=true;
                      }
-                else str.append((char)(mem.copy & 0xFF));                
+                else str.append((char)val);                
               break; 
             case TASS64:
               val>>=1;  
@@ -3378,9 +3378,9 @@ public class Assembler {
                     isString=false;  
                   }
                   if (isFirst) {
-                    str.append("$").append(ByteToExe(Unsigned.done(mem.copy))); 
+                    str.append("$").append(ByteToExe(val)); 
                     isFirst=false;
-                  } else str.append(", $").append(ByteToExe(Unsigned.done(mem.copy)));      
+                  } else str.append(", $").append(ByteToExe(val));      
               } else {
                  if (isFirst) {
                       isFirst=false;
@@ -3390,7 +3390,7 @@ public class Assembler {
                           str.append(", \"");
                           isString=true;  
                         }  
-                  str.append((char)(mem.copy & 0xFF));  
+                  str.append((char)val);  
                 }   
               break;  
             }                                  
@@ -3419,7 +3419,240 @@ public class Assembler {
 
       @Override
       public void flush(StringBuilder str) {
-    
+        if (list.isEmpty()) return;    
+        
+        boolean isString=false;
+        boolean isFirst=true;
+        boolean isSpecial=false;
+        int position=0;
+        
+        int pos1=str.length();
+               
+        switch (aScreenText) {
+          case DOT_BYTE_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append((".byte "));
+            break;
+          case DOT_BYT_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append((".byt "));
+            break;  
+          case BYTE_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append(("byte "));  
+            break;
+          case DC_BYTE_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append(("dc "));  
+            break;
+          case DC_B_BYTE_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append(("dc.b "));  
+            break;
+          case MARK_SCR_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append(("!scr "));  
+            break;            
+          case DOT_TEXT_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append((".text "));   
+            break;  
+          case DOT_SCREEN_SCREENTEXT:
+            str.append(getDataSpacesTabs()).append((".screen "));   
+            break;                  
+        }     
+        
+        int pos2=str.length();
+        
+        MemoryDasm mem;
+        MemoryDasm memRel;
+      
+        while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          memRel=listRel.pop();
+          
+          // not all char can be converted in string
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
+            case TMPX:              
+              val>>=1;
+              if ( (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)(mem.copy & 0xFF));  
+                }     
+                if (val==0) str.append('@');  
+                else if (val<=0x1A) str.append((char)(val+96)); 
+                else if (val<=0x1F) str.append((char)(val+64)); 
+                else if (val==64) str.append('`');
+                else str.append((char)val); 
+              break;    
+            case CA65:
+              if ( (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }     
+              break;
+            case ACME:                        
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 if (val==0x5C) str.append("\\");
+                 if (val==0) str.append('@');  
+                 else if (val<=0x1A) str.append((char)(val+96)); 
+                 else if (val<=0x1F) str.append((char)(val+64)); 
+                 else if (val==64) str.append('`');
+                 else str.append((char)val);  
+                }   
+                
+              break;              
+            case KICK:
+              if (isFirst) {
+                position=str.length();
+                str.append("@\"");
+                isString=true;
+                isFirst=false;  
+              }    
+              if ((val<=0x02) ||
+                  (val==0x0A) ||
+                  (val==0x0C) ||    
+                  (val==0x0D) ||
+                  (val==0x0E) ||        
+                  (val==0x0F) ||         
+                  (val==0x40) ||
+                  (val==0x5B) ||
+                  (val==0x5D) ||
+                  (val>=0x61 && val<=0x7A) ||
+                  (val==0x7F) ||
+                  (val==0xA0) ||
+                  (val==0xA3)                         
+                 ) {
+                str.append("\\$").append(ByteToExe(val));   
+                isSpecial=true;
+              } else if (val==0x22) {
+                       str.append("\\\"");
+                       isSpecial=true;
+                     }
+                else if (val==0x5C) { 
+                       str.append("\\\\");
+                       isSpecial=true;
+                     }
+                else str.append((char)val);                
+              break; 
+            case TASS64:
+              val>>=1;  
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }   
+              break;  
+            }                                  
+          if (list.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+            if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
+          }
+        }
       }
    }  
    
@@ -3438,7 +3671,235 @@ public class Assembler {
 
       @Override
       public void flush(StringBuilder str) {
-    
+        if (list.isEmpty()) return;    
+        
+        boolean isString=false;
+        boolean isFirst=true;
+        boolean isSpecial=false;
+        int position=0;
+        
+        int pos1=str.length();
+               
+        switch (aPetasciiText) {
+          case DOT_BYTE_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append((".byte "));
+            break;
+          case DOT_BYT_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append((".byt "));
+            break;  
+          case BYTE_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append(("byte "));  
+            break;
+          case DC_BYTE_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append(("dc "));  
+            break;
+          case DC_B_BYTE_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append(("dc.b "));  
+            break;
+          case MARK_PET_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append(("!pet "));  
+            break;            
+          case DOT_TEXT_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append((".text "));   
+            break;                  
+        }
+        
+        int pos2=str.length();
+        
+        MemoryDasm mem;
+        MemoryDasm memRel;
+      
+        while (!list.isEmpty()) {
+          // accodate each bytes in the format choosed
+          mem=list.pop();
+          memRel=listRel.pop();
+          
+          // not all char can be converted in string
+          
+          int val=(mem.copy & 0xFF);  
+          switch (option.assembler) {
+            case DASM:
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
+            case TMPX:
+              val>>=1;
+              if ( (val==0x08) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)  
+                 )  {                                    
+                  // sorry, we force to be bytes as tmpx did not supports byte in line of text
+                  if (isFirst) {
+                    str.replace(pos1, pos2, "");
+                    isFirst=false; 
+                  } else                      
+                      if (isString) {
+                        str.append("\"\n");
+                        isString=false;  
+                      }                  
+                  list.push(mem);
+                  listRel.push(memRel);
+                  aByte.flush(str);   
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;    
+            case CA65:
+              if ( (val==0x0A) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }     
+              break;
+            case ACME:                 
+              if ( (val==0x00) ||
+                   (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+
+                  if  (val==0x5C) str.append("\\");
+                  if (val>=0xC1 && val<=0xDA) str.append((char)(val & 0x7F));
+                  else if (val>=0x41 && val<=0x5A) str.append((char)(val+32));
+                  else str.append((char)val);  
+                }     
+                
+              break;              
+            case KICK:
+              if (isFirst) {
+                position=str.length();
+                str.append("@\"");
+                isString=true;
+                isFirst=false;  
+              }    
+              if ((val<=0x02) ||
+                  (val==0x0A) ||
+                  (val==0x0C) ||    
+                  (val==0x0D) ||
+                  (val==0x0E) ||        
+                  (val==0x0F) ||         
+                  (val==0x40) ||
+                  (val==0x5B) ||
+                  (val==0x5D) ||
+                  (val>=0x61 && val<=0x7A) ||
+                  (val==0x7F) ||
+                  (val==0xA0) ||
+                  (val==0xA3)                         
+                 ) {
+                str.append("\\$").append(ByteToExe(val));   
+                isSpecial=true;
+              } else if (val==0x22) {
+                       str.append("\\\"");
+                       isSpecial=true;
+                     }
+                else if (val==0x5C) { 
+                       str.append("\\\\");
+                       isSpecial=true;
+                     }
+                else str.append((char)val);                
+              break; 
+            case TASS64:
+              val>>=1;  
+              if ( (val==0x0A) ||
+                   (val==0x0D) ||
+                   (val==0x22) ||
+                   (val>127)    
+                 ){
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }   
+              break;  
+            }                                  
+          if (list.isEmpty()) { 
+            if (isString) str.append("\"\n");
+            else str.append("\n");
+            if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
+          }
+        }
       }
    }  
    
@@ -4066,7 +4527,17 @@ public class Assembler {
      if (actualType instanceof ShiftText) {
        // look if it is time to aggregate data
        if (list.size()==option.maxTextAggregate) actualType.flush(str);         
-     }  
+     } else
+     // we are processing text to screen code?
+     if (actualType instanceof ScreenText) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
+     } else
+     // we are processing text to petascii code?
+     if (actualType instanceof PetasciiText) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
+     } 
    }
    
    /**
@@ -4346,7 +4817,17 @@ public class Assembler {
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   
          numText=null;
-         return aShiftText;         
+         return aShiftText;      
+       case SCREEN_TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aScreenText; 
+       case PETASCII_TEXT:
+         isMonoSpriteBlock=false;
+         isMultiSpriteBlock=false;   
+         numText=null;
+         return aPetasciiText;        
      }
      
      // default is of Byte type

@@ -1831,7 +1831,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Option", jPanelPreview);
@@ -2596,7 +2596,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("Vic20", jPanelVic20Comm);
@@ -2866,7 +2866,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxPlus4Ted)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxPlus4Kernal)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("Plus4", jPanelPlus4Comm);
@@ -5000,7 +5000,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpxPetasciiTextDeclaration)
                     .addComponent(jRadioButtonTmpxDotPetasciiText)
                     .addComponent(jScrollPaneTmpxDotPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("TMPx", jPanelTMPx);
@@ -5884,7 +5884,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneCa65DotBytePetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonCa65DotBytPetasciiText)
                     .addComponent(jScrollPaneCa65DotBytPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("CA65", jPanelCa65);
@@ -6920,7 +6920,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneAcmeMarkPetPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonAcmeMarkPetPetasciiText)
                     .addComponent(jLabelAcmePetasciiTextDeclaration))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("ACME", jPanelAcme);
@@ -7613,26 +7613,25 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPaneKickMacroHexMultiSprite)
                             .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
-                                .addComponent(jScrollPaneKickMacroHexMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonKickMacroBinMonoSprite)
-                            .addComponent(jRadioButtonKickMacroBinMultiSprite))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPanekickMacroBinMultiSprite)
-                            .addComponent(jScrollPaneKickMacroBinMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPaneKickMacroHexMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
                         .addComponent(jRadioButtonDasmSharpIfPBlockComment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPaneDasmSharpIfPBlockComment, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPaneDasmSharpIfPBlockComment)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonKickMacroBinMonoSprite)
+                    .addComponent(jRadioButtonKickMacroBinMultiSprite))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPanekickMacroBinMultiSprite)
+                    .addComponent(jScrollPaneKickMacroBinMonoSprite, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(jPanelKickAssemblerLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jCheckBoxKickColonMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(453, Short.MAX_VALUE))
+                .addContainerGap(456, Short.MAX_VALUE))
         );
         jPanelKickAssemblerLayout.setVerticalGroup(
             jPanelKickAssemblerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -7778,7 +7777,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelKickPetasciiTextDeclaration)
                     .addComponent(jRadioButtonKickDotTextPetasciiText)
                     .addComponent(jScrollPaneKickDotTextPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("KickAssembler", jPanelKickAssembler);
@@ -8666,7 +8665,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTass65PetasciiTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonTass64DotTextPetasciiText)
                     .addComponent(jScrollPaneTass64DotTextPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jTabbedPaneAssembler.addTab("64Tass", jPanelTass64);
@@ -8937,7 +8936,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonLookSynth))
-                        .addContainerGap(628, Short.MAX_VALUE))))
+                        .addContainerGap(548, Short.MAX_VALUE))))
         );
 
         jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
@@ -8983,7 +8982,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jPanelOption, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE))
+                .addComponent(jPanelOption, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE))
         );
 
         pack();
