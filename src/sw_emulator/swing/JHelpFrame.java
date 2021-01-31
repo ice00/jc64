@@ -87,7 +87,7 @@ public class JHelpFrame extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPaneHelp, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(567, 472));
+        setSize(new java.awt.Dimension(817, 804));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

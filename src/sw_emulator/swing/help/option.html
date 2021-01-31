@@ -5,12 +5,12 @@
     <style></style>
   </head>
   <body>
-  <h1 align="center">JC64dis Option menu</h1>
+  <h1 align="center">JC64dis Options menu</h1>
   <p>The option menu has few choices:</p>
   <p align="center"><img src="./option1.png"></p>  
   <p align="center"><img src="./option2.png"></p>  
   
-  <h2>General Option</h2>
+  <h2>General Options</h2>
   <h3>Option</h3>
   <p>Here you can changes various option about the disassembler engine:</p>
   <p align="center"><img src="./option3.png"></p> 
@@ -29,20 +29,104 @@
   <li><b>Erase disassembler automatic comment when mark a memory location as Data:</b> when you mark a memory location as data you can choose if the automatic comment (that is assed for code) should be erased as not more useful</li>
   <li><b>Erase relative + address when mark a memory location as Data</b>: as relative plus association are done in automatic onto code, you can choose that it will be erased if you mark the memory location as of data</li>
   <li><b>Undefined code/data used as code instead of data</b>: select how undefinde memory location should be managed (code or data)</li>
-  <li><b>Max lenght of label (some assembler has a limit):</b>: fix the max length of a label you can insert (minimun is fixed to 6) so you are sure to not go over the limitation of some assembler</li>
-  <li><b>Aggregate up to X values on a data row:</b> data memory locations will be grouped in group automatically of 2..8 bytes</li>
+  <li><b>A click on UC column edit the user comment</b>: activate an alterative way to add/edit user comment</li>
+  <li><b>A click on UB column edit the global comment</b>: activate an alterative way to add/edit global comemnt</li>
+  <li><b>A click on UL column edit the user label</b>: activate an alternative way to add/edit user label<li>    
+  <li><b>A click on DC column erase the automatic comment</b>: activate an alternative way to delete automatic comment</li>    
+  <li><b>A click on DL column erase the automatic label</b>: activate an alternative way to delete automatic label</li>      
+  <li><b>Label is on separate line from instructio</b>: chnage the way a label is showed inside the code</li>
+  <li><b>Force compilation at every modification</b>: at every modification you made the source is generated again. Takes present that in long source code the bottleneck is probably the highlighting of it in preview and source panel rather that the source generation itself</li>   
+  <li><b>Aggregate up to X values on a data row of type:</b> data memory locations will be grouped in group automatically of some bytes
+   <ul>
+       <li><b>Byte:</b> aggregate bytes from 2 to 8</li>
+       <li><b>Word:</b> aggregate words (2 bytes) from 2 to 8</li>
+       <li><b>Tribyte:</b> aggregate tribytes (3 bytes) from 2 to 8</li>
+       <li><b>Long:</b> aggregate longs (4 bytes) from 2 to 8</li>
+       <li><b>Swapped:</b> aggregate swapped (2 bytes) from 2 to 8</li>
+       <li><b>Text:</b> aggregate text (some bytes) from 2 to 40</li>       
+       <li><b>Address:</b> aggregate address (2 bytes( from 2 to 8</li>
+       <li><b>Stack Word</b> aggregate stack word (2 bytes) from 2 to 8</li>
+   </ul>
+  </li>
+  <li><b>Max lenght of label (some assembler has a limit)</b>: fix the max length of a label you can insert (minimun is fixed to 6) so you are sure to not go over the limitation of some assembler</li>
   <li><b>PSID init songs label:</b> as Psid has a init routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
   <li><b>PSID play sound label:</b> as Psid has a play routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
   <li><b>SID frequency table low label:</b> automatically detect a frequency table low part and create this user label for it (see the note at the end of this section)</li>
   <li><b>SID frequency table high label:</b> automatically detect a frequency table high part and create this user label for it (see the note at the end of this section)</li>
+  <li><b>Instruction sepatarator in start of row of source:</b> select how many spaces/tabs you want to separate an instruction into the source from the beginning of row</li>
+  <li><b>Data separator in start of row of source:</b> select how many spaces/tabs you want to separate an data declarationb from the beginning of row</li>
+  <li><b>Temp path for assembler compilation:</b> a path used for generating the binary of assembler. The best way is to use a memory drive (/tmp in most of Linux ditribution for example) as the generated files are to be considearte temporary</li>
  </ul>
  The disassembler engine used the SidFreq class implemented in XSidplay2 for detecting the A4 frequency that a tune is playing by searching in memory for the low and high part of table frequency of the octaves the SID can play.<br>
  Where such area is find, it will be marked ad data kind and the label for low and high position are generated as user label and a comment is added for giving the A4 frequency information
 </p>
 <p align="center"><img src="./option5.png"></p> 
+
+
+ <h3>Comments</h3>
+  <p>Here you can select what kind of memory address can be used for generating an automatic comments for the given architecture:</p>
+  <ul>
+      <li>C64: <p align="center"><img src="./option7.png"></p></li> 
+      <li>C1541: <p align="center"><img src="./option8.png"></p></li> 
+      <li>C128: <p align="center"><img src="./option9.png"></p></li> 
+      <li>VIC20: <p align="center"><img src="./option10.png"></p></li> 
+      <li>PLUS4: <p align="center"><img src="./option11.png"></p></li> 
+  </ul>
+  
+ <h3>Disassembler</h3> 
+ <p>Here you activate the assembler to use and so the corresponding syntax format for the source code</p>
+ <p align="center"><img src="./option13.png"></p> 
+ <p>The option varies from assembler to assembler and are divided into: </p>
+ <ul>
+     <li><b>Starting</b>: starting directiver for compilation</li>
+     <li><b>Origin</b>: the kind of syntax for declaring an origin memory zone</li>
+     <li><b>Comment</b>: the sysntax for declaring a instrction comment</li>
+     <li><b>Block comment</b>: the syntax for declaring a block comment</li>
+     <li><b>Label</b>: the syntax for declaring a label. Always a label start from the first column of row even if some assembler support starting in other columns</li>
+     <li><b>Byte</b>: the syntax for declaring a byte. It shows the four kind of way you can define a byte area, but you cannot differentiate the synstax throw the different methods</li>
+     <li><b>Word</b>: the syntax for declaring a word</li>
+     <li><b>Word swapped</b>: the syntax for declaring a word swapped. For compatibility with assemblers that not support this kind of data, in that case a macro is used</li>
+     <li><b>Tribyte</b>: the syntax for declaring a tribyte (3 bytes). For compatibility with assemblers that not support this kind of data, in that case a macro is used</li>
+     <li><b>Long</b>: the syntax for declaring a long (4 bytes). For compatibility with assemblers that not support this kind of data, in that case a macro is used</li>
+     <li><b>Address</b>: the syntax for declaring and address. For compatibility with assemblers that not support this kind of data, in that case a word is used</li>
+     <li><b>Stack Word</b>: the syntax for declaring a stack word. For compatibility with assemblers that not support this kind of data, in that case a macro is used</li>
+     <li><b>Monocolor sprite</b>: the syntax for declaring a monocromatic sprite. It uses bytes unless tribytes are available or macros</li>
+     <li><b>Multicolor sprite</b>: the syntax for declaring a multicolor sprite. It uses bytes unless tribyte are avaialble or macros</li>
+     <li><b>Text</b>: the syntax for declaring a text area</li>
+     <li><b>Text with # of char before</b>: the syntax for declaring a text where the number of char is the first byte. If the assembler did not support this it is managed as normal text</li>
+     <li><b>Text 0 terminated</b>: the syntax for declaring a text that terminate with a zero byte. If the assembler did not support this it is managed as normal text</li>
+     <li><b>Text '1' terminated</b>: the syntax for declaring a text that termintate with the high bit to 1. If the assembler did not support this it is managed as normal text</li>
+     <li><b>Text left shifted</b>: the syntax for declaring a text that is left shifted by 1 bit. If the assembler did not support this it is managed as normal text</li>
+     <li><b>Text to screen code</b>: the syntax for declaring a text that uses screen code. If the assembler did not support this it is managed as normal text</li>
+     <li><b>Text to petascii code</b>: the syntax for declaring a text that uses petascii code. If the assembler did not support this it is managed as normal text</li>
+ </ul>  
+ <ul>
+    <li><b>Dasm</b>
+      <p align="center"><img src="./option14.png"></p>    
+      Dasm has an option for making the source compatible with the -f3 option that is to produce a SID file in PSID format correctly.
+     </li>  
+    <li><b>TMPX</b>
+      <p align="center"><img src="./option15.png"></p>     
+     </li>   
+    <li><b>CA65</b>
+      <p align="center"><img src="./option16.png"></p>     
+    </li>  
+    <li><b>ACME</b>
+      <p align="center"><img src="./option17.png"></p>     
+    </li>   
+    <li><b>Kick Assembler</b>
+      <p align="center"><img src="./option18.png"></p>    
+      Kicx assembler has an option for calling a macro with a colon before if actviated.
+    </li>    
+    <li><b>64Tass</b>
+      <p align="center"><img src="./option19.png"></p>     
+    </li>    
+ </ul>
+ 
 <h3>Look & Feel</h3>
 <p>Here you can changes the look & feel of the program:</p>
 <p align="center"><img src="./option6.png"></p> 
+<p align="center"><img src="./option12.png"></p> 
 <p>According with you kind of system, you can select one of those Look & Feel:
  <ul>
      <li><b>Java</b></li> 
@@ -55,8 +139,13 @@
      <li><b>Synth based (that allow you to choose from more that 55 flat laf)</b></li> 
  </ul>
 </p>
+  
+ <h2>Apply SIDLD flags to memory</h2>
+ We saw that for a project you can add some files of SIDLD that has the code/data attribution about memory locations by true playback of the SID tune.<br>
+ If you had such files you can apply the attribution with this function. It is manual as otherwise it will prevent you to change a data/code area by hand if it is applyed at every disassambly.<br>
+ The right way to use it is so to apply it on the fitst time, otherwise it can overwrite your memory/code previous selection.
 
-  <h2>View Project</h2>
+ <h2>View Project</h2>
  <p>This menu will open the dialog box used for creating the project. 
   Here you can still going to add other SIDLD files or changing the file to disassemblate.
 </p>

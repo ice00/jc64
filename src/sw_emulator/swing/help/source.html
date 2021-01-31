@@ -18,7 +18,16 @@
  Two passes is always needed to apply one modification generated in one point to the previous passed one (like a jump in one point to a back location that were not already labeled), so the preview is always one step behind, 
  but source windows has the code processed two times as there is no difference into the engine when generating a preview or source, but only a different output of collected data.<br>
  Since the actual state of disassembly is stored in the project you should find such difference in the first generation or when you mark a data area as code.<br>
- When the generation is done, the preview and source area will be updated but you will not lose the actual line position.<br><br> 
+ When the generation is done, the preview and source area will be updated but you will not lose the actual line position.<br>
+ With an option you can activate the automatic disassembly at every modification you apply into the project.
+ <br><br> 
+ </p>
+ 
+ <h2>Assemblate</h2>
+ <p>This run the assembler you had selected into option to the source for generarting a binary into the output temp directory set in option.<br>
+    The executed assemblers are in native java bytecode, so there are not problems if you execute JC64dis in Windows, Linux or MacOs.<br>
+    If for some reason we cannot generate a java bytecode from the assembler (that usually are made in C) that assembler will not produce an binary output.<br>
+    This option is added for let you verify on the fly that the source can be assemblate again into binary.
  </p>
  
  <h2>Find text in preview</h2>
@@ -26,14 +35,14 @@
  <p align="center"><img src="./source4.png"></p>  
  
  <h2>Export As of preview</h2>
-</p> Export the actual preview source into a file.</p>
+ <p> Export the actual preview source into a file.</p>
  
  <h2>Find text in source</h2>
  <p>It opens a standard windows for inserting a text and find it inside the preview area. It has many option, like mark up all match, go backward and forward, match regular expression, whole word and lower/upper case.</p>
  <p align="center"><img src="./source4.png"></p>  
  
  <h2>Export As of source</h2>
-</p> Export the actual preview source into a file.</p>
+ <p> Export the actual preview source into a file.</p>
    <hr>
     <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
   </body>

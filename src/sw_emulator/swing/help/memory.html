@@ -6,49 +6,61 @@
   </head>
   <body>
   <h1 align="center">JC64dis Memory menu</h1>
-  <p>The file menu is dedicated to the memory area, and so have many voices:<br></p>
+  <p>The memory menu is dedicated to the memory area, and so have many voices:<br></p>
   <p align="center"><img src="./memory1.png"></p>  
   <p align="center"><img src="./memory2.png"></p>    
+  
   <h2>Clear disassembly automatic comment</h2>
   <p>During the disassemble phase, the disassembly engine is able to add some comments to common memory locations (based onto the choosed platform) used by the instruction being executed.<br>
     So, for example, if the address of an load/store instruction is $D400, the automatic comment appended to that memory area will be "Voice 1: Frequency control (lo byte)"<br>
     You can use those comments to easy search for some text (eg. "Frequency control"), however if you don't need it, you can use this menu function to erase the comments and leave them blank to all the memory location you had delected<br>
-    Please, note that as soon as you will regenerate the source code, the disassembler will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a disassembler automatic comment.
+    Please, note that as soon as you will regenerate the source code, the disassembler will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a disassembler automatic comment.<br>
+    Another way to clear the automatic comment is to activate a flag in option that allow you to click in the DC column of memory area for erasing it.
   </p>
   
   <h2>Clear user comment</h2>
- <p>This is a shortcut function for make your comment to that location as blank (e.g you can enter the comment and modify it to be empty, but this fastest).</p>
+  <p>This is a shortcut function to make your comment to that location as blank (e.g you can enter the comment and modify it to be empty, but this is fastest).</p>
+ 
  <h2>Clear disassembly automatic label</h2>
- <p>The disassembly engine is able to detect all the memory location used into the program area and label them as "W" + the hex representation of the memory area.<br>
-  This command will erase that association, but if it still present into the source it will be recreated at next disassembler source regeneration. So why this function is present?<br>
+ <p>The disassembly engine is able to detect all the memory locations used into the program area and label them as "W" + the hex representation of the memory area.<br>
+  This command will erase that association, but if it is still present into the source it will be recreated at next disassembler source regeneration. So why this function is present?<br>
   The answer is simple: at the beginning all memory locations are not marked as code/data, so the engine use them as code (by default in option). <br>
-  In this phase that could be a data area that if managed as code refers to a givem memory location and so that will be labeled. 
-  When you will mark that area as code, the label is still associated, so it could appars when it is utilizated as data.
+  In this phase that could be a data area that if managed as code refers to a given memory location and so that will be labeled. 
+  When you will mark that area as code, the label is still associated, so it could appars when it is utilizated as data.<br>
+  Another way to clear the automatic label is to activate a flag in option that allow you to click in the DL column of memory area for erasing it.
  </p>
  
   <h2>Add user comment</h2> 
   <p>This function let you add a comment to the selected memory area. The comment is used over a disassembler automatic one and in source appears in the line where there is the code.</p>
   <p align="center"><img src="./memory3.png"></p> 
-  <p>Note instead that a comment into the data area will appears only if there is a label and it will be after the label declaration (this let to merge more bytes to one row).</p>
+  <p>Note instead that a comment into the data area will appears only if there is a label and it will be after the label declaration (this let to merge more bytes to one row).<br>
+     Another way to add/edit a user comment is to activate a flag in option that allow you to click in the UC column of memory area for adding it.   
+  </p>
   
   <h2>Add user block comment</h2> 
   <p>This function is essential for adding the right formatting to the source and appropriate comments to block of code.<br>
-  The fist usage is for adding blank lines and so separating parts of code or data. The rule is simple: add a space (only one) and a carriage return (and iterate more times as you need). That char will add a blank line, otherwise you will gene a line with ; (a comment) that it is not good to read.<br><br>
+  The fist usage is for adding blank lines and so separating parts of code or data. The rule is simple: add a space (only one) and a carriage return (and iterate more times as you need). 
+  That char will add a blank line, otherwise you will get a line formatted as comment that it is not good to read.<br><br>
   Here an example with data that are separated every 8 lines (so we have a block of 8x8 area): you can see the comment inside memort address $2040
   <p align="center"><img src="./memory4.png"></p> 
-  <p>All other values inserted will be addes as ; and your comment, so for example, here a screen that show what it was inserted in comment and what you got:</p>
+  <p>All other values inserted will be addes as global comment (with the format selected in option), so for example, here a screen that show what it was inserted in comment and what you got:</p>
    <p align="center"><img src="./memory5.png"></p>  
+   Another way to add/edit a block comment is to activate a flag in option that allow you to click in the UB column of memory area for adding it.   
    
    <h2>Add user label</h2> 
-   <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user will be used instead of the other.<br>
+   <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user's one will be used instead of the other.<br>
    You cannot insert label with less than 5 chars and a option let you specify the max one to use (as some assembler has a limit in his length). <br>
    The program will search if the label was already present into the code, so you cannot create duplicates.
    As we had seen, disassembler generate labels only for memory locations inside the binary data, but a user can add a label even in the outside area (so as a constant).<br>
    This is for mark up external routine (like the KERNAL one) or memory area where to copy some code/data.<br><br>
    The engine of source generation processes the memory outside the binary data first, so block comments and label declaration will appears into the source into the initial area, then it process the internal memory area.<br>
-   During the constant declaration even user comment are shoed:
+   During the constant declaration even user comment are showed:
    </p>  
    <p align="center"><img src="./memory6.png"></p>   
+   Another way to add/edit a user label is to activate a flag in option that allow you to click in the UL column of memory area for adding it.
+   
+   <h2>Add user label on next word address</h2> 
+   <p>This is a fast way to create a label when you are onto an instuction that operated in an word address: instead of goint to that memory location and define the label, you define it by positioning to the memory location of the instruction.</p>
    
    <h2>Mark as code</h2>
    <p>The selected area will be marked as code (so color will be green)</p>
@@ -126,6 +138,12 @@
    This marks the data as of a left shifted bytes, so low bit is always 0 (you cannot select an area with low bit at 1 for this kind).
    As some assemblers support this syntax, the byte is right shifted when converted into the source, while all the others simply acts it as normal text.
    
+   <h2>Mark data as Text converted to screen code</h2>
+   This marks data as text convertet to C64 screen code. It change the disassembled output for the assembler that has an instruction that support it, otherwise it is acted as normal text.
+   
+   <h2>Mark data as Text converted to petascii code</h2>
+   This marks data as text convertet to C64 petascii code. It change the disassembled output for the assembler that has an instruction that support it, otherwise it is acted as normal text.
+   
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
    <p align="center"><img src="./memory7.png"></p>   
@@ -145,24 +163,24 @@
      <p align="center"><img src="./memory13.png"></p> 
    <p>You can delete a minus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it.</p>
    
-   <h2>Assign the selected address as #< </h2>
+   <h2>Assign the selected address as ##&lt; </h2>
    <p>In some cases a immediate value is not a simple byte but it could be the low part of one address.<br>
   <p> In you reverse a binary to source you can compile again the file back to binary and it works, but if you relocate the code to another memory position it will not works if the byte where a low part of one pointer.<br>
    It is let to your analisys to find such relation but the program will help you.<br>
    You need to select the memory location of that byte (that is the next byte after the opcode position for example) and this function will open a table where 
    all possible addresses in the binary range are equal to that byte as low part:</p>
    <p align="center"><img src="./memory10.png"></p> 
-  <p> If you press Ok without select an location and there was already a mapped one, the program will ask you if it has to remove the association.<br>
+  <p> If you press Ok without select a location and there was already a mapped one, the program will ask you if it has to remove the association.<br>
    The RE column will show an < sign in that location and the tool tip will show the value of it</p>
    
     
-   <h2>Assign the selected address as #> </h2>
+   <h2>Assign the selected address as ##&gt; </h2>
    <p>This function is the analoge of the previous but operates with the high part of an address. </p>
   
    <p align="center"><img src="./memory11.png"></p> 
   
 
-   <p>As a final note you should know that you cannot mark a memory location as + and # at the same time. Only one is tollerated!</p>
+   <p>As a final note you should know that you cannot mark a memory location as +/- and # at the same time. Only one is tollerated!</p>
    <hr>
     <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
   </body>
