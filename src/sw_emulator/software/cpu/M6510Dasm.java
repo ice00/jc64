@@ -1084,23 +1084,30 @@ public class M6510Dasm implements disassembler {
       else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
       
       if (label!=null) {
-        if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
-        else tmp=label+" = $"+ShortToExe(mem.address);
+        if (option.assembler==Assembler.Name.KICK) {
+          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
+          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
+        } else {
+          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
+          else tmp=label+" = $"+ShortToExe(mem.address);
+        }
         
         tmp2="";
         for (int i=tmp.length(); i<34; i++) // insert spaces
           tmp2+=" ";
         result.append(tmp).append(tmp2);
           
-        if (mem.dasmComment!=null) tmp2=mem.dasmComment;   
-        else tmp2="";
+       // if (mem.dasmComment!=null) tmp2=mem.dasmComment;   
+       // else tmp2="";
           
+        assembler.setComment(result, mem);
+        
         // if there is a user comment, then use it
-        if (mem.userComment!=null) {
-             if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
-             else result.append("\n");
-        }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
-                else result.append("\n");                        
+      //  if (mem.userComment!=null) {
+      //       if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
+      //       else result.append("\n");
+      //  }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
+      //          else result.append("\n");                        
       }
     }
     return result.append("\n").toString();

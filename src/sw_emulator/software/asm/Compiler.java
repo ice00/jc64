@@ -121,7 +121,7 @@ public class Compiler {
         System.err.println(e);
       }      
     System.setOut(orgStream);
-    //System.setErr(orgStream);
+    System.setErr(orgStream);
     
     try {
        result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
@@ -182,6 +182,10 @@ public class Compiler {
     
     try {
        result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
+       if ("".equals(result)) result="Compilation done";
     } catch (Exception e) {
         System.err.println(e);
       }   
