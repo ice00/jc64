@@ -64,6 +64,7 @@ import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.FileManager;
+import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
@@ -3850,12 +3851,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        } 
                    
        // test that the projects are of the same
-       if ((Arrays.hashCode(mergeProject.inB) != Arrays.hashCode(project.inB)) ||
-           (mergeProject.mpr.hashCode() != project.hashCode())) {
-         JOptionPane.showMessageDialog(this, "Hashcode of the projects are different: they are not of the same source", "Error", JOptionPane.ERROR_MESSAGE);
+       if ((Arrays.hashCode(mergeProject.inB) != Arrays.hashCode(project.inB))) {
+         JOptionPane.showMessageDialog(this, "Byte data of the projects are different: they are not of the same source", "Error", JOptionPane.ERROR_MESSAGE);
          return;            
        }
        
+       if (project.fileType==FileType.CRT && project.chip != mergeProject.chip) {
+         JOptionPane.showMessageDialog(this, "You are disassemblate different chip inside a CRT image", "Error", JOptionPane.ERROR_MESSAGE);
+         return;    
+       }       
        
        // take name/description from secondary only if not present in primary
        if (project.name==null || "".equals(project.name)) project.name=mergeProject.name;       
