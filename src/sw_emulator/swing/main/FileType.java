@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing.main;
 
+import java.util.Locale;
 import sw_emulator.math.Unsigned;
 
   /** File type */  
@@ -33,6 +34,196 @@ import sw_emulator.math.Unsigned;
           return "Unrecognized file";
         }
     },  // undefined  
+    CRT {
+        @Override
+        public String getDescription(byte[] inB) {
+          StringBuilder tmp=new StringBuilder();  
+          
+          tmp.append("C64 CARTRIDGE\n");
+          
+          int header=Math.max(
+                      ((inB[0x10]&0xFF)<<24)+((inB[0x11]&0xFF)<<16)+
+                      ((inB[0x12]&0xFF)<<8)+(inB[0x13]&0xFF), 0x40);
+          
+          tmp.append("Cartridge version: "+(inB[0x14]&0xFF)+"."+(inB[0x15]& 0xFF)).append("\n");
+          
+          tmp.append("Cartridge type: ");
+          switch ((inB[0x16]&0xFF)<<8+(inB[0x17]&0xFF)) {              
+              case 0:
+                tmp.append("Normal cartridge\n");
+                break;
+              case 1:
+                tmp.append("Action Replay\n");
+                break;
+              case 2:
+                tmp.append("KCS Power Cartridge\n");
+                break;
+              case 3:
+                tmp.append("Final Cartridge III\n");
+                break;
+              case 4:
+                tmp.append("Simons Basic\n");
+                break;                                       
+              case 5:
+                tmp.append("Ocean type 1*\n");
+                break;
+              case 6:
+                tmp.append("Expert Cartridge\n");
+                break;
+              case 7:
+                tmp.append("Fun Play, Power Play\n");
+                break;
+              case 8:
+                tmp.append("Super Games\n");
+                break;
+              case 9:
+                tmp.append("Atomic Power\n");
+                break;
+              case 10:
+                tmp.append("Epyx Fastload\n");
+                break;
+              case 11:
+                tmp.append("Westermann Learning\n");
+                break;
+              case 12:
+                tmp.append("Rex Utility\n");
+                break;
+              case 13:
+                tmp.append("Final Cartridge I\n");
+                break;                    
+              case 14:
+                tmp.append("Magic Formel\n");
+                break;
+              case 15:
+                tmp.append("C64 Game System, System 3\n");
+                break;
+              case 16:
+                tmp.append("WarpSpeed\n");
+                break;
+              case 17:
+                tmp.append("Dinamic**\n");
+                break;
+              case 18:
+                tmp.append("Zaxxon, Super Zaxxon (SEGA)\n");
+                break;
+              case 19:
+                tmp.append("Magic Desk, Domark, HES Australia\n");
+                break;
+              case 20:
+                tmp.append("Super Snapshot 5\n");
+                break;
+              case 21:
+                tmp.append("Comal-80\n");
+                break;
+              case 22:
+                tmp.append("Structured Basic\n");
+                break;
+              case 23:
+                tmp.append("Ross\n");
+                break;
+              case 24:
+                tmp.append("Dela EP64\n");
+                break;
+              case 25:
+                tmp.append("Dela EP7x8\n");
+                break;
+              case 26:
+                tmp.append("Dela EP256\n");
+                break;
+              case 27:
+                tmp.append("Rex EP256\n");
+                break;
+              default:
+                tmp.append("Unknown cartridge type\n");
+          }
+          tmp.append("Cartridge port EXROM "+ (inB[0x18]==0 ? "inactive": "active")).append("\n");
+          tmp.append("Cartridge port GAME "+ (inB[0x19]==0 ? "inactive": "active")).append("\n");
+          for (int i=0x20; i<header; i++) {
+            tmp.append((char)inB[i]);
+          }
+          tmp.append("\n");
+          
+          // now we have many CHIP section until end of memory
+          int pos=header;
+          while (pos<inB.length) {
+            header=getChip(inB, pos, tmp);
+            
+            // avoid to not go ahead in buffer for wrong file codification
+            if (header<=pos) break;
+            pos=header;            
+          }
+          
+          return tmp.toString();
+        }        
+
+        /**
+         * Get the chip type information an positioning to the next
+         * 
+         * @param inB the buffer
+         * @param pos the starting position
+         * @param tmp the output buffer
+         * @return the next position in buffer
+         */
+        private int getChip(byte[] inB, int pos, StringBuilder tmp) {
+          tmp.append((char)inB[pos])
+             .append((char)inB[pos+1])
+             .append((char)inB[pos+2])
+             .append((char)inB[pos+3]);
+          tmp.append(" #")
+             .append(((inB[pos+0xA]&0xFF)<<8)+(inB[pos+0xB]&0xFF));
+          switch ((inB[pos+8]&0xFF<<8)+inB[pos+9]&0xFF) {
+            case 0: 
+              tmp.append(" ROM");
+              break;
+            case 1:
+              tmp.append(" RAM");
+              break;
+            case 2:
+              tmp.append(" Flash ROM");
+              break;
+            default:
+              tmp.append(" ");
+          }        
+          
+          tmp.append(" ")
+             .append(ShortToExe(((inB[pos+0xC]&0xFF)<<8)+(inB[pos+0xD]&0xFF)))
+             .append("-")
+             .append(ShortToExe(((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF)))
+             .append("\n");
+          
+          return pos+((inB[pos+0x4]&0xFF)<<24)
+                    +((inB[pos+0x5]&0xFF)<<16)
+                    +((inB[pos+0x6]&0xFF)<<8)
+                    +(inB[pos+0x7]&0xFF);
+        }
+        
+        /**
+         * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
+         *
+         * @param value the short value to convert
+         * @return the exe string rapresentation of byte
+        */
+        private String ShortToExe(int value) {
+          int tmp=value;
+ 
+          if (value<0) return "????";
+    
+          String ret=Integer.toHexString(tmp);
+          int len=ret.length();
+          switch (len) {
+            case 1:
+              ret="000"+ret;
+              break;
+            case 2:
+              ret="00"+ret;
+              break;
+            case 3:
+              ret="0"+ret;
+              break;
+          }
+          return ret.toUpperCase(Locale.ENGLISH);
+        }   
+    }, // cartridge
     SID {
         @Override
         public String getDescription(byte[] inB) {
@@ -183,6 +374,7 @@ import sw_emulator.math.Unsigned;
       if (isPSID(inB)) return SID;
       if (isMUS(inB)) return MUS;
       if (isMPR(inB)) return MPR;
+      if (isCRT(inB)) return CRT;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -254,6 +446,32 @@ import sw_emulator.math.Unsigned;
    private static boolean isPRG(byte[] inB) {
      int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      return (inB.length<=65535+3-start); 
+   }
+   
+   /**
+    * Determine if the input file is a CRT file
+    * 
+    * @param inB the data
+    * @return true if the file is a CRT image
+    */
+   private static boolean isCRT(byte[] inB) {
+     if (inB[0]!='C') return false;
+     if (inB[1]!='6') return false;
+     if (inB[2]!='4') return false;
+     if (inB[3]!=' ') return false;   
+     if (inB[4]!='C') return false;   
+     if (inB[5]!='A') return false;   
+     if (inB[6]!='R') return false;   
+     if (inB[7]!='T') return false;   
+     if (inB[8]!='R') return false;   
+     if (inB[9]!='I') return false;   
+     if (inB[10]!='D') return false;   
+     if (inB[11]!='G') return false;   
+     if (inB[12]!='E') return false;   
+     if (inB[13]!=' ') return false;   
+     if (inB[14]!=' ') return false;   
+     
+     return inB[15]==' ';
    }
    
    /**

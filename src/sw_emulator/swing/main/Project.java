@@ -33,12 +33,13 @@ import sw_emulator.software.MemoryDasm;
  * Version 0: initial
  * Version 1: add isGarbage onto memoryDasm
  *            add TargetType
+ * Version 2: add CRT chip number
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=1;       
+  public static final byte ACTUAL_VERSION=2;       
     
   /**
    * Type of the file
@@ -68,6 +69,9 @@ public class Project implements Cloneable {
   
   /** Memory for dasm*/
   public MemoryDasm[] memory=new MemoryDasm[0xFFFF+1];
+  
+  /** CRT chip */
+  public int chip;
 
   /**
    * Construct the project
@@ -102,6 +106,7 @@ public class Project implements Cloneable {
     hash = 89 * hash + Arrays.deepHashCode(this.memory);
     hash = 89 * hash + Objects.hashCode(this.targetType);
     hash = 89 * hash + MPR.hashCode(this.mpr); 
+    hash = 89 * hash + this.chip;
     return hash;
   }
   
@@ -121,6 +126,8 @@ public class Project implements Cloneable {
     for (int i=0; i<this.memory.length; i++) {
       p.memory[i]=this.memory[i].clone();
     }
+    
+    p.chip=this.chip;
       
     return p;
   }    
@@ -151,6 +158,8 @@ public class Project implements Cloneable {
     for (int i=0; i<this.memory.length; i++) {
       if (!this.memory[i].equals(p.memory[i])) return false;   
     }   
+    
+    if (this.chip!=p.chip) return false;
     
     return true;
   }

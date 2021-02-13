@@ -3387,8 +3387,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       disassembly.source="";
       disassembly.disassembly="";
     } else {
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.targetType, false);
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.targetType, true);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.chip, project.targetType, false);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.chip, project.targetType, true);
       }  
     int lineS=0;
     int lineD=0;

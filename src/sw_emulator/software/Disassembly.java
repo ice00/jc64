@@ -77,6 +77,9 @@ public class Disassembly {
   /** Eventual mulpiple program */
   private MPR mpr;
   
+  /** Eventual CRT chip */
+  private int chip;
+  
   /** The type of file */
   private FileType fileType;
   
@@ -160,14 +163,16 @@ public class Disassembly {
    * @param option for disassembler
    * @param memory the memory for dasm
    * @param mpr eventual MPR blocks to use
+   * @param chip eventual CRT chip
    * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, TargetType targetType, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, int chip, TargetType targetType, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
     this.mpr=mpr;
+    this.chip=chip;
 
     this.memory=memory;
     
@@ -182,6 +187,9 @@ public class Disassembly {
     }
     
     switch (fileType) {
+      case CRT:  
+        disassemblyCRT(asSource, targetType);  
+        break;  
       case MUS:
         dissassemblyMUS(asSource);                
         break;
@@ -448,6 +456,111 @@ public class Disassembly {
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
         tmp.append(prg.cdasm(inB, 2, inB.length, start));
+        disassembly=tmp.toString();
+      }       
+  }   
+  
+  /**
+   * Disassembly a CRT file
+   * 
+   * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
+   */
+  private void disassemblyCRT(boolean asSource, TargetType targetType) {
+    M6510Dasm prg;
+    
+    setupAssembler();
+      
+    switch (targetType) {
+      case C64:
+        prg=new C64Dasm();  
+        break;  
+      case C1541:
+        prg=new C1541Dasm();     
+        break;
+      case C128:
+        prg=new C128Dasm();  
+        break;
+      case VIC20:
+        prg=new CVic20Dasm(); 
+        break;
+      case PLUS4:
+        prg=new CPlus4Dasm();  
+        break;
+      default:  
+        prg=new M6510Dasm();
+    }      
+    
+    prg.setMemory(memory);
+    prg.setOption(option,  assembler);
+    
+    // get start and end address for the selected chip
+    int header=Math.max(
+                      ((inB[0x10]&0xFF)<<24)+((inB[0x11]&0xFF)<<16)+
+                      ((inB[0x12]&0xFF)<<8)+(inB[0x13]&0xFF), 0x40);
+    
+    int pos=header;
+    int index=0;
+    if (chip!=0) {
+      try {       
+        for (int i=0; i<chip; i++) {        
+          pos=pos+((inB[pos+0x4]&0xFF)<<24)
+                    +((inB[pos+0x5]&0xFF)<<16)
+                    +((inB[pos+0x6]&0xFF)<<8)
+                    +(inB[pos+0x7]&0xFF);
+          if (pos>=inB.length) {
+            pos=header;
+            break;
+          }
+        }  
+      } catch (Exception e) {
+          pos=header; // force to use the chip 0
+        }  
+    }
+      
+    // pos= position of starting of CHIP area inside buffer
+    
+    startAddress=((inB[pos+0xC]&0xFF)<<8)+(inB[pos+0xD]&0xFF);
+    endAddress=startAddress+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF);
+    
+    
+     
+    // calculate start/end address
+    startBuffer=pos+0x10;
+    endBuffer=startBuffer+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF);
+    
+    markInside(startAddress, endAddress, 2);
+     
+    // search for SID frequency table
+    SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, startAddress-startBuffer,
+            option.sidFreqLoLabel, option.sidFreqHiLabel);
+     
+    StringBuilder tmp=new StringBuilder();
+    
+    if (asSource) {
+      prg.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(tmp, mem);
+
+      assembler.setStarting(tmp);
+      assembler.setMacro(tmp, memory);
+
+      if (option.dasmF3Comp) {
+        assembler.setOrg(tmp, startAddress-2);
+        assembler.setWord(tmp, (byte)(startAddress>>8), (byte)startAddress, null);
+        tmp.append("\n");
+      }  
+      assembler.setOrg(tmp, startAddress);
+      
+      tmp.append(prg.csdasm(inB, startBuffer, endBuffer, startAddress));
+      source=tmp.toString();
+    } else {    
+        prg.upperCase=option.opcodeUpperCasePreview;
+        tmp.append(fileType.getDescription(inB))
+           .append("\nCHIP=").append(chip).append("\n");
+        tmp.append(prg.cdasm(inB, startBuffer, endBuffer, startAddress));
         disassembly=tmp.toString();
       }       
   }    

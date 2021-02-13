@@ -713,6 +713,8 @@ public class FileManager {
         }
       }
       
+      if (version>1) project.chip=in.readInt();
+      
     } catch (Exception e) {
         System.err.println(e);
         return false;
@@ -797,6 +799,8 @@ public class FileManager {
           out.writeChar(memory.type);
       }  
       
+      out.writeInt(project.chip);  // version 2
+      
       out.flush();
       out.close();
     } catch (Exception e) {
@@ -815,13 +819,14 @@ public class FileManager {
    * @throws IOException
    * @throws SecurityException
    */
-  public byte[] readFile(String inN) throws FileNotFoundException, IOException, SecurityException {
-    byte[] inB = new byte[66000];      
+  public byte[] readFile(String inN) throws FileNotFoundException, IOException, SecurityException {       
     int size;
     BufferedInputStream inF;  
-      
+    File file=new File(inN);
+    byte[] inB = new byte[(int)file.length()];   
+    
     // see if the file is present
-    inF=new BufferedInputStream(new FileInputStream(inN));
+    inF=new BufferedInputStream(new FileInputStream(file));
                  
     // read the file
      size=inF.read(inB);
