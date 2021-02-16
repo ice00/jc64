@@ -98,6 +98,7 @@ import javax.swing.plaf.metal.DefaultMetalTheme;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.swing.Shared;
+import sw_emulator.swing.table.DataTableModelMemory;
 
 
 /**
@@ -238,6 +239,9 @@ public class Option {
     
   /** Mode of the illegal opcode  */
   public byte illegalOpcodeMode = M6510Dasm.MODE1;
+  
+  /** Memory value type to use */
+  public byte memoryValue = DataTableModelMemory.MOD_HEX;
         
   /** Uper case for opcode in preview */
   public boolean opcodeUpperCasePreview = true;

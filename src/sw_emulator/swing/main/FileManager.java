@@ -340,6 +340,9 @@ public class FileManager {
       option.commentVic20KernalRom = in.readBoolean();
                   
       option.assembler = Name.valueOf(in.readUTF());
+      
+      // 1.0 
+      option.memoryValue = in.readByte();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -633,6 +636,9 @@ public class FileManager {
       out.writeBoolean(option.commentVic20KernalRom); 
       
       out.writeUTF(option.assembler.name());
+      
+      // 1.0
+      out.writeByte(option.memoryValue);
       
       out.flush();
       out.close();

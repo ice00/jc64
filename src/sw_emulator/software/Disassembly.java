@@ -895,7 +895,7 @@ public class Disassembly {
    */
   public String getAssemblerDescription() {
     return  "****************************\n"+
-            "  JC64dis version 0.9\n"+
+            "  JC64dis version 1.0\n"+
             "  \n"+
             "  Source in "+option.assembler.getName()+" format\n"+
             "****************************\n";        

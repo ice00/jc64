@@ -26,6 +26,7 @@ package sw_emulator.swing.table;
 import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.main.Option;
 
 /**
  * DataTableModel for memory dasm
@@ -33,8 +34,18 @@ import sw_emulator.software.MemoryDasm;
  * @author ice
  */
 public class DataTableModelMemory extends AbstractTableModel {    
+  // mode for show memory address  
+  public static final byte MOD_HEX=1;
+  public static final byte MOD_CHAR=2;  
+  
+  Option option;
+    
   /** Table data */  
   MemoryDasm[] data;  
+
+  public DataTableModelMemory(Option option) {
+    this.option=option;
+  }
   
   public enum COLUMNS {
     ID("Memory location", Integer.class),
@@ -43,7 +54,8 @@ public class DataTableModelMemory extends AbstractTableModel {
     DL("Dasm location", Boolean.class),
     UL("User location", Boolean.class),
     UB("User block comment", Boolean.class),
-    RE("Related address", Character.class);
+    RE("Related address", Character.class),
+    VL("Value in memory", Integer.class);
       
     String columnsTip;
     Class type;
@@ -114,7 +126,10 @@ public class DataTableModelMemory extends AbstractTableModel {
       
     switch (columns[columnIndex]) {
         case ID:
-          return ShortToExe(memory.address);            
+          return ShortToExe(memory.address);   
+        case VL:
+          if (option.memoryValue==MOD_HEX) return ByteToExe(memory.copy); 
+          else return (char)memory.copy;  
         case DC:
           return memory.dasmComment!=null;            
         case UC:
@@ -166,6 +181,25 @@ public class DataTableModelMemory extends AbstractTableModel {
         ret="00"+ret;
         break;
      case 3:
+        ret="0"+ret;
+        break;
+    }
+    return ret.toUpperCase(Locale.ENGLISH);
+  }
+  
+  /**
+   * Convert a byte (containing in a int) to Exe upper case 2 chars
+   *
+   * @param value the short value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected String ByteToExe(byte value) {
+    int tmp=value & 0xFF;
+    
+    String ret=Integer.toHexString(tmp);
+    int len=ret.length();
+    switch (len) {
+      case 1:
         ret="0"+ret;
         break;
     }

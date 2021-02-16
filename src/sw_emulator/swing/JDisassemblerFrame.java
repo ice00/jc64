@@ -92,13 +92,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   Project savedProject;
   
   /** Data table for memory */
-  DataTableModelMemory dataTableModelMemory=new DataTableModelMemory();
+  DataTableModelMemory dataTableModelMemory=new DataTableModelMemory(option);
   
   /** Disassembly engine  */
   Disassembly disassembly=new Disassembly();
   
   /** Option dialog */
-  JOptionDialog jOptionDialog=new JOptionDialog(this, true);
+  JOptionDialog jOptionDialog=new JOptionDialog(this, true, dataTableModelMemory);
   
   /** Project dialog */
   JProjectDialog jProjectDialog=new JProjectDialog(this, true);
@@ -353,7 +353,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 "Disassembler automatic label",
                 "User manual label",
                 "User global comment",
-                "Related location and data type"};
+                "Related location and data type",
+                "Value in memory"};
             @Override protected JTableHeader createDefaultTableHeader() {
                 return new JTableHeader(columnModel) {
                     @Override public String getToolTipText(MouseEvent e) {
