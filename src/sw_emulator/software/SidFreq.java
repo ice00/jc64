@@ -200,8 +200,8 @@ public class SidFreq {
     sid=Unsigned.done(inB[high+A4*2])*256+Unsigned.done(inB[low+A4*2]);  
     
     addData(high, low, sid);
-    markMemory(high, high+TABLE+6, 2);
-    markMemory(low, low+TABLE+6, 2);
+    markMemory(high, high+(TABLE+6)*2, 2);
+    markMemory(low, low+(TABLE+6)*2, 2);
       
     return true;    
   }
