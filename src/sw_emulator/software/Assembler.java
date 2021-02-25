@@ -4405,6 +4405,8 @@ public class Assembler {
      
      // if there is a block comments use it
      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {
+       flush(str);  // be sure that previous collected data are send correctly
+       
        type=actualType;
        actualType=aBlockComment;
        flush(str);
