@@ -307,7 +307,7 @@ public class Assembler {
       @Override
       public void flush(StringBuilder str) {
         String comment=lastMem.dasmComment;
-        if (lastMem.userComment != null && !"".equals(lastMem.userComment)) comment=lastMem.userComment;
+        if (lastMem.userComment != null) comment=lastMem.userComment;
         
         if (comment==null || "".equals(comment)) {
           str.append("\n");
