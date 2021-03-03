@@ -560,18 +560,18 @@ public class M6510Dasm implements disassembler {
           }
             
           // add block if user declare it
-          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
-            // split by new line
-            String[] lines = mem.userBlockComment.split("\\r?\\n");
-            for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) result.append("\n");
-              else result.append(";").append(line).append("\n");   
-            }  
-          }  
+          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+            assembler.setBlockComment(result, mem);
+          }   
             
           // add the label if it was declared by dasm or user           
-          if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
-          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
+          //if (mem.userLocation!=null && !"".equals(mem.userLocation)) result.append(mem.userLocation).append(":\n");
+          //else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) result.append(mem.dasmLocation).append(":\n");
+          if ((mem.userLocation!=null && !"".equals(mem.userLocation)) || 
+             (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))) {
+            assembler.setLabel(result, mem);
+            result.append("\n");
+          }  
           
           // this is an instruction
           tmp=dasm(buffer); 
@@ -677,26 +677,26 @@ public class M6510Dasm implements disassembler {
             wasGarbage=false;
             assembler.setOrg(result, (int)pc);
           }             
-               
-          // add block if user declare it
-          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {                     
-            // split by new line
-            String[] lines = mem.userBlockComment.split("\\r?\\n");
-            for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) result.append("\n");
-              else result.append(";").append(line).append("\n");   
-            }  
-          }  
+          
+          // add block if user declare it    
+          if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+            assembler.setBlockComment(result, mem);
+          }          
             
           // add the label if it was declared by dasm or user           
-          if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
-            result.append(mem.userLocation).append(":");
+          //if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
+          //  result.append(mem.userLocation).append(":");
+          //  if (option.labelOnSepLine) result.append("\n");
+          //}
+          //else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) {
+          //  result.append(mem.dasmLocation).append(":");
+          //  if (option.labelOnSepLine) result.append("\n");
+          //}     
+          if ((mem.userLocation!=null && !"".equals(mem.userLocation)) || 
+             (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))) {
+            assembler.setLabel(result, mem);
             if (option.labelOnSepLine) result.append("\n");
-          }
-          else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) {
-            result.append(mem.dasmLocation).append(":");
-            if (option.labelOnSepLine) result.append("\n");
-          }          
+          }  
           
           // this is an instruction
           tmp=dasm(buffer); 
@@ -1069,14 +1069,9 @@ public class M6510Dasm implements disassembler {
       if (mem.isInside) continue;
       
       // look for block comment
-      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {      
-        // split by new line
-        lines = mem.userBlockComment.split("\\r?\\n");
-        for (String line : lines) {
-          if ("".equals(line) || " ".equals(line)) result.append("\n");
-          else result.append(";").append(line).append("\n");   
-        }  
-      }
+      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+        assembler.setBlockComment(result, mem);
+      }   
       
       // look for constant
       label=null;
@@ -1095,19 +1090,9 @@ public class M6510Dasm implements disassembler {
         tmp2="";
         for (int i=tmp.length(); i<34; i++) // insert spaces
           tmp2+=" ";
-        result.append(tmp).append(tmp2);
+        result.append(tmp).append(tmp2);          
           
-       // if (mem.dasmComment!=null) tmp2=mem.dasmComment;   
-       // else tmp2="";
-          
-        assembler.setComment(result, mem);
-        
-        // if there is a user comment, then use it
-      //  if (mem.userComment!=null) {
-      //       if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
-      //       else result.append("\n");
-      //  }  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
-      //          else result.append("\n");                        
+        assembler.setComment(result, mem);                             
       }
     }
     return result.append("\n").toString();

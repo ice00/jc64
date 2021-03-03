@@ -2147,6 +2147,34 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         // select this row
         jTableMemory.setRowSelectionInterval(addr, addr);
+        
+       
+        if (evt.isControlDown()) {
+          int actual;  
+        
+          // get the address in hex format
+          addr=jTableMemory.getSelectedRow();
+          pos=0;        
+
+          // scan all lines for the memory location
+          try {
+            String preview=rSyntaxTextAreaDis.getText();
+            String lines[] = preview.split("\\r?\\n");
+            for (String line: lines) {
+              actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
+              if (actual==addr) {      
+                // set preview in the find position  
+                rSyntaxTextAreaDis.setCaretPosition(pos);
+                rSyntaxTextAreaDis.requestFocusInWindow();
+                break;
+              } else {
+                  pos+=line.length()+1;
+                }
+            }
+          } catch (Exception e) {
+              System.err.println();  
+            } 
+        }
       } catch (Exception e) {
           System.err.println(e);
       }

@@ -307,7 +307,7 @@ public class Assembler {
       @Override
       public void flush(StringBuilder str) {
         String comment=lastMem.dasmComment;
-        if (lastMem.userComment != null) comment=lastMem.userComment;
+        if (lastMem.userComment != null /*&& !"".equals(lastMem.userComment)*/) comment=lastMem.userComment;
         
         if (comment==null || "".equals(comment)) {
           str.append("\n");
@@ -360,25 +360,25 @@ public class Assembler {
         switch (aBlockComment) {
           case SEMICOLON:    
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) str.append("\n");
+              if (" ".equals(line)) str.append("\n");
               else str.append(";").append(line).append("\n");   
             }                      
             break;  
          case DOUBLE_BAR:    
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) str.append("\n");
+              if (" ".equals(line)) str.append("\n");
               else str.append("//").append(line).append("\n");   
             }                      
             break;           
           case CSTYLE:
             boolean isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append("/*\n\n");
-                else {
-                 str.append("\n*/\n\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append("*/\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");                
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -392,31 +392,31 @@ public class Assembler {
           case IF:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append("endif\n\n");
-                else {
-                 str.append("if 0\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append(" endif\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
-                    str.append("if 0\n");
+                    str.append(" if 0\n");
                   }
                   str.append(line).append("\n");
                 }   
             }        
-            if (isOpen) str.append("endif\n");   
+            if (isOpen) str.append(" endif\n");   
             break;
           case DOT_IF:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append(".endif\n\n");
-                else {
-                 str.append(".if 0\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append(".endif\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -430,12 +430,12 @@ public class Assembler {
           case DOT_IF_FI:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append(".fi\n\n");
-                else {
-                 str.append(".if 0\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append(".fi\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -449,12 +449,12 @@ public class Assembler {
           case SHARP_IF:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append("#endif\n\n");
-                else {
-                 str.append("#if UNDEF \n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append("#endif\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -468,12 +468,12 @@ public class Assembler {
           case MARK_IF:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append("}\n\n");
-                else {
-                 str.append("!if 0 {\n\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append("}\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -487,12 +487,12 @@ public class Assembler {
           case DOT_COMMENT:
             isOpen=false;
             for (String line : lines) {
-              if ("".equals(line) || " ".equals(line)) {
-                if (isOpen) str.append(".comment\n\n");
-                else {
-                 str.append(".endc\n\n");
-                 isOpen=false;
+              if (" ".equals(line)) {
+                if (isOpen) {
+                  str.append(".comment\n\n");
+                  isOpen=false;
                 }
+                else str.append("\n\n");    
               } else {
                   if (!isOpen) {
                     isOpen=true;
@@ -4405,8 +4405,7 @@ public class Assembler {
      
      // if there is a block comments use it
      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {
-       flush(str);  // be sure that previous collected data are send correctly
-       
+       flush(str);
        type=actualType;
        actualType=aBlockComment;
        flush(str);
@@ -4711,6 +4710,17 @@ public class Assembler {
      lastMem=mem;
      aComment.flush(str);
    }
+   
+   /**
+    * Set the label if present 
+    * 
+    * @param str the stream to use
+    * @param mem the memory with comment
+    */
+   public void setLabel(StringBuilder str, MemoryDasm mem) {
+     lastMem=mem;
+     aLabel.flush(str);
+   }   
    
    /**
     * Set the block comment if present 
