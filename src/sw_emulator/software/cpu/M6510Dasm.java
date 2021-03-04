@@ -955,6 +955,24 @@ public class M6510Dasm implements disassembler {
     if (addr<0 || addr>0xffff) return "$??";
       
     MemoryDasm mem=memory[(int)addr];
+    
+    if (mem.type=='+') {
+      /// this is a memory in table label
+      int pos=mem.address-mem.related;
+      MemoryDasm mem2=memory[mem.related];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+      return "$"+ByteToExe((int)mem.related)+"+"+pos;  
+    }
+    
+    if (mem.type=='-') {
+      /// this is a memory in table label
+      int pos=mem.address-mem.related;
+      MemoryDasm mem2=memory[mem.related];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
+      return "$"+ByteToExe((int)mem.related)+pos;  
+    }     
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
