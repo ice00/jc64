@@ -316,6 +316,18 @@ public class Option {
   /** Number of space in starting row of data */
   public int numDataTabs=0;
   
+  /** Number of spaces after instruction for comment */
+  public int numInstrCSpaces=39;
+  
+  /** Number of tabs after instruction for comment */
+  public int numInstrCTabs=0;
+  
+  /** Number of spaces after data for comment */
+  public int numDataCSpaces=39;
+  
+  /** Number of tabs after data for comment */
+  public int numDataCTabs=0;
+  
   /** A label is on a sepatate line from instruction */
   public boolean labelOnSepLine=true;
   

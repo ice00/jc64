@@ -343,6 +343,10 @@ public class FileManager {
       
       // 1.0 
       option.memoryValue = in.readByte();
+      option.numInstrCSpaces = in.readInt();
+      option.numInstrCTabs = in.readInt();
+      option.numDataCSpaces = in.readInt();
+      option.numDataCTabs = in.readInt();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -639,6 +643,10 @@ public class FileManager {
       
       // 1.0
       out.writeByte(option.memoryValue);
+      out.writeInt(option.numInstrCSpaces);
+      out.writeInt(option.numInstrCTabs);
+      out.writeInt(option.numDataCSpaces);
+      out.writeInt(option.numDataCTabs);      
       
       out.flush();
       out.close();
