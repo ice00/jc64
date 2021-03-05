@@ -36,6 +36,7 @@ import sw_emulator.software.machine.C64SidDasm;
 import sw_emulator.software.machine.C1541Dasm;
 import sw_emulator.software.machine.CPlus4Dasm;
 import sw_emulator.software.machine.CVic20Dasm;
+import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
@@ -895,7 +896,7 @@ public class Disassembly {
    */
   public String getAssemblerDescription() {
     return  "****************************\n"+
-            "  JC64dis version 1.0\n"+
+            "  JC64dis version "+Shared.version+"\n"+
             "  \n"+
             "  Source in "+option.assembler.getName()+" format\n"+
             "****************************\n";        

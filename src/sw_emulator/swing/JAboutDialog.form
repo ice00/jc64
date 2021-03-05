@@ -107,7 +107,9 @@
     <Component class="javax.swing.JLabel" name="jLabelVersion">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Version 1.0"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Version &quot;+Shared.version" type="code"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>

@@ -51,6 +51,16 @@ public class Assembler {
   protected static String getDataSpacesTabs() {
     return SPACES.substring(0, option.numDataSpaces)+TABS.substring(0, option.numDataTabs);
   } 
+  
+  /**
+   * Return spaces/tabs to use in comment after data
+   * 
+   * @param skip dimension to skip
+   * @return the spaces/tabs
+   */
+  protected static String getDataCSpacesTabs(int skip) {
+    return SPACES.substring(0, (option.numDataCSpaces-skip<0 ? 1: option.numDataCSpaces-skip))+TABS.substring(0, option.numDataCTabs);
+  }   
    
 /**
    * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
@@ -354,6 +364,8 @@ public class Assembler {
     
       @Override
       public void flush(StringBuilder str) {
+        if (lastMem==null || lastMem.userBlockComment==null) return;
+          
         // split by new line
         String[] lines = lastMem.userBlockComment.split("\\r?\\n");  
      
@@ -540,6 +552,8 @@ public class Assembler {
         MemoryDasm mem;
         MemoryDasm memRel;
         
+        int initial=str.length();
+        
         // create starting command according to the kind of byte
         switch (aByte) {
           case DOT_BYTE:
@@ -589,7 +603,15 @@ public class Assembler {
                  else str.append(mem.type).append("$").append(ShortToExe(memRel.address));
           } else str.append(getByteType(mem.dataType, mem.copy));
           if (listRel.size()>0) str.append(", ");  
-          else str.append("\n");
+          else {
+            if (mem.dasmLocation==null && mem.userLocation==null) {
+              str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
+              MemoryDasm tmp=lastMem;
+              lastMem=mem;
+              aComment.flush(str);  
+              lastMem=tmp;
+            } else str.append("\n");            
+          }
         }
         list.clear();
       }  
@@ -1651,6 +1673,8 @@ public class Assembler {
                            Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*");
           lastMem=mem3;
           
+          int initial=str.length();
+          
           // now we have one row of 3 bytes
           switch (aMonoSprite) {
             case BYTE_HEX:
@@ -1792,6 +1816,7 @@ public class Assembler {
                listRel.pop();  
                break;               
             }
+          str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
         } else {
             // force to be as byte
@@ -1888,6 +1913,8 @@ public class Assembler {
                            BinToMulti(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))+
                            BinToMulti(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1));
           lastMem=mem3;
+          
+          int initial=str.length();
           
           // now we have one row of 3 bytes
           switch (aMultiSprite) {
@@ -2028,6 +2055,7 @@ public class Assembler {
                listRel.pop();  
                break;               
             }          
+          str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
         } else {
             // force to be as byte
@@ -4430,7 +4458,7 @@ public class Assembler {
          // check if there is a comment for the label
          if (lastMem.userComment!=null) {
            size=str.length()-size;      // get number of chars used  
-           str.append(SPACES.substring(0, SPACES.length()-size));
+           str.append(SPACES.substring(0, (SPACES.length()-size<0 ? 1: SPACES.length()-size)));
            type=aComment;
            type.flush(str);
          } else str.append("\n");  // close label by going in a new line
@@ -4452,7 +4480,14 @@ public class Assembler {
      // we are processing bytes?
      if (actualType instanceof Byte) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxByteAggregate) actualType.flush(str);         
+       if (list.size()==option.maxByteAggregate) actualType.flush(str);     
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }  
      } else
      // we are processing word?    
      if (actualType instanceof Word) {

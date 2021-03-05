@@ -682,16 +682,7 @@ public class M6510Dasm implements disassembler {
           if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
             assembler.setBlockComment(result, mem);
           }          
-            
-          // add the label if it was declared by dasm or user           
-          //if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
-          //  result.append(mem.userLocation).append(":");
-          //  if (option.labelOnSepLine) result.append("\n");
-          //}
-          //else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) {
-          //  result.append(mem.dasmLocation).append(":");
-          //  if (option.labelOnSepLine) result.append("\n");
-          //}     
+              
           if ((mem.userLocation!=null && !"".equals(mem.userLocation)) || 
              (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))) {
             assembler.setLabel(result, mem);
@@ -701,19 +692,11 @@ public class M6510Dasm implements disassembler {
           // this is an instruction
           tmp=dasm(buffer); 
   
-          tmp2="";
-          for (int i=tmp.length(); i<34; i++) // insert spaces
-            tmp2+=" ";
-          result.append(getInstrSpacesTabs(mem)).append(tmp).append(tmp2);
+          result.append(getInstrSpacesTabs(mem)).append(tmp).append(getInstrCSpacesTabs(tmp.length()));
           
           tmp2=dcom();   
           
           // if there is a user comment, then use it
-          //if (mem.userComment!=null) {
-          //     if (!"".equals(mem.userComment)) result.append("; ").append(mem.userComment).append("\n");
-          //     else result.append("\n");
-          //}  else if (!"".equals(tmp2)) result.append("; ").append(tmp2).append("\n");  
-          //        else result.append("\n");
           assembler.setComment(result, mem);
           
           // always add a carriage return after a RTS, RTI or JMP
@@ -1078,8 +1061,6 @@ public class M6510Dasm implements disassembler {
   private String addConstants() {
     String label;  
     String tmp;
-    String tmp2;
-    String[] lines;
       
     StringBuilder result=new StringBuilder();
     
@@ -1105,10 +1086,7 @@ public class M6510Dasm implements disassembler {
           else tmp=label+" = $"+ShortToExe(mem.address);
         }
         
-        tmp2="";
-        for (int i=tmp.length(); i<34; i++) // insert spaces
-          tmp2+=" ";
-        result.append(tmp).append(tmp2);          
+        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
           
         assembler.setComment(result, mem);                             
       }
@@ -1116,7 +1094,7 @@ public class M6510Dasm implements disassembler {
     return result.append("\n").toString();
   }
   
-  private static final String SPACES="                                       "; 
+  private static final String SPACES="                                                                               "; 
   private static final String TABS="\t\t\t\t\t\t\t\t\t\t";
   
   /**
@@ -1130,16 +1108,18 @@ public class M6510Dasm implements disassembler {
       int num=0;  
       if (mem.userLocation!=null && !"".equals(mem.userLocation)) num=mem.userLocation.length()+1;
       else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) num=mem.dasmLocation.length()+1;
-      return SPACES.substring(0, option.maxLabelLength-num)+SPACES.substring(0, option.numInstrSpaces)+TABS.substring(0, option.numInstrTabs);
+      return SPACES.substring(0, (option.maxLabelLength-num<0 ? 1: option.maxLabelLength-num))+SPACES.substring(0, option.numInstrSpaces)+TABS.substring(0, option.numInstrTabs);
     } else return SPACES.substring(0, option.numInstrSpaces)+TABS.substring(0, option.numInstrTabs);
-  }
+  }    
   
   /**
-   * Return spaces/tabs to use in start of data area
+   * Return spaces/tabs to use in comment after instruction
    * 
+   * @param mem the memory of this line
    * @return the spaces/tabs
    */
-  private String getDataSpacesTabs() {
-    return SPACES.substring(0, option.numDataSpaces)+TABS.substring(0, option.numDataTabs);
+  private String getInstrCSpacesTabs(int skip) {
+    return SPACES.substring(0, (option.numInstrCSpaces-skip<0 ? 1:option.numInstrCSpaces-skip))+TABS.substring(0, option.numInstrCTabs);
   }  
+     
 }

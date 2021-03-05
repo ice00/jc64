@@ -317,13 +317,13 @@ public class Option {
   public int numDataTabs=0;
   
   /** Number of spaces after instruction for comment */
-  public int numInstrCSpaces=39;
+  public int numInstrCSpaces=34;
   
   /** Number of tabs after instruction for comment */
   public int numInstrCTabs=0;
   
   /** Number of spaces after data for comment */
-  public int numDataCSpaces=39;
+  public int numDataCSpaces=34;
   
   /** Number of tabs after data for comment */
   public int numDataCTabs=0;

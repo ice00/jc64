@@ -13,6 +13,9 @@ import java.util.ArrayList;
  * @author ice
  */
 public class Shared {
-  /** List of used frames. Each frame must regisetr here */  
+  /** List of used frames. Each frame must register here */  
   public static ArrayList framesList=new ArrayList();   
+  
+  /** Version of the application */
+  public static final String version="1.0";
 }
