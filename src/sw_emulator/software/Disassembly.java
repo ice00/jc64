@@ -281,8 +281,8 @@ public class Disassembly {
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
     psidPAddr=Unsigned.done(inB[13])+Unsigned.done(inB[12])*256;    
-    memory[psidIAddr].userLocation=option.psidInitSongsLabel;
-    memory[psidPAddr].userLocation=option.psidPlaySoundsLabel;
+    if (psidIAddr!=0) memory[psidIAddr].userLocation=option.psidInitSongsLabel;
+    if (psidPAddr!=0) memory[psidPAddr].userLocation=option.psidPlaySoundsLabel;
     
     psidDOff=Unsigned.done(inB[0x07])+Unsigned.done(inB[0x06])*256;
     
@@ -332,8 +332,8 @@ public class Disassembly {
       assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
       assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
       assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");      
-      assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
-      assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);
+      if (psidIAddr!=0) assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
+      if (psidPAddr!=0) assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);
       assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
       assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
       assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
@@ -896,7 +896,7 @@ public class Disassembly {
    */
   public String getAssemblerDescription() {
     return  "****************************\n"+
-            "  JC64dis version "+Shared.version+"\n"+
+            "  JC64dis version "+Shared.VERSION+"\n"+
             "  \n"+
             "  Source in "+option.assembler.getName()+" format\n"+
             "****************************\n";        

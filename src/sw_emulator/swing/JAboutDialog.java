@@ -74,7 +74,7 @@ public class JAboutDialog extends javax.swing.JDialog {
         });
 
         jLabelVersion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelVersion.setText("Version "+Shared.version);
+        jLabelVersion.setText("Version "+Shared.VERSION);
         jLabelVersion.setToolTipText("");
 
         jLabelYear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
