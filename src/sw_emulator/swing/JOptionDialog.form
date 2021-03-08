@@ -328,13 +328,17 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="Center"/>
+              <BorderConstraints direction="First"/>
             </Constraint>
           </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanelPreview">
+            <Container class="javax.swing.JScrollPane" name="jScrollPanePreview">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Option">
@@ -343,894 +347,903 @@
                 </Constraint>
               </Constraints>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Component id="jLabelTmpPath" min="-2" max="-2" attributes="1"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jTextFieldTmpPath" min="-2" pref="320" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButtonBrowse" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="405" pref="405" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabelMaxByte" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                                      <Component id="jLabelMaxTribyte" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="jLabelMaxAddress" max="32767" attributes="0"/>
-                                                          <Component id="jLabelMaxSwapped" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Component id="jLabelAggregate" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jSpinnerMaxSwappedAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxTribyteAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxByteAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxAddressAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabelMaxStackWord" max="32767" attributes="0"/>
-                                              <Component id="jLabelMaxText" max="32767" attributes="0"/>
-                                              <Component id="jLabelMaxLong" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jLabelMaxWord" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jSpinnerMaxStackWordAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxTextAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxLongAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerMaxWordAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="425" pref="425" max="-2" attributes="0"/>
-                                          <Component id="jSpinnerMaxLength" min="-2" pref="58" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Component id="jLabelMaxLength" min="-2" pref="381" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabelPSIDinitsong" max="32767" attributes="0"/>
-                                              <Component id="jLabelSIDfreqLo" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jLabelPSIDplaysound" max="32767" attributes="0"/>
-                                              <Component id="jLabelInstrSep" max="32767" attributes="0"/>
-                                              <Component id="jLabelSIDfreqHi" max="32767" attributes="0"/>
-                                              <Component id="jLabelDataSep" min="-2" pref="381" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jTextFieldPlaySound" min="-2" pref="219" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldInitSongs" min="-2" pref="219" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldSidFreqLo" min="-2" pref="219" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jLabelInstrSpace" min="-2" pref="60" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jSpinnerInstrSpaces" min="-2" pref="71" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jLabelDataSpace" min="-2" pref="60" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jSpinnerDataSpaces" min="-2" pref="71" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabelInstrTabs" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jLabelDataTabs" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jSpinnerDataTabs" min="-2" pref="70" max="-2" attributes="0"/>
-                                                      <Component id="jSpinnerInstrTabs" min="-2" pref="70" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabelDataCSep" min="-2" pref="381" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                                  <Component id="jLabelDataCSpace" min="-2" pref="60" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jSpinnerDataCSpaces" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jLabelDataCTabs" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="jSpinnerDataCTabs" min="-2" pref="70" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabelInstrCSep" min="-2" pref="381" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                                  <Component id="jLabelInstrCSpace" min="-2" pref="60" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jSpinnerInstrCSpaces" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jLabelInstrCTabs" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="jSpinnerInstrCTabs" min="-2" pref="70" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelLanguage1" alignment="1" pref="210" max="32767" attributes="0"/>
-                                              <Component id="jLabelIllegalOpcodeStyle" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                              <Component id="jLabelLanguage" alignment="0" pref="210" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonStyle1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonLangEnglish" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonMemoryValueHex" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jRadioButtonStyle2" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonLangItalian" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jRadioButtonMemoryValueChar" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonStyle3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jCheckBoxDlErase" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxDcErase" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxUlEdit" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxUbEdit" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxUcEdit" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxUndefinedCode" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxErasePlus" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxEraseDComm" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxOpcodeFormattingSource" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxOpcodeFormattingPreview" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxLabel" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxForceCompilation" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelIllegalOpcodeStyle" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonStyle1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonStyle2" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonStyle3" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelLanguage" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonLangEnglish" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonLangItalian" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelLanguage1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonMemoryValueHex" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonMemoryValueChar" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxOpcodeFormattingPreview" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxOpcodeFormattingSource" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxEraseDComm" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxErasePlus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxUndefinedCode" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxUcEdit" min="-2" pref="23" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxUbEdit" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxUlEdit" min="-2" pref="23" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxDcErase" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxDlErase" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxForceCompilation" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jLabelMaxByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxByteAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelMaxWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxWordAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jLabelMaxTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxTribyteAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelMaxLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxLongAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jLabelMaxSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxSwappedAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelMaxText" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxTextAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jLabelMaxAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxAddressAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelMaxStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerMaxStackWordAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="jLabelAggregate" min="-2" pref="96" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jSpinnerMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelPSIDinitsong" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldInitSongs" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelPSIDplaysound" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldPlaySound" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelSIDfreqLo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldSidFreqLo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelSIDfreqHi" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldSidFreqHi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelInstrSep" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInstrSpace" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerInstrSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInstrTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerInstrTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelDataSep" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDataSpace" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerDataSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDataTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerDataTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelInstrCSep" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInstrCSpace" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerInstrCSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInstrCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerInstrCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelDataCSep" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDataCSpace" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerDataCSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDataCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerDataCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabelIllegalOpcodeStyle">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Illegal opcode style:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle1">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
-                    </Property>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="ANE, ISB, SHY, SHS"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Mode use by John west and Marko M&quot;akel&quot;a"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle1ItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle2">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="AXA, ISC, SYH, SSH"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Mode use by Juergen Buchmueller"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle2ItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle3">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="XAA, INS, SAY, TAS"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Mode use by Adam Vardy"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle3ItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelLanguage">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Language of comments:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonLangEnglish">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupLanguage"/>
-                    </Property>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="English"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonLangEnglishItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonLangItalian">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupLanguage"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Italian"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonLangItalianItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxEraseDComm">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Erase DASM automatic comment when mark a memory location as Data"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxEraseDCommItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingPreview">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingPreviewItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxUndefinedCode">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Undefined code/data used as code instead of data"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUndefinedCodeItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxLength">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="25" maximum="40" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxLengthStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxLength">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Max lenght of label (some assembler has a limit):"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelAggregate">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Aggregate up to X values on a data row of type:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxByteAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="8" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxByteAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelPSIDinitsong">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="PSID init songs label:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextFieldInitSongs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="initSongs"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for the PSID starting init routine"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldInitSongsFocusLost"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelPSIDplaysound">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="PSID play sound label:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextFieldPlaySound">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="playSound"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for PSID play sound routine"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldPlaySoundFocusLost"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelSIDfreqLo">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="SID frequency table low label:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextFieldSidFreqLo">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="frequencyLo"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for low address of frequency table"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqLoFocusLost"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelSIDfreqHi">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="SID frequency table high label:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextFieldSidFreqHi">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="frequencyHi"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Label to use for high address of frequenct table"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqHiFocusLost"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingSource">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingSourceItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxErasePlus">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Erase relative + address when mark a memory location as Data"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxErasePlusItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrSep">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Instruction separator in start of row of source:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerInstrSpaces">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="6" maximum="20" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrSpacesStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerInstrTabs">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrTabsStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrSpace">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Spaces:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrTabs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tabs:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataSep">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Data separator in start of row of source:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataSpace">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Spaces:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerDataSpaces">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="2" maximum="20" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataSpacesStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataTabs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tabs:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerDataTabs">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataTabsStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Label is on a separated line from instruction"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxLabelActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxByte">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Byte:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxWord">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Word:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxWordAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxWordAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxTribyte">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tribyte:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxTribyteAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="3" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxTribyteAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxLong">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Long:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxLongAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxLongAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelTmpPath">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Temp. Path for assembler compilation:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextFieldTmpPath">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButtonBrowse">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBrowseActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxSwapped">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Swapped:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxSwappedAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxSwappedAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxText">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Text:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxTextAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="32" maximum="40" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxTextAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxAddress">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Address:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxAddressAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxAddressAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelMaxStackWord">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Stack word:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerMaxStackWordAggregate">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxStackWordAggregateStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxUbEdit">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="A click on UB column edit the global comment"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUbEditItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxUcEdit">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="A click on UC column edit the user comment"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUcEditItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxUlEdit">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="A click on UL column edit the user label"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUlEditItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxDcErase">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="A click on DC column erase the automatic comment"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxDcEraseItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxDlErase">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="A click on DL column erase the automatic label"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxDlEraseItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxForceCompilation">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Force compilation at every modification"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxForceCompilationActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelLanguage1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Memory value in left panel:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonMemoryValueHex">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupMemoryValue"/>
-                    </Property>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Hex"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonMemoryValueHexItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButtonMemoryValueChar">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroupMemoryValue"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Char"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonMemoryValueCharItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrCSep">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Comment separator inside instruction in source:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrCSpace">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Spaces:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerInstrCSpaces">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="34" maximum="50" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrCSpacesStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelInstrCTabs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tabs:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerInstrCTabs">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrCTabsStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataCSep">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Comment separator inside data in source:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataCSpace">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Spaces:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerDataCSpaces">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="34" maximum="70" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataCSpacesStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelDataCTabs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tabs:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinnerDataCTabs">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataCTabsStateChanged"/>
-                  </Events>
-                </Component>
+                <Container class="javax.swing.JPanel" name="jPanelPreview">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                              <Component id="jLabelTmpPath" min="-2" max="-2" attributes="1"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextFieldTmpPath" min="-2" pref="320" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jButtonBrowse" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="405" pref="405" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jLabelMaxByte" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                                          <Component id="jLabelMaxTribyte" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="jLabelMaxAddress" max="32767" attributes="0"/>
+                                                              <Component id="jLabelMaxSwapped" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                  </Group>
+                                                  <Component id="jLabelAggregate" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jSpinnerMaxSwappedAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxTribyteAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxByteAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxAddressAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabelMaxStackWord" max="32767" attributes="0"/>
+                                                  <Component id="jLabelMaxText" max="32767" attributes="0"/>
+                                                  <Component id="jLabelMaxLong" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabelMaxWord" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jSpinnerMaxStackWordAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxTextAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxLongAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerMaxWordAggregate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="425" pref="425" max="-2" attributes="0"/>
+                                              <Component id="jSpinnerMaxLength" min="-2" pref="58" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                              <Component id="jLabelMaxLength" min="-2" pref="381" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabelPSIDinitsong" max="32767" attributes="0"/>
+                                                  <Component id="jLabelSIDfreqLo" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabelPSIDplaysound" max="32767" attributes="0"/>
+                                                  <Component id="jLabelInstrSep" max="32767" attributes="0"/>
+                                                  <Component id="jLabelSIDfreqHi" max="32767" attributes="0"/>
+                                                  <Component id="jLabelDataSep" min="-2" pref="381" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jTextFieldPlaySound" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <Component id="jTextFieldInitSongs" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <Component id="jTextFieldSidFreqLo" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <Component id="jLabelInstrSpace" min="-2" pref="60" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="jSpinnerInstrSpaces" min="-2" pref="71" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <Component id="jLabelDataSpace" min="-2" pref="60" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="jSpinnerDataSpaces" min="-2" pref="71" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jLabelInstrTabs" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabelDataTabs" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jSpinnerDataTabs" min="-2" pref="70" max="-2" attributes="0"/>
+                                                          <Component id="jSpinnerInstrTabs" min="-2" pref="70" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jLabelDataCSep" min="-2" pref="381" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="jLabelDataCSpace" min="-2" pref="60" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerDataCSpaces" min="-2" pref="71" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jLabelDataCTabs" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerDataCTabs" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jLabelInstrCSep" min="-2" pref="381" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="jLabelInstrCSpace" min="-2" pref="60" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerInstrCSpaces" min="-2" pref="71" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jLabelInstrCTabs" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerInstrCTabs" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabelLanguage1" alignment="1" pref="210" max="32767" attributes="0"/>
+                                                  <Component id="jLabelIllegalOpcodeStyle" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                                  <Component id="jLabelLanguage" alignment="0" pref="210" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jRadioButtonStyle1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonLangEnglish" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonMemoryValueHex" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jRadioButtonLangItalian" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jRadioButtonMemoryValueChar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jRadioButtonStyle2" min="-2" pref="179" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jRadioButtonStyle3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCheckBoxDlErase" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxDcErase" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxUlEdit" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxUbEdit" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxUcEdit" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxUndefinedCode" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxErasePlus" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxEraseDComm" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxOpcodeFormattingSource" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxOpcodeFormattingPreview" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxForceCompilation" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelIllegalOpcodeStyle" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonStyle1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonStyle2" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonStyle3" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelLanguage" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonLangEnglish" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonLangItalian" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelLanguage1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonMemoryValueHex" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonMemoryValueChar" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxOpcodeFormattingPreview" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxOpcodeFormattingSource" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxEraseDComm" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxErasePlus" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxUndefinedCode" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxUcEdit" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxUbEdit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxUlEdit" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxDcErase" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxDlErase" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxForceCompilation" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jLabelMaxByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxByteAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelMaxWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxWordAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jLabelMaxTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxTribyteAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelMaxLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxLongAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jLabelMaxSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxSwappedAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelMaxText" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxTextAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jLabelMaxAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxAddressAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelMaxStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMaxStackWordAggregate" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAggregate" min="-2" pref="96" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jSpinnerMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelMaxLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelPSIDinitsong" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldInitSongs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelPSIDplaysound" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldPlaySound" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelSIDfreqLo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldSidFreqLo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelSIDfreqHi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldSidFreqHi" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelInstrSep" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelInstrSpace" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerInstrSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelInstrTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerInstrTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelDataSep" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataSpace" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelInstrCSep" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelInstrCSpace" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerInstrCSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelInstrCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerInstrCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelDataCSep" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataCSpace" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataCSpaces" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataCTabs" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabelIllegalOpcodeStyle">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Illegal opcode style:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle1">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
+                        </Property>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="ANE, ISB, SHY, SHS"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Mode use by John west and Marko M&quot;akel&quot;a"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle1ItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle2">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="AXA, ISC, SYH, SSH"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Mode use by Juergen Buchmueller"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle2ItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonStyle3">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupIllegalOpcodeStyle"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="XAA, INS, SAY, TAS"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Mode use by Adam Vardy"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonStyle3ItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelLanguage">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Language of comments:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonLangEnglish">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupLanguage"/>
+                        </Property>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="English"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonLangEnglishItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonLangItalian">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupLanguage"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Italian"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonLangItalianItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxEraseDComm">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Erase DASM automatic comment when mark a memory location as Data"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxEraseDCommItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingPreview">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingPreviewItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxUndefinedCode">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Undefined code/data used as code instead of data"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUndefinedCodeItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxLength">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="25" maximum="40" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxLengthStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxLength">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Max lenght of label (some assembler has a limit):"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelAggregate">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Aggregate up to X values on a data row of type:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxByteAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="8" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxByteAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelPSIDinitsong">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="PSID init songs label:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldInitSongs">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="initSongs"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Label to use for the PSID starting init routine"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldInitSongsFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelPSIDplaysound">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="PSID play sound label:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldPlaySound">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="playSound"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Label to use for PSID play sound routine"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldPlaySoundFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelSIDfreqLo">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="SID frequency table low label:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldSidFreqLo">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="frequencyLo"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Label to use for low address of frequency table"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqLoFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelSIDfreqHi">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="SID frequency table high label:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldSidFreqHi">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="frequencyHi"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Label to use for high address of frequenct table"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSidFreqHiFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingSource">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingSourceItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxErasePlus">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Erase relative + address when mark a memory location as Data"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxErasePlusItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrSep">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Instruction separator in start of row of source:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerInstrSpaces">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="6" maximum="20" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrSpacesStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerInstrTabs">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrTabsStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrSpace">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Spaces:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrTabs">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tabs:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataSep">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Data separator in start of row of source:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataSpace">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Spaces:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataSpaces">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="2" maximum="20" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataSpacesStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataTabs">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tabs:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataTabs">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="At least 1 space or 1 tabs is necessary"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataTabsStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxLabel">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Label is on a separated line from instruction"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxLabelActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxByte">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Byte:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxWord">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Word:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxWordAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxWordAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxTribyte">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tribyte:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxTribyteAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="3" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxTribyteAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxLong">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Long:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxLongAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxLongAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelTmpPath">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Temp. Path for assembler compilation:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldTmpPath">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonBrowse">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Browse"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBrowseActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxSwapped">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Swapped:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxSwappedAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxSwappedAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxText">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Text:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxTextAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="32" maximum="40" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxTextAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxAddress">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Address:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxAddressAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxAddressAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelMaxStackWord">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Stack word:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerMaxStackWordAggregate">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="4" maximum="8" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMaxStackWordAggregateStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxUbEdit">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on UB column edit the global comment"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUbEditItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxUcEdit">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on UC column edit the user comment"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUcEditItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxUlEdit">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on UL column edit the user label"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxUlEditItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxDcErase">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on DC column erase the automatic comment"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxDcEraseItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxDlErase">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on DL column erase the automatic label"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxDlEraseItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxForceCompilation">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Force compilation at every modification"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxForceCompilationActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelLanguage1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Memory value in left panel:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonMemoryValueHex">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupMemoryValue"/>
+                        </Property>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Hex"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonMemoryValueHexItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jRadioButtonMemoryValueChar">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupMemoryValue"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Char"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonMemoryValueCharItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrCSep">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Comment separator inside instruction in source:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrCSpace">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Spaces:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerInstrCSpaces">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="34" maximum="50" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrCSpacesStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelInstrCTabs">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tabs:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerInstrCTabs">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerInstrCTabsStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataCSep">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Comment separator inside data in source:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataCSpace">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Spaces:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataCSpaces">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="34" maximum="70" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataCSpacesStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataCTabs">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tabs:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataCTabs">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataCTabsStateChanged"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanelComment">
@@ -2523,7 +2536,7 @@
                               <Component id="jComboBoxAssembler" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPaneAssembler" pref="718" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneAssembler" pref="773" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -12824,7 +12837,7 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="532" max="32767" attributes="0"/>
+                                  <EmptySpace pref="587" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

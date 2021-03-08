@@ -256,6 +256,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         buttonGroupMemoryValue = new javax.swing.ButtonGroup();
         jPanelOption = new javax.swing.JPanel();
         jTabbedPaneOption = new javax.swing.JTabbedPane();
+        jScrollPanePreview = new javax.swing.JScrollPane();
         jPanelPreview = new javax.swing.JPanel();
         jLabelIllegalOpcodeStyle = new javax.swing.JLabel();
         jRadioButtonStyle1 = new javax.swing.JRadioButton();
@@ -1328,6 +1329,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         jTabbedPaneOption.setName("Options"); // NOI18N
         jTabbedPaneOption.setPreferredSize(new java.awt.Dimension(831, 842));
 
+        jScrollPanePreview.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPanePreview.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         jLabelIllegalOpcodeStyle.setText("Illegal opcode style:");
 
         buttonGroupIllegalOpcodeStyle.add(jRadioButtonStyle1);
@@ -1830,11 +1834,13 @@ public class JOptionDialog extends javax.swing.JDialog {
                                     .addComponent(jRadioButtonMemoryValueHex, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonStyle2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jRadioButtonLangItalian)
-                                    .addComponent(jRadioButtonMemoryValueChar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonStyle3))
+                                    .addComponent(jRadioButtonMemoryValueChar)
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addComponent(jRadioButtonStyle2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonStyle3)))
+                                .addGap(28, 28, 28))
                             .addComponent(jCheckBoxDlErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxDcErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxUlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1977,7 +1983,9 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPaneOption.addTab("Option", jPanelPreview);
+        jScrollPanePreview.setViewportView(jPanelPreview);
+
+        jTabbedPaneOption.addTab("Option", jScrollPanePreview);
 
         jLabelautocomment.setText("Automatic add comments to those known locations:");
 
@@ -8865,7 +8873,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelAutoComment)
                     .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE))
+                .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Disassembler", jPanelDisassembler);
@@ -9108,12 +9116,12 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonLookSynth))
-                        .addContainerGap(532, Short.MAX_VALUE))))
+                        .addContainerGap(587, Short.MAX_VALUE))))
         );
 
         jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
 
-        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.CENTER);
+        jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.PAGE_START);
 
         jButtonLoad.setText("Load");
         jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -11760,6 +11768,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneKickMacroTribyte;
     private javax.swing.JScrollPane jScrollPaneKickMacroWordSwapped;
     private javax.swing.JScrollPane jScrollPaneList;
+    private javax.swing.JScrollPane jScrollPanePreview;
     private javax.swing.JScrollPane jScrollPaneTMPx;
     private javax.swing.JScrollPane jScrollPaneTass64;
     private javax.swing.JScrollPane jScrollPaneTass64ASterixOrigin;
