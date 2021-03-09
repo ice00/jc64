@@ -1864,7 +1864,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuHelpContents.setText("Help");
 
-    jMenuItemContents.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemContents.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
     jMenuItemContents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/help_index.png"))); // NOI18N
     jMenuItemContents.setMnemonic('h');
     jMenuItemContents.setText("Help contents");
@@ -3167,7 +3167,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (option.erasePlus && mem.type=='+') {
               mem.related=-1;
               mem.type=' ';
-            }  
+            } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   }  
           }          
         } else JOptionPane.showMessageDialog(this, "This area is not zero terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
         break;
@@ -3217,7 +3220,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (option.erasePlus && mem.type=='+') {
               mem.related=-1;
               mem.type=' ';
-            }  
+            } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   } 
           }  
         }        
         break;  
@@ -3245,7 +3251,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (option.erasePlus && mem.type=='+') {
               mem.related=-1;
               mem.type=' ';
-            }  
+            } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   } 
           }          
         } else JOptionPane.showMessageDialog(this, "This area is not high bit terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
         break; 
@@ -3273,7 +3282,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (option.erasePlus && mem.type=='+') {
               mem.related=-1;
               mem.type=' ';
-            }  
+            } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   } 
           }          
         }
         break;  
@@ -3291,7 +3303,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (option.erasePlus && mem.type=='+') {
             mem.related=-1;
             mem.type=' ';
-          }
+          } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   }
         }
        break;
     }
@@ -3341,7 +3356,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (option.erasePlus && mem.type=='+') {
         mem.related=-1;
         mem.type=' ';
-      }
+      } else if (option.erasePlus && mem.type=='^') {
+                     mem.related&=0xFFFF;
+                     mem.type='>';
+                   }
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -3704,7 +3722,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+        if (project.memory[row].type=='>' || project.memory[row].type=='<' || project.memory[row].type=='^') {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
             project.memory[row].type=' ';
             project.memory[row].related=-1;
@@ -3763,16 +3781,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
        int rowS=table.getSelectedRow();
        if (rowS<0) {
-         if (project.memory[row].type=='>' || project.memory[row].type=='<') {
+         if (project.memory[row].type=='>' || project.memory[row].type=='<' || project.memory[row].type=='^') {
             if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-              project.memory[row].type=' ';
-              project.memory[row].related=-1;
+              // + and < ?
+              if (project.memory[row].type=='^') { 
+                  project.memory[row].type='+';
+                  project.memory[row].related>>=8;
+              } else {
+                  project.memory[row].type=' ';
+                  project.memory[row].related=-1;
+              }              
             }
          } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
          return;
-       } else {         
-           project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
-           project.memory[row].type='>';
+       } else {                  
+           if (project.memory[row].type=='+') {
+               project.memory[row].type='^';
+               project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+           } else {
+               project.memory[row].type='>';
+               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
+           }
          }
        
        dataTableModelMemory.fireTableDataChanged();
@@ -3844,16 +3873,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='+') {
+        if (project.memory[row].type=='+' || project.memory[row].type=='^') {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-            project.memory[row].type=' ';
-            project.memory[row].related=-1;
+              // + and < ?
+              if (project.memory[row].type=='^') { 
+                  project.memory[row].type='>';
+                  project.memory[row].related&=0xFFFF;
+              } else {
+                  project.memory[row].type=' ';
+                  project.memory[row].related=-1;
+              }   
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
       } else {         
-           mem.related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
-           mem.type='+';
+           if (project.memory[row].type=='>') {
+               project.memory[row].type='^';
+               project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
+           } else {
+               project.memory[row].type='+';
+               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
+           }
         }
        
       dataTableModelMemory.fireTableDataChanged();

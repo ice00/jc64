@@ -627,7 +627,7 @@ public class M6510Dasm implements disassembler {
               assembler.setOrg(result, (int)pc);
             }            
             
-            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related]: null); 
+            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related & 0xFFFF]: null); 
             
             pos++;
             pc++;
@@ -726,7 +726,7 @@ public class M6510Dasm implements disassembler {
               assembler.setOrg(result, (int)pc);
             }   
             
-            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related]: null);            
+            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related & 0xFFFF]: null);            
             
             pos++;
             pc++;
@@ -917,9 +917,11 @@ public class M6510Dasm implements disassembler {
     if (addr<0 || addr>0xffff) return "$??"; 
     
     // this is a data declaration            
-    if (memory[(int)addr].type=='<' || memory[(int)addr].type=='>') {                
+    if (memory[(int)addr].type=='<' || memory[(int)addr].type=='>' || memory[(int)addr].type=='^') {    
+      MemoryDasm memRel;
       // the byte is a reference
-      MemoryDasm memRel=memory[memory[(int)addr].related];   
+      if (memory[(int)addr].type=='^') memRel=memory[memory[(int)addr].related & 0xFFFF];   
+      else memRel=memory[memory[(int)addr].related];   
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
@@ -947,6 +949,16 @@ public class M6510Dasm implements disassembler {
       if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
       return "$"+ByteToExe((int)mem.related)+"+"+pos;  
     }
+    
+    if (mem.type=='^') {
+      /// this is a memory in table label
+      int rel=mem.related>>16;
+      int pos=mem.address-rel;
+      MemoryDasm mem2=memory[rel];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+      return "$"+ByteToExe(rel)+"+"+pos;  
+    }    
     
     if (mem.type=='-') {
       /// this is a memory in table label
@@ -982,6 +994,16 @@ public class M6510Dasm implements disassembler {
       return "$"+ShortToExe((int)mem.related)+"+"+pos;  
     }
     
+    if (mem.type=='^') {
+      /// this is a memory in table label
+      int rel=mem.related>>16;
+      int pos=mem.address-rel;
+      MemoryDasm mem2=memory[rel];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+      return "$"+ShortToExe(rel)+"+"+pos;  
+    }    
+    
     if (mem.type=='-') {
       /// this is a memory in table label
       int pos=mem.address-mem.related;
@@ -1007,7 +1029,8 @@ public class M6510Dasm implements disassembler {
     MemoryDasm mem=memory[(int)addr];
            
     if (mem.isInside && !mem.isGarbage) {
-      if (mem.type=='+' || mem.type=='-') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);          
+      if (mem.type=='+' || mem.type=='-') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);  
+      else if (mem.type=='^') memory[mem.related & 0xFFFF].dasmLocation="W"+ShortToExe(mem.related & 0xFFFF);  
         
       mem.dasmLocation="W"+ShortToExe((int)addr);
     }
