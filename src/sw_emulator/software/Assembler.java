@@ -2661,6 +2661,8 @@ public class Assembler {
        
        boolean isString=false;
        boolean isFirst=true;
+       boolean isSpecial=false;
+       int position=0;
        
        int pos1=str.length(); 
          
@@ -2841,6 +2843,7 @@ public class Assembler {
               break;  
             case KICK:
               if (isFirst) {
+                position=str.length();
                 str.append("@\"");
                 isString=true;
                 isFirst=false;  
@@ -2860,14 +2863,17 @@ public class Assembler {
                   (val==0xA0) ||
                   (val==0xA3)                         
                  ) {
-                str.append("\\$").append(ByteToExe(val));   
+                str.append("\\$").append(ByteToExe(val));  
+                isSpecial=true;
               } else if (val==0x22) {
                        str.append("\\\"");
+                       isSpecial=true;
                      }
                 else if (val==0x5C) { 
                        str.append("\\\\");
+                       isSpecial=true;
                      }
-                else str.append(val);                
+                else str.append((char)val);                
               break;         
             case TASS64:
               if ( (val==0x0A) ||
@@ -2904,7 +2910,7 @@ public class Assembler {
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
-
+            if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
        }     
      }
