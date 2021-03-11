@@ -3142,6 +3142,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     switch (dataType) {
       case ZERO_TEXT:
+        if (rows.length<=1) {
+          JOptionPane.showMessageDialog(this, "Too few elements", "Warning", JOptionPane.WARNING_MESSAGE);
+          break;   
+        }   
         // we must find area that terminate with a 0
         int pos;
         boolean fount=false;
@@ -3151,6 +3155,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             break;
           }    
         }
+        
+        // look if the area is crossing a zero terminated one
+        if (!fount && rows[pos-1]<0xFFFF && project.memory[rows[pos-1]+1].dataType==DataType.ZERO_TEXT) {
+          pos--;  
+          fount=true;
+        }
 
         if (fount) {
           int lastRow=rows[pos];  
@@ -3158,19 +3168,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (lastRow-rows[i]>1) break;
             lastRow=rows[i];
           
-            mem= project.memory[rows[i]];
-            mem.isData=true;
-            mem.isCode=false;
-            mem.isGarbage=false;
-            mem.dataType=dataType;
-            if (option.eraseDComm) mem.dasmComment=null;
-            if (option.erasePlus && mem.type=='+') {
-              mem.related=-1;
-              mem.type=' ';
-            } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   }  
+            setMem(project.memory[rows[i]], dataType, rows[i]);  
           }          
         } else JOptionPane.showMessageDialog(this, "This area is not zero terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
         break;
@@ -3211,50 +3209,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         if (pos>0) {
           for (int i=0; i<=pos; i++) {
-            mem= project.memory[rows[i]];
-            mem.isData=true;
-            mem.isCode=false;
-            mem.isGarbage=false;
-            mem.dataType=dataType;
-            if (option.eraseDComm) mem.dasmComment=null;
-            if (option.erasePlus && mem.type=='+') {
-              mem.related=-1;
-              mem.type=' ';
-            } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   } 
+            setMem(project.memory[rows[i]], dataType, rows[i]); 
           }  
         }        
         break;  
-      case HIGH_TEXT:       
+      case HIGH_TEXT:      
+        if (rows.length<=1) {
+          JOptionPane.showMessageDialog(this, "Too few elements", "Warning", JOptionPane.WARNING_MESSAGE);
+          break;   
+        }  
+          
         if ((project.memory[rows[0]].copy & 0x80)!=0) {
           JOptionPane.showMessageDialog(this, "Area can not start with high bit", "Warning", JOptionPane.WARNING_MESSAGE);
           break;
         }
+        
+        fount=false;
         for (pos=1; pos<rows.length; pos++) {
-          if ((project.memory[rows[pos]].copy & 0x80)!=0) break;    
+          if ((project.memory[rows[pos]].copy & 0x80)!=0) {
+            fount=true;
+            break;
+          }    
+        }
+        
+        // look if the area is crossing a high terminated one
+        if (!fount && rows[pos-1]<0xFFFF && project.memory[rows[pos-1]+1].dataType==DataType.HIGH_TEXT) {
+          pos--;  
+          fount=true;
         }
 
-        if (pos>0 || (rows.length<=0xFFFF && project.memory[rows.length].dataType==DataType.HIGH_TEXT)) {
+        if (fount) {
           lastRow=rows[pos];  
           for (int i=pos; i>=0; i--) {
             if (lastRow-rows[i]>1) break;
             lastRow=rows[i];
           
-            mem= project.memory[rows[i]];
-            mem.isData=true;
-            mem.isCode=false;
-            mem.isGarbage=false;
-            mem.dataType=dataType;
-            if (option.eraseDComm) mem.dasmComment=null;
-            if (option.erasePlus && mem.type=='+') {
-              mem.related=-1;
-              mem.type=' ';
-            } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   } 
+            setMem(project.memory[rows[i]], dataType, rows[i]);  
           }          
         } else JOptionPane.showMessageDialog(this, "This area is not high bit terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
         break; 
@@ -3273,40 +3263,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (lastRow-rows[i]>1) break;
             lastRow=rows[i];
           
-            mem= project.memory[rows[i]];
-            mem.isData=true;
-            mem.isCode=false;
-            mem.isGarbage=false;
-            mem.dataType=dataType;
-            if (option.eraseDComm) mem.dasmComment=null;
-            if (option.erasePlus && mem.type=='+') {
-              mem.related=-1;
-              mem.type=' ';
-            } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   } 
+            setMem(project.memory[rows[i]], dataType, rows[i]); 
           }          
         }
         break;  
       default:              
         for (int i=0; i<rows.length; i++) {
-          mem= project.memory[rows[i]];
-          mem.isData=true;
-          mem.isCode=false;
-          mem.isGarbage=false;
-          if (mem.dataType==DataType.ZERO_TEXT) removeType(rows[i], DataType.ZERO_TEXT);
-          if (mem.dataType==DataType.NUM_TEXT) removeType(rows[i], DataType.NUM_TEXT);
-          if (mem.dataType==DataType.HIGH_TEXT) removeType(rows[i], DataType.HIGH_TEXT);
-          mem.dataType=dataType;
-          if (option.eraseDComm) mem.dasmComment=null;
-          if (option.erasePlus && mem.type=='+') {
-            mem.related=-1;
-            mem.type=' ';
-          } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   }
+          setMem(project.memory[rows[i]], dataType, rows[i]);
         }
        break;
     }
@@ -3316,6 +3279,45 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     for (int i=0; i<rows.length; i++) {
       jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
     }
+  }
+  
+  /**
+   * Set the memory with the given type
+   * 
+   * @param mem the memroy location to set
+   * @param dataType the new datatype to set
+   * @param pos the position where it is in memory
+   */
+  private void setMem(MemoryDasm mem, DataType dataType, int pos) {
+    mem.isData=true;
+    mem.isCode=false;
+    mem.isGarbage=false;
+    if (mem.dataType!=dataType && mem.dataType==DataType.ZERO_TEXT) removeBelowType(pos, DataType.ZERO_TEXT);
+    if (mem.dataType!=dataType && mem.dataType==DataType.NUM_TEXT) removeType(pos, DataType.NUM_TEXT);
+    if (mem.dataType!=dataType && mem.dataType==DataType.HIGH_TEXT) removeBelowType(pos, DataType.HIGH_TEXT);
+    mem.dataType=dataType;
+    if (option.eraseDComm) mem.dasmComment=null;
+    if (option.erasePlus && mem.type=='+') {
+      mem.related=-1;
+      mem.type=' ';
+    } else if (option.erasePlus && mem.type=='^') {
+              mem.related&=0xFFFF;
+              mem.type='>';
+            }  
+  }
+  
+  /**
+   * Remove text type that are below this point
+   * 
+   * @param pos the position
+   * @param type the type to remove
+   */
+  private void removeBelowType(int pos, DataType type) {
+    if (pos==0) return;
+    for (int i=pos-1; i>=0; i--) {
+      if (project.memory[i].dataType==type) project.memory[i].dataType=DataType.NONE;
+      else break;
+    }                
   }
   
   /**
