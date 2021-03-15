@@ -326,6 +326,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMarkPlus = new javax.swing.JButton();
         jButtonMarkMinus = new javax.swing.JButton();
         jButtonMarkLow = new javax.swing.JButton();
+        jButtonMarkLowHigh = new javax.swing.JButton();
+        jButtonMarkHighLow = new javax.swing.JButton();
         jButtonMarkMax = new javax.swing.JButton();
         jSeparatorButton3 = new javax.swing.JToolBar.Separator();
         jButtonConfigure = new javax.swing.JButton();
@@ -476,6 +478,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMinus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
+        jMenuItemMemLowHigh = new javax.swing.JMenuItem();
+        jMenuItemMemHighLow = new javax.swing.JMenuItem();
         jMenuItemMemHigh = new javax.swing.JMenuItem();
         jMenuOption = new javax.swing.JMenu();
         jMenuItemConfigure = new javax.swing.JMenuItem();
@@ -965,6 +969,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBar.add(jButtonMarkLow);
+
+        jButtonMarkLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/minmax.png"))); // NOI18N
+        jButtonMarkLowHigh.setToolTipText("Assign the 2 selected addresses as #<>");
+        jButtonMarkLowHigh.setFocusable(false);
+        jButtonMarkLowHigh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkLowHigh.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkLowHigh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkLowHighActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkLowHigh);
+
+        jButtonMarkHighLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/maxmin.png"))); // NOI18N
+        jButtonMarkHighLow.setToolTipText("Assign the 2 selected addresses as #<>");
+        jButtonMarkHighLow.setFocusable(false);
+        jButtonMarkHighLow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkHighLow.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkHighLow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkHighLowActionPerformed(evt);
+            }
+        });
+        jToolBar.add(jButtonMarkHighLow);
 
         jButtonMarkMax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/max.png"))); // NOI18N
         jButtonMarkMax.setToolTipText("Assign the selected address as #>");
@@ -1724,6 +1752,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemLow);
 
+    jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minmax.png"))); // NOI18N
+    jMenuItemMemLowHigh.setText("Assign the 2 selected addresses as #<>");
+    jMenuItemMemLowHigh.setToolTipText("");
+    jMenuItemMemLowHigh.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMemLowHighActionPerformed(evt);
+        }
+    });
+    jMenuMemory.add(jMenuItemMemLowHigh);
+
+    jMenuItemMemHighLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_GREATER, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemHighLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/maxmin.png"))); // NOI18N
+    jMenuItemMemHighLow.setText("Assign the 2 selected addresses as #><");
+    jMenuItemMemHighLow.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemMemHighLowActionPerformed(evt);
+        }
+    });
+    jMenuMemory.add(jMenuItemMemHighLow);
+
     jMenuItemMemHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_GREATER, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
     jMenuItemMemHigh.setText("Assign the selected address as #>");
@@ -1916,7 +1965,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 1189, Short.MAX_VALUE)
         .addComponent(jSplitPaneExternal)
     );
     layout.setVerticalGroup(
@@ -2520,6 +2569,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_ASS);
     }//GEN-LAST:event_jMenuItemAssemblyActionPerformed
 
+    private void jButtonMarkLowHighActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkLowHighActionPerformed
+      execute(MEM_LOWHIGH);
+    }//GEN-LAST:event_jButtonMarkLowHighActionPerformed
+
+    private void jMenuItemMemLowHighActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMemLowHighActionPerformed
+      execute(MEM_LOWHIGH);
+    }//GEN-LAST:event_jMenuItemMemLowHighActionPerformed
+
+    private void jMenuItemMemHighLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMemHighLowActionPerformed
+      execute(MEM_HIGHLOW);
+    }//GEN-LAST:event_jMenuItemMemHighLowActionPerformed
+
+    private void jButtonMarkHighLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkHighLowActionPerformed
+      execute(MEM_HIGHLOW);
+    }//GEN-LAST:event_jButtonMarkHighLowActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2580,7 +2645,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonMarkCode;
     private javax.swing.JButton jButtonMarkData;
     private javax.swing.JButton jButtonMarkGarbage;
+    private javax.swing.JButton jButtonMarkHighLow;
     private javax.swing.JButton jButtonMarkLow;
+    private javax.swing.JButton jButtonMarkLowHigh;
     private javax.swing.JButton jButtonMarkMax;
     private javax.swing.JButton jButtonMarkMinus;
     private javax.swing.JButton jButtonMarkPlus;
@@ -2629,7 +2696,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemMarkData;
     private javax.swing.JMenuItem jMenuItemMarkGarbage;
     private javax.swing.JMenuItem jMenuItemMemHigh;
+    private javax.swing.JMenuItem jMenuItemMemHighLow;
     private javax.swing.JMenuItem jMenuItemMemLow;
+    private javax.swing.JMenuItem jMenuItemMemLowHigh;
     private javax.swing.JMenuItem jMenuItemMinus;
     private javax.swing.JMenuItem jMenuItemNewProject;
     private javax.swing.JMenuItem jMenuItemNumText;
@@ -2883,10 +2952,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          memLow();  
          if (option.forceCompilation) disassembly();
          break;
+       case MEM_LOWHIGH:
+         memLowHigh();  
+         if (option.forceCompilation) disassembly();
+         break;
+       case MEM_HIGHLOW:
+         memHighLow();  
+         if (option.forceCompilation) disassembly();
+         break;         
        case MEM_HIGH:
          memHigh();  
          if (option.forceCompilation) disassembly();
-         break;
+         break;         
        case MEM_PLUS:
          memPlus();  
          if (option.forceCompilation) disassembly();
@@ -3741,6 +3818,82 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }       
   }
 
+  /**
+   * Assign two references to memory as #< and #>
+   */
+  private void memLowHigh() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    int rows[]=jTableMemory.getSelectedRows();
+    if (rows.length==1) {
+      JOptionPane.showMessageDialog(this, "At least two rows must be selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }    
+    
+    MemoryDasm low, high;
+    int address;
+    
+    for (int i=0; i<rows.length; i+=2) {
+            
+      if (i==rows.length-1) break;
+      low=project.memory[rows[i]];
+      high=project.memory[rows[i+1]];
+    
+      address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
+    
+      low.related=address;          
+      low.type='<';
+      high.related=address;
+      if (high.type=='+') high.type='^';
+      else high.type='>';     
+    }
+      
+    dataTableModelMemory.fireTableDataChanged();      
+    jTableMemory.setRowSelectionInterval(rows[0], rows[rows.length-1]);        
+  }  
+  
+/**
+   * Assign two references to memory as #> and #<
+   */
+  private void memHighLow() {
+    int row=jTableMemory.getSelectedRow();
+    if (row<0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }
+    
+    int rows[]=jTableMemory.getSelectedRows();
+    if (rows.length==1) {
+      JOptionPane.showMessageDialog(this, "Two rows must be selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+      return;
+    }    
+    
+    MemoryDasm low, high;
+    int address; 
+    
+    for (int i=0; i<rows.length; i+=2) {
+            
+      if (i==rows.length-1) break;
+      low=project.memory[rows[i+1]];
+      high=project.memory[rows[i]];
+    
+      address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
+    
+      low.related=address;          
+      low.type='<';
+      high.related=address;
+      if (high.type=='+') high.type='^';
+      else high.type='>';     
+    }     
+      
+    dataTableModelMemory.fireTableDataChanged();      
+    jTableMemory.setRowSelectionInterval(rows[0], rows[rows.length-1]);        
+  }    
+  
   /**
    * Assign a reference to memory as #>
    */
