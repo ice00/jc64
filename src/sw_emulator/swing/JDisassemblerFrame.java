@@ -3246,7 +3246,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             lastRow=rows[i];
           
             setMem(project.memory[rows[i]], dataType, rows[i]);  
-          }          
+          }  
+          
+          pos++;
+          while (pos>0 && pos<rows.length) {
+            pos=searchMoreZero(rows, pos);
+          }
         } else JOptionPane.showMessageDialog(this, "This area is not zero terminated", "Warning", JOptionPane.WARNING_MESSAGE); 
         break;
       case NUM_TEXT:
@@ -3359,6 +3364,41 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
+   * Search for more zero text area
+   * @param rows the rows selected
+   * @param initial the initial position
+   * @return the found position or -1
+   */
+  private int searchMoreZero(int rows[], int initial) {
+    boolean fount=false;
+    int pos;
+
+    for (pos=initial; pos<rows.length; pos++) {
+      if (project.memory[rows[pos]].copy==0) {
+        fount=true;  
+        break;
+      }    
+    }
+        
+    // look if the area is crossing a zero terminated one
+    if (!fount && rows[pos-1]<0xFFFF && project.memory[rows[pos-1]+1].dataType==DataType.ZERO_TEXT) {
+      pos--;  
+      fount=true;
+    }
+
+    if (fount) {
+      int lastRow=rows[pos];  
+      for (int i=pos; i>=0; i--) {
+        if (lastRow-rows[i]>1) break;
+        lastRow=rows[i];
+          
+        setMem(project.memory[rows[i]], DataType.ZERO_TEXT, rows[i]);  
+      }  
+      return pos+1;          
+    } else return -1;
+  }
+  
+  /**
    * Set the memory with the given type
    * 
    * @param mem the memroy location to set
@@ -3392,6 +3432,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private void removeBelowType(int pos, DataType type) {
     if (pos==0) return;
     for (int i=pos-1; i>=0; i--) {
+      if (project.memory[i].dataType==DataType.ZERO_TEXT && project.memory[i].copy==0 ) break;
       if (project.memory[i].dataType==type) project.memory[i].dataType=DataType.NONE;
       else break;
     }                
