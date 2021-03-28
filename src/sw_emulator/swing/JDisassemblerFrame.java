@@ -303,7 +303,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemtextShifted = new javax.swing.JMenuItem();
         jMenuItemTextScreen = new javax.swing.JMenuItem();
         jMenuItemTextPetascii = new javax.swing.JMenuItem();
-        jToolBar = new javax.swing.JToolBar();
+        jPanelToolBar = new javax.swing.JPanel();
+        jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
         jButtonOpenProject = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
@@ -312,7 +313,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMPR = new javax.swing.JButton();
         jButtonMerge = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
-        jSeparatorButton1 = new javax.swing.JToolBar.Separator();
+        jToolBarMemory = new javax.swing.JToolBar();
         jButtonClearDMem = new javax.swing.JButton();
         jButtonClearUMem = new javax.swing.JButton();
         jButtonClearDLabel = new javax.swing.JButton();
@@ -329,11 +330,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMarkLowHigh = new javax.swing.JButton();
         jButtonMarkHighLow = new javax.swing.JButton();
         jButtonMarkMax = new javax.swing.JButton();
-        jSeparatorButton3 = new javax.swing.JToolBar.Separator();
+        jToolBarOption = new javax.swing.JToolBar();
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
         jButtonViewProject = new javax.swing.JButton();
-        jSeparatorButton2 = new javax.swing.JToolBar.Separator();
+        jToolBarSource = new javax.swing.JToolBar();
         jButtonFindMem = new javax.swing.JButton();
         jButtonDisassemble = new javax.swing.JButton();
         jButtonDisassemble1 = new javax.swing.JButton();
@@ -699,8 +700,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
 
-        jToolBar.setFloatable(false);
-        jToolBar.setRollover(true);
+        jPanelToolBar.setLayout(new javax.swing.BoxLayout(jPanelToolBar, javax.swing.BoxLayout.LINE_AXIS));
+
+        jToolBarFile.setRollover(true);
 
         jButtonNewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/filenew.png"))); // NOI18N
         jButtonNewProject.setToolTipText("New project");
@@ -712,7 +714,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonNewProjectActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonNewProject);
+        jToolBarFile.add(jButtonNewProject);
 
         jButtonOpenProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/fileopen.png"))); // NOI18N
         jButtonOpenProject.setToolTipText("Open project");
@@ -724,7 +726,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonOpenProjectActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonOpenProject);
+        jToolBarFile.add(jButtonOpenProject);
 
         jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/close.png"))); // NOI18N
         jButtonClose.setToolTipText("Close the project");
@@ -736,7 +738,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonCloseActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClose);
+        jToolBarFile.add(jButtonClose);
 
         jButtonSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/filesave.png"))); // NOI18N
         jButtonSaveProject.setToolTipText("Save project");
@@ -748,7 +750,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonSaveProjectActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonSaveProject);
+        jToolBarFile.add(jButtonSaveProject);
 
         jButtonSaveProjectAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/filesaveas.png"))); // NOI18N
         jButtonSaveProjectAs.setToolTipText("Save project as");
@@ -760,7 +762,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonSaveProjectAsActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonSaveProjectAs);
+        jToolBarFile.add(jButtonSaveProjectAs);
 
         jButtonMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/create.png"))); // NOI18N
         jButtonMPR.setToolTipText("Create a MRP archive");
@@ -772,7 +774,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMPRActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMPR);
+        jToolBarFile.add(jButtonMPR);
 
         jButtonMerge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/merge.png"))); // NOI18N
         jButtonMerge.setToolTipText("Collaborative merge");
@@ -784,7 +786,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMergeActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMerge);
+        jToolBarFile.add(jButtonMerge);
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exit.png"))); // NOI18N
         jButtonExit.setToolTipText("Exit application");
@@ -796,8 +798,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonExitActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonExit);
-        jToolBar.add(jSeparatorButton1);
+        jToolBarFile.add(jButtonExit);
+
+        jPanelToolBar.add(jToolBarFile);
+
+        jToolBarMemory.setRollover(true);
 
         jButtonClearDMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser.png"))); // NOI18N
         jButtonClearDMem.setToolTipText("Erase daisassembly automatic comment");
@@ -809,7 +814,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonClearDMemActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClearDMem);
+        jToolBarMemory.add(jButtonClearDMem);
 
         jButtonClearUMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser1.png"))); // NOI18N
         jButtonClearUMem.setToolTipText("Erase user comment");
@@ -821,7 +826,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonClearUMemActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClearUMem);
+        jToolBarMemory.add(jButtonClearUMem);
 
         jButtonClearDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/eraser2.png"))); // NOI18N
         jButtonClearDLabel.setToolTipText("Erase disassembly automatic label");
@@ -833,7 +838,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonClearDLabelActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonClearDLabel);
+        jToolBarMemory.add(jButtonClearDLabel);
 
         jButtonAddUserComm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/comm.png"))); // NOI18N
         jButtonAddUserComm.setToolTipText("Add user comment");
@@ -845,7 +850,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonAddUserCommActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonAddUserComm);
+        jToolBarMemory.add(jButtonAddUserComm);
 
         jButtonAddUserBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/block.png"))); // NOI18N
         jButtonAddUserBlock.setToolTipText("Add a block user comment");
@@ -857,7 +862,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonAddUserBlockActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonAddUserBlock);
+        jToolBarMemory.add(jButtonAddUserBlock);
 
         jButtonAddUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem2.png"))); // NOI18N
         jButtonAddUserLabel.setToolTipText("Add user label");
@@ -869,7 +874,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonAddUserLabelActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonAddUserLabel);
+        jToolBarMemory.add(jButtonAddUserLabel);
 
         jButtonAddUserLabelOp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem3.png"))); // NOI18N
         jButtonAddUserLabelOp.setToolTipText("Add user label on next word address");
@@ -881,7 +886,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonAddUserLabelOpActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonAddUserLabelOp);
+        jToolBarMemory.add(jButtonAddUserLabelOp);
 
         jButtonMarkCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/code.png"))); // NOI18N
         jButtonMarkCode.setToolTipText("Mark the selected addresses as code");
@@ -898,7 +903,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkCodeActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkCode);
+        jToolBarMemory.add(jButtonMarkCode);
 
         jButtonMarkData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/data.png"))); // NOI18N
         jButtonMarkData.setToolTipText("Mark the selected addresses as data");
@@ -915,7 +920,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkDataActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkData);
+        jToolBarMemory.add(jButtonMarkData);
 
         jButtonMarkGarbage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/garb.png"))); // NOI18N
         jButtonMarkGarbage.setToolTipText("Mark the selected addresses as garbage");
@@ -932,7 +937,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkGarbageActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkGarbage);
+        jToolBarMemory.add(jButtonMarkGarbage);
 
         jButtonMarkPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/plus.png"))); // NOI18N
         jButtonMarkPlus.setToolTipText("Mark the selected addresses as +");
@@ -944,7 +949,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkPlusActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkPlus);
+        jToolBarMemory.add(jButtonMarkPlus);
 
         jButtonMarkMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/minus.png"))); // NOI18N
         jButtonMarkMinus.setToolTipText("Mark the selected addresses as -");
@@ -956,7 +961,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkMinusActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkMinus);
+        jToolBarMemory.add(jButtonMarkMinus);
 
         jButtonMarkLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/min.png"))); // NOI18N
         jButtonMarkLow.setToolTipText("Assign the selected address as #<");
@@ -968,7 +973,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkLowActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkLow);
+        jToolBarMemory.add(jButtonMarkLow);
 
         jButtonMarkLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/minmax.png"))); // NOI18N
         jButtonMarkLowHigh.setToolTipText("Assign the 2 selected addresses as #<>");
@@ -980,7 +985,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkLowHighActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkLowHigh);
+        jToolBarMemory.add(jButtonMarkLowHigh);
 
         jButtonMarkHighLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/maxmin.png"))); // NOI18N
         jButtonMarkHighLow.setToolTipText("Assign the 2 selected addresses as #<>");
@@ -992,7 +997,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkHighLowActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkHighLow);
+        jToolBarMemory.add(jButtonMarkHighLow);
 
         jButtonMarkMax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/max.png"))); // NOI18N
         jButtonMarkMax.setToolTipText("Assign the selected address as #>");
@@ -1004,8 +1009,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonMarkMaxActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonMarkMax);
-        jToolBar.add(jSeparatorButton3);
+        jToolBarMemory.add(jButtonMarkMax);
+
+        jPanelToolBar.add(jToolBarMemory);
+
+        jToolBarOption.setRollover(true);
 
         jButtonConfigure.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/configure.png"))); // NOI18N
         jButtonConfigure.setToolTipText("Set general option");
@@ -1017,7 +1025,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonConfigureActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonConfigure);
+        jToolBarOption.add(jButtonConfigure);
 
         jButtonSIDLD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem.png"))); // NOI18N
         jButtonSIDLD.setToolTipText("Apply SIDLD flags to memory");
@@ -1029,7 +1037,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonSIDLDActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonSIDLD);
+        jToolBarOption.add(jButtonSIDLD);
 
         jButtonViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/view_detailed.png"))); // NOI18N
         jButtonViewProject.setToolTipText("View project");
@@ -1041,8 +1049,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonViewProjectActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonViewProject);
-        jToolBar.add(jSeparatorButton2);
+        jToolBarOption.add(jButtonViewProject);
+
+        jPanelToolBar.add(jToolBarOption);
+
+        jToolBarSource.setRollover(true);
 
         jButtonFindMem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/finda.png"))); // NOI18N
         jButtonFindMem.setToolTipText("Find a memory address");
@@ -1054,7 +1065,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonFindMemActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonFindMem);
+        jToolBarSource.add(jButtonFindMem);
 
         jButtonDisassemble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exec.png"))); // NOI18N
         jButtonDisassemble.setToolTipText("Disassemble");
@@ -1066,7 +1077,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonDisassembleActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonDisassemble);
+        jToolBarSource.add(jButtonDisassemble);
 
         jButtonDisassemble1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/assembler.png"))); // NOI18N
         jButtonDisassemble1.setToolTipText("Assemblate");
@@ -1078,7 +1089,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonDisassemble1ActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonDisassemble1);
+        jToolBarSource.add(jButtonDisassemble1);
 
         jButtonFindDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/findd.png"))); // NOI18N
         jButtonFindDis.setToolTipText("Find a text in preview");
@@ -1090,7 +1101,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonFindDisActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonFindDis);
+        jToolBarSource.add(jButtonFindDis);
 
         jButtonExportAsDiss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exportas1.png"))); // NOI18N
         jButtonExportAsDiss.setToolTipText("Save preview file");
@@ -1102,7 +1113,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonExportAsDissActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonExportAsDiss);
+        jToolBarSource.add(jButtonExportAsDiss);
 
         jButtonFindSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/finds.png"))); // NOI18N
         jButtonFindSource.setToolTipText("Find a text in source");
@@ -1114,7 +1125,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonFindSourceActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonFindSource);
+        jToolBarSource.add(jButtonFindSource);
 
         jButtonExportAsSource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/exportas2.png"))); // NOI18N
         jButtonExportAsSource.setToolTipText("Save source file");
@@ -1126,7 +1137,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jButtonExportAsSourceActionPerformed(evt);
             }
         });
-        jToolBar.add(jButtonExportAsSource);
+        jToolBarSource.add(jButtonExportAsSource);
+
+        jPanelToolBar.add(jToolBarSource);
 
         jSplitPaneExternal.setToolTipText("");
 
@@ -1965,13 +1978,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 1189, Short.MAX_VALUE)
-        .addComponent(jSplitPaneExternal)
+        .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
+        .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
     );
@@ -2740,6 +2753,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuMerge;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
+    private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuData;
     private javax.swing.JScrollPane jScrollPaneLeft;
     private javax.swing.JScrollPane jScrollPaneMemory;
@@ -2750,9 +2764,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JToolBar.Separator jSeparatorButton1;
-    private javax.swing.JToolBar.Separator jSeparatorButton2;
-    private javax.swing.JToolBar.Separator jSeparatorButton3;
     private javax.swing.JPopupMenu.Separator jSeparatorByte;
     private javax.swing.JPopupMenu.Separator jSeparatorByte1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp1;
@@ -2770,7 +2781,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JSplitPane jSplitPaneInternal;
     private javax.swing.JMenu jSubMenu;
     private javax.swing.JTable jTableMemory;
-    private javax.swing.JToolBar jToolBar;
+    private javax.swing.JToolBar jToolBarFile;
+    private javax.swing.JToolBar jToolBarMemory;
+    private javax.swing.JToolBar jToolBarOption;
+    private javax.swing.JToolBar jToolBarSource;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDis;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
     // End of variables declaration//GEN-END:variables
@@ -3004,7 +3018,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         if (project.file==null || "".equals(project.file)) {
           project=null;
-          savedProject=null;          
+          savedProject=null;       
+          rSyntaxTextAreaSource.setText("");
+          rSyntaxTextAreaDis.setText("");
+          dataTableModelMemory.setData(null);
+          dataTableModelMemory.fireTableDataChanged();
         } else {
           dataTableModelMemory.setData(project.memory);
           dataTableModelMemory.fireTableDataChanged();

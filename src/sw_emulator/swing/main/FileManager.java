@@ -727,7 +727,7 @@ public class FileManager {
         }
       }
       
-      if (version>1) project.chip=in.readInt();
+      if (version>1) project.chip=in.readInt(); // version 2
       
     } catch (Exception e) {
         System.err.println(e);

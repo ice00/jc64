@@ -2561,7 +2561,7 @@
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneDasm">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
@@ -5009,7 +5009,7 @@
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneTMPx">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
@@ -5118,9 +5118,9 @@
                                           <Component id="jRadioButtonTmpxMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jScrollPaneTmpxMacroHexMonoSprite" max="32767" attributes="0"/>
-                                          <Component id="jScrollPaneTmpxMacroHexMultiSprite" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jScrollPaneTmpxMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneTmpxMacroHexMultiSprite" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -6275,7 +6275,7 @@
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneCa65">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
@@ -7834,7 +7834,7 @@
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneAcme">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
@@ -9660,7 +9660,7 @@
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneKickAssembler">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
@@ -9782,25 +9782,15 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jScrollPaneKickMacroHexMultiSprite" max="32767" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="jScrollPaneKickMacroHexMonoSprite" min="-2" pref="125" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jRadioButtonDasmSharpIfPBlockComment" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jScrollPaneDasmSharpIfPBlockComment" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonDasmSharpIfPBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jScrollPaneDasmSharpIfPBlockComment" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneKickMacroHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneKickMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -11158,7 +11148,7 @@
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64">
                       <Properties>
-                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                         <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
                       <Constraints>
