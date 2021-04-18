@@ -347,6 +347,9 @@ public class FileManager {
       option.numInstrCTabs = in.readInt();
       option.numDataCSpaces = in.readInt();
       option.numDataCTabs = in.readInt();
+      
+      // 1.2
+      option.allowUtf = in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -646,7 +649,10 @@ public class FileManager {
       out.writeInt(option.numInstrCSpaces);
       out.writeInt(option.numInstrCTabs);
       out.writeInt(option.numDataCSpaces);
-      out.writeInt(option.numDataCTabs);      
+      out.writeInt(option.numDataCTabs);  
+      
+      // 1.2
+      out.writeBoolean(option.allowUtf);
       
       out.flush();
       out.close();

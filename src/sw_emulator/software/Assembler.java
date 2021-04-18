@@ -647,11 +647,57 @@ public class Assembler {
               case BYTE_BIN:
                 return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
               case BYTE_CHAR:
+                int val=(value & 0xFF);
                 switch (option.assembler) {
+                  case DASM:
+                    if ( (val==0x00) ||
+                         (val==0x0A) ||
+                         (val==0x22) ||
+                         (val>127)    
+                       )  return "$"+ByteToExe(Unsigned.done(value));
+                    else return "'"+(char)Unsigned.done(value); 
+                  case TMPX:
+                    if ( (val==0x08) ||
+                         (val==0x0A) ||
+                         (val==0x0D) ||
+                         (val==0x22) ||
+                         (val>127)  
+                        ) return "$"+ByteToExe(Unsigned.done(value));
+                    else return "'"+(char)Unsigned.done(value); 
+                  case CA65:
+                    if ( (val==0x0A) ||
+                         (val==0x22) ||
+                         (val>=127)    
+                       ) return "$"+ByteToExe(Unsigned.done(value));
+                    else if (val>=0x20) return "'"+(char)Unsigned.done(value)+"'"; 
+                    else return "\""+(char)Unsigned.done(value)+"\""; 
+                  case ACME:
+                    if ( (val==0x00) ||
+                         (val==0x0A) ||
+                         (val==0x0D) ||
+                         (val==0x22) ||                  
+                         (val>127) 
+                        ) return "$"+ByteToExe(Unsigned.done(value));
+                    else  if (val==0x27 || val==0x5C) return "'\\"+(char)Unsigned.done(value)+"'"; 
+                          else return "'"+(char)Unsigned.done(value)+"'";   
                   case KICK:
-                    return "'"+(char)Unsigned.done(value)+"'";      
+                    if (val==0x0A || (val>=0x0C && val<=0x0F) 
+                                  || val==0x040 || val==0x05B 
+                                  || val==0x05D
+                                  || (val>=0x61 && val<=0x7A)  
+                                  || val==0x7F
+                                  || val==0xA0
+                                  || val==0xA3
+                        ) return "$"+ByteToExe(Unsigned.done(value));
+                    else return "'"+(char)Unsigned.done(value)+"'";      
                   case TASS64:
-                    return "\""+(char)Unsigned.done(value)+"\"";
+                    if ((val==0x0A) ||
+                        (val==0x0D) ||
+                        (val==0x22) ||
+                        (val>=0x7F)     
+                       )  
+                    return "$"+ByteToExe(Unsigned.done(value));    
+                    else return "\""+(char)Unsigned.done(value)+"\"";
                   default:
                     return "'"+(char)Unsigned.done(value); 
                 }  

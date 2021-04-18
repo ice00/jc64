@@ -349,6 +349,8 @@ public class Option {
   /** Force compilation */
   public boolean forceCompilation=false;
   
+  /** Allow uft for text */
+  public boolean allowUtf=true;
   
   // comments C64
   
