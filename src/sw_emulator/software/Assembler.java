@@ -650,11 +650,10 @@ public class Assembler {
                 int val=(value & 0xFF);
                 switch (option.assembler) {
                   case DASM:
-                    if ( (val==0x00) ||
-                         (val==0x0A) ||
-                         (val==0x22) ||
-                         (val>127)    
-                       )  return "$"+ByteToExe(Unsigned.done(value));
+                    if (
+                       (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                       (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
+                       ) return "$"+ByteToExe(Unsigned.done(value));
                     else return "'"+(char)Unsigned.done(value); 
                   case TMPX:
                     if ( (val==0x08) ||
@@ -2237,11 +2236,11 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
-                 )  {
+              if (
+                 (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                 (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
+                 )     
+              {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
