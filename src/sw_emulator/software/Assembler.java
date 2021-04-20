@@ -2502,10 +2502,9 @@ public class Assembler {
                str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
-                  if ( (val==0x00) ||
-                       (val==0x0A) ||
-                       (val==0x22) ||
-                       (val>127)    
+                  if (
+                      (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                      (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                      )  {
                       if (isString) {
                         str.append("\"");
@@ -2762,10 +2761,9 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3038,10 +3036,9 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3305,10 +3302,9 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3552,10 +3548,9 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3801,10 +3796,9 @@ public class Assembler {
           int val=(mem.copy & 0xFF);  
           switch (option.assembler) {
             case DASM:
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )  {
                   if (isString) {
                     str.append("\"");
