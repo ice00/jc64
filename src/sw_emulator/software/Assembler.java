@@ -662,12 +662,12 @@ public class Assembler {
                        ) return "$"+ByteToExe(Unsigned.done(value));
                     else return "'"+(char)Unsigned.done(value); 
                   case CA65:
-                    if ( (val==0x0A) ||
-                         (val==0x22) ||
-                         (val>=127)    
+                    if (
+                        (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                        (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                        ) return "$"+ByteToExe(Unsigned.done(value));
                     else if (val>=0x20) return "'"+(char)Unsigned.done(value)+"'"; 
-                    else return "\""+(char)Unsigned.done(value)+"\""; 
+                         else return "\""+(char)Unsigned.done(value)+"\""; 
                   case ACME:
                     if ( (val==0x00) ||
                          (val==0x0A) ||
@@ -2235,7 +2235,7 @@ public class Assembler {
           switch (option.assembler) {
             case DASM:
               if (
-                 (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
+                 (!option.allowUtf && ((val<0x20 || val==0x22 || (val>127)))) ||     
                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
                  )     
               {
@@ -2261,7 +2261,7 @@ public class Assembler {
               break;
             case TMPX:
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  ) {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -2289,10 +2289,10 @@ public class Assembler {
                 }                  
               break;  
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
-                 )  {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -2525,7 +2525,7 @@ public class Assembler {
               break;
             case TMPX:
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -2557,9 +2557,9 @@ public class Assembler {
                str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
-                  if ( (val==0x0A) ||
-                       (val==0x22) ||
-                       (val>127)    
+                  if (
+                      (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                      (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                      )  {
                     if (isString) {
                       str.append("\"");
@@ -2781,7 +2781,7 @@ public class Assembler {
               break;
            case TMPX:
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && (val<0x08) || ((val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -2814,9 +2814,9 @@ public class Assembler {
               }
               break; 
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3060,7 +3060,7 @@ public class Assembler {
                 str.append((char)(mem.copy & 0x7F));  
               } 
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -3088,9 +3088,9 @@ public class Assembler {
                 }   
               break; 
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3319,7 +3319,7 @@ public class Assembler {
             case TMPX:
               val>>=1;
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -3347,9 +3347,9 @@ public class Assembler {
                 }                  
               break;    
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3595,9 +3595,9 @@ public class Assembler {
                 else str.append((char)val); 
               break;    
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3811,7 +3811,7 @@ public class Assembler {
             case TMPX:
               val>>=1;
               if (
-                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
@@ -3839,9 +3839,9 @@ public class Assembler {
                 }                  
               break;    
             case CA65:
-              if ( (val==0x0A) ||
-                   (val==0x22) ||
-                   (val>127)    
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
