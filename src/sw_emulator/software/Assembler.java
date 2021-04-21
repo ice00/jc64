@@ -656,12 +656,10 @@ public class Assembler {
                        ) return "$"+ByteToExe(Unsigned.done(value));
                     else return "'"+(char)Unsigned.done(value); 
                   case TMPX:
-                    if ( (val==0x08) ||
-                         (val==0x0A) ||
-                         (val==0x0D) ||
-                         (val==0x22) ||
-                         (val>127)  
-                        ) return "$"+ByteToExe(Unsigned.done(value));
+                    if (
+                        (!option.allowUtf && (val<=0x19) || (val==0x22) || (val>127)) ||    
+                        (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                       ) return "$"+ByteToExe(Unsigned.done(value));
                     else return "'"+(char)Unsigned.done(value); 
                   case CA65:
                     if ( (val==0x0A) ||
@@ -2262,12 +2260,10 @@ public class Assembler {
                 }                  
               break;
             case TMPX:
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
-                 )  {                                    
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 ) {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
                     str.replace(pos1, pos2, "");
@@ -2528,12 +2524,10 @@ public class Assembler {
               }
               break;
             case TMPX:
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
-                 )  {                                    
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
                     str.replace(pos1, pos2, "");
@@ -2786,11 +2780,9 @@ public class Assembler {
                 }                  
               break;
            case TMPX:
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
@@ -3067,12 +3059,10 @@ public class Assembler {
                 listRel.pop();
                 str.append((char)(mem.copy & 0x7F));  
               } 
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
-                 )  {                                    
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
                     str.replace(pos1, pos2, "");
@@ -3328,12 +3318,10 @@ public class Assembler {
               break;
             case TMPX:
               val>>=1;
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
-                 )  {                                    
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
                     str.replace(pos1, pos2, "");
@@ -3822,12 +3810,10 @@ public class Assembler {
               break;
             case TMPX:
               val>>=1;
-              if ( (val==0x08) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127)  
-                 )  {                                    
+              if (
+                  (!option.allowUtf && (val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)) ||    
+                  (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 )   {                                    
                   // sorry, we force to be bytes as tmpx did not supports byte in line of text
                   if (isFirst) {
                     str.replace(pos1, pos2, "");
