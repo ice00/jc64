@@ -669,12 +669,10 @@ public class Assembler {
                     else if (val>=0x20) return "'"+(char)Unsigned.done(value)+"'"; 
                          else return "\""+(char)Unsigned.done(value)+"\""; 
                   case ACME:
-                    if ( (val==0x00) ||
-                         (val==0x0A) ||
-                         (val==0x0D) ||
-                         (val==0x22) ||                  
-                         (val>127) 
-                        ) return "$"+ByteToExe(Unsigned.done(value));
+                    if (
+                        (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                        (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                       ) return "$"+ByteToExe(Unsigned.done(value));
                     else  if (val==0x27 || val==0x5C) return "'\\"+(char)Unsigned.done(value)+"'"; 
                           else return "'"+(char)Unsigned.done(value)+"'";   
                   case KICK:
@@ -2314,12 +2312,10 @@ public class Assembler {
                 }     
               break;
             case ACME:                
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||                  
-                   (val>127) 
-                 )  {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -2587,12 +2583,10 @@ public class Assembler {
                str.append("$").append(ByteToExe(val)); 
                isFirst=false;                   
               } else {  
-                  if ( (val==0x00) ||
-                       (val==0x0A) ||
-                       (val==0x0D) ||
-                       (val==0x22) ||
-                       (val>127) 
-                     )  {
+                if (
+                    (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                    (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
+                   )  {
                     if (isString) {
                        str.append("\"");
                        isString=false;  
@@ -2844,11 +2838,9 @@ public class Assembler {
               }
               break;  
            case ACME:                
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127) 
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3113,11 +3105,9 @@ public class Assembler {
                 }   
               break;  
            case ACME:                
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127) 
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3372,11 +3362,9 @@ public class Assembler {
                 }     
               break;
             case ACME:                
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127) 
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
@@ -3620,9 +3608,7 @@ public class Assembler {
                 }     
               break;
             case ACME:                        
-              if ( (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
+              if ( (val==0x22) ||
                    (val>127) 
                  )  {
                   if (isString) {
@@ -3864,11 +3850,9 @@ public class Assembler {
                 }     
               break;
             case ACME:                 
-              if ( (val==0x00) ||
-                   (val==0x0A) ||
-                   (val==0x0D) ||
-                   (val==0x22) ||
-                   (val>127) 
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
+                  (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
                  )  {
                   if (isString) {
                     str.append("\"");
