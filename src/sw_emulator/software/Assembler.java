@@ -687,12 +687,11 @@ public class Assembler {
                         ) return "$"+ByteToExe(Unsigned.done(value));
                     else return "'"+(char)Unsigned.done(value)+"'";      
                   case TASS64:
-                    if ((val==0x0A) ||
-                        (val==0x0D) ||
-                        (val==0x22) ||
-                        (val>=0x7F)     
-                       )  
-                    return "$"+ByteToExe(Unsigned.done(value));    
+                    if (
+                        (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                        (option.allowUtf && ((val==0x0A) || (val==0x0D) ||
+                         (val==0x22) || (val>127)))                      
+                       ) return "$"+ByteToExe(Unsigned.done(value));    
                     else return "\""+(char)Unsigned.done(value)+"\"";
                   default:
                     return "'"+(char)Unsigned.done(value); 
@@ -2380,11 +2379,13 @@ public class Assembler {
                 else str.append((char)val);                
               break; 
             case TASS64:
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -2652,11 +2653,13 @@ public class Assembler {
                 }
               break;    
             case TASS64:
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -2925,11 +2928,13 @@ public class Assembler {
                 else str.append((char)val);                
               break;         
             case TASS64:
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -3189,11 +3194,13 @@ public class Assembler {
                 else str.append((char)val);                
               break;         
             case TASS64:                
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -3457,11 +3464,13 @@ public class Assembler {
               break; 
             case TASS64:
               val>>=1;  
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -3584,7 +3593,6 @@ public class Assembler {
                 }                  
               break;
             case TMPX:              
-              val>>=1;
               if ( (val==0x22) ||
                    (val>127)  
                  )  {                                    
@@ -3713,12 +3721,13 @@ public class Assembler {
                 else str.append((char)val);                
               break; 
             case TASS64:
-              val>>=1;  
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
@@ -3837,7 +3846,6 @@ public class Assembler {
                 }                  
               break;
             case TMPX:
-              val>>=1;
               if (
                   (!option.allowUtf && ((val<0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127))) ||    
                   (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
@@ -3962,12 +3970,13 @@ public class Assembler {
                 else str.append((char)val);                
               break; 
             case TASS64:
-              val>>=1;  
-              if ( (val==0x0A) ||
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
+                  (option.allowUtf && ((val==0x0A) ||
                    (val==0x0D) ||
                    (val==0x22) ||
-                   (val>127)    
-                 ){
+                   (val>127)))                      
+                 ) {
                   if (isString) {
                     str.append("\"");
                     isString=false;  
