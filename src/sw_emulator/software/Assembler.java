@@ -676,6 +676,7 @@ public class Assembler {
                     else  if (val==0x27 || val==0x5C) return "'\\"+(char)Unsigned.done(value)+"'"; 
                           else return "'"+(char)Unsigned.done(value)+"'";   
                   case KICK:
+                    if (!option.allowUtf &&  (val<=0x1F || val>=0x80)) return "$"+ByteToExe(Unsigned.done(value));                      
                     if (val==0x0A || (val>=0x0C && val<=0x0F) 
                                   || val==0x040 || val==0x05B 
                                   || val==0x05D
@@ -2344,20 +2345,28 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )                      
+                   {
                 str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
@@ -2615,20 +2624,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false; 
               } else {   
-                  if ((val<=0x02) ||
-                      (val==0x0A) ||
-                      (val==0x0C) ||    
-                      (val==0x0D) ||
-                      (val==0x0E) ||        
-                      (val==0x0F) ||         
-                      (val==0x40) ||
-                      (val==0x5B) ||
-                      (val==0x5D) ||
-                      (val>=0x61 && val<=0x7A) ||
-                      (val==0x7F) ||
-                      (val==0xA0) ||
-                      (val==0xA3)                         
-                    ) {
+                  if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                   str.append("\\$").append(ByteToExe(val));   
                 } else if (val==0x22) str.append("\\\"");
                   else if (val==0x5C) str.append("\\\\");
@@ -2875,21 +2891,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x00) ||
-                  (val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                 str.append("\\$").append(ByteToExe(val));  
                 isSpecial=true;
               } else if (val==0x22) {
@@ -3136,21 +3158,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x00) ||
-                  (val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                 str.append("\\$").append(ByteToExe(val));   
               } else if (val==0x22) {
                        str.append("\\\"");
@@ -3394,20 +3422,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                 str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
@@ -3644,20 +3679,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                 str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
@@ -3886,20 +3928,27 @@ public class Assembler {
                 isString=true;
                 isFirst=false;  
               }    
-              if ((val<=0x02) ||
-                  (val==0x0A) ||
-                  (val==0x0C) ||    
-                  (val==0x0D) ||
-                  (val==0x0E) ||        
-                  (val==0x0F) ||         
-                  (val==0x40) ||
-                  (val==0x5B) ||
-                  (val==0x5D) ||
-                  (val>=0x61 && val<=0x7A) ||
-                  (val==0x7F) ||
-                  (val==0xA0) ||
-                  (val==0xA3)                         
-                 ) {
+              if (
+                  (!option.allowUtf && ((val<=0x1F) || (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val>=0xA0))) ||    
+                  (option.allowUtf && ((val<=0x02) ||
+                    (val==0x0A) ||
+                    (val==0x0C) ||    
+                    (val==0x0D) ||
+                    (val==0x0E) ||        
+                    (val==0x0F) ||         
+                    (val==0x40) ||
+                    (val==0x5B) ||
+                    (val==0x5D) ||
+                    (val>=0x61 && val<=0x7A) ||
+                    (val==0x7F) ||
+                    (val==0xA0) ||
+                    (val==0xA3)))
+                  )  {
                 str.append("\\$").append(ByteToExe(val));   
                 isSpecial=true;
               } else if (val==0x22) {
