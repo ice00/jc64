@@ -34,12 +34,14 @@ import sw_emulator.software.MemoryDasm;
  * Version 1: add isGarbage onto memoryDasm
  *            add TargetType
  * Version 2: add CRT chip number
+ * Version 3: add constants for assembler
+ *            add index for memoryDasm
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=2;       
+  public static final byte ACTUAL_VERSION=3;       
     
   /**
    * Type of the file
@@ -72,6 +74,9 @@ public class Project implements Cloneable {
   
   /** CRT chip */
   public int chip;
+  
+  /** Constant for assembler */
+  public Constant costant=new Constant();
 
   /**
    * Construct the project
@@ -107,6 +112,7 @@ public class Project implements Cloneable {
     hash = 89 * hash + Objects.hashCode(this.targetType);
     hash = 89 * hash + MPR.hashCode(this.mpr); 
     hash = 89 * hash + this.chip;
+    hash = 89 * hash + Arrays.hashCode(this.costant.table);
     return hash;
   }
   
@@ -127,7 +133,8 @@ public class Project implements Cloneable {
       p.memory[i]=this.memory[i].clone();
     }
     
-    p.chip=this.chip;
+    p.chip=this.chip;    
+    p.costant=(Constant)this.costant.clone();
       
     return p;
   }    
@@ -160,6 +167,7 @@ public class Project implements Cloneable {
     }   
     
     if (this.chip!=p.chip) return false;
+    if (!this.costant.equals(p.costant)) return false;
     
     return true;
   }

@@ -9,6 +9,7 @@
   <p>The memory menu is dedicated to the memory area, and so have many voices:<br></p>
   <p align="center"><img src="./memory1.png"></p>  
   <p align="center"><img src="./memory2.png"></p>    
+  <p align="center"><img src="./memory16.png"></p> 
   
   <h2>Clear disassembly automatic comment</h2>
   <p>During the disassemble phase, the disassembly engine is able to add some comments to common memory locations (based onto the choosed platform) used by the instruction being executed.<br>
@@ -144,6 +145,12 @@
    
    <h2>Mark data as Text converted to petascii code</h2>
    This marks data as text convertet to C64 petascii code. It change the disassembled output for the assembler that has an instruction that support it, otherwise it is acted as normal text.
+   
+   <h2>Sub mark a cell of constant 0/1/2/3/4/5/6/7/8/9/clar all</h2>
+   The selected memory location is marked as of table X, so disassambler can show that data as of constant definend in that table (this is even true even for code for some instructions).
+   
+   <h2>Mark as garbage</h2>
+   The selected area are marked as garbase and so it will be ignored by the disassembler.
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>

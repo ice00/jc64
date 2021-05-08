@@ -65,6 +65,9 @@ public class MemoryDasm implements Cloneable {
   /** If inside it store the copy of value of memory */
   public byte copy;
   
+  /** Constant index to use if applicable into the kind of data */
+  public byte index=-1;
+  
   /** Related address (#< or #>)*/
   public int related=-1;
   
@@ -99,6 +102,7 @@ public class MemoryDasm implements Cloneable {
     if (this.related != d.related) return false;
     if (this.type != d.type) return false;
     if (this.dataType != d.dataType) return false;
+    if (this.index != d.index) return false;
     
     return true;
   }
@@ -119,6 +123,7 @@ public class MemoryDasm implements Cloneable {
         hash = 53 * hash + this.copy;
         hash = 53 * hash + this.related;
         hash = 53 * hash + this.type;
+        hash = 53 * hash + this.index;
         hash = 53 * hash + Objects.hashCode(this.dataType);
         return hash;
     }
@@ -141,6 +146,7 @@ public class MemoryDasm implements Cloneable {
     m.userComment=this.userComment;
     m.userLocation=this.userLocation;
     m.dataType=this.dataType;
+    m.index=this.index;
           
     return m;    
   }  

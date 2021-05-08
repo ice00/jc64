@@ -373,7 +373,6 @@ public class FileManager {
                            new BufferedOutputStream(
                            new FileOutputStream(file))); 
       
-    
       out.writeBoolean(option.opcodeUpperCasePreview);
       out.writeBoolean(option.opcodeUpperCaseSource);
       out.writeByte(option.illegalOpcodeMode);
@@ -672,6 +671,7 @@ public class FileManager {
    */
   public boolean readProjectFile(File file, Project project) {
     try {      
+      MemoryDasm mem;  
       DataInputStream in=new DataInputStream(
                          new BufferedInputStream(
                          new FileInputStream(file)));  
@@ -696,44 +696,60 @@ public class FileManager {
       size=in.readInt();
       project.memory=new MemoryDasm[size];
       for (int i=0; i<project.memory.length; i++) {
-        project.memory[i]=new MemoryDasm();  
-        project.memory[i].address=in.readInt();
+        mem=new MemoryDasm();        
         
-        if (in.readBoolean()) project.memory[i].dasmComment=in.readUTF();
-        else project.memory[i].dasmComment=null;
+        mem.address=in.readInt();
         
-        if (in.readBoolean()) project.memory[i].userComment=in.readUTF();
-        else project.memory[i].userComment=null;
+        if (in.readBoolean()) mem.dasmComment=in.readUTF();
+        else mem.dasmComment=null;
         
-        if (in.readBoolean()) project.memory[i].userBlockComment=in.readUTF();
-        else project.memory[i].userBlockComment=null;
+        if (in.readBoolean()) mem.userComment=in.readUTF();
+        else mem.userComment=null;
         
-        if (in.readBoolean()) project.memory[i].dasmLocation=in.readUTF();
-        else project.memory[i].dasmLocation=null;
+        if (in.readBoolean()) mem.userBlockComment=in.readUTF();
+        else mem.userBlockComment=null;
         
-        if (in.readBoolean()) project.memory[i].userLocation=in.readUTF();
-        else project.memory[i].userLocation=null;
+        if (in.readBoolean()) mem.dasmLocation=in.readUTF();
+        else mem.dasmLocation=null;
         
-        project.memory[i].isInside=in.readBoolean();
-        project.memory[i].isCode=in.readBoolean();
-        project.memory[i].isData=in.readBoolean();
+        if (in.readBoolean()) mem.userLocation=in.readUTF();
+        else mem.userLocation=null;
+        
+        mem.isInside=in.readBoolean();
+        mem.isCode=in.readBoolean();
+        mem.isData=in.readBoolean();
         
         if (version>0) {
-            project.memory[i].isGarbage=in.readBoolean();
-            project.memory[i].dataType=DataType.valueOf(in.readUTF());
+            mem.isGarbage=in.readBoolean();
+            mem.dataType=DataType.valueOf(in.readUTF());
         } // version 1
         
-        project.memory[i].copy=in.readByte();
-        project.memory[i].related=in.readInt();
-        project.memory[i].type=in.readChar();
+        mem.copy=in.readByte();
+        mem.related=in.readInt();
+        mem.type=in.readChar();
         
         if (project.fileType==FileType.MPR) {
           project.mpr=new MPR();
           project.mpr.getElements(project.inB);
         }
+        
+        if (version>2) { // version 3
+          mem.index=in.readByte();
+        }
+        
+        project.memory[i]=mem;  
       }
       
       if (version>1) project.chip=in.readInt(); // version 2
+      
+      if (version>2)  {                         // version 3
+        for (int i=0; i<10; i++) {
+          for (int j=0; j<256; j++) {
+            if (in.readBoolean()) project.costant.table[i][j]=in.readUTF();
+            else project.costant.table[i][j]=null;   
+          }  
+        }
+      }
       
     } catch (Exception e) {
         System.err.println(e);
@@ -817,9 +833,23 @@ public class FileManager {
           out.writeByte(memory.copy);
           out.writeInt(memory.related);
           out.writeChar(memory.type);
+          
+          out.writeByte(memory.index);   // version 3
       }  
       
       out.writeInt(project.chip);  // version 2
+      
+      // version 3
+      for (int i=0; i<10; i++) {
+        for (int j=0; j<256; j++) {
+          if (project.costant.table[i][j]!=null) {
+            out.writeBoolean(true);
+            out.writeUTF(project.costant.table[i][j]);  
+          } else {
+              out.writeBoolean(false);
+            } 
+        }  
+      }
       
       out.flush();
       out.close();

@@ -303,6 +303,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemtextShifted = new javax.swing.JMenuItem();
         jMenuItemTextScreen = new javax.swing.JMenuItem();
         jMenuItemTextPetascii = new javax.swing.JMenuItem();
+        jPopupMenuConstant = new javax.swing.JPopupMenu();
+        jMenuItemConstant0 = new javax.swing.JMenuItem();
+        jMenuItemConstant1 = new javax.swing.JMenuItem();
+        jMenuItemConstant2 = new javax.swing.JMenuItem();
+        jMenuItemConstant3 = new javax.swing.JMenuItem();
+        jMenuItemConstant4 = new javax.swing.JMenuItem();
+        jMenuItemConstant5 = new javax.swing.JMenuItem();
+        jMenuItemConstant6 = new javax.swing.JMenuItem();
+        jMenuItemConstant7 = new javax.swing.JMenuItem();
+        jMenuItemConstant8 = new javax.swing.JMenuItem();
+        jMenuItemConstant9 = new javax.swing.JMenuItem();
+        jMenuItemConstantClear_ = new javax.swing.JMenuItem();
         jPanelToolBar = new javax.swing.JPanel();
         jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
@@ -324,6 +336,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMarkCode = new javax.swing.JButton();
         jButtonMarkData = new javax.swing.JButton();
         jButtonMarkGarbage = new javax.swing.JButton();
+        jButtonMarkConstant = new javax.swing.JButton();
         jButtonMarkPlus = new javax.swing.JButton();
         jButtonMarkMinus = new javax.swing.JButton();
         jButtonMarkLow = new javax.swing.JButton();
@@ -476,6 +489,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemTextScreen1 = new javax.swing.JMenuItem();
         jMenuItemTextPetascii1 = new javax.swing.JMenuItem();
         jMenuItemMarkGarbage = new javax.swing.JMenuItem();
+        jSubMenuC = new javax.swing.JMenu();
+        jMenuItemConstant0b = new javax.swing.JMenuItem();
+        jMenuItemConstant1b = new javax.swing.JMenuItem();
+        jMenuItemConstant2b = new javax.swing.JMenuItem();
+        jMenuItemConstant3b = new javax.swing.JMenuItem();
+        jMenuItemConstant4b = new javax.swing.JMenuItem();
+        jMenuItemConstant5b = new javax.swing.JMenuItem();
+        jMenuItemConstant6b = new javax.swing.JMenuItem();
+        jMenuItemConstant7b = new javax.swing.JMenuItem();
+        jMenuItemConstant8b = new javax.swing.JMenuItem();
+        jMenuItemConstant9b = new javax.swing.JMenuItem();
+        jMenuItemConstantClear = new javax.swing.JMenuItem();
         jMenuItemPlus = new javax.swing.JMenuItem();
         jMenuItemMinus = new javax.swing.JMenuItem();
         jMenuItemMemLow = new javax.swing.JMenuItem();
@@ -686,6 +711,105 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuData.add(jMenuItemTextPetascii);
+
+        jMenuItemConstant0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/0.png"))); // NOI18N
+        jMenuItemConstant0.setText("Sub-mark cell as of constant 0");
+        jMenuItemConstant0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant0ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant0);
+
+        jMenuItemConstant1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/1.png"))); // NOI18N
+        jMenuItemConstant1.setText("Sub-mark cell as of constant 1");
+        jMenuItemConstant1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant1ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant1);
+
+        jMenuItemConstant2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/2.png"))); // NOI18N
+        jMenuItemConstant2.setText("Sub-mark cell as of constant 2");
+        jMenuItemConstant2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant2ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant2);
+
+        jMenuItemConstant3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/3.png"))); // NOI18N
+        jMenuItemConstant3.setText("Sub-mark cell as of constant 3");
+        jMenuItemConstant3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant3ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant3);
+
+        jMenuItemConstant4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/4.png"))); // NOI18N
+        jMenuItemConstant4.setText("Sub-mark cell as of constant 4");
+        jMenuItemConstant4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant4ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant4);
+
+        jMenuItemConstant5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/5.png"))); // NOI18N
+        jMenuItemConstant5.setText("Sub-mark cell as of constant 5");
+        jMenuItemConstant5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant5ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant5);
+
+        jMenuItemConstant6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/6.png"))); // NOI18N
+        jMenuItemConstant6.setText("Sub-mark cell as of constant 6");
+        jMenuItemConstant6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant6ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant6);
+
+        jMenuItemConstant7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/7.png"))); // NOI18N
+        jMenuItemConstant7.setText("Sub-mark cell as of constant 7");
+        jMenuItemConstant7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant7ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant7);
+
+        jMenuItemConstant8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/8.png"))); // NOI18N
+        jMenuItemConstant8.setText("Sub-mark cell as of constant 8");
+        jMenuItemConstant8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant8ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant8);
+
+        jMenuItemConstant9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/9.png"))); // NOI18N
+        jMenuItemConstant9.setText("Sub-mark cell as of constant 9");
+        jMenuItemConstant9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstant9ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstant9);
+
+        jMenuItemConstantClear_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/0-9.png"))); // NOI18N
+        jMenuItemConstantClear_.setText("Sub-mark cell as of constant none");
+        jMenuItemConstantClear_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConstantClear_ActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemConstantClear_);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
@@ -939,11 +1063,33 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBarMemory.add(jButtonMarkGarbage);
 
+        jButtonMarkConstant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/const.png"))); // NOI18N
+        jButtonMarkConstant.setToolTipText("Mark the selected addresses as constant");
+        jButtonMarkConstant.setFocusable(false);
+        jButtonMarkConstant.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMarkConstant.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkConstant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonMarkConstantMouseEntered(evt);
+            }
+        });
+        jButtonMarkConstant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarkConstantActionPerformed(evt);
+            }
+        });
+        jToolBarMemory.add(jButtonMarkConstant);
+
         jButtonMarkPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/plus.png"))); // NOI18N
         jButtonMarkPlus.setToolTipText("Mark the selected addresses as +");
         jButtonMarkPlus.setFocusable(false);
         jButtonMarkPlus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonMarkPlus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMarkPlus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonMarkPlusMouseEntered(evt);
+            }
+        });
         jButtonMarkPlus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMarkPlusActionPerformed(evt);
@@ -1189,14 +1335,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaDisMouseReleased(evt);
-        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseClicked(evt);
         }
         public void mouseEntered(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseEntered(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaDisMouseReleased(evt);
         }
     });
     jScrollPaneLeft.setViewportView(rSyntaxTextAreaDis);
@@ -1246,14 +1392,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaSourceMouseReleased(evt);
-        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseClicked(evt);
         }
         public void mouseEntered(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseEntered(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaSourceMouseReleased(evt);
         }
     });
     jScrollPaneRight.setViewportView(rSyntaxTextAreaSource);
@@ -1733,6 +1879,121 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMarkGarbage);
 
+    jSubMenuC.setText("Sub-mark a cell");
+
+    jMenuItemConstant0b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant0b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/0.png"))); // NOI18N
+    jMenuItemConstant0b.setText("as of constant 0");
+    jMenuItemConstant0b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant0bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant0b);
+
+    jMenuItemConstant1b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant1b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/1.png"))); // NOI18N
+    jMenuItemConstant1b.setText("as of constant 1");
+    jMenuItemConstant1b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant1bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant1b);
+
+    jMenuItemConstant2b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant2b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/2.png"))); // NOI18N
+    jMenuItemConstant2b.setText("as of constant 2");
+    jMenuItemConstant2b.setToolTipText("");
+    jMenuItemConstant2b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant2bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant2b);
+
+    jMenuItemConstant3b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant3b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/3.png"))); // NOI18N
+    jMenuItemConstant3b.setText("as of constant 3");
+    jMenuItemConstant3b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant3bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant3b);
+
+    jMenuItemConstant4b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant4b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/4.png"))); // NOI18N
+    jMenuItemConstant4b.setText("as of constant 4");
+    jMenuItemConstant4b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant4bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant4b);
+
+    jMenuItemConstant5b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant5b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/5.png"))); // NOI18N
+    jMenuItemConstant5b.setText("as of constant 5");
+    jMenuItemConstant5b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant5bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant5b);
+
+    jMenuItemConstant6b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant6b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/6.png"))); // NOI18N
+    jMenuItemConstant6b.setText("as of constant 6");
+    jMenuItemConstant6b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant6bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant6b);
+
+    jMenuItemConstant7b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant7b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/7.png"))); // NOI18N
+    jMenuItemConstant7b.setText("as of constant 7");
+    jMenuItemConstant7b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant7bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant7b);
+
+    jMenuItemConstant8b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant8b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/8.png"))); // NOI18N
+    jMenuItemConstant8b.setText("as of constant 8");
+    jMenuItemConstant8b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant8bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant8b);
+
+    jMenuItemConstant9b.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstant9b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/9.png"))); // NOI18N
+    jMenuItemConstant9b.setText("as of constant 9");
+    jMenuItemConstant9b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstant9bActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstant9b);
+
+    jMenuItemConstantClear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemConstantClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/0-9.png"))); // NOI18N
+    jMenuItemConstantClear.setText("reset to none");
+    jMenuItemConstantClear.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemConstantClearActionPerformed(evt);
+        }
+    });
+    jSubMenuC.add(jMenuItemConstantClear);
+
+    jMenuMemory.add(jSubMenuC);
+
     jMenuItemPlus.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ADD, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
     jMenuItemPlus.setText("Assign the selected address as +");
@@ -1978,7 +2239,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
+        .addComponent(jSplitPaneExternal)
         .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
@@ -2400,22 +2661,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void jButtonMarkGarbageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarkGarbageMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
     }//GEN-LAST:event_jButtonMarkGarbageMouseEntered
 
     private void jMenuBarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBarMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
     }//GEN-LAST:event_jMenuBarMouseEntered
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
     }//GEN-LAST:event_formMouseEntered
 
     private void rSyntaxTextAreaDisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseEntered
 
     private void rSyntaxTextAreaSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
 
     private void jMenuItemByteHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteHexActionPerformed
@@ -2598,6 +2864,106 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_HIGHLOW);
     }//GEN-LAST:event_jButtonMarkHighLowActionPerformed
 
+    private void jButtonMarkConstantMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarkConstantMouseEntered
+      jPopupMenuConstant.show((JComponent)evt.getSource(), 0, ((JComponent)evt.getSource()).getHeight());
+    }//GEN-LAST:event_jButtonMarkConstantMouseEntered
+
+    private void jButtonMarkConstantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarkConstantActionPerformed
+      execute(MEM_SUB_CLEAR);
+    }//GEN-LAST:event_jButtonMarkConstantActionPerformed
+
+    private void jButtonMarkPlusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarkPlusMouseEntered
+      if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);  
+    }//GEN-LAST:event_jButtonMarkPlusMouseEntered
+
+    private void jMenuItemConstant0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant0ActionPerformed
+      execute(MEM_SUB_0);  
+    }//GEN-LAST:event_jMenuItemConstant0ActionPerformed
+
+    private void jMenuItemConstant1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant1ActionPerformed
+      execute(MEM_SUB_1);  
+    }//GEN-LAST:event_jMenuItemConstant1ActionPerformed
+
+    private void jMenuItemConstant2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant2ActionPerformed
+      execute(MEM_SUB_2); 
+    }//GEN-LAST:event_jMenuItemConstant2ActionPerformed
+
+    private void jMenuItemConstant3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant3ActionPerformed
+      execute(MEM_SUB_3); 
+    }//GEN-LAST:event_jMenuItemConstant3ActionPerformed
+
+    private void jMenuItemConstant4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant4ActionPerformed
+      execute(MEM_SUB_4);  
+    }//GEN-LAST:event_jMenuItemConstant4ActionPerformed
+
+    private void jMenuItemConstant5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant5ActionPerformed
+      execute(MEM_SUB_5); 
+    }//GEN-LAST:event_jMenuItemConstant5ActionPerformed
+
+    private void jMenuItemConstant6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant6ActionPerformed
+      execute(MEM_SUB_6);  
+    }//GEN-LAST:event_jMenuItemConstant6ActionPerformed
+
+    private void jMenuItemConstant7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant7ActionPerformed
+      execute(MEM_SUB_7);   
+    }//GEN-LAST:event_jMenuItemConstant7ActionPerformed
+
+    private void jMenuItemConstant8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant8ActionPerformed
+      execute(MEM_SUB_8);   
+    }//GEN-LAST:event_jMenuItemConstant8ActionPerformed
+
+    private void jMenuItemConstant9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant9ActionPerformed
+      execute(MEM_SUB_9); 
+    }//GEN-LAST:event_jMenuItemConstant9ActionPerformed
+
+    private void jMenuItemConstant0bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant0bActionPerformed
+      execute(MEM_SUB_0); 
+    }//GEN-LAST:event_jMenuItemConstant0bActionPerformed
+
+    private void jMenuItemConstant1bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant1bActionPerformed
+      execute(MEM_SUB_1);  
+    }//GEN-LAST:event_jMenuItemConstant1bActionPerformed
+
+    private void jMenuItemConstant2bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant2bActionPerformed
+      execute(MEM_SUB_2);
+    }//GEN-LAST:event_jMenuItemConstant2bActionPerformed
+
+    private void jMenuItemConstant3bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant3bActionPerformed
+      execute(MEM_SUB_3);
+    }//GEN-LAST:event_jMenuItemConstant3bActionPerformed
+
+    private void jMenuItemConstant4bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant4bActionPerformed
+      execute(MEM_SUB_4);
+    }//GEN-LAST:event_jMenuItemConstant4bActionPerformed
+
+    private void jMenuItemConstant5bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant5bActionPerformed
+      execute(MEM_SUB_5);
+    }//GEN-LAST:event_jMenuItemConstant5bActionPerformed
+
+    private void jMenuItemConstant6bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant6bActionPerformed
+      execute(MEM_SUB_6);
+    }//GEN-LAST:event_jMenuItemConstant6bActionPerformed
+
+    private void jMenuItemConstant7bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant7bActionPerformed
+      execute(MEM_SUB_7);
+    }//GEN-LAST:event_jMenuItemConstant7bActionPerformed
+
+    private void jMenuItemConstant8bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant8bActionPerformed
+      execute(MEM_SUB_8); 
+    }//GEN-LAST:event_jMenuItemConstant8bActionPerformed
+
+    private void jMenuItemConstant9bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstant9bActionPerformed
+      execute(MEM_SUB_9);   
+    }//GEN-LAST:event_jMenuItemConstant9bActionPerformed
+
+    private void jMenuItemConstantClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstantClearActionPerformed
+      execute(MEM_SUB_CLEAR); 
+    }//GEN-LAST:event_jMenuItemConstantClearActionPerformed
+
+    private void jMenuItemConstantClear_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstantClear_ActionPerformed
+      execute(MEM_SUB_CLEAR); 
+    }//GEN-LAST:event_jMenuItemConstantClear_ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2656,6 +3022,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonFindSource;
     private javax.swing.JButton jButtonMPR;
     private javax.swing.JButton jButtonMarkCode;
+    private javax.swing.JButton jButtonMarkConstant;
     private javax.swing.JButton jButtonMarkData;
     private javax.swing.JButton jButtonMarkGarbage;
     private javax.swing.JButton jButtonMarkHighLow;
@@ -2694,6 +3061,28 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemClearUMem;
     private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem jMenuItemConfigure;
+    private javax.swing.JMenuItem jMenuItemConstant0;
+    private javax.swing.JMenuItem jMenuItemConstant0b;
+    private javax.swing.JMenuItem jMenuItemConstant1;
+    private javax.swing.JMenuItem jMenuItemConstant1b;
+    private javax.swing.JMenuItem jMenuItemConstant2;
+    private javax.swing.JMenuItem jMenuItemConstant2b;
+    private javax.swing.JMenuItem jMenuItemConstant3;
+    private javax.swing.JMenuItem jMenuItemConstant3b;
+    private javax.swing.JMenuItem jMenuItemConstant4;
+    private javax.swing.JMenuItem jMenuItemConstant4b;
+    private javax.swing.JMenuItem jMenuItemConstant5;
+    private javax.swing.JMenuItem jMenuItemConstant5b;
+    private javax.swing.JMenuItem jMenuItemConstant6;
+    private javax.swing.JMenuItem jMenuItemConstant6b;
+    private javax.swing.JMenuItem jMenuItemConstant7;
+    private javax.swing.JMenuItem jMenuItemConstant7b;
+    private javax.swing.JMenuItem jMenuItemConstant8;
+    private javax.swing.JMenuItem jMenuItemConstant8b;
+    private javax.swing.JMenuItem jMenuItemConstant9;
+    private javax.swing.JMenuItem jMenuItemConstant9b;
+    private javax.swing.JMenuItem jMenuItemConstantClear;
+    private javax.swing.JMenuItem jMenuItemConstantClear_;
     private javax.swing.JMenuItem jMenuItemContents;
     private javax.swing.JMenuItem jMenuItemCredits;
     private javax.swing.JMenuItem jMenuItemDiss;
@@ -2754,6 +3143,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JPanel jPanelToolBar;
+    private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JPopupMenu jPopupMenuData;
     private javax.swing.JScrollPane jScrollPaneLeft;
     private javax.swing.JScrollPane jScrollPaneMemory;
@@ -2780,6 +3170,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JSplitPane jSplitPaneExternal;
     private javax.swing.JSplitPane jSplitPaneInternal;
     private javax.swing.JMenu jSubMenu;
+    private javax.swing.JMenu jSubMenuC;
     private javax.swing.JTable jTableMemory;
     private javax.swing.JToolBar jToolBarFile;
     private javax.swing.JToolBar jToolBarMemory;
@@ -2985,7 +3376,40 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_MINUS:
          memMinus();  
          if (option.forceCompilation) disassembly();
-         break;         
+         break;    
+       case MEM_SUB_0:
+         subAssign(0);  
+         break;  
+       case MEM_SUB_1:  
+         subAssign(1);
+         break;  
+       case MEM_SUB_2:  
+         subAssign(2);  
+         break;
+       case MEM_SUB_3:  
+         subAssign(3);  
+         break;  
+       case MEM_SUB_4:  
+         subAssign(4);  
+         break;  
+       case MEM_SUB_5:  
+         subAssign(5);  
+         break;
+       case MEM_SUB_6:  
+         subAssign(6);  
+         break;  
+       case MEM_SUB_7:  
+         subAssign(7);  
+         break;  
+       case MEM_SUB_8:  
+         subAssign(8); 
+         break;  
+       case MEM_SUB_9:  
+         subAssign(9);  
+         break;  
+       case MEM_SUB_CLEAR:  
+         subAssign(-1);  
+         break;  
          
        case HELP_CONTENTS: 
          jHelpFrame.setVisible(true);
@@ -4169,12 +4593,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               memProject.isGarbage=memMerge.isGarbage;
             }  
             
-            if (memProject.related!=-1) {
+            if (memProject.related==-1) {
               memProject.related=memMerge.related;
               memProject.type=memMerge.type;
             }
             
             if (memProject.dataType!=DataType.NONE) memProject.dataType=memMerge.dataType;
+            
+            if (memProject.index==-1) memProject.index=memMerge.index;
           }
        }
           
@@ -4341,5 +4767,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     JScrollPane scrollPane = new JScrollPane(textArea);
     JOptionPane.showMessageDialog(this, scrollPane, "Result of "+option.assembler.getName()+" compilatation", JOptionPane.INFORMATION_MESSAGE);
     
+  }
+
+  /**
+   * Assing the given index in table to memory
+   * 
+   * @param key the key table to assign
+   */
+  private void subAssign(int index) {
+    MemoryDasm mem;   
+      
+    int rows[]=jTableMemory.getSelectedRows();
+        
+    for (int i=0; i<rows.length; i++) {
+      mem= project.memory[rows[i]];
+      mem.index=(byte)index;
+    }
+    
+    dataTableModelMemory.fireTableDataChanged();  
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    } 
   }
 }

@@ -141,8 +141,11 @@ public class DataTableModelMemory extends AbstractTableModel {
         case UB:
           return memory.userBlockComment!=null;     
         case RE:
-          if (memory.type!=' ') return ""+memory.dataType.getChar()+memory.type;
-          else return ""+memory.dataType.getChar();
+          String val="";  
+          if (memory.index!=-1) val=""+memory.index; 
+            
+          if (memory.type!=' ') return ""+memory.dataType.getChar()+memory.type+val;
+          else return ""+memory.dataType.getChar()+val;
                  
     }  
     return "";

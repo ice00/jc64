@@ -200,6 +200,40 @@ public interface userAction {
   /** Memory assign #><  */
   public static final int MEM_HIGHLOW = 58;  
   
+  /** Memory sub 0 assigment */
+  public static final int MEM_SUB_0 = 59;
+  
+  /** Memory sub 1 assigment */
+  public static final int MEM_SUB_1 = 60;
+  
+  /** Memory sub 2 assigment */
+  public static final int MEM_SUB_2 = 61;
+  
+  /** Memory sub 3 assigment */
+  public static final int MEM_SUB_3 = 62;
+  
+  /** Memory sub 4 assigment */
+  public static final int MEM_SUB_4 = 63;
+  
+  /** Memory sub 5 assigment */
+  public static final int MEM_SUB_5 = 64;
+  
+  /** Memory sub 6 assigment */
+  public static final int MEM_SUB_6 = 65;  
+  
+  /** Memory sub 7 assigment */
+  public static final int MEM_SUB_7 = 66;
+  
+  /** Memory sub 8 assigment */
+  public static final int MEM_SUB_8 = 67;
+  
+  /** Memory sub 9 assigment */
+  public static final int MEM_SUB_9 = 68;
+  
+  /** Memory sub clear assigment */
+  public static final int MEM_SUB_CLEAR = 69;
+  
+  
   /**
    * Execute the passed user action
    * 
