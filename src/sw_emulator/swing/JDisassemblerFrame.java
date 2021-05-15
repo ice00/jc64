@@ -62,6 +62,7 @@ import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.memory.memoryState;
+import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.FileType;
@@ -4115,6 +4116,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        }
       }
       
+     // see if label is as constant
+     // for (int i=0; i<Constant.COLS; i++) {
+     //   for (int j=0; j<Constant.ROWS; j++) {
+     //     if (label.equals(project.costant.table[i][j])) {
+     //       JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
+     //       return;  
+     //     } 
+     //   }
+     // }
+      
       mem.userLocation=label;
       dataTableModelMemory.fireTableDataChanged(); 
       jTableMemory.setRowSelectionInterval(row, row); 
@@ -4572,6 +4583,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        if (project.name==null || "".equals(project.name)) project.name=mergeProject.name;       
        if (project.description==null || "".equals(project.description)) project.description=mergeProject.description;
        
+       // copy costant
+       for (int i=0; i<Constant.COLS; i++) {
+         for (int j=0; i<Constant.ROWS; j++) {
+           if (project.costant.table[i][j]==null || "".equals(project.costant.table[i][j])) project.costant.table[i][j]=mergeProject.costant.table[i][j];
+         }  
+       }      
        
        MemoryDasm memProject;
        MemoryDasm memMerge;

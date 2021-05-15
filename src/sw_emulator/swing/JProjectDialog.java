@@ -48,6 +48,9 @@ public class JProjectDialog extends javax.swing.JDialog {
     /** The project to use (create an emty one not used) */
     Project project=new Project();
     
+    /** Dialog for constants table */
+    JConstantDialog jConstantDialog=new JConstantDialog(null, true);
+    
     /**
      * Creates new form JDialogProject
      */
@@ -72,10 +75,12 @@ public class JProjectDialog extends javax.swing.JDialog {
      */
     public void setUp(Project project) {
       this.project=project;  
+      jConstantDialog.setUp(project.costant);
       
       jTextFieldProjectName.setText(project.name);
       jTextFieldInputFile.setText(project.file);
-      jTextAreaDescr.setText(project.description);
+      if (project.description!=null) jTextAreaDescr.setText(project.description);
+      else jTextAreaDescr.setText("");
       jSpinnerCRT.setValue(project.chip);
       if (project.fileType!=null) {
         switch (project.fileType) {
@@ -166,6 +171,8 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonPlus4 = new javax.swing.JRadioButton();
         jRadioButtonCRT = new javax.swing.JRadioButton();
         jSpinnerCRT = new javax.swing.JSpinner();
+        jLabelConstant = new javax.swing.JLabel();
+        jButtonEdit = new javax.swing.JButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -293,6 +300,15 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelConstant.setText("Constants table:");
+
+        jButtonEdit.setText("Edit");
+        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -321,7 +337,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jRadioButtonCRT)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 43, Short.MAX_VALUE))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -329,14 +345,6 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addComponent(jTextFieldProjectName)))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jLabelSidLd, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonClear)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonInit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAddNext))
                             .addComponent(jLabelFileDes)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,7 +357,19 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonVic20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonPlus4)))
+                                .addComponent(jRadioButtonPlus4))
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabelConstant, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelSidLd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonInit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddNext)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -393,7 +413,11 @@ public class JProjectDialog extends javax.swing.JDialog {
                     .addComponent(jLabelSidLd)
                     .addComponent(jButtonAddNext)
                     .addComponent(jButtonInit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelConstant)
+                    .addComponent(jButtonEdit))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -560,6 +584,10 @@ public class JProjectDialog extends javax.swing.JDialog {
       project.chip=(Integer)jSpinnerCRT.getValue();
     }//GEN-LAST:event_jSpinnerCRTStateChanged
 
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+      jConstantDialog.setVisible(true);
+    }//GEN-LAST:event_jButtonEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -609,8 +637,10 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAddNext;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonInit;
     private javax.swing.JButton jButtonSelect;
+    private javax.swing.JLabel jLabelConstant;
     private javax.swing.JLabel jLabelFileDes;
     private javax.swing.JLabel jLabelFileTarget;
     private javax.swing.JLabel jLabelFileType;

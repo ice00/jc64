@@ -743,8 +743,8 @@ public class FileManager {
       if (version>1) project.chip=in.readInt(); // version 2
       
       if (version>2)  {                         // version 3
-        for (int i=0; i<10; i++) {
-          for (int j=0; j<256; j++) {
+        for (int i=0; i<Constant.COLS; i++) {
+          for (int j=0; j<Constant.ROWS; j++) {
             if (in.readBoolean()) project.costant.table[i][j]=in.readUTF();
             else project.costant.table[i][j]=null;   
           }  
@@ -840,8 +840,8 @@ public class FileManager {
       out.writeInt(project.chip);  // version 2
       
       // version 3
-      for (int i=0; i<10; i++) {
-        for (int j=0; j<256; j++) {
+      for (int i=0; i<Constant.COLS; i++) {
+        for (int j=0; j<Constant.ROWS; j++) {
           if (project.costant.table[i][j]!=null) {
             out.writeBoolean(true);
             out.writeUTF(project.costant.table[i][j]);  

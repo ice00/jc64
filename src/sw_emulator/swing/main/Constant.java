@@ -31,6 +31,13 @@ import java.util.Arrays;
  * @author ice
  */
 public class Constant {
+  /** Columns */  
+  public static final int COLS=10;  
+  
+  /** Rows */
+  public static final int ROWS=255;
+  
+    
   /** String tables of constants  */  
   public String[][] table=new String[10][255];
 
@@ -57,12 +64,30 @@ public class Constant {
    protected Object clone() {
      Constant res=new Constant();       
      
-     for (int i=0; i<10; i++) {
-       for (int j=0; j<255; j++) {
+     for (int i=0; i<COLS; i++) {
+       for (int j=0; j<ROWS; j++) {
          res.table[i][j]=table[i][j];
        }     
      }  
      
      return res;
-   }    
+   }   
+   
+   /**
+    * True if the value is allowed (not present or not in reserved words)
+    * 
+    * @param value
+    * @return 
+    */
+   public boolean isAllowed(String value) {
+     if (value==null || "".equals(value)) return false;
+       
+     for (int i=0; i<COLS; i++) {
+       for (int j=0; j<ROWS; j++) {
+         if (value.equals(table[i][j])) return false;
+       }     
+     }    
+     
+     return true;
+   }
 }

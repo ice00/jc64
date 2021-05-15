@@ -130,7 +130,7 @@ public class Project implements Cloneable {
     if (this.mpr!=null) p.mpr=(MPR)this.mpr.clone();
       
     for (int i=0; i<this.memory.length; i++) {
-      p.memory[i]=this.memory[i].clone();
+      if (this.memory[i]!=null) p.memory[i]=this.memory[i].clone();
     }
     
     p.chip=this.chip;    

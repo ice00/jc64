@@ -1,5 +1,5 @@
 /**
- * @(#)ColorTableCelleRenderer.java 2019/12/24
+ * @(#)MemoryTableCelleRenderer.java 2019/12/24
  *
  * ICE Team Free Software Group
  *

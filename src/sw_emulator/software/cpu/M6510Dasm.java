@@ -157,7 +157,7 @@ public class M6510Dasm implements disassembler {
   /**
    * Contains the mnemonics of instructions
    */
-  public String[] mnemonics={
+  public static final String[] mnemonics={
     // legal instruction first:
     "ADC", 
     "AND",
