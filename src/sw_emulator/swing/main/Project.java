@@ -76,7 +76,7 @@ public class Project implements Cloneable {
   public int chip;
   
   /** Constant for assembler */
-  public Constant costant=new Constant();
+  public Constant constant=new Constant();
 
   /**
    * Construct the project
@@ -112,7 +112,7 @@ public class Project implements Cloneable {
     hash = 89 * hash + Objects.hashCode(this.targetType);
     hash = 89 * hash + MPR.hashCode(this.mpr); 
     hash = 89 * hash + this.chip;
-    hash = 89 * hash + Arrays.hashCode(this.costant.table);
+    hash = 89 * hash + Arrays.hashCode(this.constant.table);
     return hash;
   }
   
@@ -134,7 +134,7 @@ public class Project implements Cloneable {
     }
     
     p.chip=this.chip;    
-    p.costant=(Constant)this.costant.clone();
+    p.constant=(Constant)this.constant.clone();
       
     return p;
   }    
@@ -167,7 +167,7 @@ public class Project implements Cloneable {
     }   
     
     if (this.chip!=p.chip) return false;
-    if (!this.costant.equals(p.costant)) return false;
+    if (!this.constant.equals(p.constant)) return false;
     
     return true;
   }

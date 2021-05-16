@@ -63,6 +63,7 @@ public class JConstantDialog extends javax.swing.JDialog {
         jButtonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Constants definitions");
 
         jTableConstant.setModel(dataModel);
         jScrollPaneTable.setViewportView(jTableConstant);
@@ -79,7 +80,7 @@ public class JConstantDialog extends javax.swing.JDialog {
 
         getContentPane().add(jPanelDn, java.awt.BorderLayout.PAGE_END);
 
-        pack();
+        setBounds(0, 0, 763, 545);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed

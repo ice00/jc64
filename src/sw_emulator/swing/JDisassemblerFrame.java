@@ -3998,8 +3998,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       disassembly.source="";
       disassembly.disassembly="";
     } else {
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.chip, project.targetType, false);
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.mpr, project.chip, project.targetType, true);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.chip, project.targetType, false);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.chip, project.targetType, true);
       }  
     int lineS=0;
     int lineD=0;
@@ -4119,7 +4119,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
      // see if label is as constant
      // for (int i=0; i<Constant.COLS; i++) {
      //   for (int j=0; j<Constant.ROWS; j++) {
-     //     if (label.equals(project.costant.table[i][j])) {
+     //     if (label.equals(project.constant.table[i][j])) {
      //       JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
      //       return;  
      //     } 
@@ -4583,10 +4583,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        if (project.name==null || "".equals(project.name)) project.name=mergeProject.name;       
        if (project.description==null || "".equals(project.description)) project.description=mergeProject.description;
        
-       // copy costant
+       // copy constant
        for (int i=0; i<Constant.COLS; i++) {
          for (int j=0; i<Constant.ROWS; j++) {
-           if (project.costant.table[i][j]==null || "".equals(project.costant.table[i][j])) project.costant.table[i][j]=mergeProject.costant.table[i][j];
+           if (project.constant.table[i][j]==null || "".equals(project.constant.table[i][j])) project.constant.table[i][j]=mergeProject.constant.table[i][j];
          }  
        }      
        

@@ -35,11 +35,11 @@ public class Constant {
   public static final int COLS=10;  
   
   /** Rows */
-  public static final int ROWS=255;
+  public static final int ROWS=256;
   
     
   /** String tables of constants  */  
-  public String[][] table=new String[10][255];
+  public String[][] table=new String[10][256];
 
   @Override
   public boolean equals(Object obj) {

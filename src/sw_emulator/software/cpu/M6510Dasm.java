@@ -28,6 +28,7 @@ import sw_emulator.math.Unsigned;
 import java.util.Locale;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.Option;
 
 /**
@@ -342,6 +343,9 @@ public class M6510Dasm implements disassembler {
   /** Option to use */
   protected Option option;    
   
+  /** Constant to use */
+  protected Constant constant;  
+  
   /**
    * Set the memory dasm to use
    * 
@@ -349,6 +353,15 @@ public class M6510Dasm implements disassembler {
    */
   public void setMemory(MemoryDasm[] memory) {
     this.memory=memory;  
+  }
+  
+  /**
+   * Set the constant to use
+   * 
+   * @param constant the constants
+   */
+  public void setConstant(Constant constant) {
+    this.constant=constant;  
   }
   
   /**
@@ -535,9 +548,7 @@ public class M6510Dasm implements disassembler {
     StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
-    String label;                // string for label
     MemoryDasm mem;              // memory dasm
-    MemoryDasm memRel;           // memory related
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -916,17 +927,25 @@ public class M6510Dasm implements disassembler {
   private String getLabelImm(long addr, long value) {
     if (addr<0 || addr>0xffff) return "$??"; 
     
+    char type=memory[(int)addr].type;
+    
     // this is a data declaration            
-    if (memory[(int)addr].type=='<' || memory[(int)addr].type=='>' || memory[(int)addr].type=='^') {    
+    if (type=='<' || type=='>' || type=='^') {    
       MemoryDasm memRel;
       // the byte is a reference
-      if (memory[(int)addr].type=='^') memRel=memory[memory[(int)addr].related & 0xFFFF];   
+      if (type=='^') memRel=memory[memory[(int)addr].related & 0xFFFF];   
       else memRel=memory[memory[(int)addr].related];   
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
            else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
-    } else  return "$"+ByteToExe((int)value);
+    } else {        
+        if (memory[(int)addr].index!=-1) {
+          String res=constant.table[memory[(int)addr].index][(int)value];  
+          if (res!=null && !"".equals(res)) return res;
+        }            
+        return "$"+ByteToExe((int)value);
+      }
   }
   
   

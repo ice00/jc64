@@ -75,7 +75,7 @@ public class JProjectDialog extends javax.swing.JDialog {
      */
     public void setUp(Project project) {
       this.project=project;  
-      jConstantDialog.setUp(project.costant);
+      jConstantDialog.setUp(project.constant);
       
       jTextFieldProjectName.setText(project.name);
       jTextFieldInputFile.setText(project.file);

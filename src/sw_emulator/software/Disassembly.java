@@ -37,6 +37,7 @@ import sw_emulator.software.machine.C1541Dasm;
 import sw_emulator.software.machine.CPlus4Dasm;
 import sw_emulator.software.machine.CVic20Dasm;
 import sw_emulator.swing.Shared;
+import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
@@ -86,6 +87,9 @@ public class Disassembly {
   
   /** The option for disassembler */
   private Option option;
+  
+  /** Constants */
+  public Constant constant;
   
   /** Memory dasm */
   public MemoryDasm[] memory;
@@ -163,17 +167,19 @@ public class Disassembly {
    * @param inB the buffer
    * @param option for disassembler
    * @param memory the memory for dasm
+   * @param constant the constants to use
    * @param mpr eventual MPR blocks to use
    * @param chip eventual CRT chip
    * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, MPR mpr, int chip, TargetType targetType, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, Constant constant, MPR mpr, int chip, TargetType targetType, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
     this.mpr=mpr;
     this.chip=chip;
+    this.constant=constant;
 
     this.memory=memory;
     
@@ -276,7 +282,8 @@ public class Disassembly {
       
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
-    sid.setOption(option, assembler );       
+    sid.setConstant(constant);
+    sid.setOption(option, assembler);       
   
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
@@ -315,6 +322,8 @@ public class Disassembly {
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
       assembler.setBlockComment(tmp, mem);
+      
+      assembler.setConstant(tmp, constant);
       
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
@@ -416,6 +425,7 @@ public class Disassembly {
     }      
     
     prg.setMemory(memory);
+    prg.setConstant(constant);
     prg.setOption(option,  assembler);
     int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      
@@ -439,6 +449,8 @@ public class Disassembly {
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
       assembler.setBlockComment(tmp, mem);
+      
+      assembler.setConstant(tmp, constant);
 
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
@@ -493,6 +505,7 @@ public class Disassembly {
     }      
     
     prg.setMemory(memory);
+    prg.setConstant(constant);
     prg.setOption(option,  assembler);
     
     // get start and end address for the selected chip
@@ -544,6 +557,8 @@ public class Disassembly {
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
       assembler.setBlockComment(tmp, mem);
+      
+      assembler.setConstant(tmp, constant);
 
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
@@ -598,6 +613,7 @@ public class Disassembly {
     }
        
     prg.setMemory(memory);
+    prg.setConstant(constant);
     prg.setOption(option,  assembler);
     
     if (mpr==null) return;
@@ -614,6 +630,8 @@ public class Disassembly {
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
       assembler.setBlockComment(tmp, mem);
+      
+      assembler.setConstant(tmp, constant);
 
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
@@ -739,7 +757,7 @@ public class Disassembly {
   /**
    * Set up the assembler
    */
-  private void setupAssembler() {
+  private void setupAssembler() {   
     switch (option.assembler) {
       case DASM:
         aStarting=option.dasmStarting;
@@ -886,7 +904,7 @@ public class Disassembly {
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
                         aText, aNumText, aZeroText, aHighText, aShiftText,
-                        aScreenText, aPetasciiText);      
+                        aScreenText, aPetasciiText, constant);      
   }
   
   /**

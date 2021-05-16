@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.Option;
 
@@ -62,7 +63,7 @@ public class Assembler {
     return SPACES.substring(0, (option.numDataCSpaces-skip<0 ? 1: option.numDataCSpaces-skip))+TABS.substring(0, option.numDataCTabs);
   }   
    
-/**
+ /**
    * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
    *
    * @param value the byte value to convert
@@ -604,7 +605,7 @@ public class Assembler {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
                  else str.append(type).append("$").append(ShortToExe(memRel.address));
-          } else str.append(getByteType(mem.dataType, mem.copy));
+          } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
           if (listRel.size()>0) str.append(", ");  
           else {
             if (mem.dasmLocation==null && mem.userLocation==null) {
@@ -624,9 +625,10 @@ public class Assembler {
        * 
        * @param dataType the type to use 
        * @param value the byte value
+       * @param index the index of constant
        * @return the converted string
        */
-      private String getByteType(DataType dataType, byte value) {
+      private String getByteType(DataType dataType, byte value, byte index) {
         if (aByte==DOT_CHAR && value<0) {
           switch (dataType)   {
               case BYTE_DEC:
@@ -641,6 +643,11 @@ public class Assembler {
                 return "-$"+ByteToExe(Math.abs(value));
            }            
         } else {
+            if (index!=-1) {
+              String res=constant.table[index][value & 0xFF];  
+              if (res!=null && !"".equals(res)) return res;
+            } 
+            
             switch (dataType)   {
               case BYTE_DEC:
                 return ""+Unsigned.done(value);
@@ -4331,7 +4338,7 @@ public class Assembler {
    protected static Option option;
          
    /** Last used memory dasm */
-   protected static MemoryDasm lastMem=null;
+   protected static MemoryDasm lastMem=null;   
    
    /** Last program counter */
    protected static int lastPC=0;
@@ -4400,6 +4407,9 @@ public class Assembler {
    /** Assembler text to petascii code type */
    protected static Assembler.PetasciiText aPetasciiText; 
    
+   /** Memory constant */
+   protected static Constant constant;
+   
    /** Actual type being processed */
    ActionType actualType=null;
 
@@ -4417,7 +4427,7 @@ public class Assembler {
    
    /** Memory dasm with num or chars */
    MemoryDasm numText;
-     
+        
    /**
     * Set the option to use
     * 
@@ -4443,6 +4453,7 @@ public class Assembler {
     * @param aShiftText the text left shifted
     * @param aScreenText the text to screen code
     * @param aPetasciiText the text to petascii code
+    * @param constant the constants to use
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -4465,7 +4476,8 @@ public class Assembler {
                          Assembler.HighText aHighText,
                          Assembler.ShiftText aShiftText,
                          Assembler.ScreenText aScreenText,
-                         Assembler.PetasciiText aPetasciiText
+                         Assembler.PetasciiText aPetasciiText,
+                         Constant constant
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -4494,6 +4506,8 @@ public class Assembler {
      sizeMonoSpriteBlock=0;
      isMultiSpriteBlock=false;
      sizeMultiSpriteBlock=0;
+     
+     this.constant=constant;
    } 
    
    /**
@@ -4655,7 +4669,7 @@ public class Assembler {
    /**
     * Put the starting string
     * 
-    * @param str the steam for output
+    * @param str the stream for output
     */
    public void setStarting(StringBuilder str) {
      aStarting.flush(str);
@@ -4664,13 +4678,44 @@ public class Assembler {
    /**
     * Put the origin of PC
     * 
-    * @param str the steam for output
+    * @param str the stream for output
     * @param pc the program counter to set
     */
    public void setOrg(StringBuilder str, int pc) {
      lastPC=pc;
      aOrigin.flush(str);
    }      
+   
+   /**
+    * Put constants values
+    * 
+    * @param str the stream for output
+    * @param constant the constants to use
+    */
+   public void setConstant(StringBuilder str, Constant constant) {
+     boolean already;  
+     String val;
+     
+     for (int i=0; i<Constant.COLS; i++) {
+       already=false;
+       
+       for (int j=0; j<Constant.ROWS; j++) {
+         val=constant.table[i][j];
+         if (val!=null && !"".equals(val)) {
+           if (!already) {             
+             MemoryDasm mem=new MemoryDasm();
+             mem.userBlockComment=" \nConstants of type "+i;
+             setBlockComment(str, mem);
+               
+             already=true;  
+           }  
+           
+           str.append(val+" = "+"$"+ByteToExe(j)+"\n");
+         }
+       }         
+     } 
+     str.append("\n");
+   }
    
    /**
     * Put macros if they are used based onto assembler and user option
