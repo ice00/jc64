@@ -3489,12 +3489,12 @@ public class M6510 extends Thread implements powered, signaller {
     monitor.opNotify();                         // notify that we will use it
     
     while(ioPort==null) {
-      yield();
+      this.yield();
     }
     
       // do nothing until the bus is available
       while (!bus.isInitialized())  {              // there's a bus?
-        yield();                                   // no, attend power
+        this.yield();                                   // no, attend power
       }
    
     regA=0;
@@ -3519,7 +3519,7 @@ public class M6510 extends Thread implements powered, signaller {
         // attend that power returned
 
         while (!power) {
-          yield();                              // give mutex to other threads
+          this.yield();                              // give mutex to other threads
         }
         regPC=bus.load(regPC, view, sigAEC)+
              (bus.load(regPC+1, view, sigAEC)<<8);

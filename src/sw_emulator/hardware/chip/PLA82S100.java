@@ -708,7 +708,7 @@ public class PLA82S100 extends Thread implements powered, signaller {
   public void run() {
     while (true) {
       while (!power) {          // is there power?
-        yield();                // no, attend power
+        this.yield();                // no, attend power
       }
       chooseTables();           // calculate the right tables for bus
       ///monitor.opSignal2();

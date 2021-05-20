@@ -123,7 +123,7 @@ public class Clock extends Thread {
     ///long start=0;
     while (true) {
       while (started==false) {       // attend a start command
-        yield();
+        this.yield();
       }
 
       

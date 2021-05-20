@@ -83,7 +83,7 @@ public /*abstract*/ class Sid extends Thread implements powered, signaller,
     while (true) {
       if (!power)                                  // there's power ?
         while (!power) {                           // no, attend power
-          yield();                                  // give mutex
+          this.yield();                                  // give mutex
         }
 
       ///monitor.opSignal2();

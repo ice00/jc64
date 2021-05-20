@@ -431,19 +431,19 @@ public abstract class VicII extends Thread implements powered,
 
     // do nothing until io connection are inserted
     while (io==null) {
-      yield();
+      this.yield();
     }
 
     while (true) {
 
       // do nothig until the power is arrived   
       while (!power) {                             // there's power ?
-        yield();                                   // no, attend power
+        this.yield();                                   // no, attend power
       }
       
       // do nothing until the bus is available
       while (!bus.isInitialized())  {              // there's a bus?
-        yield();                                   // no, attend power
+        this.yield();                                   // no, attend power
       }
       
 

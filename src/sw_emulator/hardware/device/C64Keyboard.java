@@ -163,7 +163,7 @@ public class C64Keyboard extends Keyboard{
    */
   public void run(){
     while (cia==null)
-      yield();
+      this.yield();
 
     while (true) {
       monitor.opWait();                       // attend cia or joystick event

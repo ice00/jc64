@@ -90,14 +90,14 @@ public class GameCartridge extends Cartridge {
   public void run() {
     while (true) {
       while (!power) {
-        yield();
+        this.yield();
       }                                                  // give mutex to other
 
       io.notifySignal(S_GAME, 0);
       io.notifySignal(S_EXROM, 0);
 
       while (power) {
-        yield();                                         // give mutex to other
+        this.yield();                                         // give mutex to other
       }
     }
   }

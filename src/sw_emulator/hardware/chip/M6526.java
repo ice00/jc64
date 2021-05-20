@@ -739,12 +739,12 @@ public class M6526 extends Thread implements powered, signaller,
     monitor.opNotify();                         // notify that we will use it      
       
     while(io==null) {
-      yield();
+      this.yield();
     }  
     
     while(true) {   
       while (!power) {
-        yield();                              // give mutex to other threads
+        this.yield();                              // give mutex to other threads
       }      
       
       bodyAsync();                            // execute tha async part of body 
