@@ -61,9 +61,11 @@ public class ConstantCellEditor extends DefaultCellEditor {
     
     if (constant==null) return super.stopCellEditing();
     
+    if (actual==null || "".equals(actual)) return super.stopCellEditing();
+    
     String tmp=actual.toUpperCase();
     for (String val: M6510Dasm.mnemonics) {
-      if (actual.equals(val)) {
+      if (tmp.equals(val)) {
         textField.setBorder(red);
         return false;  
       }
