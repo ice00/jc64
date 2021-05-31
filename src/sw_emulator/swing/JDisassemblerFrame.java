@@ -3440,6 +3440,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         projectFile=null;
         jProjectDialog.setUp(project);            
         jProjectDialog.setVisible(true);
+        setTitle("JC64dis (<new>)");
         
         if (project.file==null || "".equals(project.file)) {
           project=null;
@@ -3467,6 +3468,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (res!=JOptionPane.YES_OPTION) return;              
     }       
   
+    setTitle("JC64dis");
     project=null;
     savedProject=null;
     projectFile=null;
@@ -3487,6 +3489,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (retVal == JFileChooser.APPROVE_OPTION) {
           projectFile=projectChooserFile.getSelectedFile();
           project=new Project();
+          setTitle("JC64dis ("+projectFile.getName()+")");
           if (!FileManager.instance.readProjectFile(projectFile , project)) {
               JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
@@ -3529,6 +3532,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         int retVal=projectChooserFile.showSaveDialog(this);
         if (retVal == JFileChooser.APPROVE_OPTION) {
           projectFile=projectChooserFile.getSelectedFile();
+          setTitle("JC64dis ("+projectFile.getName()+")");
           if (!FileManager.instance.writeProjectFile(projectFile , project)) {
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
