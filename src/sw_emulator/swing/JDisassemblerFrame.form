@@ -385,7 +385,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="110"/>
                 <Property name="text" type="java.lang.String" value="New Project"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemNewProjectActionPerformed"/>
@@ -403,7 +402,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Open Project"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenProjectActionPerformed"/>
@@ -419,7 +417,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Close Project"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCloseProjectActionPerformed"/>
@@ -437,7 +434,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Save Project"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSaveProjectActionPerformed"/>
@@ -484,7 +480,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="114"/>
                 <Property name="text" type="java.lang.String" value="Collaborative merge"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -562,14 +557,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddComment">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+U"/>
+                  <KeyStroke key="SEMICOLON"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/comm.png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="117"/>
                 <Property name="text" type="java.lang.String" value="Add user comment"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddCommentActionPerformed"/>
@@ -578,14 +572,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddBlock">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+B"/>
+                  <KeyStroke key="Ctrl+SEMICOLON"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/block.png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="98"/>
                 <Property name="text" type="java.lang.String" value="Add user block comment"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddBlockActionPerformed"/>
@@ -601,7 +594,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="108"/>
                 <Property name="text" type="java.lang.String" value="Add user label"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUserLabelActionPerformed"/>
@@ -1149,7 +1141,6 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/plus.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign the selected address as +"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPlusActionPerformed"/>
@@ -1178,7 +1169,6 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/min.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign the selected address as #&lt;"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemMemLowActionPerformed"/>
@@ -1193,7 +1183,6 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/minmax.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign the 2 selected addresses as #&lt;&gt;"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemMemLowHighActionPerformed"/>
@@ -1260,7 +1249,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Apply SIDLD flags to memory"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSIDLDActionPerformed"/>
@@ -1278,7 +1266,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="106"/>
                 <Property name="text" type="java.lang.String" value="View Project"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemViewProjectActionPerformed"/>
@@ -1315,7 +1302,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Disassemble"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDissActionPerformed"/>
@@ -1331,7 +1317,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="116"/>
                 <Property name="text" type="java.lang.String" value="Assemblate"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAssemblyActionPerformed"/>
@@ -1348,7 +1333,6 @@
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/findd.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Find text in preview"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFindDisActionPerformed"/>
@@ -1364,7 +1348,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="112"/>
                 <Property name="text" type="java.lang.String" value="Export As of preview"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDissSaveAsActionPerformed"/>
@@ -1396,7 +1379,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Export As of source"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSourceSaveAsActionPerformed"/>
@@ -1419,7 +1401,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="104"/>
                 <Property name="text" type="java.lang.String" value="Help contents"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemContentsActionPerformed"/>
@@ -1458,7 +1439,6 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="About"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAboutActionPerformed"/>

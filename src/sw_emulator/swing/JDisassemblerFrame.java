@@ -1445,7 +1445,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemNewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filenew.png"))); // NOI18N
     jMenuItemNewProject.setMnemonic('n');
     jMenuItemNewProject.setText("New Project");
-    jMenuItemNewProject.setToolTipText("");
     jMenuItemNewProject.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemNewProjectActionPerformed(evt);
@@ -1458,7 +1457,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemOpenProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/fileopen.png"))); // NOI18N
     jMenuItemOpenProject.setMnemonic('o');
     jMenuItemOpenProject.setText("Open Project");
-    jMenuItemOpenProject.setToolTipText("");
     jMenuItemOpenProject.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemOpenProjectActionPerformed(evt);
@@ -1470,7 +1468,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemCloseProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/close.png"))); // NOI18N
     jMenuItemCloseProject.setMnemonic('c');
     jMenuItemCloseProject.setText("Close Project");
-    jMenuItemCloseProject.setToolTipText("");
     jMenuItemCloseProject.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemCloseProjectActionPerformed(evt);
@@ -1483,7 +1480,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesave.png"))); // NOI18N
     jMenuItemSaveProject.setMnemonic('s');
     jMenuItemSaveProject.setText("Save Project");
-    jMenuItemSaveProject.setToolTipText("");
     jMenuItemSaveProject.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemSaveProjectActionPerformed(evt);
@@ -1517,7 +1513,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/merge.png"))); // NOI18N
     jMenuItem2.setMnemonic('r');
     jMenuItem2.setText("Collaborative merge");
-    jMenuItem2.setToolTipText("");
     jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItem2ActionPerformed(evt);
@@ -1574,11 +1569,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuMemory.add(jMenuItemClearDLabel);
     jMenuMemory.add(jSeparator4);
 
-    jMenuItemAddComment.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemAddComment.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SEMICOLON, 0));
     jMenuItemAddComment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/comm.png"))); // NOI18N
     jMenuItemAddComment.setMnemonic('u');
     jMenuItemAddComment.setText("Add user comment");
-    jMenuItemAddComment.setToolTipText("");
     jMenuItemAddComment.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemAddCommentActionPerformed(evt);
@@ -1586,11 +1580,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemAddComment);
 
-    jMenuItemAddBlock.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemAddBlock.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SEMICOLON, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemAddBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/block.png"))); // NOI18N
     jMenuItemAddBlock.setMnemonic('b');
     jMenuItemAddBlock.setText("Add user block comment");
-    jMenuItemAddBlock.setToolTipText("");
     jMenuItemAddBlock.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemAddBlockActionPerformed(evt);
@@ -1602,7 +1595,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem2.png"))); // NOI18N
     jMenuItemUserLabel.setMnemonic('l');
     jMenuItemUserLabel.setText("Add user label");
-    jMenuItemUserLabel.setToolTipText("");
     jMenuItemUserLabel.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemUserLabelActionPerformed(evt);
@@ -1998,7 +1990,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemPlus.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ADD, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/plus.png"))); // NOI18N
     jMenuItemPlus.setText("Assign the selected address as +");
-    jMenuItemPlus.setToolTipText("");
     jMenuItemPlus.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemPlusActionPerformed(evt);
@@ -2019,7 +2010,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
-    jMenuItemMemLow.setToolTipText("");
     jMenuItemMemLow.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemMemLowActionPerformed(evt);
@@ -2030,7 +2020,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minmax.png"))); // NOI18N
     jMenuItemMemLowHigh.setText("Assign the 2 selected addresses as #<>");
-    jMenuItemMemLowHigh.setToolTipText("");
     jMenuItemMemLowHigh.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemMemLowHighActionPerformed(evt);
@@ -2078,7 +2067,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemSIDLD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem.png"))); // NOI18N
     jMenuItemSIDLD.setMnemonic('e');
     jMenuItemSIDLD.setText("Apply SIDLD flags to memory");
-    jMenuItemSIDLD.setToolTipText("");
     jMenuItemSIDLD.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemSIDLDActionPerformed(evt);
@@ -2091,7 +2079,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemViewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/view_detailed.png"))); // NOI18N
     jMenuItemViewProject.setMnemonic('j');
     jMenuItemViewProject.setText("View Project");
-    jMenuItemViewProject.setToolTipText("");
     jMenuItemViewProject.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemViewProjectActionPerformed(evt);
@@ -2117,7 +2104,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemDiss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exec.png"))); // NOI18N
     jMenuItemDiss.setMnemonic('e');
     jMenuItemDiss.setText("Disassemble");
-    jMenuItemDiss.setToolTipText("");
     jMenuItemDiss.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemDissActionPerformed(evt);
@@ -2129,7 +2115,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemAssembly.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/assembler.png"))); // NOI18N
     jMenuItemAssembly.setMnemonic('t');
     jMenuItemAssembly.setText("Assemblate");
-    jMenuItemAssembly.setToolTipText("");
     jMenuItemAssembly.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemAssemblyActionPerformed(evt);
@@ -2141,7 +2126,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemFindDis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemFindDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/findd.png"))); // NOI18N
     jMenuItemFindDis.setText("Find text in preview");
-    jMenuItemFindDis.setToolTipText("");
     jMenuItemFindDis.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemFindDisActionPerformed(evt);
@@ -2153,7 +2137,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemDissSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exportas1.png"))); // NOI18N
     jMenuItemDissSaveAs.setMnemonic('p');
     jMenuItemDissSaveAs.setText("Export As of preview");
-    jMenuItemDissSaveAs.setToolTipText("");
     jMenuItemDissSaveAs.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemDissSaveAsActionPerformed(evt);
@@ -2176,7 +2159,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemSourceSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exportas2.png"))); // NOI18N
     jMenuItemSourceSaveAs.setMnemonic('s');
     jMenuItemSourceSaveAs.setText("Export As of source");
-    jMenuItemSourceSaveAs.setToolTipText("");
     jMenuItemSourceSaveAs.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemSourceSaveAsActionPerformed(evt);
@@ -2192,7 +2174,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemContents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/help_index.png"))); // NOI18N
     jMenuItemContents.setMnemonic('h');
     jMenuItemContents.setText("Help contents");
-    jMenuItemContents.setToolTipText("");
     jMenuItemContents.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemContentsActionPerformed(evt);
@@ -2224,7 +2205,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemAbout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemAbout.setMnemonic('a');
     jMenuItemAbout.setText("About");
-    jMenuItemAbout.setToolTipText("");
     jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemAboutActionPerformed(evt);
