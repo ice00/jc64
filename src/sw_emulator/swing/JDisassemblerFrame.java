@@ -1346,6 +1346,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             rSyntaxTextAreaDisMouseReleased(evt);
         }
     });
+    rSyntaxTextAreaDis.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            rSyntaxTextAreaDisKeyReleased(evt);
+        }
+    });
     jScrollPaneLeft.setViewportView(rSyntaxTextAreaDis);
 
     jSplitPaneInternal.setLeftComponent(jScrollPaneLeft);
@@ -2583,7 +2588,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         //scroll to that point
         jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
         
-        // select this rows
+        // select those rows
         jTableMemory.setRowSelectionInterval(min, max);
       } catch (Exception e) {
           System.err.println(e);;
@@ -2944,6 +2949,34 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jMenuItemConstantClear_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConstantClear_ActionPerformed
       execute(MEM_SUB_CLEAR); 
     }//GEN-LAST:event_jMenuItemConstantClear_ActionPerformed
+
+    private void rSyntaxTextAreaDisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisKeyReleased
+        
+      // test for down/up without shift
+      if ((evt.getKeyCode()==40 || evt.getKeyCode()==38)) {
+        if (!evt.isShiftDown()) {
+          try {  
+            int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
+       
+            int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
+        
+            if (addr==-1) return;
+                
+            //scroll to that point
+            jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        
+            // select this row
+            jTableMemory.setRowSelectionInterval(addr, addr); 
+         } catch (Exception e) {
+             System.err.println(e);
+           }
+        } else {
+            // this is a selection
+            rSyntaxTextAreaDisMouseReleased(null);
+          }  
+      }
+      
+    }//GEN-LAST:event_rSyntaxTextAreaDisKeyReleased
 
     /**
      * @param args the command line arguments
