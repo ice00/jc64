@@ -131,6 +131,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** About dialog */
   JAboutDialog jAboutDialog=new JAboutDialog(this, true);
   
+  /** Labels dialog */
+  JLabelsDialog jLabelsDialog=new JLabelsDialog(this, true);
+  
   /** Help dialog */
   JHelpFrame jHelpFrame=new JHelpFrame();
   
@@ -348,6 +351,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
         jButtonViewProject = new javax.swing.JButton();
+        jButtonViewLabels = new javax.swing.JButton();
         jToolBarSource = new javax.swing.JToolBar();
         jButtonFindMem = new javax.swing.JButton();
         jButtonDisassemble = new javax.swing.JButton();
@@ -513,6 +517,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSIDLD = new javax.swing.JMenuItem();
         jSeparatorOption = new javax.swing.JPopupMenu.Separator();
         jMenuItemViewProject = new javax.swing.JMenuItem();
+        jMenuItemViewLabels = new javax.swing.JMenuItem();
         jMenuSource = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemDiss = new javax.swing.JMenuItem();
@@ -1197,6 +1202,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jToolBarOption.add(jButtonViewProject);
+
+        jButtonViewLabels.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/view_label.png"))); // NOI18N
+        jButtonViewLabels.setToolTipText("View labels");
+        jButtonViewLabels.setFocusable(false);
+        jButtonViewLabels.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonViewLabels.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonViewLabels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewLabelsActionPerformed(evt);
+            }
+        });
+        jToolBarOption.add(jButtonViewLabels);
 
         jPanelToolBar.add(jToolBarOption);
 
@@ -2091,6 +2108,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuOption.add(jMenuItemViewProject);
 
+    jMenuItemViewLabels.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemViewLabels.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/view_label.png"))); // NOI18N
+    jMenuItemViewLabels.setMnemonic('b');
+    jMenuItemViewLabels.setText("View labels");
+    jMenuItemViewLabels.setToolTipText("");
+    jMenuItemViewLabels.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemViewLabelsActionPerformed(evt);
+        }
+    });
+    jMenuOption.add(jMenuItemViewLabels);
+
     jMenuBar.add(jMenuOption);
 
     jMenuSource.setText("Source");
@@ -2978,6 +3007,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
     }//GEN-LAST:event_rSyntaxTextAreaDisKeyReleased
 
+    private void jButtonViewLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewLabelsActionPerformed
+      execute(OPTION_LABELS);
+    }//GEN-LAST:event_jButtonViewLabelsActionPerformed
+
+    private void jMenuItemViewLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewLabelsActionPerformed
+      execute(OPTION_LABELS);
+    }//GEN-LAST:event_jMenuItemViewLabelsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3051,6 +3088,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonSIDLD;
     private javax.swing.JButton jButtonSaveProject;
     private javax.swing.JButton jButtonSaveProjectAs;
+    private javax.swing.JButton jButtonViewLabels;
     private javax.swing.JButton jButtonViewProject;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuHelpContents;
@@ -3143,6 +3181,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemTribyte1;
     private javax.swing.JMenuItem jMenuItemUserLabel;
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
+    private javax.swing.JMenuItem jMenuItemViewLabels;
     private javax.swing.JMenuItem jMenuItemViewProject;
     private javax.swing.JMenuItem jMenuItemWord;
     private javax.swing.JMenuItem jMenuItemWord1;
@@ -3226,6 +3265,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         break;        
       case OPTION_MPR:
         optionMPR();
+        break;
+      case OPTION_LABELS:
+        optionLabels();
         break;
       case SOURCE_DISASS:
         disassembly();
@@ -4005,6 +4047,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     
    JOptionPane.showMessageDialog(this, mpr.getDescription(), "Information on saved file", JOptionPane.INFORMATION_MESSAGE);
+  }
+  
+  /**
+   * Option for show labels
+   */
+  private void optionLabels() {
+    if (project==null) {
+      JOptionPane.showMessageDialog(this,"No project. Open a project first", "Warning", JOptionPane.WARNING_MESSAGE); 
+      return;
+    }
+    jLabelsDialog.setUp(project.memory);
+    jLabelsDialog.setVisible(true);
   }
   
   /**

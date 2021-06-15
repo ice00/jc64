@@ -233,6 +233,9 @@ public interface userAction {
   /** Memory sub clear assigment */
   public static final int MEM_SUB_CLEAR = 69;
   
+   /** Option labels */
+  public static final int OPTION_LABELS = 70; 
+  
   
   /**
    * Execute the passed user action
