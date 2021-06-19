@@ -316,6 +316,40 @@ import sw_emulator.math.Unsigned;
           return tmp.toString();
         }
     },  // MUS
+    VSF {  // Vice vsf
+        @Override
+        public String getDescription(byte[] inB) {
+          StringBuffer tmp=new StringBuffer("");  
+            
+          for (int i=0; i<19; i++) {
+            tmp.append((char)inB[i]);
+          } 
+          
+          tmp.append("\nVMajor=").append(inB[20]).append(" Vminor=").append(inB[21]).append("\n");
+          
+          tmp.append("Machine Name=");
+          for (int i=22; i<37; i++) {
+            tmp.append((char)inB[i]);
+          }
+          
+          tmp.append("\nVersion Magic=");
+          for (int i=37; i<50; i++) {
+            tmp.append((char)inB[i]);
+          }
+          
+          tmp.append("\nVersion=").append(inB[50] & 0xff)
+                      .append(".").append(inB[51] & 0xff)
+                      .append(".").append(inB[52] & 0xff)
+                      .append(".").append(inB[53] & 0xff)
+                      .append("\n");
+          tmp.append("Svn Version=").append(((inB[57] & 0xff)<<24)+
+                                            ((inB[56] & 0xff)<<16)+
+                                            ((inB[55] & 0xff)<<8)+
+                                             (inB[54] & 0xff)).append("\n");
+          
+          return tmp.toString();
+        }        
+    },
     MPR {
         @Override
         public String getDescription(byte[] inB) {
@@ -375,6 +409,7 @@ import sw_emulator.math.Unsigned;
       if (isMUS(inB)) return MUS;
       if (isMPR(inB)) return MPR;
       if (isCRT(inB)) return CRT;
+      if (isVSF(inB)) return VSF;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -447,6 +482,22 @@ import sw_emulator.math.Unsigned;
      int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
      return (inB.length<=65535+3-start); 
    }
+   
+   /**
+    * Determine if the input file is a VSF file
+    *
+    * @return true if the file is VSF file
+    */    
+    private static boolean isVSF(byte[] inB) {
+      StringBuffer tmp=new StringBuffer("");  
+            
+      for (int i=0; i<18; i++) {
+        tmp.append((char)inB[i]);
+      }   
+      
+      if (inB[18]!=0x1a) return false;
+      return "VICE Snapshot File".equals(tmp.toString());
+    }
    
    /**
     * Determine if the input file is a CRT file
