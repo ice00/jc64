@@ -44,9 +44,11 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="dataModel" type="code"/>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableLabels.setDefaultEditor(String.class, constantCellEditor);&#xa;jTableLabels.putClientProperty(&quot;terminateEditOnFocusLost&quot;, Boolean.TRUE);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableLabels.putClientProperty(&quot;terminateEditOnFocusLost&quot;, Boolean.TRUE);&#xa;&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableLabels.getColumnModel().getColumn(0).setPreferredWidth(10);&#xa;jTableLabels.getColumnModel().getColumn(1).setPreferredWidth(10);&#xa;&#xa;DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;centerRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;jTableLabels.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );"/>
           </AuxValues>
         </Component>
       </SubComponents>

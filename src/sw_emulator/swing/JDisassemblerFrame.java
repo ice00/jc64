@@ -132,7 +132,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   JAboutDialog jAboutDialog=new JAboutDialog(this, true);
   
   /** Labels dialog */
-  JLabelsDialog jLabelsDialog=new JLabelsDialog(this, true);
+  JLabelsDialog jLabelsDialog=new JLabelsDialog(this, true, option);
   
   /** Help dialog */
   JHelpFrame jHelpFrame=new JHelpFrame();
@@ -200,77 +200,77 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (timer.isRunning()) {
               // There was an earlier click so we'll treat it as a double click
               timer.stop();
-             doubleClick();
-          } else {
-              // (Re)start the timer and wait for 2nd click      	
-              timer.restart();
-            }
-	}
+              doubleClick();
+            } else {
+               // (Re)start the timer and wait for 2nd click      	
+                timer.restart();
+              }
+	  }
           
-        /**
-         * Single click on table
-         */ 
-	protected void singleClick() {
-          int row=jTableMemory.rowAtPoint(last.getPoint());
-          int col= jTableMemory.columnAtPoint(last.getPoint());
+          /**
+           * Single click on table
+           */ 
+          protected void singleClick() {
+            int row=jTableMemory.rowAtPoint(last.getPoint());
+            int col= jTableMemory.columnAtPoint(last.getPoint());
           
-          switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
-            case UC:    // user comment
-              if (option.clickUcEdit) addComment(row);
-              break;  
-            case UL:     // user label
-              if (option.clickUlEdit) addLabel(row);  
-              break;
-            case UB:     // user global comment
-              if (option.clickUbEdit) addBlock(row);   
-              break;
-            case DC:     // automatic comment
-              if (option.clickDcErase) {
-                MemoryDasm mem= project.memory[row];
-                if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
-                dataTableModelMemory.fireTableDataChanged();  
-              }                 
-              break;  
-            case DL:     // automatic label
-              if (option.clickDlErase) {
-                MemoryDasm mem= project.memory[row];
-                if (mem.dasmLocation!=null) mem.dasmLocation=null;
-                dataTableModelMemory.fireTableDataChanged();  
-              }  
-              break;  
-          }
-	}
-
-        /**
-         * Double click on table
-         */
-	protected void doubleClick() {
-	  int actual;  
-        
-          // get the address in hex format
-          int addr=jTableMemory.getSelectedRow();
-          int pos=0;        
-
-          // scan all lines for the memory location
-          try {
-            String preview=rSyntaxTextAreaDis.getText();
-            String lines[] = preview.split("\\r?\\n");
-            for (String line: lines) {
-              actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
-              if (actual==addr) {      
-                // set preview in the find position  
-                rSyntaxTextAreaDis.setCaretPosition(pos);
-                rSyntaxTextAreaDis.requestFocusInWindow();
+            switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
+              case UC:    // user comment
+                if (option.clickUcEdit) addComment(row);
+                break;  
+              case UL:     // user label
+                if (option.clickUlEdit) addLabel(row);  
                 break;
-              } else {
-                  pos+=line.length()+1;
-                }
+              case UB:     // user global comment
+                if (option.clickUbEdit) addBlock(row);   
+                break;
+              case DC:     // automatic comment
+                if (option.clickDcErase) {
+                  MemoryDasm mem= project.memory[row];
+                  if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
+                  dataTableModelMemory.fireTableDataChanged();  
+                }                 
+                break;  
+              case DL:     // automatic label
+                if (option.clickDlErase) {
+                  MemoryDasm mem= project.memory[row];
+                  if (mem.dasmLocation!=null) mem.dasmLocation=null;
+                  dataTableModelMemory.fireTableDataChanged();  
+                }  
+                break;  
             }
-          } catch (Exception e) {
-              System.err.println();  
-            }  
-        }             
-      });
+	  }
+
+          /**
+           * Double click on table
+           */
+	  protected void doubleClick() {
+            int actual;  
+         
+            // get the address in hex format
+            int addr=jTableMemory.getSelectedRow();
+            int pos=0;        
+
+            // scan all lines for the memory location
+            try {
+              String preview=rSyntaxTextAreaDis.getText();
+              String lines[] = preview.split("\\r?\\n");
+              for (String line: lines) {
+                actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
+                if (actual==addr) {      
+                  // set preview in the find position  
+                  rSyntaxTextAreaDis.setCaretPosition(pos);
+                  rSyntaxTextAreaDis.requestFocusInWindow();
+                  break;
+                } else {
+                    pos+=line.length()+1;
+                  }
+              }
+            } catch (Exception e) {
+                System.err.println();  
+              }  
+          }             
+        });
     }
 
     /**
@@ -422,11 +422,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                         case RE:
                         if (memory.type!=' ') {
                             MemoryDasm mem=dataTableModelMemory.getData()[memory.related];
-                            if (memory.type=='+') {
+                            switch (memory.type) {
+                                case '+':
                                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+(memory.address-memory.related);
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+(memory.address-memory.related);
                                 else tip="$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
-                            } else {
+                                break;
+                                case '-':
+                                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related);
+                                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);
+                                else tip="$"+ShortToExe(mem.address)+(memory.address-memory.related);
+                                break;
+                                default:
                                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
                                 else tip="#"+memory.type+"$"+ShortToExe(mem.address);
@@ -4057,7 +4064,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       JOptionPane.showMessageDialog(this,"No project. Open a project first", "Warning", JOptionPane.WARNING_MESSAGE); 
       return;
     }
-    jLabelsDialog.setUp(project.memory);
+    jLabelsDialog.setUp(project.memory, jTableMemory, rSyntaxTextAreaDis, project);
     jLabelsDialog.setVisible(true);
   }
   

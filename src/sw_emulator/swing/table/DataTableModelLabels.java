@@ -126,7 +126,20 @@ public class DataTableModelLabels extends AbstractTableModel {
           return ShortToExe(memory.address);   
         case DL:
           return memory.dasmLocation;            
-        case UL:
+        case UL:            
+          if (memory.type!=' ') {
+            MemoryDasm mem=data[memory.related];
+            if (memory.type=='+') {
+              if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-memory.related); 
+              else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-memory.related);
+                   else return "$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
+            } 
+             if (memory.type=='-') {
+               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+(memory.address-memory.related); 
+                  else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))return mem.dasmLocation+(memory.address-memory.related);
+                       else return "$"+ShortToExe(mem.address)+(memory.address-memory.related);                 
+            }    
+          }   
           return memory.userLocation;                       
     }  
     return "";
