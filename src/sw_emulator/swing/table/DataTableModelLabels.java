@@ -127,7 +127,7 @@ public class DataTableModelLabels extends AbstractTableModel {
         case DL:
           return memory.dasmLocation;            
         case UL:            
-          if (memory.type!=' ') {
+          if (memory.type=='+' || memory.type=='-') {
             MemoryDasm mem=data[memory.related];
             if (memory.type=='+') {
               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-memory.related); 

@@ -319,34 +319,59 @@ import sw_emulator.math.Unsigned;
     VSF {  // Vice vsf
         @Override
         public String getDescription(byte[] inB) {
+          int pos;  
           StringBuffer tmp=new StringBuffer("");  
             
           for (int i=0; i<19; i++) {
-            tmp.append((char)inB[i]);
+            if (inB[i]!=0) tmp.append((char)inB[i]);
           } 
           
-          tmp.append("\nVMajor=").append(inB[20]).append(" Vminor=").append(inB[21]).append("\n");
+          tmp.append("\nVMajor=").append(inB[20]).append(" VMinor=").append(inB[21]).append("\n");
           
           tmp.append("Machine Name=");
           for (int i=22; i<37; i++) {
-            tmp.append((char)inB[i]);
+            if (inB[i]!=0) tmp.append((char)inB[i]);
           }
           
-          tmp.append("\nVersion Magic=");
-          for (int i=37; i<50; i++) {
-            tmp.append((char)inB[i]);
+          if (((inB[37] & 0xff) == 0x56) &&
+              ((inB[38] & 0xff) == 0x49) &&
+              ((inB[39] & 0xff) == 0x43) &&
+              ((inB[40] & 0xff) == 0x45)
+             ) {    
+          
+            tmp.append("\nVersion Magic=");
+            for (int i=37; i<50; i++) {
+              if (inB[i]!=0) tmp.append((char)inB[i]);
+            }
+          
+            tmp.append("\nVersion=").append(inB[50] & 0xff)
+                        .append(".").append(inB[51] & 0xff)
+                        .append(".").append(inB[52] & 0xff)
+                        .append(".").append(inB[53] & 0xff)
+                        .append("\n");
+            tmp.append("Svn Version=").append(((inB[57] & 0xff)<<24)+
+                                              ((inB[56] & 0xff)<<16)+
+                                              ((inB[55] & 0xff)<<8)+
+                                               (inB[54] & 0xff)).append("\n\n");
+            pos=58;
+          } else {
+              tmp.append("\n\n");
+              pos=37;
+            }                   
+          
+          int size=0;
+            while (pos<inB.length-21) {
+              for (int i=pos; i<pos+16; i++) {
+              if (inB[i]!=0) tmp.append((char)inB[i]);
+            }  
+            tmp.append("\nVMajor=").append(inB[pos+16]).append(" VMinor=").append(inB[pos+17]).append("\n"); 
+            size=((inB[pos+21] & 0xff)<<24)+
+                 ((inB[pos+20] & 0xff)<<16)+
+                 ((inB[pos+19] & 0xff)<<8)+
+                  (inB[pos+18] & 0xff);
+            tmp.append("Size=").append(size).append("\n\n");
+            pos=pos+size;
           }
-          
-          tmp.append("\nVersion=").append(inB[50] & 0xff)
-                      .append(".").append(inB[51] & 0xff)
-                      .append(".").append(inB[52] & 0xff)
-                      .append(".").append(inB[53] & 0xff)
-                      .append("\n");
-          tmp.append("Svn Version=").append(((inB[57] & 0xff)<<24)+
-                                            ((inB[56] & 0xff)<<16)+
-                                            ((inB[55] & 0xff)<<8)+
-                                             (inB[54] & 0xff)).append("\n");
-          
           return tmp.toString();
         }        
     },

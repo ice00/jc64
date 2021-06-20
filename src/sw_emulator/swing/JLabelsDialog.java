@@ -198,6 +198,7 @@ public class JLabelsDialog extends javax.swing.JDialog {
       this.jTable=jTable;
       this.rSyntaxTextAreaDis=rSyntaxTextAreaDis;
       this.project=project;
+      dataModel.fireTableDataChanged();
     }         
 
     /**

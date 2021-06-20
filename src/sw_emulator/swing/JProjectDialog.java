@@ -66,6 +66,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program", "mpr"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
     }
     
     /**
@@ -98,6 +99,9 @@ public class JProjectDialog extends javax.swing.JDialog {
             break;    
           case CRT:
             jRadioButtonCRT.setSelected(true);
+            break;   
+          case VSF:
+            jRadioButtonVSF.setSelected(true);
             break;     
         }
       } else {
@@ -106,6 +110,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonMUS.setSelected(false);
           jRadioButtonMPR.setSelected(false);  
           jRadioButtonCRT.setSelected(false);  
+          jRadioButtonVSF.setSelected(false);  
         }
       if (project.targetType!=null) {
         switch (project.targetType) {
@@ -173,6 +178,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jSpinnerCRT = new javax.swing.JSpinner();
         jLabelConstant = new javax.swing.JLabel();
         jButtonEdit = new javax.swing.JButton();
+        jRadioButtonVSF = new javax.swing.JRadioButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -309,6 +315,10 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFileType.add(jRadioButtonVSF);
+        jRadioButtonVSF.setText("VSF");
+        jRadioButtonVSF.setEnabled(false);
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -337,9 +347,11 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jRadioButtonCRT)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 43, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonVSF)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                .addComponent(jTextFieldInputFile)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonSelect))
                             .addComponent(jTextFieldProjectName)))
@@ -393,7 +405,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addComponent(jRadioButtonPRG)
                         .addComponent(jRadioButtonMPR)
                         .addComponent(jRadioButtonCRT)
-                        .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioButtonVSF))
                     .addComponent(jLabelFileType))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -499,7 +512,17 @@ public class JProjectDialog extends javax.swing.JDialog {
               jRadioButtonVic20.setEnabled(true);
               jRadioButtonPlus4.setEnabled(true);  
               jSpinnerCRT.setEnabled(false);
-              break;              
+              break;      
+            case VSF:
+              jRadioButtonVSF.setSelected(true);
+              jRadioButtonC64.setEnabled(true);
+              project.targetType=TargetType.C64;
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);  
+              jSpinnerCRT.setEnabled(false);
+              break;  
             case UND:
               jRadioButtonSID.setSelected(false);  
               jRadioButtonMUS.setSelected(false);  
@@ -658,6 +681,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonPRG;
     private javax.swing.JRadioButton jRadioButtonPlus4;
     private javax.swing.JRadioButton jRadioButtonSID;
+    private javax.swing.JRadioButton jRadioButtonVSF;
     private javax.swing.JRadioButton jRadioButtonVic20;
     private javax.swing.JScrollPane jScrollPaneDescr;
     private javax.swing.JSpinner jSpinnerCRT;

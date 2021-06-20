@@ -208,7 +208,10 @@ public class Disassembly {
         break;
       case MPR:
         disassemlyMPR(asSource, targetType);  
-        break;        
+        break;     
+       case VSF:
+        disassemlyVSF(asSource, targetType);  
+        break;                
       case UND:            
         source="";
         disassembly="";   
@@ -580,6 +583,126 @@ public class Disassembly {
         disassembly=tmp.toString();
       }       
   }    
+  
+  /**
+   * Disassembly a VSF file
+   * 
+   * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
+   */
+  private void disassemlyVSF(boolean asSource, TargetType targetType) {
+    M6510Dasm prg;
+    
+    setupAssembler();
+      
+    switch (targetType) {
+      case C64:
+        prg=new C64Dasm();  
+        break;  
+      case C1541:
+        prg=new C1541Dasm();     
+        break;
+      case C128:
+        prg=new C128Dasm();  
+        break;
+      case VIC20:
+        prg=new CVic20Dasm(); 
+        break;
+      case PLUS4:
+        prg=new CPlus4Dasm();  
+        break;
+      default:  
+        prg=new M6510Dasm();
+    }      
+    
+    prg.setMemory(memory);
+    prg.setConstant(constant);
+    prg.setOption(option,  assembler);
+    
+    int pos;
+    
+    if (((inB[37] & 0xff) == 0x56) &&
+        ((inB[38] & 0xff) == 0x49) &&
+        ((inB[39] & 0xff) == 0x43) &&
+        ((inB[40] & 0xff) == 0x45)
+       ) pos=58;
+    else pos=37;
+        
+    int actPos;
+    int size=0;
+    boolean find=false;
+    
+    while (pos<inB.length-21) {
+      size=((inB[pos+21] & 0xff)<<24)+
+           ((inB[pos+20] & 0xff)<<16)+
+           ((inB[pos+19] & 0xff)<<8)+
+           (inB[pos+18] & 0xff);
+            
+      actPos=pos;
+      pos+=size;  
+        
+      if ((inB[actPos]& 0xff)   != 0x43) continue;
+      if ((inB[actPos+1]& 0xff) != 0x36) continue;
+      if ((inB[actPos+2]& 0xff) != 0x34) continue;
+      if ((inB[actPos+3]& 0xff) != 0x4D) continue;
+      if ((inB[actPos+4]& 0xff) != 0x45) continue;
+      if ((inB[actPos+5]& 0xff) != 0x4D) continue;
+      
+      pos=actPos;
+      find=true;
+      break;
+    }
+    
+    if (!find) {
+     if (asSource) source="";
+     else disassembly="";
+     return;
+    }
+    
+       
+    // calculate start/end address
+    startAddress=0;    
+    startBuffer=pos+26;
+    endAddress=65535;
+    endBuffer=startBuffer+endAddress+1;
+    
+    markInside(startAddress, endAddress, startBuffer);
+     
+    // search for SID frequency table
+    SidFreq.instance.identifyFreq(inB, memory, startBuffer, endBuffer, startAddress-startBuffer,
+            option.sidFreqLoLabel, option.sidFreqHiLabel);
+     
+    StringBuilder tmp=new StringBuilder();
+    
+    if (asSource) {
+      prg.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(tmp, mem);
+      
+      assembler.setConstant(tmp, constant);
+
+      assembler.setStarting(tmp);
+      assembler.setMacro(tmp, memory);
+
+      if (option.dasmF3Comp) {
+        assembler.setOrg(tmp, startAddress);
+        assembler.setWord(tmp, (byte)0, (byte)0, null);
+        tmp.append("\n");
+      }  
+      assembler.setOrg(tmp, startAddress);
+      
+      tmp.append(prg.csdasm(inB, startBuffer, endBuffer, startAddress));
+      source=tmp.toString();
+    } else {    
+        prg.upperCase=option.opcodeUpperCasePreview;
+        tmp.append(fileType.getDescription(inB));
+        tmp.append("\n");
+        tmp.append(prg.cdasm(inB, startBuffer, endBuffer, startAddress));
+        disassembly=tmp.toString();
+      }       
+  }   
   
   /**
    * Disassembly a MPR file
