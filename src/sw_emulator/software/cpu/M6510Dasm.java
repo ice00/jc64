@@ -1107,7 +1107,32 @@ public class M6510Dasm implements disassembler {
     StringBuilder result=new StringBuilder();
     
     for (MemoryDasm mem : memory) {
-      if (mem.isInside) continue;
+      if (mem.isInside && !mem.isGarbage) continue;
+      
+      // for garbage inside, only if there is a user label makes it outs
+      if (mem.isGarbage && mem.userLocation!=null && !"".equals(mem.userLocation)) {
+        
+        // look for block comment
+        if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+          assembler.setBlockComment(result, mem);
+        } 
+        
+        label=mem.userLocation;
+        
+        if (option.assembler==Assembler.Name.KICK) {
+          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
+          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
+        } else {
+          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
+          else tmp=label+" = $"+ShortToExe(mem.address);
+        }
+        
+        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
+          
+        assembler.setComment(result, mem);                    
+        
+        continue;
+      } 
       
       // look for block comment
       if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
