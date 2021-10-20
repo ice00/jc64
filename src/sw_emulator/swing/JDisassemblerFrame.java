@@ -4618,7 +4618,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm memory;
     
     int addr;
-    for (int i=1; i<32; i++) {
+    for (int i=1; i<256; i++) {
       addr=mem.address-i;
       if (i<0) continue;
       
@@ -4769,7 +4769,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm memory;
     
     int addr;
-    for (int i=1; i<32; i++) {
+    for (int i=1; i<256; i++) {
       addr=mem.address+i;
       if (i<0) continue;
       
