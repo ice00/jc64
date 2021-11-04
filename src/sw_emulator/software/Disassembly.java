@@ -732,7 +732,7 @@ public class Disassembly {
       markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);
      
       // search for SID frequency table
-      SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, block.inB.length, block.startAddress-block.startBuffer,
+      SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, block.endBuffer, block.startAddress-block.startBuffer,
              option.sidFreqLoLabel, option.sidFreqHiLabel);
       
 
