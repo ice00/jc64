@@ -23,20 +23,16 @@
  */
 package sw_emulator.software;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.cpu.M6510Dasm;
-import sw_emulator.software.machine.C128Dasm;
-import sw_emulator.software.machine.C64Dasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
-import sw_emulator.software.machine.C1541Dasm;
-import sw_emulator.software.machine.CPlus4Dasm;
-import sw_emulator.software.machine.CVic20Dasm;
 import sw_emulator.swing.Shared;
+import sw_emulator.swing.main.Block;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
@@ -55,24 +51,6 @@ public class Disassembly {
   /** Raw disassembly */
   public String disassembly;    
   
-  /** Starting adress of data from file */
-  public int startAddress;
-  
-  /** Ending address of data from file */
-  public int endAddress;
-  
-   /** Starting buffer adress of data from file */
-  public int startBuffer;
-  
-  /** Ending buffer address of data from file */
-  public int endBuffer; 
-  
-  /** Starting address for MPR */
-  public int[] startMPR;
-  
-  /** Ending address for MPR */
-  public int[] endMPR;
-  
   /** Buffer of data to disassemble */
   private byte[] inB;
   
@@ -87,6 +65,10 @@ public class Disassembly {
   
   /** The option for disassembler */
   private Option option;
+  
+  
+  /** Blocks of memory to disassemblate */
+  public ArrayList<Block> blocks;
   
   /** Constants */
   public Constant constant;
@@ -182,16 +164,16 @@ public class Disassembly {
     this.constant=constant;
 
     this.memory=memory;
-    
-    startMPR=null;
-    endMPR=null;
-      
+
+              
     // avoid to precess null data  
     if (inB==null) {
       source="";
       disassembly="";
       return;
     }
+    
+    blocks=new ArrayList();
     
     switch (fileType) {
       case CRT:  
@@ -236,13 +218,7 @@ public class Disassembly {
     
     StringBuilder tmp=new StringBuilder();    
     C64MusDasm mus=new C64MusDasm();
-    
-    // don't use start/end address for mus
-    startAddress=-1;
-    endAddress=-1;
-    startBuffer=-1;
-    endBuffer=-1;
-    
+        
     musPC=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
     v1Length=Unsigned.done(inB[2])+Unsigned.done(inB[3])*256;
     v2Length=Unsigned.done(inB[4])+Unsigned.done(inB[5])*256;
@@ -280,6 +256,7 @@ public class Disassembly {
     int psidPAddr;    // psid play address     
     int sidPos;       // Position in buffer of start of sid program     
     int sidPC;        // PC value of start of sid program 
+    Block block;
     
     setupAssembler();
       
@@ -296,26 +273,25 @@ public class Disassembly {
     
     psidDOff=Unsigned.done(inB[0x07])+Unsigned.done(inB[0x06])*256;
     
+    block=new Block();
+    
     //calculate address for disassembler
     if (psidLAddr==0) {
       sidPC=Unsigned.done(inB[psidDOff])+Unsigned.done(inB[psidDOff+1])*256;
       sidPos=psidDOff+2;
-      startAddress=sidPC;
-      endAddress=sidPC+inB.length-sidPos-1;      
+      block.startAddress=sidPC;
+      block.endAddress=sidPC+inB.length-sidPos-1;      
     } else {
         sidPos=psidDOff;
         sidPC=psidLAddr;
-        startAddress=sidPC;
-        endAddress=sidPC+inB.length-sidPos-1;     
+        block.startAddress=sidPC;
+        block.endAddress=sidPC+inB.length-sidPos-1;     
       }
-    startBuffer=sidPos;
-    endBuffer=sidPos+(endAddress-startAddress);
-    
-    markInside(startAddress, endAddress, sidPos);
-    
-    // search for SID frequency table
-    SidFreq.instance.identifyFreq(inB, memory, sidPos, inB.length, sidPC-sidPos,
-            option.sidFreqLoLabel, option.sidFreqHiLabel);
+    block.startBuffer=sidPos;
+    block.endBuffer=sidPos+(block.endAddress-block.startAddress);
+    block.inB=inB;
+    blocks.add(block);
+
         
     StringBuilder tmp=new StringBuilder();
     
@@ -366,18 +342,20 @@ public class Disassembly {
         assembler.setWord(tmp, inB[0x7C], inB[0x7D], "read load address"); 
         psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
       }
-      tmp.append("\n");
-      assembler.setOrg(tmp, psidLAddr);      
-      
-      tmp.append(sid.csdasm(inB, sidPos, inB.length, sidPC));
-      source=tmp.toString();
+      tmp.append("\n");      
     } else {
         sid.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
-        tmp.append(sid.cdasm(inB, sidPos, inB.length, sidPC));
-        disassembly=tmp.toString(); 
-      }     
+      }  
+    
+    // add blocks from relocate
+    // ...
+    
+    disassemblyBlocks(asSource, sid, tmp);
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
   }
   
   /**
@@ -404,45 +382,23 @@ public class Disassembly {
    */
   private void disassemlyPRG(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    Block block;
     
     setupAssembler();
-      
-    switch (targetType) {
-      case C64:
-        prg=new C64Dasm();  
-        break;  
-      case C1541:
-        prg=new C1541Dasm();     
-        break;
-      case C128:
-        prg=new C128Dasm();  
-        break;
-      case VIC20:
-        prg=new CVic20Dasm(); 
-        break;
-      case PLUS4:
-        prg=new CPlus4Dasm();  
-        break;
-      default:  
-        prg=new M6510Dasm();
-    }      
     
+    prg=targetType.getDasm();             
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
-    int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
-     
-    // calculate start/end address
-    startAddress=start;    
-    startBuffer=2;
-    endAddress=inB.length-1-startBuffer+startAddress;
-    endBuffer=inB.length-1;
     
-    markInside(startAddress, endAddress, 2);
-     
-    // search for SID frequency table
-    SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
-            option.sidFreqLoLabel, option.sidFreqHiLabel);
+    block=new Block();   
+    block.startAddress=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
+    block.startBuffer=2;
+    block.endAddress=inB.length-1-block.startBuffer+block.startAddress;
+    block.endBuffer=inB.length-1;
+    block.inB=inB;            
+    blocks.add(block);
+       
      
     StringBuilder tmp=new StringBuilder();
     
@@ -457,23 +413,28 @@ public class Disassembly {
 
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
-
-      if (option.dasmF3Comp) {
-        assembler.setOrg(tmp, start-2);
-        assembler.setWord(tmp, inB[0], inB[1], null);
-        tmp.append("\n");
-      }  
-      assembler.setOrg(tmp, start);
-      
-      tmp.append(prg.csdasm(inB, 2, inB.length, start));
-      source=tmp.toString();
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
-        tmp.append(prg.cdasm(inB, 2, inB.length, start));
-        disassembly=tmp.toString();
-      }       
+      } 
+    
+    // add blocks from relocate
+    // ...
+    
+    // add startup for DASM if this is the case
+    if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+      int start=Math.max(0, getMinAddress());
+        
+      assembler.setOrg(tmp, start-2); 
+      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
+      tmp.append("\n");
+    } 
+    
+    disassemblyBlocks(asSource, prg, tmp);
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
   }   
   
   /**
@@ -484,29 +445,11 @@ public class Disassembly {
    */
   private void disassemblyCRT(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    Block block;
     
     setupAssembler();
       
-    switch (targetType) {
-      case C64:
-        prg=new C64Dasm();  
-        break;  
-      case C1541:
-        prg=new C1541Dasm();     
-        break;
-      case C128:
-        prg=new C128Dasm();  
-        break;
-      case VIC20:
-        prg=new CVic20Dasm(); 
-        break;
-      case PLUS4:
-        prg=new CPlus4Dasm();  
-        break;
-      default:  
-        prg=new M6510Dasm();
-    }      
-    
+    prg=targetType.getDasm();          
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
@@ -537,20 +480,14 @@ public class Disassembly {
       
     // pos= position of starting of CHIP area inside buffer
     
-    startAddress=((inB[pos+0xC]&0xFF)<<8)+(inB[pos+0xD]&0xFF);
-    endAddress=startAddress+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF);
+    block=new Block();   
+    block.startAddress=((inB[pos+0xC]&0xFF)<<8)+(inB[pos+0xD]&0xFF);
+    block.startBuffer=pos+0x10;
+    block.endAddress=block.startAddress+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF)-1; 
+    block.endBuffer=block.startBuffer+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF)-1;
+    block.inB=inB;            
+    blocks.add(block);
     
-    
-     
-    // calculate start/end address
-    startBuffer=pos+0x10;
-    endBuffer=startBuffer+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF);
-    
-    markInside(startAddress, endAddress, 2);
-     
-    // search for SID frequency table
-    SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, startAddress-startBuffer,
-            option.sidFreqLoLabel, option.sidFreqHiLabel);
      
     StringBuilder tmp=new StringBuilder();
     
@@ -559,29 +496,32 @@ public class Disassembly {
 
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);
-      
+      assembler.setBlockComment(tmp, mem);     
       assembler.setConstant(tmp, constant);
-
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
-
-      if (option.dasmF3Comp) {
-        assembler.setOrg(tmp, startAddress-2);
-        assembler.setWord(tmp, (byte)(startAddress>>8), (byte)startAddress, null);
-        tmp.append("\n");
-      }  
-      assembler.setOrg(tmp, startAddress);
-      
-      tmp.append(prg.csdasm(inB, startBuffer, endBuffer, startAddress));
-      source=tmp.toString();
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB))
            .append("\nCHIP=").append(chip).append("\n");
-        tmp.append(prg.cdasm(inB, startBuffer, endBuffer, startAddress));
-        disassembly=tmp.toString();
-      }       
+      } 
+            
+    // add blocks from relocate
+    // ...
+    
+    // add startup for DASM if this is the case
+    if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+      int start=Math.max(0, getMinAddress());
+        
+      assembler.setOrg(tmp, start-2); 
+      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
+      tmp.append("\n");
+    } 
+        
+    disassemblyBlocks(asSource, prg, tmp);   
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
   }    
   
   /**
@@ -592,28 +532,11 @@ public class Disassembly {
    */
   private void disassemlyVSF(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    Block block;
     
     setupAssembler();
       
-    switch (targetType) {
-      case C64:
-        prg=new C64Dasm();  
-        break;  
-      case C1541:
-        prg=new C1541Dasm();     
-        break;
-      case C128:
-        prg=new C128Dasm();  
-        break;
-      case VIC20:
-        prg=new CVic20Dasm(); 
-        break;
-      case PLUS4:
-        prg=new CPlus4Dasm();  
-        break;
-      default:  
-        prg=new M6510Dasm();
-    }      
+    prg=targetType.getDasm();    
     
     prg.setMemory(memory);
     prg.setConstant(constant);
@@ -658,19 +581,15 @@ public class Disassembly {
      else disassembly="";
      return;
     }
-    
-       
+           
     // calculate start/end address
-    startAddress=0;    
-    startBuffer=pos+26;
-    endAddress=65535;
-    endBuffer=startBuffer+endAddress+1;
-    
-    markInside(startAddress, endAddress, startBuffer);
-     
-    // search for SID frequency table
-    SidFreq.instance.identifyFreq(inB, memory, startBuffer, endBuffer, startAddress-startBuffer,
-            option.sidFreqLoLabel, option.sidFreqHiLabel);
+    block=new Block();
+    block.startAddress=0;    
+    block.startBuffer=pos+26;
+    block.endAddress=65535;
+    block.endBuffer=block.startBuffer+block.endAddress+1;
+    block.inB=inB;
+    blocks.add(block);
      
     StringBuilder tmp=new StringBuilder();
     
@@ -684,24 +603,30 @@ public class Disassembly {
       assembler.setConstant(tmp, constant);
 
       assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory);
-
-      if (option.dasmF3Comp) {
-        assembler.setOrg(tmp, startAddress);
-        assembler.setWord(tmp, (byte)0, (byte)0, null);
-        tmp.append("\n");
-      }  
-      assembler.setOrg(tmp, startAddress);
-      
-      tmp.append(prg.csdasm(inB, startBuffer, endBuffer, startAddress));
-      source=tmp.toString();
+      assembler.setMacro(tmp, memory); 
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         tmp.append(fileType.getDescription(inB));
         tmp.append("\n");
-        tmp.append(prg.cdasm(inB, startBuffer, endBuffer, startAddress));
-        disassembly=tmp.toString();
-      }       
+
+      }      
+    
+    // add blocks from relocate
+    // ...
+    
+    // add startup for DASM if this is the case
+    if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+      int start=Math.max(0, getMinAddress());
+        
+      assembler.setOrg(tmp, start-2); 
+      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
+      tmp.append("\n");
+    } 
+            
+    disassemblyBlocks(asSource, prg, tmp);   
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
   }   
   
   /**
@@ -712,28 +637,11 @@ public class Disassembly {
    */
   private void disassemlyMPR(boolean asSource, TargetType targetType) {
     M6510Dasm prg;
+    Block block;
     
     setupAssembler();
       
-    switch (targetType) {
-      case C64:
-        prg=new C64Dasm();     
-        break;  
-      case C1541:
-        prg=new C1541Dasm();   
-        break;
-      case C128:
-        prg=new C128Dasm();  
-        break;
-      case VIC20:
-        prg=new CVic20Dasm(); 
-        break;
-      case PLUS4:
-        prg=new CPlus4Dasm();       
-        break;
-      default:  
-        prg=new M6510Dasm();
-    }
+    prg=targetType.getDasm();
        
     prg.setMemory(memory);
     prg.setConstant(constant);
@@ -743,19 +651,13 @@ public class Disassembly {
     
     StringBuilder tmp=new StringBuilder();
     
-    byte[] inB;
-    
-    boolean first=true;
-    
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
       
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);
-      
+      assembler.setBlockComment(tmp, mem);      
       assembler.setConstant(tmp, constant);
-
       assembler.setStarting(tmp);
       assembler.setMacro(tmp, memory);
     } else {    
@@ -765,60 +667,82 @@ public class Disassembly {
         tmp.append("\n");        
       }
     
-    // sort by asc memory address
-    Collections.sort(mpr.blocks, new Comparator<byte[]>() {
-        @Override
-        public int compare(byte[] block2, byte[] block1)
-        {
-
-            return  (Unsigned.done(block2[0])+Unsigned.done(block2[1])*256)-
-                    (Unsigned.done(block1[0])+Unsigned.done(block1[1])*256);
-        }
-     });
-     
-     startMPR=new int[mpr.block];
-     endMPR=new int[mpr.block];
+    // generate the blocks
+    for (byte[] inB: mpr.blocks) {
+      block=new Block();
+      block.inB=inB;
+      
+      block.startAddress=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
+      block.startBuffer=2;
+      block.endAddress=inB.length-1-block.startBuffer+block.startAddress;      
+      block.endBuffer=inB.length-1;
+      blocks.add(block);
+    }
     
-    Iterator<byte[]> iter=mpr.blocks.iterator();
-    int i=0;
+    // add blocks from relocate
+    // ...
+    
+    // add startup for DASM if this is the case
+    if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+      int start=Math.max(0, getMinAddress());
+        
+      assembler.setOrg(tmp, start-2); 
+      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
+      tmp.append("\n");
+    }   
+    
+    disassemblyBlocks(asSource, prg, tmp);
+    
+    if (asSource) source=tmp.toString();
+    else disassembly=tmp.toString();
+  }
+  
+  /**
+   * Get the min starting address inside the blovks
+   * 
+   * @return the min starting address
+   */
+  private int getMinAddress() {
+    int min=0xffff;
+    
+    for (Block block: blocks) {
+      if (block.startAddress<min) min=block.startAddress;            
+    }  
+    
+    return min;
+  }
+  
+  /**
+   * Disassembly the blocks we have 
+   * 
+   * @param asSource true if the disassembly is as source
+   * @param tmp the buffer for output
+   */
+  private void disassemblyBlocks(boolean asSource, M6510Dasm prg, StringBuilder tmp) {
+    Block block;
+
+    // sort by asc memory address
+    Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
+    
+        
+    Iterator<Block> iter=blocks.iterator();
     while (iter.hasNext()) {
-      inB=iter.next();
-      
-      int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
- 
-      // calculate start/end address
-      startAddress=start;    
-      startBuffer=2;
-      endAddress=inB.length-1-startBuffer+startAddress;
-      endBuffer=inB.length-1;
-      
-      startMPR[i]=startAddress;
-      endMPR[i]=endAddress;
-      i++;
-      
-      markInside(inB, startAddress, endAddress, 2);
+      block=iter.next();
+            
+      markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);
      
       // search for SID frequency table
-      SidFreq.instance.identifyFreq(inB, memory, startBuffer, inB.length, start-startBuffer,
+      SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, block.inB.length, block.startAddress-block.startBuffer,
              option.sidFreqLoLabel, option.sidFreqHiLabel);
       
 
       if (asSource) {
-        if (first && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
-          assembler.setOrg(tmp, start-2); 
-          assembler.setWord(tmp, inB[0], inB[1], null);
-          tmp.append("\n");
-          first=false;
-        }
-        assembler.setOrg(tmp, start);        
-        tmp.append(prg.csdasm(inB, 2, inB.length, start));
+        assembler.setOrg(tmp, block.startAddress);        
+        tmp.append(prg.csdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
       } else {    
-          tmp.append(prg.cdasm(inB, 2, inB.length, start));
+          tmp.append(prg.cdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
         }       
     }
-    
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
   }
   
  /**

@@ -23,6 +23,13 @@
  */
 package sw_emulator.swing.main;
 
+import sw_emulator.software.cpu.M6510Dasm;
+import sw_emulator.software.machine.C128Dasm;
+import sw_emulator.software.machine.C1541Dasm;
+import sw_emulator.software.machine.C64Dasm;
+import sw_emulator.software.machine.CPlus4Dasm;
+import sw_emulator.software.machine.CVic20Dasm;
+
 /**
  * Target machine type for disassembly
  * 
@@ -33,6 +40,28 @@ package sw_emulator.swing.main;
    C1541,
    C128,
    VIC20,
-   PLUS4              
+   PLUS4;              
+   
+   /**
+    * Get the appropriate disassembler for the target type
+    * 
+    * @return the disassembler to use
+    */
+   public M6510Dasm getDasm() {
+     switch (this) {
+      case C64:
+        return new C64Dasm();  
+      case C1541:
+        return new C1541Dasm();     
+      case C128:
+        return new C128Dasm();  
+      case VIC20:
+        return new CVic20Dasm(); 
+      case PLUS4:
+        return new CPlus4Dasm();  
+      default:  
+        return new M6510Dasm();
+     }    
+   }
 }    
 

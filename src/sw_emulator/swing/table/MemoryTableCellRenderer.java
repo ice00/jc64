@@ -28,6 +28,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import sw_emulator.software.Disassembly;
+import sw_emulator.swing.main.Block;
 import static sw_emulator.swing.table.DataTableModelMemory.COLUMNS.ID;
 
 /**
@@ -53,12 +54,12 @@ public class MemoryTableCellRenderer extends DefaultTableCellRenderer {
                                                       row, column);
       
       if (isSelected) return c;      
-      if (disassembly==null || disassembly.startAddress<0) return c;
+      if (disassembly==null) return c;
       
       if (DataTableModelMemory.columns[table.convertColumnIndexToModel(column)]==ID) {
-        if (disassembly.startMPR!=null)   {
-            for (int i=0; i<disassembly.startMPR.length; i++) {
-              if (row>=disassembly.startMPR[i] && row<=disassembly.endMPR[i]) {
+
+            for (Block block: disassembly.blocks) {
+              if (row>=block.startAddress && row<=block.endAddress) {
                 if (disassembly.memory[row].isCode) c.setBackground(Color.green);
                 else if (disassembly.memory[row].isData) c.setBackground(Color.cyan);
                 else if (disassembly.memory[row].isGarbage) c.setBackground(Color.red);
@@ -67,13 +68,6 @@ public class MemoryTableCellRenderer extends DefaultTableCellRenderer {
               } 
             }
             c.setBackground(Color.white);
-        } else {
-            if (row<disassembly.startAddress || row>disassembly.endAddress) c.setBackground(Color.white);
-            else if (disassembly.memory[row].isCode) c.setBackground(Color.green);
-            else if (disassembly.memory[row].isData) c.setBackground(Color.cyan);
-            else if (disassembly.memory[row].isGarbage) c.setBackground(Color.red);
-            else c.setBackground(Color.LIGHT_GRAY);
-          }
       }
       return c;
     }
