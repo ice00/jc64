@@ -25,12 +25,18 @@ package sw_emulator.swing;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.bind.DatatypeConverter;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.Project;
+import sw_emulator.swing.main.Relocate;
 import sw_emulator.swing.main.TargetType;
 
 /**
@@ -67,6 +73,50 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
+    }
+    
+  /**
+   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
+   *
+   * @param value the short value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected String ShortToExe(int value) {
+    int tmp=value;
+
+    if (value<0) return "????";
+    
+    String ret=Integer.toHexString(tmp);
+    int len=ret.length();
+    switch (len) {
+      case 1:
+        ret="000"+ret;
+        break;
+     case 2:
+        ret="00"+ret;
+        break;
+     case 3:
+        ret="0"+ret;
+        break;
+    }
+    return ret.toUpperCase(Locale.ENGLISH);
+  } 
+    
+    /**
+     * Get relocate table as string description
+     * 
+     * @return the string description
+     */
+    private String getRelocateDesc() {
+      if (project==null || project.relocates==null) return "";
+      
+      String res="";
+      for (Relocate relocate:project.relocates) {
+        res+=ShortToExe(relocate.fromStart)+":"+ShortToExe(relocate.fromEnd)+" => "+
+             ShortToExe(relocate.toStart)+":"+ShortToExe(relocate.toEnd)+"\n";
+      }
+      
+      return res;
     }
     
     /**
@@ -137,6 +187,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonVic20.setSelected(false);
           jRadioButtonPlus4.setSelected(false);
         }
+      jTextAreaRelocate.setText(getRelocateDesc());
     }
 
     /**
@@ -179,6 +230,10 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabelConstant = new javax.swing.JLabel();
         jButtonEdit = new javax.swing.JButton();
         jRadioButtonVSF = new javax.swing.JRadioButton();
+        jLabelRelocate = new javax.swing.JLabel();
+        jButtonRelocateAdd = new javax.swing.JButton();
+        jScrollPaneRelocate = new javax.swing.JScrollPane();
+        jTextAreaRelocate = new javax.swing.JTextArea();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -319,6 +374,20 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonVSF.setText("VSF");
         jRadioButtonVSF.setEnabled(false);
 
+        jLabelRelocate.setText("Relocate table:");
+
+        jButtonRelocateAdd.setText("Add");
+        jButtonRelocateAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelocateAddActionPerformed(evt);
+            }
+        });
+
+        jTextAreaRelocate.setEditable(false);
+        jTextAreaRelocate.setColumns(20);
+        jTextAreaRelocate.setRows(5);
+        jScrollPaneRelocate.setViewportView(jTextAreaRelocate);
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -369,20 +438,26 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonVic20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonPlus4))
+                                .addComponent(jRadioButtonPlus4)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelConstant, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelSidLd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRelocateAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabelConstant, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelSidLd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonInit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAddNext)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButtonAddNext)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPaneRelocate))))
                 .addContainerGap())
         );
         jPanelCenterLayout.setVerticalGroup(
@@ -430,7 +505,15 @@ public class JProjectDialog extends javax.swing.JDialog {
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelConstant)
                     .addComponent(jButtonEdit))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonRelocateAdd)
+                            .addComponent(jLabelRelocate)))
+                    .addComponent(jScrollPaneRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -544,7 +627,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           }
         
         project.fileType=project.fileType.getFileType(project.inB);
-        
+        jTextAreaRelocate.setText(getRelocateDesc());        
       } 
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
@@ -611,6 +694,33 @@ public class JProjectDialog extends javax.swing.JDialog {
       jConstantDialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditActionPerformed
 
+    private void jButtonRelocateAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelocateAddActionPerformed
+      Relocate relocate=new Relocate();
+      
+      relocate.fromStart=Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) from where to copy"),16);
+      relocate.fromEnd=Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) from where to copy"),16);
+      relocate.toStart=Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) to where to copy"), 16);
+      relocate.toEnd=Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) to where to copy"), 16);
+      
+      if (!relocate.isValidRange()) {
+        JOptionPane.showMessageDialog(this, "Invalid range of addresses", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
+      
+      int size=0;
+      if (project.relocates!=null) size=project.relocates.length;
+      
+      // copy the value in the list
+      Relocate[] relocates2=new Relocate[size+1];
+      if (size>0) System.arraycopy(project.relocates, 0, relocates2, 0, project.relocates.length);
+      relocates2[size]=relocate;
+            
+      project.relocates=relocates2;
+      
+      
+      jTextAreaRelocate.setText(getRelocateDesc());
+    }//GEN-LAST:event_jButtonRelocateAddActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -662,6 +772,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonInit;
+    private javax.swing.JButton jButtonRelocateAdd;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabelConstant;
     private javax.swing.JLabel jLabelFileDes;
@@ -669,6 +780,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelFileType;
     private javax.swing.JLabel jLabelInputFile;
     private javax.swing.JLabel jLabelProjectName;
+    private javax.swing.JLabel jLabelRelocate;
     private javax.swing.JLabel jLabelSidLd;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelDn;
@@ -684,8 +796,10 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonVSF;
     private javax.swing.JRadioButton jRadioButtonVic20;
     private javax.swing.JScrollPane jScrollPaneDescr;
+    private javax.swing.JScrollPane jScrollPaneRelocate;
     private javax.swing.JSpinner jSpinnerCRT;
     private javax.swing.JTextArea jTextAreaDescr;
+    private javax.swing.JTextArea jTextAreaRelocate;
     private javax.swing.JTextField jTextFieldInputFile;
     private javax.swing.JTextField jTextFieldProjectName;
     // End of variables declaration//GEN-END:variables

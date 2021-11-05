@@ -77,6 +77,9 @@ public class Project implements Cloneable {
   
   /** Constant for assembler */
   public Constant constant=new Constant();
+  
+  /** Relocate entries */
+  public Relocate[] relocates;
 
   /**
    * Construct the project

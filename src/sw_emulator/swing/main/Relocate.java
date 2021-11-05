@@ -51,6 +51,8 @@ public class Relocate {
    if (toEnd < toStart) return false;
    
    if (fromEnd-fromStart!=toEnd-toStart) return false;
+   
+   if (fromStart<0 || toStart<0 || fromEnd>0xFFFF || toEnd>0xFFFF) return false;
 
    return true;   
   }

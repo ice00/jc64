@@ -37,6 +37,7 @@ import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
+import sw_emulator.swing.main.Relocate;
 import sw_emulator.swing.main.TargetType;
 
 /**
@@ -54,7 +55,7 @@ public class Disassembly {
   /** Buffer of data to disassemble */
   private byte[] inB;
   
-  /** Eventual mulpiple program */
+  /** Eventual multiple program */
   private MPR mpr;
   
   /** Eventual CRT chip */
@@ -65,6 +66,9 @@ public class Disassembly {
   
   /** The option for disassembler */
   private Option option;
+  
+  /** The relocates for disassembly */
+  private Relocate[] relocates;
   
   
   /** Blocks of memory to disassemblate */
@@ -151,22 +155,23 @@ public class Disassembly {
    * @param memory the memory for dasm
    * @param constant the constants to use
    * @param mpr eventual MPR blocks to use
+   * @param relocates eventual relocates to use
    * @param chip eventual CRT chip
    * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, Constant constant, MPR mpr, int chip, TargetType targetType, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, Constant constant, MPR mpr, Relocate[] relocates, int chip, TargetType targetType, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
     this.mpr=mpr;
     this.chip=chip;
     this.constant=constant;
+    this.relocates=relocates;
 
     this.memory=memory;
-
-              
-    // avoid to precess null data  
+     
+    // avoid to process null data  
     if (inB==null) {
       source="";
       disassembly="";
@@ -350,7 +355,7 @@ public class Disassembly {
       }  
     
     // add blocks from relocate
-    // ...
+    addRelocate(blocks); 
     
     disassemblyBlocks(asSource, sid, tmp);
     
@@ -420,7 +425,7 @@ public class Disassembly {
       } 
     
     // add blocks from relocate
-    // ...
+    addRelocate(blocks);
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -507,7 +512,7 @@ public class Disassembly {
       } 
             
     // add blocks from relocate
-    // ...
+    addRelocate(blocks);    
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -612,7 +617,7 @@ public class Disassembly {
       }      
     
     // add blocks from relocate
-    // ...
+    addRelocate(blocks);    
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -680,7 +685,7 @@ public class Disassembly {
     }
     
     // add blocks from relocate
-    // ...
+    addRelocate(blocks);
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -773,17 +778,33 @@ public class Disassembly {
   }  
   
   /**
-   * Mark the memory as inside
+   * Add relocate blocks
    * 
-   * @param start the start of internal
-   * @param end the end of internal
-   * @param offset in buffer of start position
+   * @param list the list where to add blocks
    */
-  private void markInside(int start, int end, int offset) {
-    for (int i=start; i<=end; i++) {
-      memory[i].isInside=true;  
-      memory[i].copy=inB[i-start+offset];
-    }  
+  private void addRelocate(ArrayList<Block> list) {
+    if (relocates==null)   return;
+    
+    byte[] inB;
+    int size;
+    Block block;
+    
+   for (Relocate relocate:relocates) {
+     size=relocate.fromEnd-relocate.fromStart+1;
+     inB=new byte[size];
+     for (int i=0; i<size; i++) {
+       inB[i]=memory[relocate.fromStart+i].copy;  
+     } 
+     
+     block=new Block();
+     block.inB=inB;
+     block.startAddress=relocate.toStart;
+     block.endAddress=relocate.toEnd;
+     block.startBuffer=0;
+     block.endBuffer=size-1;
+     list.add((block));
+   }
+      
   }
   
   /**
