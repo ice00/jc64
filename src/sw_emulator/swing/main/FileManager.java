@@ -672,6 +672,7 @@ public class FileManager {
   public boolean readProjectFile(File file, Project project) {
     try {      
       MemoryDasm mem;  
+      Relocate relocate;
       DataInputStream in=new DataInputStream(
                          new BufferedInputStream(
                          new FileInputStream(file)));  
@@ -751,6 +752,21 @@ public class FileManager {
         }
       }
       
+      if (version>3)  {                         // version 4
+        size=in.readInt();
+        if (size==0) project.relocates=null;
+        else {
+          for (int i=0; i<size; i++) {  
+            project.relocates=new Relocate[size];
+            relocate=new Relocate();
+            relocate.fromStart=in.readInt();
+            relocate.fromEnd=in.readInt();
+            relocate.toStart=in.readInt();
+            relocate.toEnd=in.readInt();
+            project.relocates[i]=relocate;
+          }
+        }
+      }    
     } catch (Exception e) {
         System.err.println(e);
         return false;
@@ -849,6 +865,18 @@ public class FileManager {
               out.writeBoolean(false);
             } 
         }  
+      }
+      
+      // version 4
+      if (project.relocates==null) out.writeInt(0);
+      else {
+        out.writeInt(project.relocates.length);
+        for (Relocate relocate:project.relocates) {
+          out.writeInt(relocate.fromStart);
+          out.writeInt(relocate.fromEnd);
+          out.writeInt(relocate.toStart);
+          out.writeInt(relocate.toEnd);
+        }
       }
       
       out.flush();

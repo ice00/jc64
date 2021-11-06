@@ -15,7 +15,7 @@
   The project windows gives you the ability to insert:
     <ul>
      <li><b>Project name:</b> a name to give to the project</li>
-     <li><b>File to disassemblate:</b> it let you choose the file that you want to disassemblate. Once done, you will see the type (SID, MUS, PRG, MPG, CRT) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemblate using the spinner</li>
+     <li><b>File to disassemblate:</b> it let you choose the file that you want to disassemblate. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemblate using the spinner</li>
      <li><b>Target maschine:</b> for program file you can choose the target machine to use in disassembler from:
          <ul>
              <li><b>C64</b></li>
@@ -40,6 +40,16 @@
      <li><b>Edit Constant Table:</b> create constants of max 5 chars that you can associate to better format the code.
      <p align="center"><img src="./constant1.png"></p>    
      </li>
+     <li><b>Edit Relocate table:</b> you can insert a list of addresses that are code relocated.<br>
+         For example: this code takes the contents from $8000 to $8CFF and relocates it to $C000:$CCFF
+         <p align="center"><img src="./project2.png"></p>
+         <p align="center"><img src="./project3.png"></p>
+         <p align="center"><img src="./project4.png"></p>
+         Now you can makes as garbage the code from $8000 that refers to code relocated in $C000 and continue to works on $C000 analysis.<br>
+         The disadvantage of this is that the source code you obtain can not be compiled back to the original binary form.<br>
+         Due to the nature of relocation implementation, when you apply a relocation address it copies the value from one position to another position in memory, so the order of application is important in case of multiple relocation. 
+         For this once added you cannot delete the relocations, so before adding it, save the project and reopen it if the relocation is wrong.
+     </li>  
     </ul>
   <h2>Open project</h2>
   <p>The function let you open a previusly salved project by read a .dis file.<br>

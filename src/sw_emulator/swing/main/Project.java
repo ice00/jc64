@@ -41,7 +41,7 @@ import sw_emulator.software.MemoryDasm;
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=3;       
+  public static final byte ACTUAL_VERSION=4;       
     
   /**
    * Type of the file

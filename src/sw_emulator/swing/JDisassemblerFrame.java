@@ -4381,11 +4381,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
     }
-    
+        
     Vector cols=new Vector();
     cols.add("ADDR");
     cols.add("DASM");
     cols.add("USER");
+    cols.add("REL");
         
     Vector rows=new Vector();
     Vector data;
@@ -4401,6 +4402,36 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         data.add(ShortToExe(memory.address));
         data.add(memory.dasmLocation);
         data.add(memory.userLocation);
+        
+        String res="";
+        if (memory.type=='+') {
+          /// this is a memory in table label
+          int pos=memory.address-memory.related;
+          MemoryDasm mem2=project.memory[memory.related];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+          else res="$"+ShortToExe((int)memory.related)+"+"+pos;  
+        }
+    
+        if (memory.type=='^') {
+          /// this is a memory in table label
+          int rel=memory.related>>16;
+          int pos=memory.address-rel;
+          MemoryDasm mem2=project.memory[rel];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+          else res="$"+ShortToExe(rel)+"+"+pos;  
+        }    
+    
+        if (memory.type=='-') {
+          /// this is a memory in table label
+          int pos=memory.address-memory.related;
+          MemoryDasm mem2=project.memory[memory.related];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+          else res="$"+ShortToExe((int)memory.related)+pos;  
+        }         
+        data.add(res);
           
         rows.add(data);
       }
@@ -4408,6 +4439,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     JTable table = new JTable(rows, cols);
     table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    table.getColumnModel().getColumn(0).setPreferredWidth(18);
     
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
             "Select the address to use as #<", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
@@ -4521,6 +4553,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     cols.add("ADDR");
     cols.add("DASM");
     cols.add("USER");
+    cols.add("REL");
         
     Vector rows=new Vector();
     Vector data;
@@ -4536,6 +4569,36 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         data.add(ShortToExe(memory.address));
         data.add(memory.dasmLocation);
         data.add(memory.userLocation);
+        
+        String res="";
+        if (memory.type=='+') {
+          /// this is a memory in table label
+          int pos=memory.address-memory.related;
+          MemoryDasm mem2=project.memory[memory.related];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+          else res="$"+ShortToExe((int)memory.related)+"+"+pos;  
+        }
+    
+        if (memory.type=='^') {
+          /// this is a memory in table label
+          int rel=memory.related>>16;
+          int pos=memory.address-rel;
+          MemoryDasm mem2=project.memory[rel];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+          else res="$"+ShortToExe(rel)+"+"+pos;  
+        }    
+    
+        if (memory.type=='-') {
+          /// this is a memory in table label
+          int pos=memory.address-memory.related;
+          MemoryDasm mem2=project.memory[memory.related];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+          else res="$"+ShortToExe((int)memory.related)+pos;  
+        }         
+        data.add(res);
           
         rows.add(data);
       }
@@ -4543,6 +4606,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     JTable table = new JTable(rows, cols);
     table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    table.getColumnModel().getColumn(0).setPreferredWidth(18);
     
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
            "Select the address to use as #>", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
@@ -4620,7 +4684,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     int addr;
     for (int i=1; i<256; i++) {
       addr=mem.address-i;
-      if (i<0) continue;
+      if (addr<0) continue;
       
       memory=project.memory[addr];
       
@@ -4771,7 +4835,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     int addr;
     for (int i=1; i<256; i++) {
       addr=mem.address+i;
-      if (i<0) continue;
+      if (addr>0xFFFF) continue;
       
       memory=project.memory[addr];
       
