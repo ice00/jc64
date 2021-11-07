@@ -552,6 +552,7 @@ public class Assembler {
         
         MemoryDasm mem;
         MemoryDasm memRel;
+        MemoryDasm memRel2;
         
         int initial=str.length();
         
@@ -597,14 +598,47 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=iter.next();
           memRel=listRel.pop();
+          memRel2=listRel2.pop();
           
           if (mem.type=='<' || mem.type=='>' || mem.type=='^') {    
             char type;
             if (mem.type=='^') type='>';
             else type=mem.type;
-            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
+            
+            if (memRel2!=null) {                
+              switch (memRel.type) {
+                case '+':
+                  /// this is a memory in table label
+                  int pos=memRel.address-memRel.related;
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append("+").append(pos);
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append("+").append(pos);
+                  else str.append(type).append("$").append(ShortToExe((int)memRel.related)).append("+").append(pos);
+                  break;
+                case '^':
+                  /// this is a memory in table label
+                  int rel=memRel.related>>16;
+                  pos=memRel.address-rel;
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append("+").append(pos);
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append("+").append(pos);
+                  else str.append(type).append("$").append(ShortToExe(rel)).append("+").append(pos);
+                  break;
+                case '-':
+                  /// this is a memory in table label
+                  pos=memRel.address-memRel.related;
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append(pos);  
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append(pos);
+                  else str.append(type).append("$").append(ShortToExe((int)memRel.related)).append(pos);
+                  break;             
+                default:
+                  if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
+                  else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
+                  else str.append(type).append("$").append(ShortToExe(memRel.address));          
+                  break;
+              }                
+            }           
+            else if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
-                 else str.append(type).append("$").append(ShortToExe(memRel.address));
+            else str.append(type).append("$").append(ShortToExe(memRel.address));              
           } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
           if (listRel.size()>0) str.append(", ");  
           else {
@@ -786,8 +820,11 @@ public class Assembler {
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
+           listRel2.pop();
+           
            memHigh=list.pop();
            memRelHigh=listRel.pop();           
+           listRel2.pop();
            
            if (memLow.type=='<' && (memHigh.type=='>' || memHigh.type=='^')&& (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
@@ -801,6 +838,8 @@ public class Assembler {
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
                  listRel.addFirst(memRelLow);
+                 listRel2.addFirst(null);
+                 listRel2.addFirst(null);
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
                    isFirst=false;
@@ -882,8 +921,11 @@ public class Assembler {
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
+           listRel2.pop();
+           
            memHigh=list.pop();
-           memRelHigh=listRel.pop();           
+           memRelHigh=listRel.pop();  
+           listRel2.pop();
            
            if (memLow.type=='<' && (memHigh.type=='>' || memHigh.type=='^')&& (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
@@ -897,6 +939,9 @@ public class Assembler {
                list.addFirst(memLow);
                listRel.addFirst(memRelHigh);
                listRel.addFirst(memRelLow);
+               listRel2.addFirst(null);
+               listRel2.addFirst(null);
+               
                if (isFirst) {
                  str.replace(pos1, pos2, "");
                  isFirst=false;
@@ -1159,9 +1204,15 @@ public class Assembler {
            mem1=list.pop();
            mem2=list.pop();
            mem3=list.pop();
+           
            listRel.pop();
            listRel.pop();
            listRel.pop();
+           
+           listRel2.pop();
+           listRel2.pop();
+           listRel2.pop();
+           
            if (aTribyte==DOT_LINT_TRIBYTE && mem1.copy<0) {
               str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
                               .append(ByteToExe(Unsigned.done(mem2.copy)))
@@ -1487,10 +1538,17 @@ public class Assembler {
            mem2=list.pop();
            mem3=list.pop();
            mem4=list.pop();
+           
            listRel.pop();
            listRel.pop();
            listRel.pop();
            listRel.pop();
+           
+           listRel2.pop();
+           listRel2.pop();
+           listRel2.pop();
+           listRel2.pop();
+           
            if (aLong==DOT_DLINT_LONG && mem1.copy<0) {
               str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
                               .append(ByteToExe(Unsigned.done(mem2.copy)))
@@ -1646,8 +1704,11 @@ public class Assembler {
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
+           listRel2.pop();
+           
            memHigh=list.pop();
-           memRelHigh=listRel.pop();           
+           memRelHigh=listRel.pop(); 
+           listRel2.pop();
            
            if (memLow.type=='<' && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
@@ -1661,6 +1722,9 @@ public class Assembler {
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
                  listRel.addFirst(memRelLow);
+                 listRel2.addFirst(null);
+                 listRel2.addFirst(null);
+                 
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
                    isFirst=false;
@@ -1767,6 +1831,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
@@ -1776,7 +1844,11 @@ public class Assembler {
                  .append("  ");
                listRel.pop();
                listRel.pop();
-               listRel.pop();  
+               listRel.pop(); 
+               
+               listRel2.pop();
+               listRel2.pop();
+               listRel2.pop();
                break;                
             case MACRO_HEX:
             case MACRO3_HEX:    
@@ -1789,6 +1861,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO_BIN:
             case MACRO3_BIN:    
@@ -1801,6 +1877,10 @@ public class Assembler {
                listRel.pop();
                listRel.pop();
                listRel.pop();  
+               
+               listRel2.pop();
+               listRel2.pop();
+               listRel2.pop();
                break;  
             case MACRO1_HEX:
               str.append(getDataSpacesTabs())
@@ -1813,6 +1893,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO1_BIN:
               str.append(getDataSpacesTabs())
@@ -1822,10 +1906,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append(")  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break; 
+              listRel.pop();
+              listRel.pop();
+              listRel.pop(); 
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -1835,6 +1923,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine %")
@@ -1842,10 +1934,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;    
+              listRel.pop();
+              listRel.pop();
+              listRel.pop(); 
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;    
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -1855,6 +1951,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine %")
@@ -1862,10 +1962,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;               
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();  
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;               
             }
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
@@ -2008,6 +2112,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
@@ -2015,10 +2123,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;               
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();  
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;               
             case MACRO_HEX:
             case MACRO3_HEX:    
               str.append(getDataSpacesTabs()).append("MultiSpriteLine $")
@@ -2029,6 +2141,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO_BIN:
             case MACRO3_BIN:    
@@ -2037,10 +2153,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;  
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();  
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;  
             case MACRO1_HEX:
               str.append(getDataSpacesTabs())
                  .append((option.kickColonMacro ? ":":""))     
@@ -2052,6 +2172,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO1_BIN:
               str.append(getDataSpacesTabs())
@@ -2061,10 +2185,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append(")  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break; 
+              listRel.pop();
+              listRel.pop();
+              listRel.pop(); 
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -2074,6 +2202,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine %")
@@ -2081,10 +2213,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;   
+              listRel.pop();
+              listRel.pop();
+              listRel.pop();  
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;   
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -2094,6 +2230,10 @@ public class Assembler {
               listRel.pop();
               listRel.pop();
               listRel.pop();
+              
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine %")
@@ -2101,10 +2241,14 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               break;               
+              listRel.pop();
+              listRel.pop();
+              listRel.pop(); 
+               
+              listRel2.pop();
+              listRel2.pop();
+              listRel2.pop();
+              break;               
             }          
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
@@ -2233,6 +2377,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -2280,6 +2425,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -2495,12 +2642,14 @@ public class Assembler {
          // this byte is calculated by instruction
          list.pop();
          listRel.pop();
+         listRel2.pop();
        }
       
         while (!list.isEmpty()) {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -2552,6 +2701,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -2769,6 +2920,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -2815,6 +2967,7 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -2831,6 +2984,7 @@ public class Assembler {
                   // terminating 0 is ommitted
                 list.pop();
                 listRel.pop();
+                listRel2.pop();
               }
               break; 
             case CA65:
@@ -2861,6 +3015,7 @@ public class Assembler {
                   // terminating 0 is ommitted
                 list.pop();
                 listRel.pop();
+                listRel2.pop();
               }
               break;  
            case ACME:                
@@ -2892,6 +3047,7 @@ public class Assembler {
                   // terminating 0 is ommitted
                 list.pop();
                 listRel.pop();
+                listRel2.pop();
               }
               break;  
             case KICK:
@@ -2965,6 +3121,7 @@ public class Assembler {
                   // terminating 0 is ommitted
                 list.pop();
                 listRel.pop();
+                listRel2.pop();
               }
               break;               
           }   
@@ -3048,6 +3205,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -3083,6 +3241,8 @@ public class Assembler {
                 // terminating has 1 converted to 0
                 mem=list.pop();
                 listRel.pop();
+                listRel2.pop();
+                
                 str.append((char)(mem.copy & 0x7F));  
               } 
               if (
@@ -3100,6 +3260,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -3231,6 +3393,8 @@ public class Assembler {
                 // terminating has 1 converted to 0
                 mem=list.pop();
                 listRel.pop();
+                listRel2.pop();
+                
                 str.append((char)(mem.copy & 0x7F));  
               }
               break;               
@@ -3318,6 +3482,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -3365,6 +3530,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                          
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -3569,6 +3736,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -3614,6 +3782,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -3822,6 +3992,7 @@ public class Assembler {
           // accodate each bytes in the format choosed
           mem=list.pop();
           memRel=listRel.pop();
+          listRel2.pop();
           
           // not all char can be converted in string
           
@@ -3868,6 +4039,8 @@ public class Assembler {
                       }                  
                   list.push(mem);
                   listRel.push(memRel);
+                  listRel2.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -4069,8 +4242,11 @@ public class Assembler {
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
+           listRel2.pop();
+           
            memHigh=list.pop();
            memRelHigh=listRel.pop();           
+           listRel2.pop();
            
            if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation).append("+1");
@@ -4084,6 +4260,9 @@ public class Assembler {
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
                  listRel.addFirst(memRelLow);
+                 listRel2.addFirst(null);
+                 listRel2.addFirst(null);
+                 
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
                    isFirst=false;
@@ -4334,6 +4513,9 @@ public class Assembler {
    /** Fifo list of related memory locations */
    protected static LinkedList<MemoryDasm> listRel=new LinkedList();   
    
+   /** Fifo list of related memory locations of second kind */
+   protected static LinkedList<MemoryDasm> listRel2=new LinkedList();
+   
    /** Option to use */
    protected static Option option;
          
@@ -4516,8 +4698,9 @@ public class Assembler {
     * @param str the string builder where put result
     * @param mem the memory being processed
     * @param memRel eventual memory related
+    * @param memRel2 eventaul memory related of second kind
     */
-   public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel) {
+   public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel, MemoryDasm memRel2) {
      ActionType type=actualType;  
      lastMem=mem;
      
@@ -4566,6 +4749,7 @@ public class Assembler {
      
      list.add(mem);
      listRel.add(memRel);
+     listRel2.add(memRel2);     
      
      // we are processing bytes?
      if (actualType instanceof Byte) {
@@ -4763,6 +4947,7 @@ public class Assembler {
        
      list.clear();
      listRel.clear();  
+     listRel2.clear();  
      
      lowMem.type='<';
      lowMem.related=address;
@@ -4775,6 +4960,8 @@ public class Assembler {
      highMemRel.dasmLocation=label;
      listRel.add(lowMemRel);
      listRel.add(highMemRel);
+     listRel2.add(null);
+     listRel2.add(null);
      
      actualType=aByte;
      flush(str);
@@ -4804,10 +4991,15 @@ public class Assembler {
      
      list.clear();
      listRel.clear();
+     listRel2.clear();
+     
      list.add(lowMem);
      listRel.add(null);
+     listRel2.add(null);
+     
      list.add(highMem);
      listRel.add(null);
+     listRel2.add(null);
      
      int size=0;
      
@@ -4840,6 +5032,7 @@ public class Assembler {
      
      list.clear();
      listRel.clear();
+     listRel2.clear();
           
      int size=0;
      
@@ -4849,6 +5042,7 @@ public class Assembler {
        mem.dataType=DataType.TEXT;
        list.add(mem);
        listRel.add(null);
+       listRel2.add(null);
      }
        
      actualType=aText;

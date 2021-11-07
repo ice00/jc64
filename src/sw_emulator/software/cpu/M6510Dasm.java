@@ -549,6 +549,8 @@ public class M6510Dasm implements disassembler {
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
     MemoryDasm mem;              // memory dasm
+    MemoryDasm memRel;           // memory related
+    MemoryDasm memRel2;          // memory related of second kind
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -638,7 +640,10 @@ public class M6510Dasm implements disassembler {
               assembler.setOrg(result, (int)pc);
             }            
             
-            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related & 0xFFFF]: null); 
+            memRel=mem.related!=-1 ? memory[mem.related & 0xFFFF]: null;
+            if (memRel!=null) memRel2=memRel.related!=-1 ? memory[memRel.related & 0xFFFF]: null;
+            else memRel2=null;
+            assembler.putValue(result, mem, memRel, memRel2); 
             
             pos++;
             pc++;
@@ -665,9 +670,9 @@ public class M6510Dasm implements disassembler {
     StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
-    String label;                // string for label 
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
+    MemoryDasm memRel2;          // memory related of second kind
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -737,7 +742,10 @@ public class M6510Dasm implements disassembler {
               assembler.setOrg(result, (int)pc);
             }   
             
-            assembler.putValue(result, mem, mem.related!=-1 ? memory[mem.related & 0xFFFF]: null);            
+            memRel=mem.related!=-1 ? memory[mem.related & 0xFFFF]: null;
+            if (memRel!=null) memRel2=memRel.related!=-1 ? memory[memRel.related & 0xFFFF]: null;
+            else memRel2=null;
+            assembler.putValue(result, mem, memRel, memRel2);            
             
             pos++;
             pc++;
