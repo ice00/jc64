@@ -756,8 +756,8 @@ public class FileManager {
         size=in.readInt();
         if (size==0) project.relocates=null;
         else {
-          for (int i=0; i<size; i++) {  
-            project.relocates=new Relocate[size];
+          project.relocates=new Relocate[size];
+          for (int i=0; i<size; i++) {              
             relocate=new Relocate();
             relocate.fromStart=in.readInt();
             relocate.fromEnd=in.readInt();
