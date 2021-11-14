@@ -33,6 +33,12 @@ public class SidFreq {
   /** A4 index in table */  
   static final int A4=57;  
   
+  /** A4 index in ocn note table table */
+  static final int OCT_NOTE_A4 = A4+16;
+  
+  /** Table size for ocatve/note */
+  static final int OCT_NOTE_TABLE = 128-6;
+  
   /** Table size */
   static final int TABLE = 96-6;
   
@@ -97,16 +103,22 @@ public class SidFreq {
     this.offset= offset;
     this.lowLabel=lowLabel;
     this.highLabel=highLabel;
-    
+ 
     if (linearTable()) return;
     if (combinedTable()) return;
     if (shortLinearTable()) return;        
     if (shortCombinedTable()) return;
     if (linearInverseTable()) return;
+    
+    if (linearOctNoteTable()) return;
     highOctave();
   }
   
-  /**
+  
+  ///////////////////////////
+  
+  
+    /**
    * Search for tables in linear way (low / high or high / low)
    *  
    * @return true if the table is fount
@@ -136,20 +148,21 @@ public class SidFreq {
           break;
         }           
       }
-    
-      // check for high frequency table (second part)
-      if ((low==-1) && (high<end-TABLE*2)) {
-        for (i=high+TABLE; i<end-TABLE; i++) {
-          if (searchLow(high, i)) {
-            low=i;
-            break;
-          }                 
-        }
+    }  
+        
+    // check for high frequency table (second part)
+    if ((low==-1) && (high<end-TABLE*2)) {
+      for (i=high+TABLE; i<end-TABLE; i++) {
+        if (searchLow(high, i)) {
+          low=i;
+          break;
+        }                 
       }
-    
-      // look if low table was fount
-      if (low==-1) return false;
     }
+      
+    
+    // look if low table was fount
+    if (low==-1) return false;  
     
     // get the A4 note
     sid=Unsigned.done(inB[high+A4])*256+Unsigned.done(inB[low+A4]);  
@@ -157,6 +170,66 @@ public class SidFreq {
     addData(high, low, sid);
     markMemory(high, high+TABLE+6, 1);
     markMemory(low, low+TABLE+6, 1);
+    
+    return true;    
+  }
+  
+  
+  ////////////////////////////
+  
+  /**
+   * Search for tables in linear way (low / high or high / low) in octave/note 
+   * format
+   *  
+   * @return true if the table is fount
+   */
+  private boolean linearOctNoteTable() {
+    int i;  
+    int sid;
+    int high=-1;
+    int low=-1;   
+    
+    // check for high frequency table
+    for (i=start; i<end-OCT_NOTE_TABLE; i++) {
+      if (searchOctNoteHigh(i)) {
+        high=i;
+        break;         
+      }
+    }  
+    
+    // look if high table was fount
+    if (high==-1) return false;      
+    
+    // check for low frequency table (first part)
+    if (high>OCT_NOTE_TABLE) {
+      for (i=0; i<=high-OCT_NOTE_TABLE-6; i++) {
+        if (searchOctNoteLow(high, i)) {
+          low=i;
+          break;
+        }           
+      }
+    }
+    
+    // check for high frequency table (second part)
+    if ((low==-1) && (high<end-OCT_NOTE_TABLE*2)) {
+      for (i=high+OCT_NOTE_TABLE+6; i<end-OCT_NOTE_TABLE-6; i++) {
+        if (searchOctNoteLow(high, i)) {
+          low=i;
+          break;
+        }                 
+      }
+    }
+    
+    // look if low table was fount
+    if (low==-1) return false;
+ 
+    
+    // get the A4 note
+    sid=Unsigned.done(inB[high+OCT_NOTE_A4])*256+Unsigned.done(inB[low+OCT_NOTE_A4]);  
+
+    addData(high, low, sid);
+    markMemory(high, high+OCT_NOTE_TABLE+6, 1);
+    markMemory(low, low+OCT_NOTE_TABLE+6, 1);
     
     return true;    
   }
@@ -397,6 +470,81 @@ public class SidFreq {
    
     return true;   
   } 
+  
+   /**
+   * Search for the high frequency table in linear way for octave/note format
+   *
+   * @param index the index where to start the test
+   * @return true if there is a high frequency table in that position 
+   */ 
+  private boolean searchOctNoteHigh(int index) {
+    int i=0;
+    int oct;
+    int actual=1;   
+   
+    // it must start with three 1
+    if ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1)) return false;
+    
+    for (oct=0; oct<8; oct++) {
+        if ((int)inB[index+oct*16+12]!=0 || 
+            (int)inB[index+oct*16+13]!=0 ||
+            (int)inB[index+oct*16+14]!=0 ||
+            (int)inB[index+oct*16+15]!=0)   return false;
+        
+        if ((int)(inB[index+oct*16] &0xff)<actual ||
+            (int)(inB[index+oct*16+1] &0xff)<(int)(inB[index+oct*16] &0xff) ||    
+            (int)(inB[index+oct*16+2] &0xff)<(int)(inB[index+oct*16+1] &0xff) ||        
+            (int)(inB[index+oct*16+3] &0xff)<(int)(inB[index+oct*16+2] &0xff) ||    
+            (int)(inB[index+oct*16+4] &0xff)<(int)(inB[index+oct*16+3] &0xff) ||    
+            (int)(inB[index+oct*16+5] &0xff)<(int)(inB[index+oct*16+4] &0xff) ||        
+            (int)(inB[index+oct*16+6] &0xff)<(int)(inB[index+oct*16+5] &0xff) ||        
+            (int)(inB[index+oct*16+7] &0xff)<(int)(inB[index+oct*16+6] &0xff) ||        
+            (int)(inB[index+oct*16+8] &0xff)<(int)(inB[index+oct*16+7] &0xff) ||        
+            (int)(inB[index+oct*16+9] &0xff)<(int)(inB[index+oct*16+8] &0xff) ||        
+            (int)(inB[index+oct*16+10] &0xff)<(int)(inB[index+oct*16+9] &0xff) ||        
+            (int)(inB[index+oct*16+11] &0xff)<(int)(inB[index+oct*16+10] &0xff)) return false; 
+      actual=(int)(inB[index+oct*16+11] &0xff);
+    }
+
+    return true;   
+  }
+  
+  /**
+   * Search for a low frequency table in linear way for octave/note
+   * 
+   * @param high the position of high table
+   * @param index the index where to search for low table
+   * @return true if there is a low frequency table in that position 
+   */ 
+  private boolean searchOctNoteLow(int high, int index){
+    int i;
+    int note1, note2, note3, note4, note5, note6, note7;
+    int diff;
+    
+    // scan all notes
+    for (i=0; i<12; i++) {
+      note1=(int)(inB[high+i]& 0xFF)*256+(int)(inB[index+i]& 0xFF);
+      note2=(int)(inB[high+i+16]& 0xFF)*256+(int)(inB[index+i+16]& 0xFF);
+      note3=(int)(inB[high+i+16*2]& 0xFF)*256+(int)(inB[index+i+16*2]& 0xFF);
+      note4=(int)(inB[high+i+16*3]& 0xFF)*256+(int)(inB[index+i+16*3]& 0xFF);
+      note5=(int)(inB[high+i+16*4]& 0xFF)*256+(int)(inB[index+i+16*4]& 0xFF);
+      note6=(int)(inB[high+i+16*5]& 0xFF)*256+(int)(inB[index+i+16*5]& 0xFF);
+      note7=(int)(inB[high+i+16*6]& 0xFF)*256+(int)(inB[index+i+16*6]& 0xFF);
+  
+      diff=0;
+      diff+=Math.abs(note1*2 - note2);
+      if (i<11) diff+=Math.abs(note2*2 - note3);
+      if (i<11) diff+=Math.abs(note3*2 - note4);
+      if (i<11) diff+=Math.abs(note4*2 - note5);
+      if (i<11) diff+=Math.abs(note5*2 - note6);
+      if (i<11) diff+=Math.abs(note6*2 - note7);
+      
+      if (diff>ERROR+3) return false;
+    }
+   
+    return true;
+  }  
+  
   
   /**
    * Search for a low frequency table in linear way
