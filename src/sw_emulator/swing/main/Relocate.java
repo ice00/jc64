@@ -28,7 +28,7 @@ package sw_emulator.swing.main;
  * 
  * @author ice
  */
-public class Relocate {
+public class Relocate implements Cloneable {
   /** Starting position from where to relocate */  
   public int fromStart;
   
@@ -56,4 +56,39 @@ public class Relocate {
 
    return true;   
   }
+
+   /**
+    * Clone the object
+    * 
+    * @return the cloned object
+    */
+   @Override
+   public Object clone() {
+     Relocate copy=new Relocate();
+     copy.fromStart=fromStart;
+     copy.fromEnd=fromEnd;
+     copy.toStart=toStart;
+     copy.toEnd=toEnd;
+     
+     return copy;
+   }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof Relocate)) return false;
+      
+      Relocate relocate=(Relocate) obj;
+      
+      if (relocate.fromStart!=fromStart) return false;
+      if (relocate.toStart!=toStart) return false;
+      if (relocate.fromEnd!=fromEnd) return false;
+      if (relocate.toEnd!=toEnd) return false;
+      
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode()+79*fromStart+71*fromEnd+17*toStart+11*toEnd;
+    }    
 }

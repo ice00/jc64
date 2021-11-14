@@ -4745,6 +4745,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     int retVal=projectMergeFile.showOpenDialog(this);
     if (retVal == JFileChooser.APPROVE_OPTION) {
        File mergeFile=projectMergeFile.getSelectedFile();
+       
        Project mergeProject=new Project();
        if (!FileManager.instance.readProjectFile(mergeFile , mergeProject)) {
          JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
@@ -4761,6 +4762,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          JOptionPane.showMessageDialog(this, "You are disassemblate different chip inside a CRT image", "Error", JOptionPane.ERROR_MESSAGE);
          return;    
        }       
+       
+       if (MPR.hashCode(mergeProject.mpr) != MPR.hashCode(project.mpr)) {
+         JOptionPane.showMessageDialog(this, "Byte data of MPR in projects are different: they are not of the same source", "Error", JOptionPane.ERROR_MESSAGE);  
+         return;  
+       }
        
        // take name/description from secondary only if not present in primary
        if (project.name==null || "".equals(project.name)) project.name=mergeProject.name;       
@@ -4803,6 +4809,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (memProject.index==-1) memProject.index=memMerge.index;
           }
        }
+       
+       // check relocate
+       if (project.relocates==null) project.relocates=mergeProject.relocates;
+       
+       
+       // check patch
+       if (project.patches==null) project.patches=mergeProject.patches;
+               
           
        dataTableModelMemory.fireTableDataChanged();
     }

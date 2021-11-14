@@ -36,6 +36,8 @@ import sw_emulator.software.MemoryDasm;
  * Version 2: add CRT chip number
  * Version 3: add constants for assembler
  *            add index for memoryDasm
+ * Version 4: add relocates
+ * Version 5: add patch
  * 
  * @author ice
  */
@@ -80,6 +82,9 @@ public class Project implements Cloneable {
   
   /** Relocate entries */
   public Relocate[] relocates;
+  
+  /** Patch entries*/
+  public Patch[] patches;
 
   /**
    * Construct the project
@@ -116,6 +121,8 @@ public class Project implements Cloneable {
     hash = 89 * hash + MPR.hashCode(this.mpr); 
     hash = 89 * hash + this.chip;
     hash = 89 * hash + Arrays.hashCode(this.constant.table);
+    hash = 89 * hash + Arrays.hashCode(this.relocates);
+    hash = 89 * hash + Arrays.hashCode(this.patches);
     return hash;
   }
   
@@ -138,6 +145,17 @@ public class Project implements Cloneable {
     
     p.chip=this.chip;    
     p.constant=(Constant)this.constant.clone();
+        
+    if (p.relocates!=null) {
+      for (int i=0; i<this.relocates.length; i++) {
+        p.relocates[i]=(Relocate)this.relocates[i].clone();
+      }  
+    }
+    if (p.patches!=null) {
+      for (int i=0; i<this.relocates.length; i++) {
+        p.patches[i]=(Patch)this.patches[i].clone();
+      }        
+    }
       
     return p;
   }    
@@ -171,6 +189,18 @@ public class Project implements Cloneable {
     
     if (this.chip!=p.chip) return false;
     if (!this.constant.equals(p.constant)) return false;
+    
+    if (this.relocates!=null && p.relocates!=null) {
+      for (int i=0; i<this.relocates.length; i++) {
+        if (!this.relocates[i].equals(p.relocates[i])) return false;  
+      }  
+    }
+    
+    if (this.patches!=null && p.patches!=null) {
+      for (int i=0; i<this.patches.length; i++) {
+        if (!this.patches[i].equals(p.patches[i])) return false;  
+      }  
+    }  
     
     return true;
   }

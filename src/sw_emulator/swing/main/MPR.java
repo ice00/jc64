@@ -216,6 +216,11 @@ public class MPR implements Cloneable {
      
      return hash;
    }
+
+    @Override
+    public int hashCode() {
+      return hashCode(this);
+    }     
    
    /**
     * Clone the object
