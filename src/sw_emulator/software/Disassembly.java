@@ -37,6 +37,7 @@ import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
+import sw_emulator.swing.main.Patch;
 import sw_emulator.swing.main.Relocate;
 import sw_emulator.swing.main.TargetType;
 
@@ -69,6 +70,9 @@ public class Disassembly {
   
   /** The relocates for disassembly */
   private Relocate[] relocates;
+  
+  /** The patches for disassembly  */
+  private Patch[] patches;
   
   
   /** Blocks of memory to disassemblate */
@@ -156,11 +160,15 @@ public class Disassembly {
    * @param constant the constants to use
    * @param mpr eventual MPR blocks to use
    * @param relocates eventual relocates to use
+   * @param patches eventual patches to apply
    * @param chip eventual CRT chip
    * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
-  public void dissassembly(FileType fileType, byte[] inB, Option option,  MemoryDasm[] memory, Constant constant, MPR mpr, Relocate[] relocates, int chip, TargetType targetType, boolean asSource) {
+  public void dissassembly(FileType fileType, byte[] inB, Option option,  
+                           MemoryDasm[] memory, Constant constant, MPR mpr,
+                           Relocate[] relocates, Patch[] patches,
+                           int chip, TargetType targetType, boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
@@ -168,6 +176,7 @@ public class Disassembly {
     this.chip=chip;
     this.constant=constant;
     this.relocates=relocates;
+    this.patches=patches;
 
     this.memory=memory;
      
@@ -294,7 +303,7 @@ public class Disassembly {
       }
     block.startBuffer=sidPos;
     block.endBuffer=sidPos+(block.endAddress-block.startAddress);
-    block.inB=inB;
+    block.inB=inB.clone();
     blocks.add(block);
 
         
@@ -401,7 +410,7 @@ public class Disassembly {
     block.startBuffer=2;
     block.endAddress=inB.length-1-block.startBuffer+block.startAddress;
     block.endBuffer=inB.length-1;
-    block.inB=inB;            
+    block.inB=inB.clone();            
     blocks.add(block);
        
      
@@ -490,7 +499,7 @@ public class Disassembly {
     block.startBuffer=pos+0x10;
     block.endAddress=block.startAddress+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF)-1; 
     block.endBuffer=block.startBuffer+((inB[pos+0xE]&0xFF)<<8)+(inB[pos+0xF]&0xFF)-1;
-    block.inB=inB;            
+    block.inB=inB.clone();            
     blocks.add(block);
     
      
@@ -593,7 +602,7 @@ public class Disassembly {
     block.startBuffer=pos+26;
     block.endAddress=65535;
     block.endBuffer=block.startBuffer+block.endAddress+1;
-    block.inB=inB;
+    block.inB=inB.clone();
     blocks.add(block);
      
     StringBuilder tmp=new StringBuilder();
@@ -675,7 +684,7 @@ public class Disassembly {
     // generate the blocks
     for (byte[] inB: mpr.blocks) {
       block=new Block();
-      block.inB=inB;
+      block.inB=inB.clone();
       
       block.startAddress=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
       block.startBuffer=2;
@@ -733,8 +742,10 @@ public class Disassembly {
     Iterator<Block> iter=blocks.iterator();
     while (iter.hasNext()) {
       block=iter.next();
-            
-      markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);
+      
+      applyPatches(block);
+      
+      markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);            
      
       // search for SID frequency table
       SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, block.endBuffer, block.startAddress-block.startBuffer,
@@ -747,6 +758,21 @@ public class Disassembly {
       } else {    
           tmp.append(prg.cdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
         }       
+    }
+  }
+  
+  /**
+   * Apply patches in this memory block
+   * 
+   * @param block the block where to apply patched
+   */
+  private void applyPatches(Block block) {
+    if (patches==null) return;
+    
+    for (Patch patch: patches) {
+      if (block.startAddress<=patch.address && patch.address<=block.endAddress) {
+        block.inB[patch.address-block.startAddress+block.startBuffer]=(byte)patch.value;
+      } 
     }
   }
   

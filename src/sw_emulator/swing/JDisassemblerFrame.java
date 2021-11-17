@@ -3655,6 +3655,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }  else {
          jProjectDialog.setUp(project);
          jProjectDialog.setVisible(true);
+         dataTableModelMemory.setData(project.memory);
+         dataTableModelMemory.fireTableDataChanged();
          execute(SOURCE_DISASS);
         }      
   }
@@ -4117,8 +4119,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       disassembly.source="";
       disassembly.disassembly="";
     } else {
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.chip, project.targetType, false);
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.chip, project.targetType, true);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, false);
+        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
       }  
     int lineS=0;
     int lineD=0;
@@ -4811,13 +4813,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        }
        
        // check relocate
-       if (project.relocates==null) project.relocates=mergeProject.relocates;
-       
+       if (project.relocates==null) project.relocates=mergeProject.relocates;       
        
        // check patch
        if (project.patches==null) project.patches=mergeProject.patches;
-               
-          
+                        
        dataTableModelMemory.fireTableDataChanged();
     }
            

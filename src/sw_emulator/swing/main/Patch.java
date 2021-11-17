@@ -36,6 +36,18 @@ public class Patch {
   public int value; 
   
   /**
+   * Check if the reange are valid
+   * 
+   * @return true if range are valid
+   */
+  public boolean isValidRange() {
+   if (value<0 || value>255) return false;   
+   if (value<0 || value>0xFFFF) return false;
+
+   return true;   
+  }
+  
+  /**
    * Clone the object
    * 
    * @return the cloned object

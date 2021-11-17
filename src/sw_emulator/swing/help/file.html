@@ -50,6 +50,16 @@
          Due to the nature of relocation implementation, when you apply a relocation address it copies the value from one position to another position in memory, so the order of application is important in case of multiple relocation. 
          For this once added you cannot delete the relocations, so before adding it, save the project and reopen it if the relocation is wrong.
      </li>  
+     <li><b>Edit Patch table:</b> you can insert a list of addresses and a patch value to apply in memory.<br>
+         Please, note that only value that are inside the read data are patched, not the one in memory outside (thare are so all 0)<br>
+         For example: this code takes the addresses C07D aand C07E that has a $1B value and put a $0 value.
+         <p align="center"><img src="./project5.png"></p>
+         <p align="center"><img src="./project6.png"></p>
+         <p align="center"><img src="./project7.png"></p>  
+         This alteration of the binary code that are applied takes advantage when you disassemblate a VICE image, as you can have some values that are the result of code executed until the snapshot were taken.<br>
+         So you can have an index that must start from 0 when the program is executed the first time but that instead points to the last value reached previously. If you will execut the binary obtained the result will be not the expected.<br>
+         For patches it is allowed to remove values, but the rules is that you must always delete from the last one by one.
+     </li>
     </ul>
   <h2>Open project</h2>
   <p>The function let you open a previusly salved project by read a .dis file.<br>

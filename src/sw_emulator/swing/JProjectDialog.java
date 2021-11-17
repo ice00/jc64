@@ -25,16 +25,14 @@ package sw_emulator.swing;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.bind.DatatypeConverter;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.swing.main.FileManager;
+import sw_emulator.swing.main.Patch;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.Relocate;
 import sw_emulator.swing.main.TargetType;
@@ -101,6 +99,22 @@ public class JProjectDialog extends javax.swing.JDialog {
     }
     return ret.toUpperCase(Locale.ENGLISH);
   } 
+  
+   /**
+   * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
+   *
+   * @param value the byte value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected static String ByteToExe(int value) {
+    int tmp=value;
+    
+    if (value<0) return "??";
+    
+    String ret=Integer.toHexString(tmp);
+    if (ret.length()==1) ret="0"+ret;
+    return ret.toUpperCase(Locale.ENGLISH);
+  }
     
     /**
      * Get relocate table as string description
@@ -114,6 +128,22 @@ public class JProjectDialog extends javax.swing.JDialog {
       for (Relocate relocate:project.relocates) {
         res+=ShortToExe(relocate.fromStart)+":"+ShortToExe(relocate.fromEnd)+" => "+
              ShortToExe(relocate.toStart)+":"+ShortToExe(relocate.toEnd)+"\n";
+      }
+      
+      return res;
+    }
+    
+    /**
+     * Get relocate table as string description
+     * 
+     * @return the string description
+     */
+    private String getPatchDesc() {
+      if (project==null || project.patches==null) return "";
+      
+      String res="";
+      for (Patch patch:project.patches) {
+        res+=ShortToExe(patch.address)+" => "+ByteToExe(patch.value)+"\n";
       }
       
       return res;
@@ -234,6 +264,11 @@ public class JProjectDialog extends javax.swing.JDialog {
         jButtonRelocateAdd = new javax.swing.JButton();
         jScrollPaneRelocate = new javax.swing.JScrollPane();
         jTextAreaRelocate = new javax.swing.JTextArea();
+        jLabelPatch = new javax.swing.JLabel();
+        jButtonPatchAdd = new javax.swing.JButton();
+        jScrollPaneRelocate1 = new javax.swing.JScrollPane();
+        jTextAreaPatch = new javax.swing.JTextArea();
+        jButtonPatchRemove = new javax.swing.JButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -364,6 +399,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabelConstant.setText("Constants table:");
 
         jButtonEdit.setText("Edit");
+        jButtonEdit.setToolTipText("Edit the constants definitions");
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditActionPerformed(evt);
@@ -377,6 +413,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabelRelocate.setText("Relocate table:");
 
         jButtonRelocateAdd.setText("Add");
+        jButtonRelocateAdd.setToolTipText("Add relocated addresses. Operation cannot be undone!");
         jButtonRelocateAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRelocateAddActionPerformed(evt);
@@ -387,6 +424,29 @@ public class JProjectDialog extends javax.swing.JDialog {
         jTextAreaRelocate.setColumns(20);
         jTextAreaRelocate.setRows(5);
         jScrollPaneRelocate.setViewportView(jTextAreaRelocate);
+
+        jLabelPatch.setText("Patch table:");
+
+        jButtonPatchAdd.setText("Add");
+        jButtonPatchAdd.setToolTipText("Add patched value into memory");
+        jButtonPatchAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPatchAddActionPerformed(evt);
+            }
+        });
+
+        jTextAreaPatch.setEditable(false);
+        jTextAreaPatch.setColumns(20);
+        jTextAreaPatch.setRows(5);
+        jScrollPaneRelocate1.setViewportView(jTextAreaPatch);
+
+        jButtonPatchRemove.setText("Remove");
+        jButtonPatchRemove.setToolTipText("Remove last inserted value");
+        jButtonPatchRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPatchRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
@@ -441,22 +501,31 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jRadioButtonPlus4)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabelConstant, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelSidLd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRelocateAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jButtonInit)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabelConstant, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelSidLd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonRelocateAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelPatch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonPatchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonPatchAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jButtonInit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonAddNext)
                                 .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPaneRelocate1)
                             .addComponent(jScrollPaneRelocate))))
                 .addContainerGap())
         );
@@ -513,7 +582,17 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addComponent(jButtonRelocateAdd)
                             .addComponent(jLabelRelocate)))
                     .addComponent(jScrollPaneRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonPatchAdd)
+                            .addComponent(jLabelPatch))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPatchRemove))
+                    .addComponent(jScrollPaneRelocate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -716,10 +795,50 @@ public class JProjectDialog extends javax.swing.JDialog {
       relocates2[size]=relocate;
             
       project.relocates=relocates2;
-      
-      
+           
       jTextAreaRelocate.setText(getRelocateDesc());
     }//GEN-LAST:event_jButtonRelocateAddActionPerformed
+
+    private void jButtonPatchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchAddActionPerformed
+      Patch patch=new Patch();
+      
+      patch.address=Integer.parseInt(JOptionPane.showInputDialog("Address (in hex) where to insert the new value"),16);
+      patch.value=Integer.parseInt(JOptionPane.showInputDialog("Valuie (in hex) to put into memory"),16);
+      
+      if (!patch.isValidRange()) {
+        JOptionPane.showMessageDialog(this, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
+      
+      int size=0;
+      if (project.patches!=null) size=project.patches.length;
+      
+      // copy the value in the list
+      Patch[] patches2=new Patch[size+1];
+      if (size>0) System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
+      patches2[size]=patch;
+            
+      project.patches=patches2;      
+
+      jTextAreaPatch.setText(getPatchDesc());
+    }//GEN-LAST:event_jButtonPatchAddActionPerformed
+
+    private void jButtonPatchRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchRemoveActionPerformed
+      if (project.patches==null) return;
+      
+      if (project.patches.length==1) {
+        project.patches=null;
+        jTextAreaPatch.setText("");
+        return;
+      }
+      
+      Patch[] patches2=new Patch[project.patches.length-1];
+      patches2=Arrays.copyOf(project.patches, project.patches.length-1);
+      
+      project.patches=patches2;
+      
+      jTextAreaPatch.setText(getPatchDesc());
+    }//GEN-LAST:event_jButtonPatchRemoveActionPerformed
     
     /**
      * @param args the command line arguments
@@ -772,6 +891,8 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonInit;
+    private javax.swing.JButton jButtonPatchAdd;
+    private javax.swing.JButton jButtonPatchRemove;
     private javax.swing.JButton jButtonRelocateAdd;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabelConstant;
@@ -779,6 +900,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelFileTarget;
     private javax.swing.JLabel jLabelFileType;
     private javax.swing.JLabel jLabelInputFile;
+    private javax.swing.JLabel jLabelPatch;
     private javax.swing.JLabel jLabelProjectName;
     private javax.swing.JLabel jLabelRelocate;
     private javax.swing.JLabel jLabelSidLd;
@@ -797,8 +919,10 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonVic20;
     private javax.swing.JScrollPane jScrollPaneDescr;
     private javax.swing.JScrollPane jScrollPaneRelocate;
+    private javax.swing.JScrollPane jScrollPaneRelocate1;
     private javax.swing.JSpinner jSpinnerCRT;
     private javax.swing.JTextArea jTextAreaDescr;
+    private javax.swing.JTextArea jTextAreaPatch;
     private javax.swing.JTextArea jTextAreaRelocate;
     private javax.swing.JTextField jTextFieldInputFile;
     private javax.swing.JTextField jTextFieldProjectName;

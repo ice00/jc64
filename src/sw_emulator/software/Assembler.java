@@ -63,7 +63,7 @@ public class Assembler {
     return SPACES.substring(0, (option.numDataCSpaces-skip<0 ? 1: option.numDataCSpaces-skip))+TABS.substring(0, option.numDataCTabs);
   }   
    
- /**
+  /**
    * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
    *
    * @param value the byte value to convert
