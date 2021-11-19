@@ -164,6 +164,8 @@ public class SidFreq {
     // look if low table was fount
     if (low==-1) return false;  
     
+    if (checkGarbage(high, low)) return false;
+    
     // get the A4 note
     sid=Unsigned.done(inB[high+A4])*256+Unsigned.done(inB[low+A4]);  
 
@@ -222,7 +224,8 @@ public class SidFreq {
     
     // look if low table was fount
     if (low==-1) return false;
- 
+    
+    if (checkGarbage(high, low)) return false;
     
     // get the A4 note
     sid=Unsigned.done(inB[high+OCT_NOTE_A4])*256+Unsigned.done(inB[low+OCT_NOTE_A4]);  
@@ -268,6 +271,8 @@ public class SidFreq {
    
     // look if low table was fount
     if (low==-1) return false;  
+    
+    if (checkGarbage(high, low)) return false;
   
     // get the A4 note
     sid=Unsigned.done(inB[high+A4*2])*256+Unsigned.done(inB[low+A4*2]);  
@@ -313,6 +318,8 @@ public class SidFreq {
    
     // look if low table was fount
     if (low==-1) return false;  
+    
+    if (checkGarbage(high, low)) return false;
   
     // get the A4 note
     sid=Unsigned.done(inB[high+A4*2])*256+Unsigned.done(inB[low+A4*2]);  
@@ -368,6 +375,8 @@ public class SidFreq {
       
     // look if low table was fount
     if (low==-1) return false;
+    
+    if (checkGarbage(high, low)) return false;
      
     // get the A4 note
     sid=Unsigned.done(inB[high+A4])*256+Unsigned.done(inB[low+A4]);   
@@ -959,5 +968,17 @@ public class SidFreq {
    
     return true;
   }   
+
+  /**
+   * Check if the find table is in garbage area
+   * 
+   * @param high the high pointer
+   * @param low the low pointer
+   * @return true if it is garbage area
+   */
+  private boolean checkGarbage(int high, int low) {
+    if (memory[high+offset].isGarbage || memory[low+offset].isGarbage) return true;
+    return false;
+  }
 
 }

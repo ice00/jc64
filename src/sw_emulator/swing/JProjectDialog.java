@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.swing.main.FileManager;
@@ -158,6 +159,10 @@ public class JProjectDialog extends javax.swing.JDialog {
       this.project=project;  
       jConstantDialog.setUp(project.constant);
       
+      SwingUtilities.invokeLater(new Runnable(){
+			public void run()
+			{
+      
       jTextFieldProjectName.setText(project.name);
       jTextFieldInputFile.setText(project.file);
       if (project.description!=null) jTextAreaDescr.setText(project.description);
@@ -218,6 +223,9 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonPlus4.setSelected(false);
         }
       jTextAreaRelocate.setText(getRelocateDesc());
+      jTextAreaPatch.setText(getPatchDesc());     
+              }
+      });
     }
 
     /**

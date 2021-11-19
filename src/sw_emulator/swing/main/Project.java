@@ -37,13 +37,13 @@ import sw_emulator.software.MemoryDasm;
  * Version 3: add constants for assembler
  *            add index for memoryDasm
  * Version 4: add relocates
- * Version 5: add patch
+ * Version 5: add patches
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=4;       
+  public static final byte ACTUAL_VERSION=5;       
     
   /**
    * Type of the file
