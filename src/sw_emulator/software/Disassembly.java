@@ -185,7 +185,7 @@ public class Disassembly {
       source="";
       disassembly="";
       return;
-    }
+    }    
     
     blocks=new ArrayList();
     
@@ -277,7 +277,8 @@ public class Disassembly {
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
     sid.setConstant(constant);
-    sid.setOption(option, assembler);       
+    sid.setOption(option, assembler);      
+    sid.setMode(option.illegalOpcodeMode);
   
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
@@ -404,6 +405,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
+    prg.setMode(option.illegalOpcodeMode);
     
     block=new Block();   
     block.startAddress=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
@@ -467,6 +469,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
+    prg.setMode(option.illegalOpcodeMode);
     
     // get start and end address for the selected chip
     int header=Math.max(
@@ -555,6 +558,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
+    prg.setMode(option.illegalOpcodeMode);
     
     int pos;
     
@@ -660,6 +664,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
+    prg.setMode(option.illegalOpcodeMode);
     
     if (mpr==null) return;
     
