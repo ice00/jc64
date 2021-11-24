@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -50,6 +51,9 @@ public class JProjectDialog extends javax.swing.JDialog {
      /** File chooser for memory flags */
     JFileChooser memFileChooser=new JFileChooser();    
     
+    /** File chooser for export */
+    JFileChooser exportFileChooser=new JFileChooser();     
+    
     /** The project to use (create an emty one not used) */
     Project project=new Project();
     
@@ -65,6 +69,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         Shared.framesList.add(this);
         Shared.framesList.add(fileChooser);
         Shared.framesList.add(memFileChooser);
+        Shared.framesList.add(exportFileChooser);
         
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PSID/RSID tune", "sid"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MUS tune", "mus"));
@@ -160,8 +165,7 @@ public class JProjectDialog extends javax.swing.JDialog {
       jConstantDialog.setUp(project.constant);
       
       SwingUtilities.invokeLater(new Runnable(){
-			public void run()
-			{
+	public void run() {
       
       jTextFieldProjectName.setText(project.name);
       jTextFieldInputFile.setText(project.file);
@@ -224,7 +228,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         }
       jTextAreaRelocate.setText(getRelocateDesc());
       jTextAreaPatch.setText(getPatchDesc());     
-              }
+       }
       });
     }
 
@@ -277,6 +281,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jScrollPaneRelocate1 = new javax.swing.JScrollPane();
         jTextAreaPatch = new javax.swing.JTextArea();
         jButtonPatchRemove = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -291,6 +296,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabelInputFile.setText("File to disassemblate:");
 
         jButtonSelect.setText("Select");
+        jButtonSelect.setToolTipText("Select the file to disassemblate");
         jButtonSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelectActionPerformed(evt);
@@ -456,6 +462,14 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesaveas.png"))); // NOI18N
+        jButtonSave.setToolTipText("Export back the file that was selected");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -472,26 +486,30 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldProjectName)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonSID)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonMUS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonPRG)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonMPR)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonCRT)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonVSF)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jTextFieldInputFile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSelect))
-                            .addComponent(jTextFieldProjectName)))
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                        .addComponent(jRadioButtonSID)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonMUS)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonPRG)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonMPR)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonCRT)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonVSF))
+                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                        .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonSelect)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonSave)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelFileDes)
@@ -548,7 +566,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelInputFile)
                     .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelect))
+                    .addComponent(jButtonSelect)
+                    .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -847,6 +866,20 @@ public class JProjectDialog extends javax.swing.JDialog {
       
       jTextAreaPatch.setText(getPatchDesc());
     }//GEN-LAST:event_jButtonPatchRemoveActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+      if (project.inB!=null) {
+          File file=new File(project.file);
+          exportFileChooser.setSelectedFile(new File(file.getName()));
+          int retValue=exportFileChooser.showOpenDialog(this);
+      
+          if (retValue==JFileChooser.APPROVE_OPTION) {
+            file=exportFileChooser.getSelectedFile();
+            if (FileManager.instance.writeFile(file, project.inB)) JOptionPane.showMessageDialog(this, "Saving of file done");
+            else JOptionPane.showMessageDialog(this, "Error", "Error in saving file", JOptionPane.ERROR_MESSAGE);
+          }
+      }    
+    }//GEN-LAST:event_jButtonSaveActionPerformed
     
     /**
      * @param args the command line arguments
@@ -902,6 +935,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonPatchAdd;
     private javax.swing.JButton jButtonPatchRemove;
     private javax.swing.JButton jButtonRelocateAdd;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabelConstant;
     private javax.swing.JLabel jLabelFileDes;

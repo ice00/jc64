@@ -34,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.MemoryDasm;
@@ -941,6 +942,25 @@ public class FileManager {
      byte[] res=new byte[size];
      System.arraycopy(inB, 0, res, 0, size);
      return res;
+  }
+  
+  /**
+   * Write the buffer to file
+   * 
+   * @param file the file to create
+   * @param inB the buffer to write
+   * @return true if operation is ok
+   */
+  public boolean writeFile(File file, byte[]inB) {
+    try {
+      BufferedOutputStream outF=new BufferedOutputStream(new FileOutputStream(file));
+      outF.write(inB, 0, inB.length);
+      outF.flush();
+      outF.close();        
+    } catch (Exception e) {
+       return false; 
+      }        
+    return true;
   }
 
   /**
