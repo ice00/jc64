@@ -60,7 +60,8 @@
   <li><b>Temp path for assembler compilation:</b> a path used for generating the binary of assembler. The best way is to use a memory drive (/tmp in most of Linux ditribution for example) as the generated files are to be considearte temporary</li>
  </ul>
  The disassembler engine used the SidFreq class implemented in XSidplay2 for detecting the A4 frequency that a tune is playing by searching in memory for the low and high part of table frequency of the octaves the SID can play.<br>
- Where such area is find, it will be marked ad data kind and the label for low and high position are generated as user label and a comment is added for giving the A4 frequency information
+ Where such area is find, it will be marked ad data kind and the label for low and high position are generated as user label and a comment is added for giving the A4 frequency information<br>
+ From version 1.6 the engine is called multiple times to find possible more blocks of notes data. In such cases, the label will then be marked with index, 1, 2, 3...
 </p>
 <p align="center"><img src="./option5.png"></p> 
 

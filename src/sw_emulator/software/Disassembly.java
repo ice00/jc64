@@ -743,6 +743,7 @@ public class Disassembly {
     // sort by asc memory address
     Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
     
+    SidFreq.instance.reset();    
         
     Iterator<Block> iter=blocks.iterator();
     while (iter.hasNext()) {

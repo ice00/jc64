@@ -75,6 +75,9 @@ public class SidFreq {
   /** Label for high frequency */
   String highLabel;
   
+  /** Actual index (-1=no find) */
+  int actIndex=-1;
+  
   /** Instance of the class as singleton */
   public static final SidFreq instance=new SidFreq();
   
@@ -82,6 +85,13 @@ public class SidFreq {
    * Private constructor
    */
   private SidFreq() {      
+  }
+  
+  /**
+   * Reset the engine as we catch more elements 
+   */
+  public void reset() {
+    actIndex=-1;  
   }
   
 /**
@@ -103,15 +113,34 @@ public class SidFreq {
     this.offset= offset;
     this.lowLabel=lowLabel;
     this.highLabel=highLabel;
- 
-    if (linearTable()) return;
-    if (combinedTable()) return;
-    if (shortLinearTable()) return;        
-    if (shortCombinedTable()) return;
-    if (linearInverseTable()) return;
     
-    if (linearOctNoteTable()) return;
-    highOctave();
+    try {
+       while (linearTable()) {}
+      this.start=start;
+    
+      while (combinedTable()) {}
+      this.start=start;
+    
+    
+      while (linearInverseTable()) {
+        this.end=this.start;
+        this.start=Math.min(0, start-TABLE);  
+      }
+      this.start=start;
+        
+      while (linearOctNoteTable()) {}
+      this.start=start;   
+    
+      while (highOctave()) {}
+      this.start=start;
+    
+      // for short table looks only if there are no solution before
+      if (actIndex<0) shortLinearTable();
+      if (actIndex<0) shortCombinedTable();
+    } catch (Exception e) {
+        // catch errors to avoid blocking the program
+        System.err.println(e);
+      }  
   }
   
   
@@ -142,7 +171,7 @@ public class SidFreq {
     
     // check for low frequency table (first part)
     if (high>TABLE) {
-      for (i=0; i<=high-TABLE; i++) {
+      for (i=start; i<=high-TABLE; i++) {
         if (searchLow(high, i)) {
           low=i;
           break;
@@ -204,7 +233,7 @@ public class SidFreq {
     
     // check for low frequency table (first part)
     if (high>OCT_NOTE_TABLE) {
-      for (i=0; i<=high-OCT_NOTE_TABLE-6; i++) {
+      for (i=start; i<=high-OCT_NOTE_TABLE-6; i++) {
         if (searchOctNoteLow(high, i)) {
           low=i;
           break;
@@ -249,7 +278,7 @@ public class SidFreq {
     int low=-1;
      
     // check for high frequency table
-    for (i=0; i<end-TABLE*2; i++) {
+    for (i=start; i<end-TABLE*2; i++) {
       if (searchHigh2(i)) {
         high=i;
         break;         
@@ -260,7 +289,7 @@ public class SidFreq {
     if (high==-1) return false;  
   
     // check for low frequency table
-    for (i=0; i<end-TABLE*2; i++) {
+    for (i=start; i<end-TABLE*2; i++) {
       if (i!=high) {
         if (searchLow2(high, i)) {
           low=i;
@@ -296,7 +325,7 @@ public class SidFreq {
     int low=-1;
      
     // check for high frequency table
-    for (i=0; i<end-SHORT2*2; i++) {
+    for (i=start; i<end-SHORT2*2; i++) {
       if (searchShortHigh2(i)) {
         high=i;
         break;         
@@ -307,7 +336,7 @@ public class SidFreq {
     if (high==-1) return false;  
   
     // check for low frequency table
-    for (i=0; i<end-SHORT2*2; i++) {
+    for (i=start; i<end-SHORT2*2; i++) {
       if (i!=high) {
         if (searchShortLow2(high, i)) {
           low=i;
@@ -343,7 +372,7 @@ public class SidFreq {
     int low=-1;
      
     // check for high frequency table
-    for (i=0; i<end-SHORT; i++) {
+    for (i=start; i<end-SHORT; i++) {
       if (searchShortHigh(i)) {
         high=i;
         break;         
@@ -355,7 +384,7 @@ public class SidFreq {
      
     // check for low frequency table (first part)
     if (high>SHORT) {
-      for (i=0; i<=high-SHORT; i++) {
+      for (i=start; i<=high-SHORT; i++) {
         if (searchShortLow(high, i)) {
           low=i;
           break;
@@ -387,6 +416,8 @@ public class SidFreq {
       
     return true;    
    }
+  
+  ///////////////////////
   
   /**
    * Search for the high frequency table in linear way
@@ -786,14 +817,21 @@ public class SidFreq {
    * @param sid the sid A4 word freq
    */
   private void addData(int high, int low, int sid) {
-    memory[high+offset].userLocation=highLabel;
-    memory[low+offset].userLocation=lowLabel;
+    actIndex++;
+    String off="";
+    if (actIndex>0) off=""+actIndex;
+      
+    memory[high+offset].userLocation=highLabel+off;
+    memory[low+offset].userLocation=lowLabel+off;
     
     int freqNTSC=(int)Math.round(sid*0.0609592795372);
     int freqPAL=(int)Math.round(sid*0.0587253570557);    
     
     memory[low+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
     memory[high+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
+    
+    // modify start for another analisys
+    start=Math.max(high, low)+TABLE;
   }
   
   /**
@@ -818,7 +856,7 @@ public class SidFreq {
     final double STEP=Math.pow(2, 1/12);
     int[] freq=new int[12];
       
-    for (int i=0; i<end-13*2; i++) {
+    for (int i=start; i<end-13*2; i++) {
       if ((int)inB[i]==0 && (int)inB[i+13]==0) {
         freq[0]=(int)(inB[i+1]& 0xFF)+(int)(inB[i+14]& 0xFF)*256; 
         if (freq[0]==0) continue;
@@ -880,7 +918,7 @@ public class SidFreq {
 
     // check for low frequency table (first part)
     if (high>ALL) {
-      for (i=0+ALL; i<high; i++) {
+      for (i=start+ALL; i<high; i++) {
         if (searchInverseLow(high, i)) {
           low=i;
           break;
