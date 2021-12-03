@@ -24,6 +24,7 @@
 package sw_emulator.swing;
 
 import javax.swing.JTextField;
+import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.table.ConstantCellEditor;
 import sw_emulator.swing.table.DataTableModelConstant;
@@ -56,12 +57,13 @@ public class JConstantDialog extends javax.swing.JDialog {
      * Set up the dialog with the project to use 
      * 
      * @param constant constant 
+     * @param memories the memory
      */
-    public void setUp(Constant constant) {
+    public void setUp(Constant constant, MemoryDasm[] memories) {
       this.constant=constant;  
       dataModel=new DataTableModelConstant(constant);
       jTableConstant.setModel(dataModel);    
-      constantCellEditor.setCostant(constant);
+      constantCellEditor.setCostant(constant, memories);
     }  
 
     /**

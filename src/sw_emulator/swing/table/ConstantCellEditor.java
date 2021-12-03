@@ -26,10 +26,12 @@ package sw_emulator.swing.table;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.swing.main.Constant;
 
@@ -44,14 +46,16 @@ public class ConstantCellEditor extends DefaultCellEditor {
   private static final Border red = new LineBorder(Color.red);
   private static final Border black = new LineBorder(Color.black);
   private Constant constant;
+  private MemoryDasm[] memories;
 
   public ConstantCellEditor(JTextField textField) {
     super(textField);
     this.textField=textField;
   }
   
-  public void setCostant(Constant constant) {
+  public void setCostant(Constant constant, MemoryDasm[] memories) {
     this.constant=constant;   
+    this.memories=memories;
   }
 
   @Override
@@ -74,6 +78,13 @@ public class ConstantCellEditor extends DefaultCellEditor {
     if (!constant.isAllowed(actual) || actual.length()>5 || Character.isDigit(actual.charAt(0))) {
       textField.setBorder(red);
       return false;
+    }
+    
+    for (MemoryDasm memory : memories) {
+      if (actual.equals(memory.dasmLocation) || actual.equals(memory.userLocation)) {
+        textField.setBorder(red);
+        return false;
+      }
     }
      
     return super.stopCellEditing();

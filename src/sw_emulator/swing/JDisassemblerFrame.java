@@ -61,6 +61,7 @@ import org.fife.ui.rtextarea.SearchResult;
 import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
@@ -4202,55 +4203,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     MemoryDasm mem= project.memory[row];
-    String initial="";
-    if (mem.userLocation!=null) initial=mem.userLocation;
-    else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) initial=mem.dasmLocation;
-    
-    String label=JOptionPane.showInputDialog(this, "Insert the label for the selected memory location", initial);  
-    if (label!=null) {
-      if ("".equals(label)) {
-        JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   
-        mem.userLocation=null;
-        return;
-      }  
-      
-      if (label.contains(" ")) {
-        JOptionPane.showMessageDialog(this, "Label must not contain spaces", "Error", JOptionPane.ERROR_MESSAGE);   
-        return;
-      }
-      
-      if (label.length()>option.maxLabelLength) {
-        JOptionPane.showMessageDialog(this, "Label too long. Max allowed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
-        return;
-      }
-        
-      if (label.length()<6) {
-        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=6", "Error", JOptionPane.ERROR_MESSAGE);     
-        return;
-      }    
-            
-      // see if the label is already defined
-      for (MemoryDasm memory : project.memory) {
-        if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {
-          JOptionPane.showMessageDialog(this, "This label is already used into the source", "Error", JOptionPane.ERROR_MESSAGE);  
-          return;
-       }
-      }
-      
-     // see if label is as constant
-     // for (int i=0; i<Constant.COLS; i++) {
-     //   for (int j=0; j<Constant.ROWS; j++) {
-     //     if (label.equals(project.constant.table[i][j])) {
-     //       JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
-     //       return;  
-     //     } 
-     //   }
-     // }
-      
-      mem.userLocation=label;
-      dataTableModelMemory.fireTableDataChanged(); 
-      jTableMemory.setRowSelectionInterval(row, row); 
-    }      
+    addLabel(mem);
+    dataTableModelMemory.fireTableDataChanged(); 
+    jTableMemory.setRowSelectionInterval(row, row); 
   }
   
   /**
@@ -4276,13 +4231,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     // get next address
-    MemoryDasm mem= project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];
-    
-    String initial="";
+    MemoryDasm mem= project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];    
+    addLabel(mem);
+    dataTableModelMemory.fireTableDataChanged(); 
+      jTableMemory.setRowSelectionInterval(row, row); 
+  }
+  
+  /**
+   * Add the label in given memory
+   * 
+   * @param mem the mem to use 
+   */
+  private void addLabel(MemoryDasm mem) {
+      String initial="";
     if (mem.userLocation!=null) initial=mem.userLocation;
     else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) initial=mem.dasmLocation;
     
-    String label=JOptionPane.showInputDialog(this, "Insert the label for the address of operation", initial);  
+    String label=JOptionPane.showInputDialog(this, "Insert the label for the selected memory location", initial);  
     if (label!=null) {
       if ("".equals(label)) {
         JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   
@@ -4300,8 +4265,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         return;
       }
         
-      if (label.length()<6) {
-        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=6", "Error", JOptionPane.ERROR_MESSAGE);     
+      if (label.length()<2) {
+        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=2", "Error", JOptionPane.ERROR_MESSAGE);     
         return;
       }    
             
@@ -4313,10 +4278,31 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        }
       }
       
+      // see if label is as constant
+      for (int i=0; i<Constant.COLS; i++) {
+        for (int j=0; j<Constant.ROWS; j++) {
+          if (label.equals(project.constant.table[i][j])) {
+           JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
+            return;  
+           } 
+         }
+      }
+      
+      String tmp=label.toUpperCase();
+      for (String val: M6510Dasm.mnemonics) {
+        if (tmp.equals(val)) {
+          JOptionPane.showMessageDialog(this, "This label is an opcode, cannot be defined", "Error", JOptionPane.ERROR_MESSAGE);  
+          return;  
+        }
+      }
+      
+      if (label.startsWith("W") && label.length()==5) {
+         JOptionPane.showMessageDialog(this, "Label cannot be like Wxxxx as they are reserverd", "Error", JOptionPane.ERROR_MESSAGE); 
+         return;
+      }
+      
       mem.userLocation=label;
-      dataTableModelMemory.fireTableDataChanged(); 
-      jTableMemory.setRowSelectionInterval(row, row); 
-    }
+    }  
   }
 
   /**

@@ -162,7 +162,7 @@ public class JProjectDialog extends javax.swing.JDialog {
      */
     public void setUp(Project project) {
       this.project=project;  
-      jConstantDialog.setUp(project.constant);
+      jConstantDialog.setUp(project.constant, project.memory);
       
       SwingUtilities.invokeLater(new Runnable(){
 	public void run() {
