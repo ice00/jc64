@@ -326,36 +326,44 @@ public class Disassembly {
       int header=sidPC;   
       header-=sidPos;
       if (psidLAddr==0) header-=2;      
-      assembler.setOrg(tmp, header);
       
-      // create header of PSID
-      if (inB[0]=='P') assembler.setText(tmp, "PSID");
-      else assembler.setText(tmp, "RSID");
+      if (option.createPSID) {
+        assembler.setOrg(tmp, header);
+                
+        // create header of PSID
+        if (inB[0]=='P') assembler.setText(tmp, "PSID");
+        else assembler.setText(tmp, "RSID");
       
-      assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
-      assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
-      assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");      
-      if (psidIAddr!=0) assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
-      if (psidPAddr!=0) assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);
-      assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
-      assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
-      assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
-      assembler.setWord(tmp, inB[0x14], inB[0x15], "speed");
+        assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
+        assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
+        assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");     
+        if (option.notMarkPSID) {
+          assembler.setWord(tmp, inB[0xA], inB[0xB], "init songs");
+          assembler.setWord(tmp, inB[0xC], inB[0xD], "play sound");
+        } else {
+          if (psidIAddr!=0) assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
+          if (psidPAddr!=0) assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);          
+        }
+        assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
+        assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
+        assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
+        assembler.setWord(tmp, inB[0x14], inB[0x15], "speed");
    
-      addString(tmp, 0x16, 0x36);
-      addString(tmp, 0x36, 0x56);
-      addString(tmp, 0x56, 0x76);
+        addString(tmp, 0x16, 0x36);
+        addString(tmp, 0x36, 0x56);
+        addString(tmp, 0x56, 0x76);
       
-      // test if version > 1
-      if (inB[0x07]>0x76) {
-        assembler.setWord(tmp, inB[0x76], inB[0x77], "word flag");
-        assembler.setWord(tmp, inB[0x78], inB[0x79], "start and page length");
-        assembler.setWord(tmp, inB[0x7A], inB[0x7B], "second and third SID address");      
-      }
-      tmp.append("\n");
+        // test if version > 1
+        if (inB[0x07]>0x76) {
+          assembler.setWord(tmp, inB[0x76], inB[0x77], "word flag");
+          assembler.setWord(tmp, inB[0x78], inB[0x79], "start and page length");
+          assembler.setWord(tmp, inB[0x7A], inB[0x7B], "second and third SID address");      
+        }
+        tmp.append("\n");
+      }  
       if (psidLAddr==0) {
-        assembler.setWord(tmp, inB[0x7C], inB[0x7D], "read load address"); 
-        psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
+          if (option.createPSID) assembler.setWord(tmp, inB[0x7C], inB[0x7D], "read load address"); 
+          psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
       }
       tmp.append("\n");      
     } else {

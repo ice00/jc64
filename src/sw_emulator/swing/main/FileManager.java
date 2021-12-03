@@ -356,6 +356,8 @@ public class FileManager {
       option.sidFreqMarkMem=in.readBoolean();
       option.sidFreqCreateLabel=in.readBoolean();
       option.sidFreqCreateComment=in.readBoolean();
+      option.createPSID=in.readBoolean();
+      option.notMarkPSID=in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -664,6 +666,8 @@ public class FileManager {
       out.writeBoolean(option.sidFreqMarkMem);
       out.writeBoolean(option.sidFreqCreateLabel);
       out.writeBoolean(option.sidFreqCreateComment);
+      out.writeBoolean(option.createPSID);
+      out.writeBoolean(option.notMarkPSID);
       
       out.flush();
       out.close();

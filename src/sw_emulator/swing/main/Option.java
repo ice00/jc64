@@ -291,7 +291,7 @@ public class Option {
   /** Temporary path */
   public String tmpPath="";
   
-  /** Use sID freqeuncy*/
+  /** Use SID frequency*/
   public boolean useSidFreq=true;
   
   /** Sid frequency marks the memory*/
@@ -314,6 +314,12 @@ public class Option {
   
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
+  
+  /** Not mark psid addresses */
+  public boolean notMarkPSID=false;
+  
+  /** Create PSID heather */
+  public boolean createPSID=true;
   
   /** Number of spaces in starting row of instruction */
   public int numInstrSpaces=6;

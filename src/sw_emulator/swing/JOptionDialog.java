@@ -336,6 +336,8 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxMarkMemory = new javax.swing.JCheckBox();
         jCheckBoxSetLabels = new javax.swing.JCheckBox();
         jCheckBoxSetComment = new javax.swing.JCheckBox();
+        jCheckBoxNotUsePSID = new javax.swing.JCheckBox();
+        jCheckBoxCreatePSID = new javax.swing.JCheckBox();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -1758,6 +1760,23 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jCheckBoxNotUsePSID.setText("Did not create PSID labels");
+        jCheckBoxNotUsePSID.setToolTipText("Not create the PSID init e play labels");
+        jCheckBoxNotUsePSID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxNotUsePSIDActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxCreatePSID.setSelected(true);
+        jCheckBoxCreatePSID.setText("Create PSID heather");
+        jCheckBoxCreatePSID.setToolTipText("For PSID it creates heather. Removing this will break binary recreation from source");
+        jCheckBoxCreatePSID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxCreatePSIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -1765,13 +1784,124 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addGroup(jPanelPreviewLayout.createSequentialGroup()
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(222, 222, 222))
+                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(222, 222, 222))
+                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(222, 222, 222))
+                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jLabelDataCSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabelInstrCSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabelDataSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabelInstrSep, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(24, 24, 24)
+                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabelDataCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelInstrCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelDataSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelInstrSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(30, 30, 30)
+                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addComponent(jSpinnerDataCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLabelDataCTabs))
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addComponent(jSpinnerInstrCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLabelInstrCTabs))
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jSpinnerDataSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSpinnerInstrSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabelInstrTabs)
+                                                            .addComponent(jLabelDataTabs)))))
+                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                .addGap(352, 352, 352)
+                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabelMaxByte, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabelMaxTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                .addComponent(jLabelMaxAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(jLabelMaxSwapped, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGap(10, 10, 10)
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jSpinnerMaxSwappedAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSpinnerMaxTribyteAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSpinnerMaxByteAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSpinnerMaxAddressAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(24, 24, 24)
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(jLabelMaxStackWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(jLabelMaxText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(jLabelMaxLong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(jLabelMaxWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(jCheckBoxNotUsePSID, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                                .addComponent(jCheckBoxMarkMemory)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(jCheckBoxSetLabels)))
+                                                        .addGap(97, 97, 97)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jSpinnerMaxWordAggregate)
+                                            .addComponent(jSpinnerMaxLongAggregate)
+                                            .addComponent(jSpinnerMaxTextAggregate)
+                                            .addComponent(jSpinnerInstrCTabs)
+                                            .addComponent(jSpinnerDataTabs)
+                                            .addComponent(jSpinnerInstrTabs)
+                                            .addComponent(jSpinnerMaxStackWordAggregate)
+                                            .addComponent(jSpinnerDataCTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabelAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addComponent(jLabelTmpPath)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonBrowse))
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addGap(405, 405, 405)
+                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jCheckBoxAllowSIDFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(332, 332, 332)
+                                        .addComponent(jCheckBoxSetComment)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelPreviewLayout.createSequentialGroup()
                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelLanguage1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                                     .addComponent(jLabelIllegalOpcodeStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                                    .addComponent(jLabelLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButtonStyle1)
@@ -1800,111 +1930,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxForceCompilation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxAllowUtf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jCheckBoxAllowSIDFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelSIDfreqHi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(297, 297, 297))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelPSIDplaysound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(297, 297, 297))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelSIDfreqLo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelPSIDinitsong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(297, 297, 297))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addGap(489, 489, 489)
-                                .addComponent(jCheckBoxSetLabels)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBoxSetComment)
-                                .addGap(75, 75, 75))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabelDataCSep, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                                            .addComponent(jLabelInstrCSep, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                                            .addComponent(jLabelDataSep, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                                            .addComponent(jLabelInstrSep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelDataCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelInstrCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDataSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelInstrSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                                .addComponent(jSpinnerDataCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelDataCTabs))
-                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                                .addComponent(jSpinnerInstrCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelInstrCTabs))
-                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jSpinnerDataSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jSpinnerInstrSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabelInstrTabs)
-                                                    .addComponent(jLabelDataTabs)))))
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addGap(352, 352, 352)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabelMaxByte, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabelMaxTribyte, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(jLabelMaxAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabelMaxSwapped, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                                .addComponent(jCheckBoxMarkMemory)
-                                                .addGap(19, 19, 19)))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSpinnerMaxSwappedAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinnerMaxTribyteAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinnerMaxByteAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinnerMaxAddressAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabelMaxStackWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelMaxText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelMaxLong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabelMaxWord, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSpinnerMaxWordAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(jSpinnerMaxLongAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(jSpinnerMaxTextAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(jSpinnerInstrCTabs)
-                                    .addComponent(jSpinnerDataTabs)
-                                    .addComponent(jSpinnerInstrTabs)
-                                    .addComponent(jSpinnerMaxStackWordAggregate, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(jSpinnerDataCTabs)))
-                            .addComponent(jLabelAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addComponent(jLabelTmpPath)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonBrowse))
-                            .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                .addGap(405, 405, 405)
-                                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jCheckBoxCreatePSID, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanelPreviewLayout.setVerticalGroup(
@@ -1952,6 +1979,10 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxForceCompilation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxAllowUtf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxNotUsePSID)
+                    .addComponent(jCheckBoxCreatePSID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxAllowSIDFreq)
@@ -2041,7 +2072,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jScrollPanePreview.setViewportView(jPanelPreview);
@@ -2321,7 +2352,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jCheckBoxC1541Via1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541_200Area, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
+                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
                 .addGap(379, 379, 379))
         );
         jPanelC1541CommLayout.setVerticalGroup(
@@ -2536,7 +2567,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxC128Cia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxC128DMA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxC128KernalRom, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         jPanelC128CommLayout.setVerticalGroup(
             jPanelC128CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2763,7 +2794,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jCheckBoxVic20Block4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
         jPanelVic20CommLayout.setVerticalGroup(
             jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3019,7 +3050,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addComponent(jCheckBoxPlus4ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                                 .addComponent(jCheckBoxPlus4StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jCheckBoxPlus4_300Area, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(381, Short.MAX_VALUE))
+                        .addContainerGap(393, Short.MAX_VALUE))
                     .addGroup(jPanelPlus4CommLayout.createSequentialGroup()
                         .addGroup(jPanelPlus4CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxPlus4Ted, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -9118,7 +9149,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         jPanelLookLayout.setVerticalGroup(
             jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -10939,6 +10970,15 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.sidFreqCreateComment=jCheckBoxSetComment.isSelected();
     }//GEN-LAST:event_jCheckBoxSetCommentActionPerformed
 
+    private void jCheckBoxNotUsePSIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxNotUsePSIDActionPerformed
+      option.notMarkPSID=jCheckBoxNotUsePSID.isSelected();
+    }//GEN-LAST:event_jCheckBoxNotUsePSIDActionPerformed
+
+    private void jCheckBoxCreatePSIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCreatePSIDActionPerformed
+      option.createPSID=jCheckBoxCreatePSID.isSelected();
+      jCheckBoxNotUsePSID.setEnabled(option.createPSID);
+    }//GEN-LAST:event_jCheckBoxCreatePSIDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -11167,6 +11207,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxC64ZeroPage;
     private javax.swing.JCheckBox jCheckBoxC64_200Area;
     private javax.swing.JCheckBox jCheckBoxC64_300Area;
+    private javax.swing.JCheckBox jCheckBoxCreatePSID;
     private javax.swing.JCheckBox jCheckBoxDasmF3Comp;
     private javax.swing.JCheckBox jCheckBoxDcErase;
     private javax.swing.JCheckBox jCheckBoxDlErase;
@@ -11176,6 +11217,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxKickColonMacro;
     private javax.swing.JCheckBox jCheckBoxLabel;
     private javax.swing.JCheckBox jCheckBoxMarkMemory;
+    private javax.swing.JCheckBox jCheckBoxNotUsePSID;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingSource;
     private javax.swing.JCheckBox jCheckBoxPlus4Acia;
@@ -12251,6 +12293,9 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxMarkMemory.setEnabled(option.useSidFreq);
       jCheckBoxSetLabels.setEnabled(option.useSidFreq);
       jCheckBoxSetComment.setEnabled(option.useSidFreq);
+      jCheckBoxNotUsePSID.setSelected(option.notMarkPSID);
+      jCheckBoxCreatePSID.setSelected(option.createPSID);
+      jCheckBoxNotUsePSID.setEnabled(option.createPSID);
       
       
       actualLEF=option.getLafName();

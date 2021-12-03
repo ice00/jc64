@@ -4969,7 +4969,7 @@ public class Assembler {
    }
    
    /**
-    * Set a word and put to ouptput steam (it deletes anything that threre are in queue)
+    * Set a word and put to ouptput stream (it deletes anything that threre are in queue)
     * 
     * @param str the output stream
     * @param low the low byte
