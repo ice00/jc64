@@ -743,7 +743,7 @@ public class Disassembly {
     // sort by asc memory address
     Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
     
-    SidFreq.instance.reset();    
+    if (option.useSidFreq) SidFreq.instance.reset();    
         
     Iterator<Block> iter=blocks.iterator();
     while (iter.hasNext()) {
@@ -754,9 +754,12 @@ public class Disassembly {
       markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);            
      
       // search for SID frequency table
-      SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, block.endBuffer, block.startAddress-block.startBuffer,
-             option.sidFreqLoLabel, option.sidFreqHiLabel);
-      
+      if (option.useSidFreq)
+          SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, 
+             block.endBuffer, block.startAddress-block.startBuffer,
+             option.sidFreqLoLabel, option.sidFreqHiLabel, 
+             option.sidFreqMarkMem, option.sidFreqCreateLabel,
+             option.sidFreqCreateComment);      
 
       if (asSource) {
         assembler.setOrg(tmp, block.startAddress);        

@@ -37,7 +37,14 @@
   <li><b>A click on DL column erase the automatic label</b>: activate an alternative way to delete automatic label</li>      
   <li><b>Label is on separate line from instructio</b>: chnage the way a label is showed inside the code</li>
   <li><b>Force compilation at every modification</b>: at every modification you made the source is generated again. Takes present that in long source code the bottleneck is probably the highlighting of it in preview and source panel rather that the source generation itself</li>   
-  <li>Allow UTF chars in text/char definitions<b></b>: UTF char are used if they compile back to right binary code</li>
+  <li><b>Allow UTF chars in text/char definitions</b>: UTF char are used if they compile back to right binary code</li>
+  <li><b>Use SID Frequency catcher: </b> scan memory for music notes table
+    <ul>
+      <li><b>Mark memory:</b> mark the memory as of data type</li>
+      <li><b>Set labels:</b> set the labels of low/high pointer of music table</li>
+      <li><b>Set comments:</b> set comments about A4 frequency used in table</li> 
+    </ul>
+      </li>
   <li><b>Aggregate up to X values on a data row of type:</b> data memory locations will be grouped in group automatically of some bytes
    <ul>
        <li><b>Byte:</b> aggregate bytes from 2 to 8</li>
@@ -57,6 +64,8 @@
   <li><b>SID frequency table high label:</b> automatically detect a frequency table high part and create this user label for it (see the note at the end of this section)</li>
   <li><b>Instruction sepatarator in start of row of source:</b> select how many spaces/tabs you want to separate an instruction into the source from the beginning of row</li>
   <li><b>Data separator in start of row of source:</b> select how many spaces/tabs you want to separate an data declarationb from the beginning of row</li>
+  <li><b>Comment separator inside instruction in source:</b> select how many spaces/tabs you want to separate a comment into the source with an instruction</li>
+  <li><b>Comment separator inside data in source:</b> select how many spaces/tabs you want to separate a comment into the source with a data</li>
   <li><b>Temp path for assembler compilation:</b> a path used for generating the binary of assembler. The best way is to use a memory drive (/tmp in most of Linux ditribution for example) as the generated files are to be considearte temporary</li>
  </ul>
  The disassembler engine used the SidFreq class implemented in XSidplay2 for detecting the A4 frequency that a tune is playing by searching in memory for the low and high part of table frequency of the octaves the SID can play.<br>

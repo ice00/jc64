@@ -75,6 +75,15 @@ public class SidFreq {
   /** Label for high frequency */
   String highLabel;
   
+  /** Mark memory */
+  boolean markMemory;
+  
+  /** Create label */
+  boolean createLabel;
+  
+  /** Create comment */
+  boolean createComment;
+  
   /** Actual index (-1=no find) */
   int actIndex=-1;
   
@@ -104,8 +113,14 @@ public class SidFreq {
  * @param offset offset to add for having memory address
  * @param lowLabel label for low frequency
  * @param highLabel label for high frequency
+ * @param markMemory mark the memory
+ * @param createLabel create the label
+ * @param createComment crete the comment 
  */  
-  public void identifyFreq(byte[] inB, MemoryDasm[] memory, int start, int end, int offset, String lowLabel, String highLabel) {
+  public void identifyFreq(byte[] inB, MemoryDasm[] memory, int start, int end,
+                           int offset, String lowLabel, String highLabel,
+                           boolean markMemory, boolean createLabel,
+                           boolean createComment) {
     this.inB=inB;  
     this.memory=memory;
     this.start=start;
@@ -113,6 +128,9 @@ public class SidFreq {
     this.offset= offset;
     this.lowLabel=lowLabel;
     this.highLabel=highLabel;
+    this.markMemory=markMemory;
+    this.createLabel=createLabel;
+    this.createComment=createComment;
     
     try {
        while (linearTable()) {}
@@ -821,14 +839,18 @@ public class SidFreq {
     String off="";
     if (actIndex>0) off=""+actIndex;
       
-    memory[high+offset].userLocation=highLabel+off;
-    memory[low+offset].userLocation=lowLabel+off;
+    if (createLabel) {
+      memory[high+offset].userLocation=highLabel+off;
+      memory[low+offset].userLocation=lowLabel+off;
+    }  
     
     int freqNTSC=(int)Math.round(sid*0.0609592795372);
     int freqPAL=(int)Math.round(sid*0.0587253570557);    
     
-    memory[low+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
-    memory[high+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
+    if (createComment) {
+      memory[low+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
+      memory[high+offset].userComment="A4="+freqPAL+" HZ (PAL) | A4="+freqNTSC+" HZ (NTSC)";
+    }
     
     // modify start for another analisys
     start=Math.max(high, low)+TABLE;
@@ -842,6 +864,9 @@ public class SidFreq {
    * @param step the step to use
    */
   private void markMemory(int start, int end, int step) {
+    // skip if option say that  
+    if (!markMemory) return;  
+      
     for (int i=start; i<end; i+=step) {
       if (!memory[i+offset].isCode && !memory[i+offset].isData) memory[i+offset].isData=true;
     }   

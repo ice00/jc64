@@ -291,6 +291,17 @@ public class Option {
   /** Temporary path */
   public String tmpPath="";
   
+  /** Use sID freqeuncy*/
+  public boolean useSidFreq=true;
+  
+  /** Sid frequency marks the memory*/
+  public boolean sidFreqMarkMem=true;
+  
+  /** Sid frequency create labels */
+  public boolean sidFreqCreateLabel=true;
+  
+  /** Sid frequency create comment */
+  public boolean sidFreqCreateComment=true;
   
   /** Psid init song label to use as user defined */
   public String psidInitSongsLabel = "initSongs";

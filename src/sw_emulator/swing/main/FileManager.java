@@ -34,7 +34,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.MemoryDasm;
@@ -351,6 +350,12 @@ public class FileManager {
       
       // 1.2
       option.allowUtf = in.readBoolean();
+      
+      // 1.6
+      option.useSidFreq=in.readBoolean();
+      option.sidFreqMarkMem=in.readBoolean();
+      option.sidFreqCreateLabel=in.readBoolean();
+      option.sidFreqCreateComment=in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -653,6 +658,12 @@ public class FileManager {
       
       // 1.2
       out.writeBoolean(option.allowUtf);
+      
+      // 1.6
+      out.writeBoolean(option.useSidFreq);
+      out.writeBoolean(option.sidFreqMarkMem);
+      out.writeBoolean(option.sidFreqCreateLabel);
+      out.writeBoolean(option.sidFreqCreateComment);
       
       out.flush();
       out.close();
