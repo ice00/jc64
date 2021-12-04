@@ -60,6 +60,9 @@ public class JProjectDialog extends javax.swing.JDialog {
     /** Dialog for constants table */
     JConstantDialog jConstantDialog=new JConstantDialog(null, true);
     
+    /** Last address added in patch*/
+    int lastAddress=-1;
+    
     /**
      * Creates new form JDialogProject
      */
@@ -829,13 +832,16 @@ public class JProjectDialog extends javax.swing.JDialog {
     private void jButtonPatchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchAddActionPerformed
       Patch patch=new Patch();
       
-      patch.address=Integer.parseInt(JOptionPane.showInputDialog("Address (in hex) where to insert the new value"),16);
+      if (lastAddress==-1) patch.address=Integer.parseInt(JOptionPane.showInputDialog("Address (in hex) where to insert the new value"),16);
+      else patch.address=Integer.parseInt(JOptionPane.showInputDialog(this, "Address (in hex) where to insert the new value", Integer.toHexString(lastAddress+1)),16);
       patch.value=Integer.parseInt(JOptionPane.showInputDialog("Valuie (in hex) to put into memory"),16);
       
       if (!patch.isValidRange()) {
         JOptionPane.showMessageDialog(this, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
         return;
       }
+      
+      lastAddress=patch.address;
       
       int size=0;
       if (project.patches!=null) size=project.patches.length;

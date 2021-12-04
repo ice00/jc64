@@ -107,6 +107,10 @@ import sw_emulator.swing.table.DataTableModelMemory;
  * @author ice
  */
 public class Option {
+  public static final int HEATHER_STANDARD=1;
+  public static final int HEATHER_NONE=2;
+  public static final int HEATHER_CUSTOM=3;       
+    
   // loook and feel options
     
   /** Macintosh Look and Feel */  
@@ -368,6 +372,13 @@ public class Option {
   
   /** Allow uft for text */
   public boolean allowUtf=true;
+  
+  /** Heather to use */
+  public int heather=HEATHER_STANDARD;
+  
+  /** Custom heather */
+  public String custom;
+  
   
   // comments C64
   

@@ -323,6 +323,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemConstant8 = new javax.swing.JMenuItem();
         jMenuItemConstant9 = new javax.swing.JMenuItem();
         jMenuItemConstantClear_ = new javax.swing.JMenuItem();
+        jPopupMenuSaveAs = new javax.swing.JPopupMenu();
+        jMenuItemSaveAsDasm = new javax.swing.JMenuItem();
+        jMenuItemSaveAsTmpx = new javax.swing.JMenuItem();
+        jMenuItemSaveAsCa65 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsAcme = new javax.swing.JMenuItem();
+        jMenuItemSaveAsKickAssembler = new javax.swing.JMenuItem();
+        jMenuItemSaveAsTass64 = new javax.swing.JMenuItem();
         jPanelToolBar = new javax.swing.JPanel();
         jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
@@ -352,6 +359,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonMarkBoth = new javax.swing.JButton();
         jButtonMarkHighLow = new javax.swing.JButton();
         jButtonMarkMax = new javax.swing.JButton();
+        jButtonWizard = new javax.swing.JButton();
         jToolBarOption = new javax.swing.JToolBar();
         jButtonConfigure = new javax.swing.JButton();
         jButtonSIDLD = new javax.swing.JButton();
@@ -365,6 +373,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonExportAsDiss = new javax.swing.JButton();
         jButtonFindSource = new javax.swing.JButton();
         jButtonExportAsSource = new javax.swing.JButton();
+        jToolBarPerformance = new javax.swing.JToolBar();
+        heapView = new sw_emulator.swing.HeapView();
         jSplitPaneExternal = new javax.swing.JSplitPane();
         jSplitPaneInternal = new javax.swing.JSplitPane();
         jScrollPaneLeft = new javax.swing.JScrollPane();
@@ -525,6 +535,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemMemBoth = new javax.swing.JMenuItem();
         jMenuItemMemHighLow = new javax.swing.JMenuItem();
         jMenuItemMemHigh = new javax.swing.JMenuItem();
+        jMenuItemWizard = new javax.swing.JMenuItem();
         jMenuOption = new javax.swing.JMenu();
         jMenuItemConfigure = new javax.swing.JMenuItem();
         jMenuItemSIDLD = new javax.swing.JMenuItem();
@@ -830,6 +841,54 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jPopupMenuConstant.add(jMenuItemConstantClear_);
 
+        jMenuItemSaveAsDasm.setText("Save in Dasm format");
+        jMenuItemSaveAsDasm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsDasmActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsDasm);
+
+        jMenuItemSaveAsTmpx.setText("Save in TMPx format");
+        jMenuItemSaveAsTmpx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsTmpxActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsTmpx);
+
+        jMenuItemSaveAsCa65.setText("Save in CA65 format");
+        jMenuItemSaveAsCa65.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsCa65ActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsCa65);
+
+        jMenuItemSaveAsAcme.setText("Save in Acme format");
+        jMenuItemSaveAsAcme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsAcmeActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsAcme);
+
+        jMenuItemSaveAsKickAssembler.setText("Save in KickAssembler format");
+        jMenuItemSaveAsKickAssembler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsKickAssemblerActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsKickAssembler);
+
+        jMenuItemSaveAsTass64.setText("Save in Tass64 format");
+        jMenuItemSaveAsTass64.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsTass64ActionPerformed(evt);
+            }
+        });
+        jPopupMenuSaveAs.add(jMenuItemSaveAsTass64);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -843,6 +902,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
 
+        jPanelToolBar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelToolBarMouseEntered(evt);
+            }
+        });
         jPanelToolBar.setLayout(new javax.swing.BoxLayout(jPanelToolBar, javax.swing.BoxLayout.LINE_AXIS));
 
         jToolBarFile.setRollover(true);
@@ -1188,6 +1252,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBarMemory.add(jButtonMarkMax);
 
+        jButtonWizard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/wizard.png"))); // NOI18N
+        jButtonWizard.setToolTipText("Assign using a wizard");
+        jButtonWizard.setFocusable(false);
+        jButtonWizard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonWizard.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonWizard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWizardActionPerformed(evt);
+            }
+        });
+        jToolBarMemory.add(jButtonWizard);
+
         jPanelToolBar.add(jToolBarMemory);
 
         jToolBarOption.setRollover(true);
@@ -1309,6 +1385,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonFindSource.setFocusable(false);
         jButtonFindSource.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonFindSource.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonFindSource.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonFindSourceMouseEntered(evt);
+            }
+        });
         jButtonFindSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFindSourceActionPerformed(evt);
@@ -1321,6 +1402,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonExportAsSource.setFocusable(false);
         jButtonExportAsSource.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonExportAsSource.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonExportAsSource.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonExportAsSourceMouseEntered(evt);
+            }
+        });
         jButtonExportAsSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportAsSourceActionPerformed(evt);
@@ -1329,6 +1415,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jToolBarSource.add(jButtonExportAsSource);
 
         jPanelToolBar.add(jToolBarSource);
+
+        jToolBarPerformance.setRollover(true);
+        jToolBarPerformance.setAlignmentY(0.5F);
+        jToolBarPerformance.setMaximumSize(new java.awt.Dimension(128, 38));
+        jToolBarPerformance.setMinimumSize(new java.awt.Dimension(128, 38));
+        jToolBarPerformance.setPreferredSize(new java.awt.Dimension(128, 38));
+        jToolBarPerformance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToolBarPerformanceMouseEntered(evt);
+            }
+        });
+
+        heapView.setMinimumSize(new java.awt.Dimension(128, 38));
+        heapView.setName(""); // NOI18N
+        heapView.setPreferredSize(new java.awt.Dimension(128, 38));
+        jToolBarPerformance.add(heapView);
+
+        jPanelToolBar.add(jToolBarPerformance);
 
         jSplitPaneExternal.setToolTipText("");
 
@@ -2054,7 +2158,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMinus);
 
-    jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
     jMenuItemMemLow.addActionListener(new java.awt.event.ActionListener() {
@@ -2064,7 +2168,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemLow);
 
-    jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LESS, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minmax.png"))); // NOI18N
     jMenuItemMemLowHigh.setText("Assign the 2 selected addresses as #<>");
     jMenuItemMemLowHigh.addActionListener(new java.awt.event.ActionListener() {
@@ -2084,7 +2188,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemBoth);
 
-    jMenuItemMemHighLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_GREATER, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemHighLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemHighLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/maxmin.png"))); // NOI18N
     jMenuItemMemHighLow.setText("Assign the 2 selected addresses as #><");
     jMenuItemMemHighLow.addActionListener(new java.awt.event.ActionListener() {
@@ -2094,7 +2198,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemHighLow);
 
-    jMenuItemMemHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_GREATER, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
     jMenuItemMemHigh.setText("Assign the selected address as #>");
     jMenuItemMemHigh.addActionListener(new java.awt.event.ActionListener() {
@@ -2103,6 +2207,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMemory.add(jMenuItemMemHigh);
+
+    jMenuItemWizard.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemWizard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
+    jMenuItemWizard.setText("Assign using wizard");
+    jMenuItemWizard.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemWizardActionPerformed(evt);
+        }
+    });
+    jMenuMemory.add(jMenuItemWizard);
 
     jMenuBar.add(jMenuMemory);
 
@@ -2290,7 +2404,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addComponent(jSplitPaneExternal)
-        .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1526, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2712,26 +2826,31 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jButtonMarkGarbageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarkGarbageMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
       if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);     
     }//GEN-LAST:event_jButtonMarkGarbageMouseEntered
 
     private void jMenuBarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBarMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
       if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);     
     }//GEN-LAST:event_jMenuBarMouseEntered
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
       if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);     
     }//GEN-LAST:event_formMouseEntered
 
     private void rSyntaxTextAreaDisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
       if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);     
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseEntered
 
     private void rSyntaxTextAreaSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseEntered
       if (jPopupMenuData.isShowing()) jPopupMenuData.setVisible(false);
       if (jPopupMenuConstant.isShowing()) jPopupMenuConstant.setVisible(false);
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);  
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
 
     private void jMenuItemByteHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemByteHexActionPerformed
@@ -3058,6 +3177,54 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_BOTH);
     }//GEN-LAST:event_jMenuItemMemBothActionPerformed
 
+    private void jButtonWizardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWizardActionPerformed
+       
+    }//GEN-LAST:event_jButtonWizardActionPerformed
+
+    private void jMenuItemWizardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWizardActionPerformed
+        
+    }//GEN-LAST:event_jMenuItemWizardActionPerformed
+
+    private void jMenuItemSaveAsDasmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsDasmActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsDasmActionPerformed
+
+    private void jMenuItemSaveAsTmpxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTmpxActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsTmpxActionPerformed
+
+    private void jMenuItemSaveAsCa65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsCa65ActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsCa65ActionPerformed
+
+    private void jMenuItemSaveAsAcmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsAcmeActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsAcmeActionPerformed
+
+    private void jMenuItemSaveAsKickAssemblerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsKickAssemblerActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsKickAssemblerActionPerformed
+
+    private void jMenuItemSaveAsTass64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTass64ActionPerformed
+
+    }//GEN-LAST:event_jMenuItemSaveAsTass64ActionPerformed
+
+    private void jButtonExportAsSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExportAsSourceMouseEntered
+      jPopupMenuSaveAs.show((JComponent)evt.getSource(), 0, ((JComponent)evt.getSource()).getHeight());
+    }//GEN-LAST:event_jButtonExportAsSourceMouseEntered
+
+    private void jButtonFindSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFindSourceMouseEntered
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);  
+    }//GEN-LAST:event_jButtonFindSourceMouseEntered
+
+    private void jToolBarPerformanceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToolBarPerformanceMouseEntered
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);  
+    }//GEN-LAST:event_jToolBarPerformanceMouseEntered
+
+    private void jPanelToolBarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToolBarMouseEntered
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);  
+    }//GEN-LAST:event_jPanelToolBarMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -3097,6 +3264,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private sw_emulator.swing.HeapView heapView;
     private javax.swing.JButton jButtonAddUserBlock;
     private javax.swing.JButton jButtonAddUserComm;
     private javax.swing.JButton jButtonAddUserLabel;
@@ -3134,6 +3302,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonSaveProjectAs;
     private javax.swing.JButton jButtonViewLabels;
     private javax.swing.JButton jButtonViewProject;
+    private javax.swing.JButton jButtonWizard;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
@@ -3205,7 +3374,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemOpenProject;
     private javax.swing.JMenuItem jMenuItemPlus;
     private javax.swing.JMenuItem jMenuItemSIDLD;
+    private javax.swing.JMenuItem jMenuItemSaveAsAcme;
+    private javax.swing.JMenuItem jMenuItemSaveAsCa65;
+    private javax.swing.JMenuItem jMenuItemSaveAsDasm;
+    private javax.swing.JMenuItem jMenuItemSaveAsKickAssembler;
     private javax.swing.JMenuItem jMenuItemSaveAsProject;
+    private javax.swing.JMenuItem jMenuItemSaveAsTass64;
+    private javax.swing.JMenuItem jMenuItemSaveAsTmpx;
     private javax.swing.JMenuItem jMenuItemSaveProject;
     private javax.swing.JMenuItem jMenuItemSourceSaveAs;
     private javax.swing.JMenuItem jMenuItemSpriteMono;
@@ -3228,6 +3403,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewLabels;
     private javax.swing.JMenuItem jMenuItemViewProject;
+    private javax.swing.JMenuItem jMenuItemWizard;
     private javax.swing.JMenuItem jMenuItemWord;
     private javax.swing.JMenuItem jMenuItemWord1;
     private javax.swing.JMenuItem jMenuItemWordSwapped;
@@ -3243,6 +3419,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JPopupMenu jPopupMenuData;
+    private javax.swing.JPopupMenu jPopupMenuSaveAs;
     private javax.swing.JScrollPane jScrollPaneLeft;
     private javax.swing.JScrollPane jScrollPaneMemory;
     private javax.swing.JScrollPane jScrollPaneRight;
@@ -3273,6 +3450,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JToolBar jToolBarFile;
     private javax.swing.JToolBar jToolBarMemory;
     private javax.swing.JToolBar jToolBarOption;
+    private javax.swing.JToolBar jToolBarPerformance;
     private javax.swing.JToolBar jToolBarSource;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDis;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
