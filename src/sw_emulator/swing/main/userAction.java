@@ -239,6 +239,24 @@ public interface userAction {
   /** Memory assign for both  */
   public static final int MEM_BOTH = 71;
   
+  /** Export source as dasm format */
+  public static final int SOURCE_DASM = 72;
+  
+  /** Export source as TMPx format */
+  public static final int SOURCE_TMPX = 73;
+  
+  /** Export source as CA65 format */
+  public static final int SOURCE_CA65 = 74;
+  
+  /** Export source as acme format */
+  public static final int SOURCE_ACME = 75;
+  
+  /** Export source as kick assembler format */
+  public static final int SOURCE_KICK = 76;
+  
+  /** Export source as 64 tass format */
+  public static final int SOURCE_TASS64 = 77;
+  
   
   /**
    * Execute the passed user action

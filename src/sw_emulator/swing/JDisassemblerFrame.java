@@ -58,6 +58,7 @@ import org.fife.rsta.ui.search.SearchListener;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
@@ -552,6 +553,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemFindSource = new javax.swing.JMenuItem();
         jMenuItemSourceSaveAs = new javax.swing.JMenuItem();
+        jMenuSub = new javax.swing.JMenu();
+        jMenuItemSaveAsDasm1 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsTmpx1 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsCa66 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsAcme1 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsKickAssembler1 = new javax.swing.JMenuItem();
+        jMenuItemSaveAsTass65 = new javax.swing.JMenuItem();
         jMenuHelpContents = new javax.swing.JMenu();
         jMenuItemContents = new javax.swing.JMenuItem();
         jSeparatorHelp1 = new javax.swing.JPopupMenu.Separator();
@@ -1429,7 +1437,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         heapView.setMinimumSize(new java.awt.Dimension(128, 38));
         heapView.setName(""); // NOI18N
-        heapView.setPreferredSize(new java.awt.Dimension(128, 38));
         jToolBarPerformance.add(heapView);
 
         jPanelToolBar.add(jToolBarPerformance);
@@ -1544,14 +1551,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaSourceMouseReleased(evt);
+        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseClicked(evt);
         }
         public void mouseEntered(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaSourceMouseEntered(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaSourceMouseReleased(evt);
         }
     });
     jScrollPaneRight.setViewportView(rSyntaxTextAreaSource);
@@ -2348,6 +2355,64 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuSource.add(jMenuItemSourceSaveAs);
+
+    jMenuSub.setText("(more specific export)");
+
+    jMenuItemSaveAsDasm1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsDasm1.setText("Save in Dasm format");
+    jMenuItemSaveAsDasm1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsDasm1ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsDasm1);
+
+    jMenuItemSaveAsTmpx1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsTmpx1.setText("Save in TMPx format");
+    jMenuItemSaveAsTmpx1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsTmpx1ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsTmpx1);
+
+    jMenuItemSaveAsCa66.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsCa66.setText("Save in CA65 format");
+    jMenuItemSaveAsCa66.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsCa66ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsCa66);
+
+    jMenuItemSaveAsAcme1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsAcme1.setText("Save in Acme format");
+    jMenuItemSaveAsAcme1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsAcme1ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsAcme1);
+
+    jMenuItemSaveAsKickAssembler1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsKickAssembler1.setText("Save in KickAssembler format");
+    jMenuItemSaveAsKickAssembler1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsKickAssembler1ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsKickAssembler1);
+
+    jMenuItemSaveAsTass65.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_DOWN_MASK));
+    jMenuItemSaveAsTass65.setText("Save in Tass64 format");
+    jMenuItemSaveAsTass65.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemSaveAsTass65ActionPerformed(evt);
+        }
+    });
+    jMenuSub.add(jMenuItemSaveAsTass65);
+
+    jMenuSource.add(jMenuSub);
 
     jMenuBar.add(jMenuSource);
 
@@ -3186,27 +3251,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemWizardActionPerformed
 
     private void jMenuItemSaveAsDasmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsDasmActionPerformed
-
+      execute(SOURCE_DASM);
     }//GEN-LAST:event_jMenuItemSaveAsDasmActionPerformed
 
     private void jMenuItemSaveAsTmpxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTmpxActionPerformed
-
+      execute(SOURCE_TMPX);
     }//GEN-LAST:event_jMenuItemSaveAsTmpxActionPerformed
 
     private void jMenuItemSaveAsCa65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsCa65ActionPerformed
-
+      execute(SOURCE_CA65);
     }//GEN-LAST:event_jMenuItemSaveAsCa65ActionPerformed
 
     private void jMenuItemSaveAsAcmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsAcmeActionPerformed
-
+      execute(SOURCE_ACME);
     }//GEN-LAST:event_jMenuItemSaveAsAcmeActionPerformed
 
     private void jMenuItemSaveAsKickAssemblerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsKickAssemblerActionPerformed
-
+      execute(SOURCE_KICK);
     }//GEN-LAST:event_jMenuItemSaveAsKickAssemblerActionPerformed
 
     private void jMenuItemSaveAsTass64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTass64ActionPerformed
-
+      execute(SOURCE_TASS64);
     }//GEN-LAST:event_jMenuItemSaveAsTass64ActionPerformed
 
     private void jButtonExportAsSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExportAsSourceMouseEntered
@@ -3224,6 +3289,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jPanelToolBarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToolBarMouseEntered
       if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false);  
     }//GEN-LAST:event_jPanelToolBarMouseEntered
+
+    private void jMenuItemSaveAsDasm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsDasm1ActionPerformed
+      execute(SOURCE_DASM);
+    }//GEN-LAST:event_jMenuItemSaveAsDasm1ActionPerformed
+
+    private void jMenuItemSaveAsTmpx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTmpx1ActionPerformed
+      execute(SOURCE_TMPX);
+    }//GEN-LAST:event_jMenuItemSaveAsTmpx1ActionPerformed
+
+    private void jMenuItemSaveAsCa66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsCa66ActionPerformed
+      execute(SOURCE_CA65);
+    }//GEN-LAST:event_jMenuItemSaveAsCa66ActionPerformed
+
+    private void jMenuItemSaveAsAcme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsAcme1ActionPerformed
+      execute(SOURCE_ACME);
+    }//GEN-LAST:event_jMenuItemSaveAsAcme1ActionPerformed
+
+    private void jMenuItemSaveAsKickAssembler1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsKickAssembler1ActionPerformed
+      execute(SOURCE_KICK);
+    }//GEN-LAST:event_jMenuItemSaveAsKickAssembler1ActionPerformed
+
+    private void jMenuItemSaveAsTass65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTass65ActionPerformed
+      execute(SOURCE_TASS64);
+    }//GEN-LAST:event_jMenuItemSaveAsTass65ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3375,12 +3464,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemPlus;
     private javax.swing.JMenuItem jMenuItemSIDLD;
     private javax.swing.JMenuItem jMenuItemSaveAsAcme;
+    private javax.swing.JMenuItem jMenuItemSaveAsAcme1;
     private javax.swing.JMenuItem jMenuItemSaveAsCa65;
+    private javax.swing.JMenuItem jMenuItemSaveAsCa66;
     private javax.swing.JMenuItem jMenuItemSaveAsDasm;
+    private javax.swing.JMenuItem jMenuItemSaveAsDasm1;
     private javax.swing.JMenuItem jMenuItemSaveAsKickAssembler;
+    private javax.swing.JMenuItem jMenuItemSaveAsKickAssembler1;
     private javax.swing.JMenuItem jMenuItemSaveAsProject;
     private javax.swing.JMenuItem jMenuItemSaveAsTass64;
+    private javax.swing.JMenuItem jMenuItemSaveAsTass65;
     private javax.swing.JMenuItem jMenuItemSaveAsTmpx;
+    private javax.swing.JMenuItem jMenuItemSaveAsTmpx1;
     private javax.swing.JMenuItem jMenuItemSaveProject;
     private javax.swing.JMenuItem jMenuItemSourceSaveAs;
     private javax.swing.JMenuItem jMenuItemSpriteMono;
@@ -3416,6 +3511,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuMerge;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuSource;
+    private javax.swing.JMenu jMenuSub;
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JPopupMenu jPopupMenuData;
@@ -3693,6 +3789,25 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_SUB_CLEAR:  
          subAssign(-1);  
          break;  
+         
+       case SOURCE_DASM:
+         export(Name.DASM);
+         break;         
+       case SOURCE_TMPX:  
+         export(Name.TMPX);
+         break;         
+       case SOURCE_CA65:
+         export(Name.CA65);  
+         break;         
+       case SOURCE_ACME:
+         export(Name.ACME);  
+         break;         
+       case SOURCE_KICK:
+         export(Name.KICK);  
+         break;
+       case SOURCE_TASS64:
+         export(Name.TASS64);
+         break;                        
          
        case HELP_CONTENTS: 
          jHelpFrame.setVisible(true);
@@ -4881,6 +4996,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                   project.memory[row].type=' ';
                   project.memory[row].related=-1;
               }   
+              
+              // delete an automatic label if present, otherwise in code instruction it will be recreated if label is no more used
+              project.memory[row].dasmLocation=null;
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
@@ -5176,5 +5294,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (project==null) return;
     jAutoLoHiDialog.setUp(project.memory);
     jAutoLoHiDialog.setVisible(true);
+  }
+  
+  /**
+   * Export the source with the given 
+   * 
+   * @param name the assembler name
+   */
+  private void export(Name name) {
+    if (project==null) return;
+    
+    Name actual=option.assembler;    
+    option.assembler=name;
+    Disassembly dis=new Disassembly();        
+    dis.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
+     option.assembler=actual;
+    
+    exportAs(dis.source);     
   }
 }
