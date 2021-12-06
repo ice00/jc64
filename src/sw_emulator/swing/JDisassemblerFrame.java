@@ -139,6 +139,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Auto low/hi dialog */
   JAutoLoHiDialog jAutoLoHiDialog=new JAutoLoHiDialog(this, true);
   
+  /** JWizard dialog */
+  JWizardDialog jWizardDialog=new JWizardDialog(this, true, option);
+  
   /** Help dialog */
   JHelpFrame jHelpFrame=new JHelpFrame();
   
@@ -149,7 +152,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   FindDialog findDialogDis;
   
   /** Compiler */
-  Compiler compiler=new Compiler();
+  Compiler compiler=new Compiler();  
   
   
     /**
@@ -3243,11 +3246,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemMemBothActionPerformed
 
     private void jButtonWizardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWizardActionPerformed
-       
+      execute(MEM_WIZARD);       
     }//GEN-LAST:event_jButtonWizardActionPerformed
 
     private void jMenuItemWizardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWizardActionPerformed
-        
+      execute(MEM_WIZARD);  
     }//GEN-LAST:event_jMenuItemWizardActionPerformed
 
     private void jMenuItemSaveAsDasmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsDasmActionPerformed
@@ -3789,6 +3792,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case MEM_SUB_CLEAR:  
          subAssign(-1);  
          break;  
+       case MEM_WIZARD:
+         wizard();  
+         break;
          
        case SOURCE_DASM:
          export(Name.DASM);
@@ -5311,5 +5317,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
      option.assembler=actual;
     
     exportAs(dis.source);     
+  }
+  
+  /**
+   * Run wizard for memory 
+   */
+  public void wizard() {
+    if (project==null)  return;
+    
+    jWizardDialog.setUp(project.memory, disassembly);
+    jWizardDialog.setVisible(true);
   }
 }

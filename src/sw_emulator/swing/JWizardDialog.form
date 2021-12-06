@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,18,0,0,4,125"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanelUp">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="First"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabelWizard">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Wizard for automatic &lt; and &gt; addresses creation"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanelCn">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jSplitPaneMain" pref="1149" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jSplitPaneMain" alignment="1" pref="718" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JSplitPane" name="jSplitPaneMain">
+          <Properties>
+            <Property name="dividerLocation" type="int" value="450"/>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelMem">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                  <JSplitPaneConstraints position="left"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="2"/>
+                <Property name="rows" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanelFrom">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="jPanelLo">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="First"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelLow">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="LOW"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneLow">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="jTableLow">
+                          <Properties>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="dataTableModelMemoryLow" type="code"/>
+                            </Property>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="0"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableLowMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;     String[] hh={&quot;Memory address location in Hex&quot;, &#xa;                  &quot;Disassembler automatic comment&quot;, &#xa;                  &quot;User manual comment&quot;, &#xa;                  &quot;Disassembler automatic label&quot;,&#xa;                  &quot;User manual label&quot;,&#xa;                  &quot;User global comment&quot;,&#xa;                  &quot;Related location and data type&quot;,&#xa;                  &quot;Value in memory&quot;};&#xa;     @Override protected JTableHeader createDefaultTableHeader() {&#xa;        return new JTableHeader(columnModel) {&#xa;          @Override public String getToolTipText(MouseEvent e) {&#xa;            int col = columnAtPoint(e.getPoint());&#xa;            int index = columnModel.getColumnIndexAtX(e.getPoint().x);&#xa;            int realIndex = columnModel.getColumn(index).getModelIndex();&#xa;            return hh[realIndex];&#xa;          }&#xa;        };&#xa;      }&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemoryLow.getData()[rowIndex];&#xa;      switch (dataTableModelMemoryLow.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;        case RE:&#xa;          if (memory.type!=&apos; &apos;) {&#xa;            MemoryDasm mem=dataTableModelMemoryLow.getData()[memory.related];&#xa;            switch (memory.type) {&#xa;              case &apos;+&apos;:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=mem.userLocation+&quot;+&quot;+(memory.address-memory.related); &#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=mem.dasmLocation+&quot;+&quot;+(memory.address-memory.related);&#xa;                     else tip=&quot;$&quot;+Shared.ShortToExe(mem.address)+&quot;+&quot;+(memory.address-memory.related);&#xa;                break;&#xa;              case &apos;-&apos;:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related); &#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);&#xa;                     else tip=&quot;$&quot;+Shared.ShortToExe(mem.address)+(memory.address-memory.related);&#xa;                break;&#xa;              default:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=&quot;#&quot;+memory.type+mem.userLocation;&#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=&quot;#&quot;+memory.type+mem.dasmLocation;&#xa;                     else tip=&quot;#&quot;+memory.type+&quot;$&quot;+Shared.ShortToExe(mem.address);            &#xa;            }&#xa;          } else if (memory.dataType!=null) {&#xa;                   tip=memory.dataType.getDescription();&#xa;                 }&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableLow.setDefaultRenderer(Integer.class, memoryTableCellRenderer);&#xa;jTableLow.getColumnModel().getColumn(0).setPreferredWidth(310);&#xa;&#xa;    InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);&#xa;    ActionMap am = this.getRootPane().getActionMap();&#xa;&#xa;    //add custom action&#xa;    im.put(KeyStroke.getKeyStroke(&quot;control D&quot;), &quot;searchLow&quot;);&#xa;    am.put(&quot;searchLow&quot;, new AbstractAction(){&#xa;            @Override&#xa;            public void actionPerformed(ActionEvent ae) {&#xa;                  String addr=JOptionPane.showInputDialog(&quot;Search and go to a given HEX memory address&quot;);&#xa;                  if (addr==null) return;&#xa;    &#xa;                  try {&#xa;                    int pos=Integer.parseInt(addr,16);&#xa;                    if (pos&lt;0 || pos&gt;0xFFFF) return;&#xa;    &#xa;                    jTableLow.getSelectionModel().setSelectionInterval(pos, pos);&#xa;                    jTableLow.scrollRectToVisible(new Rectangle(jTableLow.getCellRect(pos, 0, true)));&#xa;                  } catch (Exception e) {&#xa;               }&#xa;            }&#xa;        });&#xa;&#xa;&#xa;((InputMap)UIManager.get(&quot;Table.ancestorInputMap&quot;)).put(KeyStroke.getKeyStroke(&quot;control D&quot;), &quot;none&quot;);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanelSearchLow">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Last"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelSeachLow">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="CTRL+D search"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanelTo">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="jPanelHigh">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="North"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelHigh">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="HIGH"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneHigh">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="jTableHigh">
+                          <Properties>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="dataTableModelMemoryHigh" type="code"/>
+                            </Property>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="0"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableHighMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;     String[] hh={&quot;Memory address location in Hex&quot;, &#xa;                  &quot;Disassembler automatic comment&quot;, &#xa;                  &quot;User manual comment&quot;, &#xa;                  &quot;Disassembler automatic label&quot;,&#xa;                  &quot;User manual label&quot;,&#xa;                  &quot;User global comment&quot;,&#xa;                  &quot;Related location and data type&quot;,&#xa;                  &quot;Value in memory&quot;};&#xa;     @Override protected JTableHeader createDefaultTableHeader() {&#xa;        return new JTableHeader(columnModel) {&#xa;          @Override public String getToolTipText(MouseEvent e) {&#xa;            int col = columnAtPoint(e.getPoint());&#xa;            int index = columnModel.getColumnIndexAtX(e.getPoint().x);&#xa;            int realIndex = columnModel.getColumn(index).getModelIndex();&#xa;            return hh[realIndex];&#xa;          }&#xa;        };&#xa;      }&#xa;&#xa;  //Implement table cell tool tips.           &#xa;  public String getToolTipText(MouseEvent e) {&#xa;    String tip = null;&#xa;    java.awt.Point p = e.getPoint();&#xa;    int rowIndex = rowAtPoint(p);&#xa;    int colIndex = columnAtPoint(p);&#xa;    int realColumnIndex = convertColumnIndexToModel(colIndex);&#xa;&#xa;    try {&#xa;      MemoryDasm memory=dataTableModelMemoryHigh.getData()[rowIndex];&#xa;      switch (dataTableModelMemoryHigh.columns[realColumnIndex]) {&#xa;        case ID:&#xa;          if (!memory.isInside) tip=&quot;Memory outside of the program&quot;;&#xa;          else if(memory.isCode) tip=&quot;Memory marked as code&quot;;&#xa;          else if (memory.isData) tip=&quot;Memory marked as data&quot;;&#xa;          else tip=&quot;Memory not marked as code or data&quot;;&#xa;          break;&#xa;        case DC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmComment;&#xa;          break;&#xa;        case UC:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userComment;&#xa;          break;&#xa;        case DL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.dasmLocation;&#xa;          break;&#xa;        case UL:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=memory.userLocation;&#xa;          break;&#xa;        case UB:&#xa;          if ((Boolean)getValueAt(rowIndex, colIndex)) tip=&quot;&lt;html&gt;&quot;+memory.userBlockComment.replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;)+&quot;&lt;/html&gt;&quot;;&#xa;          break;&#xa;        case RE:&#xa;          if (memory.type!=&apos; &apos;) {&#xa;            MemoryDasm mem=dataTableModelMemoryHigh.getData()[memory.related];&#xa;            switch (memory.type) {&#xa;              case &apos;+&apos;:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=mem.userLocation+&quot;+&quot;+(memory.address-memory.related); &#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=mem.dasmLocation+&quot;+&quot;+(memory.address-memory.related);&#xa;                     else tip=&quot;$&quot;+Shared.ShortToExe(mem.address)+&quot;+&quot;+(memory.address-memory.related);&#xa;                break;&#xa;              case &apos;-&apos;:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related); &#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);&#xa;                     else tip=&quot;$&quot;+Shared.ShortToExe(mem.address)+(memory.address-memory.related);&#xa;                break;&#xa;              default:&#xa;                if (mem.userLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.userLocation)) tip=&quot;#&quot;+memory.type+mem.userLocation;&#xa;                else if (mem.dasmLocation!=null &amp;&amp; !&quot;&quot;.equals(mem.dasmLocation)) tip=&quot;#&quot;+memory.type+mem.dasmLocation;&#xa;                     else tip=&quot;#&quot;+memory.type+&quot;$&quot;+Shared.ShortToExe(mem.address);            &#xa;            }&#xa;          } else if (memory.dataType!=null) {&#xa;                   tip=memory.dataType.getDescription();&#xa;                 }&#xa;          break;&#xa;      }&#xa;    } catch (RuntimeException e1) {&#xa;        //catch null pointer exception if mouse is over an empty line&#xa;      }&#xa;    return tip;&#xa;  }&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableHigh.setDefaultRenderer(Integer.class, memoryTableCellRenderer);&#xa;jTableHigh.getColumnModel().getColumn(0).setPreferredWidth(310);&#xa;&#xa;jTableHigh.getColumnModel().getColumn(0).setPreferredWidth(310);&#xa;&#xa;&#xa;    InputMap im1 = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);&#xa;    ActionMap am1 = this.getRootPane().getActionMap();&#xa;&#xa;    //add custom action&#xa;    im1.put(KeyStroke.getKeyStroke(&quot;control F&quot;), &quot;searchHigh&quot;);&#xa;    am1.put(&quot;searchHigh&quot;, new AbstractAction(){&#xa;            @Override&#xa;            public void actionPerformed(ActionEvent ae) {&#xa;                  String addr=JOptionPane.showInputDialog(&quot;Search and go to a given HEX memory address&quot;);&#xa;                  if (addr==null) return;&#xa;    &#xa;                  try {&#xa;                    int pos=Integer.parseInt(addr,16);&#xa;                    if (pos&lt;0 || pos&gt;0xFFFF) return;&#xa;    &#xa;                    jTableHigh.getSelectionModel().setSelectionInterval(pos, pos);&#xa;                    jTableHigh.scrollRectToVisible(new Rectangle(jTableHigh.getCellRect(pos, 0, true)));&#xa;                  } catch (Exception e) {&#xa;               }&#xa;            }&#xa;        });&#xa;&#xa;&#xa;((InputMap)UIManager.get(&quot;Table.ancestorInputMap&quot;)).put(KeyStroke.getKeyStroke(&quot;control F&quot;), &quot;none&quot;);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanelSearchHigh">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Last"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabelSearchHigh">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="CTRL+F search"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelTable">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                  <JSplitPaneConstraints position="right"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanelText">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="North"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabelText">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Preview of (combined)  memory address "/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanelCmd">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="South"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jLabelSize" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                              <Component id="jSpinnerSize" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jLabelPrefix" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldPrefix" min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jLabelDigit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jSpinnerDigit" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="jButtonApply" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                      <Component id="jLabelSize" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="jSpinnerSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelPrefix" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldPrefix" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelDigit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerDigit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jButtonApply" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabelSize">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Table size:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerSize">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="256" maximum="256" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerSizeStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonApply">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Apply"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Apply the selected table/labels in memory"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApplyActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelPrefix">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Prefix:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextFieldPrefix">
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldPrefixFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDigit">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Digit:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDigit">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="1" maximum="2" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Min number of digits to use (can increase automatically)"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDigitStateChanged"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JScrollPane" name="jScrollPaneTable">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
+                    <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[700, 418]"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="Center"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jTable">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="8" rowCount="32">
+                            <Column editable="false" title="1" type="java.lang.String"/>
+                            <Column editable="false" title="2" type="java.lang.String"/>
+                            <Column editable="false" title="3" type="java.lang.String"/>
+                            <Column editable="false" title="4" type="java.lang.String"/>
+                            <Column editable="false" title="5" type="java.lang.String"/>
+                            <Column editable="false" title="6" type="java.lang.String"/>
+                            <Column editable="false" title="7" type="java.lang.String"/>
+                            <Column editable="false" title="8" type="java.lang.String"/>
+                          </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
+                        </Property>
+                        <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="wizardTableCellRenderer=new WizardTableCellRenderer(jSpinnerSize);&#xa;jTable.setDefaultRenderer(String.class, wizardTableCellRenderer);"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanelDn">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Last"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jButtonClose">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Close"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCloseActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

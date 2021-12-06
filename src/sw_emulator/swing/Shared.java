@@ -24,6 +24,7 @@
 package sw_emulator.swing;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Contains all shared object accessible by the application
@@ -36,4 +37,31 @@ public class Shared {
   
   /** Version of the application */
   public static final String VERSION="1.6";
+  
+  /**
+   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
+   *
+   * @param value the short value to convert
+   * @return the exe string rapresentation of byte
+   */
+  protected static String ShortToExe(int value) {
+    int tmp=value;
+
+    if (value<0) return "????";
+    
+    String ret=Integer.toHexString(tmp);
+    int len=ret.length();
+    switch (len) {
+      case 1:
+        ret="000"+ret;
+        break;
+     case 2:
+        ret="00"+ret;
+        break;
+     case 3:
+        ret="0"+ret;
+        break;
+    }
+    return ret.toUpperCase(Locale.ENGLISH);
+  }      
 }

@@ -257,6 +257,9 @@ public interface userAction {
   /** Export source as 64 tass format */
   public static final int SOURCE_TASS64 = 77;
   
+  /** Wizard memory */
+  public static final int MEM_WIZARD=78;
+  
   
   /**
    * Execute the passed user action
