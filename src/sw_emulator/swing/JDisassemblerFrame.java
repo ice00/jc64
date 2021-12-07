@@ -2219,7 +2219,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuMemory.add(jMenuItemMemHigh);
 
     jMenuItemWizard.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-    jMenuItemWizard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/max.png"))); // NOI18N
+    jMenuItemWizard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/wizard.png"))); // NOI18N
     jMenuItemWizard.setText("Assign using wizard");
     jMenuItemWizard.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5325,7 +5325,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   public void wizard() {
     if (project==null)  return;
     
-    jWizardDialog.setUp(project.memory, disassembly);
+    jWizardDialog.setUp(project.memory, disassembly, project);
     jWizardDialog.setVisible(true);
   }
 }

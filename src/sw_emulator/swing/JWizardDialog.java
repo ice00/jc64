@@ -40,6 +40,9 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.table.TableModel;
+import sw_emulator.software.cpu.M6510Dasm;
+import sw_emulator.swing.main.Constant;
+import sw_emulator.swing.main.Project;
 import sw_emulator.swing.table.WizardTableCellRenderer;
 
 /**
@@ -52,6 +55,7 @@ public class JWizardDialog extends javax.swing.JDialog {
   Option option;    
   MemoryDasm[] memory;
   Disassembly disassembly;
+  Project project;
   
   /** Memory cell renderer for table */
   MemoryTableCellRenderer memoryTableCellRenderer=new MemoryTableCellRenderer();
@@ -71,6 +75,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     public JWizardDialog(java.awt.Frame parent, boolean modal, Option option) {
         super(parent, modal);
         this.option=option;
+       
                 
         Shared.framesList.add(this);
                 
@@ -85,9 +90,10 @@ public class JWizardDialog extends javax.swing.JDialog {
      * @param memory 
      * @param disassembly the disassembler
      */
-    public void setUp(MemoryDasm[] memory, Disassembly disassembly) {
+    public void setUp(MemoryDasm[] memory, Disassembly disassembly, Project project) {
       this.memory=memory;
       this.disassembly=disassembly;
+      this.project=project;
       
       memoryTableCellRenderer.setDisassembly(disassembly);    
         
@@ -300,6 +306,7 @@ public class JWizardDialog extends javax.swing.JDialog {
         jTextFieldPrefix = new javax.swing.JTextField();
         jLabelDigit = new javax.swing.JLabel();
         jSpinnerDigit = new javax.swing.JSpinner();
+        jCheckBoxUpper = new javax.swing.JCheckBox();
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         wizardTableCellRenderer=new WizardTableCellRenderer(jSpinnerSize);
@@ -471,6 +478,13 @@ public class JWizardDialog extends javax.swing.JDialog {
             }
         });
 
+        jCheckBoxUpper.setText("Uppercase");
+        jCheckBoxUpper.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxUpperItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCmdLayout = new javax.swing.GroupLayout(jPanelCmd);
         jPanelCmd.setLayout(jPanelCmdLayout);
         jPanelCmdLayout.setHorizontalGroup(
@@ -488,13 +502,16 @@ public class JWizardDialog extends javax.swing.JDialog {
                 .addComponent(jLabelDigit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSpinnerDigit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
-                .addComponent(jButtonApply))
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBoxUpper)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(jButtonApply)
+                .addContainerGap())
         );
         jPanelCmdLayout.setVerticalGroup(
             jPanelCmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCmdLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addGap(2, 2, 2)
                 .addGroup(jPanelCmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCmdLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -504,8 +521,10 @@ public class JWizardDialog extends javax.swing.JDialog {
                         .addComponent(jLabelPrefix)
                         .addComponent(jTextFieldPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelDigit)
-                        .addComponent(jSpinnerDigit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonApply)))
+                        .addComponent(jSpinnerDigit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonApply)
+                        .addComponent(jCheckBoxUpper)))
+                .addGap(3, 3, 3))
         );
 
         jPanelTable.add(jPanelCmd, java.awt.BorderLayout.SOUTH);
@@ -618,7 +637,8 @@ public class JWizardDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jTableHighMouseClicked
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
-      apply(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
+      apply(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+           jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jButtonApplyActionPerformed
 
     private void jSpinnerSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSizeStateChanged
@@ -626,12 +646,19 @@ public class JWizardDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jSpinnerSizeStateChanged
 
     private void jSpinnerDigitStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDigitStateChanged
-        // TODO add your handling code here:
+      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jSpinnerDigitStateChanged
 
     private void jTextFieldPrefixFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPrefixFocusLost
-        // TODO add your handling code here:
+      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jTextFieldPrefixFocusLost
+
+    private void jCheckBoxUpperItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxUpperItemStateChanged
+      simulate(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
+    }//GEN-LAST:event_jCheckBoxUpperItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -678,6 +705,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JCheckBox jCheckBoxUpper;
     private javax.swing.JLabel jLabelDigit;
     private javax.swing.JLabel jLabelHigh;
     private javax.swing.JLabel jLabelLow;
@@ -752,16 +780,19 @@ public class JWizardDialog extends javax.swing.JDialog {
     /**
      * Apply the selected table to relative relation in memory
      * 
+     * @param prefix prefix for label
+     * @param digit digit to use
+     * @param uppercase uppercase digit
      * @param rowLow row low position 
      * @param rowHigh roh high position
      * @param size size to use for table
      */
-    private void apply(int rowLow, int rowHigh, int size) {
+    private void apply(String prefix, int digit, boolean uppercase, int rowLow, int rowHigh, int size) {
       if (hasError(rowLow, rowHigh, size)) return;
-      
-      
+            
       int address;
       MemoryDasm mem;
+      String label;
       
       for (int i=0; i<size; i++) {
           
@@ -772,10 +803,23 @@ public class JWizardDialog extends javax.swing.JDialog {
         memory[rowLow+i].type='<';
 
         memory[rowHigh+i].related=address;       
-        memory[rowHigh+i].type='>';          
+        memory[rowHigh+i].type='>';     
+        
+        if (prefix!=null && !"".equals(prefix)) { 
+          label=Integer.toHexString(i);
+          if (label.length()==1 && digit==2) label="0"+label;
+          if (uppercase) label=label.toUpperCase();
+          else label=label.toLowerCase();
+          label=prefix+label;        
+          memory[address].userLocation=label;
+        }  
       }
       
       JOptionPane.showMessageDialog(this, "Table relation applied into memory");
+      
+      jTableLow.getSelectionModel().removeSelectionInterval(rowLow, rowLow);
+      jTableHigh.getSelectionModel().removeSelectionInterval(rowHigh, rowHigh);
+      popolate(-1, -1);
     }
 
     
@@ -810,5 +854,109 @@ public class JWizardDialog extends javax.swing.JDialog {
         return true; 
       }
       return false;
+    }
+
+    /**
+     * Simulate label creation
+     * 
+     * @param prefix prefix for label
+     * @param digit digit to use
+     * @param uppercase uppercase digit
+     * @param rowLow low row position
+     * @param rowHigh high row position
+     * @param size the size of table
+     */
+    private void simulate(String prefix, int digit, boolean uppercase, int rowLow, int rowHigh, int size) {
+      int address;
+      MemoryDasm mem;
+      String label;
+      
+      if (prefix==null || "".equals(prefix)) {
+        for (int i=0; i<size; i++) {
+          
+        address=(memory[rowLow+i].copy & 0xFF)+(memory[rowHigh+i].copy & 0xFF)*256;
+        mem=memory[address];
+        
+        memory[rowLow+i].related=address;          
+        memory[rowLow+i].type='<';
+
+        memory[rowHigh+i].related=address;       
+        memory[rowHigh+i].type='>';              
+      }
+        return;
+      }
+      
+
+      
+      TableModel model=jTable.getModel(); 
+      
+      int row=-1;
+      for (int i=0; i<size; i++) {
+        if (i%8==0) row++;  
+           
+        address=(memory[rowLow+i].copy & 0xFF)+(memory[rowHigh+i].copy & 0xFF)*256;
+        mem=memory[address];
+        
+        if (prefix!=null && !"".equals(prefix)) {
+          label=Integer.toHexString(i);
+          if (label.length()==1 && digit==2) label="0"+label;
+          if (uppercase) label=label.toUpperCase();
+          else label=label.toLowerCase();
+          label=prefix+label;
+                
+        
+          if (label.contains(" ")) {
+            JOptionPane.showMessageDialog(this, "Label must not contain spaces", "Error", JOptionPane.ERROR_MESSAGE);   
+            return;
+          }
+        
+          if (label.length()>option.maxLabelLength) {
+            JOptionPane.showMessageDialog(this, "Label too long. Max allowed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
+            return;
+          }
+        
+          if (label.length()<2) {
+            JOptionPane.showMessageDialog(this, "Label too short. Min allowed=2", "Error", JOptionPane.ERROR_MESSAGE);     
+            return;
+          }    
+            
+          // see if the label is already defined
+          for (MemoryDasm memory : project.memory) {
+            if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {
+              JOptionPane.showMessageDialog(this, "This label is already used into the source", "Error", JOptionPane.ERROR_MESSAGE);  
+              return;
+            }
+          }  
+      
+          // see if label is as constant
+          for (int ii=0; ii<Constant.COLS; ii++) {
+            for (int j=0; j<Constant.ROWS; j++) {
+              if (label.equals(project.constant.table[ii][j])) {
+               JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
+                return;  
+               } 
+             }
+          }
+      
+          String tmp=label.toUpperCase();
+          for (String val: M6510Dasm.mnemonics) {
+            if (tmp.equals(val)) {
+              JOptionPane.showMessageDialog(this, "This label is an opcode, cannot be defined", "Error", JOptionPane.ERROR_MESSAGE);  
+              return;  
+            }
+          }
+      
+          if (label.startsWith("W") && label.length()==5) {
+             JOptionPane.showMessageDialog(this, "Label cannot be like Wxxxx as they are reserverd", "Error", JOptionPane.ERROR_MESSAGE); 
+             return;
+          }                                          
+        } else {
+            if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
+            else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
+            else label="$"+Shared.ShortToExe((int)address);       
+        }        
+                
+        model.setValueAt(label, row, i%8);             
+      }
     }
 }

@@ -1292,7 +1292,7 @@
                   <KeyStroke key="Ctrl+W"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/max.png"/>
+                  <Image iconType="3" name="/sw_emulator/swing/icons/mini/wizard.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assign using wizard"/>
               </Properties>
