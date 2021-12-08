@@ -23,8 +23,10 @@
  */
 package sw_emulator.swing;
 
+import java.awt.AWTException;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -46,8 +48,11 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.BadLocationException;
@@ -224,19 +229,29 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           
             switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
               case UC:    // user comment
-                if (option.clickUcEdit) addComment(row);
+                if (option.clickUcEdit) {
+                  addComment(row);
+                  if (option.forceCompilation) disassembly();
+                }
                 break;  
               case UL:     // user label
-                if (option.clickUlEdit) addLabel(row);  
+                if (option.clickUlEdit) {
+                  addLabel(row);
+                  if (option.forceCompilation) disassembly();
+                }  
                 break;
               case UB:     // user global comment
-                if (option.clickUbEdit) addBlock(row);   
+                if (option.clickUbEdit) {
+                  addBlock(row);
+                  if (option.forceCompilation) disassembly();
+                }   
                 break;
               case DC:     // automatic comment
                 if (option.clickDcErase) {
                   MemoryDasm mem= project.memory[row];
                   if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
                   dataTableModelMemory.fireTableDataChanged();  
+                  if (option.forceCompilation) disassembly();
                 }                 
                 break;  
               case DL:     // automatic label
@@ -244,6 +259,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                   MemoryDasm mem= project.memory[row];
                   if (mem.dasmLocation!=null) mem.dasmLocation=null;
                   dataTableModelMemory.fireTableDataChanged();  
+                  if (option.forceCompilation) disassembly();
                 }  
                 break;  
             }
@@ -569,6 +585,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemLicense = new javax.swing.JMenuItem();
         jMenuItemCredits = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
+        jSeparatorHelp2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemImportLabels = new javax.swing.JMenuItem();
+        jMenuItemRefactorLabels = new javax.swing.JMenuItem();
 
         jMenuItemByteHex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
         jMenuItemByteHex.setText("(B) Mark data as Byte (HEX)");
@@ -2462,6 +2481,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuHelpContents.add(jMenuItemAbout);
+    jMenuHelpContents.add(jSeparatorHelp2);
+
+    jMenuItemImportLabels.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemImportLabels.setMnemonic('i');
+    jMenuItemImportLabels.setText("Import labels");
+    jMenuItemImportLabels.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemImportLabelsActionPerformed(evt);
+        }
+    });
+    jMenuHelpContents.add(jMenuItemImportLabels);
+
+    jMenuItemRefactorLabels.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemRefactorLabels.setMnemonic('t');
+    jMenuItemRefactorLabels.setText("Refactor labels");
+    jMenuItemRefactorLabels.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRefactorLabelsActionPerformed(evt);
+        }
+    });
+    jMenuHelpContents.add(jMenuItemRefactorLabels);
 
     jMenuBar.add(jMenuHelpContents);
 
@@ -3317,6 +3357,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_TASS64);
     }//GEN-LAST:event_jMenuItemSaveAsTass65ActionPerformed
 
+    private void jMenuItemImportLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportLabelsActionPerformed
+
+    }//GEN-LAST:event_jMenuItemImportLabelsActionPerformed
+
+    private void jMenuItemRefactorLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRefactorLabelsActionPerformed
+
+    }//GEN-LAST:event_jMenuItemRefactorLabelsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3447,6 +3495,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFindDis;
     private javax.swing.JMenuItem jMenuItemFindSource;
+    private javax.swing.JMenuItem jMenuItemImportLabels;
     private javax.swing.JMenuItem jMenuItemLicense;
     private javax.swing.JMenuItem jMenuItemLong;
     private javax.swing.JMenuItem jMenuItemLong1;
@@ -3465,6 +3514,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemNumText1;
     private javax.swing.JMenuItem jMenuItemOpenProject;
     private javax.swing.JMenuItem jMenuItemPlus;
+    private javax.swing.JMenuItem jMenuItemRefactorLabels;
     private javax.swing.JMenuItem jMenuItemSIDLD;
     private javax.swing.JMenuItem jMenuItemSaveAsAcme;
     private javax.swing.JMenuItem jMenuItemSaveAsAcme1;
@@ -3531,6 +3581,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparatorByte;
     private javax.swing.JPopupMenu.Separator jSeparatorByte1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp1;
+    private javax.swing.JPopupMenu.Separator jSeparatorHelp2;
     private javax.swing.JPopupMenu.Separator jSeparatorOption;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu0;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu1;
@@ -4627,9 +4678,39 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm mem= project.memory[row];
     JTextArea area=new JTextArea(20,40);
     area.setText(mem.userBlockComment);
-    area.setFont(new Font("monospaced", Font.PLAIN, 12));
+    area.setFont(new Font("monospaced", Font.PLAIN, 12)); 
 
-    JScrollPane scrollPane = new JScrollPane(area);
+    JScrollPane scrollPane = new JScrollPane(area);  
+    
+ /*   area.addAncestorListener(new AncestorListener() {
+    @Override
+    public void ancestorRemoved(AncestorEvent event) {}
+
+    @Override
+    public void ancestorMoved(AncestorEvent event) {}
+
+    @Override
+    public void ancestorAdded(AncestorEvent event) {
+       System.err.println(event.getComponent().requestFocusInWindow());
+    }
+    });*/
+         
+
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        try {
+          Robot robot = new Robot();
+          int i = 2;
+          while (i-- > 0) {
+            robot.keyPress(KeyEvent.VK_TAB);
+            robot.delay(100);
+            robot.keyRelease(KeyEvent.VK_TAB);
+          }
+        } catch (AWTException e) {
+            System.out.println("Failed to use Robot, got exception: " + e.getMessage());
+          }
+      }
+    });
     
     if (JOptionPane.showConfirmDialog(null, scrollPane, "Add a multi lines block comment", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
       mem.userBlockComment=area.getText();
