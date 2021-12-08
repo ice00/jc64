@@ -260,6 +260,12 @@ public interface userAction {
   /** Wizard memory */
   public static final int MEM_WIZARD=78;
   
+  /** Import labels */
+  public static final int HELP_IMPORT=79;
+  
+  /** Refactor labels */
+  public static final int HELP_REFACTOR=80;
+  
   
   /**
    * Execute the passed user action
