@@ -89,18 +89,22 @@ public class JWizardDialog extends javax.swing.JDialog {
      * 
      * @param memory 
      * @param disassembly the disassembler
+     * @param project the project
+     * @param rowLow the row low position
      */
-    public void setUp(MemoryDasm[] memory, Disassembly disassembly, Project project) {
+    public void setUp(MemoryDasm[] memory, Disassembly disassembly, Project project, int rowLow) {
       this.memory=memory;
       this.disassembly=disassembly;
       this.project=project;
       
-      memoryTableCellRenderer.setDisassembly(disassembly);    
+      memoryTableCellRenderer.setDisassembly(disassembly);       
         
       dataTableModelMemoryLow.setData(memory);
       dataTableModelMemoryLow.fireTableDataChanged();  
       dataTableModelMemoryHigh.setData(memory);
       dataTableModelMemoryHigh.fireTableDataChanged();
+      jTableLow.getSelectionModel().setSelectionInterval(rowLow, rowLow);
+      jTableLow.scrollRectToVisible(new Rectangle(jTableLow.getCellRect(rowLow, 0, true)));
     }
 
     /**
@@ -307,6 +311,8 @@ public class JWizardDialog extends javax.swing.JDialog {
         jLabelDigit = new javax.swing.JLabel();
         jSpinnerDigit = new javax.swing.JSpinner();
         jCheckBoxUpper = new javax.swing.JCheckBox();
+        jLabelStart = new javax.swing.JLabel();
+        jSpinnerStart = new javax.swing.JSpinner();
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         wizardTableCellRenderer=new WizardTableCellRenderer(jSpinnerSize);
@@ -485,26 +491,39 @@ public class JWizardDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelStart.setText("Start:");
+
+        jSpinnerStart.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerStart.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerStartStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCmdLayout = new javax.swing.GroupLayout(jPanelCmd);
         jPanelCmd.setLayout(jPanelCmdLayout);
         jPanelCmdLayout.setHorizontalGroup(
             jPanelCmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCmdLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jLabelSize)
                 .addGap(5, 5, 5)
                 .addComponent(jSpinnerSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
                 .addComponent(jLabelPrefix)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelDigit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSpinnerDigit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelStart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinnerStart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxUpper)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonApply)
                 .addContainerGap())
         );
@@ -523,7 +542,9 @@ public class JWizardDialog extends javax.swing.JDialog {
                         .addComponent(jLabelDigit)
                         .addComponent(jSpinnerDigit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonApply)
-                        .addComponent(jCheckBoxUpper)))
+                        .addComponent(jCheckBoxUpper)
+                        .addComponent(jLabelStart)
+                        .addComponent(jSpinnerStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(3, 3, 3))
         );
 
@@ -629,36 +650,47 @@ public class JWizardDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void jTableLowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLowMouseClicked
-      popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      if (jTextFieldPrefix.getText()==null || "".equals(jTextFieldPrefix.getText())) popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      else simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jTableLowMouseClicked
 
     private void jTableHighMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHighMouseClicked
-      popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      if (jTextFieldPrefix.getText()==null || "".equals(jTextFieldPrefix.getText())) popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      else simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jTableHighMouseClicked
 
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
-      apply(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+      apply(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
            jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jButtonApplyActionPerformed
 
     private void jSpinnerSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSizeStateChanged
-      popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      if (jTextFieldPrefix.getText()==null || "".equals(jTextFieldPrefix.getText())) popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      else simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jSpinnerSizeStateChanged
 
     private void jSpinnerDigitStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDigitStateChanged
-      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
               jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jSpinnerDigitStateChanged
 
     private void jTextFieldPrefixFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPrefixFocusLost
-      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+      simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
               jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jTextFieldPrefixFocusLost
 
     private void jCheckBoxUpperItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxUpperItemStateChanged
-      simulate(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(),
+      simulate(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
               jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jCheckBoxUpperItemStateChanged
+
+    private void jSpinnerStartStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerStartStateChanged
+      simulate(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
+              jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
+    }//GEN-LAST:event_jSpinnerStartStateChanged
 
     /**
      * @param args the command line arguments
@@ -713,6 +745,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelSeachLow;
     private javax.swing.JLabel jLabelSearchHigh;
     private javax.swing.JLabel jLabelSize;
+    private javax.swing.JLabel jLabelStart;
     private javax.swing.JLabel jLabelText;
     private javax.swing.JLabel jLabelWizard;
     private javax.swing.JPanel jPanelCmd;
@@ -733,6 +766,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneTable;
     private javax.swing.JSpinner jSpinnerDigit;
     private javax.swing.JSpinner jSpinnerSize;
+    private javax.swing.JSpinner jSpinnerStart;
     private javax.swing.JSplitPane jSplitPaneMain;
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTableHigh;
@@ -783,11 +817,12 @@ public class JWizardDialog extends javax.swing.JDialog {
      * @param prefix prefix for label
      * @param digit digit to use
      * @param uppercase uppercase digit
+     * @param start the starting digit
      * @param rowLow row low position 
      * @param rowHigh roh high position
      * @param size size to use for table
      */
-    private void apply(String prefix, int digit, boolean uppercase, int rowLow, int rowHigh, int size) {
+    private void apply(String prefix, int digit, boolean uppercase, int start, int rowLow, int rowHigh, int size) {
       if (hasError(rowLow, rowHigh, size)) return;
             
       int address;
@@ -806,7 +841,7 @@ public class JWizardDialog extends javax.swing.JDialog {
         memory[rowHigh+i].type='>';     
         
         if (prefix!=null && !"".equals(prefix)) { 
-          label=Integer.toHexString(i);
+          label=Integer.toHexString(i+start);
           if (label.length()==1 && digit==2) label="0"+label;
           if (uppercase) label=label.toUpperCase();
           else label=label.toLowerCase();
@@ -862,11 +897,12 @@ public class JWizardDialog extends javax.swing.JDialog {
      * @param prefix prefix for label
      * @param digit digit to use
      * @param uppercase uppercase digit
+     * @param start the starting digit
      * @param rowLow low row position
      * @param rowHigh high row position
      * @param size the size of table
      */
-    private void simulate(String prefix, int digit, boolean uppercase, int rowLow, int rowHigh, int size) {
+    private void simulate(String prefix, int digit, boolean uppercase, int start, int rowLow, int rowHigh, int size) {
       int address;
       MemoryDasm mem;
       String label;
@@ -875,7 +911,6 @@ public class JWizardDialog extends javax.swing.JDialog {
         for (int i=0; i<size; i++) {
           
         address=(memory[rowLow+i].copy & 0xFF)+(memory[rowHigh+i].copy & 0xFF)*256;
-        mem=memory[address];
         
         memory[rowLow+i].related=address;          
         memory[rowLow+i].type='<';
@@ -885,9 +920,7 @@ public class JWizardDialog extends javax.swing.JDialog {
       }
         return;
       }
-      
-
-      
+            
       TableModel model=jTable.getModel(); 
       
       int row=-1;
@@ -898,7 +931,7 @@ public class JWizardDialog extends javax.swing.JDialog {
         mem=memory[address];
         
         if (prefix!=null && !"".equals(prefix)) {
-          label=Integer.toHexString(i);
+          label=Integer.toHexString(i+start);
           if (label.length()==1 && digit==2) label="0"+label;
           if (uppercase) label=label.toUpperCase();
           else label=label.toLowerCase();

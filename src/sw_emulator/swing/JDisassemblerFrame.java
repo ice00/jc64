@@ -5406,7 +5406,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   public void wizard() {
     if (project==null)  return;
     
-    jWizardDialog.setUp(project.memory, disassembly, project);
+    jWizardDialog.setUp(project.memory, disassembly, project, jTableMemory.getSelectedRow());
     jWizardDialog.setVisible(true);
   }
 }
