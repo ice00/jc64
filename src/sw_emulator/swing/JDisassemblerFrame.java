@@ -32,10 +32,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.StringTokenizer;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -51,8 +54,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.BadLocationException;
@@ -126,6 +127,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Save MPR as file chooser */
   JFileChooser optionMPRSaveChooserFile=new JFileChooser();
   
+  /** Import labels from dasm */
+  JFileChooser importLabelsChooserFile=new JFileChooser();
+  
   /** Memory cell renderer for table */
   MemoryTableCellRenderer memoryTableCellRenderer=new MemoryTableCellRenderer();
   
@@ -173,6 +177,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         Shared.framesList.add(optionMPRSaveChooserFile);
         Shared.framesList.add(findDialogDis);
         Shared.framesList.add(findDialogSource);
+        Shared.framesList.add(importLabelsChooserFile);
         findDialogDis.setSearchString(" ");
         findDialogSource.setSearchString(" ");
         
@@ -191,6 +196,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
         optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
         optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");  
+        importLabelsChooserFile.setDialogTitle("Select a memory label dump dile from DASM"); 
         compiler.setOption(option);   
                 
         jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3880,7 +3886,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          jAboutDialog.setVisible(true);
          break;
        case HELP_IMPORT:
-           
+         importLabels();
          if (option.forceCompilation) disassembly();   
          break;  
        case HELP_REFACTOR:  
@@ -5463,5 +5469,102 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
       
       return false;        
+  }
+  
+  /**
+   * Return true if label gives error without giving messages
+   * 
+   * @param label the label to check
+   * @return true if error
+   */
+  private boolean silentErrorLabel(String label) {
+      if (label.contains(" ")) return true;     
+      if (label.length()>option.maxLabelLength) return true;      
+      if (label.length()<2) return true ;
+            
+      // see if the label is already defined
+      for (MemoryDasm memory : project.memory) {
+        if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {       
+          return true;
+       }
+      }
+      
+      // see if label is as constant
+      for (int i=0; i<Constant.COLS; i++) {
+        for (int j=0; j<Constant.ROWS; j++) {
+          if (label.equals(project.constant.table[i][j])) {
+            return true;  
+           } 
+         }
+      }
+      
+      String tmp=label.toUpperCase();
+      for (String val: M6510Dasm.mnemonics) {
+        if (tmp.equals(val)) {
+          return true;  
+        }
+      }
+      
+      if (label.startsWith("W") && label.length()==5) {
+         return true;
+      }
+      
+      return false;        
+  }
+  
+  /**
+   * Import lables from dasm file 
+   */
+  private void importLabels() {           
+     File file;
+     
+     int retVal=importLabelsChooserFile.showOpenDialog(this);
+     if (retVal != JFileChooser.APPROVE_OPTION) return;
+          
+     file=importLabelsChooserFile.getSelectedFile();
+     
+     try {
+       BufferedReader br=new BufferedReader(new FileReader(file));
+ 
+       String text;
+       StringTokenizer st;
+       String label;
+       String pos;
+       int address;
+       MemoryDasm mem;
+       
+       int done=0;
+       int processed=0;
+       
+       while ((text = br.readLine()) != null) {
+         if (text.startsWith("---")) continue;
+         processed++;
+         
+         st=new StringTokenizer(text);
+         label=st.nextToken();
+         pos=st.nextToken();                  
+         
+         address=Integer.parseInt(pos, 16);
+         
+         if (silentErrorLabel(label)) continue;
+         
+         mem=project.memory[address];
+         // avoid to create a label like the automatic one
+         if (mem.dasmLocation!=null && mem.dasmLocation.equals(mem.userLocation)) continue;
+         
+         mem.userLocation=label;
+         done++;
+       }
+         
+           
+       br.close();
+       
+       JOptionPane.showMessageDialog(this, "Created "+done+" lables, out of "+processed+" entries");
+       
+     } catch (Exception e) {
+         System.err.println(e);
+         JOptionPane.showMessageDialog(this, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+         
   }
 }
