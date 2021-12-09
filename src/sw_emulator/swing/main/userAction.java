@@ -266,6 +266,9 @@ public interface userAction {
   /** Refactor labels */
   public static final int HELP_REFACTOR=80;
   
+  /** Recent files */
+  public static final int PROJ_RECENT=81;
+  
   
   /**
    * Execute the passed user action

@@ -77,6 +77,7 @@ import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
+import sw_emulator.swing.main.RecentItems;
 import sw_emulator.swing.main.userAction;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
@@ -99,6 +100,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /** Last saved project values */
   Project savedProject;
+  
+  /** Recent items */
+  RecentItems recentFile=new RecentItems();
   
   /** Data table for memory */
   DataTableModelMemory dataTableModelMemory=new DataTableModelMemory(option);
@@ -496,6 +500,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemNewProject = new javax.swing.JMenuItem();
         jSeparatorProject1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOpenProject = new javax.swing.JMenuItem();
+        jMenuRecent = new javax.swing.JMenu();
+        jMenuItemRecent1 = new javax.swing.JMenuItem();
+        jMenuItemRecent2 = new javax.swing.JMenuItem();
+        jMenuItemRecent3 = new javax.swing.JMenuItem();
+        jMenuItemRecent4 = new javax.swing.JMenuItem();
+        jMenuItemRecent5 = new javax.swing.JMenuItem();
+        jMenuItemRecent6 = new javax.swing.JMenuItem();
+        jMenuItemRecent7 = new javax.swing.JMenuItem();
+        jMenuItemRecent8 = new javax.swing.JMenuItem();
+        jMenuItemRecent9 = new javax.swing.JMenuItem();
         jMenuItemCloseProject = new javax.swing.JMenuItem();
         jSeparatorProject2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSaveProject = new javax.swing.JMenuItem();
@@ -1517,14 +1531,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     );
     rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            rSyntaxTextAreaDisMouseReleased(evt);
+        }
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseClicked(evt);
         }
         public void mouseEntered(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseEntered(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaDisMouseReleased(evt);
         }
     });
     rSyntaxTextAreaDis.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1649,6 +1663,91 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuMerge.add(jMenuItemOpenProject);
+
+    jMenuRecent.setText("Open Recent Project");
+    jMenuRecent.addMenuListener(new javax.swing.event.MenuListener() {
+        public void menuSelected(javax.swing.event.MenuEvent evt) {
+            jMenuRecentMenuSelected(evt);
+        }
+        public void menuDeselected(javax.swing.event.MenuEvent evt) {
+        }
+        public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        }
+    });
+
+    jMenuItemRecent1.setEnabled(false);
+    jMenuItemRecent1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent1ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent1);
+
+    jMenuItemRecent2.setEnabled(false);
+    jMenuItemRecent2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent2ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent2);
+
+    jMenuItemRecent3.setEnabled(false);
+    jMenuItemRecent3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent3ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent3);
+
+    jMenuItemRecent4.setEnabled(false);
+    jMenuItemRecent4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent4ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent4);
+
+    jMenuItemRecent5.setEnabled(false);
+    jMenuItemRecent5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent5ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent5);
+
+    jMenuItemRecent6.setEnabled(false);
+    jMenuItemRecent6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent6ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent6);
+
+    jMenuItemRecent7.setEnabled(false);
+    jMenuItemRecent7.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent7ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent7);
+
+    jMenuItemRecent8.setEnabled(false);
+    jMenuItemRecent8.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent8ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent8);
+
+    jMenuItemRecent9.setEnabled(false);
+    jMenuItemRecent9.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemRecent9ActionPerformed(evt);
+        }
+    });
+    jMenuRecent.add(jMenuItemRecent9);
+
+    jMenuMerge.add(jMenuRecent);
 
     jMenuItemCloseProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemCloseProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/close.png"))); // NOI18N
@@ -3371,6 +3470,46 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(HELP_REFACTOR);
     }//GEN-LAST:event_jMenuItemRefactorLabelsActionPerformed
 
+    private void jMenuRecentMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuRecentMenuSelected
+      execute(PROJ_RECENT);
+    }//GEN-LAST:event_jMenuRecentMenuSelected
+
+    private void jMenuItemRecent1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent1ActionPerformed
+      recent(0);
+    }//GEN-LAST:event_jMenuItemRecent1ActionPerformed
+
+    private void jMenuItemRecent2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent2ActionPerformed
+      recent(1); 
+    }//GEN-LAST:event_jMenuItemRecent2ActionPerformed
+
+    private void jMenuItemRecent9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent9ActionPerformed
+      recent(8);
+    }//GEN-LAST:event_jMenuItemRecent9ActionPerformed
+
+    private void jMenuItemRecent4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent4ActionPerformed
+      recent(3);
+    }//GEN-LAST:event_jMenuItemRecent4ActionPerformed
+
+    private void jMenuItemRecent5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent5ActionPerformed
+      recent(4);
+    }//GEN-LAST:event_jMenuItemRecent5ActionPerformed
+
+    private void jMenuItemRecent6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent6ActionPerformed
+      recent(5);
+    }//GEN-LAST:event_jMenuItemRecent6ActionPerformed
+
+    private void jMenuItemRecent7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent7ActionPerformed
+      recent(6);
+    }//GEN-LAST:event_jMenuItemRecent7ActionPerformed
+
+    private void jMenuItemRecent8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent8ActionPerformed
+      recent(7);
+    }//GEN-LAST:event_jMenuItemRecent8ActionPerformed
+
+    private void jMenuItemRecent3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecent3ActionPerformed
+      recent(2);  
+    }//GEN-LAST:event_jMenuItemRecent3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3520,6 +3659,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemNumText1;
     private javax.swing.JMenuItem jMenuItemOpenProject;
     private javax.swing.JMenuItem jMenuItemPlus;
+    private javax.swing.JMenuItem jMenuItemRecent1;
+    private javax.swing.JMenuItem jMenuItemRecent2;
+    private javax.swing.JMenuItem jMenuItemRecent3;
+    private javax.swing.JMenuItem jMenuItemRecent4;
+    private javax.swing.JMenuItem jMenuItemRecent5;
+    private javax.swing.JMenuItem jMenuItemRecent6;
+    private javax.swing.JMenuItem jMenuItemRecent7;
+    private javax.swing.JMenuItem jMenuItemRecent8;
+    private javax.swing.JMenuItem jMenuItemRecent9;
     private javax.swing.JMenuItem jMenuItemRefactorLabels;
     private javax.swing.JMenuItem jMenuItemSIDLD;
     private javax.swing.JMenuItem jMenuItemSaveAsAcme;
@@ -3569,6 +3717,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuMemory;
     private javax.swing.JMenu jMenuMerge;
     private javax.swing.JMenu jMenuOption;
+    private javax.swing.JMenu jMenuRecent;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JMenu jMenuSub;
     private javax.swing.JPanel jPanelToolBar;
@@ -3624,6 +3773,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case PROJ_OPEN:
         projectOpen();
         break;
+      case PROJ_RECENT:
+        recentFile();  
+        break;  
       case PROJ_SAVE:
         projectSave(); 
         break;        
@@ -3952,7 +4104,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectOpen() {
     if (project != null && !project.equals(savedProject)) {
-      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then create a new one.", "Information", JOptionPane.WARNING_MESSAGE);
+      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then open the project.", "Information", JOptionPane.WARNING_MESSAGE);
     } else {
         int retVal=projectChooserFile.showOpenDialog(this);
         if (retVal == JFileChooser.APPROVE_OPTION) {
@@ -3987,7 +4139,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
               savedProject=project.clone();
             }  
-        }
+          recentFile.push(projectFile.getPath());
+        }       
       }      
   } 
   
@@ -4008,6 +4161,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
               savedProject=project.clone();
             }
+          
+          recentFile.push(projectFile.getPath());
         }
      }      
   }
@@ -5566,5 +5721,81 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          JOptionPane.showMessageDialog(this, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
        }
          
+  }
+  
+  /**
+   * Popolate recent file menu
+   */
+  private void recentFile() {
+    String path;  
+      
+    recentFile.reload();       
+    
+    for (int i=0; i<recentFile.size(); i++) {
+      path=new File(recentFile.get(i)).getName();            
+      
+      switch (i) {
+        case 0:
+          jMenuItemRecent1.setText(path);
+          jMenuItemRecent1.setEnabled(true);
+          break;
+        case 1:
+          jMenuItemRecent2.setText(path);
+          jMenuItemRecent2.setEnabled(true);
+          break;  
+        case 2:
+          jMenuItemRecent3.setText(path);
+          jMenuItemRecent3.setEnabled(true);
+          break;  
+        case 3:
+          jMenuItemRecent4.setText(path);
+          jMenuItemRecent4.setEnabled(true);
+          break;    
+        case 4:
+          jMenuItemRecent5.setText(path);
+          jMenuItemRecent5.setEnabled(true);
+          break;  
+        case 5:
+          jMenuItemRecent6.setText(path);
+          jMenuItemRecent6.setEnabled(true);
+          break;  
+        case 6:
+          jMenuItemRecent7.setText(path);
+          jMenuItemRecent7.setEnabled(true);
+          break;  
+        case 7:
+          jMenuItemRecent8.setText(path);
+          jMenuItemRecent8.setEnabled(true);
+          break;    
+        case 8:
+          jMenuItemRecent9.setText(path);
+          jMenuItemRecent9.setEnabled(true);
+          break;              
+      }
+    }
+  }
+  
+  /**
+   * Load a recent file 
+   * 
+   * @param pos the position i nrecent
+   */
+  private void recent(int pos) {
+    if (project != null && !project.equals(savedProject)) {
+      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then open the project.", "Information", JOptionPane.WARNING_MESSAGE);
+    } else {
+        projectFile=new File(recentFile.get(pos));
+        project=new Project();
+        setTitle("JC64dis ("+projectFile.getName()+")");
+        if (!FileManager.instance.readProjectFile(projectFile , project)) {
+            JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+            execute(SOURCE_DISASS);
+          }
+        savedProject=project.clone();
+        dataTableModelMemory.setData(project.memory);
+        dataTableModelMemory.fireTableDataChanged();
+      }            
   }
 }
