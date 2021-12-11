@@ -379,6 +379,9 @@ public class Option {
   /** Custom heather */
   public String custom;
   
+  /** Repostionate the memory position after compilation */
+  public boolean repositionate=false;
+  
   
   // comments C64
   

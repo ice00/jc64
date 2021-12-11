@@ -2785,22 +2785,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
-      try {
-        // get starting position of clicked point  
-        int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-       
-        int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
-        
-        if (addr==-1) return;
-                
-        //scroll to that point
-        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
-        
-        // select this row
-        jTableMemory.setRowSelectionInterval(addr, addr);
-      } catch (Exception e) {
-          System.err.println(e);
-      }
+      gotoMem();
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -4690,7 +4675,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         System.err.println(ex);
     }       
     
-    memoryTableCellRenderer.setDisassembly(disassembly);      
+    memoryTableCellRenderer.setDisassembly(disassembly);
+    
+    // repositionate in memory if option is on
+    if (option.repositionate) gotoMem();
   }
 
   /**
@@ -5825,5 +5813,27 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     for (MemoryDasm mem: project.memory) {
       mem.dasmLocation=null;  
     }  
+  }
+  
+  /**
+   * Got memory from preview
+   */
+  private void gotoMem() {
+    try {  
+      // get starting position of clicked point  
+      int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
+       
+      int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
+       
+      if (addr==-1) return;
+                
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        
+      // select this row
+      jTableMemory.setRowSelectionInterval(addr, addr);  
+    } catch (Exception e) {
+        System.err.println(e);
+      }  
   }
 }

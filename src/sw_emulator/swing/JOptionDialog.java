@@ -345,6 +345,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonStandard = new javax.swing.JRadioButton();
         jRadioButtonNone = new javax.swing.JRadioButton();
         jLabelHeather = new javax.swing.JLabel();
+        jCheckBoxRepositionate = new javax.swing.JCheckBox();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -1818,6 +1819,13 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelHeather.setText("Source heather:");
 
+        jCheckBoxRepositionate.setText("Repositionate memory from preview after compilation");
+        jCheckBoxRepositionate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRepositionateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -1974,7 +1982,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                                             .addComponent(jCheckBoxErasePlus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jCheckBoxCreatePSID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                                            .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                                            .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jScrollPaneHeather)
@@ -2042,6 +2051,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneHeather))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxAllowUtf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxRepositionate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxNotUsePSID)
@@ -2135,7 +2146,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jScrollPanePreview.setViewportView(jPanelPreview);
@@ -2310,7 +2321,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC64Cia2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC64KernalRom)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C64", jPanelC64Comm);
@@ -2415,7 +2426,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jCheckBoxC1541Via1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541_200Area, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBoxC1541StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                    .addComponent(jCheckBoxC1541ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
                 .addGap(379, 379, 379))
         );
         jPanelC1541CommLayout.setVerticalGroup(
@@ -2443,7 +2454,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC1541Via2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC1541Kernal)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C1541", jPanelC1541Comm);
@@ -2630,7 +2641,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxC128Cia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxC128DMA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBoxC128KernalRom, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
         jPanelC128CommLayout.setVerticalGroup(
             jPanelC128CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2673,7 +2684,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxC128DMA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxC128KernalRom)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("C128", jPanelC128Comm);
@@ -2857,7 +2868,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jCheckBoxVic20Block4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
         jPanelVic20CommLayout.setVerticalGroup(
             jPanelVic20CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2902,7 +2913,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxVic20BasicRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxVic20KernalRom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jTabbedPaneComm.addTab("Vic20", jPanelVic20Comm);
@@ -3113,7 +3124,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addComponent(jCheckBoxPlus4ZeroPage, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                                 .addComponent(jCheckBoxPlus4StackArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jCheckBoxPlus4_300Area, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(393, Short.MAX_VALUE))
+                        .addContainerGap(381, Short.MAX_VALUE))
                     .addGroup(jPanelPlus4CommLayout.createSequentialGroup()
                         .addGroup(jPanelPlus4CommLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxPlus4Ted, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3197,7 +3208,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jLabelautocomment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPaneComm, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Comments", jPanelComment);
@@ -4596,7 +4607,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneDasmDcZeroPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonDasmDcDotBPetasciiText)
                     .addComponent(jScrollPaneDasmDcDotBPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jScrollPaneDasm.setViewportView(jPanelDasm);
@@ -5251,7 +5262,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jLabelTmpxAddressDeclaration)
                             .addComponent(jRadioButtonTmpxDotAddrAddress)
                             .addComponent(jScrollPaneTmpxDotAddrAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addGroup(jPanelTMPxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabelTmpxStackWordDeclaration)
                             .addComponent(jRadioButtonTmpxDotRdaStackWord)
@@ -5313,7 +5324,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpxPetasciiTextDeclaration)
                     .addComponent(jRadioButtonTmpxDotPetasciiText)
                     .addComponent(jScrollPaneTmpxDotPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jScrollPaneTMPx.setViewportView(jPanelTMPx);
@@ -6202,7 +6213,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneCa65DotBytePetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonCa65DotBytPetasciiText)
                     .addComponent(jScrollPaneCa65DotBytPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jScrollPaneCa65.setViewportView(jPanelCa65);
@@ -7243,7 +7254,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneAcmeMarkPetPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonAcmeMarkPetPetasciiText)
                     .addComponent(jLabelAcmePetasciiTextDeclaration))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jScrollPaneAcme.setViewportView(jPanelAcme);
@@ -8099,7 +8110,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelKickPetasciiTextDeclaration)
                     .addComponent(jRadioButtonKickDotTextPetasciiText)
                     .addComponent(jScrollPaneKickDotTextPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jScrollPaneKickAssembler.setViewportView(jPanelKickAssembler);
@@ -8992,7 +9003,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTass65PetasciiTextDeclaration, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonTass64DotTextPetasciiText)
                     .addComponent(jScrollPaneTass64DotTextPetasciiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jScrollPaneTass64.setViewportView(jPanelTass64);
@@ -9021,7 +9032,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelAutoComment)
                     .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE))
         );
 
         jTabbedPaneOption.addTab("Disassembler", jPanelDisassembler);
@@ -9212,7 +9223,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         jPanelLookLayout.setVerticalGroup(
             jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -9264,7 +9275,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonLookSynth))
-                        .addContainerGap(587, Short.MAX_VALUE))))
+                        .addContainerGap(656, Short.MAX_VALUE))))
         );
 
         jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
@@ -11056,6 +11067,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.heather=Option.HEATHER_CUSTOM;
     }//GEN-LAST:event_jRadioButtonCustomItemStateChanged
 
+    private void jCheckBoxRepositionateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRepositionateActionPerformed
+      option.repositionate=jCheckBoxRepositionate.isSelected();
+    }//GEN-LAST:event_jCheckBoxRepositionateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -11321,6 +11336,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxPlus4_6529B_1;
     private javax.swing.JCheckBox jCheckBoxPlus4_6529B_2;
     private javax.swing.JCheckBox jCheckBoxPlus4_700Area;
+    private javax.swing.JCheckBox jCheckBoxRepositionate;
     private javax.swing.JCheckBox jCheckBoxSetComment;
     private javax.swing.JCheckBox jCheckBoxSetLabels;
     private javax.swing.JCheckBox jCheckBoxUbEdit;
@@ -12380,6 +12396,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxNotUsePSID.setSelected(option.notMarkPSID);
       jCheckBoxCreatePSID.setSelected(option.createPSID);
       jCheckBoxNotUsePSID.setEnabled(option.createPSID);
+      jCheckBoxRepositionate.setSelected(option.repositionate);
       
       switch (option.heather) {
           case Option.HEATHER_STANDARD:

@@ -360,6 +360,7 @@ public class FileManager {
       option.notMarkPSID=in.readBoolean();
       option.heather=in.readInt();
       option.custom=in.readUTF();
+      option.repositionate=in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -672,6 +673,7 @@ public class FileManager {
       out.writeBoolean(option.notMarkPSID);
       out.writeInt(option.heather);
       out.writeUTF(option.custom);
+      out.writeBoolean(option.repositionate);
       
       out.flush();
       out.close();
