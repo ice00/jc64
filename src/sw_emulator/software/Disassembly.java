@@ -283,7 +283,7 @@ public class Disassembly {
     psidLAddr=Unsigned.done(inB[9])+Unsigned.done(inB[8])*256;    
     psidIAddr=Unsigned.done(inB[11])+Unsigned.done(inB[10])*256;
     psidPAddr=Unsigned.done(inB[13])+Unsigned.done(inB[12])*256;    
-    if (option.createPSID && option.notMarkPSID) {
+    if (option.createPSID && !option.notMarkPSID) {
       if (psidIAddr!=0) memory[psidIAddr].userLocation=option.psidInitSongsLabel;
       if (psidPAddr!=0) memory[psidPAddr].userLocation=option.psidPlaySoundsLabel;
     }  
