@@ -269,6 +269,9 @@ public interface userAction {
   /** Recent files */
   public static final int PROJ_RECENT=81;
   
+  /** Clear automatic label */
+  public static final int HELP_CLEAR=82;
+  
   
   /**
    * Execute the passed user action

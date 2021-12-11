@@ -318,6 +318,7 @@ public class JWizardDialog extends javax.swing.JDialog {
         wizardTableCellRenderer=new WizardTableCellRenderer(jSpinnerSize);
         jTable.setDefaultRenderer(String.class, wizardTableCellRenderer);
         jPanelDn = new javax.swing.JPanel();
+        jButtonReset = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -451,7 +452,7 @@ public class JWizardDialog extends javax.swing.JDialog {
 
         jLabelSize.setText("Table size:");
 
-        jSpinnerSize.setModel(new javax.swing.SpinnerNumberModel(256, 1, 256, 1));
+        jSpinnerSize.setModel(new javax.swing.SpinnerNumberModel(2, 1, 256, 1));
         jSpinnerSize.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSpinnerSizeStateChanged(evt);
@@ -632,7 +633,17 @@ public class JWizardDialog extends javax.swing.JDialog {
 
         jPanelDn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jButtonReset.setText("Reset");
+        jButtonReset.setToolTipText("Clear all selection in this dialog");
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
+            }
+        });
+        jPanelDn.add(jButtonReset);
+
         jButtonClose.setText("Close");
+        jButtonClose.setToolTipText("Close dialog");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
@@ -692,6 +703,17 @@ public class JWizardDialog extends javax.swing.JDialog {
               jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }//GEN-LAST:event_jSpinnerStartStateChanged
 
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+      jSpinnerSize.setValue(2);
+      jSpinnerDigit.setValue(1);
+      jSpinnerStart.setValue(0);
+      jTextFieldPrefix.setText("");
+      jCheckBoxUpper.setSelected(false);
+      jTableLow.getSelectionModel().removeSelectionInterval(jTableLow.getSelectedRow(), jTableLow.getSelectedRow());
+      jTableHigh.getSelectionModel().removeSelectionInterval(jTableHigh.getSelectedRow(), jTableHigh.getSelectedRow());
+      popolate(-1, -1);
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -737,6 +759,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonApply;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonReset;
     private javax.swing.JCheckBox jCheckBoxUpper;
     private javax.swing.JLabel jLabelDigit;
     private javax.swing.JLabel jLabelHigh;

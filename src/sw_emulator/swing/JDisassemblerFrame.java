@@ -608,6 +608,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorHelp2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemImportLabels = new javax.swing.JMenuItem();
         jMenuItemRefactorLabels = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenuItemByteHex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
         jMenuItemByteHex.setText("(B) Mark data as Byte (HEX)");
@@ -2608,6 +2609,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuHelpContents.add(jMenuItemRefactorLabels);
 
+    jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItem3.setText("Clear automatic label");
+    jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem3ActionPerformed(evt);
+        }
+    });
+    jMenuHelpContents.add(jMenuItem3);
+
     jMenuBar.add(jMenuHelpContents);
 
     setJMenuBar(jMenuBar);
@@ -3510,6 +3520,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       recent(2);  
     }//GEN-LAST:event_jMenuItemRecent3ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      execute(HELP_CLEAR);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3592,6 +3606,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -4045,6 +4060,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          refactor();  
          if (option.forceCompilation) disassembly(); 
          break;
+       case HELP_CLEAR:  
+         clear();
+         if (option.forceCompilation) disassembly(); 
+         break;  
     }
         
   }
@@ -5797,5 +5816,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         dataTableModelMemory.setData(project.memory);
         dataTableModelMemory.fireTableDataChanged();
       }            
+  }
+  
+  /**
+   * Clear the automatic label
+   */
+  private void clear() {
+    for (MemoryDasm mem: project.memory) {
+      mem.dasmLocation=null;  
+    }  
   }
 }
