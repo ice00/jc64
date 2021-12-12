@@ -557,9 +557,9 @@ public class M6510Dasm implements disassembler {
         
     result.append(addConstants());
     
-    this.pos=pos;;
+    this.pos=pos;
     this.pc=pc;
-    while (pos<end | pos<start) { // verify also that don't circle in the buffer        
+    while (pos<=end | pos<start) { // verify also that don't circle in the buffer        
       mem=memory[(int)pc];
       isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
@@ -681,7 +681,7 @@ public class M6510Dasm implements disassembler {
     
     this.pos=pos;
     this.pc=pc;
-    while (pos<end | pos<start) { // verify also that don't circle in the buffer        
+    while (pos<=end | pos<start) { // verify also that don't circle in the buffer        
       mem=memory[(int)pc];
       isCode=((mem.isCode || (!mem.isData && option.useAsCode)) && !mem.isGarbage);
         
