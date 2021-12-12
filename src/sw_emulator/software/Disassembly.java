@@ -615,7 +615,7 @@ public class Disassembly {
     block.startAddress=0;    
     block.startBuffer=pos+26;
     block.endAddress=65535;
-    block.endBuffer=block.startBuffer+block.endAddress+1;
+    block.endBuffer=block.startBuffer+block.endAddress;
     block.inB=inB.clone();
     blocks.add(block);
      
