@@ -675,6 +675,7 @@ public class JWizardDialog extends javax.swing.JDialog {
     private void jButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplyActionPerformed
       apply(jTextFieldPrefix.getText(),(Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
            jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
+      jTextFieldPrefix.setText("");
     }//GEN-LAST:event_jButtonApplyActionPerformed
 
     private void jSpinnerSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSizeStateChanged
