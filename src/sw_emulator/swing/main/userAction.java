@@ -272,6 +272,12 @@ public interface userAction {
   /** Clear automatic label */
   public static final int HELP_CLEAR=82;
   
+  /** Copy action */
+  public static final int APP_COPY=83;
+  
+  /** Paste action */
+  public static final int APP_PASTE=84;
+  
   
   /**
    * Execute the passed user action

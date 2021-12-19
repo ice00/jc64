@@ -27,19 +27,32 @@ import java.awt.AWTException;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -78,6 +91,7 @@ import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.RecentItems;
+import sw_emulator.swing.main.Serial;
 import sw_emulator.swing.main.userAction;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
@@ -360,6 +374,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSaveAsAcme = new javax.swing.JMenuItem();
         jMenuItemSaveAsKickAssembler = new javax.swing.JMenuItem();
         jMenuItemSaveAsTass64 = new javax.swing.JMenuItem();
+        jPopupMenuCopyPaste = new javax.swing.JPopupMenu();
+        jMenuItemCopy = new javax.swing.JMenuItem();
+        jMenuItemPaste = new javax.swing.JMenuItem();
         jPanelToolBar = new javax.swing.JPanel();
         jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
@@ -939,6 +956,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuSaveAs.add(jMenuItemSaveAsTass64);
+
+        jMenuItemCopy.setText("Copy into this instance");
+        jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCopyActionPerformed(evt);
+            }
+        });
+        jPopupMenuCopyPaste.add(jMenuItemCopy);
+
+        jMenuItemPaste.setText("Paste from another instance");
+        jMenuItemPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPasteActionPerformed(evt);
+            }
+        });
+        jPopupMenuCopyPaste.add(jMenuItemPaste);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
@@ -1630,6 +1663,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
 
+    jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            jTableMemoryMousePressed(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            jTableMemoryMouseReleased(evt);
+        }
+    });
     jScrollPaneMemory.setViewportView(jTableMemory);
 
     jSplitPaneExternal.setLeftComponent(jScrollPaneMemory);
@@ -3509,6 +3550,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(HELP_CLEAR);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
+      execute(APP_COPY);
+    }//GEN-LAST:event_jMenuItemCopyActionPerformed
+
+    private void jMenuItemPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPasteActionPerformed
+      execute(APP_PASTE);
+    }//GEN-LAST:event_jMenuItemPasteActionPerformed
+
+    private void jTableMemoryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMousePressed
+      if (evt.isPopupTrigger()) jPopupMenuCopyPaste.show(evt.getComponent(),evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTableMemoryMousePressed
+
+    private void jTableMemoryMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMouseReleased
+      if (evt.isPopupTrigger()) jPopupMenuCopyPaste.show(evt.getComponent(),evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTableMemoryMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -3634,6 +3691,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemConstantClear;
     private javax.swing.JMenuItem jMenuItemConstantClear_;
     private javax.swing.JMenuItem jMenuItemContents;
+    private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemCredits;
     private javax.swing.JMenuItem jMenuItemDiss;
     private javax.swing.JMenuItem jMenuItemDissSaveAs;
@@ -3658,6 +3716,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemNumText;
     private javax.swing.JMenuItem jMenuItemNumText1;
     private javax.swing.JMenuItem jMenuItemOpenProject;
+    private javax.swing.JMenuItem jMenuItemPaste;
     private javax.swing.JMenuItem jMenuItemPlus;
     private javax.swing.JMenuItem jMenuItemRecent1;
     private javax.swing.JMenuItem jMenuItemRecent2;
@@ -3722,6 +3781,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuSub;
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
+    private javax.swing.JPopupMenu jPopupMenuCopyPaste;
     private javax.swing.JPopupMenu jPopupMenuData;
     private javax.swing.JPopupMenu jPopupMenuSaveAs;
     private javax.swing.JScrollPane jScrollPaneLeft;
@@ -4049,6 +4109,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          clear();
          if (option.forceCompilation) disassembly(); 
          break;  
+       case APP_COPY:
+         appCopy();  
+         break;
+       case APP_PASTE:
+         appPaste();  
+         if (option.forceCompilation) disassembly();   
+         break;
     }
         
   }
@@ -5836,4 +5903,114 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         System.err.println(e);
       }  
   }
+  
+  /**
+   * Copy action
+   */
+  private void appCopy() {
+    // prepara the data to copy in clipboard  
+    Serial serial=new Serial();      
+    serial.uuid=Shared.uuid;
+    serial.selected=jTableMemory.getSelectedRows();
+    serial.memory=project.memory;
+    
+    if (serial.selected==null) {
+      JOptionPane.showMessageDialog(this, "No memory addresses to copy are selected. Abort copy.");
+      return;   
+    }
+    
+    String result="";
+      try {
+          ByteArrayOutputStream bos = new ByteArrayOutputStream();
+          ObjectOutputStream os = new ObjectOutputStream(bos);
+          os.writeObject(serial);
+          result= Base64.getEncoder().encodeToString(bos.toByteArray());
+          os.close();      
+      } catch (IOException ex) {
+          JOptionPane.showMessageDialog(this, "Error in copy objects in memory!");
+          return;
+      }
+      
+    StringSelection st=new StringSelection(result);      
+    Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();      
+    cb.setContents(st, st);
+  }
+  
+  /**
+   * Paste action
+   */
+  private void appPaste() {
+    Serial serial=null;  
+    String result="";
+    
+    Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+      
+    try {
+      Transferable t = cb.getContents(null);
+      if (t.isDataFlavorSupported(DataFlavor.stringFlavor))
+        result=(String)t.getTransferData(DataFlavor.stringFlavor);  
+   
+      ByteArrayInputStream bis = new ByteArrayInputStream(Base64.getDecoder().decode(result));
+      ObjectInputStream oInputStream = new ObjectInputStream(bis);
+      serial=(Serial)oInputStream.readObject();                   
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error getting JC64dis objects from clipboard!");
+        return;
+      }
+    
+    if (serial==null) {
+      JOptionPane.showMessageDialog(this, "Nothing to do");
+      return;  
+    }
+    
+    if (serial.selected==null) {
+      JOptionPane.showMessageDialog(this, "There was no rows copied to paste.");
+      return;    
+    }
+    
+    int row=jTableMemory.getSelectedRow();
+      
+    if (serial.uuid.equals(Shared.uuid)) {
+      JOptionPane.showMessageDialog(this, "Can not paste from same instance.");
+      return;    
+    }
+    
+    if (row==-1) {
+      JOptionPane.showMessageDialog(this, "Select the row where to copy.");
+      return;      
+    }
+    
+    MemoryDasm memC;
+    MemoryDasm memP;
+    
+    try {
+      int pos=serial.selected[0];
+    
+      // scan all the selected memory addresses
+      for (int val: serial.selected) {
+        memC=serial.memory[val];  // copy from
+        memP=project.memory[row+val-pos]; // paste to
+      
+        memP.userComment=memC.userComment;
+        memP.userLocation=memC.userLocation;
+        memP.userBlockComment=memC.userBlockComment;
+        memP.type=memC.type;
+        if (memC.related>=0) {
+          if (memC.related>0xFFFF) {
+              memP.related=(memP.address-memC.address+(memC.related>>16))<<16;
+          } else {
+              memP.related=memP.address-memC.address+memC.related;
+            }
+        } else memP.related=memC.related;
+        memP.isCode=memC.isCode;
+        memP.isData=memC.isData;
+        memP.isGarbage=memC.isGarbage;
+        memP.index=memC.index;
+        memP.dataType=memC.dataType;
+      }
+    } catch (Exception e) {
+        System.err.println(e);
+      }  
+    
+   }
 }

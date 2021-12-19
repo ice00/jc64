@@ -23,6 +23,7 @@
  */
 package sw_emulator.software;
 
+import java.io.Serializable;
 import java.util.Objects;
 import sw_emulator.swing.main.DataType;
 
@@ -31,7 +32,7 @@ import sw_emulator.swing.main.DataType;
  * 
  * @author ice
  */
-public class MemoryDasm implements Cloneable {
+public class MemoryDasm implements Cloneable, Serializable {
   /** Address of memory (0..$FFFF) */  
   public int address;  
   
