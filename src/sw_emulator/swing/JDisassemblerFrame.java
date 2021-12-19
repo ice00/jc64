@@ -4849,7 +4849,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         return;
       }  
       
-      if (errorLabel(label)) return;
+        String error=errorLabel(label);
+        if (error!=null) {
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);   
+            return;
+        }
       
       mem.userLocation=label;
     }  
@@ -5632,12 +5636,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }    
     
     String result;
+    String error;
       
     for (MemoryDasm mem:project.memory) {
       if (mem.userLocation!=null && !"".equals(mem.userLocation) && mem.userLocation.startsWith(oldPrefix)) {
         result=mem.userLocation.replaceFirst(oldPrefix, newPrefix);
           
-        if (errorLabel(result)) return;
+        error=errorLabel(result);
+        if (error!=null) {
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);   
+            return;
+        }
         
         mem.userLocation=result;
       }
@@ -5645,32 +5654,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
-   * Return true if label gives error
+   * Return if label gives error
    * 
    * @param label the label to check
-   * @return true if error
+   * @return null if ok or the error message
    */
-  private boolean errorLabel(String label) {
-      if (label.contains(" ")) {
-        JOptionPane.showMessageDialog(this, "Label must not contain spaces", "Error", JOptionPane.ERROR_MESSAGE);   
-        return true;
-      }
-      
-      if (label.length()>option.maxLabelLength) {
-        JOptionPane.showMessageDialog(this, "Label too long. Max allowed="+option.maxLabelLength, "Error", JOptionPane.ERROR_MESSAGE);     
-        return true;
-      }
-        
-      if (label.length()<2) {
-        JOptionPane.showMessageDialog(this, "Label too short. Min allowed=2", "Error", JOptionPane.ERROR_MESSAGE);     
-        return true ;
-      }    
+  private String errorLabel(String label) {
+      if (label.contains(" ")) return "Label must not contain spaces";      
+      if (label.length()>option.maxLabelLength) return "Label too long. Max allowed="+option.maxLabelLength;            
+      if (label.length()<2) return "Label too short. Min allowed=2";
             
       // see if the label is already defined
       for (MemoryDasm memory : project.memory) {
         if (label.equals(memory.dasmLocation) || label.equals(memory.userLocation)) {
-          JOptionPane.showMessageDialog(this, "This label is already used into the source", "Error", JOptionPane.ERROR_MESSAGE);  
-          return true;
+          return "This label is already used into the source at: "+Shared.ShortToExe(memory.address);
        }
       }
       
@@ -5678,8 +5675,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       for (int i=0; i<Constant.COLS; i++) {
         for (int j=0; j<Constant.ROWS; j++) {
           if (label.equals(project.constant.table[i][j])) {
-           JOptionPane.showMessageDialog(this, "This label is already used as constant", "Error", JOptionPane.ERROR_MESSAGE);  
-            return true;  
+             return "This label is already used as constant ("+i+"/"+j+")";
            } 
          }
       }
@@ -5687,17 +5683,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       String tmp=label.toUpperCase();
       for (String val: M6510Dasm.mnemonics) {
         if (tmp.equals(val)) {
-          JOptionPane.showMessageDialog(this, "This label is an opcode, cannot be defined", "Error", JOptionPane.ERROR_MESSAGE);  
-          return true;  
+          return "This label is an opcode, cannot be defined";
         }
       }
       
       if (label.startsWith("W") && label.length()==5) {
-         JOptionPane.showMessageDialog(this, "Label cannot be like Wxxxx as they are reserverd", "Error", JOptionPane.ERROR_MESSAGE); 
-         return true;
+         return "Label cannot be like Wxxxx as they are reserverd";
       }
       
-      return false;        
+      return null;        
   }
   
   /**
