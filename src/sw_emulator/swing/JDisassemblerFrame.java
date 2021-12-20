@@ -46,13 +46,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -87,11 +89,13 @@ import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.FileType;
+import sw_emulator.swing.main.KeyProject;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.RecentItems;
 import sw_emulator.swing.main.Serial;
+import sw_emulator.swing.main.UndoManager;
 import sw_emulator.swing.main.userAction;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
@@ -117,6 +121,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /** Recent items */
   RecentItems recentFile=new RecentItems();
+  
+  /** Undo manager */
+  UndoManager undo=new UndoManager();
   
   /** Data table for memory */
   DataTableModelMemory dataTableModelMemory=new DataTableModelMemory(option);
@@ -513,7 +520,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         };
         jMenuBar = new javax.swing.JMenuBar();
-        jMenuMerge = new javax.swing.JMenu();
+        jMenuFile = new javax.swing.JMenu();
         jMenuItemNewProject = new javax.swing.JMenuItem();
         jSeparatorProject1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOpenProject = new javax.swing.JMenuItem();
@@ -626,6 +633,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemImportLabels = new javax.swing.JMenuItem();
         jMenuItemRefactorLabels = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparatorHelp3 = new javax.swing.JPopupMenu.Separator();
+        jMenuUndo = new javax.swing.JMenu();
+        jMenuItemUndo1 = new javax.swing.JMenuItem();
+        jMenuItemUndo2 = new javax.swing.JMenuItem();
+        jMenuItemUndo3 = new javax.swing.JMenuItem();
+        jMenuItemUndo4 = new javax.swing.JMenuItem();
+        jMenuItemUndo5 = new javax.swing.JMenuItem();
+        jMenuItemUndo6 = new javax.swing.JMenuItem();
+        jMenuItemUndo7 = new javax.swing.JMenuItem();
+        jMenuItemUndo8 = new javax.swing.JMenuItem();
+        jMenuItemUndo9 = new javax.swing.JMenuItem();
 
         jMenuItemByteHex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
         jMenuItemByteHex.setText("(B) Mark data as Byte (HEX)");
@@ -1681,7 +1699,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
 
-    jMenuMerge.setText("File");
+    jMenuFile.setText("File");
 
     jMenuItemNewProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemNewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filenew.png"))); // NOI18N
@@ -1692,8 +1710,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemNewProjectActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemNewProject);
-    jMenuMerge.add(jSeparatorProject1);
+    jMenuFile.add(jMenuItemNewProject);
+    jMenuFile.add(jSeparatorProject1);
 
     jMenuItemOpenProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemOpenProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/fileopen.png"))); // NOI18N
@@ -1704,7 +1722,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemOpenProjectActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemOpenProject);
+    jMenuFile.add(jMenuItemOpenProject);
 
     jMenuRecent.setText("Open Recent Project");
     jMenuRecent.addMenuListener(new javax.swing.event.MenuListener() {
@@ -1789,7 +1807,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuRecent.add(jMenuItemRecent9);
 
-    jMenuMerge.add(jMenuRecent);
+    jMenuFile.add(jMenuRecent);
 
     jMenuItemCloseProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemCloseProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/close.png"))); // NOI18N
@@ -1800,8 +1818,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemCloseProjectActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemCloseProject);
-    jMenuMerge.add(jSeparatorProject2);
+    jMenuFile.add(jMenuItemCloseProject);
+    jMenuFile.add(jSeparatorProject2);
 
     jMenuItemSaveProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesave.png"))); // NOI18N
@@ -1812,7 +1830,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemSaveProjectActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemSaveProject);
+    jMenuFile.add(jMenuItemSaveProject);
 
     jMenuItemSaveAsProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemSaveAsProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/filesaveas.png"))); // NOI18N
@@ -1823,8 +1841,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemSaveAsProjectActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemSaveAsProject);
-    jMenuMerge.add(jSeparatorProject3);
+    jMenuFile.add(jMenuItemSaveAsProject);
+    jMenuFile.add(jSeparatorProject3);
 
     jMenuItemMPR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/create.png"))); // NOI18N
@@ -1834,7 +1852,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemMPRActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemMPR);
+    jMenuFile.add(jMenuItemMPR);
 
     jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/merge.png"))); // NOI18N
@@ -1845,7 +1863,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItem2ActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItem2);
+    jMenuFile.add(jMenuItem2);
 
     jMenuItemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/exit.png"))); // NOI18N
@@ -1856,9 +1874,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             jMenuItemExitActionPerformed(evt);
         }
     });
-    jMenuMerge.add(jMenuItemExit);
+    jMenuFile.add(jMenuItemExit);
 
-    jMenuBar.add(jMenuMerge);
+    jMenuBar.add(jMenuFile);
 
     jMenuMemory.setText("Memory");
 
@@ -2658,6 +2676,96 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     jMenuHelpContents.add(jMenuItem3);
+    jMenuHelpContents.add(jSeparatorHelp3);
+
+    jMenuUndo.setText("Undo");
+    jMenuUndo.addMenuListener(new javax.swing.event.MenuListener() {
+        public void menuSelected(javax.swing.event.MenuEvent evt) {
+            jMenuUndoMenuSelected(evt);
+        }
+        public void menuDeselected(javax.swing.event.MenuEvent evt) {
+        }
+        public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        }
+    });
+
+    jMenuItemUndo1.setEnabled(false);
+    jMenuItemUndo1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo1ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo1);
+
+    jMenuItemUndo2.setToolTipText("");
+    jMenuItemUndo2.setEnabled(false);
+    jMenuItemUndo2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo2ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo2);
+
+    jMenuItemUndo3.setEnabled(false);
+    jMenuItemUndo3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo3ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo3);
+
+    jMenuItemUndo4.setEnabled(false);
+    jMenuItemUndo4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo4ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo4);
+
+    jMenuItemUndo5.setToolTipText("");
+    jMenuItemUndo5.setEnabled(false);
+    jMenuItemUndo5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo5ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo5);
+
+    jMenuItemUndo6.setToolTipText("");
+    jMenuItemUndo6.setEnabled(false);
+    jMenuItemUndo6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo6ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo6);
+
+    jMenuItemUndo7.setEnabled(false);
+    jMenuItemUndo7.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo7ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo7);
+
+    jMenuItemUndo8.setEnabled(false);
+    jMenuItemUndo8.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo8ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo8);
+
+    jMenuItemUndo9.setToolTipText("");
+    jMenuItemUndo9.setEnabled(false);
+    jMenuItemUndo9.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemUndo9ActionPerformed(evt);
+        }
+    });
+    jMenuUndo.add(jMenuItemUndo9);
+
+    jMenuHelpContents.add(jMenuUndo);
 
     jMenuBar.add(jMenuHelpContents);
 
@@ -3566,6 +3674,46 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (evt.isPopupTrigger()) jPopupMenuCopyPaste.show(evt.getComponent(),evt.getX(), evt.getY());
     }//GEN-LAST:event_jTableMemoryMouseReleased
 
+    private void jMenuItemUndo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo1ActionPerformed
+      undo(0);
+    }//GEN-LAST:event_jMenuItemUndo1ActionPerformed
+
+    private void jMenuItemUndo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo2ActionPerformed
+      undo(1);
+    }//GEN-LAST:event_jMenuItemUndo2ActionPerformed
+
+    private void jMenuItemUndo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo3ActionPerformed
+      undo(2);
+    }//GEN-LAST:event_jMenuItemUndo3ActionPerformed
+
+    private void jMenuItemUndo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo4ActionPerformed
+      undo(3);
+    }//GEN-LAST:event_jMenuItemUndo4ActionPerformed
+
+    private void jMenuItemUndo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo5ActionPerformed
+      undo(4);
+    }//GEN-LAST:event_jMenuItemUndo5ActionPerformed
+
+    private void jMenuItemUndo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo6ActionPerformed
+      undo(5);
+    }//GEN-LAST:event_jMenuItemUndo6ActionPerformed
+
+    private void jMenuItemUndo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo7ActionPerformed
+      undo(6);
+    }//GEN-LAST:event_jMenuItemUndo7ActionPerformed
+
+    private void jMenuItemUndo8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo8ActionPerformed
+      undo(7);
+    }//GEN-LAST:event_jMenuItemUndo8ActionPerformed
+
+    private void jMenuItemUndo9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo9ActionPerformed
+      undo(8);
+    }//GEN-LAST:event_jMenuItemUndo9ActionPerformed
+
+    private void jMenuUndoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuUndoMenuSelected
+      execute(HELP_UNDO);
+    }//GEN-LAST:event_jMenuUndoMenuSelected
+
     /**
      * @param args the command line arguments
      */
@@ -3645,6 +3793,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonViewProject;
     private javax.swing.JButton jButtonWizard;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -3760,6 +3909,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemTextZero1;
     private javax.swing.JMenuItem jMenuItemTribyte;
     private javax.swing.JMenuItem jMenuItemTribyte1;
+    private javax.swing.JMenuItem jMenuItemUndo1;
+    private javax.swing.JMenuItem jMenuItemUndo2;
+    private javax.swing.JMenuItem jMenuItemUndo3;
+    private javax.swing.JMenuItem jMenuItemUndo4;
+    private javax.swing.JMenuItem jMenuItemUndo5;
+    private javax.swing.JMenuItem jMenuItemUndo6;
+    private javax.swing.JMenuItem jMenuItemUndo7;
+    private javax.swing.JMenuItem jMenuItemUndo8;
+    private javax.swing.JMenuItem jMenuItemUndo9;
     private javax.swing.JMenuItem jMenuItemUserLabel;
     private javax.swing.JMenuItem jMenuItemUserLabelOp;
     private javax.swing.JMenuItem jMenuItemViewLabels;
@@ -3774,11 +3932,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemtextShifted;
     private javax.swing.JMenuItem jMenuItemtextShifted1;
     private javax.swing.JMenu jMenuMemory;
-    private javax.swing.JMenu jMenuMerge;
     private javax.swing.JMenu jMenuOption;
     private javax.swing.JMenu jMenuRecent;
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JMenu jMenuSub;
+    private javax.swing.JMenu jMenuUndo;
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JPopupMenu jPopupMenuCopyPaste;
@@ -3797,6 +3955,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparatorByte1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp2;
+    private javax.swing.JPopupMenu.Separator jSeparatorHelp3;
     private javax.swing.JPopupMenu.Separator jSeparatorOption;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu0;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu1;
@@ -4109,6 +4268,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          clear();
          if (option.forceCompilation) disassembly(); 
          break;  
+       case HELP_UNDO:
+         undo();
+         break;
        case APP_COPY:
          appCopy();  
          break;
@@ -4746,6 +4908,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     // repositionate in memory if option is on
     if (option.repositionate) gotoMem();
+    
+    DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");    
+    undo.store(df.format(new Date()), project);
   }
 
   /**
@@ -6007,4 +6172,104 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }  
     
    }
+  
+  /**
+   * Popolate menus
+   */
+  private void undo() {
+    KeyProject obj;  
+      
+    Iterator<KeyProject> iter=undo.getAll();
+    int i=0;
+    while (iter.hasNext()) {
+      obj=iter.next();
+      
+      switch (i) {
+        case 0:
+          jMenuItemUndo1.setText(obj.key);
+          jMenuItemUndo1.setEnabled(true);
+          break;
+        case 1:
+          jMenuItemUndo2.setText(obj.key);
+          jMenuItemUndo2.setEnabled(true);
+          break;  
+        case 2:
+          jMenuItemUndo3.setText(obj.key);
+          jMenuItemUndo3.setEnabled(true);
+          break;  
+        case 3:
+          jMenuItemUndo4.setText(obj.key);
+          jMenuItemUndo4.setEnabled(true);
+          break;    
+        case 4:
+          jMenuItemUndo5.setText(obj.key);
+          jMenuItemUndo5.setEnabled(true);
+          break;  
+        case 5:
+          jMenuItemUndo6.setText(obj.key);
+          jMenuItemUndo6.setEnabled(true);
+          break;  
+        case 6:
+          jMenuItemUndo7.setText(obj.key);
+          jMenuItemUndo7.setEnabled(true);
+          break;  
+        case 7:
+          jMenuItemUndo8.setText(obj.key);
+          jMenuItemUndo8.setEnabled(true);
+          break;    
+        case 8:
+          jMenuItemUndo9.setText(obj.key);
+          jMenuItemUndo9.setEnabled(true);
+          break;   
+      }   
+      i++;
+    }
+  }
+  
+  /**
+   * Undo project at given index 
+   * 
+   * @param index the index
+   */
+  private void undo(int index) {
+    String key=null;
+    
+    switch (index) {
+      case 0:
+        key=jMenuItemUndo1.getText();
+        break;
+      case 1:
+        key=jMenuItemUndo2.getText();
+        break;   
+      case 2:
+        key=jMenuItemUndo3.getText();
+        break;     
+      case 3:
+        key=jMenuItemUndo4.getText();
+        break;     
+      case 4:
+        key=jMenuItemUndo5.getText();
+        break;     
+      case 5:
+        key=jMenuItemUndo6.getText();
+        break;     
+      case 6:
+        key=jMenuItemUndo7.getText();
+        break;     
+      case 7:
+        key=jMenuItemUndo8.getText();
+        break;     
+      case 8:
+        key=jMenuItemUndo9.getText();
+        break;     
+    }  
+      
+    Project search=undo.retrieve(key);
+    
+    if (search!=null) {
+      project=search;  
+      dataTableModelMemory.fireTableDataChanged();
+      if (option.forceCompilation) disassembly();   
+    }
+  }
 }

@@ -278,6 +278,9 @@ public interface userAction {
   /** Paste action */
   public static final int APP_PASTE=84;
   
+  /** Help undo function */
+  public static final int HELP_UNDO=85;
+  
   
   /**
    * Execute the passed user action
