@@ -469,8 +469,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                     switch (dataTableModelMemory.columns[realColumnIndex]) {
                         case ID:
                         if (!memory.isInside) tip="Memory outside of the program";
-                        else if(memory.isCode) tip="Memory marked as code";
-                        else if (memory.isData) tip="Memory marked as data";
+                        else if(memory.isCode) tip="Memory marked as code ("+getAreaCodeSize(memory.address)+")";
+                        else if (memory.isData) tip="Memory marked as data ("+getAreaDataSize(memory.address)+")";
+                        else if (memory.isGarbage) tip="Memory marked as garbage ("+getAreaGarbageSize(memory.address)+")";
                         else tip="Memory not marked as code or data";
                         break;
                         case DC:
@@ -6286,4 +6287,88 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (option.forceCompilation) disassembly();   
     }
   }
+  
+  /**
+   * Get the hex size of the are around the given code memory location
+   * 
+   * @param address the address to check
+   * @return the hex number string
+   */
+  private String getAreaCodeSize(int address) {
+    MemoryDasm mem=project.memory[address];
+    
+    int size=1;
+    
+    int i=address-1;
+    while (i>=0) {
+      if (project.memory[i].isCode) size++;
+      else break;
+      i--;
+    }
+    
+    i=address+1;
+    while (i<=0xFFFF) {
+      if (project.memory[i].isCode) size++;
+      else break;  
+      i++;
+    }
+    
+    return Shared.ShortToExe(size);
+  }  
+  
+  /**
+   * Get the hex size of the are around the given date memory location
+   * 
+   * @param address the address to check
+   * @return the hex number string
+   */
+  private String getAreaDataSize(int address) {
+    MemoryDasm mem=project.memory[address];
+    
+    int size=1;
+    
+    int i=address-1;
+    while (i>=0) {
+      if (project.memory[i].isData) size++;
+      else break;
+      i--;
+    }
+    
+    i=address+1;
+    while (i<=0xFFFF) {
+      if (project.memory[i].isData) size++;
+      else break;   
+      i++;
+    }
+    
+    return Shared.ShortToExe(size);
+  }   
+  
+    /**
+   * Get the hex size of the are around the given garbage memory location
+   * 
+   * @param address the address to check
+   * @return the hex number string
+   */
+  private String getAreaGarbageSize(int address) {
+    MemoryDasm mem=project.memory[address];
+    
+    int size=1;
+    
+    int i=address-1;
+    while (i>=0) {
+      if (project.memory[i].isGarbage) size++;
+      else break;
+      i--;
+    }
+    
+    i=address+1;
+    while (i<=0xFFFF) {
+      if (project.memory[i].isGarbage) size++;
+      else break;      
+      i++;
+    }
+    
+    return Shared.ShortToExe(size);
+  }  
 }
