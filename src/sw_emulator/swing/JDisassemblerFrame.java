@@ -5096,6 +5096,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     MemoryDasm mem;   
       
     int rows[]=jTableMemory.getSelectedRows();
+    
+    // erase all if no row selected
+    if (rows.length==0) {
+      clear();
+      return;
+    }
         
     for (int i=0; i<rows.length; i++) {
       mem= project.memory[rows[i]];
