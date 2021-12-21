@@ -221,7 +221,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
         optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
         optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");  
-        importLabelsChooserFile.setDialogTitle("Select a memory label dump dile from DASM"); 
+        importLabelsChooserFile.setDialogTitle("Select a memory label dump file from DASM"); 
         compiler.setOption(option);   
                 
         jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {

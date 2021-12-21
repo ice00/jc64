@@ -105,6 +105,13 @@ public class JWizardDialog extends javax.swing.JDialog {
       dataTableModelMemoryHigh.fireTableDataChanged();
       jTableLow.getSelectionModel().setSelectionInterval(rowLow, rowLow);
       jTableLow.scrollRectToVisible(new Rectangle(jTableLow.getCellRect(rowLow, 0, true)));
+      
+      jTableHigh.getSelectionModel().setSelectionInterval(rowLow+(Integer)jSpinnerSize.getValue(), rowLow+(Integer)jSpinnerSize.getValue());
+      jTableHigh.scrollRectToVisible(new Rectangle(jTableHigh.getCellRect(rowLow+(Integer)jSpinnerSize.getValue(), 0, true)));
+      
+      if (jTextFieldPrefix.getText()==null || "".equals(jTextFieldPrefix.getText())) popolate(jTableLow.getSelectedRow(), jTableHigh.getSelectedRow());
+      else simulate(jTextFieldPrefix.getText(), (Integer)jSpinnerDigit.getValue(), jCheckBoxUpper.isSelected(), (Integer)jSpinnerStart.getValue(),
+             jTableLow.getSelectedRow(), jTableHigh.getSelectedRow(), (Integer)jSpinnerSize.getValue());
     }
 
     /**
