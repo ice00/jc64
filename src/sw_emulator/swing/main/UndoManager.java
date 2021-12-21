@@ -106,6 +106,6 @@ public class UndoManager {
    * @return all elements iterator
    */
   public Iterator<KeyProject> getAll() {
-    return dequeProject.descendingIterator();
+    return dequeProject.iterator();
   }
 }
