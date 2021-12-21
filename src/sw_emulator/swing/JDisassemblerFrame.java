@@ -2934,7 +2934,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
-      gotoMem();
+      gotoMem(evt.getModifiersEx());
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -4907,7 +4907,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     memoryTableCellRenderer.setDisassembly(disassembly);
     
     // repositionate in memory if option is on
-    if (option.repositionate) gotoMem();
+    if (option.repositionate) gotoMem(0);
     
     DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");    
     undo.store(df.format(new Date()), project);
@@ -6049,8 +6049,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /**
    * Got memory from preview
+   * 
+   * @param modifier the key modifier of mouse click
    */
-  private void gotoMem() {
+  private void gotoMem(int modifier) {
     try {  
       // get starting position of clicked point  
       int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
@@ -6061,9 +6063,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 
       //scroll to that point
       jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
-        
-      // select this row
-      jTableMemory.setRowSelectionInterval(addr, addr);  
+      
+      if ((modifier & InputEvent.SHIFT_DOWN_MASK)==InputEvent.SHIFT_DOWN_MASK) {
+        int row=jTableMemory.getSelectedRow();
+        if (row==-1) jTableMemory.setRowSelectionInterval(addr, addr);
+        else {
+          if (row<addr) jTableMemory.setRowSelectionInterval(row, addr); 
+          else jTableMemory.setRowSelectionInterval(addr, row); 
+        }
+      } else jTableMemory.setRowSelectionInterval(addr, addr);       // select this row
     } catch (Exception e) {
         System.err.println(e);
       }  
