@@ -1583,6 +1583,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         }
     );
+
+    // force menu key not working otherwise
+    rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_MASK),
+        new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                execute(MEM_PLUS);
+            }
+        }
+    );
+
+    // force menu key not working otherwise
+    rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_MASK),
+        new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                execute(MEM_MINUS);
+            }
+        }
+    );
     rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             rSyntaxTextAreaDisMouseReleased(evt);
@@ -2353,7 +2373,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMinus);
 
-    jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/min.png"))); // NOI18N
     jMenuItemMemLow.setText("Assign the selected address as #<");
     jMenuItemMemLow.addActionListener(new java.awt.event.ActionListener() {
@@ -2363,7 +2383,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemLow);
 
-    jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemLowHigh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemLowHigh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minmax.png"))); // NOI18N
     jMenuItemMemLowHigh.setText("Assign the 2 selected addresses as #<>");
     jMenuItemMemLowHigh.addActionListener(new java.awt.event.ActionListener() {
@@ -2373,7 +2393,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemLowHigh);
 
-    jMenuItemMemBoth.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_COLON, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemBoth.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemBoth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/minmax.png"))); // NOI18N
     jMenuItemMemBoth.setText("Assign the 2 tables as #<>");
     jMenuItemMemBoth.addActionListener(new java.awt.event.ActionListener() {
@@ -2383,7 +2403,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuMemory.add(jMenuItemMemBoth);
 
-    jMenuItemMemHighLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemMemHighLow.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemMemHighLow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/maxmin.png"))); // NOI18N
     jMenuItemMemHighLow.setText("Assign the 2 selected addresses as #><");
     jMenuItemMemHighLow.addActionListener(new java.awt.event.ActionListener() {
@@ -4322,6 +4342,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       int res=JOptionPane.showConfirmDialog(this, "Project not saved. Close it anywere?", "Information", JOptionPane.YES_NO_OPTION);
       if (res!=JOptionPane.YES_OPTION) return;              
     }       
+    
+    undo.clear();  // clear all previous undo action
   
     setTitle("JC64dis");
     project=null;
@@ -6069,7 +6091,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         int row=jTableMemory.getSelectedRow();
         if (row==-1) jTableMemory.setRowSelectionInterval(addr, addr);
         else {
-          if (row<addr) jTableMemory.setRowSelectionInterval(row, addr); 
+          if (row<addr) {
+            MemoryDasm mem=project.memory[addr];
+            if (mem.isCode) jTableMemory.setRowSelectionInterval(row, addr+M6510Dasm.tableSize[mem.copy & 0xff]-1); // go to end of instruction
+            else jTableMemory.setRowSelectionInterval(row, addr);
+          } 
           else jTableMemory.setRowSelectionInterval(addr, row); 
         }
       } else jTableMemory.setRowSelectionInterval(addr, addr);       // select this row

@@ -1325,7 +1325,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemLow">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+LEFT"/>
+                  <KeyStroke key="Ctrl+1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/min.png"/>
@@ -1339,7 +1339,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemLowHigh">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Shift+Ctrl+LEFT"/>
+                  <KeyStroke key="Ctrl+2"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/minmax.png"/>
@@ -1353,7 +1353,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemBoth">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Shift+Ctrl+COLON"/>
+                  <KeyStroke key="Ctrl+3"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/minmax.png"/>
@@ -1367,7 +1367,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMemHighLow">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Shift+Ctrl+RIGHT"/>
+                  <KeyStroke key="Ctrl+4"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sw_emulator/swing/icons/mini/maxmin.png"/>
@@ -2563,7 +2563,7 @@
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rSyntaxTextAreaDisKeyReleased"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogDis=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaDis);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaDis.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogDis=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaDis);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaDis.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_PLUS); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_MINUS); &#xa;                  }&#xa;                }&#xa;);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

@@ -246,7 +246,7 @@ public class M6510Dasm implements disassembler {
   /**
    * Contains the mnemonics reference for the instruction
    */
-  public byte[] tableMnemonics={
+  public static final byte[] tableMnemonics={
     M_BRK, M_ORA, M_JAM, M_SLO, M_NOP1,M_ORA, M_ASL, M_SLO,  // 00
     M_PHP, M_ORA, M_ASL, M_ANC, M_NOP2,M_ORA, M_ASL, M_SLO,
     M_BPL, M_ORA, M_JAM, M_SLO, M_NOP1,M_ORA, M_ASL, M_SLO,
@@ -281,7 +281,7 @@ public class M6510Dasm implements disassembler {
     M_SED, M_SBC, M_NOP0,M_ISB, M_NOP2,M_SBC, M_INC, M_ISB
   };
 
-  public byte[] tableModes={
+  public static final byte[] tableModes={
     A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 00
     A_IMP, A_IMM, A_ACC, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
@@ -314,6 +314,42 @@ public class M6510Dasm implements disassembler {
     A_IMP, A_IMM, A_IMP, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
     A_REL, A_IDY, A_NUL, A_IDY, A_ZPX, A_ZPX, A_ZPX, A_ZPX,
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX
+  };
+    
+  public static final byte[] tableSize={
+    1, 2, 1, 2, 2, 2, 2, 2, // 00
+    1, 2, 1, 2, 3, 3, 3, 3, 
+    2, 2, 1, 2, 2, 2, 2, 2, 
+    1, 3, 1, 3, 3, 3, 3, 3,
+    3, 2, 1, 2, 2, 2, 2, 2, // 20
+    1, 2, 1, 2, 3, 3, 3, 3, 
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    1, 2, 1, 2, 2, 2, 2, 2, // 40
+    1, 2, 1, 2, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    1, 2, 1, 2, 2, 2, 2, 2, // 60
+    1, 2, 1, 1, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    2, 2, 2, 2, 2, 2, 2, 2, // 80
+    1, 2, 1, 2, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    2, 2, 2, 2, 2, 2, 2, 2, // A0
+    1, 2, 1, 2, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    2, 2, 2, 2, 2, 2, 2, 2, // C0
+    1, 2, 1, 2, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3,
+    2, 2, 2, 2, 2, 2, 2, 2, // E0
+    1, 2, 1, 2, 3, 3, 3, 3,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    2, 2, 1, 2, 2, 2, 2, 2,
+    1, 3, 1, 3, 3, 3, 3, 3    
   };
 
   /** Type of instruction (used to create comment) */
