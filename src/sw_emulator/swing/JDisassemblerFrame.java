@@ -1692,8 +1692,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     ActionMap am = this.getRootPane().getActionMap();
 
     //add custom action
-    im.put(KeyStroke.getKeyStroke("control F"), "save");
-    am.put("save", new AbstractAction(){
+    im.put(KeyStroke.getKeyStroke("control F"), "find");
+    am.put("find", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
             execute(SOURCE_FINDA);
@@ -1701,6 +1701,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
 
     ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
+
+    //add custom action
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_HOME, InputEvent.ALT_DOWN_MASK), "home");
+    am.put("home", new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            altHome();
+        }
+    });
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_END, InputEvent.ALT_DOWN_MASK), "end");
+    am.put("end", new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            altEnd();
+        }
+    });
 
     jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -6397,4 +6413,121 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     return Shared.ShortToExe(size);
   }  
+  
+  /**
+   * Go to home of the block kind where is the memory location
+   */
+  private void altHome() {
+    int row=jTableMemory.getSelectedRow();
+    if (row==-1) return;
+    
+    
+    int i=row-1;
+    
+    MemoryDasm mem2;
+    MemoryDasm mem=project.memory[row];
+    
+    if ((mem.isCode || (!mem.isData && option.useAsCode)) && mem.isInside && !mem.isGarbage) {
+       
+      while (i>=0) {
+        mem2=project.memory[i];
+        
+        if ((mem2.isCode || (!mem2.isData && option.useAsCode)) && mem2.isInside && !mem2.isGarbage) i--;
+        else break;      
+      }  
+      i++;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);
+    } else 
+    if ((mem.isData || (!mem.isCode && !option.useAsCode)) && mem.isInside && !mem.isGarbage)  {
+        
+      while (i>=0) {
+        mem2=project.memory[i];
+        
+        if ((mem2.isData || (!mem2.isCode && !option.useAsCode)) && mem2.isInside && !mem2.isGarbage)  i--;
+        else break;      
+      }  
+      i++;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);  
+        
+    }
+    else 
+    if (mem.isGarbage) {
+      while (i>=0) {
+        mem2=project.memory[i];
+        
+        if (mem2.isGarbage)  i--;
+        else break;      
+      }  
+      i++;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);    
+    } 
+  }
+  
+  /**
+   * Go to end of the block kind where is the memory location
+   */
+  private void altEnd() {
+    int row=jTableMemory.getSelectedRow();
+    if (row==-1) return;
+    
+    
+    int i=row+1;
+    
+    MemoryDasm mem2;
+    MemoryDasm mem=project.memory[row];
+    
+    if ((mem.isCode || (!mem.isData && option.useAsCode)) && mem.isInside && !mem.isGarbage) {
+       
+      while (i<=0xFFFF) {
+        mem2=project.memory[i];
+        
+        if ((mem2.isCode || (!mem2.isData && option.useAsCode)) && mem2.isInside && !mem2.isGarbage) i++;
+        else break;      
+      }  
+      i--;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);
+    } else 
+    if ((mem.isData || (!mem.isCode && !option.useAsCode)) && mem.isInside && !mem.isGarbage)  {
+        
+      while (i<=0xFFFF) {
+        mem2=project.memory[i];
+        
+        if ((mem2.isData || (!mem2.isCode && !option.useAsCode)) && mem2.isInside && !mem2.isGarbage)  i++;
+        else break;      
+      }  
+      i--;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);  
+        
+    }
+    else 
+    if (mem.isGarbage) {
+      while (i<=0XFFFF) {
+        mem2=project.memory[i];
+        
+        if (mem2.isGarbage)  i++;
+        else break;      
+      }  
+      i--;
+      
+      //scroll to that point
+      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      jTableMemory.setRowSelectionInterval(i, i);    
+    }    
+  }
+  
 }
