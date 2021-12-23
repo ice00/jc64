@@ -55,6 +55,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -188,6 +189,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Compiler */
   Compiler compiler=new Compiler();  
   
+  /** Last directory for saving project  */
+  public final static String LAST_DIR_PROJECT = "last.dir.project";
+  
+  /** Preference system file */
+  private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
+  
   
     /**
      * Creates new form JFrameDisassembler
@@ -214,8 +221,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jOptionDialog.useOption(option);
         
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
+        projectChooserFile.setAcceptAllFileFilterUsed(false);
+        projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
+        
         projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
-        exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));
+        exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));        
         optionMPRLoadChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program (prg, bin)", "prg", "bin"));
         optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
         optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
@@ -4426,6 +4436,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         int retVal=projectChooserFile.showSaveDialog(this);
         if (retVal == JFileChooser.APPROVE_OPTION) {
           projectFile=projectChooserFile.getSelectedFile();
+          
+          String ext=Arrays.stream(projectFile.getName().split("\\.")).reduce((a,b) -> b).orElse(null);
+          if (ext==null) {
+            try {  
+              projectFile = new File(projectFile.getCanonicalPath() +".dis");
+            } catch (Exception e) {
+                System.err.println(e);
+              }  
+          }
+          
+          m_prefNode.put(LAST_DIR_PROJECT, projectFile.getPath());
+          
+          projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
+          
           setTitle("JC64dis ("+projectFile.getName()+")");
           if (!FileManager.instance.writeProjectFile(projectFile , project)) {
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);

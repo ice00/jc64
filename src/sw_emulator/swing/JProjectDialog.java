@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -63,6 +64,13 @@ public class JProjectDialog extends javax.swing.JDialog {
     /** Last address added in patch*/
     int lastAddress=-1;
     
+      
+  /** Last direcotry for load file in project */
+  public final static String LAST_DIR_FILE = "last.dir.file";
+  
+  /** Preference system file */
+  private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
+    
     /**
      * Creates new form JDialogProject
      */
@@ -80,6 +88,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
+        fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
     }
     
   /**
@@ -649,6 +658,8 @@ public class JProjectDialog extends javax.swing.JDialog {
       if (retValue==JFileChooser.APPROVE_OPTION) {
         project.file=fileChooser.getSelectedFile().getAbsolutePath();
         jTextFieldInputFile.setText(project.file);        
+        
+        m_prefNode.put(LAST_DIR_FILE, fileChooser.getSelectedFile().getPath());
         
         // go to read the file
         try {
