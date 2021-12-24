@@ -116,7 +116,8 @@ public class JLabelsDialog extends javax.swing.JDialog {
             // scan all lines for the memory location
             try {
               //scroll to that point
-              jTable.scrollRectToVisible(jTable.getCellRect(address,0, true)); 
+              ///jTable.scrollRectToVisible(jTable.getCellRect(address,0, true)); 
+              Shared.scrollToCenter(jTable, address, 0);
         
               // select this row
               jTable.setRowSelectionInterval(address, address);
