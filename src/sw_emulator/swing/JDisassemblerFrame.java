@@ -3034,7 +3034,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (addr==-1) return;
                 
         //scroll to that point
-        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        Shared.scrollToCenter(jTableMemory, addr, 0);
         
         // select this row
         jTableMemory.setRowSelectionInterval(addr, addr);
@@ -3168,7 +3169,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (max==-1) return;
       
         //scroll to that point
-        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        Shared.scrollToCenter(jTableMemory, min, 0);
         
         // select those rows
         jTableMemory.setRowSelectionInterval(min, max);
@@ -3202,7 +3204,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (max==-1) return;
       
         //scroll to that point
-        jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        Shared.scrollToCenter(jTableMemory, min, 0);
         
         // select this rows
         jTableMemory.setRowSelectionInterval(min, max);
@@ -3550,7 +3553,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if (addr==-1) return;
                 
             //scroll to that point
-            jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+            ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+            Shared.scrollToCenter(jTableMemory, addr, 0);
         
             // select this row
             jTableMemory.setRowSelectionInterval(addr, addr); 
@@ -4384,7 +4388,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /**
    * Project open user action
    */
-  private void projectOpen() {
+  private void projectOpen() {     
     if (project != null && !project.equals(savedProject)) {
       JOptionPane.showMessageDialog(this, "Project not saved. Close it, then open the project.", "Information", JOptionPane.WARNING_MESSAGE);
     } else {
@@ -5459,7 +5463,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (pos<0 || pos>0xFFFF) return;
     
       jTableMemory.getSelectionModel().setSelectionInterval(pos, pos);
-      jTableMemory.scrollRectToVisible(new Rectangle(jTableMemory.getCellRect(pos, 0, true)));
+      ///jTableMemory.scrollRectToVisible(new Rectangle(jTableMemory.getCellRect(pos, 0, true)));
+      Shared.scrollToCenter(jTableMemory, pos, 0);
     } catch (Exception e) {
       }
   }
@@ -6125,7 +6130,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (addr==-1) return;
                 
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+      Shared.scrollToCenter(jTableMemory, addr, 0);
       
       if ((modifier & InputEvent.SHIFT_DOWN_MASK)==InputEvent.SHIFT_DOWN_MASK) {
         int row=jTableMemory.getSelectedRow();
@@ -6462,7 +6468,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i++;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);      
       jTableMemory.setRowSelectionInterval(i, i);
     } else 
     if ((mem.isData || (!mem.isCode && !option.useAsCode)) && mem.isInside && !mem.isGarbage)  {
@@ -6476,7 +6483,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i++;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);
       jTableMemory.setRowSelectionInterval(i, i);  
         
     }
@@ -6491,7 +6499,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i++;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);
       jTableMemory.setRowSelectionInterval(i, i);    
     } 
   }
@@ -6520,7 +6529,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i--;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);
       jTableMemory.setRowSelectionInterval(i, i);
     } else 
     if ((mem.isData || (!mem.isCode && !option.useAsCode)) && mem.isInside && !mem.isGarbage)  {
@@ -6534,7 +6544,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i--;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);
       jTableMemory.setRowSelectionInterval(i, i);  
         
     }
@@ -6549,9 +6560,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       i--;
       
       //scroll to that point
-      jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(i, 0, true)); 
+      Shared.scrollToCenter(jTableMemory, i, 0);
       jTableMemory.setRowSelectionInterval(i, i);    
     }    
-  }
-  
+  }    
 }

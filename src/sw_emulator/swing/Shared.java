@@ -23,9 +23,12 @@
  */
 package sw_emulator.swing;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
+import javax.swing.JTable;
+import javax.swing.JViewport;
 
 /**
  * Contains all shared object accessible by the application
@@ -68,4 +71,25 @@ public class Shared {
     }
     return ret.toUpperCase(Locale.ENGLISH);
   }      
+  
+  public static void scrollToCenter(JTable table, int rowIndex, int vColIndex) {
+    if (!(table.getParent() instanceof JViewport)) {
+      return;
+    }
+    JViewport viewport = (JViewport) table.getParent();
+    Rectangle rect = table.getCellRect(rowIndex, vColIndex, true);
+    Rectangle viewRect = viewport.getViewRect();
+    rect.setLocation(rect.x - viewRect.x, rect.y - viewRect.y);
+
+    int centerX = (viewRect.width - rect.width) / 2;
+    int centerY = (viewRect.height - rect.height) / 2;
+    if (rect.x < centerX) {
+      centerX = -centerX;
+    }
+    if (rect.y < centerY) {
+      centerY = -centerY;
+    }
+    rect.translate(centerX, centerY);
+    viewport.scrollRectToVisible(rect);
+  }
 }
