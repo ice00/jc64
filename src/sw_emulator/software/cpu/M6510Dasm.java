@@ -1060,7 +1060,7 @@ public class M6510Dasm implements disassembler {
 
         if (mem.type=='^') {
           /// this is a memory in table label
-          int rel=mem.related>>16;
+          int rel=(mem.related>>16)&0xFFFF;
           int pos=mem.address-rel;
           MemoryDasm mem2=memory[rel];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;

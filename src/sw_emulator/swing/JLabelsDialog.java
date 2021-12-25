@@ -28,6 +28,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -199,7 +200,12 @@ public class JLabelsDialog extends javax.swing.JDialog {
       this.jTable=jTable;
       this.rSyntaxTextAreaDis=rSyntaxTextAreaDis;
       this.project=project;
-      dataModel.fireTableDataChanged();
+      
+      SwingUtilities.invokeLater(new Runnable(){
+	public void run() {
+          dataModel.fireTableDataChanged();
+        }
+      });
     }         
 
     /**
