@@ -24,6 +24,7 @@
 package sw_emulator.software.asm;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
@@ -314,6 +315,8 @@ public class Compiler {
     PrintStream orgStream;
     PrintStream fileStream;
     
+    File tmp=new File(output.getAbsolutePath()+".tmp");
+    
     orgStream = System.out;
     
     String result="No result obtained!!";
@@ -321,7 +324,7 @@ public class Compiler {
    
     args[0]="";
     args[1]=input.getAbsolutePath();    
-    args[2]="-o"+output.getAbsolutePath();   
+    args[2]="-o"+tmp.getAbsolutePath();   
    
     try {
       fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
@@ -334,7 +337,56 @@ public class Compiler {
       
     } catch (Exception e) {
         System.err.println(e);
-      }      
+      }  
+    
+    
+    try {
+      FileWriter myWriter = new FileWriter(option.tmpPath+File.separator+"c64-asm.cfg");
+      myWriter.write(
+        "FEATURES {\n" +
+        "    STARTADDRESS: default = $0801;\n" +
+        "}\n" +
+        "SYMBOLS {\n" +
+        "}\n" +
+        "MEMORY {\n" +
+        "    ZP:      file = \"\", start = $0002,  size = $00FE,      define = yes;\n" +
+        "    MAIN:     file = %O, start = %S,     size = $D000 - %S;\n" +
+        "}\n" +
+        "SEGMENTS {\n" +
+        "    ZEROPAGE: load = ZP,       type = zp,  optional = yes;\n" +
+        "    EXEHDR:   load = MAIN,     type = ro,  optional = yes;\n" +
+        "    CODE:     load = MAIN,     type = rw;\n" +
+        "    RODATA:   load = MAIN,     type = ro,  optional = yes;\n" +
+        "    DATA:     load = MAIN,     type = rw,  optional = yes;\n" +
+        "    BSS:      load = MAIN,     type = bss, optional = yes, define = yes;\n" +
+        "}"
+      );
+      myWriter.close();
+    } catch (Exception e) {
+        System.err.println(e);
+      } 
+        
+    args=new String[4];
+    args[0]="";
+    args[1]="-o"+output.getAbsolutePath(); 
+    args[2]="-C"+option.tmpPath+File.separator+"c64-asm.cfg";
+    args[3]=tmp.getAbsolutePath();    
+  
+   
+    try {
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      System.setOut(fileStream);
+      System.setErr(fileStream);  
+        
+      Class cl = Class.forName("sw_emulator.software.asm.Ld65");
+      Method mMain = cl.getMethod("run", new Class[]{String[].class});
+      mMain.invoke(cl.newInstance(), new Object[]{args});
+      
+    } catch (Exception e) {
+        System.err.println(e);
+      }
+
+    
     System.setOut(orgStream);
     System.setErr(orgStream);
     
