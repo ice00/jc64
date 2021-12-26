@@ -4894,7 +4894,15 @@ public class Assembler {
              already=true;  
            }  
            
-           str.append(val+" = "+"$"+ByteToExe(j)+"\n");
+           switch (option.assembler) {
+               case KICK:
+                 str.append(".const "+val+" = "+"$"+ByteToExe(j)+"\n");  
+                 break;
+               default:
+                 str.append(val+" = "+"$"+ByteToExe(j)+"\n");
+                 break;  
+           }
+           
          }
        }         
      } 
