@@ -326,8 +326,7 @@ public class Disassembly {
       
       // calculate org for header
       int header=sidPC;   
-      header-=sidPos;
-      if (psidLAddr==0) header-=2;      
+      header-=sidPos;            
       
       if (option.createPSID) {
         assembler.setOrg(tmp, header);
@@ -343,8 +342,8 @@ public class Disassembly {
           assembler.setWord(tmp, inB[0xA], inB[0xB], "init songs");
           assembler.setWord(tmp, inB[0xC], inB[0xD], "play sound");
         } else {
-          if (psidIAddr!=0) assembler.setByteRel(tmp, psidIAddr, option.psidInitSongsLabel);
-          if (psidPAddr!=0) assembler.setByteRel(tmp, psidPAddr, option.psidPlaySoundsLabel);          
+          if (psidIAddr!=0) assembler.setByteRelRev(tmp, psidIAddr, option.psidInitSongsLabel);
+          if (psidPAddr!=0) assembler.setByteRelRev(tmp, psidPAddr, option.psidPlaySoundsLabel);          
         }
         assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
         assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");

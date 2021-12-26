@@ -4969,6 +4969,42 @@ public class Assembler {
    }
    
    /**
+    * Set bytes of a relative memory location (it deletes anything that threre are in queue) in reverse order
+    * 
+    * @param str the output stream
+    * @param address the relative address
+    * @param label the label of address
+    */
+   public void setByteRelRev(StringBuilder str, int address, String label) {
+     MemoryDasm lowMem=new MemoryDasm();
+     MemoryDasm highMem=new MemoryDasm();
+     MemoryDasm lowMemRel=new MemoryDasm();
+     MemoryDasm highMemRel=new MemoryDasm();
+       
+     list.clear();
+     listRel.clear();  
+     listRel2.clear();  
+     
+     lowMem.type='<';
+     lowMem.related=address;
+     highMem.type='>';
+     highMem.related=address;
+     list.add(highMem);
+     list.add(lowMem);
+     
+     lowMemRel.dasmLocation=label;
+     highMemRel.dasmLocation=label;
+     listRel.add(highMemRel);
+     listRel.add(lowMemRel);
+     listRel2.add(null);
+     listRel2.add(null);
+     
+     actualType=aByte;
+     flush(str);
+     actualType=null;
+   }
+   
+   /**
     * Set a word and put to ouptput stream (it deletes anything that threre are in queue)
     * 
     * @param str the output stream
