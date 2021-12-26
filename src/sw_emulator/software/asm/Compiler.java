@@ -102,11 +102,13 @@ public class Compiler {
     orgStream = System.out;
     
     String result="No result obtained!!";
-    String[] args=new String[3];
+    String[] args=new String[4];
     
     args[0]=" ";
     args[1]=input.getAbsolutePath();
     args[2]="-o"+output.getAbsolutePath();
+    if (option.dasmF3Comp) args[3]="-f3";
+    else args[3]="-f1";
     
     try {
       fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
