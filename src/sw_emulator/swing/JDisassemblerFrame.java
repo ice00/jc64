@@ -25,7 +25,6 @@ package sw_emulator.swing;
 
 import java.awt.AWTException;
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -190,8 +189,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   Compiler compiler=new Compiler();  
   
   /** Last directory for saving project  */
-  public final static String LAST_DIR_PROJECT = "last.dir.project";
-  
+  public final static String LAST_DIR_PROJECT = "last.dir.project";  
+     
   /** Preference system file */
   private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
   
@@ -4395,6 +4394,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         int retVal=projectChooserFile.showOpenDialog(this);
         if (retVal == JFileChooser.APPROVE_OPTION) {
           projectFile=projectChooserFile.getSelectedFile();
+          
+          m_prefNode.put(LAST_DIR_PROJECT, projectFile.getPath());
+          
           project=new Project();
           setTitle("JC64dis ("+projectFile.getName()+")");
           if (!FileManager.instance.readProjectFile(projectFile , project)) {
