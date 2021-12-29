@@ -478,9 +478,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                     switch (dataTableModelMemory.columns[realColumnIndex]) {
                         case ID:
                         if (!memory.isInside) tip="Memory outside of the program";
-                        else if(memory.isCode) tip="Memory marked as code ("+getAreaCodeSize(memory.address)+")";
-                        else if (memory.isData) tip="Memory marked as data ("+getAreaDataSize(memory.address)+")";
-                        else if (memory.isGarbage) tip="Memory marked as garbage ("+getAreaGarbageSize(memory.address)+")";
+                        else if(memory.isCode) tip="Memory marked as code ("+getAreaCodeSize(memory.address)+"/"+Shared.ShortToExe(jTableMemory.getSelectedRowCount())+")";
+                        else if (memory.isData) tip="Memory marked as data ("+getAreaDataSize(memory.address)+"/"+Shared.ShortToExe(jTableMemory.getSelectedRowCount())+")";
+                        else if (memory.isGarbage) tip="Memory marked as garbage ("+getAreaGarbageSize(memory.address)+"/"+Shared.ShortToExe(jTableMemory.getSelectedRowCount())+")";
                         else tip="Memory not marked as code or data";
                         break;
                         case DC:
