@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing.main;
 
+import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
 
 /**
@@ -34,8 +35,12 @@ public class JC64Dis {
   private JDisassemblerFrame jMainFrame;
     
     public JC64Dis() {
-      jMainFrame=new JDisassemblerFrame();
-      jMainFrame.setVisible(true);
+      SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+          jMainFrame=new JDisassemblerFrame();
+         jMainFrame.setVisible(true);
+        }
+      });  
     }
        
     /**

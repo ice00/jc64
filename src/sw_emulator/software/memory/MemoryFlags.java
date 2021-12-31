@@ -115,7 +115,7 @@ public class MemoryFlags implements memoryState {
   protected byte[] readBinFile(String name) {
     int result=0;         // result of reading byte
     int done=0;           // number of bytes done
-    byte[] memory=new byte[65535];    
+    byte[] memory=new byte[65536];    
     byte[] header=new byte[16];
     
     BufferedInputStream file;
@@ -183,7 +183,7 @@ public class MemoryFlags implements memoryState {
    * @return the conpacted memory state of all files
    */
   protected byte[] realAllBinFile(String[] names) {
-    byte[] memory=new byte[65535];
+    byte[] memory=new byte[65536];
     byte[] res;
  
     for (int i=0; i<names.length; i++) {
@@ -201,7 +201,7 @@ public class MemoryFlags implements memoryState {
    * @return the resulting memory map
    */
   public byte[] orMemory(byte[] mem1, byte[] mem2) {
-    byte[] res=new byte[65535];
+    byte[] res=new byte[65536];
    
     for (int i=0; i<res.length; i++) {
       res[i]=(byte)(mem1[i] | mem2[i]);

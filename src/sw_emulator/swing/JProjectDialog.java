@@ -768,15 +768,15 @@ public class JProjectDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jButtonAddNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNextActionPerformed
-      if (project.memoryFlags==null) project.memoryFlags=new byte[0xffff]; 
+      if (project.memoryFlags==null) project.memoryFlags=new byte[0x10000]; 
           
       int retValue=memFileChooser.showOpenDialog(this);
       
       if (retValue==JFileChooser.APPROVE_OPTION) {
         String[] file=new String[1];
-        file[1]=memFileChooser.getSelectedFile().getAbsolutePath();
+        file[0]=memFileChooser.getSelectedFile().getAbsolutePath();
         MemoryFlags memoryFlags=new MemoryFlags(file);
-        project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0xFFFF), project.memoryFlags);       
+        project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);       
       }  
     }//GEN-LAST:event_jButtonAddNextActionPerformed
 
