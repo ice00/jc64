@@ -2953,10 +2953,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void jButtonSIDLDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSIDLDActionPerformed
       execute(OPTION_SIDLD);
+      if (option.forceCompilation) disassembly();
     }//GEN-LAST:event_jButtonSIDLDActionPerformed
 
     private void jMenuItemSIDLDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSIDLDActionPerformed
       execute(OPTION_SIDLD);
+      if (option.forceCompilation) disassembly();
     }//GEN-LAST:event_jMenuItemSIDLDActionPerformed
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
@@ -4881,9 +4883,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                        memoryState.MEM_SAMPLE)) !=0;
       
                project.memory[i].isCode = (project.memoryFlags[i] & 
-                       (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) !=0;                                             
+                       (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) !=0;  
+               
+               // code execution has priority over data access
+               if (project.memory[i].isCode) project.memory[i].isData=false;
            }
            JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);  
+           
+           dataTableModelMemory.fireTableDataChanged();            
          }                  
        }  
   }

@@ -239,7 +239,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonPlus4.setSelected(false);
         }
       jTextAreaRelocate.setText(getRelocateDesc());
-      jTextAreaPatch.setText(getPatchDesc());     
+      jTextAreaPatch.setText(getPatchDesc());    
        }
       });
     }
@@ -631,7 +631,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonPatchRemove))
                     .addComponent(jScrollPaneRelocate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -764,7 +764,7 @@ public class JProjectDialog extends javax.swing.JDialog {
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
       // clear memory flags
-      project.memoryFlags=new byte[0xffff];        
+      project.memoryFlags=new byte[0x10000];     
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jButtonAddNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNextActionPerformed
@@ -776,14 +776,14 @@ public class JProjectDialog extends javax.swing.JDialog {
         String[] file=new String[1];
         file[0]=memFileChooser.getSelectedFile().getAbsolutePath();
         MemoryFlags memoryFlags=new MemoryFlags(file);
-        project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);       
+        project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);  
       }  
     }//GEN-LAST:event_jButtonAddNextActionPerformed
 
     private void jButtonInitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInitActionPerformed
-      // ser as executable
+      // set as executable
       MemoryFlags memoryFlags=new MemoryFlags((String[])null);
-      project.memoryFlags=memoryFlags.getMemoryState(0, 0xFFFF);
+      project.memoryFlags=memoryFlags.getMemoryState(0, 0x10000);
     }//GEN-LAST:event_jButtonInitActionPerformed
 
     private void jRadioButtonC64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC64ActionPerformed
