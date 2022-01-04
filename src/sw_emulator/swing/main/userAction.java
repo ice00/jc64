@@ -270,7 +270,7 @@ public interface userAction {
   public static final int PROJ_RECENT=81;
   
   /** Clear automatic label */
-  public static final int HELP_CLEAR=82;
+  public static final int HELP_CLEARLAB=82;
   
   /** Copy action */
   public static final int APP_COPY=83;
@@ -280,6 +280,9 @@ public interface userAction {
   
   /** Help undo function */
   public static final int HELP_UNDO=85;
+  
+  /** Clear automatic comment */
+  public static final int HELP_CLEARCOM=86;
   
   
   /**

@@ -642,7 +642,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jSeparatorHelp2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemImportLabels = new javax.swing.JMenuItem();
         jMenuItemRefactorLabels = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemAutComment = new javax.swing.JMenuItem();
+        jMenuItemAutLabel = new javax.swing.JMenuItem();
         jSeparatorHelp3 = new javax.swing.JPopupMenu.Separator();
         jMenuUndo = new javax.swing.JMenu();
         jMenuItemUndo1 = new javax.swing.JMenuItem();
@@ -2719,14 +2720,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jMenuHelpContents.add(jMenuItemRefactorLabels);
 
-    jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-    jMenuItem3.setText("Clear automatic label");
-    jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+    jMenuItemAutComment.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemAutComment.setText("Clear automatic  comment");
+    jMenuItemAutComment.setActionCommand("Clear automatic comment");
+    jMenuItemAutComment.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jMenuItem3ActionPerformed(evt);
+            jMenuItemAutCommentActionPerformed(evt);
         }
     });
-    jMenuHelpContents.add(jMenuItem3);
+    jMenuHelpContents.add(jMenuItemAutComment);
+
+    jMenuItemAutLabel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+    jMenuItemAutLabel.setText("Clear automatic label");
+    jMenuItemAutLabel.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItemAutLabelActionPerformed(evt);
+        }
+    });
+    jMenuHelpContents.add(jMenuItemAutLabel);
     jMenuHelpContents.add(jSeparatorHelp3);
 
     jMenuUndo.setText("Undo");
@@ -3711,9 +3722,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       recent(2);  
     }//GEN-LAST:event_jMenuItemRecent3ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      execute(HELP_CLEAR);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void jMenuItemAutLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAutLabelActionPerformed
+      execute(HELP_CLEARLAB);
+    }//GEN-LAST:event_jMenuItemAutLabelActionPerformed
 
     private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
       execute(APP_COPY);
@@ -3782,6 +3793,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 }
             };
     }//GEN-LAST:event_heapViewMouseClicked
+
+    private void jMenuItemAutCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAutCommentActionPerformed
+      execute(HELP_CLEARCOM);
+    }//GEN-LAST:event_jMenuItemAutCommentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3866,13 +3881,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
     private javax.swing.JMenuItem jMenuItemAddress;
     private javax.swing.JMenuItem jMenuItemAddress1;
     private javax.swing.JMenuItem jMenuItemAssembly;
+    private javax.swing.JMenuItem jMenuItemAutComment;
+    private javax.swing.JMenuItem jMenuItemAutLabel;
     private javax.swing.JMenuItem jMenuItemByteBin;
     private javax.swing.JMenuItem jMenuItemByteBin1;
     private javax.swing.JMenuItem jMenuItemByteChar;
@@ -4333,10 +4349,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          refactor();  
          if (option.forceCompilation) disassembly(); 
          break;
-       case HELP_CLEAR:  
-         clear();
+       case HELP_CLEARLAB:  
+         clearLab();
          if (option.forceCompilation) disassembly(); 
          break;  
+       case HELP_CLEARCOM:  
+         clearCom();
+         if (option.forceCompilation) disassembly(); 
+         break;          
        case HELP_UNDO:
          undo();
          break;
@@ -4391,7 +4411,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       if (res!=JOptionPane.YES_OPTION) return;              
     }       
     
-    undo.clear();  // clear all previous undo action
+    undo.clear();  // clearLab all previous undo action
   
     setTitle("JC64dis");
     project=null;
@@ -4548,7 +4568,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
     for (int i=0; i<rows.length; i++) {
       mem= project.memory[rows[i]];
-      if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
+      
+      // in data no automatic comments are added, so we can erase it directly
+      if (mem.isData) if (mem.dasmComment!=null) {
+        mem.dasmComment=null;
+        // for compatibility, we erase a user "" comment
+        if ("".equals(mem.userComment)) mem.userComment=null;
+      } else if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
     }
     
     dataTableModelMemory.fireTableDataChanged();
@@ -5192,7 +5218,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     // erase all if no row selected
     if (rows.length==0) {
-      clear();
+      clearLab();
       return;
     }
         
@@ -6135,11 +6161,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /**
    * Clear the automatic label
    */
-  private void clear() {
+  private void clearLab() {
     for (MemoryDasm mem: project.memory) {
       mem.dasmLocation=null;  
     }  
+    dataTableModelMemory.fireTableDataChanged();
   }
+  
+  /**
+   * Clear the automatic comment
+   */
+  private void clearCom() {
+    for (MemoryDasm mem: project.memory) {
+      mem.dasmComment=null;  
+      if (mem.isData && "".equals(mem.userComment)) mem.userComment=null; 
+    }  
+    dataTableModelMemory.fireTableDataChanged();
+  }  
   
   /**
    * Got memory from preview
