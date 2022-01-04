@@ -165,7 +165,7 @@ public class SidFreq {
   ///////////////////////////
   
   
-    /**
+   /**
    * Search for tables in linear way (low / high or high / low)
    *  
    * @return true if the table is fount
@@ -447,8 +447,11 @@ public class SidFreq {
     int i;
     int actual=1;   
    
-    // it must start with three 1
-    if ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1)) return false;
+    // it must start with three 1 or at least with 0 1 1 1
+    if (
+         ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1) ) &&
+         ( ((int)inB[index+0]!=0) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1) || ((int)inB[index+3]!=1))
+       ) return false;
    
     // search for increasing numbers
     for (i=index+3; i<index+TABLE; i++) {
@@ -473,8 +476,8 @@ public class SidFreq {
     int i;
     int actual=1;   
    
-    // it must start with three 1
-    if ( ((int)(inB[index+0]& 0xFF)!=1) || ((int)(inB[index+1]& 0xFF)!=1) || ((int)(inB[index+2]& 0xFF)!=1)) return false;
+    // it must start with three 1 or at least with 0 1 1 1
+    if ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1)) return false;
    
     // search for increasing numbers
     for (i=index+3; i<index+SHORT; i++) {
@@ -635,12 +638,16 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note2*2 - note3);
       if (i<11) diff+=Math.abs(note3*2 - note4);
       if (i<11) diff+=Math.abs(note4*2 - note5);
-      if (i<11) diff+=Math.abs(note5*2 - note6);
+      if (i<11) diff+=Math.abs(note5*2 - note6);  
       if (i<11) diff+=Math.abs(note6*2 - note7);
-      
+   // System.err.println(high+"  "+index+"   "+i+" "+diff);    
+
       // catch error into Vibrants/JO note table at 416Hz  
-      if (i==0 && diff==212) continue;   
+      if (i==0 && diff==212) continue;  
       
+      // catch error into Master Composer at 424Hz and 434Hz     
+      if (i==0 && diff==29) continue;    
+      if (i==0 && diff==44) continue;  
          
       // catch an error on MUSICIANS/P/PseudoGrafx/Fonttime.sid (short table seems 476Hz)
       if (i==2 && diff==25) continue;    
@@ -650,7 +657,7 @@ public class SidFreq {
       if (errSoundTracker) {
         if (i==9 && diff==302) continue; 
         if (i==10 && diff==514) continue;
-      }  
+      }   
     
       // catch an error onto TFX note table 449Hz
       if (i==3 && diff==25) continue; 
@@ -689,10 +696,10 @@ public class SidFreq {
       
       // catch errors onto Mon/Futurecomposer (table: 424Hz; B1 - values 03E0 instead of 03F4)
       if (i==11 && diff==20) continue;
-      
+
       if (diff>ERROR) return false;
     }
-   
+
     return true;
   } 
   
