@@ -1541,6 +1541,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         heapView.setMinimumSize(new java.awt.Dimension(128, 38));
         heapView.setName(""); // NOI18N
+        heapView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                heapViewMouseClicked(evt);
+            }
+        });
         jToolBarPerformance.add(heapView);
 
         jPanelToolBar.add(jToolBarPerformance);
@@ -3765,6 +3770,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private void jMenuUndoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuUndoMenuSelected
       execute(HELP_UNDO);
     }//GEN-LAST:event_jMenuUndoMenuSelected
+
+    private void heapViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_heapViewMouseClicked
+        // Trigger a gc
+            new Runnable() {
+            @Override
+                public void run() {
+                    System.gc();
+                    System.runFinalization();
+                    System.gc();
+                }
+            };
+    }//GEN-LAST:event_heapViewMouseClicked
 
     /**
      * @param args the command line arguments
