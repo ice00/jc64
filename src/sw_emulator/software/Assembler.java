@@ -41,7 +41,7 @@ import sw_emulator.swing.main.Option;
  * @author ice
  */
 public class Assembler {
-   private static final String SPACES="                                        ";  
+   private static final String SPACES="                                                                                                                        ";  
    private static final String TABS="\t\t\t\t\t\t\t\t\t\t";
    
   /**
@@ -775,7 +775,7 @@ public class Assembler {
        MemoryDasm memRelLow;
        MemoryDasm memRelHigh;
      
-       int pos1=str.length();  // store initial position
+       int pos1=str.length();  // store initial position       
        
        // create starting command according to the kind of byte
        switch (aWord) {
@@ -853,7 +853,15 @@ public class Assembler {
                }    
              }
            if (list.size()>=2) str.append(", ");
-           else str.append("\n");
+           else {
+             if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
+               str.append(getDataCSpacesTabs(str.length()-pos1-getDataSpacesTabs().length()));
+               MemoryDasm tmp=lastMem;
+               lastMem=memHigh;
+               aComment.flush(str);  
+               lastMem=tmp;
+             } else str.append("\n");            
+           }
          }
        }
      } 
@@ -953,9 +961,17 @@ public class Assembler {
                isFirst=false;
              }                            
            }
-           if (list.size()>=2) str.append(", ");
-           else if (aWordSwapped==MACRO1_WORD_SWAPPED) str.append(")\n");
-                else str.append("\n");
+           if (list.size()>=2) str.append(", ");           
+           else {
+            if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
+              str.append(getDataCSpacesTabs(str.length()-pos1-getDataSpacesTabs().length()));
+              MemoryDasm tmp=lastMem;
+              lastMem=memHigh;
+              aComment.flush(str);  
+              lastMem=tmp;
+            } else if (aWordSwapped==MACRO1_WORD_SWAPPED) str.append(")\n");
+                   else str.append("\n");        
+          }                      
          }
        }
      }
@@ -1154,6 +1170,8 @@ public class Assembler {
          return;
        }
        
+       int initial=str.length();
+       
        MemoryDasm mem;
        
        Iterator<MemoryDasm> iter=list.iterator();
@@ -1223,8 +1241,16 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem3.copy)));
            }
            if (list.size()>=3) str.append(", ");
-           else if (aTribyte==MACRO1_TRIBYTE) str.append(")\n");
-                else str.append("\n");
+           else {
+            if (mem3.dasmLocation==null && mem3.userLocation==null) {
+              str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
+              MemoryDasm tmp=lastMem;
+              lastMem=mem3;
+              aComment.flush(str);  
+              lastMem=tmp;
+            } else if (aTribyte==MACRO1_TRIBYTE) str.append(")\n");
+                else str.append("\n");       
+           }  
          }
        }   
      } 
@@ -1482,6 +1508,8 @@ public class Assembler {
          return;
        }
        
+       int initial=str.length();
+       
        MemoryDasm mem;
        
        Iterator<MemoryDasm> iter=list.iterator();
@@ -1561,7 +1589,18 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem4.copy)));
            }
            if (list.size()>=4) str.append(", ");
-           else str.append("\n");
+           else {
+             if (mem4.dasmLocation==null && mem4.userLocation==null) {
+               str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
+               MemoryDasm tmp=lastMem;
+               lastMem=mem4;
+               aComment.flush(str);  
+               lastMem=tmp;
+             } else str.append("\n");       
+           }
+           
+           
+           
          }
        }   
       } 
@@ -1737,7 +1776,15 @@ public class Assembler {
                }    
              }
            if (list.size()>=2) str.append(", ");
-           else str.append("\n");
+           else {
+             if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
+               str.append(getDataCSpacesTabs(str.length()-pos1-getDataSpacesTabs().length()));
+               MemoryDasm tmp=lastMem;
+               lastMem=memHigh;
+               aComment.flush(str);  
+               lastMem=tmp;
+             } else str.append("\n");       
+           }
          }
        }
      } 
@@ -4766,32 +4813,67 @@ public class Assembler {
      // we are processing word?    
      if (actualType instanceof Word) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxWordAggregate*2) actualType.flush(str);         
+       if (list.size()==option.maxWordAggregate*2) actualType.flush(str);   
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }
      } else
      // we are processing word swapped?    
      if (actualType instanceof WordSwapped) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxSwappedAggregate*2) actualType.flush(str);         
+       if (list.size()==option.maxSwappedAggregate*2) actualType.flush(str);   
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }
      } else         
      // we are processing tribyte?    
      if (actualType instanceof Tribyte) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxTribyteAggregate*3) actualType.flush(str);         
+       if (list.size()==option.maxTribyteAggregate*3) actualType.flush(str);        
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }
      } else
      // we are processing long?    
      if (actualType instanceof Long) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxLongAggregate*4) actualType.flush(str);         
+       if (list.size()==option.maxLongAggregate*4) actualType.flush(str);  
+
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }       
      } else
      // we are processing address?    
      if (actualType instanceof Address) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxAddressAggregate*2) actualType.flush(str);         
+       if (list.size()==option.maxAddressAggregate*2) actualType.flush(str); 
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
+       }
      } else
      // we are processing address?    
      if (actualType instanceof StackWord) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxStackWordAggregate*2) actualType.flush(str);         
+       if (list.size()==option.maxStackWordAggregate*2) actualType.flush(str); 
      } else    
      // we are processing mono sprite?    
      if (actualType instanceof MonoSprite) {
@@ -4812,7 +4894,7 @@ public class Assembler {
      // we are processing text?
      if (actualType instanceof Text) {
        // look if it is time to aggregate data
-       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
+       if (list.size()==option.maxTextAggregate) actualType.flush(str);    
      } else
      // we are processing text?
      if (actualType instanceof NumText) {
