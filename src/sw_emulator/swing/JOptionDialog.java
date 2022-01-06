@@ -346,6 +346,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonNone = new javax.swing.JRadioButton();
         jLabelHeather = new javax.swing.JLabel();
         jCheckBoxRepositionate = new javax.swing.JCheckBox();
+        jCheckBoxPedantic = new javax.swing.JCheckBox();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -1826,6 +1827,13 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jCheckBoxPedantic.setText("Allow result messages for load/save");
+        jCheckBoxPedantic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxPedanticActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -1983,7 +1991,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                                             .addComponent(jCheckBoxCreatePSID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                                            .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jCheckBoxPedantic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jScrollPaneHeather)
@@ -2053,6 +2062,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxAllowUtf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxRepositionate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxPedantic)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxNotUsePSID)
@@ -2146,7 +2157,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jScrollPanePreview.setViewportView(jPanelPreview);
@@ -11071,6 +11082,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.repositionate=jCheckBoxRepositionate.isSelected();
     }//GEN-LAST:event_jCheckBoxRepositionateActionPerformed
 
+    private void jCheckBoxPedanticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxPedanticActionPerformed
+      option.pedantic=jCheckBoxPedantic.isShowing();
+    }//GEN-LAST:event_jCheckBoxPedanticActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -11313,6 +11328,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxNotUsePSID;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
     private javax.swing.JCheckBox jCheckBoxOpcodeFormattingSource;
+    private javax.swing.JCheckBox jCheckBoxPedantic;
     private javax.swing.JCheckBox jCheckBoxPlus4Acia;
     private javax.swing.JCheckBox jCheckBoxPlus4BasicExt;
     private javax.swing.JCheckBox jCheckBoxPlus4BasicRamN;
@@ -12397,6 +12413,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxCreatePSID.setSelected(option.createPSID);
       jCheckBoxNotUsePSID.setEnabled(option.createPSID);
       jCheckBoxRepositionate.setSelected(option.repositionate);
+      jCheckBoxPedantic.setSelected(option.pedantic);
       
       switch (option.heather) {
           case Option.HEATHER_STANDARD:

@@ -4441,7 +4441,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (!FileManager.instance.readProjectFile(projectFile , project)) {
               JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
-              JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+              if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
               execute(SOURCE_DISASS);
             }
             savedProject=project.clone();
@@ -4463,7 +4463,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (!FileManager.instance.writeProjectFile(projectFile , project)) {
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
-              JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
+              if (option.pedantic) JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
               savedProject=project.clone();
             }  
           recentFile.push(projectFile.getPath());
@@ -4499,7 +4499,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (!FileManager.instance.writeProjectFile(projectFile , project)) {
             JOptionPane.showMessageDialog(this, "Error writing project file", "Error", JOptionPane.ERROR_MESSAGE);
           } else {
-              JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
+              if (option.pedantic) JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
               savedProject=project.clone();
             }
           
@@ -4540,7 +4540,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               if (!FileManager.instance.writeTxtFile(file , text)) {
                 JOptionPane.showMessageDialog(this, "Error writing txt file", "Error", JOptionPane.ERROR_MESSAGE);
               } else {
-                  JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
+                  if (option.pedantic) JOptionPane.showMessageDialog(this, "File saved", "Information", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
           }   
@@ -6149,7 +6149,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (!FileManager.instance.readProjectFile(projectFile , project)) {
             JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+            if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
             execute(SOURCE_DISASS);
           }
         savedProject=project.clone();

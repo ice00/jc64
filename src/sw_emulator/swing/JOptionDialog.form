@@ -550,6 +550,7 @@
                                                           <Component id="jCheckBoxUndefinedCode" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="jCheckBoxEraseDComm" pref="465" max="32767" attributes="0"/>
                                                           <Component id="jCheckBoxRepositionate" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="jCheckBoxPedantic" alignment="0" max="32767" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -638,6 +639,8 @@
                               <Component id="jCheckBoxAllowUtf" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCheckBoxRepositionate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCheckBoxPedantic" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jCheckBoxNotUsePSID" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -752,7 +755,7 @@
                                   <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="52" max="32767" attributes="0"/>
+                              <EmptySpace pref="27" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1447,6 +1450,14 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxRepositionateActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxPedantic">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Allow result messages for load/save"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxPedanticActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>

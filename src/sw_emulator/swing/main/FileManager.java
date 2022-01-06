@@ -361,6 +361,9 @@ public class FileManager {
       option.heather=in.readInt();
       option.custom=in.readUTF();
       option.repositionate=in.readBoolean();
+      
+      // 1.7
+      option.pedantic=in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -674,6 +677,9 @@ public class FileManager {
       out.writeInt(option.heather);
       out.writeUTF(option.custom);
       out.writeBoolean(option.repositionate);
+      
+      // 1.7
+      out.writeBoolean(option.pedantic);
       
       out.flush();
       out.close();

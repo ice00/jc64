@@ -382,6 +382,9 @@ public class Option {
   /** Repostionate the memory position after compilation */
   public boolean repositionate=false;
   
+  /** Be pedantic in read/save messages */
+  public boolean pedantic=false;
+  
   
   // comments C64
   
