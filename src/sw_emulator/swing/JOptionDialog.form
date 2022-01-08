@@ -1260,7 +1260,7 @@
                     <Component class="javax.swing.JSpinner" name="jSpinnerInstrCSpaces">
                       <Properties>
                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="34" maximum="50" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                          <SpinnerModel initial="34" maximum="50" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
@@ -1297,7 +1297,7 @@
                     <Component class="javax.swing.JSpinner" name="jSpinnerDataCSpaces">
                       <Properties>
                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="34" maximum="70" minimum="25" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                          <SpinnerModel initial="34" maximum="70" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>

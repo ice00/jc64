@@ -645,9 +645,24 @@ public class SidFreq {
       // catch error into Vibrants/JO note table at 416Hz  
       if (i==0 && diff==212) continue;  
       
-      // catch error into Master Composer at 424Hz and 434Hz     
-      if (i==0 && diff==29) continue;    
-      if (i==0 && diff==44) continue;  
+      // catch error into Master Composer at:
+      if (i==0) {
+        switch (diff) {
+            case 19: // 415Hz
+            case 26: // 423Hz
+            case 29: // 424Hz 
+            case 30: // 424Hz
+            case 34: // 427    
+            case 39: // 415Hz    
+            case 35: // 437Hz
+            case 44: // 434Hz    
+            case 48: // 439Hz
+            case 51: // 441Hz   
+            case 64: // 450Hz  
+            case 65: // 452Hz    
+            continue;
+        }        
+      }
          
       // catch an error on MUSICIANS/P/PseudoGrafx/Fonttime.sid (short table seems 476Hz)
       if (i==2 && diff==25) continue;    

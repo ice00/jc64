@@ -149,6 +149,12 @@ public class HeapView extends JComponent {
      * Current text being displayed.
      */
     private String heapSizeText;
+    
+    /** Stroke */
+    private final BasicStroke stroke=new BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+    
+    /** Values for graph */
+    private final Object[] values=new Object[]{(double)0, (double)0};
 
 
     public HeapView() {
@@ -283,7 +289,7 @@ public class HeapView extends JComponent {
 
         if (width > 0 && height > 0) {
             startTimerIfNecessary();
-            Graphics2D g2 = (Graphics2D) g.create();
+            Graphics2D g2 =(Graphics2D)g;// (Graphics2D) g.create();
             try {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
@@ -321,7 +327,7 @@ public class HeapView extends JComponent {
         AffineTransform oldTransform = g.getTransform();
         g.translate(x, y);
         g.setColor(OUTLINE_COLOR);
-        g.setStroke(new BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g.setStroke(stroke);
         g.draw(outline);
         g.setColor(TEXT_COLOR);
         g.fill(outline);
@@ -389,8 +395,11 @@ public class HeapView extends JComponent {
             if (graphIndex >= GRAPH_COUNT) {
                 graphIndex = 0;
             }
+            values[0]=(double) used / (1024.0 * 1024.0);
+            values[1]=(double) total / (1024.0 * 1024.0);
             heapSizeText = format.format(
-                    new Object[]{(double) used / (1024.0 * 1024.0), (double) total / (1024.0 * 1024.0)});
+                   // new Object[]{(double) used / (1024.0 * 1024.0), (double) total / (1024.0 * 1024.0)});
+                    values);            
             repaint();
         } else {
             // Either we've become invisible, or one of our ancestors has.

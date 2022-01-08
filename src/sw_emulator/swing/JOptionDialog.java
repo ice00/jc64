@@ -1687,7 +1687,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelInstrCSpace.setText("Spaces:");
 
-        jSpinnerInstrCSpaces.setModel(new javax.swing.SpinnerNumberModel(34, 25, 50, 1));
+        jSpinnerInstrCSpaces.setModel(new javax.swing.SpinnerNumberModel(34, 1, 50, 1));
         jSpinnerInstrCSpaces.setToolTipText("");
         jSpinnerInstrCSpaces.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1709,7 +1709,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
         jLabelDataCSpace.setText("Spaces:");
 
-        jSpinnerDataCSpaces.setModel(new javax.swing.SpinnerNumberModel(34, 25, 70, 1));
+        jSpinnerDataCSpaces.setModel(new javax.swing.SpinnerNumberModel(34, 1, 70, 1));
         jSpinnerDataCSpaces.setToolTipText("");
         jSpinnerDataCSpaces.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

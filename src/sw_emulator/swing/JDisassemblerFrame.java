@@ -457,7 +457,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             @Override protected JTableHeader createDefaultTableHeader() {
                 return new JTableHeader(columnModel) {
                     @Override public String getToolTipText(MouseEvent e) {
-                        int col = columnAtPoint(e.getPoint());
+                        //int col = columnAtPoint(e.getPoint());
                         int index = columnModel.getColumnIndexAtX(e.getPoint().x);
                         int realIndex = columnModel.getColumn(index).getModelIndex();
                         return hh[realIndex];
@@ -3791,7 +3791,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                     System.runFinalization();
                     System.gc();
                 }
-            };
+            }.run();
     }//GEN-LAST:event_heapViewMouseClicked
 
     private void jMenuItemAutCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAutCommentActionPerformed

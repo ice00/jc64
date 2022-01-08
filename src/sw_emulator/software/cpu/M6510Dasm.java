@@ -382,6 +382,9 @@ public class M6510Dasm implements disassembler {
   /** Constant to use */
   protected Constant constant;  
   
+  /** String builder global to reduce GC call */
+  private final StringBuilder result=new StringBuilder ("");     
+  
   /**
    * Set the memory dasm to use
    * 
@@ -580,8 +583,7 @@ public class M6510Dasm implements disassembler {
    * @param pc the programn counter for start position 
    * @return a string rapresentation of disassemble with comment
    */
-  public String cdasm(byte[] buffer, int start, int end, long pc) {
-    StringBuilder result=new StringBuilder ("");            // resulting string
+  public String cdasm(byte[] buffer, int start, int end, long pc) {    
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
     MemoryDasm mem;              // memory dasm
@@ -591,6 +593,7 @@ public class M6510Dasm implements disassembler {
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
         
+    result.setLength(0);
     result.append(addConstants());
     
     this.pos=pos;
@@ -703,7 +706,6 @@ public class M6510Dasm implements disassembler {
    * @return a string rapresentation of disasemble with comment
    */
   public String csdasm(byte[] buffer, int start, int end, long pc) {
-    StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
     MemoryDasm mem;              // memory dasm
@@ -713,6 +715,7 @@ public class M6510Dasm implements disassembler {
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
          
+    result.setLength(0);
     result.append(addConstants());
     
     this.pos=pos;

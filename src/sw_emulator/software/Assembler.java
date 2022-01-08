@@ -4778,7 +4778,7 @@ public class Assembler {
          // check if there is a comment for the label
          if (lastMem.userComment!=null) {
            size=str.length()-size;      // get number of chars used  
-           str.append(SPACES.substring(0, (SPACES.length()-size<0 ? 1: SPACES.length()-size)));
+           str.append(getDataCSpacesTabs(size-getDataSpacesTabs().length()));
            type=aComment;
            type.flush(str);
          } else str.append("\n");  // close label by going in a new line
@@ -5139,12 +5139,12 @@ public class Assembler {
      flush(str);
      actualType=null;
      
-     if (comment!=null) {
-       str.deleteCharAt(str.length()-1);            // remove \n
-       size=str.length()-size;                      // get number of chars used  
-       str.append(SPACES.substring(0, SPACES.length()-size));
-       aComment.flush(str);  
-     }
+     //  if (comment!=null) {
+     //    str.deleteCharAt(str.length()-1);            // remove \n
+     //    size=str.length()-size;                      // get number of chars used  
+     //    str.append(SPACES.substring(0, SPACES.length()-size));
+     //   aComment.flush(str);  
+     // }
    }
    
    /**

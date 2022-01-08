@@ -149,6 +149,9 @@ public class Disassembly {
   
   /** Asembler text to screen code */
   protected static Assembler.PetasciiText aPetasciiText; 
+  
+  /** Reuse a string builder to avoid too much GC */
+  private final StringBuilder builder=new StringBuilder();
     
   /**
    * Disassemble the given data
@@ -229,9 +232,10 @@ public class Disassembly {
     int v2Length;         // length of voice 2 data
     int v3Length;         // length of voice 3 data
     int musPC;            // PC value of start of mus program
-    
-    StringBuilder tmp=new StringBuilder();    
+        
     C64MusDasm mus=new C64MusDasm();
+    
+    builder.setLength(0);
         
     musPC=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
     v1Length=Unsigned.done(inB[2])+Unsigned.done(inB[3])*256;
@@ -244,17 +248,17 @@ public class Disassembly {
     ind3=ind2+v2Length;
     txtA=v1Length+v2Length+v3Length+8;
     
-    tmp.append(fileType.getDescription(inB));
-    tmp.append("\n");
-    tmp.append(fileType.getDescription(inB)).append("\n");
-    tmp.append("VOICE 1 MUSIC DATA: \n\n");
-    tmp.append(mus.cdasm(inB, ind1, ind2-1, ind1+musPC));
-    tmp.append("\nVOICE 2 MUSIC DATA: \n\n");
-    tmp.append(mus.cdasm(inB, ind2, ind3-1, ind2+musPC));
-    tmp.append("\nVOICE 3 MUSIC DATA: \n\n");
-    tmp.append(mus.cdasm(inB, ind3, txtA-1, ind3+musPC));    
+    builder.append(fileType.getDescription(inB));
+    builder.append("\n");
+    builder.append(fileType.getDescription(inB)).append("\n");
+    builder.append("VOICE 1 MUSIC DATA: \n\n");
+    builder.append(mus.cdasm(inB, ind1, ind2-1, ind1+musPC));
+    builder.append("\nVOICE 2 MUSIC DATA: \n\n");
+    builder.append(mus.cdasm(inB, ind2, ind3-1, ind2+musPC));
+    builder.append("\nVOICE 3 MUSIC DATA: \n\n");
+    builder.append(mus.cdasm(inB, ind3, txtA-1, ind3+musPC));    
     
-    disassembly=tmp.toString();
+    disassembly=builder.toString();
     source="";
   }
   
@@ -310,76 +314,76 @@ public class Disassembly {
     blocks.add(block);
 
         
-    StringBuilder tmp=new StringBuilder();
+    builder.setLength(0);
     
     if (asSource) {
       sid.upperCase=option.opcodeUpperCaseSource;
         
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);
+      assembler.setBlockComment(builder, mem);
       
-      assembler.setConstant(tmp, constant);
+      assembler.setConstant(builder, constant);
       
-      assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory);
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
       
       // calculate org for header
       int header=sidPC;   
       header-=sidPos;            
       
       if (option.createPSID) {
-        assembler.setOrg(tmp, header);
+        assembler.setOrg(builder, header);
                 
         // create header of PSID
-        if (inB[0]=='P') assembler.setText(tmp, "PSID");
-        else assembler.setText(tmp, "RSID");
+        if (inB[0]=='P') assembler.setText(builder, "PSID");
+        else assembler.setText(builder, "RSID");
       
-        assembler.setWord(tmp, inB[0x04], inB[0x05], "version");
-        assembler.setWord(tmp, inB[0x06], inB[0x07], "data offset");
-        assembler.setWord(tmp, inB[0x08], inB[0x09], "load address in CBM format");     
+        assembler.setWord(builder, inB[0x04], inB[0x05], "version");
+        assembler.setWord(builder, inB[0x06], inB[0x07], "data offset");
+        assembler.setWord(builder, inB[0x08], inB[0x09], "load address in CBM format");     
         if (option.notMarkPSID) {
-          assembler.setWord(tmp, inB[0xA], inB[0xB], "init songs");
-          assembler.setWord(tmp, inB[0xC], inB[0xD], "play sound");
+          assembler.setWord(builder, inB[0xA], inB[0xB], "init songs");
+          assembler.setWord(builder, inB[0xC], inB[0xD], "play sound");
         } else {
-          if (psidIAddr!=0) assembler.setByteRelRev(tmp, psidIAddr, option.psidInitSongsLabel);
-          if (psidPAddr!=0) assembler.setByteRelRev(tmp, psidPAddr, option.psidPlaySoundsLabel);          
+          if (psidIAddr!=0) assembler.setByteRelRev(builder, psidIAddr, option.psidInitSongsLabel);
+          if (psidPAddr!=0) assembler.setByteRelRev(builder, psidPAddr, option.psidPlaySoundsLabel);          
         }
-        assembler.setWord(tmp, inB[0x0E], inB[0x0F], "songs");
-        assembler.setWord(tmp, inB[0x10], inB[0x12], "default song");
-        assembler.setWord(tmp, inB[0x12], inB[0x13], "speed");
-        assembler.setWord(tmp, inB[0x14], inB[0x15], "speed");
+        assembler.setWord(builder, inB[0x0E], inB[0x0F], "songs");
+        assembler.setWord(builder, inB[0x10], inB[0x12], "default song");
+        assembler.setWord(builder, inB[0x12], inB[0x13], "speed");
+        assembler.setWord(builder, inB[0x14], inB[0x15], "speed");
    
-        addString(tmp, 0x16, 0x36);
-        addString(tmp, 0x36, 0x56);
-        addString(tmp, 0x56, 0x76);
+        addString(builder, 0x16, 0x36);
+        addString(builder, 0x36, 0x56);
+        addString(builder, 0x56, 0x76);
       
         // test if version > 1
         if (inB[0x07]>0x76) {
-          assembler.setWord(tmp, inB[0x76], inB[0x77], "word flag");
-          assembler.setWord(tmp, inB[0x78], inB[0x79], "start and page length");
-          assembler.setWord(tmp, inB[0x7A], inB[0x7B], "second and third SID address");      
+          assembler.setWord(builder, inB[0x76], inB[0x77], "word flag");
+          assembler.setWord(builder, inB[0x78], inB[0x79], "start and page length");
+          assembler.setWord(builder, inB[0x7A], inB[0x7B], "second and third SID address");      
         }
-        tmp.append("\n");
+        builder.append("\n");
       }  
       if (psidLAddr==0) {
-          if (option.createPSID) assembler.setWord(tmp, inB[0x7C], inB[0x7D], "read load address"); 
+          if (option.createPSID) assembler.setWord(builder, inB[0x7C], inB[0x7D], "read load address"); 
           psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
       }
-      tmp.append("\n");      
+      builder.append("\n");      
     } else {
         sid.upperCase=option.opcodeUpperCasePreview;
-        tmp.append(fileType.getDescription(inB));
-        tmp.append("\n");
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
       }  
     
     // add blocks from relocate
     addRelocate(blocks); 
     
-    disassemblyBlocks(asSource, sid, tmp);
+    disassemblyBlocks(asSource, sid, builder);
     
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
   }
   
   /**
@@ -423,25 +427,24 @@ public class Disassembly {
     block.endBuffer=inB.length-1;
     block.inB=inB.clone();            
     blocks.add(block);
-       
-     
-    StringBuilder tmp=new StringBuilder();
+
+    builder.setLength(0);
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
 
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);
+      assembler.setBlockComment(builder, mem);
       
-      assembler.setConstant(tmp, constant);
+      assembler.setConstant(builder, constant);
 
-      assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory);
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
-        tmp.append(fileType.getDescription(inB));
-        tmp.append("\n");
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
       } 
     
     // add blocks from relocate
@@ -451,15 +454,15 @@ public class Disassembly {
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
       int start=Math.max(0, getMinAddress());
         
-      assembler.setOrg(tmp, start-2); 
-      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
-      tmp.append("\n");
+      assembler.setOrg(builder, start-2); 
+      assembler.setWord(builder, (byte)(start & 0xFF), (byte)(start>>8), null);
+      builder.append("\n");
     } 
     
-    disassemblyBlocks(asSource, prg, tmp);
+    disassemblyBlocks(asSource, prg, builder);
     
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
   }   
   
   /**
@@ -514,21 +517,21 @@ public class Disassembly {
     block.inB=inB.clone();            
     blocks.add(block);
     
-     
-    StringBuilder tmp=new StringBuilder();
+
+    builder.setLength(0);
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
 
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);     
-      assembler.setConstant(tmp, constant);
-      assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory);
+      assembler.setBlockComment(builder, mem);     
+      assembler.setConstant(builder, constant);
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
-        tmp.append(fileType.getDescription(inB))
+        builder.append(fileType.getDescription(inB))
            .append("\nCHIP=").append(chip).append("\n");
       } 
             
@@ -539,15 +542,15 @@ public class Disassembly {
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
       int start=Math.max(0, getMinAddress());
         
-      assembler.setOrg(tmp, start-2); 
-      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
-      tmp.append("\n");
+      assembler.setOrg(builder, start-2); 
+      assembler.setWord(builder, (byte)(start & 0xFF), (byte)(start>>8), null);
+      builder.append("\n");
     } 
         
-    disassemblyBlocks(asSource, prg, tmp);   
+    disassemblyBlocks(asSource, prg, builder);   
     
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
   }    
   
   /**
@@ -617,25 +620,24 @@ public class Disassembly {
     block.endBuffer=block.startBuffer+block.endAddress;
     block.inB=inB.clone();
     blocks.add(block);
-     
-    StringBuilder tmp=new StringBuilder();
+
+    builder.setLength(0);
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
 
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);
+      assembler.setBlockComment(builder, mem);
       
-      assembler.setConstant(tmp, constant);
+      assembler.setConstant(builder, constant);
 
-      assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory); 
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory); 
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
-        tmp.append(fileType.getDescription(inB));
-        tmp.append("\n");
-
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
       }      
     
     // add blocks from relocate
@@ -645,15 +647,15 @@ public class Disassembly {
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
       int start=Math.max(0, getMinAddress());
         
-      assembler.setOrg(tmp, start-2); 
-      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
-      tmp.append("\n");
+      assembler.setOrg(builder, start-2); 
+      assembler.setWord(builder, (byte)(start & 0xFF), (byte)(start>>8), null);
+      builder.append("\n");
     } 
             
-    disassemblyBlocks(asSource, prg, tmp);   
+    disassemblyBlocks(asSource, prg, builder);   
     
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
   }   
   
   /**
@@ -677,22 +679,22 @@ public class Disassembly {
     
     if (mpr==null) return;
     
-    StringBuilder tmp=new StringBuilder();
+    builder.setLength(0);
     
     if (asSource) {
       prg.upperCase=option.opcodeUpperCaseSource;  
       
       MemoryDasm mem=new MemoryDasm();
       mem.userBlockComment=getAssemblerDescription();
-      assembler.setBlockComment(tmp, mem);      
-      assembler.setConstant(tmp, constant);
-      assembler.setStarting(tmp);
-      assembler.setMacro(tmp, memory);
+      assembler.setBlockComment(builder, mem);      
+      assembler.setConstant(builder, constant);
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
     } else {    
         prg.upperCase=option.opcodeUpperCasePreview;
         
-        tmp.append(fileType.getDescription(this.inB));
-        tmp.append("\n");        
+        builder.append(fileType.getDescription(this.inB));
+        builder.append("\n");        
       }
     
     // generate the blocks
@@ -714,15 +716,15 @@ public class Disassembly {
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
       int start=Math.max(0, getMinAddress());
         
-      assembler.setOrg(tmp, start-2); 
-      assembler.setWord(tmp, (byte)(start & 0xFF), (byte)(start>>8), null);
-      tmp.append("\n");
+      assembler.setOrg(builder, start-2); 
+      assembler.setWord(builder, (byte)(start & 0xFF), (byte)(start>>8), null);
+      builder.append("\n");
     }   
     
-    disassemblyBlocks(asSource, prg, tmp);
+    disassemblyBlocks(asSource, prg, builder);
     
-    if (asSource) source=tmp.toString();
-    else disassembly=tmp.toString();
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
   }
   
   /**
