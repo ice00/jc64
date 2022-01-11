@@ -1118,7 +1118,8 @@ public class M6510Dasm implements disassembler {
     MemoryDasm mem=memory[(int)addr+offset];
     
     if (mem.isInside) {
-      if (mem.dasmLocation!=null) {
+      // set as relative + unless it is already set (even by user)
+      if (mem.dasmLocation!=null && (mem.type!='+') && (mem.type!='-')) {
         mem.type='+';
         mem.related=(int)addr;
         setLabel(addr);

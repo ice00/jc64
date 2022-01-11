@@ -4376,7 +4376,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectNew() {
     if (project != null && !project.equals(savedProject)) {
-      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
       if (input==JOptionPane.CANCEL_OPTION) return;
       else if (input==JOptionPane.OK_OPTION) projectSave(); 
     } 
@@ -4410,7 +4410,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (project == null) return;
     
     if (!project.equals(savedProject)) {
-      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
       if (input==JOptionPane.CANCEL_OPTION) return;
       else if (input==JOptionPane.OK_OPTION) projectSave();               
     }       
@@ -4432,7 +4432,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectOpen() {     
     if (project != null && !project.equals(savedProject)) {
-      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
       if (input==JOptionPane.CANCEL_OPTION) return;
       else if (input==JOptionPane.OK_OPTION) projectSave();      
     } 
@@ -4557,11 +4557,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Exit from program
    */
   private void exit() {
-    if (project != null && !project.equals(savedProject)) {
-      int res=JOptionPane.showConfirmDialog(this, "Project not saved. Exit anywere?", "Information", JOptionPane.YES_NO_OPTION);
-      if (res==JOptionPane.YES_OPTION) {      
-        System.exit(0);
-      }
+    if (project != null && !project.equals(savedProject)) {      
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      if (input==JOptionPane.OK_OPTION) projectSave();
+      System.exit(0);   
     } else System.exit(0);
   }
   
