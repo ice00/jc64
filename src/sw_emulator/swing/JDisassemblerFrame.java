@@ -4376,28 +4376,31 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectNew() {
     if (project != null && !project.equals(savedProject)) {
-      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then create a new one.", "Information", JOptionPane.WARNING_MESSAGE);
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      else if (input==JOptionPane.OK_OPTION) projectSave(); 
+    } 
+    
+    project=new Project();
+    savedProject=project.clone();
+    projectFile=null;
+    jProjectDialog.setUp(project);            
+    jProjectDialog.setVisible(true);
+    setTitle("JC64dis (<new>)");
+
+    if (project.file==null || "".equals(project.file)) {
+      project=null;
+      savedProject=null;       
+      rSyntaxTextAreaSource.setText("");
+      rSyntaxTextAreaDis.setText("");
+      dataTableModelMemory.setData(null);
+      dataTableModelMemory.fireTableDataChanged();
     } else {
-        project=new Project();
-        savedProject=project.clone();
-        projectFile=null;
-        jProjectDialog.setUp(project);            
-        jProjectDialog.setVisible(true);
-        setTitle("JC64dis (<new>)");
-        
-        if (project.file==null || "".equals(project.file)) {
-          project=null;
-          savedProject=null;       
-          rSyntaxTextAreaSource.setText("");
-          rSyntaxTextAreaDis.setText("");
-          dataTableModelMemory.setData(null);
-          dataTableModelMemory.fireTableDataChanged();
-        } else {
-          dataTableModelMemory.setData(project.memory);
-          dataTableModelMemory.fireTableDataChanged();
-          execute(SOURCE_DISASS);
-        }
-      }    
+      dataTableModelMemory.setData(project.memory);
+      dataTableModelMemory.fireTableDataChanged();
+      execute(SOURCE_DISASS);
+    }
+          
   }
   
   /**
@@ -4407,8 +4410,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (project == null) return;
     
     if (!project.equals(savedProject)) {
-      int res=JOptionPane.showConfirmDialog(this, "Project not saved. Close it anywere?", "Information", JOptionPane.YES_NO_OPTION);
-      if (res!=JOptionPane.YES_OPTION) return;              
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      else if (input==JOptionPane.OK_OPTION) projectSave();               
     }       
     
     undo.clear();  // clearLab all previous undo action
@@ -4428,27 +4432,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void projectOpen() {     
     if (project != null && !project.equals(savedProject)) {
-      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then open the project.", "Information", JOptionPane.WARNING_MESSAGE);
-    } else {
-        int retVal=projectChooserFile.showOpenDialog(this);
-        if (retVal == JFileChooser.APPROVE_OPTION) {
-          projectFile=projectChooserFile.getSelectedFile();
-          
-          m_prefNode.put(LAST_DIR_PROJECT, projectFile.getPath());
-          
-          project=new Project();
-          setTitle("JC64dis ("+projectFile.getName()+")");
-          if (!FileManager.instance.readProjectFile(projectFile , project)) {
-              JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
-          } else {
-              if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
-              execute(SOURCE_DISASS);
-            }
-            savedProject=project.clone();
-            dataTableModelMemory.setData(project.memory);
-            dataTableModelMemory.fireTableDataChanged();
-          }
-       }         
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      else if (input==JOptionPane.OK_OPTION) projectSave();      
+    } 
+    
+    int retVal=projectChooserFile.showOpenDialog(this);
+    if (retVal == JFileChooser.APPROVE_OPTION) {
+      projectFile=projectChooserFile.getSelectedFile();
+
+      m_prefNode.put(LAST_DIR_PROJECT, projectFile.getPath());
+
+      project=new Project();
+      setTitle("JC64dis ("+projectFile.getName()+")");
+      if (!FileManager.instance.readProjectFile(projectFile , project)) {
+          JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
+      } else {
+          if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+          execute(SOURCE_DISASS);
+        }
+        savedProject=project.clone();
+        dataTableModelMemory.setData(project.memory);
+        dataTableModelMemory.fireTableDataChanged();
+      }
+                
   }
   
   /**
