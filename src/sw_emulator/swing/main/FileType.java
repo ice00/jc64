@@ -449,22 +449,31 @@ import sw_emulator.math.Unsigned;
       int psidVersion;  // version of psid file
       int psidDOff;     // psid data offeset
 
-      // check header
-      if (((inB[0]!='P') && (inB[0]!='R'))
-          ||(inB[1]!='S')||(inB[2]!='I')||(inB[3]!='D')) return false;
+      try {
 
-      // check PSID version
-      if ((inB[4]!='\0')|| (inB[5]!='\1') && (inB[5]!='\2') && (inB[5]!='\3')) return false;
-      psidVersion=(int)inB[5];
+          // check header
+          if (((inB[0]!='P') && (inB[0]!='R'))
+              ||(inB[1]!='S')||(inB[2]!='I')||(inB[3]!='D')) return false;
 
-      // check PSID data offset
-      if ((inB[6]!='\0')|| (inB[7]!=0x76 && inB[7]!=0x7C)) return false;
-      psidDOff=(int)inB[7];
-      if (psidVersion==4 && psidDOff==0x76) return false; 
-      if (psidVersion==3 && psidDOff==0x76) return false; 
-      if (psidVersion==2 && psidDOff==0x76) return false; 
-      if (psidVersion==1 && psidDOff==0x7C) return false;
-      return true;
+          // check PSID version
+          if ((inB[4]!='\0')|| (inB[5]!='\1') && (inB[5]!='\2') && (inB[5]!='\3')) return false;
+          psidVersion=(int)inB[5];
+
+          // check PSID data offset
+          if ((inB[6]!='\0')|| (inB[7]!=0x76 && inB[7]!=0x7C)) return false;
+          psidDOff=(int)inB[7];
+          if (psidVersion==4 && psidDOff==0x76) return false; 
+          if (psidVersion==3 && psidDOff==0x76) return false; 
+          if (psidVersion==2 && psidDOff==0x76) return false; 
+          if (psidVersion==1 && psidDOff==0x7C) return false;
+          return true;
+      
+      } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a PSID
+      return false; 
     }
     
   /**
@@ -478,24 +487,35 @@ import sw_emulator.math.Unsigned;
     int v2Length;         // length of voice 2 data
     int v3Length;         // length of voice 3 data
 
-    v1Length=Unsigned.done(inB[2])+Unsigned.done(inB[3])*256;
-    v2Length=Unsigned.done(inB[4])+Unsigned.done(inB[5])*256;
-    v3Length=Unsigned.done(inB[6])+Unsigned.done(inB[7])*256;
+    try {
     
-    if (inB.length<v1Length+v2Length+v3Length) return false;
+        v1Length=Unsigned.done(inB[2])+Unsigned.done(inB[3])*256;
+        v2Length=Unsigned.done(inB[4])+Unsigned.done(inB[5])*256;
+        v3Length=Unsigned.done(inB[6])+Unsigned.done(inB[7])*256;
 
-    // calculate pointer to voice data
-    int ind1=8;
-    int ind2=ind1+v1Length;
-    int ind3=ind2+v2Length;
+        if (inB.length<v1Length+v2Length+v3Length) return false;
 
-    return (inB[ind2-2]==0x01 &&
-        inB[ind2-1]==0x4F &&
-        inB[ind3-2]==0x01 &&
-        inB[ind3-1]==0x4F &&
-        inB[ind3+v3Length-2]==0x01 &&
-        inB[ind3+v3Length-1]==0x4F);
-    }
+        // calculate pointer to voice data
+        int ind1=8;
+        int ind2=ind1+v1Length;
+        int ind3=ind2+v2Length;
+
+        return (inB[ind2-2]==0x01 &&
+            inB[ind2-1]==0x4F &&
+            inB[ind3-2]==0x01 &&
+            inB[ind3-1]==0x4F &&
+            inB[ind3+v3Length-2]==0x01 &&
+            inB[ind3+v3Length-1]==0x4F);
+    
+    } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a VSF
+      return false; 
+  }
+    
+    
 
    /**
     * Determine if the input file is a PRG file
@@ -515,13 +535,20 @@ import sw_emulator.math.Unsigned;
     */    
     private static boolean isVSF(byte[] inB) {
       StringBuffer tmp=new StringBuffer("");  
-            
-      for (int i=0; i<18; i++) {
-        tmp.append((char)inB[i]);
-      }   
       
-      if (inB[18]!=0x1a) return false;
-      return "VICE Snapshot File".equals(tmp.toString());
+      try {
+        for (int i=0; i<18; i++) {
+          tmp.append((char)inB[i]);
+        }   
+      
+        if (inB[18]!=0x1a) return false;
+        return "VICE Snapshot File".equals(tmp.toString());
+      } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a VSF
+      return false; 
     }
    
    /**
@@ -531,23 +558,31 @@ import sw_emulator.math.Unsigned;
     * @return true if the file is a CRT image
     */
    private static boolean isCRT(byte[] inB) {
-     if (inB[0]!='C') return false;
-     if (inB[1]!='6') return false;
-     if (inB[2]!='4') return false;
-     if (inB[3]!=' ') return false;   
-     if (inB[4]!='C') return false;   
-     if (inB[5]!='A') return false;   
-     if (inB[6]!='R') return false;   
-     if (inB[7]!='T') return false;   
-     if (inB[8]!='R') return false;   
-     if (inB[9]!='I') return false;   
-     if (inB[10]!='D') return false;   
-     if (inB[11]!='G') return false;   
-     if (inB[12]!='E') return false;   
-     if (inB[13]!=' ') return false;   
-     if (inB[14]!=' ') return false;   
+     try {
+         if (inB[0]!='C') return false;
+         if (inB[1]!='6') return false;
+         if (inB[2]!='4') return false;
+         if (inB[3]!=' ') return false;   
+         if (inB[4]!='C') return false;   
+         if (inB[5]!='A') return false;   
+         if (inB[6]!='R') return false;   
+         if (inB[7]!='T') return false;   
+         if (inB[8]!='R') return false;   
+         if (inB[9]!='I') return false;   
+         if (inB[10]!='D') return false;   
+         if (inB[11]!='G') return false;   
+         if (inB[12]!='E') return false;   
+         if (inB[13]!=' ') return false;   
+         if (inB[14]!=' ') return false;   
+
+         return inB[15]==' ';
      
-     return inB[15]==' ';
+     } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a CRT
+      return false; 
    }
    
    /**
@@ -557,12 +592,20 @@ import sw_emulator.math.Unsigned;
     * @return true if the file is a MPR file
     */
    private static boolean isMPR(byte[] inB) {
-     if (inB[0]!=0) return false;
-     if (inB[1]!=5) return false;
-     if (inB[2]!='M') return false;
-     if (inB[3]!='P') return false;
-     if (inB[4]!='R') return false;
-     if (inB[5]!='G') return false;
-     return inB[6] == '#';
+     try {  
+         if (inB[0]!=0) return false;
+         if (inB[1]!=5) return false;
+         if (inB[2]!='M') return false;
+         if (inB[3]!='P') return false;
+         if (inB[4]!='R') return false;
+         if (inB[5]!='G') return false;
+         return inB[6] == '#';
+     
+     } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a MPR
+      return false;
    }    
   }  
