@@ -150,14 +150,10 @@ public class M6510Dasm implements disassembler {
   public static final byte A_IDX=12; // indirect x
   public static final byte A_IDY=13; // indirect y
 
-  /**
-   * Actual case to use for text
-   */
+  /** Actual case to use for text */
   public boolean upperCase=true;
   
-  /**
-   * Contains the mnemonics of instructions
-   */
+  /** Contains the mnemonics of instructions */
   public static final String[] mnemonics={
     // legal instruction first:
     "ADC", 
@@ -243,9 +239,7 @@ public class M6510Dasm implements disassembler {
     "USBC"
   };
 
-  /**
-   * Contains the mnemonics reference for the instruction
-   */
+  /** Contains the mnemonics reference for the instruction */
   public static final byte[] tableMnemonics={
     M_BRK, M_ORA, M_JAM, M_SLO, M_NOP1,M_ORA, M_ASL, M_SLO,  // 00
     M_PHP, M_ORA, M_ASL, M_ANC, M_NOP2,M_ORA, M_ASL, M_SLO,
@@ -281,6 +275,7 @@ public class M6510Dasm implements disassembler {
     M_SED, M_SBC, M_NOP0,M_ISB, M_NOP2,M_SBC, M_INC, M_ISB
   };
 
+  /** Contains the modes for the instruction */
   public static final byte[] tableModes={
     A_IMP, A_IDX, A_NUL, A_IDX, A_ZPG, A_ZPG, A_ZPG, A_ZPG,  // 00
     A_IMP, A_IMM, A_ACC, A_IMM, A_ABS, A_ABS, A_ABS, A_ABS,
@@ -316,6 +311,7 @@ public class M6510Dasm implements disassembler {
     A_IMP, A_ABY, A_IMP, A_ABY, A_ABX, A_ABX, A_ABX, A_ABX
   };
     
+  /** Contains the bytes used for the instruction */
   public static final byte[] tableSize={
     1, 2, 1, 2, 2, 2, 2, 2, // 00
     1, 2, 1, 2, 3, 3, 3, 3, 
@@ -353,22 +349,22 @@ public class M6510Dasm implements disassembler {
   };
 
   /** Type of instruction (used to create comment) */
-  public int iType=M_JAM;
+  protected int iType=M_JAM;
 
   /** Type of addressing used by instruction (used to create comment) */
-  public int aType=A_NUL;
+  protected int aType=A_NUL;
 
   /** Value of address (used to create comment) */
-  public long addr=0;
+  protected long addr=0;
 
   /** Value of operation (used to create comment) */
-  public long value=0;
+  protected long value=0;
 
   /** Last position pointer in buffer */
-  public int pos=0;
+  protected int pos=0;
 
   /** Last program counter value */
-  public long pc=0;
+  protected long pc=0;
   
   /** Memory dasm to use */
   MemoryDasm[] memory;
@@ -423,6 +419,7 @@ public class M6510Dasm implements disassembler {
    *           by the <code>pos</code> in the buffer
    * @return a string menemonic rapresentation of instruction
    */
+  @Override
   public String dasm(byte[] buffer, int pos, long pc) {
     String result="";          // result disassemble string
     int op=Unsigned.done(buffer[pos++]); // instruction opcode

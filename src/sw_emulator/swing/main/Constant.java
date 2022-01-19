@@ -39,7 +39,7 @@ public class Constant {
   
     
   /** String tables of constants  */  
-  public String[][] table=new String[10][256];
+  public String[][] table=new String[COLS][ROWS];
 
   @Override
   public boolean equals(Object obj) {

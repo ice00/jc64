@@ -24,7 +24,7 @@
 package sw_emulator.swing.main;
 
 /**
- * Target machine type for disassembly
+ * Target data type for disassembly
  * 
  * @author ice
  */

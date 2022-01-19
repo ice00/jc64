@@ -606,6 +606,7 @@ public class C64MusDasm extends M6510Dasm {
    * @param pc the programn counter for start position
    * @return a string rapresentation of disasemble with comment
    */
+  @Override
   public String cdasm(byte[] buffer, int start, int end, long pc) {
     StringBuilder result=new StringBuilder ("");            // resulting string
     String tmp;                  // local temp string

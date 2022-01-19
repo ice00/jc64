@@ -32,11 +32,8 @@ import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.Option;
 
 /**
- * Assembler definitions:
- * ->Name
- * ->Label
- * ->Byte
- * ->Word
+ * Assembler builder.
+ * It manages the creation of a source output based onto rules
  * 
  * @author ice
  */
@@ -181,12 +178,9 @@ public class Assembler {
      };        
     
      /**
-      * Get the char of this data type
-      *  -> ORG $xxyy
-      *  -> .ORG $xxyy
-      *  -> * = $xxyy
-      *  -> .pc $xxyy
-      * @return the char
+      * Get the name of assembler
+      *
+      * @return the name of assembler
       */
      public abstract String getName();
    }
@@ -4554,7 +4548,7 @@ public class Assembler {
    }
 
    
-   /** Fifo list  of memory locations */
+   /** Fifo list of memory locations */
    protected static LinkedList<MemoryDasm> list=new LinkedList();
    
    /** Fifo list of related memory locations */

@@ -6148,21 +6148,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void recent(int pos) {
     if (project != null && !project.equals(savedProject)) {
-      JOptionPane.showMessageDialog(this, "Project not saved. Close it, then open the project.", "Information", JOptionPane.WARNING_MESSAGE);
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      else if (input==JOptionPane.OK_OPTION) projectSave();     
+    } 
+    
+    projectFile=new File(recentFile.get(pos));
+    project=new Project();
+    setTitle("JC64dis ("+projectFile.getName()+")");
+    if (!FileManager.instance.readProjectFile(projectFile , project)) {
+        JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        projectFile=new File(recentFile.get(pos));
-        project=new Project();
-        setTitle("JC64dis ("+projectFile.getName()+")");
-        if (!FileManager.instance.readProjectFile(projectFile , project)) {
-            JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
-            execute(SOURCE_DISASS);
-          }
-        savedProject=project.clone();
-        dataTableModelMemory.setData(project.memory);
-        dataTableModelMemory.fireTableDataChanged();
-      }            
+        if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+        execute(SOURCE_DISASS);
+      }
+    savedProject=project.clone();
+    dataTableModelMemory.setData(project.memory);
+    dataTableModelMemory.fireTableDataChanged();
+                  
   }
   
   /**
