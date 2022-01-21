@@ -347,6 +347,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         jLabelHeather = new javax.swing.JLabel();
         jCheckBoxRepositionate = new javax.swing.JCheckBox();
         jCheckBoxPedantic = new javax.swing.JCheckBox();
+        jCheckBoxVlPatch = new javax.swing.JCheckBox();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -1834,6 +1835,13 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jCheckBoxVlPatch.setText("A click on VL column allow to patch value directly");
+        jCheckBoxVlPatch.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxVlPatchItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -1992,7 +2000,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                                             .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jCheckBoxEraseDComm, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                                             .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jCheckBoxPedantic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jCheckBoxPedantic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jCheckBoxVlPatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jScrollPaneHeather)
@@ -2053,6 +2062,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                         .addComponent(jCheckBoxDcErase)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxDlErase)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxVlPatch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -11086,6 +11097,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.pedantic=jCheckBoxPedantic.isShowing();
     }//GEN-LAST:event_jCheckBoxPedanticActionPerformed
 
+    private void jCheckBoxVlPatchItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxVlPatchItemStateChanged
+      option.clickVlPatch=jCheckBoxVlPatch.isSelected();
+    }//GEN-LAST:event_jCheckBoxVlPatchItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -11379,6 +11394,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxVic20_8kExp1;
     private javax.swing.JCheckBox jCheckBoxVic20_8kExp2;
     private javax.swing.JCheckBox jCheckBoxVic20_8kExp3;
+    private javax.swing.JCheckBox jCheckBoxVlPatch;
     private javax.swing.JCheckBox jCheckC64BoxSid;
     private javax.swing.JCheckBox jCheckC64BoxVicII;
     private javax.swing.JComboBox<String> jComboBoxAssembler;
@@ -12400,6 +12416,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxUbEdit.setSelected(option.clickUbEdit);
       jCheckBoxUcEdit.setSelected(option.clickUcEdit);
       jCheckBoxUlEdit.setSelected(option.clickUlEdit);
+      jCheckBoxVlPatch.setSelected(option.clickVlPatch);
       jCheckBoxForceCompilation.setSelected(option.forceCompilation);
       jCheckBoxAllowUtf.setSelected(option.allowUtf);
       jCheckBoxAllowSIDFreq.setSelected(option.useSidFreq);

@@ -4739,7 +4739,7 @@ public class Assembler {
     * @param str the string builder where put result
     * @param mem the memory being processed
     * @param memRel eventual memory related
-    * @param memRel2 eventaul memory related of second kind
+    * @param memRel2 eventual memory related of second kind
     */
    public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel, MemoryDasm memRel2) {
      ActionType type=actualType;  
@@ -5142,7 +5142,7 @@ public class Assembler {
    }
    
    /**
-    * Set a text and put to ouptput steam (it deletes anything that threre are in queue)
+    * Set a text and put to ouptput stream (it deletes anything that threre are in queue)
     * 
     * @param str the output stream
     * @param text the text to add
@@ -5153,9 +5153,7 @@ public class Assembler {
      list.clear();
      listRel.clear();
      listRel2.clear();
-          
-     int size=0;
-     
+               
      for (char val: text.toCharArray()) {
        mem=new MemoryDasm();
        mem.copy=(byte)val;

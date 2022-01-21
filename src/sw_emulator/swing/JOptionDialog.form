@@ -551,6 +551,7 @@
                                                           <Component id="jCheckBoxEraseDComm" pref="465" max="32767" attributes="0"/>
                                                           <Component id="jCheckBoxRepositionate" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="jCheckBoxPedantic" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="jCheckBoxVlPatch" alignment="1" max="32767" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -628,6 +629,8 @@
                                       <Component id="jCheckBoxDcErase" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jCheckBoxDlErase" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxVlPatch" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jCheckBoxLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -1458,6 +1461,14 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxPedanticActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="jCheckBoxVlPatch">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="A click on VL column allow to patch value directly"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxVlPatchItemStateChanged"/>
                       </Events>
                     </Component>
                   </SubComponents>

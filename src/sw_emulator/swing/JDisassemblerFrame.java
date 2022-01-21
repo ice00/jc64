@@ -92,6 +92,7 @@ import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.KeyProject;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
+import sw_emulator.swing.main.Patch;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.RecentItems;
 import sw_emulator.swing.main.Serial;
@@ -288,7 +289,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 break;
               case DC:     // automatic comment
                 if (option.clickDcErase) {
-                  MemoryDasm mem= project.memory[row];
+                  MemoryDasm mem=project.memory[row];
                   if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
                   dataTableModelMemory.fireTableDataChanged();  
                   if (option.forceCompilation) disassembly();
@@ -296,11 +297,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 break;  
               case DL:     // automatic label
                 if (option.clickDlErase) {
-                  MemoryDasm mem= project.memory[row];
+                  MemoryDasm mem=project.memory[row];
                   if (mem.dasmLocation!=null) mem.dasmLocation=null;
                   dataTableModelMemory.fireTableDataChanged();  
                   if (option.forceCompilation) disassembly();
                 }  
+                break;  
+              case VL:    // add patch
+                if (option.clickVlPatch){  
+                  MemoryDasm mem=project.memory[row];
+                  String value=JOptionPane.showInputDialog(null, "Insert the new value (in hex) for this location");
+                  if (value!=null) {
+                    Patch patch=new Patch();  
+                    patch.value=Integer.parseInt(value,16);
+      
+                    if (!patch.isValidRange()) {
+                      JOptionPane.showMessageDialog(null, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
+                      break;
+                    }
+      
+                    patch.address=mem.address;
+      
+                    int size=0;
+                    if (project.patches!=null) size=project.patches.length;
+      
+                    // copy the value in the list
+                    Patch[] patches2=new Patch[size+1];
+                    if (size>0) System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
+                    patches2[size]=patch;
+            
+                    project.patches=patches2;  
+                    
+                    dataTableModelMemory.fireTableDataChanged();  
+                    if (option.forceCompilation) disassembly();
+                  }
+                   
+                }
                 break;  
             }
 	  }
@@ -3056,7 +3088,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         // select this row
         jTableMemory.setRowSelectionInterval(addr, addr);
-        
+System.err.println("CLICK4: $"+Shared.ShortToExe(addr)); /// remove        
        
         if (evt.isControlDown()) {
           int actual;  
@@ -3191,6 +3223,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         // select those rows
         jTableMemory.setRowSelectionInterval(min, max);
+System.err.println("CLICK3: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)); /// remove        
+        
       } catch (Exception e) {
           System.err.println(e);;
         }  
@@ -3226,6 +3260,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
         // select this rows
         jTableMemory.setRowSelectionInterval(min, max);
+System.err.println("CLICK2: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)); /// remove        
       } catch (Exception e) {
           System.err.println(e);;
         }  
@@ -3575,6 +3610,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
             // select this row
             jTableMemory.setRowSelectionInterval(addr, addr); 
+            
+System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
          } catch (Exception e) {
              System.err.println(e);
            }
@@ -4574,10 +4611,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     int rows[]=jTableMemory.getSelectedRows();
         
     for (int i=0; i<rows.length; i++) {
-      mem= project.memory[rows[i]];
+      mem=project.memory[rows[i]];
       
       // in data no automatic comments are added, so we can erase it directly
-      if (mem.isData) if (mem.dasmComment!=null) {
+      if (mem.isData && mem.dasmComment!=null) {
         mem.dasmComment=null;
         // for compatibility, we erase a user "" comment
         if ("".equals(mem.userComment)) mem.userComment=null;
@@ -5086,11 +5123,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
     }
+    System.err.println("PREGET: $"+Shared.ShortToExe(row)+"    "+Shared.ShortToExe(jTableMemory.getSelectedRow())); 
     
     MemoryDasm mem= project.memory[row];
     addLabel(mem);
     dataTableModelMemory.fireTableDataChanged(); 
     jTableMemory.setRowSelectionInterval(row, row); 
+    
+ System.err.println("GET: $"+Shared.ShortToExe(row)+"    "+Shared.ShortToExe(jTableMemory.getSelectedRow()));   
   }
   
   /**
@@ -5120,6 +5160,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     addLabel(mem);
     dataTableModelMemory.fireTableDataChanged(); 
       jTableMemory.setRowSelectionInterval(row, row); 
+      
+System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove      
   }
   
   /**
@@ -5529,7 +5571,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
 
   /**
-   * Mark the memroy as address +
+   * Mark the memory as address +
    */
   private void memPlus() {
     int row=jTableMemory.getSelectedRow();
@@ -5695,7 +5737,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
-   * Mark the memroy as address -
+   * Mark the memory as address -
    */
   private void memMinus() {
     int row=jTableMemory.getSelectedRow();
@@ -6218,7 +6260,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           } 
           else jTableMemory.setRowSelectionInterval(addr, row); 
         }
+        System.err.println("CLICK6: $"+Shared.ShortToExe(addr)+" "+Shared.ShortToExe(row)); /// remove
       } else jTableMemory.setRowSelectionInterval(addr, addr);       // select this row
+      
+System.err.println("CLICK5: $"+Shared.ShortToExe(addr)); /// remove      
     } catch (Exception e) {
         System.err.println(e);
       }  

@@ -364,8 +364,11 @@ public class Option {
   /** Click on DC column erase dasm comment */
   public boolean clickDcErase=false;
   
-  /** Click on DL column erase dasm lable */
+  /** Click on DL column erase dasm label */
   public boolean clickDlErase=false;
+  
+  /** Click on VL column patch the value */
+  public boolean clickVlPatch=false;  
   
   /** Force compilation */
   public boolean forceCompilation=false;

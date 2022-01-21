@@ -364,6 +364,7 @@ public class FileManager {
       
       // 1.7
       option.pedantic=in.readBoolean();
+      option.clickVlPatch=in.readBoolean();
               
     } catch (FileNotFoundException e) {
          return true; 
@@ -680,6 +681,7 @@ public class FileManager {
       
       // 1.7
       out.writeBoolean(option.pedantic);
+      out.writeBoolean(option.clickVlPatch);
       
       out.flush();
       out.close();
