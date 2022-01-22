@@ -6474,6 +6474,7 @@ System.err.println("CLICK5: $"+Shared.ShortToExe(addr)); /// remove
     
     if (search!=null) {
       project=search;  
+      dataTableModelMemory.setData(project.memory);
       dataTableModelMemory.fireTableDataChanged();
       if (option.forceCompilation) disassembly();   
     }
