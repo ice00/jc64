@@ -5326,7 +5326,7 @@ System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove
     
         if (memory.type=='^') {
           /// this is a memory in table label
-          int rel=memory.related>>16;
+          int rel=(memory.related>>16) &0xFFFF;
           int pos=memory.address-rel;
           MemoryDasm mem2=project.memory[rel];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
@@ -5493,7 +5493,7 @@ System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove
     
         if (memory.type=='^') {
           /// this is a memory in table label
-          int rel=memory.related>>16;
+          int rel=(memory.related>>16) &0xFFFF;;
           int pos=memory.address-rel;
           MemoryDasm mem2=project.memory[rel];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
@@ -6240,9 +6240,9 @@ System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove
     try {  
       // get starting position of clicked point  
       int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-       
+System.err.println("CARET="+rSyntaxTextAreaDis.getCaretPosition()+" POS="+pos);
       int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
-       
+System.err.println("TEST="+rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength)+" "+Shared.ShortToExe(addr));
       if (addr==-1) return;
                 
       //scroll to that point

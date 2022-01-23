@@ -610,7 +610,7 @@ public class Assembler {
                   break;
                 case '^':
                   /// this is a memory in table label
-                  int rel=memRel.related>>16;
+                  int rel=(memRel.related>>16) & 0xFFFF;
                   pos=memRel.address-rel;
                   if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append("+").append(pos);
                   else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append("+").append(pos);
