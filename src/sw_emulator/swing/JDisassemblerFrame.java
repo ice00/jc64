@@ -5149,17 +5149,40 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
       return;        
     }
     
-    // avoid to use not defined bytes
-    if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
-      JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-      return;         
+    MemoryDasm mem=null;
+    
+    // determine if it is of page zero
+    switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
+        case 1:  
+          JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+          return;           
+        case 2:
+          // avoid to use not defined bytes
+          if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
+            JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+            return;         
+          }
+    
+          // get next address
+          mem=project.memory[project.memory[row+1].copy & 0xFF];   
+          break;
+          
+        case 3:
+          // avoid to use not defined bytes
+          if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
+            JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+            return;         
+          }
+    
+          // get next address
+          mem=project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];     
+          break;
     }
     
-    // get next address
-    MemoryDasm mem= project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];    
+    
     addLabel(mem);
     dataTableModelMemory.fireTableDataChanged(); 
-      jTableMemory.setRowSelectionInterval(row, row); 
+    jTableMemory.setRowSelectionInterval(row, row); 
       
 System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove      
   }

@@ -42,9 +42,9 @@ public class Relocate implements Cloneable {
   public int toEnd;
   
   /**
-   * Check if the reange are valid
+   * Check if the ranges are valid
    * 
-   * @return true if range are valid
+   * @return true if ranges are valid
    */
   public boolean isValidRange() {
    if (fromEnd < fromStart) return false;

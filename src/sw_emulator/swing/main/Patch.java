@@ -24,11 +24,11 @@
 package sw_emulator.swing.main;
 
 /**
- * A patch for the mmemory
+ * A patch for the memory
  * 
  * @author ice
  */
-public class Patch {
+public class Patch implements Cloneable {
   /** Address to patch */
   public int address;
 
@@ -36,13 +36,13 @@ public class Patch {
   public int value; 
   
   /**
-   * Check if the reange are valid
+   * Check if the ranges are valid
    * 
-   * @return true if range are valid
+   * @return true if ranges are valid
    */
   public boolean isValidRange() {
    if (value<0 || value>255) return false;   
-   if (value<0 || value>0xFFFF) return false;
+   if (address<0 || address>0xFFFF) return false;
 
    return true;   
   }

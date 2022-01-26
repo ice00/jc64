@@ -31,6 +31,9 @@ import java.util.Arrays;
  * @author ice
  */
 public class Constant {
+  // Allowed chars  
+  private static final String allowed="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*+-";
+    
   /** Columns */  
   public static final int COLS=10;  
   
@@ -77,7 +80,7 @@ public class Constant {
     * True if the value is allowed (not present or not in reserved words)
     * 
     * @param value
-    * @return 
+    * @return true if the value is allowed
     */
    public boolean isAllowed(String value) {
      if (value==null || "".equals(value)) return false;
@@ -88,6 +91,19 @@ public class Constant {
        }     
      }    
      
+     return true;
+   }
+   
+   /**
+    * True if all values in constants are valid
+    * 
+    * @param value the vlaue
+    * @return 
+    */
+   public boolean isCorrect(String value) {
+     for (char c: value.toUpperCase().toCharArray()) {
+       if (!allowed.contains(""+c)) return false;       
+     }  
      return true;
    }
 }

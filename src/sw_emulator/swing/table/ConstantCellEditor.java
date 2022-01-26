@@ -74,7 +74,7 @@ public class ConstantCellEditor extends DefaultCellEditor {
       }
     }
 
-    if (!constant.isAllowed(actual) || actual.length()>5 || Character.isDigit(actual.charAt(0))) {
+    if (!constant.isAllowed(actual) || !constant.isCorrect(actual)) {
       textField.setBorder(red);
       return false;
     }
