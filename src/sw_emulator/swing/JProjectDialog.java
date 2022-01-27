@@ -68,6 +68,9 @@ public class JProjectDialog extends javax.swing.JDialog {
   /** Last direcotry for load file in project */
   public final static String LAST_DIR_FILE = "last.dir.file";
   
+  /** Last direcotry for load file in project */
+  public final static String LAST_DIR2_FILE = "last.dir2.file";
+  
   /** Preference system file */
   private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
     
@@ -89,6 +92,8 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
         fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
+        memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
+        memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
     }
     
   /**
@@ -773,6 +778,8 @@ public class JProjectDialog extends javax.swing.JDialog {
       int retValue=memFileChooser.showOpenDialog(this);
       
       if (retValue==JFileChooser.APPROVE_OPTION) {
+        m_prefNode.put(LAST_DIR2_FILE, memFileChooser.getSelectedFile().getPath());
+          
         String[] file=new String[1];
         file[0]=memFileChooser.getSelectedFile().getAbsolutePath();
         MemoryFlags memoryFlags=new MemoryFlags(file);
