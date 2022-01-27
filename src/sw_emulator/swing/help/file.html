@@ -40,7 +40,9 @@
           button or if you want a memory marked as all of code, than use <b>init</b> button.<br>
           Take present that you must apply the use of SIDLD with the function into the option menu
      </li>
-     <li><b>Edit Constant Table:</b> create constants of max 5 chars that you can associate to better format the code.
+     <li><b>Edit Constant Table:</b> create constants that you can associate to better format the code. 
+         The constant that start with a char and not contains +, -, /, * are assuemnd as true constant, all the others are assumed to be relative to other constants (it is left to the user to declare them correctly.<br>
+         You can create constant of type 0..9, so you can then have different constants for the same value. It is allowed to create constant for value over 255, and so it will be used only in data declared as word.
      <p align="center"><img src="./constant1.png"></p>    
      </li>
      <li><b>Edit Relocate table:</b> you can insert a list of addresses that are code relocated.<br>

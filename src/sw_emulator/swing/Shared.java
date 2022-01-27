@@ -51,7 +51,7 @@ public class Shared {
    * @param value the short value to convert
    * @return the exe string rapresentation of byte
    */
-  protected static String ShortToExe(int value) {
+  public static String ShortToExe(int value) {
     int tmp=value;
 
     if (value<0) return "????";
@@ -71,6 +71,22 @@ public class Shared {
     }
     return ret.toUpperCase(Locale.ENGLISH);
   }      
+  
+  /**
+   * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
+   *
+   * @param value the byte value to convert
+   * @return the exe string rapresentation of byte
+   */
+  public static String ByteToExe(int value) {
+    int tmp=value;
+    
+    if (value<0) return "??";
+    
+    String ret=Integer.toHexString(tmp);
+    if (ret.length()==1) ret="0"+ret;
+    return ret.toUpperCase(Locale.ENGLISH);
+  }
   
   public static void scrollToCenter(JTable table, int rowIndex, int vColIndex) {
     if (!(table.getParent() instanceof JViewport)) {

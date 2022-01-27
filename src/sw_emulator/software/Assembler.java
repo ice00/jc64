@@ -842,7 +842,14 @@ public class Assembler {
                }
                else {
                  if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
-                 else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
+                 else {
+                   // look fopr constant  
+                   if (memLow.index!=-1 && memHigh.index!=-1 && memLow.index==memHigh.index) {
+                     String res=constant.table[memLow.index][(memLow.copy & 0xFF) + ((memHigh.copy & 0xFF)<<8)];  
+                     if (res!=null && !"".equals(res)) str.append(res);
+                     else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
+                   } else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
+                 }                            
                  isFirst=false;  
                }    
              }
@@ -4961,7 +4968,7 @@ public class Assembler {
        
        for (int j=0; j<Constant.ROWS; j++) {
          val=constant.table[i][j];
-         if (val!=null && !"".equals(val)) {
+         if (val!=null && !"".equals(val) && constant.isConstant(val)) {
            if (!already) {             
              MemoryDasm mem=new MemoryDasm();
              mem.userBlockComment=" \nConstants of type "+i;

@@ -32,14 +32,17 @@ import java.util.Arrays;
  */
 public class Constant {
   // Allowed chars  
-  private static final String allowed="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*+-";
+  private static final String allowed="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*+-_";
+  private static final String notallowed="/*+-";
     
   /** Columns */  
   public static final int COLS=10;  
   
+  /** Min Rows */
+  public static final int MIN_ROWS=256;
+    
   /** Rows */
-  public static final int ROWS=256;
-  
+  public static final int ROWS=0xFFFF;
     
   /** String tables of constants  */  
   public String[][] table=new String[COLS][ROWS];
@@ -98,7 +101,7 @@ public class Constant {
     * True if all values in constants are valid
     * 
     * @param value the vlaue
-    * @return 
+    * @return true if all correct
     */
    public boolean isCorrect(String value) {
      for (char c: value.toUpperCase().toCharArray()) {
@@ -106,4 +109,20 @@ public class Constant {
      }  
      return true;
    }
-}
+   
+   /**
+    * True if this is a constant to declare (so not dependig form other)
+    * 
+    * @param value the value to check
+    * @return true if true constant
+    */
+   public boolean isConstant(String value) {
+     if (!Character.isAlphabetic(value.charAt(0))) return false;
+     
+     for (char c: value.toUpperCase().toCharArray()) {
+       if (notallowed.contains(""+c)) return false;       
+     } 
+     
+     return true;  
+   }
+} 

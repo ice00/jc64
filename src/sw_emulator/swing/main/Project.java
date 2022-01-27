@@ -38,12 +38,13 @@ import sw_emulator.software.MemoryDasm;
  *            add index for memoryDasm
  * Version 4: add relocates
  * Version 5: add patches
+ * Version 6: add constants for 16bits
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=5;       
+  public static final byte ACTUAL_VERSION=6;       
     
   /**
    * Type of the file

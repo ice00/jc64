@@ -7,6 +7,7 @@ package sw_emulator.swing.table;
 
 import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
+import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Constant;
 
 /**
@@ -88,23 +89,7 @@ public class DataTableModelConstant extends AbstractTableModel {
   public String getColumnName(int column) {
       return columns[column].name();
   }
-  
-  /**
-   * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
-   *
-   * @param value the byte value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected static String ByteToExe(int value) {
-    int tmp=value;
-    
-    if (value<0) return "??";
-    
-    String ret=Integer.toHexString(tmp);
-    if (ret.length()==1) ret="0"+ret;
-    return ret.toUpperCase(Locale.ENGLISH);
-  }
-  
+   
   /**
    * Get the value at the given position
    * 
@@ -116,7 +101,8 @@ public class DataTableModelConstant extends AbstractTableModel {
   public Object getValueAt(int rowIndex, int columnIndex) {
     switch (columns[columnIndex]) {
       case ID:
-        return ByteToExe(rowIndex);
+        if (rowIndex<Constant.MIN_ROWS) return Shared.ByteToExe(rowIndex);
+        else return Shared.ShortToExe(rowIndex);
       case T0:
         return constant.table[0][rowIndex];
       case T1:
