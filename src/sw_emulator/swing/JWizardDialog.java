@@ -881,7 +881,7 @@ public class JWizardDialog extends javax.swing.JDialog {
         }  
       }
       
-      JOptionPane.showMessageDialog(this, "Table relation applied into memory");
+      if (option.pedantic) JOptionPane.showMessageDialog(this, "Table relation applied into memory");
       
       jTableLow.getSelectionModel().removeSelectionInterval(rowLow, rowLow);
       jTableHigh.getSelectionModel().removeSelectionInterval(rowHigh, rowHigh);

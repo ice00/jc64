@@ -1457,7 +1457,7 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="jCheckBoxPedantic">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Allow result messages for load/save"/>
+                        <Property name="text" type="java.lang.String" value="Allow OK result messages for load/save/apply"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxPedanticActionPerformed"/>

@@ -4526,8 +4526,7 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
         if (retVal == JFileChooser.APPROVE_OPTION) {
           projectFile=projectChooserFile.getSelectedFile();
           
-          String ext=Arrays.stream(projectFile.getName().split("\\.")).reduce((a,b) -> b).orElse(null);
-          if (ext==null) {
+          if (!projectFile.getName().toLowerCase().endsWith(".dis")) {
             try {  
               projectFile = new File(projectFile.getCanonicalPath() +".dis");
             } catch (Exception e) {
@@ -4975,7 +4974,7 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
                // code execution has priority over data access
                if (project.memory[i].isCode) project.memory[i].isData=false;
            }
-           JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);  
+           if (option.pedantic) JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);  
            
            dataTableModelMemory.fireTableDataChanged();            
          }                  
@@ -5013,7 +5012,7 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
         return;
       }
     
-   JOptionPane.showMessageDialog(this, mpr.getDescription(), "Information on saved file", JOptionPane.INFORMATION_MESSAGE);
+   if (option.pedantic) JOptionPane.showMessageDialog(this, mpr.getDescription(), "Information on saved file", JOptionPane.INFORMATION_MESSAGE);
   }
   
   /**
@@ -5200,7 +5199,7 @@ System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove
     String label=JOptionPane.showInputDialog(this, "Insert the label for the selected memory location", initial);  
     if (label!=null) {
       if ("".equals(label)) {
-        JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   
+        if (option.pedantic) JOptionPane.showMessageDialog(this, "User label erased", "Information", JOptionPane.INFORMATION_MESSAGE);   
         mem.userLocation=null;
         return;
       }  

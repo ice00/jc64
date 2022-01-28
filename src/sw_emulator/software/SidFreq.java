@@ -33,7 +33,7 @@ public class SidFreq {
   /** A4 index in table */  
   static final int A4=57;  
   
-  /** A4 index in ocn note table table */
+  /** A4 index in oct note table table */
   static final int OCT_NOTE_A4 = A4+16;
   
   /** Table size for ocatve/note */
@@ -151,6 +151,10 @@ public class SidFreq {
     
       while (highOctave()) {}
       this.start=start;
+      
+      while (highOctaveCombined()) {}
+      this.start=start;
+          
     
       // for short table looks only if there are no solution before
       if (actIndex<0) shortLinearTable();
@@ -940,6 +944,53 @@ public class SidFreq {
     
     return false;      
   }    
+  
+  /**
+   * Looks for an high octave table
+   * 
+   * @return true if it is find
+   */
+  private boolean highOctaveCombined() {
+    final double STEP=Math.pow(2, 1/12);
+    int[] freq=new int[12];
+      
+    for (int i=start; i<end-13*2; i++) {
+
+        freq[0]=(int)(inB[i]& 0xFF)+(int)(inB[i+1]& 0xFF)*256; 
+        if (freq[0]==0) continue;
+        freq[1]=(int)(inB[i+2]& 0xFF)+(int)(inB[i+3]& 0xFF)*256;
+        if (freq[1]==0 || freq[1]<=freq[0] || Math.abs(freq[1]/freq[0]-STEP)>0.00001) continue;        
+        freq[2]=(int)(inB[i+4]& 0xFF)+(int)(inB[i+5]& 0xFF)*256;
+        if (freq[2]==0 || freq[2]<=freq[1] || Math.abs(freq[2]/freq[1]-STEP)>0.00001) continue;
+        freq[3]=(int)(inB[i+6]& 0xFF)+(int)(inB[i+7]& 0xFF)*256;
+        if (freq[3]==0 || freq[3]<=freq[2] || Math.abs(freq[3]/freq[2]-STEP)>0.00001) continue;
+        freq[4]=(int)(inB[i+8]& 0xFF)+(int)(inB[i+9]& 0xFF)*256;
+        if (freq[4]==0 || freq[4]<=freq[3] || Math.abs(freq[4]/freq[3]-STEP)>0.00001) continue;
+        freq[5]=(int)(inB[i+10]& 0xFF)+(int)(inB[i+11]& 0xFF)*256;        
+        if (freq[5]==0 || freq[5]<=freq[4] || Math.abs(freq[5]/freq[4]-STEP)>0.00001) continue;
+        freq[6]=(int)(inB[i+12]& 0xFF)+(int)(inB[i+13]& 0xFF)*256;
+        if (freq[6]==0 || freq[6]<=freq[5] || Math.abs(freq[6]/freq[5]-STEP)>0.00001) continue;
+        freq[7]=(int)(inB[i+14]& 0xFF)+(int)(inB[i+15]& 0xFF)*256;
+        if (freq[7]==0 || freq[7]<=freq[6] || Math.abs(freq[7]/freq[6]-STEP)>0.00001) continue;
+        freq[8]=(int)(inB[i+16]& 0xFF)+(int)(inB[i+17]& 0xFF)*256;
+        if (freq[8]==0 || freq[8]<=freq[7] || Math.abs(freq[8]/freq[7]-STEP)>0.00001) continue;
+        freq[9]=(int)(inB[i+18]& 0xFF)+(int)(inB[i+19]& 0xFF)*256;
+        if (freq[9]==0 || freq[9]<=freq[8] || Math.abs(freq[9]/freq[8]-STEP)>0.00001) continue;
+        freq[10]=(int)(inB[i+20]& 0xFF)+(int)(inB[i+21]& 0xFF)*256;
+        if (freq[10]==0 || freq[10]<=freq[9] || Math.abs(freq[10]/freq[9]-STEP)>0.00001) continue;
+        freq[11]=(int)(inB[i+22]& 0xFF)+(int)(inB[i+23]& 0xFF)*256;
+        if (freq[11]==0 || freq[11]<=freq[10] || Math.abs(freq[11]/freq[10]-STEP)>0.00001) continue;
+        
+        if (freq[11]<62000) continue;
+
+        addData(i+1, i, freq[9]/8);
+        markMemory(i+13, i+26, 1);
+        markMemory(i, i+13, 1);
+ 
+    }      
+    
+    return false;      
+  }  
     
   /**
    * Search for tables in linear way (low / high or high / low) with inverse direction

@@ -1828,7 +1828,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        jCheckBoxPedantic.setText("Allow result messages for load/save");
+        jCheckBoxPedantic.setText("Allow OK result messages for load/save/apply");
         jCheckBoxPedantic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxPedanticActionPerformed(evt);
