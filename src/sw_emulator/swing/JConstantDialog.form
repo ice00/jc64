@@ -47,6 +47,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableConstant.setDefaultEditor(String.class, constantCellEditor);&#xa;jTableConstant.putClientProperty(&quot;terminateEditOnFocusLost&quot;, Boolean.TRUE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);&#xa;ActionMap am = this.getRootPane().getActionMap();&#xa;&#xa;//add custom action&#xa;im.put(KeyStroke.getKeyStroke(&quot;control F&quot;), &quot;find&quot;);&#xa;am.put(&quot;find&quot;, new AbstractAction() {&#xa;     @Override&#xa;     public void actionPerformed(ActionEvent ae) {&#xa;       find();&#xa;     }&#xa;});&#xa;&#xa;&#xa;((InputMap)UIManager.get(&quot;Table.ancestorInputMap&quot;)).put(KeyStroke.getKeyStroke(&quot;control F&quot;), &quot;none&quot;);"/>
           </AuxValues>
         </Component>
       </SubComponents>

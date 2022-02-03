@@ -26,6 +26,7 @@ package sw_emulator.swing.table;
 import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Option;
 
 /**
@@ -126,9 +127,9 @@ public class DataTableModelMemory extends AbstractTableModel {
       
     switch (columns[columnIndex]) {
         case ID:
-          return ShortToExe(memory.address);   
+          return Shared.ShortToExe(memory.address);   
         case VL:
-          if (option.memoryValue==MOD_HEX) return ByteToExe(memory.copy); 
+          if (option.memoryValue==MOD_HEX) return Shared.ByteToExe(memory.copy); 
           else return (char)memory.copy;  
         case DC:
           return memory.dasmComment!=null;            
@@ -161,51 +162,5 @@ public class DataTableModelMemory extends AbstractTableModel {
   @Override
   public String getColumnName(int column) {
       return columns[column].name();
-  }
-  
-  /**
-   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
-   *
-   * @param value the short value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected String ShortToExe(int value) {
-    int tmp=value;
-
-    if (value<0) return "????";
-    
-    String ret=Integer.toHexString(tmp);
-    int len=ret.length();
-    switch (len) {
-      case 1:
-        ret="000"+ret;
-        break;
-     case 2:
-        ret="00"+ret;
-        break;
-     case 3:
-        ret="0"+ret;
-        break;
-    }
-    return ret.toUpperCase(Locale.ENGLISH);
-  }
-  
-  /**
-   * Convert a byte (containing in a int) to Exe upper case 2 chars
-   *
-   * @param value the short value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected String ByteToExe(byte value) {
-    int tmp=value & 0xFF;
-    
-    String ret=Integer.toHexString(tmp);
-    int len=ret.length();
-    switch (len) {
-      case 1:
-        ret="0"+ret;
-        break;
-    }
-    return ret.toUpperCase(Locale.ENGLISH);
-  }
+  }    
 }

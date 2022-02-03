@@ -23,7 +23,15 @@
  */
 package sw_emulator.swing;
 
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.table.ConstantCellEditor;
@@ -86,6 +94,19 @@ public class JConstantDialog extends javax.swing.JDialog {
         setTitle("Constants definitions");
 
         jTableConstant.setModel(dataModel);
+        InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        ActionMap am = this.getRootPane().getActionMap();
+
+        //add custom action
+        im.put(KeyStroke.getKeyStroke("control F"), "find");
+        am.put("find", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                find();
+            }
+        });
+
+        ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
         jScrollPaneTable.setViewportView(jTableConstant);
 
         getContentPane().add(jScrollPaneTable, java.awt.BorderLayout.CENTER);
@@ -147,6 +168,20 @@ public class JConstantDialog extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    private void find() {
+      String addr=JOptionPane.showInputDialog(this, "Search and go to a given HEX memory address");
+      if (addr==null) return;
+    
+      try {
+        int pos=Integer.parseInt(addr,16);
+        if (pos<0 || pos>0xFFFF) return;
+    
+        jTableConstant.getSelectionModel().setSelectionInterval(pos, pos);
+        Shared.scrollToCenter(jTableConstant, pos, 0);
+      } catch (Exception e) {
+        }  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

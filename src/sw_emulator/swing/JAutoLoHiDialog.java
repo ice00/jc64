@@ -109,7 +109,6 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButtonOk = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSpinnerStartLow = new javax.swing.JSpinner();
@@ -120,22 +119,34 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
         jSpinnerEndLow = new javax.swing.JSpinner();
         jLabelEndHigh = new javax.swing.JLabel();
         jSpinnerEndHigh = new javax.swing.JSpinner();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButtonOk = new javax.swing.JButton();
+        jLabelStartLo2 = new javax.swing.JLabel();
+        jSpinnerStartLow2 = new javax.swing.JSpinner();
+        jLabelStartHi2 = new javax.swing.JLabel();
+        jSpinnerStartHigh2 = new javax.swing.JSpinner();
+        jButtonOk2 = new javax.swing.JButton();
+        jLabelSize2 = new javax.swing.JLabel();
+        jSpinnerSize2 = new javax.swing.JSpinner();
+        jLabelPrefix2 = new javax.swing.JLabel();
+        jTextFieldPrefix2 = new javax.swing.JTextField();
+        jLabelDigit2 = new javax.swing.JLabel();
+        jSpinnerDigit2 = new javax.swing.JSpinner();
+        jSpinnerStart2 = new javax.swing.JSpinner();
+        jCheckBoxUpper2 = new javax.swing.JCheckBox();
+        jLabelStart2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tables automatic assigment");
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("Automatic assign low/high pointer from two tables");
         jPanel2.add(jLabel1);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
-        jButtonOk.setText("OK");
-        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOkActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButtonOk);
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -163,30 +174,115 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
 
         jSpinnerEndHigh.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(65535L), Long.valueOf(1L)));
 
+        jButtonOk.setText("OK");
+        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOkActionPerformed(evt);
+            }
+        });
+
+        jLabelStartLo2.setText("Starting of low values:");
+
+        jSpinnerStartLow2.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(65535L), Long.valueOf(1L)));
+
+        jLabelStartHi2.setText("Starting of high values:");
+
+        jSpinnerStartHigh2.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(65535L), Long.valueOf(1L)));
+
+        jButtonOk2.setText("OK");
+        jButtonOk2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOk2ActionPerformed(evt);
+            }
+        });
+
+        jLabelSize2.setText("Table size:");
+
+        jSpinnerSize2.setModel(new javax.swing.SpinnerNumberModel(2, 1, 256, 1));
+
+        jLabelPrefix2.setText("Prefix:");
+
+        jLabelDigit2.setText("Digit:");
+
+        jSpinnerDigit2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
+        jSpinnerDigit2.setToolTipText("Min number of digits to use (can increase automatically)");
+
+        jSpinnerStart2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+
+        jCheckBoxUpper2.setText("Uppercase");
+
+        jLabelStart2.setText("Start:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelStartLo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerStartLow, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabelStartHi, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerStartHigh, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(226, 226, 226)
+                                .addComponent(jButtonOk))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelStartLo)
+                                            .addComponent(jLabelEndLo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jSpinnerEndLow, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                            .addComponent(jSpinnerStartLow, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(51, 51, 51)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabelEndHigh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabelStartHi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jSpinnerStartHigh, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSpinnerEndHigh, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))))
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelEndLo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelPrefix2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldPrefix2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelStartLo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelSize2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinnerStartLow2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerSize2)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelStart2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSpinnerStart2)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelStartHi2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxUpper2)
+                                    .addComponent(jLabelDigit2))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerEndLow, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabelEndHigh, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerEndHigh, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSpinnerDigit2)
+                            .addComponent(jSpinnerStartHigh2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonOk2)
+                .addGap(224, 224, 224))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +299,34 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
                     .addComponent(jLabelEndLo)
                     .addComponent(jSpinnerEndHigh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEndHigh))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerStartLow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelStartLo2)
+                    .addComponent(jSpinnerStartHigh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelStartHi2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSize2)
+                    .addComponent(jSpinnerSize2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPrefix2)
+                    .addComponent(jTextFieldPrefix2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDigit2)
+                    .addComponent(jSpinnerDigit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUpper2)
+                    .addComponent(jSpinnerStart2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelStart2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jButtonOk2)
+                .addGap(20, 20, 20))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -270,6 +393,51 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
      setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    private void jButtonOk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOk2ActionPerformed
+      if (memories==null) return;
+      
+      long valStartLow=(Long)jSpinnerStartLow2.getValue();
+      long valStartHigh=(Long)jSpinnerStartHigh2.getValue();
+      int size=(Integer)jSpinnerSize2.getValue();
+
+      if ((valStartLow!=valStartHigh+1) && (valStartLow!=valStartHigh-1)) {
+        JOptionPane.showMessageDialog(this, "High star position must be before or after low starting position by 1");
+        return; 
+      }
+      
+      MemoryDasm low;
+      MemoryDasm high;
+      int position;
+      
+      String prefix=jTextFieldPrefix2.getText();
+      int start=(Integer)jSpinnerStart2.getValue();
+      boolean uppercase=jCheckBoxUpper2.isSelected();
+      int digit=(Integer)jSpinnerDigit2.getValue();
+      String label;
+      
+      for (int i=0; i<size; i++) {
+        low=memories[(int)(i*2+valStartLow)];
+        high=memories[(int)(i*2+valStartHigh)];  
+        
+        position=(low.copy & 0xFF)+((high.copy &0xFF)<<8);
+        low.type='<';
+        low.related=position;
+        
+        high.type='>';
+        high.related=position;  
+                
+        
+        if (prefix!=null && !"".equals(prefix)) { 
+          label=Integer.toHexString(i+start);
+          if (label.length()==1 && digit==2) label="0"+label;
+          if (uppercase) label=label.toUpperCase();
+          else label=label.toLowerCase();
+          label=prefix+label;        
+          memories[position].userLocation=label;
+        }  
+      }
+    }//GEN-LAST:event_jButtonOk2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,17 +484,32 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOk;
+    private javax.swing.JButton jButtonOk2;
+    private javax.swing.JCheckBox jCheckBoxUpper2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelDigit2;
     private javax.swing.JLabel jLabelEndHigh;
     private javax.swing.JLabel jLabelEndLo;
+    private javax.swing.JLabel jLabelPrefix2;
+    private javax.swing.JLabel jLabelSize2;
+    private javax.swing.JLabel jLabelStart2;
     private javax.swing.JLabel jLabelStartHi;
+    private javax.swing.JLabel jLabelStartHi2;
     private javax.swing.JLabel jLabelStartLo;
+    private javax.swing.JLabel jLabelStartLo2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinnerDigit2;
     private javax.swing.JSpinner jSpinnerEndHigh;
     private javax.swing.JSpinner jSpinnerEndLow;
+    private javax.swing.JSpinner jSpinnerSize2;
+    private javax.swing.JSpinner jSpinnerStart2;
     private javax.swing.JSpinner jSpinnerStartHigh;
+    private javax.swing.JSpinner jSpinnerStartHigh2;
     private javax.swing.JSpinner jSpinnerStartLow;
+    private javax.swing.JSpinner jSpinnerStartLow2;
+    private javax.swing.JTextField jTextFieldPrefix2;
     // End of variables declaration//GEN-END:variables
 }

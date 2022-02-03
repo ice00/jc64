@@ -1662,6 +1662,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     rSyntaxTextAreaDis.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            rSyntaxTextAreaDisKeyTyped(evt);
+        }
         public void keyReleased(java.awt.event.KeyEvent evt) {
             rSyntaxTextAreaDisKeyReleased(evt);
         }
@@ -3087,8 +3090,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         Shared.scrollToCenter(jTableMemory, addr, 0);
         
         // select this row
-        jTableMemory.setRowSelectionInterval(addr, addr);
-System.err.println("CLICK4: $"+Shared.ShortToExe(addr)); /// remove        
+        jTableMemory.setRowSelectionInterval(addr, addr);     
        
         if (evt.isControlDown()) {
           int actual;  
@@ -3222,8 +3224,7 @@ System.err.println("CLICK4: $"+Shared.ShortToExe(addr)); /// remove
         Shared.scrollToCenter(jTableMemory, min, 0);
         
         // select those rows
-        jTableMemory.setRowSelectionInterval(min, max);
-System.err.println("CLICK3: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)); /// remove        
+        jTableMemory.setRowSelectionInterval(min, max);       
         
       } catch (Exception e) {
           System.err.println(e);;
@@ -3259,8 +3260,7 @@ System.err.println("CLICK3: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)
         Shared.scrollToCenter(jTableMemory, min, 0);
         
         // select this rows
-        jTableMemory.setRowSelectionInterval(min, max);
-System.err.println("CLICK2: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)); /// remove        
+        jTableMemory.setRowSelectionInterval(min, max);        
       } catch (Exception e) {
           System.err.println(e);;
         }  
@@ -3610,8 +3610,6 @@ System.err.println("CLICK2: $"+Shared.ShortToExe(min)+" "+Shared.ShortToExe(max)
         
             // select this row
             jTableMemory.setRowSelectionInterval(addr, addr); 
-            
-System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
          } catch (Exception e) {
              System.err.println(e);
            }
@@ -3834,6 +3832,10 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
     private void jMenuItemAutCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAutCommentActionPerformed
       execute(HELP_CLEARCOM);
     }//GEN-LAST:event_jMenuItemAutCommentActionPerformed
+
+    private void rSyntaxTextAreaDisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSyntaxTextAreaDisKeyTyped
 
     /**
      * @param args the command line arguments
@@ -5181,9 +5183,7 @@ System.err.println("CLICK: $"+Shared.ShortToExe(addr)); /// remove
     
     addLabel(mem);
     dataTableModelMemory.fireTableDataChanged(); 
-    jTableMemory.setRowSelectionInterval(row, row); 
-      
-System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove      
+    jTableMemory.setRowSelectionInterval(row, row);       
   }
   
   /**
@@ -6262,9 +6262,8 @@ System.err.println("CLICK_NOT: $"+Shared.ShortToExe(row)); /// remove
     try {  
       // get starting position of clicked point  
       int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-System.err.println("CARET="+rSyntaxTextAreaDis.getCaretPosition()+" POS="+pos);
       int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
-System.err.println("TEST="+rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength)+" "+Shared.ShortToExe(addr));
+
       if (addr==-1) return;
                 
       //scroll to that point
@@ -6282,10 +6281,7 @@ System.err.println("TEST="+rSyntaxTextAreaDis.getDocument().getText(pos,option.m
           } 
           else jTableMemory.setRowSelectionInterval(addr, row); 
         }
-        System.err.println("CLICK6: $"+Shared.ShortToExe(addr)+" "+Shared.ShortToExe(row)); /// remove
-      } else jTableMemory.setRowSelectionInterval(addr, addr);       // select this row
-      
-System.err.println("CLICK5: $"+Shared.ShortToExe(addr)); /// remove      
+      } else jTableMemory.setRowSelectionInterval(addr, addr);       // select this row          
     } catch (Exception e) {
         System.err.println(e);
       }  
