@@ -59,4 +59,26 @@ public interface disassembler {
    * @return a comment string
    */
   public String dcom(int iType, int aType, long addr, long value);
+  
+  /**
+   * Comment and Disassemble a region of the buffer
+   *
+   * @param buffer the buffer containing the code
+   * @param start the start position in buffer
+   * @param end the end position in buffer
+   * @param pc the programn counter for start position 
+   * @return a string rapresentation of disassemble with comment
+   */
+  public String cdasm(byte[] buffer, int start, int end, long pc);
+  
+  /**
+   * Comment and Disassemble a region of the buffer as source
+   *
+   * @param buffer the buffer containing the code
+   * @param start the start position in buffer
+   * @param end the end position in buffer
+   * @param pc the programn counter for start position 
+   * @return a string rapresentation of disasemble with comment
+   */
+  public String csdasm(byte[] buffer, int start, int end, long pc);
 }

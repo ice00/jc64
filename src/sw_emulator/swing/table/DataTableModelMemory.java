@@ -23,7 +23,6 @@
  */
 package sw_emulator.swing.table;
 
-import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.Shared;
@@ -129,7 +128,7 @@ public class DataTableModelMemory extends AbstractTableModel {
         case ID:
           return Shared.ShortToExe(memory.address);   
         case VL:
-          if (option.memoryValue==MOD_HEX) return Shared.ByteToExe(memory.copy); 
+          if (option.memoryValue==MOD_HEX) return Shared.ByteToExe(memory.copy & 0xFF); 
           else return (char)memory.copy;  
         case DC:
           return memory.dasmComment!=null;            

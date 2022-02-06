@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.software.cpu.CpuDasm;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
@@ -409,16 +410,16 @@ public class Disassembly {
    * @param targetType the target machine type
    */
   private void disassemlyPRG(boolean asSource, TargetType targetType) {
-    M6510Dasm prg;
+    CpuDasm prg;
     Block block;
     
     setupAssembler();
     
-    prg=targetType.getDasm();             
+    prg=targetType.getDasm();   
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
-    prg.setMode(option.illegalOpcodeMode);
+    if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
     
     block=new Block();   
     block.startAddress=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
@@ -472,7 +473,7 @@ public class Disassembly {
    * @param targetType the target machine type
    */
   private void disassemblyCRT(boolean asSource, TargetType targetType) {
-    M6510Dasm prg;
+    CpuDasm prg;
     Block block;
     
     setupAssembler();
@@ -481,7 +482,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
-    prg.setMode(option.illegalOpcodeMode);
+    if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
     
     // get start and end address for the selected chip
     int header=Math.max(
@@ -560,7 +561,7 @@ public class Disassembly {
    * @param targetType the target machine type
    */
   private void disassemlyVSF(boolean asSource, TargetType targetType) {
-    M6510Dasm prg;
+    CpuDasm prg;
     Block block;
     
     setupAssembler();
@@ -570,7 +571,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
-    prg.setMode(option.illegalOpcodeMode);
+    if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
     
     int pos;
     
@@ -665,7 +666,7 @@ public class Disassembly {
    * @param targetType the target machine type
    */
   private void disassemlyMPR(boolean asSource, TargetType targetType) {
-    M6510Dasm prg;
+    CpuDasm prg;
     Block block;
     
     setupAssembler();
@@ -675,7 +676,7 @@ public class Disassembly {
     prg.setMemory(memory);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
-    prg.setMode(option.illegalOpcodeMode);
+    if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
     
     if (mpr==null) return;
     
@@ -748,7 +749,7 @@ public class Disassembly {
    * @param asSource true if the disassembly is as source
    * @param tmp the buffer for output
    */
-  private void disassemblyBlocks(boolean asSource, M6510Dasm prg, StringBuilder tmp) {
+  private void disassemblyBlocks(boolean asSource, CpuDasm prg, StringBuilder tmp) {
     Block block;
 
     // sort by asc memory address
