@@ -40,6 +40,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final byte T_DD =-2;
   public static final byte T_ED =-3;
   public static final byte T_FD =-4;  
+  public static final byte T_DDCB=-5;
+  public static final byte T_FDCB=-6;
     
    // legal instruction
   public static final byte M_ADC =0; 
@@ -116,268 +118,341 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final byte M_SLL =70;
   
   // addressing mode
-  public static final int A_NUL   =0;   // nothing else
-  public static final int A_REG_A =1;   // register A
-  public static final int A_REG_B =2;   // register B
-  public static final int A_REG_C =3;   // register C
-  public static final int A_REG_D =4;   // register D
-  public static final int A_REG_E =5;   // register E
-  public static final int A_REG_H =6;   // register H
-  public static final int A_REG_L =7;   // register L
-  public static final int A_BC_NN =8;   // BC absolute nn
-  public static final int A_DE_NN =9;   // DE absolute nn
-  public static final int A_HL_NN =10;  // HL absolute nn
-  public static final int A_SP_NN =11;  // SP absolute nn
-  public static final int A_IX_NN =12;  // IX absolute nn
-  public static final int A_IY_NN =13;  // IY absolute nn
-  public static final int A__BC_A =14;  // (BC) indirect A
-  public static final int A__DE_A =15;  // (DE) indirect A
-  public static final int A__HL_A =16;  // (HL) indirect A
-  public static final int A__IXN_A=17;  // (IX+N) indirect A
-  public static final int A__IYN_A=18;  // (IY+N) indirect A
-  public static final int A__NN_A =19;  // (NN) indirect A
-  public static final int A_REG_BC=20;  // registers BC
-  public static final int A_REG_DE=21;  // registers DE
-  public static final int A_REG_HL=22;  // registers HL
-  public static final int A_REG_SP=23;  // registers SP
-  public static final int A_A_N   =24;  // A reg with N
-  public static final int A_B_N   =25;  // B reg with N
-  public static final int A_C_N   =26;  // C reg with N
-  public static final int A_D_N   =27;  // D reg with N
-  public static final int A_E_N   =28;  // E reg with N
-  public static final int A_H_N   =29;  // H reg with N
-  public static final int A_L_N   =30;  // L reg with N
-  public static final int A_AF_AF =31;  // AF with shadow AF'
-  public static final int A_HL_BC =32;  // HL reg BC
-  public static final int A_HL_DE =33;  // HL reg DE
-  public static final int A_HL_HL =34;  // HL reg HL
-  public static final int A_HL_SP =35;  // HL reg SP
-  public static final int A_IX_BC =36;  // IX reg BC
-  public static final int A_IX_DE =37;  // IX reg DE
-  public static final int A_IX_HL =38;  // IX reg HL
-  public static final int A_IX_SP =39;  // IX reg SP
-  public static final int A_IY_BC =40;  // IY reg BC
-  public static final int A_IY_DE =41;  // IY reg DE
-  public static final int A_IY_HL =42;  // IY reg HL
-  public static final int A_IY_SP =43;  // IY reg SP 
-  public static final int A_A__BC =44;  // A indirect (BC)
-  public static final int A_A__DE =45;  // A indirect (DE)
-  public static final int A_A__HL =46;  // A indirect (HL)
-  public static final int A_A__IXN=47;  // A indirect (IX+N)
-  public static final int A_A__IYN=48;  // A indirect (IY+N)
-  public static final int A_REL   =49;  // relative
-  public static final int A_REL_NZ=50;  // relative NZ
-  public static final int A_REL_Z =51;  // relative Z
-  public static final int A_REL_NC=52;  // relative NC
-  public static final int A_REL_C =53;  // relative C  
-  public static final int A__NN_BC=54;  // (NN) ind absolute BC
-  public static final int A__NN_DE=55;  // (NN) ind absolute DE
-  public static final int A__NN_HL=56;  // (NN) absolute HL
-  public static final int A__NN_SP=57;  // (NN) ind absolute SP
-  public static final int A__NN_IX=58;  // (NN) ind absolute IX
-  public static final int A__NN_IY=59;  // (NN) ind absolute IY
-  public static final int A_BC__NN=60;  // BC ind absolute (NN)
-  public static final int A_DE__NN=61;  // DE ind absolute (NN)
-  public static final int A_HL__NN=62;  // HL ind absolute (NN)
-  public static final int A_SP__NN=63;  // SP ind absolute (NN)
-  public static final int A_IX__NN=64;  // IX ind absolute (NN)
-  public static final int A_IY__NN=65;  // IY ind absolute (NN)
-  public static final int A__HL   =66;  // ind (HL)
-  public static final int A__HL_N =67;  // ind (HL) imm N
-  public static final int A_A__NN =68;  // A ind (NN)
-  public static final int A_A_A   =69;  // A reg A
-  public static final int A_A_B   =70;  // A reg B
-  public static final int A_A_C   =71;  // A reg C
-  public static final int A_A_D   =72;  // A reg D
-  public static final int A_A_E   =73;  // A reg E
-  public static final int A_A_H   =74;  // A reg A
-  public static final int A_A_L   =75;  // A reg L
-  public static final int A_A_I   =76;  // A reg I
-  public static final int A_A_R   =77;  // A reg R
-  public static final int A_B_A   =78;  // B reg A
-  public static final int A_B_B   =79;  // B reg B
-  public static final int A_B_C   =80;  // B reg C
-  public static final int A_B_D   =81;  // B reg D
-  public static final int A_B_E   =82;  // B reg E
-  public static final int A_B_H   =83;  // B reg A
-  public static final int A_B_L   =84;  // B reg L
-  public static final int A_C_A   =85;  // C reg A
-  public static final int A_C_B   =86;  // C reg B
-  public static final int A_C_C   =87;  // C reg C
-  public static final int A_C_D   =88;  // C reg D
-  public static final int A_C_E   =89;  // C reg E
-  public static final int A_C_H   =90;  // C reg A
-  public static final int A_C_L   =91;  // C reg L
-  public static final int A_D_A   =92;  // D reg A
-  public static final int A_D_B   =93;  // D reg B
-  public static final int A_D_C   =94;  // D reg C
-  public static final int A_D_D   =95;  // D reg D
-  public static final int A_D_E   =96;  // D reg E
-  public static final int A_D_H   =97;  // D reg A
-  public static final int A_D_L   =98;  // D reg L
-  public static final int A_E_A   =99;  // E reg A
-  public static final int A_E_B   =100; // E reg B
-  public static final int A_E_C   =101; // E reg C
-  public static final int A_E_D   =102; // E reg D
-  public static final int A_E_E   =103; // E reg E
-  public static final int A_E_H   =104; // E reg A
-  public static final int A_E_L   =105; // E reg L
-  public static final int A_H_A   =106; // H reg A
-  public static final int A_H_B   =107; // H reg B
-  public static final int A_H_C   =108; // H reg C
-  public static final int A_H_D   =109; // H reg D
-  public static final int A_H_E   =110; // H reg E
-  public static final int A_H_H   =111; // H reg A
-  public static final int A_H_L   =112; // H reg L  
-  public static final int A_L_A   =113; // L reg A
-  public static final int A_L_B   =114; // L reg B
-  public static final int A_L_C   =115; // L reg C
-  public static final int A_L_D   =116; // L reg D
-  public static final int A_L_E   =117; // L reg E
-  public static final int A_L_H   =118; // L reg A
-  public static final int A_L_L   =119; // L reg L 
-  public static final int A_I_A   =120; // I reg A
-  public static final int A_R_A   =121; // R reg A
-  public static final int A_B__HL =122; // B indirect (HL)
-  public static final int A_B__IXN=123; // B indirect (IX+N)
-  public static final int A_B__IYN=124; // B indirect (IY+N)
-  public static final int A_C__HL =125; // C indirect (HL)
-  public static final int A_C__IXN=126; // C indirect (IX+N)
-  public static final int A_C__IYN=127; // C indirect (IY+N)  
-  public static final int A_D__HL =128; // D indirect (HL)
-  public static final int A_D__IXN=129; // D indirect (IX+N)
-  public static final int A_D__IYN=130; // D indirect (IY+N)  
-  public static final int A_E__HL =131; // E indirect (HL)
-  public static final int A_E__IXN=132; // E indirect (IX+N)
-  public static final int A_E__IYN=133; // E indirect (IY+N)  
-  public static final int A_H__HL =134; // H indirect (HL)
-  public static final int A_H__IXN=135; // H indirect (IX+N)
-  public static final int A_H__IYN=136; // H indirect (IY+N)
-  public static final int A_L__HL =137; // L indirect (HL)
-  public static final int A_L__IXN=138; // L indirect (IX+N)
-  public static final int A_L__IYN=139; // L indirect (IY+N)
-  public static final int A__HL_B =140; // (HL) indirect B
-  public static final int A__HL_C =141; // (HL) indirect C
-  public static final int A__HL_D =142; // (HL) indirect D  
-  public static final int A__HL_E =143; // (HL) indirect E
-  public static final int A__HL_H =144; // (HL) indirect H
-  public static final int A__HL_I =145; // (HL) indirect I
-  public static final int A__HL_L =146; // (HL) indirect L
-  public static final int A_00    =147; // 00h
-  public static final int A_08    =148; // 08h
-  public static final int A_10    =149; // 10h
-  public static final int A_18    =150; // 18h
-  public static final int A_20    =151; // 20h
-  public static final int A_28    =152; // 28h
-  public static final int A_30    =153; // 30h
-  public static final int A_38    =154; // 38h
-  public static final int A_NZ    =155; // NZ cond
-  public static final int A_Z     =156; // Z cond
-  public static final int A_NC    =157; // NC cond
-  public static final int A_C     =158; // C cond
-  public static final int A_PO    =159; // PO cond
-  public static final int A_P     =160; // P cond
-  public static final int A_PE    =161; // PE cond
-  public static final int A_M     =162; // PE cond
-  public static final int A_N     =163; // immediate N
-  public static final int A_NN    =164; // absolute NN
-  public static final int A_REG_AF=165; // reg AF
-  public static final int A__N_A  =166; // (N) immediate A
-  public static final int A_A__N  =167; // A immediate (N) 
-  public static final int A_SP_HL =168; // SP reg HL
-  public static final int A_DE_HL =169; // DE reg HL
-  public static final int A__SP_HL=170; // (SP) ind  HL
-  public static final int A_NZ_NN =171; // NZ cond NN
-  public static final int A_Z_NN  =172; // Z cond NN
-  public static final int A_NC_NN =173; // NC cond NN
-  public static final int A_C_NN  =174; // C cond NN
-  public static final int A_PO_NN =175; // PO cond NN
-  public static final int A_P_NN  =176; // P cond NN
-  public static final int A_PE_NN =177; // PE cond NN
-  public static final int A_M_NN  =178; // PE cond NN
-  public static final int A_A__C  =179; // A reg ind (C)
-  public static final int A_B__C  =180; // B reg ind (C)
-  public static final int A_C__C  =181; // C reg ind (C)
-  public static final int A_D__C  =182; // D reg ind (C)
-  public static final int A_E__C  =183; // E reg ind (C)
-  public static final int A_H__C  =184; // H reg ind (C)
-  public static final int A_L__C  =185; // L reg ind (C)
-  public static final int A___C   =186; // ind (C)
-  public static final int A__C_A  =187; // ind C reg A 
-  public static final int A__C_B  =188; // ind C reg B
-  public static final int A__C_C  =189; // ind C reg C
-  public static final int A__C_D  =190; // ind C reg D
-  public static final int A__C_E  =191; // ind C reg E
-  public static final int A__C_H  =192; // ind C reg H
-  public static final int A__C_L  =193; // ind C reg L
-  public static final int A___C_0 =194; // ind C 0
-  public static final int A_0     =195; // 0
-  public static final int A_1     =196; // 1
-  public static final int A_2     =197; // 2
-  public static final int A_0_A   =198; // 0 reg A
-  public static final int A_0_B   =199; // 0 reg B
-  public static final int A_0_C   =200; // 0 reg C
-  public static final int A_0_D   =201; // 0 reg D
-  public static final int A_0_E   =202; // 0 reg E
-  public static final int A_0_H   =203; // 0 reg H
-  public static final int A_0_L   =204; // 0 reg L
-  public static final int A_0__HL =205; // 0 ind (HL)
-  public static final int A_1_A   =206; // 1 reg A
-  public static final int A_1_B   =207; // 1 reg B
-  public static final int A_1_C   =208; // 1 reg C
-  public static final int A_1_D   =209; // 1 reg D
-  public static final int A_1_E   =210; // 1 reg E
-  public static final int A_1_H   =211; // 1 reg H
-  public static final int A_1_L   =212; // 1 reg L
-  public static final int A_1__HL =213; // 1 ind (HL)
-  public static final int A_2_A   =214; // 2 reg A
-  public static final int A_2_B   =215; // 2 reg B
-  public static final int A_2_C   =216; // 2 reg C
-  public static final int A_2_D   =217; // 2 reg D
-  public static final int A_2_E   =218; // 2 reg E
-  public static final int A_2_H   =219; // 2 reg H
-  public static final int A_2_L   =220; // 2 reg L
-  public static final int A_2__HL =221; // 2 ind (HL)
-  public static final int A_3_A   =222; // 3 reg A
-  public static final int A_3_B   =223; // 3 reg B
-  public static final int A_3_C   =224; // 3 reg C
-  public static final int A_3_D   =225; // 3 reg D
-  public static final int A_3_E   =226; // 3 reg E
-  public static final int A_3_H   =227; // 3 reg H
-  public static final int A_3_L   =228; // 3 reg L
-  public static final int A_3__HL =229; // 3 ind (HL)
-  public static final int A_4_A   =230; // 4 reg A
-  public static final int A_4_B   =231; // 4 reg B
-  public static final int A_4_C   =232; // 4 reg C
-  public static final int A_4_D   =233; // 4 reg D
-  public static final int A_4_E   =234; // 4 reg E
-  public static final int A_4_H   =235; // 4 reg H
-  public static final int A_4_L   =236; // 4 reg L
-  public static final int A_4__HL =237; // 4 ind (HL)
-  public static final int A_5_A   =238; // 5 reg A
-  public static final int A_5_B   =239; // 5 reg B
-  public static final int A_5_C   =240; // 5 reg C
-  public static final int A_5_D   =241; // 5 reg D
-  public static final int A_5_E   =242; // 5 reg E
-  public static final int A_5_H   =243; // 5 reg H
-  public static final int A_5_L   =244; // 5 reg L
-  public static final int A_5__HL =245; // 5 ind (HL)
-  public static final int A_6_A   =246; // 6 reg A
-  public static final int A_6_B   =247; // 6 reg B
-  public static final int A_6_C   =248; // 6 reg C
-  public static final int A_6_D   =249; // 6 reg D
-  public static final int A_6_E   =250; // 6 reg E
-  public static final int A_6_H   =251; // 6 reg H
-  public static final int A_6_L   =252; // 6 reg L
-  public static final int A_6__HL =253; // 6 ind (HL)
-  public static final int A_7_A   =254; // 7 reg A
-  public static final int A_7_B   =255; // 7 reg B
-  public static final int A_7_C   =256; // 7 reg C
-  public static final int A_7_D   =257; // 7 reg D
-  public static final int A_7_E   =258; // 7 reg E
-  public static final int A_7_H   =259; // 7 reg H
-  public static final int A_7_L   =260; // 7 reg L
-  public static final int A_7__HL =261; // 7 ind (HL)
+  public static final int A_NUL    =0;   // nothing else
+  public static final int A_REG_A  =1;   // register A
+  public static final int A_REG_B  =2;   // register B
+  public static final int A_REG_C  =3;   // register C
+  public static final int A_REG_D  =4;   // register D
+  public static final int A_REG_E  =5;   // register E
+  public static final int A_REG_H  =6;   // register H
+  public static final int A_REG_L  =7;   // register L
+  public static final int A_BC_NN  =8;   // BC absolute nn
+  public static final int A_DE_NN  =9;   // DE absolute nn
+  public static final int A_HL_NN  =10;  // HL absolute nn
+  public static final int A_SP_NN  =11;  // SP absolute nn
+  public static final int A_IX_NN  =12;  // IX absolute nn
+  public static final int A_IY_NN  =13;  // IY absolute nn
+  public static final int A__BC_A  =14;  // (BC) indirect A
+  public static final int A__DE_A  =15;  // (DE) indirect A
+  public static final int A__HL_A  =16;  // (HL) indirect A
+  public static final int A__IXN_A =17;  // (IX+N) indirect A
+  public static final int A__IYN_A =18;  // (IY+N) indirect A
+  public static final int A__NN_A  =19;  // (NN) indirect A
+  public static final int A_REG_BC =20;  // registers BC
+  public static final int A_REG_DE =21;  // registers DE
+  public static final int A_REG_HL =22;  // registers HL
+  public static final int A_REG_SP =23;  // registers SP
+  public static final int A_A_N    =24;  // A reg with N
+  public static final int A_B_N    =25;  // B reg with N
+  public static final int A_C_N    =26;  // C reg with N
+  public static final int A_D_N    =27;  // D reg with N
+  public static final int A_E_N    =28;  // E reg with N
+  public static final int A_H_N    =29;  // H reg with N
+  public static final int A_L_N    =30;  // L reg with N
+  public static final int A_AF_AF  =31;  // AF with shadow AF'
+  public static final int A_HL_BC  =32;  // HL reg BC
+  public static final int A_HL_DE  =33;  // HL reg DE
+  public static final int A_HL_HL  =34;  // HL reg HL
+  public static final int A_HL_SP  =35;  // HL reg SP
+  public static final int A_IX_BC  =36;  // IX reg BC
+  public static final int A_IX_DE  =37;  // IX reg DE
+  public static final int A_IX_HL  =38;  // IX reg HL
+  public static final int A_IX_SP  =39;  // IX reg SP
+  public static final int A_IY_BC  =40;  // IY reg BC
+  public static final int A_IY_DE  =41;  // IY reg DE
+  public static final int A_IY_HL  =42;  // IY reg HL
+  public static final int A_IY_SP  =43;  // IY reg SP 
+  public static final int A_A__BC  =44;  // A indirect (BC)
+  public static final int A_A__DE  =45;  // A indirect (DE)
+  public static final int A_A__HL  =46;  // A indirect (HL)
+  public static final int A_A__IXN =47;  // A indirect (IX+N)
+  public static final int A_A__IYN =48;  // A indirect (IY+N)
+  public static final int A_REL    =49;  // relative
+  public static final int A_REL_NZ =50;  // relative NZ
+  public static final int A_REL_Z  =51;  // relative Z
+  public static final int A_REL_NC =52;  // relative NC
+  public static final int A_REL_C  =53;  // relative C  
+  public static final int A__NN_BC =54;  // (NN) ind absolute BC
+  public static final int A__NN_DE =55;  // (NN) ind absolute DE
+  public static final int A__NN_HL =56;  // (NN) absolute HL
+  public static final int A__NN_SP =57;  // (NN) ind absolute SP
+  public static final int A__NN_IX =58;  // (NN) ind absolute IX
+  public static final int A__NN_IY =59;  // (NN) ind absolute IY
+  public static final int A_BC__NN =60;  // BC ind absolute (NN)
+  public static final int A_DE__NN =61;  // DE ind absolute (NN)
+  public static final int A_HL__NN =62;  // HL ind absolute (NN)
+  public static final int A_SP__NN =63;  // SP ind absolute (NN)
+  public static final int A_IX__NN =64;  // IX ind absolute (NN)
+  public static final int A_IY__NN =65;  // IY ind absolute (NN)
+  public static final int A__HL    =66;  // ind (HL)
+  public static final int A__HL_N  =67;  // ind (HL) imm N
+  public static final int A_A__NN  =68;  // A ind (NN)
+  public static final int A_A_A    =69;  // A reg A
+  public static final int A_A_B    =70;  // A reg B
+  public static final int A_A_C    =71;  // A reg C
+  public static final int A_A_D    =72;  // A reg D
+  public static final int A_A_E    =73;  // A reg E
+  public static final int A_A_H    =74;  // A reg A
+  public static final int A_A_L    =75;  // A reg L
+  public static final int A_A_I    =76;  // A reg I
+  public static final int A_A_R    =77;  // A reg R
+  public static final int A_B_A    =78;  // B reg A
+  public static final int A_B_B    =79;  // B reg B
+  public static final int A_B_C    =80;  // B reg C
+  public static final int A_B_D    =81;  // B reg D
+  public static final int A_B_E    =82;  // B reg E
+  public static final int A_B_H    =83;  // B reg A
+  public static final int A_B_L    =84;  // B reg L
+  public static final int A_C_A    =85;  // C reg A
+  public static final int A_C_B    =86;  // C reg B
+  public static final int A_C_C    =87;  // C reg C
+  public static final int A_C_D    =88;  // C reg D
+  public static final int A_C_E    =89;  // C reg E
+  public static final int A_C_H    =90;  // C reg A
+  public static final int A_C_L    =91;  // C reg L
+  public static final int A_D_A    =92;  // D reg A
+  public static final int A_D_B    =93;  // D reg B
+  public static final int A_D_C    =94;  // D reg C
+  public static final int A_D_D    =95;  // D reg D
+  public static final int A_D_E    =96;  // D reg E
+  public static final int A_D_H    =97;  // D reg A
+  public static final int A_D_L    =98;  // D reg L
+  public static final int A_E_A    =99;  // E reg A
+  public static final int A_E_B    =100; // E reg B
+  public static final int A_E_C    =101; // E reg C
+  public static final int A_E_D    =102; // E reg D
+  public static final int A_E_E    =103; // E reg E
+  public static final int A_E_H    =104; // E reg A
+  public static final int A_E_L    =105; // E reg L
+  public static final int A_H_A    =106; // H reg A
+  public static final int A_H_B    =107; // H reg B
+  public static final int A_H_C    =108; // H reg C
+  public static final int A_H_D    =109; // H reg D
+  public static final int A_H_E    =110; // H reg E
+  public static final int A_H_H    =111; // H reg A
+  public static final int A_H_L    =112; // H reg L  
+  public static final int A_L_A    =113; // L reg A
+  public static final int A_L_B    =114; // L reg B
+  public static final int A_L_C    =115; // L reg C
+  public static final int A_L_D    =116; // L reg D
+  public static final int A_L_E    =117; // L reg E
+  public static final int A_L_H    =118; // L reg A
+  public static final int A_L_L    =119; // L reg L 
+  public static final int A_I_A    =120; // I reg A
+  public static final int A_R_A    =121; // R reg A
+  public static final int A_B__HL  =122; // B indirect (HL)
+  public static final int A_B__IXN =123; // B indirect (IX+N)
+  public static final int A_B__IYN =124; // B indirect (IY+N)
+  public static final int A_C__HL  =125; // C indirect (HL)
+  public static final int A_C__IXN =126; // C indirect (IX+N)
+  public static final int A_C__IYN =127; // C indirect (IY+N)  
+  public static final int A_D__HL  =128; // D indirect (HL)
+  public static final int A_D__IXN =129; // D indirect (IX+N)
+  public static final int A_D__IYN =130; // D indirect (IY+N)  
+  public static final int A_E__HL  =131; // E indirect (HL)
+  public static final int A_E__IXN =132; // E indirect (IX+N)
+  public static final int A_E__IYN =133; // E indirect (IY+N)  
+  public static final int A_H__HL  =134; // H indirect (HL)
+  public static final int A_H__IXN =135; // H indirect (IX+N)
+  public static final int A_H__IYN =136; // H indirect (IY+N)
+  public static final int A_L__HL  =137; // L indirect (HL)
+  public static final int A_L__IXN =138; // L indirect (IX+N)
+  public static final int A_L__IYN =139; // L indirect (IY+N)
+  public static final int A__HL_B  =140; // (HL) indirect B
+  public static final int A__HL_C  =141; // (HL) indirect C
+  public static final int A__HL_D  =142; // (HL) indirect D  
+  public static final int A__HL_E  =143; // (HL) indirect E
+  public static final int A__HL_H  =144; // (HL) indirect H
+  public static final int A__HL_I  =145; // (HL) indirect I
+  public static final int A__HL_L  =146; // (HL) indirect L
+  public static final int A_00     =147; // 00h
+  public static final int A_08     =148; // 08h
+  public static final int A_10     =149; // 10h
+  public static final int A_18     =150; // 18h
+  public static final int A_20     =151; // 20h
+  public static final int A_28     =152; // 28h
+  public static final int A_30     =153; // 30h
+  public static final int A_38     =154; // 38h
+  public static final int A_NZ     =155; // NZ cond
+  public static final int A_Z      =156; // Z cond
+  public static final int A_NC     =157; // NC cond
+  public static final int A_C      =158; // C cond
+  public static final int A_PO     =159; // PO cond
+  public static final int A_P      =160; // P cond
+  public static final int A_PE     =161; // PE cond
+  public static final int A_M      =162; // PE cond
+  public static final int A_N      =163; // immediate N
+  public static final int A_NN     =164; // absolute NN
+  public static final int A_REG_AF =165; // reg AF
+  public static final int A__N_A   =166; // (N) immediate A
+  public static final int A_A__N   =167; // A immediate (N) 
+  public static final int A_SP_HL  =168; // SP reg HL
+  public static final int A_DE_HL  =169; // DE reg HL
+  public static final int A__SP_HL =170; // (SP) ind  HL
+  public static final int A_NZ_NN  =171; // NZ cond NN
+  public static final int A_Z_NN   =172; // Z cond NN
+  public static final int A_NC_NN  =173; // NC cond NN
+  public static final int A_C_NN   =174; // C cond NN
+  public static final int A_PO_NN  =175; // PO cond NN
+  public static final int A_P_NN   =176; // P cond NN
+  public static final int A_PE_NN  =177; // PE cond NN
+  public static final int A_M_NN   =178; // PE cond NN
+  public static final int A_A__C   =179; // A reg ind (C)
+  public static final int A_B__C   =180; // B reg ind (C)
+  public static final int A_C__C   =181; // C reg ind (C)
+  public static final int A_D__C   =182; // D reg ind (C)
+  public static final int A_E__C   =183; // E reg ind (C)
+  public static final int A_H__C   =184; // H reg ind (C)
+  public static final int A_L__C   =185; // L reg ind (C)
+  public static final int A___C    =186; // ind (C)
+  public static final int A__C_A   =187; // ind C reg A 
+  public static final int A__C_B   =188; // ind C reg B
+  public static final int A__C_C   =189; // ind C reg C
+  public static final int A__C_D   =190; // ind C reg D
+  public static final int A__C_E   =191; // ind C reg E
+  public static final int A__C_H   =192; // ind C reg H
+  public static final int A__C_L   =193; // ind C reg L
+  public static final int A___C_0  =194; // ind C 0
+  public static final int A_0      =195; // 0
+  public static final int A_1      =196; // 1
+  public static final int A_2      =197; // 2
+  public static final int A_0_A    =198; // 0 reg A
+  public static final int A_0_B    =199; // 0 reg B
+  public static final int A_0_C    =200; // 0 reg C
+  public static final int A_0_D    =201; // 0 reg D
+  public static final int A_0_E    =202; // 0 reg E
+  public static final int A_0_H    =203; // 0 reg H
+  public static final int A_0_L    =204; // 0 reg L
+  public static final int A_0__HL  =205; // 0 ind (HL)
+  public static final int A_1_A    =206; // 1 reg A
+  public static final int A_1_B    =207; // 1 reg B
+  public static final int A_1_C    =208; // 1 reg C
+  public static final int A_1_D    =209; // 1 reg D
+  public static final int A_1_E    =210; // 1 reg E
+  public static final int A_1_H    =211; // 1 reg H
+  public static final int A_1_L    =212; // 1 reg L
+  public static final int A_1__HL  =213; // 1 ind (HL)
+  public static final int A_2_A    =214; // 2 reg A
+  public static final int A_2_B    =215; // 2 reg B
+  public static final int A_2_C    =216; // 2 reg C
+  public static final int A_2_D    =217; // 2 reg D
+  public static final int A_2_E    =218; // 2 reg E
+  public static final int A_2_H    =219; // 2 reg H
+  public static final int A_2_L    =220; // 2 reg L
+  public static final int A_2__HL  =221; // 2 ind (HL)
+  public static final int A_3_A    =222; // 3 reg A
+  public static final int A_3_B    =223; // 3 reg B
+  public static final int A_3_C    =224; // 3 reg C
+  public static final int A_3_D    =225; // 3 reg D
+  public static final int A_3_E    =226; // 3 reg E
+  public static final int A_3_H    =227; // 3 reg H
+  public static final int A_3_L    =228; // 3 reg L
+  public static final int A_3__HL  =229; // 3 ind (HL)
+  public static final int A_4_A    =230; // 4 reg A
+  public static final int A_4_B    =231; // 4 reg B
+  public static final int A_4_C    =232; // 4 reg C
+  public static final int A_4_D    =233; // 4 reg D
+  public static final int A_4_E    =234; // 4 reg E
+  public static final int A_4_H    =235; // 4 reg H
+  public static final int A_4_L    =236; // 4 reg L
+  public static final int A_4__HL  =237; // 4 ind (HL)
+  public static final int A_5_A    =238; // 5 reg A
+  public static final int A_5_B    =239; // 5 reg B
+  public static final int A_5_C    =240; // 5 reg C
+  public static final int A_5_D    =241; // 5 reg D
+  public static final int A_5_E    =242; // 5 reg E
+  public static final int A_5_H    =243; // 5 reg H
+  public static final int A_5_L    =244; // 5 reg L
+  public static final int A_5__HL  =245; // 5 ind (HL)
+  public static final int A_6_A    =246; // 6 reg A
+  public static final int A_6_B    =247; // 6 reg B
+  public static final int A_6_C    =248; // 6 reg C
+  public static final int A_6_D    =249; // 6 reg D
+  public static final int A_6_E    =250; // 6 reg E
+  public static final int A_6_H    =251; // 6 reg H
+  public static final int A_6_L    =252; // 6 reg L
+  public static final int A_6__HL  =253; // 6 ind (HL)
+  public static final int A_7_A    =254; // 7 reg A
+  public static final int A_7_B    =255; // 7 reg B
+  public static final int A_7_C    =256; // 7 reg C
+  public static final int A_7_D    =257; // 7 reg D
+  public static final int A_7_E    =258; // 7 reg E
+  public static final int A_7_H    =259; // 7 reg H
+  public static final int A_7_L    =260; // 7 reg L
+  public static final int A_7__HL  =261; // 7 ind (HL)
+  public static final int A_REG_IX =262; // reg IX
+  public static final int A_REG_IY =263; // reg IY
+  public static final int A_REG_IXH=264; // reg IXH
+  public static final int A_REG_IXL=265; // reg IXL
+  public static final int A_REG_IYH=266; // reg IYH
+  public static final int A_REG_IYL=267; //reg IYL
+  public static final int A_IX_IX  =268; // IX reg IX
+  public static final int A_IY_IY  =269; // IY reg IY
+  public static final int A__IX_N  =270; // ind (IX+N)
+  public static final int A__IY_N  =271; // ind (IX+N)
+  public static final int A__IX_N_A=272; // ind (IX+N),A
+  public static final int A__IX_N_B=273; // ind (IX+N),B
+  public static final int A__IX_N_C=274; // ind (IX+N),C
+  public static final int A__IX_N_D=275; // ind (IX+N),D
+  public static final int A__IX_N_E=276; // ind (IX+N),E
+  public static final int A__IX_N_H=277; // ind (IX+N),H
+  public static final int A__IX_N_L=278; // ind (IX+N),L
+  public static final int A__IY_N_A=279; // ind (IY+N),A
+  public static final int A__IY_N_B=280; // ind (IY+N),B
+  public static final int A__IY_N_C=281; // ind (IY+N),C
+  public static final int A__IY_N_D=282; // ind (IY+N),D
+  public static final int A__IY_N_E=283; // ind (IY+N),E
+  public static final int A__IY_N_H=284; // ind (IY+N),H
+  public static final int A__IY_N_L=285; // ind (IY+N),L
+  public static final int A_SP_IX  =286; // SP reg IX
+  public static final int A_SP_IY  =287; // SP reg IY
+  public static final int A__IX    =288; // ind (IX)
+  public static final int A__IY    =289; // ind (IY)
+  public static final int A__SP_IX =290; // (SP) ind  IX
+  public static final int A__SP_IY =291; // (SP) ind  IY
+  public static final int A_IXH_A = 292; // IXH reg A
+  public static final int A_IXH_B = 293; // IXH reg B
+  public static final int A_IXH_C = 294; // IXH reg C
+  public static final int A_IXH_D = 295; // IXH reg D
+  public static final int A_IXH_E = 296; // IXH reg E
+  public static final int A_IXH_H = 297; // IXH reg H
+  public static final int A_IXH_L = 298; // IXH reg L
+  public static final int A_IYH_A = 299; // IYH reg A
+  public static final int A_IYH_B = 300; // IYH reg B
+  public static final int A_IYH_C = 301; // IYH reg C
+  public static final int A_IYH_D = 302; // IYH reg D
+  public static final int A_IYH_E = 303; // IYH reg E
+  public static final int A_IYH_H = 304; // IYH reg H
+  public static final int A_IYH_L = 305; // IYH reg L
+  public static final int A_A_IXH = 306; // A reg IXH
+  public static final int A_B_IXH = 307; // B reg IXH
+  public static final int A_C_IXH = 308; // C reg IXH
+  public static final int A_D_IXH = 309; // D reg IXH
+  public static final int A_E_IXH = 310; // E reg IXH
+  public static final int A_A_IXL = 311; // A reg IXL
+  public static final int A_B_IXL = 312; // B reg IXL
+  public static final int A_C_IXL = 313; // C reg IXL
+  public static final int A_D_IXL = 314; // D reg IXL
+  public static final int A_E_IXL = 315; // E reg IXL  
+  public static final int A_IXL_A = 316; // IXL reg A
+  public static final int A_IXL_B = 317; // IXL reg B
+  public static final int A_IXL_C = 318; // IXL reg C
+  public static final int A_IXL_D = 319; // IXL reg D
+  public static final int A_IXL_E = 320; // IXL reg E
+  public static final int A_IXL_L = 321; // IXL reg L
+  public static final int A_IXH_IXH=322; // IXH reg IXH
+  public static final int A_IXH_IXL=323; // IXH reg IXL
+  public static final int A_IXL_IXH=324; // IXL reg IXH
+  public static final int A_IXL_IXL=325; // IXL reg IXL
+  
+  public static final int A_A__IX_N=326; // A ind (IX+N)
+  public static final int A_B__IX_N=327; // B ind (IX+N)
+  public static final int A_C__IX_N=328; // C ind (IX+N)
+  public static final int A_D__IX_N=329; // D ind (IX+N)
+  public static final int A_E__IX_N=330; // E ind (IX+N)
+  public static final int A_H__IX_N=331; // H ind (IX+N)
+  public static final int A_L__IX_N=332; // L ind (IX+N)
+  
   
   /** Contains the mnemonics of instructions */
   public static final String[] mnemonics={
@@ -707,7 +782,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,    // E0
     M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, 
     M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, 
-    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, 
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET
   };
   
   /** Contains the mnemonics reference for the instruction */
@@ -743,8 +818,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     A_4_B,   A_4_C,   A_4_D,   A_4_E,   A_4_H,   A_4_L,   A_4__HL,A_4_A,   // E0
     A_5_B,   A_5_C,   A_5_D,   A_5_E,   A_5_H,   A_5_L,   A_5__HL,A_5_A,
     A_6_B,   A_6_C,   A_6_D,   A_6_E,   A_6_H,   A_6_L,   A_6__HL,A_6_A,
-    A_7_B,   A_7_C,   A_7_D,   A_7_E,   A_7_H,   A_7_L,   A_7__HL,A_7_A,
-    
+    A_7_B,   A_7_C,   A_7_D,   A_7_E,   A_7_H,   A_7_L,   A_7__HL,A_7_A    
   };
   
   
@@ -784,6 +858,114 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     2, 2, 2, 2, 2, 2, 2, 2
   };  
   
+  /** Contains the mnemonics reference for the instruction */
+  public static final byte[] tableMnemonicsDD={
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,  // 00
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_LD,  M_LD,  M_INC, M_INC, M_DEC, M_LD, M_NUL,  // 20
+    M_NUL, M_ADD, M_LD,  M_DEC, M_INC, M_DEC, M_LD, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_INC, M_DEC, M_LD, M_NUL, 
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,  // 40
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_LD,
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_LD,  M_LD, // 60
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_LD,  M_LD,
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_NUL, M_LD,    
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD,  M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_ADD, M_ADD, M_ADD, M_NUL,  // 80
+    M_NUL, M_NUL, M_NUL, M_NUL, M_ADC, M_ADC, M_ADC, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_SUB, M_SUB, M_SUB, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_SBC, M_SBC, M_SBC, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_AND, M_AND, M_AND, M_NUL,  // A0
+    M_NUL, M_NUL, M_NUL, M_NUL, M_XOR, M_XOR, M_XOR, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_OR,  M_OR,  M_OR, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_CP,  M_CP,  M_CP, M_CP,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, // C0
+    M_NUL, T_DDCB,M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_POP, M_NUL, M_EX,  M_NUL, M_PUSH,M_NUL, M_NUL, // E0 
+    M_NUL, M_JP,  M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_LD,  M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final int[] tableModesDD={
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,  // 00
+    A_NUL,  A_IX_BC,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_IX_DE,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_IX_NN,A__NN_IX,A_REG_IX,A_REG_IXH,A_REG_IXH,A_REG_IXH,A_NUL,  // 20
+    A_NUL,  A_IX_IX,A_IX__NN,A_REG_IX,A_REG_IXL,A_REG_IXL,A_REG_IXL,A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IX_N,  A__IX_N,  A__IX_N,  A_NUL, 
+    A_NUL,  A_IX_SP,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,     
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IXH,  A_B_IXL,  A_B__IX_N, A_NUL,  // 40
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_C_IXH,  A_C_IXL,  A_C__IX_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_D_IXH,  A_D_IXL,  A_D__IX_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_E_IXH,  A_E_IXL,  A_E__IX_N, A_NUL,    
+    A_IXH_B,A_IXH_C,A_IXH_D,A_IXH_E, A_IXH_IXH, A_IXH_L, A_H__IX_N, A_IXH_A,//60
+    A_IXL_B,A_IXL_C,A_IXL_D,A_IXL_E, A_IXL_IXH, A_IXL_L, A_L__IX_N, A_IXL_A,            
+    A__IX_N_B,A__IX_N_C,A__IX_N_D,A__IX_N_E,A__IX_N_H,A__IX_N_L, A_NUL,A__IX_N_A,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,  // 80    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL,  // A0
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL,   
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, // C0
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL, A_REG_IX,A_NUL,   A__SP_IX,A_REG_IX,  A_NUL,   A_NUL,     A_NUL, // E0 
+    A_NUL, A__IX,   A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL, A_NUL,   A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, 
+    A_NUL, A_SP_IX, A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL
+  };
+  
+  /** Contains the bytes used for the instruction */
+  public static final byte[] tableSizeDD={
+    1, 1, 1, 1, 1, 1, 1, 1,     // 00
+    1, 2, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 2, 1, 1, 1, 1, 1, 1,
+    1, 4, 4, 2, 2, 2, 3, 1,     // 20  
+    1, 2, 4, 2, 2, 2, 3, 1, 
+    1, 1, 1, 1, 3, 3, 4, 1, 
+    1, 2, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,     // 40
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,    
+    2, 2, 2, 2, 2, 2, 3, 2,     // 60
+    2, 2, 2, 2, 2, 2, 3, 2, 
+    3, 3, 3, 3, 3, 3, 1, 3,
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,     // 80
+    1, 1, 1, 1, 2, 2, 3, 1, 
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,     // A0
+    1, 1, 1, 1, 2, 2, 3, 1,  
+    1, 1, 1, 1, 2, 2, 3, 1,
+    1, 1, 1, 1, 2, 2, 3, 1,   
+    1, 1, 1, 1, 1, 1, 1, 1,     // C0
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 2, 1, 2, 1, 2, 1, 1,     // E0
+    1, 2, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 2, 1, 1, 1, 1, 1, 1
+  };
+  
   @Override
   public String dasm(byte[] buffer, int pos, long pc) {
     String result="";          // result disassemble string
@@ -801,7 +983,15 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         steps=tableSizeCB[op];
         break;
       case T_DD: 
-        iType=M_NUL;
+        op=Unsigned.done(buffer[pos++]);  
+        iType=(int)tableMnemonicsDD[op];  
+        aType=tableModesDD[op];
+        steps=tableSizeDD[op];
+        
+        if (iType==T_FDCB) {
+          // there are an extra table  
+          iType=M_NUL;  
+        }
         break;      
       case T_ED:
         op=Unsigned.done(buffer[pos++]);  
@@ -1017,7 +1207,109 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         
         result+=(upperCase? "C,": "c,")+getLabel(addr);
         setLabel(addr);          
+        break; 
+      case A_IXH_A:     // IXH reg A  
+        result+=(upperCase? "IXH,A": "ixh,a");  
         break;  
+      case A_IXH_B:     // IXH reg B  
+        result+=(upperCase? "IXH,B": "ixh,b");  
+        break;     
+      case A_IXH_C:     // IXH reg C  
+        result+=(upperCase? "IXH,C": "ixh,c");  
+        break;    
+      case A_IXH_D:     // IXH reg D  
+        result+=(upperCase? "IXH,D": "ixh,d");  
+        break;    
+      case A_IXH_E:     // IXH reg E  
+        result+=(upperCase? "IXH,E": "ixh,e");  
+        break;    
+      case A_IXH_H:     // IXH reg H  
+        result+=(upperCase? "IXH,H": "ixh,h");  
+        break;   
+      case A_IXH_L:     // IXH reg L  
+        result+=(upperCase? "IXH,L": "ixh,l");  
+        break;    
+      case A_IYH_A:     // IYH reg A  
+        result+=(upperCase? "IYH,A": "iyh,a");  
+        break;  
+      case A_IYH_B:     // IYH reg B  
+        result+=(upperCase? "IYH,B": "iyh,b");  
+        break;     
+      case A_IYH_C:     // IYH reg C  
+        result+=(upperCase? "IYH,C": "iyh,c");  
+        break;    
+      case A_IYH_D:     // IYH reg D  
+        result+=(upperCase? "IYH,D": "iyh,d");  
+        break;    
+      case A_IYH_E:     // IYH reg E  
+        result+=(upperCase? "IYH,E": "iyh,e");  
+        break;    
+      case A_IYH_H:     // IYH reg H  
+        result+=(upperCase? "IYH,H": "iyh,h");  
+        break;   
+      case A_IYH_L:     // IYH reg L  
+        result+=(upperCase? "IYH,L": "iyh,l");  
+        break;          
+      case A_A_IXH:     // A reg IXH 
+        result+=(upperCase? "A,IXH": "a,ixh");  
+        break;  
+      case A_B_IXH:     // B reg IXH 
+        result+=(upperCase? "B,IXH": "b,ixh");  
+        break;    
+      case A_C_IXH:     // C reg IXH 
+        result+=(upperCase? "C,IXH": "c,ixh");  
+        break;    
+      case A_D_IXH:     // D reg IXH 
+        result+=(upperCase? "D,IXH": "d,ixh");  
+        break;    
+      case A_E_IXH:     // E reg IXH 
+        result+=(upperCase? "E,IXH": "e,ixh");  
+        break;    
+      case A_A_IXL:     // A reg IXL 
+        result+=(upperCase? "A,IXL": "a,ixl");  
+        break;  
+      case A_B_IXL:     // B reg IXL 
+        result+=(upperCase? "B,IXL": "b,ixl");  
+        break;    
+      case A_C_IXL:     // C reg IXL 
+        result+=(upperCase? "C,IXL": "c,ixl");  
+        break;    
+      case A_D_IXL:     // D reg IXL 
+        result+=(upperCase? "D,IXL": "d,ixl");  
+        break;    
+      case A_E_IXL:     // E reg IXL 
+        result+=(upperCase? "E,IXL": "e,ixl");  
+        break;  
+      case A_IXL_A:     // IXL reg A
+        result+=(upperCase? "IXL, A": "ixl, a");  
+        break;    
+      case A_IXL_B:     // IXL reg B
+        result+=(upperCase? "IXL, B": "ixl, b");  
+        break;    
+      case A_IXL_C:     // IXL reg C
+        result+=(upperCase? "IXL, C": "ixl, c");  
+        break;    
+      case A_IXL_D:     // IXL reg D
+        result+=(upperCase? "IXL, D": "ixl, d");  
+        break;    
+      case A_IXL_E:     // IXL reg E
+        result+=(upperCase? "IXL, E": "ixl, e");  
+        break;    
+      case A_IXL_L:     // IXL reg L
+        result+=(upperCase? "IXL, L": "ixl, l");  
+        break;          
+      case A_IXH_IXH:     // IXH reg IXH
+        result+=(upperCase? "IXH, IXH": "ixh, ixh");  
+        break;  
+      case A_IXH_IXL:     // IXH reg IXL
+        result+=(upperCase? "IXH, IXL": "ixh, ixl");  
+        break;    
+      case A_IXL_IXH:     // IXL reg IXH
+        result+=(upperCase? "IXL, IXH": "ixl, ixh");  
+        break;          
+      case A_IXL_IXL:     // IXL reg IXL
+        result+=(upperCase? "IXL, IXL": "ixl, ixl");  
+        break;
       case A_HL_BC:     // HL reg BC
         result+=(upperCase? "HL,BC": "hl,bc");
         break;  
@@ -1060,9 +1352,27 @@ public class Z80Dasm extends CpuDasm implements disassembler {
       case A_DE_HL:     // DE reg HL 
         result+=(upperCase? "DE,HL": "de,hl");
         break;   
+      case A_IX_IX:     // IX reg IX
+        result+=(upperCase? "IX,IX": "ix,ix");  
+        break;  
+      case A_IY_IY:     // IY reg IY
+        result+=(upperCase? "IY,IY": "iy,iy");  
+        break;  
+      case A_SP_IX:     // SP reg IX
+        result+=(upperCase? "SP,IX": "sp,ix");  
+        break;  
+      case A_SP_IY:     // SP reg IY
+        result+=(upperCase? "SP,IY": "sp,iy");  
+        break;     
       case A__SP_HL:    // (SP) ind  HL  
         result+=(upperCase? "(SP),HL": "(sp),hl");  
         break;  
+      case A__SP_IX:    // (SP) ind  IX  
+        result+=(upperCase? "(SP),IX": "(sp),ix");  
+        break;          
+      case A__SP_IY:    // (SP) ind  IY  
+        result+=(upperCase? "(SP),IY": "(sp),iy");  
+        break;             
       case A_A__BC:     // A indirect (BC)  
         result+=(upperCase? "A,(BC)": "a,(bc)");  
         break;  
@@ -1159,7 +1469,37 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         this.pos=pos;   
         result+=getRefXIndXXN(buffer, (upperCase? "L": "l"), (upperCase? "IY": "iy"));
         pos=this.pos;
-        break;                   
+        break;                
+      case A_A__IX_N:  // A ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;  
+      case A_B__IX_N:  // B ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;  
+      case A_C__IX_N:  // C ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "C": "a"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;    
+      case A_D__IX_N:  // D ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "D": "a"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;    
+      case A_E__IX_N:  // E ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "E": "a"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;    
+      case A_L__IX_N:  // L ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "L": "a"), (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;                    
       case A__NN_BC:   // (NN) ind absolute BC 
         this.pos=pos;  
         result+=getNNregX(buffer, (upperCase? "BC": "bc"));
@@ -1217,7 +1557,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         break;          
       case A__HL:     // ind (HL)  
         result+=(upperCase? "(HL)": "(hl)");  
-        break; 
+        break;
+      case A__IX:     // ind (IX)    
+         result+=(upperCase? "(IX)": "(ix)");  
+        break;        
+      case A__IY:     // ind (IY)    
+         result+=(upperCase? "(IY)": "(iy)");  
+        break;          
       case A__HL_N:    // ind (HL) imm N 
         if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
         else value=0;
@@ -1757,6 +2103,104 @@ public class Z80Dasm extends CpuDasm implements disassembler {
      case A_7__HL:   // 7 ind (HL)
         result+="7,"+(upperCase? "(HL)": "(hl)"); 
         break;  
+     case  A_REG_IX: // reg IX
+        result+=(upperCase? "IX": "ix");  
+        break; 
+     case A_REG_IY:   // reg IY
+         result+=(upperCase? "IY": "iy");  
+         break;
+     case A_REG_IXH:  // reg IXH
+         result+=(upperCase? "IXH": "ixh");  
+         break;
+     case A_REG_IXL:  // reg IXL
+         result+=(upperCase? "IXL": "ixl");  
+         break;
+     case A_REG_IYH:  // reg IYH
+         result+=(upperCase? "IYH": "iyh");  
+         break;
+     case A_REG_IYL:   //reg IYL      
+         result+=(upperCase? "IYL": "iyl");  
+         break;
+     case A__IX_N:    // ind (IX+N)   
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"));
+         pos=this.pos;
+         break;
+     case A__IY_N:    // ind (IY+N)
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"));
+         pos=this.pos;
+         break;
+     case A__IX_N_A:    // ind (IX+N),A
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;    
+     case A__IX_N_B:    // ind (IX+N),B
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;
+         break;       
+     case A__IX_N_C:    // ind (IX+N),C
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;
+         break;          
+     case A__IX_N_D:    // ind (IX+N),D
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;
+         break;           
+     case A__IX_N_E:    // ind (IX+N),E
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;
+         break;          
+     case A__IX_N_H:    // ind (IX+N),H
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;
+         break;          
+     case A__IX_N_L:    // ind (IX+N),L
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;
+         break;   
+     case A__IY_N_A:    // ind (IY+N),A
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;    
+     case A__IY_N_B:    // ind (IY+N),B
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;
+         break;       
+     case A__IY_N_C:    // ind (IY+N),C
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;
+         break;          
+     case A__IY_N_D:    // ind (IY+N),D
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;
+         break;           
+     case A__IY_N_E:    // ind (IY+N),E
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;
+         break;          
+     case A__IY_N_H:    // ind (IY+N),H
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;
+         break;          
+     case A__IY_N_L:    // ind (IY+N),L
+         this.pos=pos;
+         result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;
+         break;    
     }    
     this.pc=pc+steps;
     this.pos=pos;  
@@ -1767,6 +2211,35 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   @Override
   public String dcom(int iType, int aType, long addr, long value) {
     return "";
+  }
+  
+  /**
+   * Get the instruction register indirect over byte
+   * 
+   * @param buffer the buffer to use
+   * @param reg the reg to use
+   * @return the instruction
+   */
+  private String getRegIndXN(byte[] buffer, String reg) {
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+    else value=-1; 
+        
+    return "("+reg+"+"+getLabelImm(pc+1, value)+")";  
+  }
+      
+  /**
+   * Get the instruction register indirect over byte
+   * 
+   * @param buffer the buffer to use
+   * @param reg the reg to use
+   * @param reg2 the reg2 to use
+   * @return the instruction
+   */
+  private String getRegIndXN(byte[] buffer, String reg, String reg2) {
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+    else value=-1; 
+        
+    return "("+reg+"+"+getLabelImm(pc+1, value)+"),"+reg2;  
   }
   
   /**

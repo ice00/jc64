@@ -537,17 +537,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                                 case '+':
                                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+(memory.address-memory.related);
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+(memory.address-memory.related);
-                                else tip="$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
+                                else tip="$"+Shared.ShortToExe(mem.address)+"+"+(memory.address-memory.related);
                                 break;
                                 case '-':
                                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related);
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);
-                                else tip="$"+ShortToExe(mem.address)+(memory.address-memory.related);
+                                else tip="$"+Shared.ShortToExe(mem.address)+(memory.address-memory.related);
                                 break;
                                 default:
                                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
                                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip="#"+memory.type+mem.dasmLocation;
-                                else tip="#"+memory.type+"$"+ShortToExe(mem.address);
+                                else tip="#"+memory.type+"$"+Shared.ShortToExe(mem.address);
                             }
                         } else if (memory.dataType!=null) {
                             tip=memory.dataType.getDescription();
@@ -5124,14 +5124,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
       return;
     }
-    System.err.println("PREGET: $"+Shared.ShortToExe(row)+"    "+Shared.ShortToExe(jTableMemory.getSelectedRow())); 
     
     MemoryDasm mem= project.memory[row];
     addLabel(mem);
     dataTableModelMemory.fireTableDataChanged(); 
-    jTableMemory.setRowSelectionInterval(row, row); 
-    
- System.err.println("GET: $"+Shared.ShortToExe(row)+"    "+Shared.ShortToExe(jTableMemory.getSelectedRow()));   
+    jTableMemory.setRowSelectionInterval(row, row);    
   }
   
   /**
@@ -5152,7 +5149,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     MemoryDasm mem=null;
     
-    // determine if it is of page zero
+    // determine if it is of page zero or 16 bit
     switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
         case 1:  
           JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
@@ -5166,8 +5163,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
           // get next address
           mem=project.memory[project.memory[row+1].copy & 0xFF];   
-          break;
-          
+          break;          
         case 3:
           // avoid to use not defined bytes
           if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
@@ -5332,7 +5328,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           
         data=new Vector();
           
-        data.add(ShortToExe(memory.address));
+        data.add(Shared.ShortToExe(memory.address));
         data.add(memory.dasmLocation);
         data.add(memory.userLocation);
         
@@ -5343,7 +5339,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[memory.related];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+ShortToExe((int)memory.related)+"+"+pos;  
+          else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
         }
     
         if (memory.type=='^') {
@@ -5353,7 +5349,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[rel];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+ShortToExe(rel)+"+"+pos;  
+          else res="$"+Shared.ShortToExe(rel)+"+"+pos;  
         }    
     
         if (memory.type=='-') {
@@ -5362,7 +5358,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[memory.related];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
-          else res="$"+ShortToExe((int)memory.related)+pos;  
+          else res="$"+Shared.ShortToExe((int)memory.related)+pos;  
         }         
         data.add(res);
           
@@ -5499,7 +5495,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           
         data=new Vector();
           
-        data.add(ShortToExe(memory.address));
+        data.add(Shared.ShortToExe(memory.address));
         data.add(memory.dasmLocation);
         data.add(memory.userLocation);
         
@@ -5510,7 +5506,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[memory.related];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+ShortToExe((int)memory.related)+"+"+pos;  
+          else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
         }
     
         if (memory.type=='^') {
@@ -5520,7 +5516,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[rel];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+ShortToExe(rel)+"+"+pos;  
+          else res="$"+Shared.ShortToExe(rel)+"+"+pos;  
         }    
     
         if (memory.type=='-') {
@@ -5529,7 +5525,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           MemoryDasm mem2=project.memory[memory.related];
           if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
           else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
-          else res="$"+ShortToExe((int)memory.related)+pos;  
+          else res="$"+Shared.ShortToExe((int)memory.related)+pos;  
         }         
         data.add(res);
           
@@ -5624,7 +5620,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       data=new Vector();
           
-      data.add(ShortToExe(memory.address));
+      data.add(Shared.ShortToExe(memory.address));
       data.add(memory.dasmLocation);
       data.add(memory.userLocation);
           
@@ -5790,7 +5786,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       data=new Vector();
           
-      data.add(ShortToExe(memory.address));
+      data.add(Shared.ShortToExe(memory.address));
       data.add(memory.dasmLocation);
       data.add(memory.userLocation);
           
@@ -5820,34 +5816,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();
       jTableMemory.setRowSelectionInterval(row, row);
     }
-  }  
-      
-  /**
-   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
-   *
-   * @param value the short value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected String ShortToExe(int value) {
-    int tmp=value;
-
-    if (value<0) return "????";
-    
-    String ret=Integer.toHexString(tmp);
-    int len=ret.length();
-    switch (len) {
-      case 1:
-        ret="000"+ret;
-        break;
-     case 2:
-        ret="00"+ret;
-        break;
-     case 3:
-        ret="0"+ret;
-        break;
-    }
-    return ret.toUpperCase(Locale.ENGLISH);
-  }      
+  }              
   
   /**
    * Search for a memory address (even as label) from the initial passed string
@@ -6050,7 +6019,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
       
       if (label.startsWith("W") && label.length()==5) {
-         return "Label cannot be like Wxxxx as they are reserverd";
+         return "Label cannot be like Wxxxx as they are reserved";
       }
       
       return null;        
