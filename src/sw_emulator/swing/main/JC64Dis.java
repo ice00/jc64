@@ -38,7 +38,7 @@ public class JC64Dis {
       SwingUtilities.invokeLater(new Runnable() {
         public void run() {
           jMainFrame=new JDisassemblerFrame();
-         jMainFrame.setVisible(true);
+          jMainFrame.setVisible(true);
         }
       });  
     }

@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -95,50 +94,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
         memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
     }
-    
-  /**
-   * Convert a unsigned short (containing in a int) to Exe upper case 4 chars
-   *
-   * @param value the short value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected String ShortToExe(int value) {
-    int tmp=value;
-
-    if (value<0) return "????";
-    
-    String ret=Integer.toHexString(tmp);
-    int len=ret.length();
-    switch (len) {
-      case 1:
-        ret="000"+ret;
-        break;
-     case 2:
-        ret="00"+ret;
-        break;
-     case 3:
-        ret="0"+ret;
-        break;
-    }
-    return ret.toUpperCase(Locale.ENGLISH);
-  } 
-  
-   /**
-   * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
-   *
-   * @param value the byte value to convert
-   * @return the exe string rapresentation of byte
-   */
-  protected static String ByteToExe(int value) {
-    int tmp=value;
-    
-    if (value<0) return "??";
-    
-    String ret=Integer.toHexString(tmp);
-    if (ret.length()==1) ret="0"+ret;
-    return ret.toUpperCase(Locale.ENGLISH);
-  }
-    
+        
     /**
      * Get relocate table as string description
      * 
@@ -149,8 +105,8 @@ public class JProjectDialog extends javax.swing.JDialog {
       
       String res="";
       for (Relocate relocate:project.relocates) {
-        res+=ShortToExe(relocate.fromStart)+":"+ShortToExe(relocate.fromEnd)+" => "+
-             ShortToExe(relocate.toStart)+":"+ShortToExe(relocate.toEnd)+"\n";
+        res+=Shared.ShortToExe(relocate.fromStart)+":"+Shared.ShortToExe(relocate.fromEnd)+" => "+
+             Shared.ShortToExe(relocate.toStart)+":"+Shared.ShortToExe(relocate.toEnd)+"\n";
       }
       
       return res;
@@ -166,7 +122,7 @@ public class JProjectDialog extends javax.swing.JDialog {
       
       String res="";
       for (Patch patch:project.patches) {
-        res+=ShortToExe(patch.address)+" => "+ByteToExe(patch.value)+"\n";
+        res+=Shared.ShortToExe(patch.address)+" => "+Shared.ByteToExe(patch.value)+"\n";
       }
       
       return res;
@@ -190,12 +146,14 @@ public class JProjectDialog extends javax.swing.JDialog {
       else jTextAreaDescr.setText("");
       jSpinnerCRT.setValue(project.chip);
       if (project.fileType!=null) {
+        jRadioButtonC128Z.setEnabled(true);  
         switch (project.fileType) {
           case PRG:
             jRadioButtonPRG.setSelected(true);
             break;
           case SID:
             jRadioButtonSID.setSelected(true);
+            jRadioButtonC128Z.setEnabled(false);
             break;
           case MUS:
             jRadioButtonMUS.setSelected(true);
@@ -712,7 +670,8 @@ public class JProjectDialog extends javax.swing.JDialog {
         try {
           project.setData(FileManager.instance.readFile(project.file));
           jTextAreaDescr.setText(project.description);
-          switch (project.fileType) {
+          jRadioButtonC128Z.setEnabled(true);  
+          switch (project.fileType) { 
             case CRT:
               jRadioButtonCRT.setSelected(true);
               jRadioButtonC64.setSelected(true);  
@@ -732,6 +691,7 @@ public class JProjectDialog extends javax.swing.JDialog {
               jRadioButtonVic20.setEnabled(false);
               jRadioButtonPlus4.setEnabled(false);
               jSpinnerCRT.setEnabled(false);
+              jRadioButtonC128Z.setEnabled(false);
               break;
             case MUS:
               jRadioButtonMUS.setSelected(true);

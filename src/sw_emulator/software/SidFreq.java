@@ -150,16 +150,11 @@ public class SidFreq {
       this.start=start;   
     
       while (highOctave()) {}
-      this.start=start;
-      
-      while (highOctave12()) {}
-      this.start=start;
-      
-      while (highOctaveCombined()) {}
-      this.start=start;
-          
+      this.start=start;         
     
       // for short table looks only if there are no solution before
+      if (actIndex<0) highOctave12();
+      if (actIndex<0) highOctaveCombined();
       if (actIndex<0) shortLinearTable();
       if (actIndex<0) shortCombinedTable();
     } catch (Exception e) {

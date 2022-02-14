@@ -6260,7 +6260,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Copy action
    */
   private void appCopy() {
-    // prepara the data to copy in clipboard  
+    // prepare the data to copy in clipboard  
     Serial serial=new Serial();      
     serial.uuid=Shared.uuid;
     serial.selected=jTableMemory.getSelectedRows();
@@ -6362,8 +6362,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     } catch (Exception e) {
         System.err.println(e);
-      }  
-    
+      }      
    }
   
   /**

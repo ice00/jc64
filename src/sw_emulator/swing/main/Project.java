@@ -46,9 +46,7 @@ public class Project implements Cloneable {
   /** Actual version of project */ 
   public static final byte ACTUAL_VERSION=6;       
     
-  /**
-   * Type of the file
-   */
+  /** Type of the file */
   public FileType fileType;
   
   /** Name of the project */  

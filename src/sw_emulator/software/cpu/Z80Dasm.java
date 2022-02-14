@@ -444,7 +444,6 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final int A_IXH_IXL=323; // IXH reg IXL
   public static final int A_IXL_IXH=324; // IXL reg IXH
   public static final int A_IXL_IXL=325; // IXL reg IXL
-  
   public static final int A_A__IX_N=326; // A ind (IX+N)
   public static final int A_B__IX_N=327; // B ind (IX+N)
   public static final int A_C__IX_N=328; // C ind (IX+N)
@@ -452,6 +451,37 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final int A_E__IX_N=330; // E ind (IX+N)
   public static final int A_H__IX_N=331; // H ind (IX+N)
   public static final int A_L__IX_N=332; // L ind (IX+N)
+  public static final int A_IYL_A = 333; // IYL reg A
+  public static final int A_IYL_B = 334; // IYL reg B
+  public static final int A_IYL_C = 335; // IYL reg C
+  public static final int A_IYL_D = 336; // IYL reg D
+  public static final int A_IYL_E = 337; // IYL reg E
+  public static final int A_IYL_L = 338; // IYL reg L
+  public static final int A_A_IYH = 339; // A reg IYH
+  public static final int A_B_IYH = 340; // B reg IYH
+  public static final int A_C_IYH = 341; // C reg IYH
+  public static final int A_D_IYH = 342; // D reg IYH
+  public static final int A_E_IYH = 343; // E reg IYH
+  public static final int A_A_IYL = 344; // A reg IYL
+  public static final int A_B_IYL = 345; // B reg IYL
+  public static final int A_C_IYL = 346; // C reg IYL
+  public static final int A_D_IYL = 347; // D reg IYL
+  public static final int A_E_IYL = 348; // E reg IYL
+  public static final int A_IYH_IYH=349; // IYH reg IYH
+  public static final int A_IYH_IYL=350; // IYH reg IYL
+  public static final int A_IYL_IYH=351; // IYL reg IYH
+  public static final int A_IYL_IYL=352; // IYL reg IYL
+  public static final int A_A__IY_N=353; // A ind (IY+N)
+  public static final int A_B__IY_N=354; // B ind (IY+N)
+  public static final int A_C__IY_N=355; // C ind (IY+N)
+  public static final int A_D__IY_N=356; // D ind (IY+N)
+  public static final int A_E__IY_N=357; // E ind (IY+N)
+  public static final int A_H__IY_N=358; // H ind (IY+N)
+  public static final int A_L__IY_N=359; // L ind (IY+N)
+  public static final int A_IXH_N  =360; // IXH,N
+  public static final int A_IXL_N  =361; // IXL,N
+  public static final int A_IYH_N  =362; // IYH,N
+  public static final int A_IYL_N  =363; // IYL,N
   
   
   /** Contains the mnemonics of instructions */
@@ -714,38 +744,38 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   
   /** Contains the bytes used for the instruction */
   public static final byte[] tableSizeED={
-    1, 1, 1, 1, 1, 1, 1, 1,     // 00
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,     // 20  
-    1, 1, 1, 1, 1, 1, 1, 1, 
-    1, 1, 1, 1, 1, 1, 1, 1, 
-    1, 1, 1, 1, 1, 1, 1, 1,
+    2, 2, 2, 2, 2, 2, 2, 2,     // 00
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // 20  
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 4, 2, 2, 2, 2,     // 40
     2, 2, 2, 4, 2, 2, 2, 2,
     2, 2, 2, 4, 2, 2, 2, 2,
     2, 2, 2, 4, 2, 2, 2, 2,    
     2, 2, 2, 4, 2, 2, 2, 2,     // 60
     2, 2, 2, 4, 2, 2, 2, 2, 
-    2, 2, 2, 4, 2, 2, 2, 1,
-    2, 2, 2, 4, 2, 2, 2, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,     // 80
-    1, 1, 1, 1, 1, 1, 1, 1, 
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    2, 2, 2, 2, 1, 1, 1, 1,     // A0
-    2, 2, 2, 2, 1, 1, 1, 1,  
-    2, 2, 2, 2, 1, 1, 1, 1,
-    2, 2, 2, 2, 1, 1, 1, 1,   
-    1, 1, 1, 1, 1, 1, 1, 1,     // C0
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,     // E0
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1
+    2, 2, 2, 4, 2, 2, 2, 2,
+    2, 2, 2, 4, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // 80
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // A0
+    2, 2, 2, 2, 2, 2, 2, 2,  
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,   
+    2, 2, 2, 2, 2, 2, 2, 2,     // C0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // E0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2
   };
   
   
@@ -900,8 +930,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     A_NUL,  A_IX_BC,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
     A_NUL,  A_IX_DE,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
-    A_NUL,  A_IX_NN,A__NN_IX,A_REG_IX,A_REG_IXH,A_REG_IXH,A_REG_IXH,A_NUL,  // 20
-    A_NUL,  A_IX_IX,A_IX__NN,A_REG_IX,A_REG_IXL,A_REG_IXL,A_REG_IXL,A_NUL, 
+    A_NUL,  A_IX_NN,A__NN_IX,A_REG_IX,A_REG_IXH,A_REG_IXH,A_IXH_N,A_NUL,  // 20
+    A_NUL,  A_IX_IX,A_IX__NN,A_REG_IX,A_REG_IXL,A_REG_IXL,A_IXL_N,A_NUL, 
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IX_N,  A__IX_N,  A__IX_N,  A_NUL, 
     A_NUL,  A_IX_SP,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,     
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IXH,  A_B_IXL,  A_B__IX_N, A_NUL,  // 40
@@ -932,38 +962,146 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   
   /** Contains the bytes used for the instruction */
   public static final byte[] tableSizeDD={
-    1, 1, 1, 1, 1, 1, 1, 1,     // 00
-    1, 2, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 
-    1, 2, 1, 1, 1, 1, 1, 1,
-    1, 4, 4, 2, 2, 2, 3, 1,     // 20  
-    1, 2, 4, 2, 2, 2, 3, 1, 
-    1, 1, 1, 1, 3, 3, 4, 1, 
-    1, 2, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,     // 40
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,    
+    2, 2, 2, 2, 2, 2, 2, 2,     // 00
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 4, 4, 2, 2, 2, 3, 2,     // 20  
+    2, 2, 4, 2, 2, 2, 3, 2, 
+    2, 2, 2, 2, 3, 3, 4, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // 40
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,    
     2, 2, 2, 2, 2, 2, 3, 2,     // 60
     2, 2, 2, 2, 2, 2, 3, 2, 
-    3, 3, 3, 3, 3, 3, 1, 3,
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,     // 80
-    1, 1, 1, 1, 2, 2, 3, 1, 
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,     // A0
-    1, 1, 1, 1, 2, 2, 3, 1,  
-    1, 1, 1, 1, 2, 2, 3, 1,
-    1, 1, 1, 1, 2, 2, 3, 1,   
-    1, 1, 1, 1, 1, 1, 1, 1,     // C0
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 2, 1, 2, 1, 2, 1, 1,     // E0
-    1, 2, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    1, 2, 1, 1, 1, 1, 1, 1
+    3, 3, 3, 3, 3, 3, 2, 3,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // 80
+    2, 2, 2, 2, 2, 2, 3, 2, 
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // A0
+    2, 2, 2, 2, 2, 2, 3, 2,  
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,   
+    2, 2, 2, 2, 2, 2, 2, 2,     // C0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // E0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final byte[] tableMnemonicsFD={
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,  // 00
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_LD,  M_LD,  M_INC, M_INC, M_DEC, M_LD, M_NUL,  // 20
+    M_NUL, M_ADD, M_LD,  M_DEC, M_INC, M_DEC, M_LD, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_INC, M_DEC, M_LD, M_NUL, 
+    M_NUL, M_ADD, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,  // 40
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD, M_LD,
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_LD,  M_LD, // 60
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_LD,  M_LD,
+    M_LD,  M_LD,  M_LD,  M_LD, M_LD,  M_LD,  M_NUL, M_LD,    
+    M_NUL, M_NUL, M_NUL, M_NUL, M_LD,  M_LD,  M_LD,  M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_ADD, M_ADD, M_ADD, M_NUL,  // 80
+    M_NUL, M_NUL, M_NUL, M_NUL, M_ADC, M_ADC, M_ADC, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_SUB, M_SUB, M_SUB, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_SBC, M_SBC, M_SBC, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_AND, M_AND, M_AND, M_NUL,  // A0
+    M_NUL, M_NUL, M_NUL, M_NUL, M_XOR, M_XOR, M_XOR, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_OR,  M_OR,  M_OR, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_CP,  M_CP,  M_CP, M_CP,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, // C0
+    M_NUL, T_DDCB,M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_POP, M_NUL, M_EX,  M_NUL, M_PUSH,M_NUL, M_NUL, // E0 
+    M_NUL, M_JP,  M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
+    M_NUL, M_LD,  M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final int[] tableModesFD={
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,  // 00
+    A_NUL,  A_IY_BC,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_IY_DE,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_IY_NN,A__NN_IY,A_REG_IY,A_REG_IYH,A_REG_IYH,A_IYH_N, A_NUL,  // 20
+    A_NUL,  A_IY_IY,A_IY__NN,A_REG_IY,A_REG_IYL,A_REG_IYL,A_IYL_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IY_N,  A__IY_N,  A__IY_N,  A_NUL, 
+    A_NUL,  A_IY_SP,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,     
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IYH,  A_B_IYL,  A_B__IY_N, A_NUL,  // 40
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_C_IYH,  A_C_IYL,  A_C__IY_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_D_IYH,  A_D_IYL,  A_D__IY_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_E_IYH,  A_E_IYL,  A_E__IY_N, A_NUL,    
+    A_IYH_B,A_IYH_C,A_IYH_D,A_IYH_E, A_IYH_IYH, A_IYH_L, A_H__IY_N, A_IYH_A,//60
+    A_IYL_B,A_IYL_C,A_IYL_D,A_IYL_E, A_IYL_IYH, A_IYL_L, A_L__IY_N, A_IYL_A,            
+    A__IY_N_B,A__IY_N_C,A__IY_N_D,A__IY_N_E,A__IY_N_H,A__IY_N_L, A_NUL,A__IY_N_A,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IYH,   A_A_IYL,  A_A__IY_N,A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IYH,   A_A_IYL,  A_A__IY_N,A_NUL,  // 80    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IYH,   A_A_IYL,  A_A__IY_N,A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IYH, A_REG_IYL, A__IY_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IYH,   A_A_IYL,  A_A__IY_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IYH, A_REG_IYL, A__IY_N, A_NUL,  // A0
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IYH, A_REG_IYL, A__IY_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IYH, A_REG_IYL, A__IY_N, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IYH, A_REG_IYL, A__IY_N, A_NUL,   
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, // C0
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL, A_REG_IY,A_NUL,   A__SP_IY,A_REG_IY,  A_NUL,   A_NUL,     A_NUL, // E0 
+    A_NUL, A__IY,   A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL,
+    A_NUL, A_NUL,   A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL, 
+    A_NUL, A_SP_IY, A_NUL,   A_NUL,   A_NUL,     A_NUL,    A_NUL,    A_NUL
+  };
+  
+  /** Contains the bytes used for the instruction */
+  public static final byte[] tableSizeFD={
+    2, 2, 2, 2, 2, 2, 2, 2,     // 00
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 4, 4, 2, 2, 2, 3, 2,     // 20  
+    2, 2, 4, 2, 2, 2, 3, 2, 
+    2, 2, 2, 2, 3, 3, 4, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // 40
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,    
+    2, 2, 2, 2, 2, 2, 3, 2,     // 60
+    2, 2, 2, 2, 2, 2, 3, 2, 
+    3, 3, 3, 3, 3, 3, 2, 3,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // 80
+    2, 2, 2, 2, 2, 2, 3, 2, 
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,     // A0
+    2, 2, 2, 2, 2, 2, 3, 2,  
+    2, 2, 2, 2, 2, 2, 3, 2,
+    2, 2, 2, 2, 2, 2, 3, 2,   
+    2, 2, 2, 2, 2, 2, 2, 2,     // C0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,     // E0
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2
   };
   
   @Override
@@ -988,7 +1126,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         aType=tableModesDD[op];
         steps=tableSizeDD[op];
         
-        if (iType==T_FDCB) {
+        if (iType==T_DDCB) {
           // there are an extra table  
           iType=M_NUL;  
         }
@@ -1000,7 +1138,15 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         steps=tableSizeED[op];
         break;
       case T_FD:
-        iType=M_NUL;  
+        op=Unsigned.done(buffer[pos++]);  
+        iType=(int)tableMnemonicsFD[op];  
+        aType=tableModesFD[op];
+        steps=tableSizeFD[op];
+        
+        if (iType==T_FDCB) {
+          // there are an extra table  
+          iType=M_NUL;  
+        }
         break;
       default:
         aType=tableModes[op];  
@@ -1115,10 +1261,15 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "(IY+)": "(iy+")+getLabelZero(addr)+(upperCase? "),A": "),a"); 
         break;  
       case A__NN_A:    // (NN) indirect A  
-        if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
-        else addr=-1;  
+        if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+        else addr=-1;
+        pos++;  
         
-        result+="("+getLabelZero(addr)+(upperCase? "),A": "),a"); 
+        result+="("+getLabel(addr)+(upperCase? "),A": "),a"); 
+        
+        setLabel(addr);
+        setLabelPlus(pc,1);
+        setLabelPlus(pc,2);  
         break; 
       case A_REG_BC:   // registers BC
         result+=(upperCase? "BC": "bc");   
@@ -1169,7 +1320,27 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         this.pos=pos;  
         result+=getRegXN(buffer, (upperCase? "L": "l"));
         pos=this.pos;
-        break;   
+        break;           
+      case A_IXH_N: // IXH,N
+        this.pos=pos;  
+        result+=getRegXN(buffer, (upperCase? "IXH": "ixh"));
+        pos=this.pos;   
+        break;
+      case A_IXL_N: // IXL,N
+        this.pos=pos;  
+        result+=getRegXN(buffer, (upperCase? "IXL": "ixl"));
+        pos=this.pos;          
+        break;        
+      case A_IYH_N: // IYH,N
+        this.pos=pos;  
+        result+=getRegXN(buffer, (upperCase? "IYH": "iyh"));
+        pos=this.pos;   
+        break;  
+      case A_IYL_N: // IYL,N
+        this.pos=pos;  
+        result+=getRegXN(buffer, (upperCase? "IYL": "iyl"));
+        pos=this.pos;          
+        break;                
       case A_AF_AF: 
         result+=(upperCase? "AF,AF'": "af,af'");  
         break; 
@@ -1279,7 +1450,37 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         break;    
       case A_E_IXL:     // E reg IXL 
         result+=(upperCase? "E,IXL": "e,ixl");  
+        break;
+      case A_A_IYH:     // A reg IYH 
+        result+=(upperCase? "A,IYH": "a,iyh");  
         break;  
+      case A_B_IYH:     // B reg IYH 
+        result+=(upperCase? "B,IYH": "b,iyh");  
+        break;    
+      case A_C_IYH:     // C reg IYH 
+        result+=(upperCase? "C,IYH": "c,iyh");  
+        break;    
+      case A_D_IYH:     // D reg IYH 
+        result+=(upperCase? "D,IYH": "d,iyh");  
+        break;    
+      case A_E_IYH:     // E reg IYH 
+        result+=(upperCase? "E,IYH": "e,iyh");  
+        break;    
+      case A_A_IYL:     // A reg IYL 
+        result+=(upperCase? "A,IYL": "a,iyl");  
+        break;  
+      case A_B_IYL:     // B reg IYL 
+        result+=(upperCase? "B,IYL": "b,iyl");  
+        break;    
+      case A_C_IYL:     // C reg IYL 
+        result+=(upperCase? "C,IYL": "c,iyl");  
+        break;    
+      case A_D_IYL:     // D reg IYL 
+        result+=(upperCase? "D,IYL": "d,iyl");  
+        break;    
+      case A_E_IYL:     // E reg IYL 
+        result+=(upperCase? "E,IYL": "e,iyl");  
+        break;        
       case A_IXL_A:     // IXL reg A
         result+=(upperCase? "IXL, A": "ixl, a");  
         break;    
@@ -1297,7 +1498,25 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         break;    
       case A_IXL_L:     // IXL reg L
         result+=(upperCase? "IXL, L": "ixl, l");  
-        break;          
+        break;       
+      case A_IYL_A:     // IXL reg A
+        result+=(upperCase? "IYL, A": "iyl, a");  
+        break;    
+      case A_IYL_B:     // IXL reg B
+        result+=(upperCase? "IYL, B": "iyl, b");  
+        break;    
+      case A_IYL_C:     // IXL reg C
+        result+=(upperCase? "IYL, C": "iyl, c");  
+        break;    
+      case A_IYL_D:     // IXL reg D
+        result+=(upperCase? "IYL, D": "iyl, d");  
+        break;    
+      case A_IYL_E:     // IXL reg E
+        result+=(upperCase? "IYL, E": "iyl, e");  
+        break;    
+      case A_IYL_L:     // IXL reg L
+        result+=(upperCase? "IYL, L": "iyl, l");  
+        break;            
       case A_IXH_IXH:     // IXH reg IXH
         result+=(upperCase? "IXH, IXH": "ixh, ixh");  
         break;  
@@ -1310,6 +1529,18 @@ public class Z80Dasm extends CpuDasm implements disassembler {
       case A_IXL_IXL:     // IXL reg IXL
         result+=(upperCase? "IXL, IXL": "ixl, ixl");  
         break;
+      case A_IYH_IYH:     // IYH reg IYH
+        result+=(upperCase? "IYH, IYH": "iyh, iyh");  
+        break;  
+      case A_IYH_IYL:     // IYH reg IYL
+        result+=(upperCase? "IYH, IYL": "iyh, iyl");  
+        break;    
+      case A_IYL_IYH:     // IYL reg IYH
+        result+=(upperCase? "IYL, IYH": "iyl, iyh");  
+        break;          
+      case A_IYL_IYL:     // IYL reg IYL
+        result+=(upperCase? "IYL, IYL": "iyl, iyl");  
+        break;  
       case A_HL_BC:     // HL reg BC
         result+=(upperCase? "HL,BC": "hl,bc");
         break;  
@@ -1499,7 +1730,37 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         this.pos=pos;   
         result+=getRefXIndXXN(buffer, (upperCase? "L": "a"), (upperCase? "IX": "ix"));
         pos=this.pos;
-        break;                    
+        break;       
+      case A_A__IY_N:  // A ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;  
+      case A_B__IY_N:  // B ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;  
+      case A_C__IY_N:  // C ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "C": "a"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;    
+      case A_D__IY_N:  // D ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "D": "a"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;    
+      case A_E__IY_N:  // E ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "E": "a"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;    
+      case A_L__IY_N:  // L ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, (upperCase? "L": "a"), (upperCase? "YX": "iy"));
+        pos=this.pos;
+        break;                      
       case A__NN_BC:   // (NN) ind absolute BC 
         this.pos=pos;  
         result+=getNNregX(buffer, (upperCase? "BC": "bc"));
@@ -1847,7 +2108,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         pos=this.pos;
         break;
      case A_PE_NN:  // PE cond NN
+        this.pos=pos;  
         result+=getRegXXNN(buffer,(upperCase? "PE": "pe")); 
+        pos=this.pos;
         break; 
      case A_M_NN:   // PE cond NN   
         this.pos=pos; 
