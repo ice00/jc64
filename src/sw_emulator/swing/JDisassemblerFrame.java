@@ -5748,10 +5748,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        
        // check patch
        if (project.patches==null) project.patches=mergeProject.patches;
+       else if (mergeProject.patches!=null) {          
+          // copy the value in the list
+          Patch[] patches2=new Patch[project.patches.length+mergeProject.patches.length];
+          System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
+          for (int i=0; i<mergeProject.patches.length; i++) {
+            patches2[project.patches.length+i]=mergeProject.patches[i];
+          }
+          project.patches=patches2;
+       }            
                         
        dataTableModelMemory.fireTableDataChanged();
-    }
-           
+    }      
   }
   
   /**

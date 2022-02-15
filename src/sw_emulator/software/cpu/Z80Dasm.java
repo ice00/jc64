@@ -444,8 +444,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final int A_IXH_IXL=323; // IXH reg IXL
   public static final int A_IXL_IXH=324; // IXL reg IXH
   public static final int A_IXL_IXL=325; // IXL reg IXL
-  public static final int A_A__IX_N=326; // A ind (IX+N)
-  public static final int A_B__IX_N=327; // B ind (IX+N)
+  public static final int A__IX_N_N=326; // ind (IX+N),N
+  public static final int A__IY_N_N=327; // ind (IX+N),N
   public static final int A_C__IX_N=328; // C ind (IX+N)
   public static final int A_D__IX_N=329; // D ind (IX+N)
   public static final int A_E__IX_N=330; // E ind (IX+N)
@@ -482,7 +482,135 @@ public class Z80Dasm extends CpuDasm implements disassembler {
   public static final int A_IXL_N  =361; // IXL,N
   public static final int A_IYH_N  =362; // IYH,N
   public static final int A_IYL_N  =363; // IYL,N
+  public static final int A_0__IX_N=364; // 0,(IX+N) 
+  public static final int A_1__IX_N=365; // 1,(IX+N)
+  public static final int A_2__IX_N=366; // 2,(IX+N)
+  public static final int A_3__IX_N=367; // 3,(IX+N)
+  public static final int A_4__IX_N=368; // 4,(IX+N)
+  public static final int A_5__IX_N=369; // 5,(IX+N)
+  public static final int A_6__IX_N=370; // 6,(IX+N)
+  public static final int A_7__IX_N=371; // 7,(IX+N)
+  public static final int A_0__IY_N=372; // 0,(IY+N) 
+  public static final int A_1__IY_N=373; // 1,(IY+N)
+  public static final int A_2__IY_N=374; // 2,(IY+N)
+  public static final int A_3__IY_N=375; // 3,(IY+N)
+  public static final int A_4__IY_N=376; // 4,(IY+N)
+  public static final int A_5__IY_N=377; // 5,(Iy+N)
+  public static final int A_6__IY_N=378; // 6,(IY+N)
+  public static final int A_7__IY_N=379; // 7,(IY+N)
   
+  public static final int A_0__IX_N_A=380; // 0,(IX+N),A
+  public static final int A_0__IX_N_B=381; // 0,(IX+N),B
+  public static final int A_0__IX_N_C=382; // 0,(IX+N),C
+  public static final int A_0__IX_N_D=383; // 0,(IX+N),D
+  public static final int A_0__IX_N_E=384; // 0,(IX+N),E
+  public static final int A_0__IX_N_H=385; // 0,(IX+N),H
+  public static final int A_0__IX_N_L=386; // 0,(IX+N),L
+  public static final int A_1__IX_N_A=387; // 1,(IX+N),A
+  public static final int A_1__IX_N_B=388; // 1,(IX+N),B
+  public static final int A_1__IX_N_C=389; // 1,(IX+N),C
+  public static final int A_1__IX_N_D=390; // 1,(IX+N),D
+  public static final int A_1__IX_N_E=391; // 1,(IX+N),E
+  public static final int A_1__IX_N_H=392; // 1,(IX+N),H
+  public static final int A_1__IX_N_L=393; // 1,(IX+N),L
+  public static final int A_2__IX_N_A=394; // 2,(IX+N),A
+  public static final int A_2__IX_N_B=395; // 2,(IX+N),B
+  public static final int A_2__IX_N_C=396; // 2,(IX+N),C
+  public static final int A_2__IX_N_D=397; // 2,(IX+N),D
+  public static final int A_2__IX_N_E=398; // 2,(IX+N),E
+  public static final int A_2__IX_N_H=399; // 2,(IX+N),H
+  public static final int A_2__IX_N_L=400; // 2,(IX+N),L
+  public static final int A_3__IX_N_A=401; // 3,(IX+N),A
+  public static final int A_3__IX_N_B=402; // 3,(IX+N),B
+  public static final int A_3__IX_N_C=403; // 3,(IX+N),C
+  public static final int A_3__IX_N_D=404; // 3,(IX+N),D
+  public static final int A_3__IX_N_E=405; // 3,(IX+N),E
+  public static final int A_3__IX_N_H=406; // 3,(IX+N),H
+  public static final int A_3__IX_N_L=407; // 3,(IX+N),L
+  public static final int A_4__IX_N_A=408; // 4,(IX+N),A
+  public static final int A_4__IX_N_B=409; // 4,(IX+N),B
+  public static final int A_4__IX_N_C=410; // 4,(IX+N),C
+  public static final int A_4__IX_N_D=411; // 4,(IX+N),D
+  public static final int A_4__IX_N_E=412; // 4,(IX+N),E
+  public static final int A_4__IX_N_H=413; // 4,(IX+N),H
+  public static final int A_4__IX_N_L=414; // 4,(IX+N),L
+  public static final int A_5__IX_N_A=415; // 5,(IX+N),A
+  public static final int A_5__IX_N_B=416; // 5,(IX+N),B
+  public static final int A_5__IX_N_C=417; // 5,(IX+N),C
+  public static final int A_5__IX_N_D=418; // 5,(IX+N),D
+  public static final int A_5__IX_N_E=419; // 5,(IX+N),E
+  public static final int A_5__IX_N_H=420; // 5,(IX+N),H
+  public static final int A_5__IX_N_L=421; // 5,(IX+N),L
+  public static final int A_6__IX_N_A=422; // 6,(IX+N),A
+  public static final int A_6__IX_N_B=423; // 6,(IX+N),B
+  public static final int A_6__IX_N_C=424; // 6,(IX+N),C
+  public static final int A_6__IX_N_D=425; // 6,(IX+N),D
+  public static final int A_6__IX_N_E=426; // 6,(IX+N),E
+  public static final int A_6__IX_N_H=427; // 6,(IX+N),H
+  public static final int A_6__IX_N_L=428; // 6,(IX+N),L
+  public static final int A_7__IX_N_A=429; // 7,(IX+N),A
+  public static final int A_7__IX_N_B=430; // 7,(IX+N),B
+  public static final int A_7__IX_N_C=431; // 7,(IX+N),C
+  public static final int A_7__IX_N_D=432; // 7,(IX+N),D
+  public static final int A_7__IX_N_E=433; // 7,(IX+N),E
+  public static final int A_7__IX_N_H=434; // 7,(IX+N),H
+  public static final int A_7__IX_N_L=435; // 7,(IX+N),L
+  public static final int A_0__IY_N_A=436; // 0,(IY+N),A
+  public static final int A_0__IY_N_B=437; // 0,(IY+N),B
+  public static final int A_0__IY_N_C=438; // 0,(IY+N),C
+  public static final int A_0__IY_N_D=439; // 0,(IY+N),D
+  public static final int A_0__IY_N_E=440; // 0,(IY+N),E
+  public static final int A_0__IY_N_H=441; // 0,(IY+N),H
+  public static final int A_0__IY_N_L=442; // 0,(IY+N),L
+  public static final int A_1__IY_N_A=443; // 1,(IY+N),A
+  public static final int A_1__IY_N_B=444; // 1,(IY+N),B
+  public static final int A_1__IY_N_C=445; // 1,(IY+N),C
+  public static final int A_1__IY_N_D=446; // 1,(IY+N),D
+  public static final int A_1__IY_N_E=447; // 1,(IY+N),E
+  public static final int A_1__IY_N_H=448; // 1,(IY+N),H
+  public static final int A_1__IY_N_L=449; // 1,(IY+N),L
+  public static final int A_2__IY_N_A=450; // 2,(IY+N),A
+  public static final int A_2__IY_N_B=451; // 2,(IY+N),B
+  public static final int A_2__IY_N_C=452; // 2,(IY+N),C
+  public static final int A_2__IY_N_D=453; // 2,(IY+N),D
+  public static final int A_2__IY_N_E=454; // 2,(IY+N),E
+  public static final int A_2__IY_N_H=455; // 2,(IY+N),H
+  public static final int A_2__IY_N_L=456; // 2,(IY+N),L
+  public static final int A_3__IY_N_A=457; // 3,(IY+N),A
+  public static final int A_3__IY_N_B=458; // 3,(IY+N),B
+  public static final int A_3__IY_N_C=459; // 3,(IY+N),C
+  public static final int A_3__IY_N_D=460; // 3,(IY+N),D
+  public static final int A_3__IY_N_E=461; // 3,(IY+N),E
+  public static final int A_3__IY_N_H=462; // 3,(IY+N),H
+  public static final int A_3__IY_N_L=463; // 3,(IY+N),L
+  public static final int A_4__IY_N_A=464; // 4,(IY+N),A
+  public static final int A_4__IY_N_B=465; // 4,(IY+N),B
+  public static final int A_4__IY_N_C=466; // 4,(IY+N),C
+  public static final int A_4__IY_N_D=467; // 4,(IY+N),D
+  public static final int A_4__IY_N_E=468; // 4,(IY+N),E
+  public static final int A_4__IY_N_H=469; // 4,(IY+N),H
+  public static final int A_4__IY_N_L=470; // 4,(IY+N),L
+  public static final int A_5__IY_N_A=471; // 5,(IY+N),A
+  public static final int A_5__IY_N_B=472; // 5,(IY+N),B
+  public static final int A_5__IY_N_C=473; // 5,(IY+N),C
+  public static final int A_5__IY_N_D=474; // 5,(IY+N),D
+  public static final int A_5__IY_N_E=475; // 5,(IY+N),E
+  public static final int A_5__IY_N_H=476; // 5,(IY+N),H
+  public static final int A_5__IY_N_L=477; // 5,(IY+N),L
+  public static final int A_6__IY_N_A=478; // 6,(IY+N),A
+  public static final int A_6__IY_N_B=479; // 6,(IY+N),B
+  public static final int A_6__IY_N_C=480; // 6,(IY+N),C
+  public static final int A_6__IY_N_D=481; // 6,(IY+N),D
+  public static final int A_6__IY_N_E=482; // 6,(IY+N),E
+  public static final int A_6__IY_N_H=483; // 6,(IY+N),H
+  public static final int A_6__IY_N_L=484; // 6,(IY+N),L
+  public static final int A_7__IY_N_A=485; // 7,(IY+N),A
+  public static final int A_7__IY_N_B=486; // 7,(IY+N),B
+  public static final int A_7__IY_N_C=487; // 7,(IY+N),C
+  public static final int A_7__IY_N_D=488; // 7,(IY+N),D
+  public static final int A_7__IY_N_E=489; // 7,(IY+N),E
+  public static final int A_7__IY_N_H=490; // 7,(IY+N),H
+  public static final int A_7__IY_N_L=491; // 7,(IY+N),L
   
   /** Contains the mnemonics of instructions */
   public static final String[] mnemonics={
@@ -932,20 +1060,20 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     A_NUL,  A_IX_DE,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
     A_NUL,  A_IX_NN,A__NN_IX,A_REG_IX,A_REG_IXH,A_REG_IXH,A_IXH_N,A_NUL,  // 20
     A_NUL,  A_IX_IX,A_IX__NN,A_REG_IX,A_REG_IXL,A_REG_IXL,A_IXL_N,A_NUL, 
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IX_N,  A__IX_N,  A__IX_N,  A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IX_N,  A__IX_N,  A__IX_N_N, A_NUL, 
     A_NUL,  A_IX_SP,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,     
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IXH,  A_B_IXL,  A_B__IX_N, A_NUL,  // 40
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_C_IXH,  A_C_IXL,  A_C__IX_N, A_NUL,
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_D_IXH,  A_D_IXL,  A_D__IX_N, A_NUL,
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_E_IXH,  A_E_IXL,  A_E__IX_N, A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IXH,  A_B_IXL,  A_B__IXN, A_NUL,  // 40
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_C_IXH,  A_C_IXL,  A_C__IXN, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_D_IXH,  A_D_IXL,  A_D__IXN, A_NUL,
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_E_IXH,  A_E_IXL,  A_E__IXN, A_NUL,    
     A_IXH_B,A_IXH_C,A_IXH_D,A_IXH_E, A_IXH_IXH, A_IXH_L, A_H__IX_N, A_IXH_A,//60
     A_IXL_B,A_IXL_C,A_IXL_D,A_IXL_E, A_IXL_IXH, A_IXL_L, A_L__IX_N, A_IXL_A,            
     A__IX_N_B,A__IX_N_C,A__IX_N_D,A__IX_N_E,A__IX_N_H,A__IX_N_L, A_NUL,A__IX_N_A,
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,    
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,  // 80    
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N,A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IXN, A_NUL,    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IXN, A_NUL,  // 80    
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IXN, A_NUL,    
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL, 
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IX_N, A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_A_IXH,   A_A_IXL,  A_A__IXN, A_NUL, 
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL,  // A0
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL, 
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_REG_IXH, A_REG_IXL, A__IX_N, A_NUL,
@@ -1040,7 +1168,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     A_NUL,  A_IY_DE,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL, 
     A_NUL,  A_IY_NN,A__NN_IY,A_REG_IY,A_REG_IYH,A_REG_IYH,A_IYH_N, A_NUL,  // 20
     A_NUL,  A_IY_IY,A_IY__NN,A_REG_IY,A_REG_IYL,A_REG_IYL,A_IYL_N, A_NUL, 
-    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IY_N,  A__IY_N,  A__IY_N,  A_NUL, 
+    A_NUL,  A_NUL,  A_NUL,   A_NUL,   A__IY_N,  A__IY_N,  A__IY_N_N, A_NUL, 
     A_NUL,  A_IY_SP,A_NUL,   A_NUL,   A_NUL,    A_NUL,    A_NUL,    A_NUL,     
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_B_IYH,  A_B_IYL,  A_B__IY_N, A_NUL,  // 40
     A_NUL,  A_NUL,  A_NUL,   A_NUL,   A_C_IYH,  A_C_IYL,  A_C__IY_N, A_NUL,
@@ -1104,6 +1232,223 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     2, 2, 2, 2, 2, 2, 2, 2
   };
   
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final byte[] tableMnemonicsDDCB={
+    M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC,  // 00
+    M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC,
+    M_RL,  M_RL,  M_RL,  M_RL,   M_RL,  M_RL,  M_RL,  M_RL, 
+    M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,
+    M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, // 20
+    M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA,  
+    M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL,
+    M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, 
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, // 40
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, // 60
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, 
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,  // 80
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, // A0
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, // C0
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, // E0 
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final int[] tableModesDDCB={
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A, // 00
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A, // 20
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A__IX_N_B,  A__IX_N_C,  A__IX_N_D,  A__IX_N_E,  A__IX_N_H,  A__IX_N_L,  A__IX_N,   A__IX_N_A,
+    A_0__IX_N,  A_0__IX_N,  A_0__IX_N,  A_0__IX_N,  A_0__IX_N,  A_0__IX_N,  A_0__IX_N, A_0__IX_N, // 40
+    A_1__IX_N,  A_1__IX_N,  A_1__IX_N,  A_1__IX_N,  A_1__IX_N,  A_1__IX_N,  A_1__IX_N, A_1__IX_N,
+    A_2__IX_N,  A_2__IX_N,  A_2__IX_N,  A_2__IX_N,  A_2__IX_N,  A_2__IX_N,  A_2__IX_N, A_2__IX_N,
+    A_3__IX_N,  A_3__IX_N,  A_3__IX_N,  A_3__IX_N,  A_3__IX_N,  A_3__IX_N,  A_3__IX_N, A_3__IX_N,
+    A_4__IX_N,  A_4__IX_N,  A_4__IX_N,  A_4__IX_N,  A_4__IX_N,  A_4__IX_N,  A_4__IX_N, A_4__IX_N, // 60
+    A_5__IX_N,  A_5__IX_N,  A_5__IX_N,  A_5__IX_N,  A_5__IX_N,  A_5__IX_N,  A_5__IX_N, A_5__IX_N,
+    A_6__IX_N,  A_6__IX_N,  A_6__IX_N,  A_6__IX_N,  A_6__IX_N,  A_6__IX_N,  A_6__IX_N, A_6__IX_N,
+    A_7__IX_N,  A_7__IX_N,  A_7__IX_N,  A_7__IX_N,  A_7__IX_N,  A_7__IX_N,  A_7__IX_N, A_7__IX_N,
+    A_0__IX_N_B,A_0__IX_N_C,A_0__IX_N_D,A_0__IX_N_E,A_0__IX_N_H,A_0__IX_N_L,A_0__IX_N, A_0__IX_N_A,// 80
+    A_1__IX_N_B,A_1__IX_N_C,A_1__IX_N_D,A_1__IX_N_E,A_1__IX_N_H,A_1__IX_N_L,A_1__IX_N, A_1__IX_N_A,
+    A_2__IX_N_B,A_2__IX_N_C,A_2__IX_N_D,A_2__IX_N_E,A_2__IX_N_H,A_2__IX_N_L,A_2__IX_N, A_2__IX_N_A,
+    A_3__IX_N_B,A_3__IX_N_C,A_3__IX_N_D,A_3__IX_N_E,A_3__IX_N_H,A_3__IX_N_L,A_3__IX_N, A_3__IX_N_A,
+    A_4__IX_N_B,A_4__IX_N_C,A_4__IX_N_D,A_4__IX_N_E,A_4__IX_N_H,A_4__IX_N_L,A_4__IX_N, A_4__IX_N_A, // A0
+    A_5__IX_N_B,A_5__IX_N_C,A_5__IX_N_D,A_5__IX_N_E,A_5__IX_N_H,A_5__IX_N_L,A_5__IX_N, A_5__IX_N_A,
+    A_6__IX_N_B,A_6__IX_N_C,A_6__IX_N_D,A_6__IX_N_E,A_6__IX_N_H,A_6__IX_N_L,A_6__IX_N, A_6__IX_N_A,
+    A_7__IX_N_B,A_7__IX_N_C,A_7__IX_N_D,A_7__IX_N_E,A_7__IX_N_H,A_7__IX_N_L,A_7__IX_N, A_7__IX_N_A,
+    A_0__IX_N_B,A_0__IX_N_C,A_0__IX_N_D,A_0__IX_N_E,A_0__IX_N_H,A_0__IX_N_L,A_0__IX_N, A_0__IX_N_A, // C0
+    A_1__IX_N_B,A_1__IX_N_C,A_1__IX_N_D,A_1__IX_N_E,A_1__IX_N_H,A_1__IX_N_L,A_1__IX_N, A_1__IX_N_A,
+    A_2__IX_N_B,A_2__IX_N_C,A_2__IX_N_D,A_2__IX_N_E,A_2__IX_N_H,A_2__IX_N_L,A_2__IX_N, A_2__IX_N_A,
+    A_3__IX_N_B,A_3__IX_N_C,A_3__IX_N_D,A_3__IX_N_E,A_3__IX_N_H,A_3__IX_N_L,A_3__IX_N, A_3__IX_N_A,
+    A_4__IX_N_B,A_4__IX_N_C,A_4__IX_N_D,A_4__IX_N_E,A_4__IX_N_H,A_4__IX_N_L,A_4__IX_N, A_4__IX_N_A, // E0
+    A_5__IX_N_B,A_5__IX_N_C,A_5__IX_N_D,A_5__IX_N_E,A_5__IX_N_H,A_5__IX_N_L,A_5__IX_N, A_5__IX_N_A,
+    A_6__IX_N_B,A_6__IX_N_C,A_6__IX_N_D,A_6__IX_N_E,A_6__IX_N_H,A_6__IX_N_L,A_6__IX_N, A_6__IX_N_A,
+    A_7__IX_N_B,A_7__IX_N_C,A_7__IX_N_D,A_7__IX_N_E,A_7__IX_N_H,A_7__IX_N_L,A_7__IX_N, A_7__IX_N_A
+  };
+  
+    /** Contains the bytes used for the instruction */
+  public static final byte[] tableSizeDDCB={
+    4, 4, 4, 4, 4, 4, 4, 4,     // 00
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 20  
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 40
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,    
+    4, 4, 4, 4, 4, 4, 4, 4,     // 60
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 80
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // A0
+    4, 4, 4, 4, 4, 4, 4, 4,  
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,   
+    4, 4, 4, 4, 4, 4, 4, 4,     // C0
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // E0
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 2
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final byte[] tableMnemonicsFDCB={
+    M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC, M_RLC,  // 00
+    M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC, M_RRC,
+    M_RL,  M_RL,  M_RL,  M_RL,   M_RL,  M_RL,  M_RL,  M_RL, 
+    M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,  M_RR,
+    M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, M_SLA, // 20
+    M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA, M_SRA,  
+    M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL, M_SLL,
+    M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, M_SRL, 
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, // 40
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, // 60
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, 
+    M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT, M_BIT,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,  // 80
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, // A0
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES, M_RES,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, // C0
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, // E0 
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET,
+    M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET, M_SET
+  };
+  
+  /** Contains the mnemonics reference for the instruction */
+  public static final int[] tableModesFDCB={
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A, // 00
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A, // 20
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A__IY_N_B,  A__IY_N_C,  A__IY_N_D,  A__IY_N_E,  A__IY_N_H,  A__IY_N_L,  A__IY_N,   A__IY_N_A,
+    A_0__IY_N,  A_0__IY_N,  A_0__IY_N,  A_0__IY_N,  A_0__IY_N,  A_0__IY_N,  A_0__IY_N, A_0__IY_N, // 40
+    A_1__IY_N,  A_1__IY_N,  A_1__IY_N,  A_1__IY_N,  A_1__IY_N,  A_1__IY_N,  A_1__IY_N, A_1__IY_N,
+    A_2__IY_N,  A_2__IY_N,  A_2__IY_N,  A_2__IY_N,  A_2__IY_N,  A_2__IY_N,  A_2__IY_N, A_2__IY_N,
+    A_3__IY_N,  A_3__IY_N,  A_3__IY_N,  A_3__IY_N,  A_3__IY_N,  A_3__IY_N,  A_3__IY_N, A_3__IY_N,
+    A_4__IY_N,  A_4__IY_N,  A_4__IY_N,  A_4__IY_N,  A_4__IY_N,  A_4__IY_N,  A_4__IY_N, A_4__IY_N, // 60
+    A_5__IY_N,  A_5__IY_N,  A_5__IY_N,  A_5__IY_N,  A_5__IY_N,  A_5__IY_N,  A_5__IY_N, A_5__IY_N,
+    A_6__IY_N,  A_6__IY_N,  A_6__IY_N,  A_6__IY_N,  A_6__IY_N,  A_6__IY_N,  A_6__IY_N, A_6__IY_N,
+    A_7__IY_N,  A_7__IY_N,  A_7__IY_N,  A_7__IY_N,  A_7__IY_N,  A_7__IY_N,  A_7__IY_N, A_7__IY_N,
+    A_0__IY_N_B,A_0__IY_N_C,A_0__IY_N_D,A_0__IY_N_E,A_0__IY_N_H,A_0__IY_N_L,A_0__IY_N, A_0__IY_N_A,// 80
+    A_1__IY_N_B,A_1__IY_N_C,A_1__IY_N_D,A_1__IY_N_E,A_1__IY_N_H,A_1__IY_N_L,A_1__IY_N, A_1__IY_N_A,
+    A_2__IY_N_B,A_2__IY_N_C,A_2__IY_N_D,A_2__IY_N_E,A_2__IY_N_H,A_2__IY_N_L,A_2__IY_N, A_2__IY_N_A,
+    A_3__IY_N_B,A_3__IY_N_C,A_3__IY_N_D,A_3__IY_N_E,A_3__IY_N_H,A_3__IY_N_L,A_3__IY_N, A_3__IY_N_A,
+    A_4__IY_N_B,A_4__IY_N_C,A_4__IY_N_D,A_4__IY_N_E,A_4__IY_N_H,A_4__IY_N_L,A_4__IY_N, A_4__IY_N_A, // A0
+    A_5__IY_N_B,A_5__IY_N_C,A_5__IY_N_D,A_5__IY_N_E,A_5__IY_N_H,A_5__IY_N_L,A_5__IY_N, A_5__IY_N_A,
+    A_6__IY_N_B,A_6__IY_N_C,A_6__IY_N_D,A_6__IY_N_E,A_6__IY_N_H,A_6__IY_N_L,A_6__IY_N, A_6__IY_N_A,
+    A_7__IY_N_B,A_7__IY_N_C,A_7__IY_N_D,A_7__IY_N_E,A_7__IY_N_H,A_7__IY_N_L,A_7__IY_N, A_7__IY_N_A,
+    A_0__IY_N_B,A_0__IY_N_C,A_0__IY_N_D,A_0__IY_N_E,A_0__IY_N_H,A_0__IY_N_L,A_0__IY_N, A_0__IY_N_A, // C0
+    A_1__IY_N_B,A_1__IY_N_C,A_1__IY_N_D,A_1__IY_N_E,A_1__IY_N_H,A_1__IY_N_L,A_1__IY_N, A_1__IY_N_A,
+    A_2__IY_N_B,A_2__IY_N_C,A_2__IY_N_D,A_2__IY_N_E,A_2__IY_N_H,A_2__IY_N_L,A_2__IY_N, A_2__IY_N_A,
+    A_3__IY_N_B,A_3__IY_N_C,A_3__IY_N_D,A_3__IY_N_E,A_3__IY_N_H,A_3__IY_N_L,A_3__IY_N, A_3__IY_N_A,
+    A_4__IY_N_B,A_4__IY_N_C,A_4__IY_N_D,A_4__IY_N_E,A_4__IY_N_H,A_4__IY_N_L,A_4__IY_N, A_4__IY_N_A, // E0
+    A_5__IY_N_B,A_5__IY_N_C,A_5__IY_N_D,A_5__IY_N_E,A_5__IY_N_H,A_5__IY_N_L,A_5__IY_N, A_5__IY_N_A,
+    A_6__IY_N_B,A_6__IY_N_C,A_6__IY_N_D,A_6__IY_N_E,A_6__IY_N_H,A_6__IY_N_L,A_6__IY_N, A_6__IY_N_A,
+    A_7__IY_N_B,A_7__IY_N_C,A_7__IY_N_D,A_7__IY_N_E,A_7__IY_N_H,A_7__IY_N_L,A_7__IY_N, A_7__IY_N_A
+  };
+  
+  /** Contains the bytes used for the instruction */
+  public static final byte[] tableSizeFDCB={
+    4, 4, 4, 4, 4, 4, 4, 4,     // 00
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 20  
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 40
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,    
+    4, 4, 4, 4, 4, 4, 4, 4,     // 60
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // 80
+    4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // A0
+    4, 4, 4, 4, 4, 4, 4, 4,  
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,   
+    4, 4, 4, 4, 4, 4, 4, 4,     // C0
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,     // E0
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 2
+  };
+  
   @Override
   public String dasm(byte[] buffer, int pos, long pc) {
     String result="";          // result disassemble string
@@ -1128,7 +1473,10 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         
         if (iType==T_DDCB) {
           // there are an extra table  
-          iType=M_NUL;  
+          op=Unsigned.done(buffer[pos++]);  
+          iType=(int)tableMnemonicsDDCB[op];  
+          aType=tableModesDDCB[op];
+          steps=tableSizeDDCB[op];          
         }
         break;      
       case T_ED:
@@ -1144,8 +1492,10 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         steps=tableSizeFD[op];
         
         if (iType==T_FDCB) {
-          // there are an extra table  
-          iType=M_NUL;  
+          op=Unsigned.done(buffer[pos++]);  
+          iType=(int)tableMnemonicsFDCB[op];  
+          aType=tableModesFDCB[op];
+          steps=tableSizeFDCB[op];  
         }
         break;
       default:
@@ -1613,12 +1963,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
       case A_A__HL:     // A indirect (HL)  
         result+=(upperCase? "A,(HL)": "a,(hl)");  
         break;        
-      case A_A__IXN:    // A indirect (IX+N)  
+      case A_A__IXN:    // A indirect (IX+N)   
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "IX": "ix"));   
         pos=this.pos;
         break;  
       case A_A__IYN:    // A indirect (IY+N)
+      case A_A__IY_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "IY": "iy"));  
         pos=this.pos;
@@ -1626,12 +1977,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
       case A_B__HL:    // B indirect (HL)  
         result+=(upperCase? "B,(HL)": "b,(hl)");  
         break;        
-      case A_B__IXN:    // B indirect (IX+N) 
+      case A_B__IXN:    // B indirect (IX+N)   
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "IX": "ix")); 
         pos=this.pos;
         break;  
       case A_B__IYN:    // B indirect (IY+N)  
+      case A_B__IY_N:
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "IY": "iy"));  
         pos=this.pos;
@@ -1640,11 +1992,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "C,(HL)": "c,(hl)");  
         break;        
       case A_C__IXN:    // C indirect (IX+N)  
+      case A_C__IX_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "C": "c"), (upperCase? "IX": "ix")); 
         pos=this.pos;
         break;  
       case A_C__IYN:    // C indirect (IY+N) 
+      case A_C__IY_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "C": "c"), (upperCase? "IY": "iy")); 
         pos=this.pos;
@@ -1653,11 +2007,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "D,(HL)": "d,(hl)");  
         break;        
       case A_D__IXN:    // D indirect (IX+N)  
+      case A_D__IX_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "D": "d"), (upperCase? "IX": "ix"));  
         pos=this.pos;
         break;  
-      case A_D__IYN:    // D indirect (IY+N) 
+      case A_D__IYN:    // D indirect (IY+N)
+      case A_D__IY_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "D": "d"), (upperCase? "IY": "iy")); 
         pos=this.pos;
@@ -1666,11 +2022,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "E,(HL)": "e,(hl)");  
         break;        
       case A_E__IXN:    // E indirect (IX+N)  
+      case A_E__IX_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "E": "e"), (upperCase? "IX": "ix")); 
         pos=this.pos;
         break;  
       case A_E__IYN:    // E indirect (IY+N)  
+      case A_E__IY_N:     
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "E": "e"), (upperCase? "IY": "iy")); 
         pos=this.pos;
@@ -1679,11 +2037,13 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "H,(HL)": "h,(hl)");  
         break;        
       case A_H__IXN:    // H indirect (IX+N) 
+      case A_H__IX_N:    
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "H": "h"), (upperCase? "IX": "ix")); 
         pos=this.pos;
         break;  
       case A_H__IYN:    // H indirect (IY+N)  
+      case A_H__IY_N:
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "H": "h"), (upperCase? "IY": "iy"));  
         pos=this.pos;
@@ -1692,100 +2052,127 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=(upperCase? "L,(HL)": "l,(hl)");  
         break;        
       case A_L__IXN:    // L indirect (IX+N)  
+      case A_L__IX_N:   
         this.pos=pos;  
         result+=getRefXIndXXN(buffer, (upperCase? "L": "l"), (upperCase? "IX": "ix"));  
         pos=this.pos;
         break;  
       case A_L__IYN:    // L indirect (IY+N)
+      case A_L__IY_N:    
         this.pos=pos;   
         result+=getRefXIndXXN(buffer, (upperCase? "L": "l"), (upperCase? "IY": "iy"));
         pos=this.pos;
-        break;                
-      case A_A__IX_N:  // A ind (IX+N)
+        break;                                                                             
+     case A_0__IX_N:  // 0 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "IX": "ix"));
-        pos=this.pos;
-        break;  
-      case A_B__IX_N:  // B ind (IX+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "IX": "ix"));
-        pos=this.pos;
-        break;  
-      case A_C__IX_N:  // C ind (IX+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "C": "a"), (upperCase? "IX": "ix"));
-        pos=this.pos;
-        break;    
-      case A_D__IX_N:  // D ind (IX+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "D": "a"), (upperCase? "IX": "ix"));
-        pos=this.pos;
-        break;    
-      case A_E__IX_N:  // E ind (IX+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "E": "a"), (upperCase? "IX": "ix"));
-        pos=this.pos;
-        break;    
-      case A_L__IX_N:  // L ind (IX+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "L": "a"), (upperCase? "IX": "ix"));
+        result+=getRefXIndXXN(buffer, "0", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
-      case A_A__IY_N:  // A ind (IY+N)
+     case A_0__IY_N:  // 0 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "A": "a"), (upperCase? "YX": "iy"));
-        pos=this.pos;
-        break;  
-      case A_B__IY_N:  // B ind (IY+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "B": "b"), (upperCase? "YX": "iy"));
-        pos=this.pos;
-        break;  
-      case A_C__IY_N:  // C ind (IY+N)
-        this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "C": "a"), (upperCase? "YX": "iy"));
+        result+=getRefXIndXXN(buffer, "0", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;    
-      case A_D__IY_N:  // D ind (IY+N)
+     case A_1__IX_N:  // 1 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "D": "a"), (upperCase? "YX": "iy"));
+        result+=getRefXIndXXN(buffer, "1", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_1__IY_N:  // 1 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "1", (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;            
+     case A_2__IX_N:  // 2 ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "2", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_2__IY_N:  // 2 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "0", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;    
-      case A_E__IY_N:  // E ind (IY+N)
+     case A_3__IX_N:  // 3 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "E": "a"), (upperCase? "YX": "iy"));
+        result+=getRefXIndXXN(buffer, "3", (upperCase? "IX": "ix"));
         pos=this.pos;
-        break;    
-      case A_L__IY_N:  // L ind (IY+N)
+        break;       
+     case A_3__IY_N:  // 3 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, (upperCase? "L": "a"), (upperCase? "YX": "iy"));
+        result+=getRefXIndXXN(buffer, "3", (upperCase? "IY": "iy"));
         pos=this.pos;
-        break;                      
+        break;         
+     case A_4__IX_N:  // 4 ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "4", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_4__IY_N:  // 4 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "4", (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;         
+     case A_5__IX_N:  // 5 ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "5", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_5__IY_N:  // 5 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "5", (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;     
+     case A_6__IX_N:  // 6 ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "6", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_6__IY_N:  // 6 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "6", (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;     
+     case A_7__IX_N:  // 7 ind (IX+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "7", (upperCase? "IX": "ix"));
+        pos=this.pos;
+        break;       
+     case A_7__IY_N:  // 7 ind (IY+N)
+        this.pos=pos;   
+        result+=getRefXIndXXN(buffer, "7", (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;             
       case A__NN_BC:   // (NN) ind absolute BC 
         this.pos=pos;  
-        result+=getNNregX(buffer, (upperCase? "BC": "bc"));
+        result+=getIndNNregX(buffer, (upperCase? "BC": "bc"));
         pos=this.pos;
         break;   
       case A__NN_DE:   // (NN) ind absolute DE 
         this.pos=pos;  
-        result+=getNNregX(buffer, (upperCase? "DE": "de"));
+        result+=getIndNNregX(buffer, (upperCase? "DE": "de"));
         pos=this.pos;
         break;     
       case A__NN_HL:   // (NN) ind absolute HL 
         this.pos=pos;  
-        result+=getNNregX(buffer, (upperCase? "HL": "hl"));
+        result+=getIndNNregX(buffer, (upperCase? "HL": "hl"));
         pos=this.pos;
         break;          
       case A__NN_SP:   // (NN) ind absolute SP
         this.pos=pos;  
-        result+=getNNregX(buffer, (upperCase? "SP": "sp"));
+        result+=getIndNNregX(buffer, (upperCase? "SP": "sp"));
         pos=this.pos;
         break;    
       case A__NN_IX:   // (NN) absolute IX
         this.pos=pos;  
-        result+=getNNregX(buffer, (upperCase? "IX": "ix"));
+        result+=getIndNNregX(buffer, (upperCase? "IX": "ix"));
         pos=this.pos;
-        break;          
+        break; 
+      case A__NN_IY:   // (NN) absolute IY
+        this.pos=pos;  
+        result+=getIndNNregX(buffer, (upperCase? "IY": "iy"));
+        pos=this.pos;
+        break;    
       case A_BC__NN:   // BC ind absolute (NN) 
         this.pos=pos;  
         result+=getRegXXIndNN(buffer, (upperCase? "BC": "bc"));  
@@ -1842,6 +2229,28 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);  
         break; 
+      case A__IX_N_N: // ind (IX+N),N   
+        if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+        else value=0;  
+        
+        result+="("+(upperCase? "IX": "ix")+"+"+getLabelImm(pc+1, value)+"),";
+        
+        if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+        else value=0;
+        
+        result+=getLabelImm(pc+2, value);                  
+        break;  
+      case A__IY_N_N: // ind (IY+N),N   
+        if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+        else value=0;  
+        
+        result+="("+(upperCase? "IY": "iy")+"+"+getLabelImm(pc+1, value)+"),";
+        
+        if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+        else value=0;
+        
+        result+=getLabelImm(pc+2, value);                  
+        break;                
       case A_A_A:    // A reg A
         result+=(upperCase? "A,A": "a,a");
         break;
@@ -2112,7 +2521,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         result+=getRegXXNN(buffer,(upperCase? "PE": "pe")); 
         pos=this.pos;
         break; 
-     case A_M_NN:   // PE cond NN   
+     case A_M_NN:   // M cond NN   
         this.pos=pos; 
         result+=getRegXXNN(buffer,(upperCase? "M": "m"));  
         pos=this.pos;
@@ -2463,7 +2872,567 @@ public class Z80Dasm extends CpuDasm implements disassembler {
          this.pos=pos;
          result+=getRegIndXN(buffer, (upperCase? "IY": "iy"), (upperCase? "L": "l"));
          pos=this.pos;
+         break;           
+     case A_0__IX_N_A: // 0,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_0__IX_N_B: // 0,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_0__IX_N_C: // 0,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
          break;    
+     case A_0__IX_N_D: // 0,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_0__IX_N_E: // 0,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_0__IX_N_H: // 0,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_0__IX_N_L: // 0,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IX_N_A: // 1,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_1__IX_N_B: // 1,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_1__IX_N_C: // 1,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IX_N_D: // 1,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IX_N_E: // 1,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_1__IX_N_H: // 1,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_1__IX_N_L: // 1,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;  
+    case A_2__IX_N_A: // 2,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_2__IX_N_B: // 2,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_2__IX_N_C: // 2,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_2__IX_N_D: // 2,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_2__IX_N_E: // 2,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_2__IX_N_H: // 2,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_2__IX_N_L: // 2,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+    case A_3__IX_N_A: // 3,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_3__IX_N_B: // 3,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_3__IX_N_C: // 3,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_3__IX_N_D: // 3,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_3__IX_N_E: // 3,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_3__IX_N_H: // 3,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_3__IX_N_L: // 3,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+    case A_4__IX_N_A: // 4,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_4__IX_N_B: // 4,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_4__IX_N_C: // 4,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_4__IX_N_D: // 4,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_4__IX_N_E: // 4,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_4__IX_N_H: // 4,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_4__IX_N_L: // 4,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+     case A_5__IX_N_A: // 5,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_5__IX_N_B: // 5,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_5__IX_N_C: // 5,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_5__IX_N_D: // 5,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_5__IX_N_E: // 5,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_5__IX_N_H: // 5,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_5__IX_N_L: // 5,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;      
+     case A_6__IX_N_A: // 6,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_6__IX_N_B: // 6,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_6__IX_N_C: // 6,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_6__IX_N_D: // 6,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_6__IX_N_E: // 6,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_6__IX_N_H: // 6,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_6__IX_N_L: // 6,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;     
+     case A_7__IX_N_A: // 7,(IX+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_7__IX_N_B: // 7,(IX+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_7__IX_N_C: // 7,(IX+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_7__IX_N_D: // 7,(IX+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_7__IX_N_E: // 7,(IX+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_7__IX_N_H: // 7,(IX+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_7__IX_N_L: // 7,(IX+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IX": "ix"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;             
+     case A_0__IY_N_A: // 0,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_0__IY_N_B: // 0,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_0__IY_N_C: // 0,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_0__IY_N_D: // 0,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_0__IY_N_E: // 0,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_0__IY_N_H: // 0,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_0__IY_N_L: // 0,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "0", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IY_N_A: // 1,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_1__IY_N_B: // 1,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_1__IY_N_C: // 1,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IY_N_D: // 1,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_1__IY_N_E: // 1,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_1__IY_N_H: // 1,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_1__IY_N_L: // 1,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "1", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;  
+    case A_2__IY_N_A: // 2,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_2__IY_N_B: // 2,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_2__IY_N_C: // 2,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_2__IY_N_D: // 2,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_2__IY_N_E: // 2,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_2__IY_N_H: // 2,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_2__IY_N_L: // 2,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "2", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+     case A_3__IY_N_A: // 3,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_3__IY_N_B: // 3,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_3__IY_N_C: // 3,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_3__IY_N_D: // 3,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_3__IY_N_E: // 3,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_3__IY_N_H: // 3,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_3__IY_N_L: // 3,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "3", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+     case A_4__IY_N_A: // 4,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_4__IY_N_B: // 4,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_4__IY_N_C: // 4,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_4__IY_N_D: // 4,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_4__IY_N_E: // 4,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_4__IY_N_H: // 4,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_4__IY_N_L: // 4,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "4", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;           
+     case A_5__IY_N_A: // 5,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_5__IY_N_B: // 5,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_5__IY_N_C: // 5,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_5__IY_N_D: // 5,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_5__IY_N_E: // 5,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_5__IY_N_H: // 5,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_5__IY_N_L: // 5,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "5", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;      
+     case A_6__IY_N_A: // 6,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_6__IY_N_B: // 6,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_6__IY_N_C: // 6,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_6__IY_N_D: // 6,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_6__IY_N_E: // 6,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_6__IY_N_H: // 6,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_6__IY_N_L: // 6,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "6", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;     
+     case A_7__IY_N_A: // 7,(IY+N),A
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "A": "a"));
+         pos=this.pos;
+         break;
+     case A_7__IY_N_B: // 7,(IY+N),B
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "B": "b"));
+         pos=this.pos;                  
+         break;
+     case A_7__IY_N_C: // 7,(IY+N),C
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "C": "c"));
+         pos=this.pos;                  
+         break;    
+     case A_7__IY_N_D: // 7,(IY+N),D
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "D": "d"));
+         pos=this.pos;                  
+         break;    
+     case A_7__IY_N_E: // 7,(IY+N),E
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "E": "e"));
+         pos=this.pos;                  
+         break;   
+     case A_7__IY_N_H: // 7,(IY+N),H
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "H": "h"));
+         pos=this.pos;                  
+         break;   
+     case A_7__IY_N_L: // 7,(IY+N),L
+         this.pos=pos;
+         result+=getReg2IndXN(buffer, "7", (upperCase? "IY": "iy"), (upperCase? "L": "l"));
+         pos=this.pos;                  
+         break;         
     }    
     this.pc=pc+steps;
     this.pos=pos;  
@@ -2488,6 +3457,22 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     else value=-1; 
         
     return "("+reg+"+"+getLabelImm(pc+1, value)+")";  
+  }
+  
+  /**
+   * Get the instruction register 2 indirect over byte
+   * 
+   * @param buffer the buffer to use
+   * @param reg the reg to use
+   * @param reg2 the reg2 to use
+   * @param reg3 the reg3 to use
+   * @return the instruction
+   */
+  private String getReg2IndXN(byte[] buffer, String reg, String reg2, String reg3) {
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+    else value=-1; 
+        
+    return reg+"("+reg2+"+"+getLabelImm(pc+1, value)+"),"+reg3;  
   }
       
   /**
@@ -2571,6 +3556,24 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     setLabelPlus(pc,1);
     setLabelPlus(pc,2);
     return getLabel(addr)+","+reg;    
+  }
+  
+  /**
+   * Get the instruction indirect word over register
+   * 
+   * @param buffer the bufffer to use
+   * @param reg the reg to use
+   * @return the instruction
+   */
+  private String getIndNNregX(byte[] buffer, String reg) {
+    if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
+    else addr=-1;
+    pos++;  
+        
+    setLabel(addr);
+    setLabelPlus(pc,1);
+    setLabelPlus(pc,2);
+    return "("+getLabel(addr)+"),"+reg;    
   }
   
   /**
