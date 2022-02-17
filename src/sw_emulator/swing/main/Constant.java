@@ -42,7 +42,7 @@ public class Constant {
   public static final int MIN_ROWS=256;
     
   /** Rows */
-  public static final int ROWS=0xFFFF;
+  public static final int ROWS=0xFFFF+1;
     
   /** String tables of constants  */  
   public String[][] table=new String[COLS][ROWS];
