@@ -211,7 +211,10 @@ public class Disassembly {
         break;     
        case VSF:
         disassemlyVSF(asSource, targetType);  
-        break;                
+        break;       
+       case AY:
+        disassemblyAY(asSource, targetType);
+        break;   
       case UND:            
         source="";
         disassembly="";   
@@ -726,6 +729,100 @@ public class Disassembly {
     
     if (asSource) source=builder.toString();
     else disassembly=builder.toString();
+  }
+  
+  /**
+   * Disassembly an AY file
+   * 
+   * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
+   */
+  private void disassemblyAY(boolean asSource, TargetType targetType) {
+    int posStruct, posData, posPoint, posAddr, posBlock;  
+    int address, length;
+        
+    CpuDasm prg;
+    Block block;
+    
+    setupAssembler();
+      
+    prg=targetType.getDasm();
+       
+    prg.setMemory(memory);
+    prg.setConstant(constant);
+    prg.setOption(option,  assembler);
+    if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
+    
+    builder.setLength(0);
+    
+    if (asSource) {
+      prg.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(builder, mem);
+      
+      assembler.setConstant(builder, constant);
+
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
+    } else {    
+        prg.upperCase=option.opcodeUpperCasePreview;
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
+      } 
+    
+    try {
+      posStruct=((inB[18] & 0xFF)<<8)+(inB[19] & 0xFF)+18;
+            
+      int tunes=(inB[16] & 0xFF)+1;
+      for (int i=0; i<tunes; i++) {
+        posData=((inB[posStruct+i*4+2] & 0xFF)<<8)+(inB[posStruct+i*4+3] & 0xFF)+posStruct+i*4+2;
+        posPoint=((inB[posData+10] & 0xFF)<<8)+(inB[posData+11] & 0xFF)+posData+10;
+        posAddr=((inB[posData+12] & 0xFF)<<8)+(inB[posData+13] & 0xFF)+posData+12;
+            
+        // blocks are 0 temrinating, suppose to have max 256 of them
+        for (int j=0; j<256; j++) {
+          address=((inB[posAddr+j*6] & 0xFF)<<8)+(inB[posAddr+j*6+1] & 0xFF);
+          if (address==0) break;
+
+          length=((inB[posAddr+j*6+2] & 0xFF)<<8)+(inB[posAddr+j*6+3] & 0xFF);
+          posBlock=((inB[posAddr+j*6+4] & 0xFF)<<8)+(inB[posAddr+j*6+5] & 0xFF)+posAddr+j*6+4;
+          
+          block=new Block();
+          block.startAddress=address;
+          block.endAddress=address+length-1;
+          block.startBuffer=posBlock;
+          block.endBuffer=posBlock+length-1;
+          block.inB=inB; 
+          
+          // check if this block is already in
+          boolean find=false;
+          for (Block b: blocks) {
+            if (b.startAddress==block.startAddress &&
+                b.endAddress==block.endAddress &&
+                b.startBuffer==block.startBuffer &&
+                b.endBuffer==block.endBuffer) {
+               find=true;
+               break;
+             }  
+          }
+          
+          if (!find) blocks.add(block);
+        }
+     }
+    } catch (Exception e) {
+        System.err.println(e);        
+      }   
+    
+    // add blocks from relocate
+    addRelocate(blocks);
+     
+         
+    disassemblyBlocks(asSource, prg, builder);
+    
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();            
   }
   
   /**

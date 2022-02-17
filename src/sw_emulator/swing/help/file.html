@@ -15,17 +15,24 @@
   The project windows gives you the ability to insert:
     <ul>
      <li><b>Project name:</b> a name to give to the project</li>
-     <li><b>File to disassemblate:</b> it let you choose the file that you want to disassemblate. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemblate using the spinner<br>
+     <li><b>File to disassemblate:</b> it let you choose the file that you want to disassemblate. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF, AY) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemblate using the spinner<br>
         Once selected the file will remain inside the DIS file as an internal copy, so if you get a DIS file and want to see the original binary, you can use the save function after the Select buttom to create a copy of this file.
         You can still change the file used inside a DIS by reading another one over it. This can be used when you are analysing program with a common core, so all what you have done before can be as base for the new analysins.
      </li>
      <li><b>Target maschine:</b> for program file you can choose the target machine to use in disassembler from:
-         <ul>
+         <ul><li>M0S 6502:
+            <ul>
              <li><b>C64</b></li>
              <li><b>C1541</b></li>
              <li><b>C128</b></li>
              <li><b>VIC20</b></li>
              <li><b>PLUS4</b></li>
+           </ul></li>
+            <li>Z80:
+               <ul>
+                   <li><b>C128</b></li>  
+               </ul>  
+            </li>
          </ul>
          This selection will activate specific comments to know memory locations of each machine. 
          In Option panel you can select for each machine what range of memory location must be commented automatically.
@@ -57,7 +64,7 @@
      </li>  
      <li><b>Edit Patch table:</b> you can insert a list of addresses and a patch value to apply in memory.<br>
          Please, note that only value that are inside the read data are patched, not the one in memory outside (thare are so all 0)<br>
-         For example: this code takes the addresses C07D aand C07E that has a $1B value and put a $0 value.
+         For example: this code takes the addresses C07D and C07E that has a $1B value and put a $0 value.
          <p align="center"><img src="./project5.png"></p>
          <p align="center"><img src="./project6.png"></p>
          <p align="center"><img src="./project7.png"></p>  

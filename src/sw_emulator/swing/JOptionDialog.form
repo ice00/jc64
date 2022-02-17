@@ -1444,7 +1444,8 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelHeather">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Source heather:"/>
+                        <Property name="text" type="java.lang.String" value="Source header:"/>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="jCheckBoxRepositionate">

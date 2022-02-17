@@ -123,6 +123,8 @@
                                   <Component id="jSpinnerCRT" min="-2" pref="46" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jRadioButtonVSF" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonAY" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jRadioButtonC64" min="-2" max="-2" attributes="0"/>
@@ -186,6 +188,7 @@
                               <Component id="jRadioButtonCRT" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jSpinnerCRT" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jRadioButtonVSF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonAY" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -594,6 +597,15 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonC128ZActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonAY">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroupFileType"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="AY"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -25,6 +25,7 @@ package sw_emulator.swing.main;
 
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.swing.Shared;
 
   /** File type */  
   public enum FileType {
@@ -375,6 +376,75 @@ import sw_emulator.math.Unsigned;
           return tmp.toString();
         }        
     },
+    AY {
+        @Override
+        public String getDescription(byte[] inB) {
+          int posAuthor, posMisc, posStruct, posTitle, posData, posPoint, posAddr;  
+          int address;
+          
+          StringBuffer tmp=new StringBuffer("");  
+          
+          posAuthor=((inB[12] & 0xFF)<<8)+(inB[13] & 0xFF)+12;
+          posMisc=((inB[14] & 0xFF)<<8)+(inB[15] & 0xFF)+14;
+          posStruct=((inB[18] & 0xFF)<<8)+(inB[19] & 0xFF)+18;
+          
+          tmp.append("Author: ");  
+          for (int i=0; i<256; i++) {
+            if (inB[posAuthor+i]!=0) tmp.append((char)inB[posAuthor+i]);
+            else break;
+          }   
+          tmp.append("\n");
+          tmp.append("Misc:   ");
+          for (int i=0; i<256; i++) {
+            if (inB[posMisc+i]!=0) tmp.append((char)inB[posMisc+i]);
+            else break;
+          }   
+          tmp.append("\n");
+          
+          int tunes=(inB[16] & 0xFF)+1;
+          tmp.append("Tunes:  ").append(tunes).append("\n\n");
+
+          
+          for (int i=0; i<tunes; i++) {
+            posTitle=((inB[posStruct+i*4] & 0xFF)<<8)+(inB[posStruct+i*4+1] & 0xFF)+posStruct+i*4;  
+            posData=((inB[posStruct+i*4+2] & 0xFF)<<8)+(inB[posStruct+i*4+3] & 0xFF)+posStruct+i*4+2;
+            
+            tmp.append("Title ").append(i+1).append(": ");
+            for (int j=0; j<256; j++) {
+              if (inB[posTitle+j]!=0) tmp.append((char)inB[posTitle+j]);
+              else break;              
+            } 
+            tmp.append("\n");
+            
+            tmp.append("Time: ").append(((inB[posData+4] & 0xFF)<<8)+(inB[posData+5] & 0xFF)).append(" frames\n");
+            tmp.append("Hreg: $").append(Shared.ByteToExe(inB[posData+8] & 0xFF)).append("\n");
+            tmp.append("Lreg: $").append(Shared.ByteToExe(inB[posData+9] & 0xFF)).append("\n");
+            
+            posPoint=((inB[posData+10] & 0xFF)<<8)+(inB[posData+11] & 0xFF)+posData+10;
+            tmp.append("SP: $").append(Shared.ShortToExe(((inB[posPoint] & 0xFF)<<8)+(inB[posPoint+1] & 0xFF))).append("\n");
+            tmp.append("INIT: $").append(Shared.ShortToExe(((inB[posPoint+2] & 0xFF)<<8)+(inB[posPoint+3] & 0xFF))).append("\n");
+            tmp.append("INTER: $").append(Shared.ShortToExe(((inB[posPoint+4] & 0xFF)<<8)+(inB[posPoint+5] & 0xFF))).append("\n\n");
+            
+            posAddr=((inB[posData+12] & 0xFF)<<8)+(inB[posData+13] & 0xFF)+posData+12;
+            
+            // blocks are 0 temrinating, suppose to have max 256 of them
+            for (int j=0; j<256; j++) {
+              address=((inB[posAddr+j*6] & 0xFF)<<8)+(inB[posAddr+j*6+1] & 0xFF);
+              if (address==0) break;
+              
+              tmp.append("Block ").append(j+1).append(": $").append(Shared.ShortToExe(address));
+              
+              address=((inB[posAddr+j*6+2] & 0xFF)<<8)+(inB[posAddr+j*6+3] & 0xFF);
+              
+              tmp.append(" - $").append(Shared.ShortToExe(address)).append("\n");
+            }
+            
+            tmp.append("\n");
+          }
+          
+          return tmp.toString(); 
+        }        
+    },
     MPR {
         @Override
         public String getDescription(byte[] inB) {
@@ -435,6 +505,7 @@ import sw_emulator.math.Unsigned;
       if (isMPR(inB)) return MPR;
       if (isCRT(inB)) return CRT;
       if (isVSF(inB)) return VSF;
+      if (isAY(inB))  return AY;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -443,6 +514,7 @@ import sw_emulator.math.Unsigned;
    /**
     * Determine if the input file is a PSID or RSID file
     *
+    * @param inB the data
     * @return true if the file is a PSID or RSID file
     */    
     private static boolean isPSID(byte[] inB) {
@@ -474,6 +546,28 @@ import sw_emulator.math.Unsigned;
       
       // file is too short for being a PSID
       return false; 
+    }
+    
+    /**
+     * Determine if the input file is an AY music file
+     * 
+     * @param inB the data
+     * @return reue if the file is an AY music file
+     */
+    private static boolean isAY(byte[] inB) {
+      try {
+
+          // check header
+          if ((inB[0]!='Z') && (inB[1]!='X') && (inB[2]!='A') && (inB[3]!='Y') &&
+              (inB[4]!='E') && (inB[5]!='M') && (inB[6]!='U') && (inB[7]!='L'))return false;
+          return true;
+      
+      } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a PSID
+      return false;  
     }
     
   /**

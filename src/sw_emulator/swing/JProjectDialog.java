@@ -90,6 +90,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("AY tune", "ay"));
         fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
         memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
         memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
@@ -166,7 +167,10 @@ public class JProjectDialog extends javax.swing.JDialog {
             break;   
           case VSF:
             jRadioButtonVSF.setSelected(true);
-            break;     
+            break;    
+          case AY:
+            jRadioButtonAY.setSelected(true);
+            break;      
         }
       } else {
           jRadioButtonPRG.setSelected(false);
@@ -265,6 +269,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabelZ80 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jRadioButtonC128Z = new javax.swing.JRadioButton();
+        jRadioButtonAY = new javax.swing.JRadioButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -468,6 +473,10 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFileType.add(jRadioButtonAY);
+        jRadioButtonAY.setText("AY");
+        jRadioButtonAY.setEnabled(false);
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -532,7 +541,9 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonVSF))
+                                .addComponent(jRadioButtonVSF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonAY))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jRadioButtonC64)
                                 .addGap(6, 6, 6)
@@ -582,7 +593,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addComponent(jRadioButtonMPR)
                             .addComponent(jRadioButtonCRT)
                             .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonVSF))
+                            .addComponent(jRadioButtonVSF)
+                            .addComponent(jRadioButtonAY))
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -722,7 +734,17 @@ public class JProjectDialog extends javax.swing.JDialog {
               jRadioButtonVic20.setEnabled(true);
               jRadioButtonPlus4.setEnabled(true);  
               jSpinnerCRT.setEnabled(false);
-              break;      
+              break;   
+            case AY:
+              jRadioButtonAY.setSelected(true);  
+              jRadioButtonC64.setEnabled(true);
+              project.targetType=TargetType.C128Z;
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true); 
+              jSpinnerCRT.setEnabled(false);
+              break;   
             case VSF:
               jRadioButtonVSF.setSelected(true);
               jRadioButtonC64.setEnabled(true);
@@ -745,7 +767,7 @@ public class JProjectDialog extends javax.swing.JDialog {
               jRadioButtonVic20.setEnabled(true);
               jRadioButtonPlus4.setEnabled(true);   
               jSpinnerCRT.setEnabled(false);
-              break;
+              break;              
           }
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "File not found.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -981,6 +1003,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelZ80;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JRadioButton jRadioButtonAY;
     private javax.swing.JRadioButton jRadioButtonC128;
     private javax.swing.JRadioButton jRadioButtonC128Z;
     private javax.swing.JRadioButton jRadioButtonC1541;

@@ -1043,7 +1043,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     M_NUL, M_NUL, M_NUL, M_NUL, M_OR,  M_OR,  M_OR, M_NUL,
     M_NUL, M_NUL, M_NUL, M_NUL, M_CP,  M_CP,  M_CP, M_CP,
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, // C0
-    M_NUL, T_DDCB,M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, T_DDCB,M_NUL, M_NUL, M_NUL, M_NUL,
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
     M_NUL, M_POP, M_NUL, M_EX,  M_NUL, M_PUSH,M_NUL, M_NUL, // E0 
@@ -1151,7 +1151,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     M_NUL, M_NUL, M_NUL, M_NUL, M_OR,  M_OR,  M_OR, M_NUL,
     M_NUL, M_NUL, M_NUL, M_NUL, M_CP,  M_CP,  M_CP, M_CP,
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, // C0
-    M_NUL, T_DDCB,M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
+    M_NUL, M_NUL, M_NUL, T_FDCB,M_NUL, M_NUL, M_NUL, M_NUL,
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, 
     M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL, M_NUL,
     M_NUL, M_POP, M_NUL, M_EX,  M_NUL, M_PUSH,M_NUL, M_NUL, // E0 

@@ -1819,7 +1819,8 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabelHeather.setText("Source heather:");
+        jLabelHeather.setText("Source header:");
+        jLabelHeather.setToolTipText("");
 
         jCheckBoxRepositionate.setText("Repositionate memory from preview after compilation");
         jCheckBoxRepositionate.addActionListener(new java.awt.event.ActionListener() {

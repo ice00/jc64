@@ -272,19 +272,19 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               case UC:    // user comment
                 if (option.clickUcEdit) {
                   addComment(row);
-                  if (option.forceCompilation) disassembly();
+                  if (option.forceCompilation) disassembly(true);
                 }
                 break;  
               case UL:     // user label
                 if (option.clickUlEdit) {
                   addLabel(row);
-                  if (option.forceCompilation) disassembly();
+                  if (option.forceCompilation) disassembly(true);
                 }  
                 break;
               case UB:     // user global comment
                 if (option.clickUbEdit) {
                   addBlock(row);
-                  if (option.forceCompilation) disassembly();
+                  if (option.forceCompilation) disassembly(true);
                 }   
                 break;
               case DC:     // automatic comment
@@ -292,7 +292,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                   MemoryDasm mem=project.memory[row];
                   if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
                   dataTableModelMemory.fireTableDataChanged();  
-                  if (option.forceCompilation) disassembly();
+                  if (option.forceCompilation) disassembly(true);
                 }                 
                 break;  
               case DL:     // automatic label
@@ -300,7 +300,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                   MemoryDasm mem=project.memory[row];
                   if (mem.dasmLocation!=null) mem.dasmLocation=null;
                   dataTableModelMemory.fireTableDataChanged();  
-                  if (option.forceCompilation) disassembly();
+                  if (option.forceCompilation) disassembly(true);
                 }  
                 break;  
               case VL:    // add patch
@@ -329,7 +329,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                     project.patches=patches2;  
                     
                     dataTableModelMemory.fireTableDataChanged();  
-                    if (option.forceCompilation) disassembly();
+                    if (option.forceCompilation) disassembly(true);
                   }
                    
                 }
@@ -3004,12 +3004,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void jButtonSIDLDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSIDLDActionPerformed
       execute(OPTION_SIDLD);
-      if (option.forceCompilation) disassembly();
+      if (option.forceCompilation) disassembly(true);
     }//GEN-LAST:event_jButtonSIDLDActionPerformed
 
     private void jMenuItemSIDLDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSIDLDActionPerformed
       execute(OPTION_SIDLD);
-      if (option.forceCompilation) disassembly();
+      if (option.forceCompilation) disassembly(true);
     }//GEN-LAST:event_jMenuItemSIDLDActionPerformed
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
@@ -4144,7 +4144,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         optionLabels();
         break;
       case SOURCE_DISASS:
-        disassembly();
+        disassembly(true);
         break;        
       case SOURCE_ASS:
         assembly();
@@ -4169,147 +4169,147 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         break;        
       case MEM_CLEARDCOM:
         clearDasmComment();
-        if (option.forceCompilation) disassembly();
+        if (option.forceCompilation) disassembly(true);
         break;
        case MEM_CLEARUCOM:
         clearUserComment();
-        if (option.forceCompilation) disassembly();
+        if (option.forceCompilation) disassembly(true);
         break;    
        case MEM_ADDCOMM:
          addComment();
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_ADDLABEL:
          addLabel();
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;      
        case MEM_ADDLABELOP:
          addLabelOp();
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;                   
        case MEM_MARKCODE:
          markAsCode();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_MARKDATA:
          markAsData(DataType.NONE);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_MARKDATA_B:
          markAsData(DataType.BYTE_HEX);      
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;      
        case MEM_MARKDATA_D:
          markAsData(DataType.BYTE_DEC);      
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;           
        case MEM_MARKDATA_Y:
          markAsData(DataType.BYTE_BIN);      
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break; 
        case MEM_MARKDATA_R:
          markAsData(DataType.BYTE_CHAR);      
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;          
        case MEM_MARKDATA_W:  
          markAsData(DataType.WORD);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_MARKDATA_P:  
          markAsData(DataType.SWAPPED);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;      
        case MEM_MARKDATA_E:  
          markAsData(DataType.TRIBYTE);   
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;         
        case MEM_MARKDATA_L:  
          markAsData(DataType.LONG);   
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;          
        case MEM_MARKDATA_A:  
          markAsData(DataType.ADDRESS);     
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;         
        case MEM_MARKDATA_S:  
          markAsData(DataType.STACK);      
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;           
        case MEM_MARKDATA_T: 
          markAsData(DataType.TEXT);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;           
        case MEM_MARKDATA_N:  
          markAsData(DataType.NUM_TEXT);    
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;           
        case MEM_MARKDATA_Z: 
          markAsData(DataType.ZERO_TEXT);   
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;   
        case MEM_MARKDATA_M:  
          markAsData(DataType.HIGH_TEXT);   
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;            
        case MEM_MARKDATA_H:  
          markAsData(DataType.SHIFT_TEXT);   
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;           
        case MEM_MARKDATA_C:  
          markAsData(DataType.SCREEN_TEXT);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_MARKDATA_I:  
          markAsData(DataType.PETASCII_TEXT);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;     
        case MEM_MARKDATA_O:  
          markAsData(DataType.MONO_SPRITE);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;        
        case MEM_MARKDATA_F:  
          markAsData(DataType.MULTI_SPRITE);  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;          
        case MEM_MARKGARB:
          markAsGarbage();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;        
        case MEM_ADDBLOCK:
          addBlock();
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_CLEARDLABEL:
          clearDLabel();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_LOW:
          memLow();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_LOWHIGH:          
          memLowHigh();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_BOTH:          
          memAutoLoHi();          
-         if (option.forceCompilation) disassembly(); 
+         if (option.forceCompilation) disassembly(true); 
          break;
        case MEM_HIGHLOW:
          memHighLow();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;         
        case MEM_HIGH:
          memHigh();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;         
        case MEM_PLUS:
          memPlus();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_MINUS:
          memMinus();  
-         if (option.forceCompilation) disassembly();
+         if (option.forceCompilation) disassembly(true);
          break;    
        case MEM_SUB_0:
          subAssign(0);  
@@ -4346,7 +4346,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;  
        case MEM_WIZARD:
          wizard();  
-         if (option.forceCompilation) disassembly(); 
+         if (option.forceCompilation) disassembly(true); 
          break;
          
        case SOURCE_DASM:
@@ -4382,19 +4382,19 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case HELP_IMPORT:
          importLabels();
-         if (option.forceCompilation) disassembly();   
+         if (option.forceCompilation) disassembly(true);   
          break;  
        case HELP_REFACTOR:  
          refactor();  
-         if (option.forceCompilation) disassembly(); 
+         if (option.forceCompilation) disassembly(true); 
          break;
        case HELP_CLEARLAB:  
          clearLab();
-         if (option.forceCompilation) disassembly(); 
+         if (option.forceCompilation) disassembly(true); 
          break;  
        case HELP_CLEARCOM:  
          clearCom();
-         if (option.forceCompilation) disassembly(); 
+         if (option.forceCompilation) disassembly(true); 
          break;          
        case HELP_UNDO:
          undo();
@@ -4404,7 +4404,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case APP_PASTE:
          appPaste();  
-         if (option.forceCompilation) disassembly();   
+         if (option.forceCompilation) disassembly(true);   
          break;
     }
         
@@ -5031,8 +5031,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /**
    * Disassembly the memory
+   * 
+   * @param storeUndo true if we store for the undo the compiled project
    */
-  private void disassembly() {
+  private void disassembly(boolean storeUndo) {
     if (project==null) {
       disassembly.source="";
       disassembly.disassembly="";
@@ -5074,7 +5076,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     if (option.repositionate) gotoMem(0);
     
     DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");    
-    undo.store(df.format(new Date()), project);
+    if (storeUndo) undo.store(df.format(new Date()), project);
   }
 
   /**
@@ -6470,7 +6472,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       project=search;  
       dataTableModelMemory.setData(project.memory);
       dataTableModelMemory.fireTableDataChanged();
-      if (option.forceCompilation) disassembly();   
+      if (option.forceCompilation) disassembly(false);   
     }
   }
   
