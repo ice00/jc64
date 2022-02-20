@@ -284,6 +284,9 @@ public interface userAction {
   /** Clear automatic comment */
   public static final int HELP_CLEARCOM=86;
   
+  /** Find hex sequences  */
+  public static final int SOURCE_FINDX = 87; 
+  
   
   /**
    * Execute the passed user action

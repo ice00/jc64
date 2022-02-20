@@ -153,10 +153,10 @@ public class SidFreq {
       this.start=start;         
     
       // for short table looks only if there are no solution before
-      if (actIndex<0) highOctave12();
-      if (actIndex<0) highOctaveCombined();
       if (actIndex<0) shortLinearTable();
       if (actIndex<0) shortCombinedTable();
+      if (actIndex<0) highOctave12();
+      if (actIndex<0) highOctaveCombined();
     } catch (Exception e) {
         // catch errors to avoid blocking the program
         System.err.println(e);
@@ -211,7 +211,36 @@ public class SidFreq {
       
     
     // look if low table was fount
-    if (low==-1) return false;  
+    if (low==-1) {         
+      if (inB[high]==0) {
+          
+        // This looked like a mastercomposer, then check if next is good instead
+        if (++high>end-TABLE) return false;      
+        if (!searchHigh(high)) return false;
+        
+        // check for low frequency table (first part)
+        if (high>TABLE) {
+          for (i=start; i<=high-TABLE; i++) {
+            if (searchLow(high, i)) {
+              low=i;
+              break;
+            }           
+          }
+        }  
+        
+        // check for high frequency table (second part)
+        if ((low==-1) && (high<end-TABLE*2)) {
+          for (i=high+TABLE; i<end-TABLE; i++) {
+            if (searchLow(high, i)) {
+              low=i;
+              break;
+            }                 
+          }
+        }
+      
+        if (low==-1) return false;           
+      } else return false;
+    }  
     
     if (checkGarbage(high, low)) return false;
     
@@ -625,6 +654,9 @@ public class SidFreq {
     boolean errGrooPsygon=false;
     boolean errVibrantsJO=false;
     
+    // only accept Mastercomposer 0-ff initial value
+    if (inB[high]==0 && inB[index]!= -1) return false;
+    
     // scan all notes
     for (i=0; i<12; i++) {
       note1=(int)(inB[high+i]& 0xFF)*256+(int)(inB[index+i]& 0xFF);
@@ -654,7 +686,7 @@ public class SidFreq {
             case 26: // 423Hz
             case 29: // 424Hz 
             case 30: // 424Hz
-            case 34: // 427    
+            case 34: // 427Hz    
             case 39: // 415Hz    
             case 35: // 437Hz
             case 44: // 434Hz    

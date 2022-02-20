@@ -47,6 +47,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
@@ -194,6 +195,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
      
   /** Preference system file */
   private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
+  
+  /** Last hex string searched*/
+  private String lastSearch="";
   
   
     /**
@@ -422,9 +426,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSaveAsAcme = new javax.swing.JMenuItem();
         jMenuItemSaveAsKickAssembler = new javax.swing.JMenuItem();
         jMenuItemSaveAsTass64 = new javax.swing.JMenuItem();
-        jPopupMenuCopyPaste = new javax.swing.JPopupMenu();
+        jPopupMenuMemory = new javax.swing.JPopupMenu();
         jMenuItemCopy = new javax.swing.JMenuItem();
         jMenuItemPaste = new javax.swing.JMenuItem();
+        jSeparatorMem1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemFindAddr = new javax.swing.JMenuItem();
+        jMenuItemFindSeq = new javax.swing.JMenuItem();
         jPanelToolBar = new javax.swing.JPanel();
         jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
@@ -1024,7 +1031,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jMenuItemCopyActionPerformed(evt);
             }
         });
-        jPopupMenuCopyPaste.add(jMenuItemCopy);
+        jPopupMenuMemory.add(jMenuItemCopy);
 
         jMenuItemPaste.setText("Paste from another instance");
         jMenuItemPaste.addActionListener(new java.awt.event.ActionListener() {
@@ -1032,7 +1039,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                 jMenuItemPasteActionPerformed(evt);
             }
         });
-        jPopupMenuCopyPaste.add(jMenuItemPaste);
+        jPopupMenuMemory.add(jMenuItemPaste);
+        jPopupMenuMemory.add(jSeparatorMem1);
+
+        jMenuItemFindAddr.setText("Find address");
+        jMenuItemFindAddr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFindAddrActionPerformed(evt);
+            }
+        });
+        jPopupMenuMemory.add(jMenuItemFindAddr);
+
+        jMenuItemFindSeq.setText("Find sequences of bytes");
+        jMenuItemFindSeq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFindSeqActionPerformed(evt);
+            }
+        });
+        jPopupMenuMemory.add(jMenuItemFindSeq);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
@@ -1662,9 +1686,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
     });
     rSyntaxTextAreaDis.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyTyped(java.awt.event.KeyEvent evt) {
-            rSyntaxTextAreaDisKeyTyped(evt);
-        }
         public void keyReleased(java.awt.event.KeyEvent evt) {
             rSyntaxTextAreaDisKeyReleased(evt);
         }
@@ -3770,11 +3791,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemPasteActionPerformed
 
     private void jTableMemoryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMousePressed
-      if (evt.isPopupTrigger()) jPopupMenuCopyPaste.show(evt.getComponent(),evt.getX(), evt.getY());
+      if (evt.isPopupTrigger()) jPopupMenuMemory.show(evt.getComponent(),evt.getX(), evt.getY());
     }//GEN-LAST:event_jTableMemoryMousePressed
 
     private void jTableMemoryMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMemoryMouseReleased
-      if (evt.isPopupTrigger()) jPopupMenuCopyPaste.show(evt.getComponent(),evt.getX(), evt.getY());
+      if (evt.isPopupTrigger()) jPopupMenuMemory.show(evt.getComponent(),evt.getX(), evt.getY());
     }//GEN-LAST:event_jTableMemoryMouseReleased
 
     private void jMenuItemUndo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUndo1ActionPerformed
@@ -3833,9 +3854,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(HELP_CLEARCOM);
     }//GEN-LAST:event_jMenuItemAutCommentActionPerformed
 
-    private void rSyntaxTextAreaDisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSyntaxTextAreaDisKeyTyped
+    private void jMenuItemFindAddrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindAddrActionPerformed
+      execute(SOURCE_FINDA);
+    }//GEN-LAST:event_jMenuItemFindAddrActionPerformed
+
+    private void jMenuItemFindSeqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindSeqActionPerformed
+      execute(SOURCE_FINDX); 
+    }//GEN-LAST:event_jMenuItemFindSeqActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3969,7 +3994,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemDiss;
     private javax.swing.JMenuItem jMenuItemDissSaveAs;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemFindAddr;
     private javax.swing.JMenuItem jMenuItemFindDis;
+    private javax.swing.JMenuItem jMenuItemFindSeq;
     private javax.swing.JMenuItem jMenuItemFindSource;
     private javax.swing.JMenuItem jMenuItemImportLabels;
     private javax.swing.JMenuItem jMenuItemLicense;
@@ -4063,8 +4090,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuUndo;
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
-    private javax.swing.JPopupMenu jPopupMenuCopyPaste;
     private javax.swing.JPopupMenu jPopupMenuData;
+    private javax.swing.JPopupMenu jPopupMenuMemory;
     private javax.swing.JPopupMenu jPopupMenuSaveAs;
     private javax.swing.JScrollPane jScrollPaneLeft;
     private javax.swing.JScrollPane jScrollPaneMemory;
@@ -4080,6 +4107,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparatorHelp1;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp2;
     private javax.swing.JPopupMenu.Separator jSeparatorHelp3;
+    private javax.swing.JPopupMenu.Separator jSeparatorMem1;
     private javax.swing.JPopupMenu.Separator jSeparatorOption;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu0;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu1;
@@ -4158,6 +4186,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case SOURCE_FINDA:
         findAddress();
         break;   
+      case SOURCE_FINDX:
+        findSeqHex();
+        break;    
       case SOURCE_FINDD:
         findDialogDis.setVisible(true);
         break;
@@ -5588,6 +5619,90 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       Shared.scrollToCenter(jTableMemory, pos, 0);
     } catch (Exception e) {
       }
+  }
+  
+  /**
+   * Find a sequences of hex number from current position
+   */
+  private void findSeqHex() { 
+    String addr=JOptionPane.showInputDialog(this, "Search for a sequences of hex number (it starts from the next selected position)", lastSearch);  
+    if (addr==null) return;
+    
+    addr=addr.replaceAll("0x", "");
+    addr=addr.replaceAll("0X", "");
+    addr=addr.replaceAll("$", "");
+    addr=addr.replaceAll(",", "");
+    addr=addr.replaceAll(";", "");
+    addr=addr.replaceAll(":", "");
+    addr=addr.replaceAll(" ", "");
+
+    if ("".equals(addr)) return;
+    
+    char[] data=addr.toCharArray();
+    if ((data.length % 2)!=0) {        
+      JOptionPane.showMessageDialog(this, "Invalid sequences of bytes. Bytes must be hex with 2 chars, like: 0x01 $02 03 ", "Warning", JOptionPane.WARNING_MESSAGE);
+      return;
+    };
+    
+    int pos=jTableMemory.getSelectedRow()+1;
+    // be dure to restart if this is the case
+    if (pos>0xFFFF-data.length/2) pos=0;
+    
+    // generate the list of bytes to search
+    ArrayList<Byte> list=new ArrayList();
+    int i=0;
+    String val;
+    try {
+      while (i<data.length) {
+        val=""+data[i]+data[i+1];
+        i+=2;
+        list.add((byte)((Integer.parseInt(val, 16)) &0xFF));
+      }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Invalid sequences of bytes. Bytes must be hex with 2 chars, like: 0x01 $02 03 ", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+      }  
+    
+    lastSearch=addr;
+            
+    // search from current position
+    boolean find;
+    for (i=pos; i<0xFFFF-list.size(); i++) {
+      find=true;  
+      for (int j=0; j<list.size(); j++) {
+        if (list.get(j) != project.memory[i+j].copy) {
+          find=false; 
+          break;
+        }  
+      }
+      
+      if (find) {
+        Shared.scrollToCenter(jTableMemory, i, 0);  
+        jTableMemory.getSelectionModel().setSelectionInterval(i, i+list.size()-1);
+        return;
+      }
+    }
+    
+    // search from beginning to current
+    for (i=0; i<pos; i++) {
+      if (i+list.size()>0xFFFF) break;
+      
+      find=true;  
+      for (int j=0; j<list.size(); j++) {
+        if (list.get(j) != project.memory[i+j].copy) {
+          find=false; 
+          break;
+        }  
+      }
+      
+      if (find) {
+        Shared.scrollToCenter(jTableMemory, i, 0);  
+        jTableMemory.getSelectionModel().setSelectionInterval(i, i+list.size()-1);
+        return;
+      }
+    }
+    
+    JOptionPane.showMessageDialog(this, "Sequences not fount");
   }
 
   /**
