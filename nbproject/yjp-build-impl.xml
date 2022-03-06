@@ -673,7 +673,7 @@ is divided into following sections:
             <sequential>
                 <j2seproject3:test-impl excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
                     <customize>
-                        <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=42253,onexit=snapshot"/>
+                        <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=34829,onexit=snapshot"/>
                         <jvmarg line="${run.jvmargs.ide}"/>
                     </customize>
                 </j2seproject3:test-impl>
@@ -747,7 +747,7 @@ is divided into following sections:
             <sequential>
                 <j2seproject3:test-debug-impl excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
                     <customizeDebuggee>
-                        <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=42253,onexit=snapshot"/>
+                        <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=34829,onexit=snapshot"/>
                         <jvmarg line="${run.jvmargs.ide}"/>
                     </customizeDebuggee>
                 </j2seproject3:test-debug-impl>
@@ -902,7 +902,7 @@ is divided into following sections:
                     </upgrademodulepath>
                     <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
                     <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
-                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=42253,onexit=snapshot"/>
+                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=34829,onexit=snapshot"/>
                     <jvmarg line="${run.jvmargs.ide}"/>
                     <syspropertyset>
                         <propertyref prefix="run-sys-prop."/>
@@ -935,7 +935,7 @@ is divided into following sections:
                     </upgrademodulepath>
                     <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
                     <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
-                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=42253,onexit=snapshot"/>
+                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=34829,onexit=snapshot"/>
                     <jvmarg line="${run.jvmargs.ide}"/>
                     <syspropertyset>
                         <propertyref prefix="run-sys-prop."/>
@@ -959,7 +959,7 @@ is divided into following sections:
                     <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
                     <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
                     <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
-                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=42253,onexit=snapshot"/>
+                    <jvmarg line="${run.jvmargs}"/> <jvmarg value="-agentpath:/home/ice/bin/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=sampling,sessionname=JC64,profiler_dir=/home/ice/bin/YourKit-JavaProfiler-2021.11,ideport=34829,onexit=snapshot"/>
                     <jvmarg line="${run.jvmargs.ide}"/>
                     <classpath>
                         <path path="@{classpath}"/>

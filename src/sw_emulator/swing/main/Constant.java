@@ -32,8 +32,8 @@ import java.util.Arrays;
  */
 public class Constant {
   // Allowed chars  
-  private static final String allowed="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*+-_";
-  private static final String notallowed="/*+-";
+  private static final String allowed="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*+-_><()";
+  private static final String notallowed="/*+-><()";
     
   /** Columns */  
   public static final int COLS=10;  
