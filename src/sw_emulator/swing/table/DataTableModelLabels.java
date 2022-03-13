@@ -58,7 +58,7 @@ public class DataTableModelLabels extends AbstractTableModel {
       this.type=type;
     }
     
-    };  
+  };  
   
   public static COLUMNS[] columns=COLUMNS.values();   
   

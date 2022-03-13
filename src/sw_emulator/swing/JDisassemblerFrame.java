@@ -506,6 +506,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jButtonExportAsSource = new javax.swing.JButton();
         jToolBarPerformance = new javax.swing.JToolBar();
         heapView = new sw_emulator.swing.HeapView();
+        jToolBarPerc = new javax.swing.JToolBar();
+        jPanelPerc = new sw_emulator.swing.JPanelPerc();
         jSplitPaneExternal = new javax.swing.JSplitPane();
         jSplitPaneInternal = new javax.swing.JSplitPane();
         jScrollPaneLeft = new javax.swing.JScrollPane();
@@ -1848,6 +1850,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         jPanelToolBar.add(jToolBarPerformance);
 
+        jToolBarPerc.setRollover(true);
+        jToolBarPerc.setMaximumSize(new java.awt.Dimension(92, 38));
+        jToolBarPerc.setMinimumSize(new java.awt.Dimension(92, 38));
+        jToolBarPerc.setName(""); // NOI18N
+        jToolBarPerc.setPreferredSize(new java.awt.Dimension(92, 38));
+
+        jPanelPerc.setMaximumSize(new java.awt.Dimension(74, 36));
+        jPanelPerc.setMinimumSize(new java.awt.Dimension(74, 36));
+        jPanelPerc.setName(""); // NOI18N
+        jPanelPerc.setPreferredSize(new java.awt.Dimension(74, 36));
+        jToolBarPerc.add(jPanelPerc);
+
+        jPanelToolBar.add(jToolBarPerc);
+
         jSplitPaneExternal.setToolTipText("");
 
         jSplitPaneInternal.setResizeWeight(0.5);
@@ -3135,14 +3151,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addComponent(jSplitPaneExternal)
-        .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1526, Short.MAX_VALUE)
+        .addComponent(jPanelToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addComponent(jPanelToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
+            .addComponent(jSplitPaneExternal, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
     );
 
     pack();
@@ -4440,6 +4456,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuSource;
     private javax.swing.JMenu jMenuSub;
     private javax.swing.JMenu jMenuUndo;
+    private sw_emulator.swing.JPanelPerc jPanelPerc;
     private javax.swing.JPanel jPanelToolBar;
     private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JPopupMenu jPopupMenuData;
@@ -4484,6 +4501,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JToolBar jToolBarFile;
     private javax.swing.JToolBar jToolBarMemory;
     private javax.swing.JToolBar jToolBarOption;
+    private javax.swing.JToolBar jToolBarPerc;
     private javax.swing.JToolBar jToolBarPerformance;
     private javax.swing.JToolBar jToolBarSource;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDis;
@@ -4815,6 +4833,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jProjectDialog.setUp(project);            
     jProjectDialog.setVisible(true);
     setTitle("JC64dis (<new>)");
+    jPanelPerc.setPerc(-1);
 
     if (project.file==null || "".equals(project.file)) {
       project=null;
@@ -4853,6 +4872,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     rSyntaxTextAreaDis.setText("");
     dataTableModelMemory.setData(null);
     dataTableModelMemory.fireTableDataChanged();
+    jPanelPerc.setPerc(-1);
   }
   
   /**
@@ -5466,6 +5486,35 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");    
     if (storeUndo) undo.store(df.format(new Date()), project);
+    
+    // update perc based onto the work done by renaming the labels
+    int total=0;
+    int done=0;
+    for (MemoryDasm mem:project.memory) {
+      if (!mem.isInside || mem.isGarbage) continue;
+      
+      
+      if (mem.type=='+' || mem.type=='-') {
+            MemoryDasm memr=project.memory[mem.related];
+        if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
+          total++;
+          done++;
+        }                   
+        continue;
+      }  
+      
+      
+      if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
+        total++;
+        done++;
+      } else {
+          if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) {
+            total++;  
+          }
+        }  
+    }
+    if (total!=0) jPanelPerc.setPerc((float)done/(float)total);
+    else jPanelPerc.setPerc(0);
   }
 
   /**
