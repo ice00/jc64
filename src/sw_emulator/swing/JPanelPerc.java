@@ -108,6 +108,7 @@ public class JPanelPerc extends javax.swing.JPanel {
         jLabelPerc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelPerc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerc.setText("0%");
+        jLabelPerc.setToolTipText("Percentage of reverse engineering");
         add(jLabelPerc);
         jLabelPerc.setBounds(7, 5, 70, 26);
     }// </editor-fold>//GEN-END:initComponents

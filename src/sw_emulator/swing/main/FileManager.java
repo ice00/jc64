@@ -34,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.zip.GZIPOutputStream;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.MemoryDasm;
@@ -49,6 +50,9 @@ public class FileManager {
     
   /** File to use for option*/
   public static final File OPTION_FILE=new File(System.getProperty("user.home")+File.separator+".jc64dis");
+  
+  /** Header for costant file */
+  private static final String HEADER_CST="CST";
     
   /**
    * Singleton contructor
@@ -1030,5 +1034,83 @@ public class FileManager {
           return false;
         }
       return true;  
+    }
+       
+    /**
+     * Write the constant column to file
+     * 
+     * @param file the file to read
+     * @param constant the constant container
+     * @param col the column to use
+     * @return true if operation is ok 
+     */
+    public boolean writeConstantFile(File file, Constant constant, int col) {
+      try {
+        DataOutputStream out=new DataOutputStream(
+                           new BufferedOutputStream(
+                           new FileOutputStream(file)));
+          
+        out.writeUTF(HEADER_CST);              // write header    
+        out.writeInt(1);                       // write version   
+        
+        String[] values=constant.table[col];
+        out.writeInt(values.length);
+        for (String val:values) {
+          if (val==null) out.writeBoolean(false);
+          else {
+            out.writeBoolean(true);
+            out.writeUTF(val);
+          }
+        }
+        
+        out.close();
+        out.flush();          
+      } catch (Exception e) {
+          System.err.println(e);
+          return false; 
+      }
+      return true;
+    }
+    
+    /**
+     * Read the constant column to file
+     * 
+     * @param file the file to read
+     * @param constant the constant container
+     * @param col the column to use
+     * @return true if operation is ok 
+     */
+    public boolean readConstantFile(File file, Constant constant, int col) {
+      try {
+        DataInputStream in=new DataInputStream(
+                           new BufferedInputStream(
+                           new FileInputStream(file)));
+        
+        String header=in.readUTF();
+    
+        // test header
+        if (!header.equals((HEADER_CST))) {
+          return false;
+        }
+    
+        // test for valid version
+        int version=in.readInt();
+        if (version !=1) {
+          return false;
+        }     
+
+        int size=in.readInt();
+        
+        for (int i=0; i<size; i++) {
+          if (in.readBoolean()) constant.table[col][i]=in.readUTF();
+          else constant.table[col][i]=null;
+        }
+        
+        in.close();         
+      } catch (Exception e) {
+          System.err.println(e);
+          return false; 
+      }
+      return true;
     }
 }

@@ -28,12 +28,14 @@ import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.main.Constant;
+import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.table.ConstantCellEditor;
 import sw_emulator.swing.table.DataTableModelConstant;
 
@@ -51,6 +53,9 @@ public class JConstantDialog extends javax.swing.JDialog {
     
     /** Constant cell editor */
     ConstantCellEditor constantCellEditor=new ConstantCellEditor(new JTextField());
+    
+    /** Project chooser file dialog*/
+    JFileChooser constantChooserFile=new JFileChooser();
 
     /**
      * Creates new form JConstantDialog
@@ -59,6 +64,7 @@ public class JConstantDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Shared.framesList.add(this);
+        Shared.framesList.add(constantCellEditor);
     }
     
     /**
@@ -83,12 +89,42 @@ public class JConstantDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuConstant = new javax.swing.JPopupMenu();
+        jMenuItemLoad = new javax.swing.JMenuItem();
+        jMenuItemSave = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemGoto = new javax.swing.JMenuItem();
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTableConstant = new javax.swing.JTable();
         jTableConstant.setDefaultEditor(String.class, constantCellEditor);
         jTableConstant.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
+
+        jMenuItemLoad.setText("Load from file");
+        jMenuItemLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLoadActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemLoad);
+
+        jMenuItemSave.setText("Save to file");
+        jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemSave);
+        jPopupMenuConstant.add(jSeparator1);
+
+        jMenuItemGoto.setText("Goto hex address ");
+        jMenuItemGoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGotoActionPerformed(evt);
+            }
+        });
+        jPopupMenuConstant.add(jMenuItemGoto);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Constants definitions");
@@ -107,6 +143,14 @@ public class JConstantDialog extends javax.swing.JDialog {
         });
 
         ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
+        jTableConstant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableConstantMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableConstantMouseReleased(evt);
+            }
+        });
         jScrollPaneTable.setViewportView(jTableConstant);
 
         getContentPane().add(jScrollPaneTable, java.awt.BorderLayout.CENTER);
@@ -127,6 +171,26 @@ public class JConstantDialog extends javax.swing.JDialog {
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
       setVisible(false);
     }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jMenuItemLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoadActionPerformed
+      load(); 
+    }//GEN-LAST:event_jMenuItemLoadActionPerformed
+
+    private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
+      save();
+    }//GEN-LAST:event_jMenuItemSaveActionPerformed
+
+    private void jMenuItemGotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGotoActionPerformed
+      find();
+    }//GEN-LAST:event_jMenuItemGotoActionPerformed
+
+    private void jTableConstantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConstantMousePressed
+      if (evt.isPopupTrigger()) jPopupMenuConstant.show(evt.getComponent(),evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTableConstantMousePressed
+
+    private void jTableConstantMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConstantMouseReleased
+      if (evt.isPopupTrigger()) jPopupMenuConstant.show(evt.getComponent(),evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTableConstantMouseReleased
 
     /**
      * @param args the command line arguments
@@ -170,6 +234,7 @@ public class JConstantDialog extends javax.swing.JDialog {
         });
     }
     
+    /** Find the given address */
     private void find() {
       String addr=JOptionPane.showInputDialog(this, "Search and go to a given HEX memory address");
       if (addr==null) return;
@@ -183,11 +248,54 @@ public class JConstantDialog extends javax.swing.JDialog {
       } catch (Exception e) {
         }  
     }
+    
+    /**
+     * Load the constant from file
+     */
+    private void load() {
+      int col=jTableConstant.getSelectedColumn()-1;
+      
+      if (col<0) {
+        JOptionPane.showMessageDialog(this, "Select a column to load the file in");
+        return;
+      }    
+      
+      if (constantChooserFile.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+
+        if (!FileManager.instance.readConstantFile(constantChooserFile.getSelectedFile(), constant, col)) {
+          JOptionPane.showMessageDialog(this, "Error loading the file", "Error", JOptionPane.ERROR_MESSAGE);
+        } else dataModel.fireTableDataChanged();
+      }  
+    }
+    
+    /**
+     * Save the constant from file
+     */
+    private void save() {
+      int col=jTableConstant.getSelectedColumn()-1;
+      
+      if (col<0) {
+        JOptionPane.showMessageDialog(this, "Select a column to save on file");
+        return;
+      }
+      
+      if (constantChooserFile.showSaveDialog(this)==JFileChooser.APPROVE_OPTION) {
+
+        if (!FileManager.instance.writeConstantFile(constantChooserFile.getSelectedFile(), constant, col)) {
+          JOptionPane.showMessageDialog(this, "Error saving the file", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+      }       
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JMenuItem jMenuItemGoto;
+    private javax.swing.JMenuItem jMenuItemLoad;
+    private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JPanel jPanelDn;
+    private javax.swing.JPopupMenu jPopupMenuConstant;
     private javax.swing.JScrollPane jScrollPaneTable;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTable jTableConstant;
     // End of variables declaration//GEN-END:variables
 }
