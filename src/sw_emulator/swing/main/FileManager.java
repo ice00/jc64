@@ -34,6 +34,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
@@ -708,9 +710,16 @@ public class FileManager {
       MemoryDasm mem;  
       Relocate relocate;
       Patch patch;
-      DataInputStream in=new DataInputStream(
-                         new BufferedInputStream(
-                         new FileInputStream(file)));  
+      DataInputStream in;
+      
+      if (isGZipped(file)) in=new DataInputStream(
+              new GZIPInputStream(
+              new BufferedInputStream(
+              new FileInputStream(file)))); 
+          
+      else in=new DataInputStream(
+              new BufferedInputStream(
+              new FileInputStream(file)));  
       
       byte version=in.readByte();
     
@@ -723,11 +732,19 @@ public class FileManager {
       
       int size=in.readInt();      
       project.inB=new byte[size];
-      in.read(project.inB);
+      
+      ///in.read(project.inB);      
+      for (int i=0; i<size;i++) {
+        project.inB[i]=in.readByte();
+      }
       
       size=in.readInt();
       project.memoryFlags=new byte[size];
-      in.read(project.memoryFlags);
+      
+      ///in.read(project.memoryFlags);
+      for (int i=0; i<size;i++) {
+        project.memoryFlags[i]=in.readByte();
+      }           
       
       size=in.readInt();
       project.memory=new MemoryDasm[size];
@@ -843,8 +860,9 @@ public class FileManager {
   public boolean writeProjectFile(File file, Project project) {
     try {      
       DataOutputStream out=new DataOutputStream(
+                           new GZIPOutputStream(
                            new BufferedOutputStream(
-                           new FileOutputStream(file))); 
+                           new FileOutputStream(file)))); 
       
       out.writeByte(project.ACTUAL_VERSION);
       
@@ -1113,4 +1131,22 @@ public class FileManager {
       }
       return true;
     }
+    
+  /**
+    * Checks if a file is gzipped.
+    * 
+    * @param file input file
+    * @return true if it is gzipped
+    */
+   public static boolean isGZipped(File file) {
+     int magic = 0;
+     try {
+       RandomAccessFile raf = new RandomAccessFile(file, "r");
+       magic = raf.read() & 0xff | ((raf.read() << 8) & 0xff00);
+       raf.close();
+     } catch (Throwable e) {
+         System.err.println(e);
+      }
+     return magic == GZIPInputStream.GZIP_MAGIC;
+   }    
 }

@@ -1408,7 +1408,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         });
 
         jCheckBoxOpcodeFormattingPreview.setSelected(true);
-        jCheckBoxOpcodeFormattingPreview.setText("Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview");
+        jCheckBoxOpcodeFormattingPreview.setText("Opcode formatting as Upper case (NOP, JMP, ...) instead of Lower case (nop, jmp, ...) for preview");
         jCheckBoxOpcodeFormattingPreview.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxOpcodeFormattingPreviewItemStateChanged(evt);
@@ -1481,7 +1481,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
-        jCheckBoxOpcodeFormattingSource.setText("Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source");
+        jCheckBoxOpcodeFormattingSource.setText("Opcode formatting as Upper case (NOP, JMP, ...) instead of Lower case (nop, jmp, ...) for source");
         jCheckBoxOpcodeFormattingSource.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxOpcodeFormattingSourceItemStateChanged(evt);

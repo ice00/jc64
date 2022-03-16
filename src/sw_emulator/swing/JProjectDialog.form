@@ -274,7 +274,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelInputFile">
           <Properties>
-            <Property name="text" type="java.lang.String" value="File to disassemblate:"/>
+            <Property name="text" type="java.lang.String" value="File to disassemble:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldInputFile">
@@ -282,7 +282,7 @@
         <Component class="javax.swing.JButton" name="jButtonSelect">
           <Properties>
             <Property name="text" type="java.lang.String" value="Select"/>
-            <Property name="toolTipText" type="java.lang.String" value="Select the file to disassemblate"/>
+            <Property name="toolTipText" type="java.lang.String" value="Select the file to disassemble"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectActionPerformed"/>

@@ -846,7 +846,7 @@
                     <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingPreview">
                       <Properties>
                         <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview"/>
+                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) instead of Lower case (nop, jmp, ...) for preview"/>
                       </Properties>
                       <Events>
                         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingPreviewItemStateChanged"/>
@@ -949,7 +949,7 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="jCheckBoxOpcodeFormattingSource">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source"/>
+                        <Property name="text" type="java.lang.String" value="Opcode formatting as Upper case (NOP, JMP, ...) instead of Lower case (nop, jmp, ...) for source"/>
                       </Properties>
                       <Events>
                         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxOpcodeFormattingSourceItemStateChanged"/>

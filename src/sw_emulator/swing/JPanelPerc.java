@@ -1,5 +1,5 @@
 /**
- * @(#)JPanelPerc.java 2019/12/29
+ * @(#)JPercPanel.java 2019/12/29
  *
  * ICE Team free software group
  *
@@ -86,6 +86,7 @@ public class JPanelPerc extends javax.swing.JPanel {
       jLabelPerc.setText((int)(perc*100)+"%");
       this.updateUI();
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

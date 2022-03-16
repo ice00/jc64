@@ -181,6 +181,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Help dialog */
   JHelpFrame jHelpFrame=new JHelpFrame();
   
+  /** Freeze source frame */
+  JFreezeFrame jFreezeFrame=new JFreezeFrame();
+  
   /** Find dialog for source */
   FindDialog findDialogSource;
   
@@ -499,11 +502,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jToolBarSource = new javax.swing.JToolBar();
         jButtonFindMem = new javax.swing.JButton();
         jButtonDisassemble = new javax.swing.JButton();
-        jButtonDisassemble1 = new javax.swing.JButton();
+        jButtonAssemble = new javax.swing.JButton();
         jButtonFindDis = new javax.swing.JButton();
         jButtonExportAsDiss = new javax.swing.JButton();
         jButtonFindSource = new javax.swing.JButton();
         jButtonExportAsSource = new javax.swing.JButton();
+        jButtonExportAsSource1 = new javax.swing.JButton();
         jToolBarPerformance = new javax.swing.JToolBar();
         heapView = new sw_emulator.swing.HeapView();
         jToolBarPerc = new javax.swing.JToolBar();
@@ -703,6 +707,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemSaveAsAcme1 = new javax.swing.JMenuItem();
         jMenuItemSaveAsKickAssembler1 = new javax.swing.JMenuItem();
         jMenuItemSaveAsTass65 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuHelpContents = new javax.swing.JMenu();
         jMenuItemContents = new javax.swing.JMenuItem();
         jSeparatorHelp1 = new javax.swing.JPopupMenu.Separator();
@@ -1756,17 +1761,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBarSource.add(jButtonDisassemble);
 
-        jButtonDisassemble1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/assembler.png"))); // NOI18N
-        jButtonDisassemble1.setToolTipText("Assemblate");
-        jButtonDisassemble1.setFocusable(false);
-        jButtonDisassemble1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonDisassemble1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonDisassemble1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAssemble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/assembler.png"))); // NOI18N
+        jButtonAssemble.setToolTipText("Assemble");
+        jButtonAssemble.setFocusable(false);
+        jButtonAssemble.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAssemble.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAssemble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDisassemble1ActionPerformed(evt);
+                jButtonAssembleActionPerformed(evt);
             }
         });
-        jToolBarSource.add(jButtonDisassemble1);
+        jToolBarSource.add(jButtonAssemble);
 
         jButtonFindDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/findd.png"))); // NOI18N
         jButtonFindDis.setToolTipText("Find a text in preview");
@@ -1826,6 +1831,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         });
         jToolBarSource.add(jButtonExportAsSource);
 
+        jButtonExportAsSource1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/freeze.png"))); // NOI18N
+        jButtonExportAsSource1.setToolTipText("Freeze the source");
+        jButtonExportAsSource1.setFocusable(false);
+        jButtonExportAsSource1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonExportAsSource1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonExportAsSource1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonExportAsSource1MouseEntered(evt);
+            }
+        });
+        jButtonExportAsSource1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportAsSource1ActionPerformed(evt);
+            }
+        });
+        jToolBarSource.add(jButtonExportAsSource1);
+
         jPanelToolBar.add(jToolBarSource);
 
         jToolBarPerformance.setRollover(true);
@@ -1858,7 +1880,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         jPanelPerc.setMaximumSize(new java.awt.Dimension(74, 36));
         jPanelPerc.setMinimumSize(new java.awt.Dimension(74, 36));
-        jPanelPerc.setName(""); // NOI18N
         jPanelPerc.setPreferredSize(new java.awt.Dimension(74, 36));
         jToolBarPerc.add(jPanelPerc);
 
@@ -2856,7 +2877,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemAssembly.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItemAssembly.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/assembler.png"))); // NOI18N
     jMenuItemAssembly.setMnemonic('t');
-    jMenuItemAssembly.setText("Assemblate");
+    jMenuItemAssembly.setText("Assemble");
     jMenuItemAssembly.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jMenuItemAssemblyActionPerformed(evt);
@@ -2965,6 +2986,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuSub.add(jMenuItemSaveAsTass65);
 
     jMenuSource.add(jMenuSub);
+
+    jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/freeze.png"))); // NOI18N
+    jMenuItem3.setText("Freeze source");
+    jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem3ActionPerformed(evt);
+        }
+    });
+    jMenuSource.add(jMenuItem3);
 
     jMenuBar.add(jMenuSource);
 
@@ -3746,9 +3776,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_MARKDATA_F);
     }//GEN-LAST:event_jMenuItemSpriteMulti1ActionPerformed
 
-    private void jButtonDisassemble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisassemble1ActionPerformed
+    private void jButtonAssembleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssembleActionPerformed
       execute(SOURCE_ASS);
-    }//GEN-LAST:event_jButtonDisassemble1ActionPerformed
+    }//GEN-LAST:event_jButtonAssembleActionPerformed
 
     private void jMenuItemAssemblyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAssemblyActionPerformed
       execute(SOURCE_ASS);
@@ -4207,6 +4237,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(MEM_MARKDATA_I);         
     }//GEN-LAST:event_jMenuItemTextPetascii2ActionPerformed
 
+    private void jButtonExportAsSource1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExportAsSource1MouseEntered
+      if (jPopupMenuSaveAs.isShowing()) jPopupMenuSaveAs.setVisible(false); 
+    }//GEN-LAST:event_jButtonExportAsSource1MouseEntered
+
+    private void jButtonExportAsSource1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportAsSource1ActionPerformed
+      execute(SOURCE_FREEZE);
+    }//GEN-LAST:event_jButtonExportAsSource1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      execute(SOURCE_FREEZE);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4251,16 +4293,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JButton jButtonAddUserComm;
     private javax.swing.JButton jButtonAddUserLabel;
     private javax.swing.JButton jButtonAddUserLabelOp;
+    private javax.swing.JButton jButtonAssemble;
     private javax.swing.JButton jButtonClearDLabel;
     private javax.swing.JButton jButtonClearDMem;
     private javax.swing.JButton jButtonClearUMem;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonConfigure;
     private javax.swing.JButton jButtonDisassemble;
-    private javax.swing.JButton jButtonDisassemble1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonExportAsDiss;
     private javax.swing.JButton jButtonExportAsSource;
+    private javax.swing.JButton jButtonExportAsSource1;
     private javax.swing.JButton jButtonFindDis;
     private javax.swing.JButton jButtonFindMem;
     private javax.swing.JButton jButtonFindSource;
@@ -4291,6 +4334,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenu jMenuHelpContents;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBlock;
     private javax.swing.JMenuItem jMenuItemAddComment;
@@ -4571,6 +4615,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case SOURCE_FINDS:
         findDialogSource.setVisible(true);
         break;        
+      case SOURCE_FREEZE:
+        if (project==null)  {
+          JOptionPane.showMessageDialog(this, "Needs an active project for this function");
+          return;
+        }
+        jFreezeFrame.setup(project, disassembly);
+        jFreezeFrame.setVisible(true);
+        break;
       case APP_EXIT:
         exit();
         break;        
@@ -5493,7 +5545,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     for (MemoryDasm mem:project.memory) {
       if (!mem.isInside || mem.isGarbage) continue;
       
-      
+      // look for relative locations
       if (mem.type=='+' || mem.type=='-') {
             MemoryDasm memr=project.memory[mem.related];
         if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
@@ -5503,7 +5555,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         continue;
       }  
       
-      
+      // look for locations
       if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
         total++;
         done++;
@@ -6216,7 +6268,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        }
        
        if (project.fileType==FileType.CRT && project.chip != mergeProject.chip) {
-         JOptionPane.showMessageDialog(this, "You are disassemblate different chip inside a CRT image", "Error", JOptionPane.ERROR_MESSAGE);
+         JOptionPane.showMessageDialog(this, "You are disassembe different chip inside a CRT image", "Error", JOptionPane.ERROR_MESSAGE);
          return;    
        }       
        
@@ -6382,7 +6434,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
 
   /**
-   * Assemblate back the source to binary
+   * Assemble back the source to binary
    */
   private void assembly() {
     File inputFile=new File(option.tmpPath+File.separator+"input.s");

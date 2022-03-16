@@ -185,7 +185,7 @@ public interface userAction {
   /** Mark memory of text converted to petascii code data kind */
   public static final int MEM_MARKDATA_I = 53;   
   
-  /** Assemblate action for source */
+  /** Assemble action for source */
   public static final int SOURCE_ASS = 54; 
   
   /** Mark memory of text converted to monocromatic sprite data kind */
@@ -286,6 +286,9 @@ public interface userAction {
   
   /** Find hex sequences  */
   public static final int SOURCE_FINDX = 87; 
+  
+  /** Freeze source */
+  public static final int SOURCE_FREEZE = 88;
   
   
   /**

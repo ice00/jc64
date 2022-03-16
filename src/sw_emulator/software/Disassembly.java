@@ -76,7 +76,7 @@ public class Disassembly {
   private Patch[] patches;
   
   
-  /** Blocks of memory to disassemblate */
+  /** Blocks of memory to disassemble */
   public ArrayList<Block> blocks;
   
   /** Constants */

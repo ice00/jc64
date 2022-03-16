@@ -281,10 +281,10 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         jLabelProjectName.setText("Project Name:");
 
-        jLabelInputFile.setText("File to disassemblate:");
+        jLabelInputFile.setText("File to disassemble:");
 
         jButtonSelect.setText("Select");
-        jButtonSelect.setToolTipText("Select the file to disassemblate");
+        jButtonSelect.setToolTipText("Select the file to disassemble");
         jButtonSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelectActionPerformed(evt);

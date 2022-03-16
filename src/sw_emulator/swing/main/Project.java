@@ -39,12 +39,13 @@ import sw_emulator.software.MemoryDasm;
  * Version 4: add relocates
  * Version 5: add patches
  * Version 6: add constants for 16bits
+ * Version 7: gzip format
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=6;       
+  public static final byte ACTUAL_VERSION=7;       
     
   /** Type of the file */
   public FileType fileType;
@@ -52,7 +53,7 @@ public class Project implements Cloneable {
   /** Name of the project */  
   public String name; 
   
-  /** Path + name of file to disassemblate */
+  /** Path + name of file to disassemble */
   public String file;
   
   /** Description of the file */
@@ -84,6 +85,9 @@ public class Project implements Cloneable {
   
   /** Patch entries*/
   public Patch[] patches;
+  
+  /** Freeze image */
+  public Freeze[] freezes;
 
   /**
    * Construct the project
@@ -122,6 +126,7 @@ public class Project implements Cloneable {
     hash = 89 * hash + Arrays.hashCode(this.constant.table);
     hash = 89 * hash + Arrays.hashCode(this.relocates);
     hash = 89 * hash + Arrays.hashCode(this.patches);
+    hash = 89 * hash + Arrays.hashCode(this.freezes);
     return hash;
   }
   
@@ -153,6 +158,11 @@ public class Project implements Cloneable {
     if (p.patches!=null) {
       for (int i=0; i<this.relocates.length; i++) {
         p.patches[i]=(Patch)this.patches[i].clone();
+      }        
+    }
+    if (p.freezes!=null) {
+      for (int i=0; i<this.freezes.length; i++) {
+        p.freezes[i]=(Freeze)this.freezes[i].clone();
       }        
     }
       
@@ -199,7 +209,12 @@ public class Project implements Cloneable {
       for (int i=0; i<this.patches.length; i++) {
         if (!this.patches[i].equals(p.patches[i])) return false;  
       }  
-    }  
+    }
+    if (this.freezes!=null && p.freezes!=null) {
+      for (int i=0; i<this.freezes.length; i++) {
+        if (!this.freezes[i].equals(p.freezes[i])) return false;  
+      }  
+    }
     
     return true;
   }

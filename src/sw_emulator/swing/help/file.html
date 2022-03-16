@@ -15,7 +15,7 @@
   The project windows gives you the ability to insert:
     <ul>
      <li><b>Project name:</b> a name to give to the project</li>
-     <li><b>File to disassemblate:</b> it let you choose the file that you want to disassemblate. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF, AY) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemblate using the spinner<br>
+     <li><b>File to disassemble:</b> it let you choose the file that you want to disassemble. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF, AY) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemble using the spinner<br>
         Once selected the file will remain inside the DIS file as an internal copy, so if you get a DIS file and want to see the original binary, you can use the save function after the Select buttom to create a copy of this file.
         You can still change the file used inside a DIS by reading another one over it. This can be used when you are analysing program with a common core, so all what you have done before can be as base for the new analysins.
      </li>
@@ -69,7 +69,7 @@
          <p align="center"><img src="./project5.png"></p>
          <p align="center"><img src="./project6.png"></p>
          <p align="center"><img src="./project7.png"></p>  
-         This alteration of the binary code that are applied takes advantage when you disassemblate a VICE image, as you can have some values that are the result of code executed until the snapshot were taken.<br>
+         This alteration of the binary code that are applied takes advantage when you disassemble a VICE image, as you can have some values that are the result of code executed until the snapshot were taken.<br>
          So you can have an index that must start from 0 when the program is executed the first time but that instead points to the last value reached previously. If you will execut the binary obtained the result will be not the expected.<br>
          For patches it is allowed to remove values, but the rules is that you must always delete from the last one by one.
      </li>
