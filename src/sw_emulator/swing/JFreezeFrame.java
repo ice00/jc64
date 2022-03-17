@@ -11,6 +11,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.Utilities;
@@ -38,6 +40,9 @@ public class JFreezeFrame extends javax.swing.JFrame {
   
   /** Disassembler */
   Disassembly disassembly;
+  
+  /** Actual freeze */
+  Freeze freeze;
 
     /**
      * Creates new form JFreezeFrame
@@ -58,7 +63,9 @@ public class JFreezeFrame extends javax.swing.JFrame {
      */
     public void setup(Project project, Disassembly disassembly) {
       this.project=project;  
-      this.disassembly=disassembly;            
+      this.disassembly=disassembly;    
+      
+      popolateTable();
     }
 
     /**
@@ -79,11 +86,16 @@ public class JFreezeFrame extends javax.swing.JFrame {
         jButtonDelete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         rSyntaxTextAreaSource = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Freeze source");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
 
         jPanelFreeze.setLayout(new java.awt.BorderLayout());
 
@@ -110,6 +122,15 @@ public class JFreezeFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableFreeze.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableFreeze.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (jTableFreeze.getSelectedRow() > -1) {
+                    apply(getFreeze((String)jTableFreeze.getValueAt(jTableFreeze.getSelectedRow(), 0)));
+                }
+            }
+        });
         jScrollPaneFreeze.setViewportView(jTableFreeze);
 
         jPanelFreeze.add(jScrollPaneFreeze, java.awt.BorderLayout.CENTER);
@@ -125,6 +146,11 @@ public class JFreezeFrame extends javax.swing.JFrame {
 
         jButtonDelete.setText("Delete");
         jButtonDelete.setToolTipText("Delete the selected frrezed image");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonDelete);
 
         jPanelFreeze.add(jPanel1, java.awt.BorderLayout.PAGE_END);
@@ -189,15 +215,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
 
     getContentPane().add(jSplitPaneFreeze, java.awt.BorderLayout.CENTER);
 
-    jMenu1.setText("File");
-    jMenuBar1.add(jMenu1);
-
-    jMenu2.setText("Edit");
-    jMenuBar1.add(jMenu2);
-
-    setJMenuBar(jMenuBar1);
-
-    pack();
+    setBounds(0, 0, 1074, 805);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rSyntaxTextAreaSourceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseReleased
@@ -215,6 +233,14 @@ public class JFreezeFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       addNew();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+      delete();
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+      if (freeze!=null) freeze.text=rSyntaxTextAreaSource.getText();
+    }//GEN-LAST:event_formWindowLostFocus
 
     /**
      * @param args the command line arguments
@@ -254,27 +280,32 @@ public class JFreezeFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDelete;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelFreeze;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneFreeze;
-    private javax.swing.JScrollPane jScrollPaneRight;
     private javax.swing.JSplitPane jSplitPaneFreeze;
     private javax.swing.JTable jTableFreeze;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
     // End of variables declaration//GEN-END:variables
 
     
+    /**
+     * Populate table
+     */
     private void popolateTable() {
       DefaultTableModel model = (DefaultTableModel)jTableFreeze.getModel();
-      jTableFreeze.removeRowSelectionInterval(0, model.getRowCount());
-     
-      for (Freeze freeze: project.freezes) {
-         model.addRow(new Object[]{freeze.name});
+      if (model.getRowCount()>0) {
+        for (int i=model.getRowCount()-1; i>=0; i--)  {
+          model.removeRow(i);
+        }
       }
+     
+      if (project.freezes != null) {
+        for (Freeze freeze: project.freezes) {
+           model.addRow(new Object[]{freeze.name});
+        }
+      }  
       
       model.fireTableDataChanged();
     }
@@ -287,7 +318,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       
       if (name==null || "".equals(name)) return;
             
-      if (getFreeze(name)==null) {
+      if (getFreeze(name)!=null) {
         JOptionPane.showMessageDialog(this, "This freeze name is already present. Skip action.", "Warning", JOptionPane.WARNING_MESSAGE);
         return;
       }
@@ -298,13 +329,45 @@ public class JFreezeFrame extends javax.swing.JFrame {
       // be sure to have a value
       if (freeze.text==null) freeze.text="";
       
+      int size=0;
+      if (project.freezes!=null) size=project.freezes.length;
+      
       // copy the value in the list
-      int size=project.freezes.length;
       Freeze[] freezes2=new Freeze[size+1];
       if (size>0) System.arraycopy(project.freezes, 0, freezes2, 0, size);
       freezes2[size]=freeze;
             
       project.freezes=freezes2;  
+      
+      DefaultTableModel model = (DefaultTableModel)jTableFreeze.getModel();
+      model.addRow(new Object[]{freeze.name});
+      jTableFreeze.setRowSelectionInterval(model.getRowCount()-1, model.getRowCount()-1);
+      model.fireTableDataChanged();
+    }
+    
+    /**
+     * Delete the selected element
+     */
+    public void delete() {
+      int row=jTableFreeze.getSelectedRow();
+      
+      if (row<0) return;
+      
+      String name=(String)jTableFreeze.getValueAt(row, 0);
+      
+      // copy the value in the list
+      int size=jTableFreeze.getRowCount();
+      Freeze[] freezes2=new Freeze[size-1];
+      
+      int j=0;
+      for (int i=0; i<size; i++) {
+        if (project.freezes[i].name.equals(name)) continue;
+         
+        freezes2[j]=project.freezes[i];
+        j++;
+      }
+      project.freezes=freezes2;
+      popolateTable();
     }
     
     /**
@@ -322,5 +385,17 @@ public class JFreezeFrame extends javax.swing.JFrame {
       }  
       
       return null;
+    }
+    
+    /**
+     * Apply the new freeze
+     * 
+     * @param newFreeze the new freeze
+     */
+    private void apply(Freeze newFreeze) {
+      if (freeze!=null) freeze.text=rSyntaxTextAreaSource.getText();
+        
+      rSyntaxTextAreaSource.setText(newFreeze.text);  
+      freeze=newFreeze;      
     }
 }
