@@ -96,6 +96,11 @@ public class JFreezeFrame extends javax.swing.JFrame {
                 formWindowLostFocus(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanelFreeze.setLayout(new java.awt.BorderLayout());
 
@@ -241,6 +246,10 @@ public class JFreezeFrame extends javax.swing.JFrame {
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
       if (freeze!=null) freeze.text=rSyntaxTextAreaSource.getText();
     }//GEN-LAST:event_formWindowLostFocus
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -396,6 +405,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       if (freeze!=null) freeze.text=rSyntaxTextAreaSource.getText();
         
       rSyntaxTextAreaSource.setText(newFreeze.text);  
+      rSyntaxTextAreaSource.setCaretPosition(0);
       freeze=newFreeze;      
     }
 }

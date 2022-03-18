@@ -710,6 +710,7 @@ public class FileManager {
       MemoryDasm mem;  
       Relocate relocate;
       Patch patch;
+      Freeze freeze;
       DataInputStream in;
       
       if (isGZipped(file)) in=new DataInputStream(
@@ -840,6 +841,20 @@ public class FileManager {
             if (in.readBoolean()) project.constant.table[i][j]=in.readUTF();
             else project.constant.table[i][j]=null;   
           }  
+        }
+      }
+      
+      if (version>6)  {                         // version 7
+        size=in.readInt();
+        if (size==0) project.freezes=null;
+        else {
+          project.freezes=new Freeze[size];
+          for (int i=0; i<size; i++) {              
+            freeze=new Freeze();
+            freeze.name=in.readUTF();
+            freeze.text=in.readUTF();
+            project.freezes[i]=freeze;
+          }
         }
       }
     } catch (Exception e) {
@@ -975,6 +990,16 @@ public class FileManager {
               out.writeBoolean(false);
             } 
         }  
+      }  
+      
+      // version 7
+      if (project.freezes==null) out.writeInt(0);
+      else {
+        out.writeInt(project.freezes.length);
+        for (Freeze freeze:project.freezes) {
+          out.writeUTF(freeze.name);
+          out.writeUTF(freeze.text);
+        }
       }  
       
       out.flush();
