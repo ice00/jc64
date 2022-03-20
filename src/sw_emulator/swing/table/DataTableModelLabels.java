@@ -127,18 +127,27 @@ public class DataTableModelLabels extends AbstractTableModel {
         case DL:
           return memory.dasmLocation;            
         case UL:            
-          if (memory.type=='+' || memory.type=='-') {
-            MemoryDasm mem=data[memory.related];
+          MemoryDasm  mem;
+          if (memory.type=='+' || memory.type=='-' || memory.type=='^') {
+            
             if (memory.type=='+') {
+              mem=data[memory.related];
               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-memory.related); 
               else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-memory.related);
                    else return "$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
             } 
-             if (memory.type=='-') {
+            if (memory.type=='-') {
+               mem=data[memory.related];
                if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+(memory.address-memory.related); 
                   else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))return mem.dasmLocation+(memory.address-memory.related);
                        else return "$"+ShortToExe(mem.address)+(memory.address-memory.related);                 
-            }    
+            }   
+            if (memory.type=='^') {
+              mem=data[(memory.related>>16) & 0xFFFF];  
+              if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF)); 
+              else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF));
+                   else return "$"+ShortToExe(mem.address)+"+"+(memory.address-((memory.related>>16) & 0xFFFF));
+            }             
           }   
           return memory.userLocation;                       
     }  

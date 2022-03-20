@@ -5547,8 +5547,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       // look for relative locations
       if (mem.type=='+' || mem.type=='-') {
-            MemoryDasm memr=project.memory[mem.related];
-        if (mem.userLocation!=null && !"".equals(mem.userLocation)) {
+        MemoryDasm memr=project.memory[mem.related];
+        if (memr.userLocation!=null && !"".equals(memr.userLocation)) {
+          total++;
+          done++;
+        }                   
+        continue;
+      }  
+      
+      if (mem.type=='^') {
+        MemoryDasm memr=project.memory[(mem.related>>16) & 0xFFFF];
+        if (memr.userLocation!=null && !"".equals(memr.userLocation)) {
           total++;
           done++;
         }                   
