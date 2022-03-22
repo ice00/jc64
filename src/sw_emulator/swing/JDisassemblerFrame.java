@@ -4620,7 +4620,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           JOptionPane.showMessageDialog(this, "Needs an active project for this function");
           return;
         }
-        jFreezeFrame.setup(project, disassembly);
+        jFreezeFrame.setup(project, disassembly, option);
         jFreezeFrame.setVisible(true);
         break;
       case APP_EXIT:
@@ -6477,7 +6477,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     textArea.setEditable(false);
     JScrollPane scrollPane = new JScrollPane(textArea);
     JOptionPane.showMessageDialog(this, scrollPane, "Result of "+option.assembler.getName()+" compilatation", JOptionPane.INFORMATION_MESSAGE);
-    
   }
 
   /**

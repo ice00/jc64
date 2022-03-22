@@ -7,8 +7,12 @@ package sw_emulator.swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.PrintWriter;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -22,9 +26,12 @@ import org.fife.rsta.ui.search.SearchListener;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+import sw_emulator.software.Assembler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.swing.main.Freeze;
+import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
+import sw_emulator.software.asm.Compiler;
 
 /**
  *
@@ -43,12 +50,20 @@ public class JFreezeFrame extends javax.swing.JFrame {
   
   /** Actual freeze */
   Freeze freeze;
+  
+  /** Option */
+  Option option;
+  
 
     /**
      * Creates new form JFreezeFrame
      */
     public JFreezeFrame() {
         initComponents();
+        
+        for (Assembler.Name val: Assembler.Name.values()) {
+          jComboBoxAssembler.addItem(val.getName());
+        }
         
         Shared.framesList.add(this);
         Shared.framesList.add(findDialogSource);        
@@ -61,9 +76,10 @@ public class JFreezeFrame extends javax.swing.JFrame {
      * @param project the project to use 
      * @param disassembly the disassembly engine
      */
-    public void setup(Project project, Disassembly disassembly) {
+    public void setup(Project project, Disassembly disassembly, Option option) {
       this.project=project;  
       this.disassembly=disassembly;    
+      this.option=option;
       
       popolateTable();
     }
@@ -81,10 +97,15 @@ public class JFreezeFrame extends javax.swing.JFrame {
         jPanelFreeze = new javax.swing.JPanel();
         jScrollPaneFreeze = new javax.swing.JScrollPane();
         jTableFreeze = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelDn = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButtonFreezeWith = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanelUp = new javax.swing.JPanel();
+        jLabelCompiler = new javax.swing.JLabel();
+        jComboBoxAssembler = new javax.swing.JComboBox<>();
+        jButtonAssemble = new javax.swing.JButton();
+        jScrollPaneSource = new javax.swing.JScrollPane();
         rSyntaxTextAreaSource = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -147,7 +168,16 @@ public class JFreezeFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        jPanelDn.add(jButton1);
+
+        jButtonFreezeWith.setText("Freeze with");
+        jButtonFreezeWith.setToolTipText("Freeze with a new compilation of selected compiler");
+        jButtonFreezeWith.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFreezeWithActionPerformed(evt);
+            }
+        });
+        jPanelDn.add(jButtonFreezeWith);
 
         jButtonDelete.setText("Delete");
         jButtonDelete.setToolTipText("Delete the selected frrezed image");
@@ -156,9 +186,23 @@ public class JFreezeFrame extends javax.swing.JFrame {
                 jButtonDeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonDelete);
+        jPanelDn.add(jButtonDelete);
 
-        jPanelFreeze.add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        jPanelFreeze.add(jPanelDn, java.awt.BorderLayout.PAGE_END);
+
+        jLabelCompiler.setText("Compiler:");
+        jPanelUp.add(jLabelCompiler);
+        jPanelUp.add(jComboBoxAssembler);
+
+        jButtonAssemble.setText("Assemble");
+        jButtonAssemble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAssembleActionPerformed(evt);
+            }
+        });
+        jPanelUp.add(jButtonAssemble);
+
+        jPanelFreeze.add(jPanelUp, java.awt.BorderLayout.PAGE_START);
 
         jSplitPaneFreeze.setLeftComponent(jPanelFreeze);
 
@@ -199,44 +243,21 @@ public class JFreezeFrame extends javax.swing.JFrame {
         new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                findDialogSource.setVisible(true);
             }
         }
     );
-    rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaSourceMouseReleased(evt);
-        }
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaSourceMouseClicked(evt);
-        }
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            rSyntaxTextAreaSourceMouseEntered(evt);
-        }
-    });
-    jScrollPane2.setViewportView(rSyntaxTextAreaSource);
+    jScrollPaneSource.setViewportView(rSyntaxTextAreaSource);
 
-    jSplitPaneFreeze.setRightComponent(jScrollPane2);
+    jSplitPaneFreeze.setRightComponent(jScrollPaneSource);
 
     getContentPane().add(jSplitPaneFreeze, java.awt.BorderLayout.CENTER);
 
     setBounds(0, 0, 1074, 805);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSyntaxTextAreaSourceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseReleased
-
-    }//GEN-LAST:event_rSyntaxTextAreaSourceMouseReleased
-
-    private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
-
-    }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
-
-    private void rSyntaxTextAreaSourceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseEntered
-
-    }//GEN-LAST:event_rSyntaxTextAreaSourceMouseEntered
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      addNew();
+      addNew(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
@@ -250,6 +271,14 @@ public class JFreezeFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
       setVisible(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonAssembleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssembleActionPerformed
+      compile();
+    }//GEN-LAST:event_jButtonAssembleActionPerformed
+
+    private void jButtonFreezeWithActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFreezeWithActionPerformed
+      addNew(true);
+    }//GEN-LAST:event_jButtonFreezeWithActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,11 +317,16 @@ public class JFreezeFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAssemble;
     private javax.swing.JButton jButtonDelete;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButtonFreezeWith;
+    private javax.swing.JComboBox<String> jComboBoxAssembler;
+    private javax.swing.JLabel jLabelCompiler;
+    private javax.swing.JPanel jPanelDn;
     private javax.swing.JPanel jPanelFreeze;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanelUp;
     private javax.swing.JScrollPane jScrollPaneFreeze;
+    private javax.swing.JScrollPane jScrollPaneSource;
     private javax.swing.JSplitPane jSplitPaneFreeze;
     private javax.swing.JTable jTableFreeze;
     private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
@@ -312,7 +346,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
      
       if (project.freezes != null) {
         for (Freeze freeze: project.freezes) {
-           model.addRow(new Object[]{freeze.name});
+           if (freeze!=null) model.addRow(new Object[]{freeze.name});
         }
       }  
       
@@ -320,9 +354,11 @@ public class JFreezeFrame extends javax.swing.JFrame {
     }
     
     /**
-     * Add a new image
+     * Add a new image with custom compilation with selected compiler
+     * 
+     * @param with use custom compilation with selected compiler
      */
-    private void addNew() {
+    private void addNew(boolean with) {
       String name=JOptionPane.showInputDialog("Gives the name of this new freeze");
       
       if (name==null || "".equals(name)) return;
@@ -334,7 +370,28 @@ public class JFreezeFrame extends javax.swing.JFrame {
       
       Freeze freeze=new Freeze();
       freeze.name=name;
-      freeze.text=disassembly.source;
+      
+      if (with) {
+      
+          if (project==null) return;
+    
+          Assembler.Name actual=option.assembler;    
+          String str=(String)jComboBoxAssembler.getSelectedItem();
+          
+          for (Assembler.Name name2: Assembler.Name.values()) {
+            if (name2.getName().equals(str)) {
+               option.assembler=name2;  
+              break;
+            }
+          }
+          
+          Disassembly dis=new Disassembly();        
+          dis.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
+          option.assembler=actual;
+          freeze.text=dis.source;
+      } else freeze.text=disassembly.source;
+      
+      
       // be sure to have a value
       if (freeze.text==null) freeze.text="";
       
@@ -407,5 +464,60 @@ public class JFreezeFrame extends javax.swing.JFrame {
       rSyntaxTextAreaSource.setText(newFreeze.text);  
       rSyntaxTextAreaSource.setCaretPosition(0);
       freeze=newFreeze;      
+    }
+    
+    /**
+     * Compile the text
+     */
+    private void compile() {
+      String source=rSyntaxTextAreaSource.getText();  
+      
+      File inputFile=new File(option.tmpPath+File.separator+"input.s");
+      File outputFile=new File(option.tmpPath+File.separator+"output.prg");        
+    
+      if (source==null || "".equals(source)) {
+       JOptionPane.showMessageDialog(this, "There is no source to assemble",
+               "Warning", JOptionPane.WARNING_MESSAGE);
+       return;
+      }    
+    
+      if (option.tmpPath==null || "".equals(option.tmpPath)) {
+        JOptionPane.showMessageDialog(this, "Select a temporary path for the assembler outputs", "Warning",
+        JOptionPane.WARNING_MESSAGE);
+        return;            
+      }
+    
+      try {
+        PrintWriter out=new PrintWriter(inputFile);
+        out.write(disassembly.source);
+        out.flush();
+        out.close();
+      } catch (Exception e) {
+          System.err.println(e);
+        }
+      
+      Compiler compiler=new Compiler();
+      compiler.setOption(option);
+      
+      String str=(String)jComboBoxAssembler.getSelectedItem();
+      
+      Assembler.Name actual=option.assembler;
+      
+      for (Assembler.Name name: Assembler.Name.values()) {
+        if (name.getName().equals(str)) {
+          option.assembler=name;  
+          break;
+        }
+      }
+      
+      String res=compiler.compile(inputFile, outputFile);
+      
+      option.assembler=actual;
+    
+      JTextArea textArea = new JTextArea(50, 50);
+      textArea.setText(res);
+      textArea.setEditable(false);
+      JScrollPane scrollPane = new JScrollPane(textArea);
+      JOptionPane.showMessageDialog(this, scrollPane, "Result of "+option.assembler.getName()+" compilatation", JOptionPane.INFORMATION_MESSAGE);
     }
 }

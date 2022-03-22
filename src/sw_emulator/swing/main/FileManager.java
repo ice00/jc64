@@ -852,7 +852,16 @@ public class FileManager {
           for (int i=0; i<size; i++) {              
             freeze=new Freeze();
             freeze.name=in.readUTF();
-            freeze.text=in.readUTF();
+            if (in.readBoolean()) {
+              int size2=in.readInt();
+              byte[] buf=new byte[size2];
+              for (int j=0; j<size2; j++) {
+                buf[j]=in.readByte();
+              } 
+              freeze.text=new String(buf, "utf-8");                            
+            } else {
+                freeze.text=in.readUTF();
+              }
             project.freezes[i]=freeze;
           }
         }
@@ -998,7 +1007,17 @@ public class FileManager {
         out.writeInt(project.freezes.length);
         for (Freeze freeze:project.freezes) {
           out.writeUTF(freeze.name);
-          out.writeUTF(freeze.text);
+          
+          // writeUTF is limited to FFFF size, so apply different way
+          if (freeze.text.length()>0xFFFF) {
+            out.writeBoolean(true);  
+            byte[] buf=freeze.text.getBytes("utf-8");
+            out.writeInt(buf.length);
+            out.write(buf);           
+          } else {
+              out.writeBoolean(false);
+              out.writeUTF(freeze.text);
+            }
         }
       }  
       
