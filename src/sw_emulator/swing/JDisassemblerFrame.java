@@ -2987,6 +2987,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jMenuSource.add(jMenuSub);
 
+    jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
     jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/freeze.png"))); // NOI18N
     jMenuItem3.setText("Freeze source");
     jMenuItem3.addActionListener(new java.awt.event.ActionListener() {

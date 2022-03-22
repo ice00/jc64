@@ -81,6 +81,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       this.disassembly=disassembly;    
       this.option=option;
       
+      rSyntaxTextAreaSource.setText("");
       popolateTable();
     }
 
@@ -489,7 +490,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
     
       try {
         PrintWriter out=new PrintWriter(inputFile);
-        out.write(disassembly.source);
+        out.write(source);
         out.flush();
         out.close();
       } catch (Exception e) {
@@ -511,13 +512,13 @@ public class JFreezeFrame extends javax.swing.JFrame {
       }
       
       String res=compiler.compile(inputFile, outputFile);
-      
-      option.assembler=actual;
     
       JTextArea textArea = new JTextArea(50, 50);
       textArea.setText(res);
       textArea.setEditable(false);
       JScrollPane scrollPane = new JScrollPane(textArea);
       JOptionPane.showMessageDialog(this, scrollPane, "Result of "+option.assembler.getName()+" compilatation", JOptionPane.INFORMATION_MESSAGE);
+            
+      option.assembler=actual;
     }
 }
