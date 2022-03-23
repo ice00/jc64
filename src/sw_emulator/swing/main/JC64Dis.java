@@ -35,9 +35,15 @@ public class JC64Dis {
   private JDisassemblerFrame jMainFrame;
     
     public JC64Dis() {
+        Option option=new Option();
+        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
+        
+        if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
+        else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());  
+        
       SwingUtilities.invokeLater(new Runnable() {
         public void run() {
-          jMainFrame=new JDisassemblerFrame();
+          jMainFrame=new JDisassemblerFrame(option);
           jMainFrame.setVisible(true);
         }
       });  

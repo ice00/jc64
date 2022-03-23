@@ -110,7 +110,7 @@ import sw_emulator.swing.table.MemoryTableCellRenderer;
  */
 public class JDisassemblerFrame extends javax.swing.JFrame implements userAction {
   /** Option to use */
-  Option option=new Option();
+  Option option;
   
   /** Project to use */
   Project project;
@@ -205,9 +205,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
     /**
      * Creates new form JFrameDisassembler
+     * 
+     * @param option the option to use
      */
-    public JDisassemblerFrame() {        
+    public JDisassemblerFrame(Option option) {        
         initComponents();
+
+        this.option=option;
+        
         Shared.framesList.add(this);
         Shared.framesList.add(projectChooserFile);
         Shared.framesList.add(projectMergeFile);
@@ -220,10 +225,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         findDialogDis.setSearchString(" ");
         findDialogSource.setSearchString(" ");
         
-        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
-        
-        if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
-        else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
+        //FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
+        //  if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
+        //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
         
         jOptionDialog.useOption(option);
         
@@ -4283,7 +4287,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JDisassemblerFrame().setVisible(true);
+                new JDisassemblerFrame(new Option()).setVisible(true);
             }
         });
     }

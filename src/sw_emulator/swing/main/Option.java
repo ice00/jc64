@@ -227,7 +227,7 @@ public class Option {
    */
   public static void installLook()  {   
     for (FlatLaf laf : LAF_SYNTH_FLAT) {
-      FlatLaf.install(laf);
+      FlatLaf.setup(laf);
     }
   }  
     
