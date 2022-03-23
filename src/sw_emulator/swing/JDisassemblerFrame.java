@@ -110,7 +110,7 @@ import sw_emulator.swing.table.MemoryTableCellRenderer;
  */
 public class JDisassemblerFrame extends javax.swing.JFrame implements userAction {
   /** Option to use */
-  Option option;
+  Option option=new Option();
   
   /** Project to use */
   Project project;
@@ -208,11 +208,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
      * 
      * @param option the option to use
      */
-    public JDisassemblerFrame(Option option) {        
+    public JDisassemblerFrame() {        
         initComponents();
 
-        this.option=option;
-        
         Shared.framesList.add(this);
         Shared.framesList.add(projectChooserFile);
         Shared.framesList.add(projectMergeFile);
@@ -225,7 +223,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         findDialogDis.setSearchString(" ");
         findDialogSource.setSearchString(" ");
         
-        //FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
+        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
         //  if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
         //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
         
@@ -4287,7 +4285,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JDisassemblerFrame(new Option()).setVisible(true);
+                new JDisassemblerFrame().setVisible(true);
             }
         });
     }

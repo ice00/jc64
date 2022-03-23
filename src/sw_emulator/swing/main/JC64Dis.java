@@ -36,6 +36,8 @@ public class JC64Dis {
     
     public JC64Dis() {
         Option option=new Option();
+        
+        // read option file even if it will be reload again in JDisassemblerFrame
         FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
         
         if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
@@ -43,7 +45,7 @@ public class JC64Dis {
         
       SwingUtilities.invokeLater(new Runnable() {
         public void run() {
-          jMainFrame=new JDisassemblerFrame(option);
+          jMainFrame=new JDisassemblerFrame();
           jMainFrame.setVisible(true);
         }
       });  
