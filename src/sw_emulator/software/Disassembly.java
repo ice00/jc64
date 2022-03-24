@@ -34,6 +34,7 @@ import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
 import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Block;
+import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
@@ -52,7 +53,17 @@ public class Disassembly {
   public String source;
   
   /** Raw disassembly */
-  public String disassembly;    
+  public String disassembly; 
+  
+  /** Carets for source area */
+  public Carets caretsSource=new Carets();
+  
+  /** Carets for previuw area */
+  public Carets caretsPreview=new Carets();
+  
+  /** Actual carets being used */
+  private Carets actualCarets;
+  
   
   /** Buffer of data to disassemble */
   private byte[] inB;
@@ -183,6 +194,11 @@ public class Disassembly {
     this.patches=patches;
 
     this.memory=memory;
+    
+    // clear previus carets identification and associate the actual caret to use
+    if (asSource) actualCarets=caretsSource;
+    else actualCarets=caretsPreview;
+    actualCarets.clear();
      
     // avoid to process null data  
     if (inB==null) {
@@ -870,6 +886,8 @@ public class Disassembly {
              option.sidFreqMarkMem, option.sidFreqCreateLabel,
              option.sidFreqCreateComment);      
 
+      // add an offset due to previous strings added
+      actualCarets.setOffset(tmp.length());
       if (asSource) {
         assembler.setOrg(tmp, block.startAddress);        
         tmp.append(prg.csdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
@@ -1116,7 +1134,7 @@ public class Disassembly {
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
                         aText, aNumText, aZeroText, aHighText, aShiftText,
-                        aScreenText, aPetasciiText, constant);      
+                        aScreenText, aPetasciiText, constant, actualCarets);      
   }
   
   /**

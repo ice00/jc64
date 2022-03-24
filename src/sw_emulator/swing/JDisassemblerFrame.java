@@ -3388,50 +3388,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemAddBlockActionPerformed
 
     private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
-      try {
-        // get starting position of clicked point  
-        int pos=Utilities.getRowStart(rSyntaxTextAreaSource, rSyntaxTextAreaSource.getCaretPosition());
-        
-        int addr=searchAddress(rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength));
-        
-        if (addr==-1) return;
-                
-        //scroll to that point
-        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
-        Shared.scrollToCenter(jTableMemory, addr, 0);
-        
-        // select this row
-        jTableMemory.setRowSelectionInterval(addr, addr);     
-       
-        if (evt.isControlDown()) {
-          int actual;  
-        
-          // get the address in hex format
-          addr=jTableMemory.getSelectedRow();
-          pos=0;        
-
-          // scan all lines for the memory location
-          try {
-            String preview=rSyntaxTextAreaDis.getText();
-            String lines[] = preview.split("\\r?\\n");
-            for (String line: lines) {
-              actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
-              if (actual==addr) {      
-                // set preview in the find position  
-                rSyntaxTextAreaDis.setCaretPosition(pos);
-                rSyntaxTextAreaDis.requestFocusInWindow();
-                break;
-              } else {
-                  pos+=line.length()+1;
-                }
-            }
-          } catch (Exception e) {
-              System.err.println();  
-            } 
-        }
-      } catch (Exception e) {
-          System.err.println(e);
-      }
+      gotoMemSource(evt);
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
     private void jMenuItemClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearDLabelActionPerformed
@@ -6824,10 +6781,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void gotoMem(int modifier) {
     try {  
-      // get starting position of clicked point  
-      int pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-      int addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
-
+      int pos;
+      int addr=-1;  
+        
+      // try with carets
+      MemoryDasm mem=disassembly.caretsPreview.getMemory(rSyntaxTextAreaDis.getCaretPosition());
+          
+      if (mem==null) {
+        // get starting position of clicked point  
+        pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
+        addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
+      } else addr=mem.address;
+        
       if (addr==-1) return;
                 
       //scroll to that point
@@ -6839,7 +6804,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         if (row==-1) jTableMemory.setRowSelectionInterval(addr, addr);
         else {
           if (row<addr) {
-            MemoryDasm mem=project.memory[addr];
+            mem=project.memory[addr];
             if (mem.isCode) jTableMemory.setRowSelectionInterval(row, addr+M6510Dasm.tableSize[mem.copy & 0xff]-1); // go to end of instruction
             else jTableMemory.setRowSelectionInterval(row, addr);
           } 
@@ -6849,6 +6814,67 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     } catch (Exception e) {
         System.err.println(e);
       }  
+  }
+  
+  /**
+   * Goto mem form source 
+   * 
+   * @param evt the mouse event
+   */
+  private void gotoMemSource(java.awt.event.MouseEvent evt) {
+    try {
+        int pos;
+        int addr=-1;
+        
+        // try with carets
+        MemoryDasm mem=disassembly.caretsSource.getMemory(rSyntaxTextAreaSource.getCaretPosition());
+        
+        if (mem==null) {
+          // get starting position of clicked point  
+          pos=Utilities.getRowStart(rSyntaxTextAreaSource, rSyntaxTextAreaSource.getCaretPosition());
+        
+          addr=searchAddress(rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength));
+        } else addr=mem.address;                
+        
+        if (addr==-1) return;
+                
+        //scroll to that point
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(addr,0, true)); 
+        Shared.scrollToCenter(jTableMemory, addr, 0);
+        
+        // select this row
+        jTableMemory.setRowSelectionInterval(addr, addr);     
+
+        // ctrl + click must move source area too the same position
+        if (evt.isControlDown()) {
+          int actual;  
+        
+          // get the address in hex format
+          addr=jTableMemory.getSelectedRow();
+          pos=0;        
+
+          // scan all lines for the memory location
+          try {
+            String preview=rSyntaxTextAreaDis.getText();
+            String lines[] = preview.split("\\r?\\n");
+            for (String line: lines) {
+              actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
+              if (actual==addr) {      
+                // set preview in the find position  
+                rSyntaxTextAreaDis.setCaretPosition(pos);
+                rSyntaxTextAreaDis.requestFocusInWindow();
+                break;
+              } else {
+                  pos+=line.length()+1;
+                }
+            }
+          } catch (Exception e) {
+              System.err.println();  
+            } 
+        }
+    } catch (Exception e) {
+          System.err.println(e);
+      }    
   }
   
   /**

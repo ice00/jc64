@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.Option;
@@ -360,6 +361,8 @@ public class Assembler {
       @Override
       public void flush(StringBuilder str) {
         if (lastMem==null || lastMem.userBlockComment==null) return;
+        
+        int start=str.length();
           
         // split by new line
         String[] lines = lastMem.userBlockComment.split("\\r?\\n");  
@@ -511,6 +514,9 @@ public class Assembler {
             if (isOpen) str.append(".endc\n");   
             break;  
         } 
+              
+        int end=str.length();
+        carets.add(start, end, lastMem);
       }
     }    
       
@@ -4640,6 +4646,9 @@ public class Assembler {
    /** Memory constant */
    protected static Constant constant;
    
+   /** Carets to use */
+   protected static Carets carets;
+   
    /** Actual type being processed */
    ActionType actualType=null;
 
@@ -4684,6 +4693,7 @@ public class Assembler {
     * @param aScreenText the text to screen code
     * @param aPetasciiText the text to petascii code
     * @param constant the constants to use
+    * @param carets the carets to use
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -4707,7 +4717,8 @@ public class Assembler {
                          Assembler.ShiftText aShiftText,
                          Assembler.ScreenText aScreenText,
                          Assembler.PetasciiText aPetasciiText,
-                         Constant constant
+                         Constant constant,
+                         Carets carets
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -4738,6 +4749,7 @@ public class Assembler {
      sizeMultiSpriteBlock=0;
      
      this.constant=constant;
+     this.carets=carets;
    } 
    
    /**
