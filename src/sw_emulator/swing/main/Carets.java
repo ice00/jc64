@@ -85,7 +85,7 @@ public class Carets {
   }
   
   /**
-   * Get the emory associated with that postion or null
+   * Get the memory associated with that postion or null
    * 
    * @param position the postion to search
    * @return the memory associated with that postion
@@ -96,5 +96,19 @@ public class Carets {
     }  
     
     return null;
+  }
+  
+  /**
+   * Get (start) position that has that memory 
+   * 
+   * @param memory the memory to search
+   * @return the position or -1
+   */
+  public int getPosition(MemoryDasm memory) {
+    for (Caret caret: list) {
+      if (caret.memory==memory) return caret.start;        
+    }  
+        
+     return -1;
   }
 }

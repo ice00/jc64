@@ -355,6 +355,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             // get the address in hex format
             int addr=jTableMemory.getSelectedRow();
             int pos=0;        
+            
+            // try with carets
+            if (addr>=0) {
+              pos=disassembly.caretsPreview.getPosition(project.memory[addr]);
+              
+              if (pos!=-1) {
+                rSyntaxTextAreaDis.setCaretPosition(pos);
+                rSyntaxTextAreaDis.requestFocusInWindow();
+                return;
+              } else pos=0;  
+            }
 
             // scan all lines for the memory location
             try {
