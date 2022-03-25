@@ -515,8 +515,7 @@ public class Assembler {
             break;  
         } 
               
-        int end=str.length();
-        carets.add(start, end, lastMem);
+        carets.add(start, str.length(), lastMem);
       }
     }    
       
@@ -555,6 +554,7 @@ public class Assembler {
         MemoryDasm memRel2;
         
         int initial=str.length();
+        int start=initial;
         
         // create starting command according to the kind of byte
         switch (aByte) {
@@ -640,6 +640,9 @@ public class Assembler {
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
             else str.append(type).append("$").append(ShortToExe(memRel.address));              
           } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
+          
+          carets.add(start, str.length(), mem);
+          
           if (listRel.size()>0) str.append(", ");  
           else {
             if (mem.dasmLocation==null && mem.userLocation==null) {
@@ -650,6 +653,8 @@ public class Assembler {
               lastMem=tmp;
             } else str.append("\n");            
           }
+          
+          start=str.length();
         }
         list.clear();
       }  

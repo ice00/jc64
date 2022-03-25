@@ -887,11 +887,12 @@ public class Disassembly {
              option.sidFreqCreateComment);      
 
       // add an offset due to previous strings added
-      actualCarets.setOffset(tmp.length());
       if (asSource) {
         assembler.setOrg(tmp, block.startAddress);        
+        actualCarets.setOffset(tmp.length());
         tmp.append(prg.csdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
       } else {    
+          actualCarets.setOffset(tmp.length());
           tmp.append(prg.cdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
         }       
     }
