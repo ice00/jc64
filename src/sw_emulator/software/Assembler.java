@@ -781,6 +781,7 @@ public class Assembler {
        MemoryDasm memRelHigh;
      
        int pos1=str.length();  // store initial position       
+       int start=pos1;
        
        // create starting command according to the kind of byte
        switch (aWord) {
@@ -864,6 +865,9 @@ public class Assembler {
                  isFirst=false;  
                }    
              }
+           carets.add(start, str.length(), memLow);
+           
+           
            if (list.size()>=2) str.append(", ");
            else {
              if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
@@ -874,6 +878,8 @@ public class Assembler {
                lastMem=tmp;
              } else str.append("\n");            
            }
+           
+           start=str.length();
          }
        }
      } 
