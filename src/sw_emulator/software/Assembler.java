@@ -2432,6 +2432,7 @@ public class Assembler {
         int position=0;
         
         int pos1=str.length();
+        int start=pos1;
                
         switch (aText) {
           case DOT_BYTE_TEXT:
@@ -2654,13 +2655,17 @@ public class Assembler {
                         }  
                   str.append((char)val);  
                 }   
-              break;  
-          }                                  
+              break;                          
+          }         
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
+          
+          start=str.length();
         }
       }
    }
@@ -2691,6 +2696,7 @@ public class Assembler {
        boolean isFirst=true;  
        
        int pos1=str.length();
+       int start=pos1;
          
        switch (aNumText) {
          case DOT_PTEXT_NUMTEXT:
@@ -2934,10 +2940,15 @@ public class Assembler {
                 }   
               break;              
           }   
+          
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
           }
+          
+          start=str.length();
        }     
      }       
    }   
@@ -2969,6 +2980,7 @@ public class Assembler {
        int position=0;
        
        int pos1=str.length(); 
+       int start=pos1;
          
        switch (aZeroText) {
          case DOT_NULL_ZEROTEXT:
@@ -3220,11 +3232,16 @@ public class Assembler {
               }
               break;               
           }   
+          
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
+          
+          start=str.length();
        }     
      }
    }
@@ -3255,6 +3272,7 @@ public class Assembler {
        boolean isFirst=true;
        
        int pos1=str.length(); 
+       int start=pos1;
          
        switch (aHighText) {
          case DOT_SHIFT_HIGHTEXT:
@@ -3494,11 +3512,16 @@ public class Assembler {
               }
               break;               
           }   
+          
+           carets.add(start, str.length(), mem);
+           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
 
           }
+          
+          start=str.length();
         }
       }
        
@@ -3531,6 +3554,7 @@ public class Assembler {
         int position=0;
         
         int pos1=str.length();
+        int start=pos1;
                
         switch (aShiftText) {
           case DOT_BYTE_SHIFTTEXT:
@@ -3760,12 +3784,17 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
-            }                                  
+            }       
+          
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
+          
+          start=str.length();
         }
       }            
    }  
@@ -3794,6 +3823,7 @@ public class Assembler {
         int position=0;
         
         int pos1=str.length();
+        int start=pos1;
                
         switch (aScreenText) {
           case DOT_BYTE_SCREENTEXT:
@@ -4020,12 +4050,17 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
-            }                                  
+          }     
+          
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
+          
+          start=str.length();
         }
       }
    }  
@@ -4053,6 +4088,7 @@ public class Assembler {
         int position=0;
         
         int pos1=str.length();
+        int start=pos1;
                
         switch (aPetasciiText) {
           case DOT_BYTE_PETASCIITEXT:
@@ -4272,12 +4308,17 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
-            }                                  
+          }           
+          
+          carets.add(start, str.length(), mem);
+          
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
             else str.append("\n");
             if (option.assembler==Assembler.Name.KICK && !isSpecial) str.setCharAt(position, ' ');
           }
+          
+          start=str.length();
         }
       }
    }  
@@ -4303,6 +4344,7 @@ public class Assembler {
        MemoryDasm memRelHigh;
      
        int pos1=str.length();  // store initial position
+       int start=pos1;
        int index=(int)(list.size()/2);
        
        // create starting command according to the kind of byte
@@ -4369,9 +4411,13 @@ public class Assembler {
                  isFirst=false;  
                }    
              }
+           carets.add(start, str.length(), memLow);
+           
            if (list.size()>=2) str.append(", ");
            else if (aStackWord==MACRO1_STACKWORD) str.append(")\n");
            else str.append("\n");
+           
+           start=str.length();
          }
        }           
       }
