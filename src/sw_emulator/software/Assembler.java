@@ -912,6 +912,7 @@ public class Assembler {
        int index=(int)(list.size()/2);
        
        int pos1=str.length();      // store initial position
+       int start=pos1;
         
        // create starting command according to the kind of byte
        switch (aWordSwapped) {
@@ -979,6 +980,9 @@ public class Assembler {
                isFirst=false;
              }                            
            }
+           
+           carets.add(start, str.length(), memLow);
+           
            if (list.size()>=2) str.append(", ");           
            else {
             if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
@@ -988,7 +992,9 @@ public class Assembler {
               aComment.flush(str);  
               lastMem=tmp;
             } else if (aWordSwapped==MACRO1_WORD_SWAPPED) str.append(")\n");
-                   else str.append("\n");        
+                   else str.append("\n");   
+            
+            start=str.length();
           }                      
          }
        }
@@ -1189,6 +1195,7 @@ public class Assembler {
        }
        
        int initial=str.length();
+       int start=initial;
        
        MemoryDasm mem;
        
@@ -1258,6 +1265,9 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem2.copy)))
                               .append(ByteToExe(Unsigned.done(mem3.copy)));
            }
+           
+           carets.add(start, str.length(), mem1);
+           
            if (list.size()>=3) str.append(", ");
            else {
             if (mem3.dasmLocation==null && mem3.userLocation==null) {
@@ -1269,6 +1279,8 @@ public class Assembler {
             } else if (aTribyte==MACRO1_TRIBYTE) str.append(")\n");
                 else str.append("\n");       
            }  
+           
+           start=str.length();
          }
        }   
      } 
@@ -1527,6 +1539,7 @@ public class Assembler {
        }
        
        int initial=str.length();
+       int start=initial;
        
        MemoryDasm mem;
        
@@ -1606,6 +1619,9 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem3.copy)))
                               .append(ByteToExe(Unsigned.done(mem4.copy)));
            }
+           
+           carets.add(start, str.length(), mem1);
+           
            if (list.size()>=4) str.append(", ");
            else {
              if (mem4.dasmLocation==null && mem4.userLocation==null) {
@@ -1617,8 +1633,7 @@ public class Assembler {
              } else str.append("\n");       
            }
            
-           
-           
+           start=str.length();           
          }
        }   
       } 
@@ -1720,6 +1735,7 @@ public class Assembler {
        MemoryDasm memRelHigh;
      
        int pos1=str.length();  // store initial position
+       int start=pos1;
        
        // create starting command according to the kind of byte
        switch (aAddress) {
@@ -1793,6 +1809,9 @@ public class Assembler {
                  isFirst=false;  
                }    
              }
+           
+           carets.add(start, str.length(), memLow);
+           
            if (list.size()>=2) str.append(", ");
            else {
              if (memHigh.dasmLocation==null && memHigh.userLocation==null) {
@@ -1803,6 +1822,8 @@ public class Assembler {
                lastMem=tmp;
              } else str.append("\n");       
            }
+           
+           start=str.length();
          }
        }
      } 
@@ -1854,6 +1875,7 @@ public class Assembler {
           lastMem=mem3;
           
           int initial=str.length();
+          int start=initial;
           
           // now we have one row of 3 bytes
           switch (aMonoSprite) {
@@ -2036,6 +2058,9 @@ public class Assembler {
               listRel2.pop();
               break;               
             }
+          carets.add(start, str.length(), mem1);
+          start=str.length();
+          
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
         } else {
@@ -2135,6 +2160,7 @@ public class Assembler {
           lastMem=mem3;
           
           int initial=str.length();
+          int start=initial;
           
           // now we have one row of 3 bytes
           switch (aMultiSprite) {
@@ -2314,9 +2340,13 @@ public class Assembler {
               listRel2.pop();
               listRel2.pop();
               break;               
-            }          
+            }      
+          carets.add(start, str.length(), mem1);
+          
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
+          
+          start=str.length();
         } else {
             // force to be as byte
             aByte.flush(str);
