@@ -39,6 +39,9 @@ public class SidFreq {
   /** Table size for ocatve/note */
   static final int OCT_NOTE_TABLE = 128-6;
   
+  /** Table size for ocatve/note */
+  static final int SCALE_NOTE_A4 = 33;
+  
   /** Table size */
   static final int TABLE = 96-6;
   
@@ -50,6 +53,9 @@ public class SidFreq {
   
   /** Short2 table size */
   static final int SHORT2=65;  
+  
+  /** Scale table size */
+  static final int SCALE_TABLE=56; 
   
   /** Error for note difference */
   static final int ERROR=6;
@@ -133,7 +139,7 @@ public class SidFreq {
     this.createComment=createComment;
     
     try {
-       while (linearTable()) {}
+      while (linearTable()) {}
       this.start=start;
     
       while (combinedTable()) {}
@@ -150,7 +156,10 @@ public class SidFreq {
       this.start=start;   
     
       while (highOctave()) {}
-      this.start=start;         
+      this.start=start;    
+      
+      while (linearScaleTable()) {}
+      this.start=start;
     
       // for short table looks only if there are no solution before
       if (actIndex<0) shortLinearTable();
@@ -165,6 +174,65 @@ public class SidFreq {
   
   
   ///////////////////////////
+  
+  
+  /**
+   * Search for tables in linear way (low / high or high / low) that has
+   * scale format (only CDEFGAB)
+   *  
+   * @return true if the table is fount
+   */
+  private boolean linearScaleTable() {
+    int i;  
+    int sid;
+    int high=-1;
+    int low=-1;   
+    
+    // check for high frequency table
+    for (i=start; i<end-SCALE_TABLE; i++) {
+      if (searchScaleHigh(i)) {
+        high=i;
+        break;         
+      }
+    }  
+    
+    // look if high table was fount
+    if (high==-1) return false;      
+    
+    // check for low frequency table (first part)
+    if (high>SCALE_TABLE) {
+      for (i=start; i<=high-SCALE_TABLE; i++) {
+        if (searchScaleLow(high, i)) {
+          low=i;
+          break;
+        }           
+      }
+    }
+    
+    // check for high frequency table (second part)
+    if ((low==-1) && (high<end-SCALE_TABLE*2)) {
+      for (i=high+SCALE_TABLE; i<end-SCALE_TABLE; i++) {
+        if (searchScaleLow(high, i)) {
+          low=i;
+          break;
+        }                 
+      }
+    }
+    
+    // look if low table was fount
+    if (low==-1) return false;
+    
+    if (checkGarbage(high, low)) return false;
+    
+    // get the A4 note
+    sid=Unsigned.done(inB[high+SCALE_NOTE_A4])*256+Unsigned.done(inB[low+SCALE_NOTE_A4]);  
+
+    addData(high, low, sid);
+    markMemory(high, high+SCALE_TABLE, 1);
+    markMemory(low, low+SCALE_TABLE, 1);
+    
+    return true;    
+  }
   
   
    /**
@@ -562,6 +630,29 @@ public class SidFreq {
    
     return true;   
   } 
+    
+   /**
+   * Search for the scale high frequency table in linear way
+   *
+   * @param index the index where to start the test
+   * @return true if there is a high frequency table in that position 
+   */ 
+  private boolean searchScaleHigh(int index) {
+    int i;
+    int actual=1;   
+   
+    // it must start with three 1
+    if ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1)) return false;
+   
+    // search for increasing numbers
+    for (i=index+3; i<index+SCALE_TABLE; i++) {
+      if ((int)(inB[i]& 0xFF)<actual) return false;
+      else actual=(int)(inB[i]& 0xFF);
+    }
+   
+    return true;   
+  } 
+  
   
    /**
    * Search for the high frequency table in linear way for octave/note format
@@ -881,6 +972,38 @@ public class SidFreq {
     }
    
     return true;    
+  }  
+  
+  /**
+    * Search for a low frequency scale table in linear way
+    * 
+    * @param high the position of high table
+    * @param index the index where to search for low table
+    * @return true if there is a low frequency table in that position 
+   */ 
+  private boolean searchScaleLow(int high, int index){
+    int i;
+    int note1, note2, note3, note4, note5, note6, note7;
+    int diff;
+   
+    // scan all notes
+    for (i=0; i<8; i++) {
+      note1=(int)(inB[high+i]& 0xFF)*256+(int)(inB[index+i]& 0xFF);
+      note2=(int)(inB[high+i+7]& 0xFF)*256+(int)(inB[index+i+7]& 0xFF);
+      note3=(int)(inB[high+i+7*2]& 0xFF)*256+(int)(inB[index+i+7*2]& 0xFF);
+      note4=(int)(inB[high+i+7*3]& 0xFF)*256+(int)(inB[index+i+7*3]& 0xFF);
+      note5=(int)(inB[high+i+7*4]& 0xFF)*256+(int)(inB[index+i+7*4]& 0xFF);
+  
+      diff=0;
+      diff+=Math.abs(note1*2 - note2);
+      diff+=Math.abs(note2*2 - note3);
+      diff+=Math.abs(note3*2 - note4);
+      diff+=Math.abs(note4*2 - note5);
+    
+      if (diff>ERROR) return false;
+    }
+   
+    return true;
   }  
   
   /**
