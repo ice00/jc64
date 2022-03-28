@@ -1098,7 +1098,7 @@ public class SidFreq {
     return false;      
   }     
     
-    /**
+  /**
    * Looks for an high octave table
    * 
    * @return true if it is find
@@ -1138,7 +1138,7 @@ public class SidFreq {
       addData(i+12, i, freq[9]/8);
       markMemory(i+12, i+23, 1);
       markMemory(i, i+12, 1);
-  
+      break; // we force to find only the fitst
     }    
     
     return false;      

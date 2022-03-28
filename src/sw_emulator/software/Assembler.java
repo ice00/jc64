@@ -320,6 +320,8 @@ public class Assembler {
           return;
         }
         
+        int start=str.length();
+        
         switch (aComment) {
           case SEMICOLON:
             str.append("; ").append(comment).append("\n");
@@ -331,6 +333,8 @@ public class Assembler {
             str.append("// ").append(comment).append("\n");
             break;
         }
+        
+        carets.add(start, str.length(), lastMem);
       }
     }  
    
@@ -4838,6 +4842,15 @@ public class Assembler {
      this.constant=constant;
      this.carets=carets;
    } 
+   
+   /**
+    * Get current carets
+    * 
+    * @return current cattets
+    */
+   public Carets getCarets() {
+     return carets;  
+   }
    
    /**
     * Put the value into the buffer and manage 

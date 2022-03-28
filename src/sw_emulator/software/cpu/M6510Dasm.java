@@ -496,6 +496,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
    * @param pc the programn counter for start position 
    * @return a string rapresentation of disassemble with comment
    */
+  @Override
   public String cdasm(byte[] buffer, int start, int end, long pc) {    
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
@@ -618,6 +619,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
    * @param pc the programn counter for start position 
    * @return a string rapresentation of disasemble with comment
    */
+  @Override
   public String csdasm(byte[] buffer, int start, int end, long pc) {
     String tmp;                  // local temp string
     String tmp2;                 // local temp string
@@ -627,6 +629,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
+    int pStart;
          
     result.setLength(0);
     result.append(addConstants());
@@ -656,11 +659,13 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             assembler.setLabel(result, mem);
             if (option.labelOnSepLine) result.append("\n");
           }  
-          
+                              
           // this is an instruction
           tmp=dasm(buffer); 
   
+          pStart=result.length();
           result.append(getInstrSpacesTabs(mem)).append(tmp).append(getInstrCSpacesTabs(tmp.length()));
+          assembler.getCarets().add(pStart, result.length(), mem);
           
           tmp2=dcom();   
           
