@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.swing.main.Carets;
+import sw_emulator.swing.main.Carets.Type;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.Option;
@@ -284,6 +285,9 @@ public class Assembler {
       public void flush(StringBuilder str) {
         // add the label if it was declared by dasm or user   
         String label=null;
+        
+        int start=str.length();
+         
         if (lastMem.userLocation!=null && !"".equals(lastMem.userLocation)) label=lastMem.userLocation;
         else if (lastMem.dasmLocation!=null && !"".equals(lastMem.dasmLocation)) label=lastMem.dasmLocation;
           
@@ -295,6 +299,8 @@ public class Assembler {
             str.append(label).append(":");
             break;
         }
+        
+        carets.add(start, str.length(), lastMem, Type.LABEL);
       }
     }    
    
@@ -334,7 +340,7 @@ public class Assembler {
             break;
         }
         
-        carets.add(start, str.length(), lastMem);
+        carets.add(start, str.length(), lastMem, Type.COMMENT);
       }
     }  
    
@@ -519,7 +525,7 @@ public class Assembler {
             break;  
         } 
               
-        carets.add(start, str.length(), lastMem);
+        carets.add(start, str.length(), lastMem, Type.BLOCK_COMMENT);
       }
     }    
       
@@ -645,7 +651,7 @@ public class Assembler {
             else str.append(type).append("$").append(ShortToExe(memRel.address));              
           } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.BYTE);
           
           if (listRel.size()>0) str.append(", ");  
           else {
@@ -869,7 +875,7 @@ public class Assembler {
                  isFirst=false;  
                }    
              }
-           carets.add(start, str.length(), memLow);
+           carets.add(start, str.length(), memLow, Type.WORD);
            
            
            if (list.size()>=2) str.append(", ");
@@ -985,7 +991,7 @@ public class Assembler {
              }                            
            }
            
-           carets.add(start, str.length(), memLow);
+           carets.add(start, str.length(), memLow, Type.WORD_SWAPPED);
            
            if (list.size()>=2) str.append(", ");           
            else {
@@ -1270,7 +1276,7 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem3.copy)));
            }
            
-           carets.add(start, str.length(), mem1);
+           carets.add(start, str.length(), mem1, Type.TRIBYTE);
            
            if (list.size()>=3) str.append(", ");
            else {
@@ -1624,7 +1630,7 @@ public class Assembler {
                               .append(ByteToExe(Unsigned.done(mem4.copy)));
            }
            
-           carets.add(start, str.length(), mem1);
+           carets.add(start, str.length(), mem1, Type.LONG);
            
            if (list.size()>=4) str.append(", ");
            else {
@@ -1814,7 +1820,7 @@ public class Assembler {
                }    
              }
            
-           carets.add(start, str.length(), memLow);
+           carets.add(start, str.length(), memLow, Type.ADDRESS);
            
            if (list.size()>=2) str.append(", ");
            else {
@@ -2062,7 +2068,7 @@ public class Assembler {
               listRel2.pop();
               break;               
             }
-          carets.add(start, str.length(), mem1);
+          carets.add(start, str.length(), mem1, Type.MONO_SPRITE);
           start=str.length();
           
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
@@ -2345,7 +2351,7 @@ public class Assembler {
               listRel2.pop();
               break;               
             }      
-          carets.add(start, str.length(), mem1);
+          carets.add(start, str.length(), mem1, Type.MULTI_SPRITE);
           
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
           aComment.flush(str);
@@ -2661,7 +2667,7 @@ public class Assembler {
                 }   
               break;                          
           }         
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -2945,7 +2951,7 @@ public class Assembler {
               break;              
           }   
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.NUM_TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -3237,7 +3243,7 @@ public class Assembler {
               break;               
           }   
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.ZERO_TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -3517,7 +3523,7 @@ public class Assembler {
               break;               
           }   
           
-           carets.add(start, str.length(), mem);
+           carets.add(start, str.length(), mem, Type.HIGH_TEXT);
            
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -3790,7 +3796,7 @@ public class Assembler {
               break;  
             }       
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.SHIFT_TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -4056,7 +4062,7 @@ public class Assembler {
               break;  
           }     
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.SCREEN_TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -4314,7 +4320,7 @@ public class Assembler {
               break;  
           }           
           
-          carets.add(start, str.length(), mem);
+          carets.add(start, str.length(), mem, Type.PETASCII_TEXT);
           
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -4415,7 +4421,7 @@ public class Assembler {
                  isFirst=false;  
                }    
              }
-           carets.add(start, str.length(), memLow);
+           carets.add(start, str.length(), memLow, Type.STACK_WORD);
            
            if (list.size()>=2) str.append(", ");
            else if (aStackWord==MACRO1_STACKWORD) str.append(")\n");

@@ -86,6 +86,7 @@ import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.memory.memoryState;
+import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
 import sw_emulator.swing.main.FileManager;
@@ -3356,6 +3357,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
       gotoMem(evt.getModifiersEx());
+      if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+        manageAction(disassembly.caretsPreview.getType(rSyntaxTextAreaDis.getCaretPosition()));
+      }
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -3400,6 +3404,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
       gotoMemSource(evt);
+      if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+        manageAction(disassembly.caretsSource.getType(rSyntaxTextAreaSource.getCaretPosition()));
+      }
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
     private void jMenuItemClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearDLabelActionPerformed
@@ -7303,4 +7310,25 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       //jTableMemory.setRowSelectionInterval(i, i);    
     }    
   }    
+
+  /**
+   * Manage the given typoe action in current memory cell selected
+   * 
+   * @param type the action type
+   */
+    private void manageAction(Carets.Type type) {
+      if (type==null) return;
+      
+      switch (type) {
+        case COMMENT:
+          execute(MEM_ADDCOMM);
+          break;
+        case BLOCK_COMMENT:
+          execute(MEM_ADDBLOCK);  
+          break; 
+        case LABEL:
+          execute(MEM_ADDLABEL);   
+          break;
+      }
+    }
 }

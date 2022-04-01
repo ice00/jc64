@@ -26,6 +26,11 @@ package sw_emulator.swing.main;
 import java.util.ArrayList;
 import sw_emulator.software.MemoryDasm;
 
+/**
+ * Caret container
+ * 
+ * @author ice
+ */
 class Caret {
    /** Starting caret position */  
    public int start;
@@ -35,6 +40,9 @@ class Caret {
    
    /** Memory associated with those caret interval */
    MemoryDasm memory;
+   
+   /** Type of action */
+   Carets.Type type;
 }
 
 /**
@@ -42,7 +50,36 @@ class Caret {
  * 
  * @author ice
  */
-public class Carets {        
+public class Carets {   
+  /**
+   * Type of action with double click on text
+   * 
+   * @author ice
+   */
+    public enum Type {
+      INSTR,  
+      BLOCK_COMMENT,  
+      COMMENT,
+      BYTE,
+      WORD,
+      TRIBYTE, 
+      WORD_SWAPPED, 
+      LONG, 
+      ADDRESS, 
+      MONO_SPRITE,
+      MULTI_SPRITE, 
+      TEXT, 
+      NUM_TEXT, 
+      ZERO_TEXT, 
+      HIGH_TEXT, 
+      SHIFT_TEXT, 
+      SCREEN_TEXT, 
+      PETASCII_TEXT, 
+      STACK_WORD, 
+      LABEL
+    }
+      
+    
   /** List of caret */  
   ArrayList<Caret> list=new ArrayList();
        
@@ -72,14 +109,16 @@ public class Carets {
    * @param start the starting caret position
    * @param end the ending caret position
    * @param memory the memory associated with those postions
+   * @param type the type of caret action
    */
 
-  public void add(int start, int end, MemoryDasm memory) {
+  public void add(int start, int end, MemoryDasm memory, Type type) {
      Caret caret=new Caret();
      
      caret.start=start+offset;
      caret.end=end+offset;
      caret.memory=memory;
+     caret.type=type;
      
      list.add(caret);
   }
@@ -93,6 +132,20 @@ public class Carets {
   public MemoryDasm getMemory(int position) {
     for (Caret caret: list) {
       if (position>=caret.start && position<=caret.end) return caret.memory;  
+    }  
+    
+    return null;
+  }
+  
+  /**
+   * Get the type associated with that postion or null
+   * 
+   * @param position the postion to search
+   * @return the memory associated with that postion
+   */
+  public Type getType(int position) {
+    for (Caret caret: list) {
+      if (position>=caret.start && position<=caret.end) return caret.type;  
     }  
     
     return null;

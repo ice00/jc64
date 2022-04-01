@@ -25,6 +25,7 @@ package sw_emulator.software.cpu;
 
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.main.Carets.Type;
 
 /**
  * Disasseble the M6510 code instructions
@@ -665,7 +666,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
   
           pStart=result.length();
           result.append(getInstrSpacesTabs(mem)).append(tmp).append(getInstrCSpacesTabs(tmp.length()));
-          assembler.getCarets().add(pStart, result.length(), mem);
+          assembler.getCarets().add(pStart, result.length(), mem, Type.INSTR);
           
           tmp2=dcom();   
           

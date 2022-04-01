@@ -28,6 +28,7 @@ import sw_emulator.software.Assembler;
 import sw_emulator.software.MemoryDasm;
 import static sw_emulator.software.cpu.M6510Dasm.A_NUL;
 import static sw_emulator.software.cpu.M6510Dasm.M_JAM;
+import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.Option;
 
@@ -352,6 +353,8 @@ public class CpuDasm implements disassembler {
         
         label=mem.userLocation;
         
+        int start=result.length();
+        
         if (option.assembler==Assembler.Name.KICK) {
           if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
           else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
@@ -359,8 +362,10 @@ public class CpuDasm implements disassembler {
           if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
           else tmp=label+" = $"+ShortToExe(mem.address);
         }
+                     
+        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));      
         
-        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
+        assembler.getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
           
         assembler.setComment(result, mem);                    
         
@@ -378,6 +383,9 @@ public class CpuDasm implements disassembler {
       else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
       
       if (label!=null) {
+         
+        int start=result.length();
+        
         if (option.assembler==Assembler.Name.KICK) {
           if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
           else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
@@ -385,8 +393,10 @@ public class CpuDasm implements disassembler {
           if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
           else tmp=label+" = $"+ShortToExe(mem.address);
         }
-        
+                      
         result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
+        
+        assembler.getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
           
         assembler.setComment(result, mem);                             
       }
