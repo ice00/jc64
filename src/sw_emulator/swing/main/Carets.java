@@ -76,7 +76,8 @@ public class Carets {
       SCREEN_TEXT, 
       PETASCII_TEXT, 
       STACK_WORD, 
-      LABEL
+      LABEL,
+      LABEL_REL
     }
       
     
@@ -101,6 +102,13 @@ public class Carets {
    */
   public void setOffset(int offset) {
     this.offset=offset;
+  }
+  
+  /**
+   * Get actual offset used
+   */
+  public int getOffset() {
+    return offset;  
   }
   
   /**

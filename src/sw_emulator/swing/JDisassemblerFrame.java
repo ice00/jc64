@@ -34,6 +34,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -3357,7 +3358,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
       gotoMem(evt.getModifiersEx());
-      if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+      if (evt.getClickCount() == 2 && !evt.isConsumed() && 
+          ((evt.getModifiersEx() & CTRL_DOWN_MASK) == CTRL_DOWN_MASK)) {
         manageAction(disassembly.caretsPreview.getType(rSyntaxTextAreaDis.getCaretPosition()));
       }
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
@@ -3404,7 +3406,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaSourceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMouseClicked
       gotoMemSource(evt);
-      if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+      if (evt.getClickCount() == 2 && !evt.isConsumed() && 
+          ((evt.getModifiersEx() & CTRL_DOWN_MASK) == CTRL_DOWN_MASK)) {
         manageAction(disassembly.caretsSource.getType(rSyntaxTextAreaSource.getCaretPosition()));
       }
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
@@ -7329,6 +7332,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         case LABEL:
           execute(MEM_ADDLABEL);   
           break;
+        case LABEL_REL:
+          execute(MEM_ADDLABELOP);
+          break;  
       }
     }
 }

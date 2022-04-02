@@ -351,6 +351,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
    */
   @Override
   public String dasm(byte[] buffer, int pos, long pc) {
+    int pStart;                // start position for caret
     String result="";          // result disassemble string
     int op=Unsigned.done(buffer[pos++]); // instruction opcode
 
@@ -384,27 +385,37 @@ public class M6510Dasm extends CpuDasm implements disassembler {
       case A_ZPG:     // zero page
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
+        
+        pStart=result.length();
         result+=getLabelZero(addr);
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         pc+=2;
         break;
       case A_ZPX:     // zero page x
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
+        
+        pStart=result.length();
         result+=getLabelZero(addr)+(upperCase? ",X": ",x");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         pc+=2;
         break;
       case A_ZPY:     // zero page y
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
+        
+        pStart=result.length();
         result+=getLabelZero(addr)+(upperCase? ",Y": ",y");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         
         pc+=2;
         break;
       case A_ABS:     // absolute
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
-        
+        pStart=result.length();
         result+=getLabel(addr);
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
@@ -418,7 +429,9 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         
+        pStart=result.length();
         result+=getLabel(addr)+(upperCase? ",X": ",x");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
@@ -432,8 +445,10 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         pos++;
-       
+        
+        pStart=result.length();
         result+=getLabel(addr)+(upperCase? ",Y": ",y");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         setLabel(addr);
         setLabelPlus(pc,1);
         setLabelPlus(pc,2);
@@ -455,20 +470,29 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         if (pos<buffer.length-1) addr=((Unsigned.done(buffer[pos+1])<<8) | Unsigned.done(buffer[pos++]));
         else addr=-1;
         pos++;
+        
+        pStart=result.length();
         result+="("+getLabel(addr)+")";
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         setLabel(addr);
         pc+=3;
         break;
       case A_IDX:     // indirect x
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
+        
+        pStart=result.length();
         result+="("+getLabelZero(addr)+(upperCase? ",X)": ",x)");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         pc+=2;
         break;
       case A_IDY:     // indirect y
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
         else addr=-1;
+        
+        pStart=result.length();
         result+="("+getLabelZero(addr)+(upperCase? "),Y": "),y");
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         pc+=2;
         break;
     }
@@ -504,6 +528,8 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
     MemoryDasm memRel2;          // memory related of second kind
+    int actualOffset;            // actual offset for caret action
+            
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -539,9 +565,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             assembler.setLabel(result, mem);
             result.append("\n");
           }  
-          
-          // this is an instruction
-          tmp=dasm(buffer); 
+               
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));
           if (this.pc-pc==2) {
             if (pos+1<buffer.length) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]));
@@ -554,6 +578,12 @@ public class M6510Dasm extends CpuDasm implements disassembler {
           }    
           for (int i=tmp2.length(); i<17; i++) // insert spaces
             tmp2+=" ";
+          
+          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
+          assembler.getCarets().setOffset(result.length()+actualOffset+tmp2.length());  // use new offset
+          tmp=dasm(buffer);                                                             // this is an instruction
+          assembler.getCarets().setOffset(actualOffset);                                // set old offset               
+          
           tmp=tmp2+tmp;
           tmp2="";
           for (int i=tmp.length(); i<43; i++) // insert spaces
@@ -627,6 +657,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
     MemoryDasm memRel2;          // memory related of second kind
+    int actualOffset;            // actual offset
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -661,11 +692,16 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             if (option.labelOnSepLine) result.append("\n");
           }  
                               
-          // this is an instruction
-          tmp=dasm(buffer); 
-  
           pStart=result.length();
-          result.append(getInstrSpacesTabs(mem)).append(tmp).append(getInstrCSpacesTabs(tmp.length()));
+          result.append(getInstrSpacesTabs(mem));
+          
+          // this is an instruction         
+          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
+          assembler.getCarets().setOffset(result.length()+actualOffset);                // use new offset
+          tmp=dasm(buffer);                                                             // this is an instruction
+          assembler.getCarets().setOffset(actualOffset);                                // set old offset   
+                  
+          result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));
           assembler.getCarets().add(pStart, result.length(), mem, Type.INSTR);
           
           tmp2=dcom();   
