@@ -565,6 +565,11 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             assembler.setLabel(result, mem);
             result.append("\n");
           }  
+          
+          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
+          assembler.getCarets().setOffset(result.length()+actualOffset+17);             // use new offset
+          tmp=dasm(buffer);                                                             // this is an instruction
+          assembler.getCarets().setOffset(actualOffset);                                // set old offset     
                
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));
           if (this.pc-pc==2) {
@@ -577,12 +582,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             else tmp2+=" ?????";
           }    
           for (int i=tmp2.length(); i<17; i++) // insert spaces
-            tmp2+=" ";
-          
-          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
-          assembler.getCarets().setOffset(result.length()+actualOffset+tmp2.length());  // use new offset
-          tmp=dasm(buffer);                                                             // this is an instruction
-          assembler.getCarets().setOffset(actualOffset);                                // set old offset               
+            tmp2+=" ";                   
           
           tmp=tmp2+tmp;
           tmp2="";
