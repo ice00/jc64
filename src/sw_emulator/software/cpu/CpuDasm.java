@@ -281,10 +281,18 @@ public class CpuDasm implements disassembler {
     MemoryDasm mem=memory[(int)addr];
            
     if (mem.isInside && !mem.isGarbage) {
-      if (mem.type=='+' || mem.type=='-') memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);  
-      else if (mem.type=='^') memory[mem.related & 0xFFFF].dasmLocation="W"+ShortToExe(mem.related & 0xFFFF);  
-        
-      mem.dasmLocation="W"+ShortToExe((int)addr);
+        switch (mem.type) {
+            case '+':
+            case '-':
+                memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);
+                break;
+            case '^':
+                memory[mem.related & 0xFFFF].dasmLocation="W"+ShortToExe(mem.related & 0xFFFF);
+                break;
+            default:
+                mem.dasmLocation="W"+ShortToExe((int)addr); // create dasm location only if there is not a related one
+                break;
+        }
     }
   }
   
@@ -328,81 +336,6 @@ public class CpuDasm implements disassembler {
       } 
     }
   }  
-  
-  /**
-   * Add constants to the source
-   * 
-   * @return the constants
-   */
-  protected String addConstants() {
-    String label;  
-    String tmp;
-      
-    StringBuilder result=new StringBuilder();
-    
-    for (MemoryDasm mem : memory) {
-      if (mem.isInside && !mem.isGarbage) continue;
-      
-      // for garbage inside, only if there is a user label makes it outs
-      if (mem.isGarbage && mem.userLocation!=null && !"".equals(mem.userLocation)) {
-        
-        // look for block comment
-        if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
-          assembler.setBlockComment(result, mem);
-        } 
-        
-        label=mem.userLocation;
-        
-        int start=result.length();
-        
-        if (option.assembler==Assembler.Name.KICK) {
-          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
-          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
-        } else {
-          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
-          else tmp=label+" = $"+ShortToExe(mem.address);
-        }
-                     
-        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));      
-        
-        assembler.getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
-          
-        assembler.setComment(result, mem);                    
-        
-        continue;
-      } 
-      
-      // look for block comment
-      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
-        assembler.setBlockComment(result, mem);
-      }   
-      
-      // look for constant
-      label=null;
-      if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
-      else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
-      
-      if (label!=null) {
-         
-        int start=result.length();
-        
-        if (option.assembler==Assembler.Name.KICK) {
-          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
-          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
-        } else {
-          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
-          else tmp=label+" = $"+ShortToExe(mem.address);
-        }
-                      
-        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
-        
-        assembler.getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
-          
-        assembler.setComment(result, mem);                             
-      }
-    }
-    return result.append("\n").toString();
-  }
   
   private static final String SPACES="                                                                               "; 
   private static final String TABS="\t\t\t\t\t\t\t\t\t\t";

@@ -61,6 +61,16 @@ public class Assembler {
   protected static String getDataCSpacesTabs(int skip) {
     return SPACES.substring(0, (option.numDataCSpaces-skip<0 ? 1: option.numDataCSpaces-skip))+TABS.substring(0, option.numDataCTabs);
   }   
+    
+  /**
+   * Return spaces/tabs to use in comment after instruction
+   * 
+   * @param skip amount to skip
+   * @return the spaces/tabs
+   */
+  protected String getInstrCSpacesTabs(int skip) {
+    return SPACES.substring(0, (option.numInstrCSpaces-skip<0 ? 1:option.numInstrCSpaces-skip))+TABS.substring(0, option.numInstrCTabs);
+  } 
    
   /**
    * Convert a unsigned byte (containing in a int) to Exe upper case 2 chars
@@ -5442,6 +5452,82 @@ public class Assembler {
      return aByte;
    }   
 
+  /**
+   * Add constants to the source
+   * 
+   * @add constant to source that are in memory
+   * 
+   * @return the constants
+   */
+  protected String addConstants(MemoryDasm[] memory) {
+    String label;  
+    String tmp;
+      
+    StringBuilder result=new StringBuilder();
+    
+    for (MemoryDasm mem : memory) {
+      if (mem.isInside && !mem.isGarbage) continue;
+      
+      // for garbage inside, only if there is a user label makes it outs
+      if (mem.isGarbage && mem.userLocation!=null && !"".equals(mem.userLocation)) {
+        
+        // look for block comment
+        if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+          setBlockComment(result, mem);
+        } 
+        
+        label=mem.userLocation;
+        
+        int start=result.length();
+        
+        if (option.assembler==Assembler.Name.KICK) {
+          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
+          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
+        } else {
+          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
+          else tmp=label+" = $"+ShortToExe(mem.address);
+        }
+                     
+        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));      
+        
+        getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
+          
+        setComment(result, mem);                    
+        
+        continue;
+      } 
+      
+      // look for block comment
+      if (mem.userBlockComment!=null && !"".equals(mem.userBlockComment)) {  
+        setBlockComment(result, mem);
+      }   
+      
+      // look for constant
+      label=null;
+      if (mem.userLocation!=null && !"".equals(mem.userLocation)) label=mem.userLocation;
+      else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) label=mem.dasmLocation;
+      
+      if (label!=null) {
+         
+        int start=result.length();
+        
+        if (option.assembler==Assembler.Name.KICK) {
+          if (mem.address<=0xFF) tmp=".label "+label+" = $"+ByteToExe(mem.address);  
+          else tmp=".label "+label+" = $"+ShortToExe(mem.address);  
+        } else {
+          if (mem.address<=0xFF) tmp=label+" = $"+ByteToExe(mem.address);  
+          else tmp=label+" = $"+ShortToExe(mem.address);
+        }
+                      
+        result.append(tmp).append(getInstrCSpacesTabs(tmp.length()));          
+        
+        getCarets().add(start, result.length(), mem, Carets.Type.LABEL);
+          
+        setComment(result, mem);                             
+      }
+    }
+    return result.append("\n").toString();
+  }
 }
                
 

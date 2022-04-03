@@ -3625,7 +3625,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     boolean wasGarbage=false;    // true if we were decoding garbage
         
     result.setLength(0);
-    result.append(addConstants());
+    //result.append(addConstants());
     
     this.pos=pos;
     this.pc=pc;
@@ -3755,7 +3755,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     boolean wasGarbage=false;    // true if we were decoding garbage
          
     result.setLength(0);
-    result.append(addConstants());
+    //result.append(addConstants());
     
     this.pos=pos;
     this.pc=pc;

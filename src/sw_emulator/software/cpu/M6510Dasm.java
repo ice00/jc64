@@ -380,6 +380,8 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         else value=0;
         
         result+="#"+getLabelImm(pc+1, value);
+        setLabelPlus(pc,1);
+        
         pc+=2;
         break;
       case A_ZPG:     // zero page
@@ -389,6 +391,8 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         pStart=result.length();
         result+=getLabelZero(addr);
         assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
+        setLabelPlus(pc,1);
+        
         pc+=2;
         break;
       case A_ZPX:     // zero page x
@@ -398,6 +402,8 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         pStart=result.length();
         result+=getLabelZero(addr)+(upperCase? ",X": ",x");
         assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
+        setLabelPlus(pc,1);
+        
         pc+=2;
         break;
       case A_ZPY:     // zero page y
@@ -406,7 +412,8 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         
         pStart=result.length();
         result+=getLabelZero(addr)+(upperCase? ",Y": ",y");
-        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);  
+        setLabelPlus(pc,1);
         
         pc+=2;
         break;
@@ -463,6 +470,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         
         result+=getLabel(addr);
         setLabel(addr);
+        setLabelPlus(pc,1);
         
         pc+=2;
         break;
@@ -475,6 +483,9 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         result+="("+getLabel(addr)+")";
         assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
         setLabel(addr);
+        setLabelPlus(pc,1);
+        setLabelPlus(pc,2);
+        
         pc+=3;
         break;
       case A_IDX:     // indirect x
@@ -483,7 +494,9 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         
         pStart=result.length();
         result+="("+getLabelZero(addr)+(upperCase? ",X)": ",x)");
-        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);  
+        setLabelPlus(pc,1);
+        
         pc+=2;
         break;
       case A_IDY:     // indirect y
@@ -492,7 +505,9 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         
         pStart=result.length();
         result+="("+getLabelZero(addr)+(upperCase? "),Y": "),y");
-        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);   
+        assembler.getCarets().add(pStart, result.length(), this.memory[(int)pc], Type.LABEL_REL);  
+        setLabelPlus(pc,1);
+        
         pc+=2;
         break;
     }
@@ -535,7 +550,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     boolean wasGarbage=false;    // true if we were decoding garbage
         
     result.setLength(0);
-    result.append(addConstants());
+ //   result.append(addConstants());
     
     this.pos=pos;
     this.pc=pc;
@@ -664,7 +679,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     int pStart;
          
     result.setLength(0);
-    result.append(addConstants());
+  //  result.append(addConstants());
     
     this.pos=pos;
     this.pc=pc;

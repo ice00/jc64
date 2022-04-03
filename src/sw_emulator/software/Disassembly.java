@@ -869,6 +869,9 @@ public class Disassembly {
     Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
     
     if (option.useSidFreq) SidFreq.instance.reset();    
+    
+    actualCarets.setOffset(tmp.length());
+    tmp.append(assembler.addConstants(memory));
         
     Iterator<Block> iter=blocks.iterator();
     while (iter.hasNext()) {
