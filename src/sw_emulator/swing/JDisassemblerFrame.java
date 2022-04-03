@@ -25,6 +25,7 @@ package sw_emulator.swing;
 
 import java.awt.AWTException;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -53,12 +54,15 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.prefs.Preferences;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -113,6 +117,9 @@ import sw_emulator.swing.table.MemoryTableCellRenderer;
 public class JDisassemblerFrame extends javax.swing.JFrame implements userAction {
   /** Option to use */
   Option option=new Option();
+  
+  /** Icon images */
+  List<Image> iconImages = new ArrayList<>();
   
   /** Project to use */
   Project project;
@@ -207,10 +214,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
     /**
      * Creates new form JFrameDisassembler
-     * 
-     * @param option the option to use
      */
-    public JDisassemblerFrame() {        
+    public JDisassemblerFrame() {  
+        try {
+          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon128.png")).getImage());
+          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon64.png")).getImage());
+          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon32.png")).getImage());
+        } catch (Exception e) {
+            System.err.println(e);
+          }        
+        
         initComponents();
 
         Shared.framesList.add(this);
@@ -1323,6 +1336,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
+        setIconImages(iconImages);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
