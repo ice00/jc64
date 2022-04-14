@@ -47,7 +47,7 @@ public class Compiler {
   /**
    * Set the compiler to use 
    * 
-   * @param name the name of compiler
+   * @param option the option to use 
    */
   public void setOption(Option option) {
     this.option=option; 

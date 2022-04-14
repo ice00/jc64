@@ -367,7 +367,9 @@ public class Disassembly {
           assembler.setWord(builder, inB[0xC], inB[0xD], "play sound");
         } else {
           if (psidIAddr!=0) assembler.setByteRelRev(builder, psidIAddr, option.psidInitSongsLabel);
+          else assembler.setWord(builder, (byte)0, (byte)0, "init songs");
           if (psidPAddr!=0) assembler.setByteRelRev(builder, psidPAddr, option.psidPlaySoundsLabel);          
+          else assembler.setWord(builder, (byte)0, (byte)0, "play sound");
         }
         assembler.setWord(builder, inB[0x0E], inB[0x0F], "songs");
         assembler.setWord(builder, inB[0x10], inB[0x12], "default song");
