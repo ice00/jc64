@@ -23,7 +23,11 @@
  */
 package sw_emulator.swing;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
@@ -88,6 +92,13 @@ public class Shared {
     return ret.toUpperCase(Locale.ENGLISH);
   }
   
+  /**
+   * Scroll cursor to center of view in table
+   * 
+   * @param table th table to use
+   * @param rowIndex the row that must be at center
+   * @param vColIndex the column to use
+   */
   public static void scrollToCenter(JTable table, int rowIndex, int vColIndex) {
     if (!(table.getParent() instanceof JViewport)) {
       return;

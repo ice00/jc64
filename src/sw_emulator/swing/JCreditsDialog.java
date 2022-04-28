@@ -67,12 +67,12 @@ public class JCreditsDialog extends javax.swing.JDialog {
         getContentPane().add(jPanelDn, java.awt.BorderLayout.PAGE_END);
 
         jTextPaneCredits.setContentType("text/html"); // NOI18N
-        jTextPaneCredits.setText("<html>\n  <head>\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>Code:</b><br>\n     Stefano Tognon (Ice00)\n     <br><br>\n     <b>External syntax highlight library:</b><br>\n     Robert Futrell\n     <br><br>\n<b>Flat look & feel:</b><br>\nFormDev Software GmbH\n  <br><br>\n<b>Beta testing:</b><br>\nBacchus/Fairligh<br>\nChris Abbott \n    </p>\n  </body>\n</html>\n");
+        jTextPaneCredits.setText("<html>\n  <head>\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>Code:</b><br>\n     Stefano Tognon (Ice00)\n     <br><br>\n     <b>External syntax highlight library:</b><br>\n     Robert Futrell\n     <br><br>\n<b>Flat look & feel:</b><br>\nFormDev Software GmbH\n  <br><br>\n<b>Beta testing:</b><br>\nBacchus/Fairligh<br>\nChris Abbott \n  <br><br>\n<b>C64 font:</b><br>\nhttps://style64.org/c64-truetype\n    </p>\n  </body>\n</html>\n");
         jScrollPane.setViewportView(jTextPaneCredits);
 
         getContentPane().add(jScrollPane, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(410, 330));
+        setSize(new java.awt.Dimension(416, 365));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

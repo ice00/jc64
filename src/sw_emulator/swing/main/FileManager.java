@@ -117,7 +117,7 @@ public class FileManager {
       option.maxAddressAggregate = in.readInt();
       option.maxStackWordAggregate = in.readInt();
       option.tmpPath = in.readUTF();
-      
+     
       option.dasmF3Comp = in.readBoolean();
       option.dasmStarting = Assembler.Starting.valueOf(in.readUTF());
       option.dasmOrigin = Assembler.Origin.valueOf(in.readUTF());
@@ -661,7 +661,7 @@ public class FileManager {
       out.writeBoolean(option.commentVic20Block4);
       out.writeBoolean(option.commentVic20BasicRom);
       out.writeBoolean(option.commentVic20KernalRom); 
-      
+
       out.writeUTF(option.assembler.name());
       
       // 1.0
