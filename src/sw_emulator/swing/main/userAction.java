@@ -290,6 +290,9 @@ public interface userAction {
   /** Freeze source */
   public static final int SOURCE_FREEZE = 88;
   
+  /** Show hex view */
+  public static final int MEM_HEX = 89;
+  
   
   /**
    * Execute the passed user action

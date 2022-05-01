@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupType">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Hex/Text/Char view"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1024, 803]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -18,7 +26,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,58,0,0,2,-86"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-22,0,0,3,-22"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -33,15 +41,259 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanelUp">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[468, 85]"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="North"/>
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jPanelColor" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="jLabelHex" min="-2" pref="183" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabelText" min="-2" pref="176" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                  <Component id="jLabelChar" min="-2" pref="183" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jLabelMultiChar" min="-2" pref="182" max="-2" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanelColor" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelHex" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
+                      <Component id="jLabelText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelChar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMultiChar" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanelColor">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonUpper" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonLower" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="j16ColorPanelBackground" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Component id="jLabelBackground" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelForeground" min="-2" max="-2" attributes="0"/>
+                          <Component id="j16ColorPanelForeground" min="-2" pref="190" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelCommon1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="j16ColorPanelCommon1" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelCommon4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="j16ColorPanelCommon2" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelCommon4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Component id="j16ColorPanelCommon2" pref="16" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelCommon1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Component id="j16ColorPanelCommon1" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabelBackground" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelForeground" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="j16ColorPanelBackground" pref="16" max="32767" attributes="0"/>
+                                          <Component id="j16ColorPanelForeground" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jRadioButtonUpper" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jRadioButtonLower" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabelBackground">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Background:"/>
+              </Properties>
+            </Component>
+            <Container class="sw_emulator.swing.J16ColorPanel" name="j16ColorPanelBackground">
+              <Properties>
+                <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="1" type="code"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="j16ColorPanelBackgroundMousePressed"/>
+              </Events>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+            </Container>
+            <Container class="sw_emulator.swing.J16ColorPanel" name="j16ColorPanelForeground">
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="j16ColorPanelForegroundMousePressed"/>
+              </Events>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabelForeground">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Foreground:"/>
+              </Properties>
+            </Component>
+            <Container class="sw_emulator.swing.J16ColorPanel" name="j16ColorPanelCommon1">
+              <Properties>
+                <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="2" type="code"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="j16ColorPanelCommon1MousePressed"/>
+              </Events>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabelCommon1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Common1:"/>
+              </Properties>
+            </Component>
+            <Container class="sw_emulator.swing.J16ColorPanel" name="j16ColorPanelCommon2">
+              <Properties>
+                <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="3" type="code"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="j16ColorPanelCommon2MousePressed"/>
+              </Events>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabelCommon4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Common2:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonUpper">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupType"/>
+                </Property>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Upper"/>
+                <Property name="toolTipText" type="java.lang.String" value="Select upper c64 text"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonUpperItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonLower">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupType"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Lower"/>
+                <Property name="toolTipText" type="java.lang.String" value="Select lower C64 text"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonLowerItemStateChanged"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="jLabelHex">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Hex"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelText">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Text"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelChar">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Char definition"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelMultiChar">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Multicolor char definition"/>
+          </Properties>
+        </Component>
+      </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanelTables">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[682, 300]"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
@@ -52,27 +304,29 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPaneAddr" min="-2" pref="79" max="-2" attributes="0"/>
-                  <EmptySpace pref="226" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAddr" min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPaneHex" min="-2" pref="202" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneHex1" min="-2" pref="202" max="-2" attributes="0"/>
-                      <EmptySpace pref="385" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPaneText" min="-2" pref="202" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAddrC" min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPaneMono" min="-2" pref="202" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPaneMulti" min="-2" pref="202" max="-2" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPaneAddr" pref="294" max="32767" attributes="0"/>
-              <Component id="jScrollPaneHex" alignment="1" pref="0" max="32767" attributes="0"/>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPaneHex1" alignment="0" pref="294" max="32767" attributes="0"/>
-              </Group>
+              <Component id="jScrollPaneAddr" pref="907" max="32767" attributes="0"/>
+              <Component id="jScrollPaneHex" alignment="1" pref="907" max="32767" attributes="0"/>
+              <Component id="jScrollPaneText" alignment="0" pref="907" max="32767" attributes="0"/>
+              <Component id="jScrollPaneMono" alignment="0" pref="907" max="32767" attributes="0"/>
+              <Component id="jScrollPaneMulti" alignment="0" pref="907" max="32767" attributes="0"/>
+              <Component id="jScrollPaneAddrC" alignment="0" pref="907" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -90,9 +344,12 @@
             <Component class="javax.swing.JTable" name="jTableAddr">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="1" rowCount="4">
-                    <Column editable="true" title="Address" type="java.lang.Object"/>
+                  <Table columnCount="1" rowCount="0">
+                    <Column editable="false" title="Addr." type="java.lang.String"/>
                   </Table>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
                 </Property>
               </Properties>
             </Component>
@@ -111,22 +368,25 @@
             <Component class="javax.swing.JTable" name="jTableHex">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="4">
-                    <Column editable="true" title="0" type="java.lang.String"/>
-                    <Column editable="true" title="1" type="java.lang.String"/>
-                    <Column editable="true" title="2" type="java.lang.String"/>
-                    <Column editable="true" title="3" type="java.lang.String"/>
-                    <Column editable="true" title="4" type="java.lang.String"/>
-                    <Column editable="true" title="5" type="java.lang.String"/>
-                    <Column editable="true" title="6" type="java.lang.String"/>
-                    <Column editable="true" title="7" type="java.lang.String"/>
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="0" type="java.lang.String"/>
+                    <Column editable="false" title="1" type="java.lang.String"/>
+                    <Column editable="false" title="2" type="java.lang.String"/>
+                    <Column editable="false" title="3" type="java.lang.String"/>
+                    <Column editable="false" title="4" type="java.lang.String"/>
+                    <Column editable="false" title="5" type="java.lang.String"/>
+                    <Column editable="false" title="6" type="java.lang.String"/>
+                    <Column editable="false" title="7" type="java.lang.String"/>
                   </Table>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
                 </Property>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPaneHex1">
+        <Container class="javax.swing.JScrollPane" name="jScrollPaneText">
           <Properties>
             <Property name="verticalScrollBarPolicy" type="int" value="22"/>
           </Properties>
@@ -136,19 +396,109 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTableHex1">
+            <Component class="javax.swing.JTable" name="jTableText">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="c64PlainFont" type="code"/>
+                </Property>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="0" type="java.lang.String"/>
+                    <Column editable="false" title="1" type="java.lang.String"/>
+                    <Column editable="false" title="2" type="java.lang.String"/>
+                    <Column editable="false" title="3" type="java.lang.String"/>
+                    <Column editable="false" title="4" type="java.lang.String"/>
+                    <Column editable="false" title="5" type="java.lang.String"/>
+                    <Column editable="false" title="6" type="java.lang.String"/>
+                    <Column editable="false" title="7" type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPaneMono">
+          <Properties>
+            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTableMono">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="4">
-                    <Column editable="true" title="0" type="java.lang.String"/>
-                    <Column editable="true" title="1" type="java.lang.String"/>
-                    <Column editable="true" title="2" type="java.lang.String"/>
-                    <Column editable="true" title="3" type="java.lang.String"/>
-                    <Column editable="true" title="4" type="java.lang.String"/>
-                    <Column editable="true" title="5" type="java.lang.String"/>
-                    <Column editable="true" title="6" type="java.lang.String"/>
-                    <Column editable="true" title="7" type="java.lang.String"/>
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="0" type="java.lang.Integer"/>
+                    <Column editable="false" title="1" type="java.lang.Integer"/>
+                    <Column editable="false" title="2" type="java.lang.Integer"/>
+                    <Column editable="false" title="3" type="java.lang.Integer"/>
+                    <Column editable="false" title="4" type="java.lang.Integer"/>
+                    <Column editable="false" title="5" type="java.lang.Integer"/>
+                    <Column editable="false" title="6" type="java.lang.Integer"/>
+                    <Column editable="false" title="7" type="java.lang.Integer"/>
                   </Table>
+                </Property>
+                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableMono.setDefaultRenderer(Integer.class, rendererMono);"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPaneMulti">
+          <Properties>
+            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTableMulti">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="0">
+                    <Column editable="false" title="0-1" type="java.lang.Integer"/>
+                    <Column editable="false" title="1-2" type="java.lang.Integer"/>
+                    <Column editable="false" title="2-3" type="java.lang.Integer"/>
+                    <Column editable="false" title="3-4" type="java.lang.Integer"/>
+                  </Table>
+                </Property>
+                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableMulti.setDefaultRenderer(Integer.class, rendererMulti);"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPaneAddrC">
+          <Properties>
+            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTableAddrC">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="1" rowCount="0">
+                    <Column editable="true" title="Addr." type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="1"/>
                 </Property>
               </Properties>
             </Component>

@@ -193,6 +193,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Freeze source frame */
   JFreezeFrame jFreezeFrame=new JFreezeFrame();
   
+  /** Hex dialog */
+  JHexDialog jHexDialog=new JHexDialog(this, true);
+  
   /** Find dialog for source */
   FindDialog findDialogSource;
   
@@ -492,6 +495,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jMenuItemTextScreen2 = new javax.swing.JMenuItem();
         jMenuItemTextPetascii2 = new javax.swing.JMenuItem();
         jMenuItemGarbage = new javax.swing.JMenuItem();
+        jSeparatorMem3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemHex = new javax.swing.JMenuItem();
         jPanelToolBar = new javax.swing.JPanel();
         jToolBarFile = new javax.swing.JToolBar();
         jButtonNewProject = new javax.swing.JButton();
@@ -1333,6 +1338,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             }
         });
         jPopupMenuMemory.add(jMenuItemGarbage);
+        jPopupMenuMemory.add(jSeparatorMem3);
+
+        jMenuItemHex.setText("Show hex/text/char view");
+        jMenuItemHex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHexActionPerformed(evt);
+            }
+        });
+        jPopupMenuMemory.add(jMenuItemHex);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JC64Dis");
@@ -4244,6 +4258,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_FREEZE);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItemHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHexActionPerformed
+      execute(MEM_HEX);
+    }//GEN-LAST:event_jMenuItemHexActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4391,6 +4409,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JMenuItem jMenuItemFindSeq;
     private javax.swing.JMenuItem jMenuItemFindSource;
     private javax.swing.JMenuItem jMenuItemGarbage;
+    private javax.swing.JMenuItem jMenuItemHex;
     private javax.swing.JMenuItem jMenuItemImportLabels;
     private javax.swing.JMenuItem jMenuItemLicense;
     private javax.swing.JMenuItem jMenuItemLong;
@@ -4518,6 +4537,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     private javax.swing.JPopupMenu.Separator jSeparatorHelp3;
     private javax.swing.JPopupMenu.Separator jSeparatorMem1;
     private javax.swing.JPopupMenu.Separator jSeparatorMem2;
+    private javax.swing.JPopupMenu.Separator jSeparatorMem3;
     private javax.swing.JPopupMenu.Separator jSeparatorOption;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu0;
     private javax.swing.JPopupMenu.Separator jSeparatorPopUpMenu1;
@@ -4802,6 +4822,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          wizard();  
          if (option.forceCompilation) disassembly(true); 
          break;
+       case MEM_HEX:
+         showHex();  
+         break;           
          
        case SOURCE_DASM:
          export(Name.DASM);
@@ -7350,5 +7373,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           execute(MEM_ADDLABELOP);
           break;  
       }
+    }
+    
+    /**
+     * Show hex dialog
+     */
+    private void showHex() {
+      int row=jTableMemory.getSelectedRow();
+      if (row==-1) return;  
+      
+      int end;
+      
+      for (end=row+1; end<=0xFFFF; end++) {
+        if (!project.memory[end].isInside) break;  
+      }      
+      
+      jHexDialog.setUp(project.memory, row, end-1);
+      jHexDialog.setVisible(true);
     }
 }

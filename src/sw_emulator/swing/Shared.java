@@ -23,11 +23,7 @@
  */
 package sw_emulator.swing;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Rectangle;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
