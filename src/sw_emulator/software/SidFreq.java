@@ -1139,7 +1139,7 @@ public class SidFreq {
       addData(i+12, i, freq[9]/8);
       markMemory(i+12, i+23, 1);
       markMemory(i, i+12, 1);
-      break; // we force to find only the fitst
+      break; // we force to find only the first
     }    
     
     return false;      
@@ -1186,7 +1186,7 @@ public class SidFreq {
         addData(i+1, i, freq[9]/8);
         markMemory(i+13, i+26, 1);
         markMemory(i, i+13, 1);
- 
+        break; // we force to find only the first 
     }      
     
     return false;      
@@ -1233,7 +1233,7 @@ public class SidFreq {
         addData(i+1, i, freq[9]*16);
         markMemory(i+13, i+26, 1);
         markMemory(i, i+13, 1);
- 
+        break; // we force to find only the first
     }      
     
     return false;      

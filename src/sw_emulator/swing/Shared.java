@@ -37,7 +37,7 @@ import javax.swing.JViewport;
  */
 public class Shared {
   /** List of used frames. Each frame must register here */  
-  public static ArrayList framesList=new ArrayList();   
+  public static final ArrayList framesList=new ArrayList();   
   
   /** Version of the application */
   public static final String VERSION="2.1";
