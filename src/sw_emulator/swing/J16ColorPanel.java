@@ -1,9 +1,26 @@
 /*
- * J16ColorPanel.java
+ * @(#)J16ColorPanel.java 2004/07/01
  *
- * Created on 1 luglio 2004, 22.24
+ * ICE Team free software group
+ *
+ * This file is part of C64 Java Software Emulator.
+ * See README for copyright notice.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *  02111-1307  USA.
  */
-
 package sw_emulator.swing;
 
 import java.awt.*;
@@ -67,12 +84,13 @@ public class J16ColorPanel extends javax.swing.JPanel {
      "Light gray"
   };
     
-  /** Creates new form J8ColorPanel */
+  /** 
+   * Creates new form J8ColorPanel 
+   */
   public J16ColorPanel() {
     initComponents();
     setToolTipText(""); // register for events
     setOpaque(true);
-    //setBackground(Color.white);
     setRequestFocusEnabled(false);    
   }
     
@@ -93,11 +111,11 @@ public class J16ColorPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      // Add your handling code here:
       selectedIndex=getIndexForLocation(evt.getX(), evt.getY());  
       repaint();
     }//GEN-LAST:event_formMousePressed
 
+  @Override
   public void paintComponent(java.awt.Graphics g) {
     int w=getWidth();
     int h=getHeight();
@@ -148,10 +166,12 @@ public class J16ColorPanel extends javax.swing.JPanel {
     return index;
   }
  
+  @Override
   public String getToolTipText(MouseEvent e) {
     return colorName[getIndexForLocation(e.getX(), e.getY())];  
   }
  
+  @Override
   public Dimension getPreferredSize() {
     int x = 16 * (swatchSize.width + gap.width) -1;
     int y =  2*(swatchSize.height + gap.height) -1;

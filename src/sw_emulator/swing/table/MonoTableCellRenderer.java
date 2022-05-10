@@ -27,9 +27,6 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import sw_emulator.software.Disassembly;
-import sw_emulator.swing.main.Block;
-import static sw_emulator.swing.table.DataTableModelMemory.COLUMNS.ID;
 
 /**
  * Color the cells according to the mono char

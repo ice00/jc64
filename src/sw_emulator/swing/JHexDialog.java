@@ -74,7 +74,7 @@ public class JHexDialog extends javax.swing.JDialog {
       Shared.framesList.add(this);
         
       try {
-          c64Font = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/sw_emulator/swing/C64_Pro_Mono-STYLE.ttf").getFile()));
+          c64Font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource("/sw_emulator/swing/C64_Pro_Mono-STYLE.ttf").openStream());
           c64BoldFont = c64Font.deriveFont(Font.BOLD, 12);
           c64PlainFont = c64Font.deriveFont(Font.PLAIN, 12);  
       } catch (Exception e) {
