@@ -350,6 +350,15 @@ public class Disassembly {
       
       // calculate org for header
       int header=sidPC;   
+      
+      // look if there are relocate before that position
+      if (relocates!=null) {
+        for (int i=0; i<relocates.length; i++) {
+          if (relocates[i].toStart<header) header=relocates[i].toStart;
+        }   
+      }
+      
+      
       header-=sidPos;            
       
       if (option.createPSID) {
