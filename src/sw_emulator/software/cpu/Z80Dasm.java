@@ -25,6 +25,7 @@ package sw_emulator.software.cpu;
 
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.swing.main.Carets.Type;
 
 /**
  * Disasseble the Z80 code instructions
@@ -3622,6 +3623,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
     MemoryDasm memRel2;          // memory related of second kind
+    int actualOffset;            // actual offset
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
@@ -3659,7 +3661,11 @@ public class Z80Dasm extends CpuDasm implements disassembler {
           }  
           
           // this is an instruction
-          tmp=dasm(buffer); 
+          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
+          assembler.getCarets().setOffset(result.length()+actualOffset+21);             // use new offset
+          tmp=dasm(buffer);                                                             // this is an instruction
+          assembler.getCarets().setOffset(actualOffset);                                // set old offset 
+          
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));
           if (this.pc-pc==2) {
             if (pos+1<buffer.length) tmp2+=" "+ByteToExe(Unsigned.done(buffer[pos+1]));
@@ -3752,9 +3758,11 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
     MemoryDasm memRel2;          // memory related of second kind
+    int actualOffset;            // actual offset
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
     boolean wasGarbage=false;    // true if we were decoding garbage
+    int pStart;
          
     result.setLength(0);
     //result.append(addConstants());
@@ -3785,10 +3793,16 @@ public class Z80Dasm extends CpuDasm implements disassembler {
             if (option.labelOnSepLine) result.append("\n");
           }  
           
+          pStart=result.length();
+          
           // this is an instruction
-          tmp=dasm(buffer); 
+          actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
+          assembler.getCarets().setOffset(result.length()+actualOffset);                // use new offset
+          tmp=dasm(buffer);                                                             // this is an instruction
+          assembler.getCarets().setOffset(actualOffset);                                // set old offset   
   
           result.append(getInstrSpacesTabs(mem)).append(tmp).append(getInstrCSpacesTabs(tmp.length()));
+          assembler.getCarets().add(pStart, result.length(), mem, Type.INSTR);
           
           tmp2=dcom();   
           
