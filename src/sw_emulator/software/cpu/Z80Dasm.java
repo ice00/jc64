@@ -3487,9 +3487,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
    * @return the instruction
    */
   private String getRegIndXN(byte[] buffer, String reg, String reg2) {
-    if (pos<buffer.length) value=Unsigned.done(buffer[pos-1]);
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
     else value=-1; 
-    pos++;     
+    
     return "("+reg+"+"+getLabelImm(pc+1, value)+"),"+reg2;  
   }
   
