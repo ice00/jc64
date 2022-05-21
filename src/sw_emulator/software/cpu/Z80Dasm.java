@@ -1473,7 +1473,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         
         if (iType==T_DDCB) {
           // there are an extra table  
-          op=Unsigned.done(buffer[pos++]);  
+          op=Unsigned.done(buffer[pos+1]);  
+          pos++;
           iType=(int)tableMnemonicsDDCB[op];  
           aType=tableModesDDCB[op];
           steps=tableSizeDDCB[op];          
@@ -1492,7 +1493,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         steps=tableSizeFD[op];
         
         if (iType==T_FDCB) {
-          op=Unsigned.done(buffer[pos++]);  
+          op=Unsigned.done(buffer[pos+1]);  
+          pos++;
           iType=(int)tableMnemonicsFDCB[op];  
           aType=tableModesFDCB[op];
           steps=tableSizeFDCB[op];  
@@ -3469,9 +3471,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
    * @return the instruction
    */
   private String getReg2IndXN(byte[] buffer, String reg, String reg2, String reg3) {
-    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos-1]);
     else value=-1; 
-        
+    pos++;    
     return reg+"("+reg2+"+"+getLabelImm(pc+1, value)+"),"+reg3;  
   }
       
@@ -3484,9 +3486,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
    * @return the instruction
    */
   private String getRegIndXN(byte[] buffer, String reg, String reg2) {
-    if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
+    if (pos<buffer.length) value=Unsigned.done(buffer[pos-1]);
     else value=-1; 
-        
+    pos++;     
     return "("+reg+"+"+getLabelImm(pc+1, value)+"),"+reg2;  
   }
   
@@ -3585,9 +3587,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
    * @return the instruction 
    */
   private String getRefXIndXXN(byte[] buffer, String reg, String reg2) {
-    if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
+    if (pos<buffer.length) addr=Unsigned.done(buffer[pos-1]);
     else addr=-1; 
-                
+    pos++;            
     return reg+",("+reg2+"+"+getLabelZero(addr)+")";  
   }
   
