@@ -2068,82 +2068,82 @@ public class Z80Dasm extends CpuDasm implements disassembler {
         break;                                                                             
      case A_0__IX_N:  // 0 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "0", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "0", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_0__IY_N:  // 0 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "0", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "0", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;    
      case A_1__IX_N:  // 1 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "1", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "1", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_1__IY_N:  // 1 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "1", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "1", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;            
      case A_2__IX_N:  // 2 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "2", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "2", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_2__IY_N:  // 2 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "0", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "0", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;    
      case A_3__IX_N:  // 3 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "3", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "3", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_3__IY_N:  // 3 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "3", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "3", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;         
      case A_4__IX_N:  // 4 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "4", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "4", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_4__IY_N:  // 4 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "4", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "4", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;         
      case A_5__IX_N:  // 5 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "5", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "5", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_5__IY_N:  // 5 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "5", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "5", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;     
      case A_6__IX_N:  // 6 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "6", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "6", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_6__IY_N:  // 6 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "6", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "6", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;     
      case A_7__IX_N:  // 7 ind (IX+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "7", (upperCase? "IX": "ix"));
+        result+=getRefXInd2XXN(buffer, "7", (upperCase? "IX": "ix"));
         pos=this.pos;
         break;       
      case A_7__IY_N:  // 7 ind (IY+N)
         this.pos=pos;   
-        result+=getRefXIndXXN(buffer, "7", (upperCase? "IY": "iy"));
+        result+=getRefXInd2XXN(buffer, "7", (upperCase? "IY": "iy"));
         pos=this.pos;
         break;             
       case A__NN_BC:   // (NN) ind absolute BC 
@@ -3588,13 +3588,28 @@ public class Z80Dasm extends CpuDasm implements disassembler {
    * @return the instruction 
    */
   private String getRefXIndXXN(byte[] buffer, String reg, String reg2) {
-    if (pos<buffer.length) addr=Unsigned.done(buffer[pos-1]);
+    if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
     else addr=-1; 
-    pos++;            
+       
     return reg+",("+reg2+"+"+getLabelZero(addr)+")";  
   }
   
-  
+  /**
+   * Get the instruction 
+   * 
+   * @param buffer the bufffer to use
+   * @param reg the reg to use
+   * @param reg2 the reg ind to use
+   * @return the instruction 
+   */
+  private String getRefXInd2XXN(byte[] buffer, String reg, String reg2) {
+    if (pos<buffer.length) addr=Unsigned.done(buffer[pos-1]);
+    else addr=-1; 
+    
+    pos++;
+       
+    return reg+",("+reg2+"+"+getLabelZero(addr)+")";  
+  }
   
   /**
    * Return the mnemonic assembler instruction rapresent by passed code bytes,
