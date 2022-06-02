@@ -187,7 +187,15 @@ public class Assembler {
        public String getName() {
          return "64Tass";
        }
-     };        
+     },     
+     GLASS {
+       @Override
+       public String getName() {
+         return "Glass";
+       }
+     }
+     
+     ;        
     
      /**
       * Get the name of assembler
@@ -211,6 +219,7 @@ public class Assembler {
    public enum Starting implements ActionType {
       PROC,             // processor 6502
       FAKE,             //  cpu = 6502
+      FAKEZ,            // cpu equ 80
       DOT_CPU_A,        // .cpu "6502"
       DOT_CPU,          // .cpu 6502
       DOT_CPU_UND,      // .cpu _6502
@@ -227,6 +236,9 @@ public class Assembler {
             break;
           case FAKE:
             str.append(getDataSpacesTabs()).append("cpu = 6502\n\n");
+            break; 
+          case FAKEZ:
+            str.append(getDataSpacesTabs()).append("cpu equ 80\n\n");
             break;            
           case DOT_CPU_A:
             str.append(getDataSpacesTabs()).append(".cpu \"6502\"\n\n");  

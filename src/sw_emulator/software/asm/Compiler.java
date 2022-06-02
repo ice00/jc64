@@ -84,6 +84,9 @@ public class Compiler {
       case KICK:
         res=kickCompile(input, output);  
         break;  
+      case GLASS:
+        res=glassCompile(input, output);
+        break;
     }
     
     return res;  
@@ -401,5 +404,58 @@ public class Compiler {
       }   
     
     return result;
+  }
+  
+  /**
+   * Compile the input file to the output file with Glass
+   * 
+   * @param input the input file 
+   * @param output the output file
+   * @return the io message from the appplication
+   */ 
+  public String glassCompile(File input, File output) {
+    PrintStream orgStream = System.out;
+    PrintStream fileStream;  
+    
+    String result="No result obtained!!";
+      
+    String[] args=new String[2];
+    
+       
+    args[0]=input.getAbsolutePath();
+    args[1]=output.getAbsolutePath();  
+    
+    try {
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      System.setOut(fileStream);
+      
+       // install security manager to avoid System.exit() call from lib
+       SecurityManager   previousSecurityManager = System.getSecurityManager();
+       final SecurityManager securityManager  = new SecurityManager() {
+         @Override public void checkPermission(final Permission permission) {
+           if (permission.getName() != null && permission.getName().startsWith("exitVM")) {
+             throw new SecurityException();
+            }
+         }
+       };
+       System.setSecurityManager(securityManager);
+
+       try {
+         nl.grauw.glass.Assembler.main(args);
+       } catch (SecurityException e) {
+         // Say hi to your favorite creator of closed source software that includes System.exit() in his code.
+         } finally {
+             System.setSecurityManager(previousSecurityManager);
+           }  
+       result="Compilation done";
+    } catch (Exception e) {
+        System.err.println(e);
+        result=e.getMessage();
+      }
+    
+    System.setOut(orgStream);       
+    
+    return result;   
+    
   }
 }

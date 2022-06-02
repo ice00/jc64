@@ -991,6 +991,10 @@ public class Option {
   public Assembler.PetasciiText kickPetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
   
   
+  /** Glass: starting declaration */
+  public Assembler.Starting glassStarting=Assembler.Starting.FAKEZ; 
+  
+  
   /** 64Tass: starting declaration */
   public Assembler.Starting tass64Starting=Assembler.Starting.DOT_CPU_A; 
     

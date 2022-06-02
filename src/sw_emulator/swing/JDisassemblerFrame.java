@@ -87,6 +87,7 @@ import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.software.cpu.M6510Dasm;
+import sw_emulator.software.cpu.Z80Dasm;
 import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
@@ -5665,32 +5666,100 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     MemoryDasm mem=null;
     
-    // determine if it is of page zero or 16 bit
-    switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
-        case 1:  
-          JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-          return;           
-        case 2:
-          // avoid to use not defined bytes
-          if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
-            JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-            return;         
-          }
+    switch (project.targetType) {
+      case C128:
+      case C64:  
+      case C1541:
+      case PLUS4:    
+      case VIC20:            
+        // determine if it is of page zero or 16 bit
+        switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
+            case 1:  
+              JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+              return;           
+            case 2:
+              // avoid to use not defined bytes
+              if (!project.memory[row+1].isInside) {
+                JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+                return;         
+              }
+
+              // get next address
+              mem=project.memory[project.memory[row+1].copy & 0xFF];   
+              break;          
+            case 3:
+              // avoid to use not defined bytes
+              if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
+                JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+                return;         
+              }
+
+              // get next address
+              mem=project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];     
+              break;
+        }
+        break;
+      case C128Z:
+        int op, iType, steps;   
+        op=project.memory[row].copy & 0xFF;
+        
+        iType=Z80Dasm.tableMnemonics[op];   
     
-          // get next address
-          mem=project.memory[project.memory[row+1].copy & 0xFF];   
-          break;          
+        switch (iType) {
+          case Z80Dasm.T_CB:
+            op=project.memory[row+1].copy & 0xFF;  
+            steps=Z80Dasm.tableSizeCB[op];
+            break;
+          case Z80Dasm.T_DD:
+            op=project.memory[row+1].copy & 0xFF;    
+            steps=Z80Dasm.tableSizeDD[op];
+
+            if (Z80Dasm.tableMnemonicsDD[op]==Z80Dasm.T_DDCB) {
+              // there are an extra table  
+              op=project.memory[row+2].copy & 0xFF; 
+              steps=Z80Dasm.tableSizeDDCB[op];          
+            }
+            break;      
+          case Z80Dasm.T_ED:
+            op=project.memory[row+1].copy & 0xFF; 
+            steps=Z80Dasm.tableSizeED[op];
+            break;
+          case Z80Dasm.T_FD:
+            op=project.memory[row+1].copy & 0xFF; 
+            steps=Z80Dasm.tableSizeFD[op];
+
+            if (Z80Dasm.tableMnemonicsFD[op]==Z80Dasm.T_FDCB) {
+              op=project.memory[row+2].copy & 0xFF;   
+              steps=Z80Dasm.tableSizeFDCB[op];  
+            }
+            break;
+          default:
+  
+            steps=Z80Dasm.tableSize[op];
+            break;
+        } 
+        
+      switch (steps) {
+        case 1:
+          JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+              return;        
         case 3:
           // avoid to use not defined bytes
           if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
             JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
             return;         
           }
-    
+
           // get next address
           mem=project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];     
-          break;
-    }
+          break;  
+        default:
+         JOptionPane.showMessageDialog(this, "Not jet implemented for this combination of bytes. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
+              return;    
+      }
+        
+        break;        
+  }
     
     
     addLabel(mem);
@@ -7349,7 +7418,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }    
 
   /**
-   * Manage the given typoe action in current memory cell selected
+   * Manage the given type action in current memory cell selected
    * 
    * @param type the action type
    */
