@@ -994,6 +994,49 @@ public class Option {
   /** Glass: starting declaration */
   public Assembler.Starting glassStarting=Assembler.Starting.FAKEZ; 
   
+  /** Glass: origin declaration */
+  public Assembler.Origin glassOrigin=Assembler.Origin.ORG; 
+  
+  /** Glass:: label declaration */
+  public Assembler.Label glassLabel=Assembler.Label.NAME_COLON;
+  
+  /** Glass: comment declaration */
+  public Assembler.Comment glassComment=Assembler.Comment.SEMICOLON; 
+  
+  /** Glass: block comment declaration */
+  public Assembler.BlockComment glassBlockComment=Assembler.BlockComment.SEMICOLON;
+  
+  /** Glass: byte declaration */
+  public Assembler.Byte glassByte=Assembler.Byte.DB_BYTE;
+  
+  /** Glass: word declaration */
+  public Assembler.Word glassWord=Assembler.Word.DW_WORD;
+  
+  /** Glass: word swapped declaration */
+  public Assembler.WordSwapped glassWordSwapped=Assembler.WordSwapped.MACRO5_WORD_SWAPPED;
+  
+  /** Glass: tribyte declaration */
+  public Assembler.Tribyte glassTribyte=Assembler.Tribyte.MACRO5_TRIBYTE;
+  
+  /** Glass: long declaration */
+  public Assembler.Long glassLong=Assembler.Long.DD_LONG; 
+  
+  /** Glass: Address declaration */
+  public Assembler.Address glassAddress=Assembler.Address.DW_ADDR;
+  
+  /** Glass: Stack Word declaration */
+  public Assembler.StackWord glassStackWord=Assembler.StackWord.MACRO4_STACKWORD;  
+  
+  /** Glass: mono color sprite*/
+  public Assembler.MonoSprite glassMonoSprite=Assembler.MonoSprite.BYTE_BIN;
+   
+  /** Glass: multi color sprite */
+  public Assembler.MultiSprite glassMultiSprite=Assembler.MultiSprite.BYTE_BIN;
+      
+  /** Glass: text declaration type */
+  public Assembler.Text glassText=Assembler.Text.DB_BYTE_TEXT;
+  
+  
   
   /** 64Tass: starting declaration */
   public Assembler.Starting tass64Starting=Assembler.Starting.DOT_CPU_A; 

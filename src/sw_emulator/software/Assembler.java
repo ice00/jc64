@@ -238,7 +238,7 @@ public class Assembler {
             str.append(getDataSpacesTabs()).append("cpu = 6502\n\n");
             break; 
           case FAKEZ:
-            str.append(getDataSpacesTabs()).append("cpu equ 80\n\n");
+            str.append(getDataSpacesTabs()).append("cpu: equ 80\n\n");
             break;            
           case DOT_CPU_A:
             str.append(getDataSpacesTabs()).append(".cpu \"6502\"\n\n");  
@@ -573,9 +573,10 @@ public class Assembler {
       DOT_BYT_BYTE,       //  .byt $xx
       DOT_BY_BYTE,        //   .by $xx
       MARK_BYTE,          // !byte $xx 
-      MARK_BY_BYTE,        //  !by $xx
+      MARK_BY_BYTE,       //  !by $xx
       EIGHT_BYTE,         //    !8 $xx   
-      ZEROEIGHT_BYTE;     //   !08 $xx   
+      ZEROEIGHT_BYTE,     //   !08 $xx   
+      DB_BYTE;            //    db $xx
       
       @Override
       public void flush(StringBuilder str) {
@@ -623,6 +624,9 @@ public class Assembler {
           case ZEROEIGHT_BYTE:
             str.append(getDataSpacesTabs()).append(("!08 "));  
             break;    
+          case DB_BYTE:
+            str.append(getDataSpacesTabs()).append(("db "));    
+            break;  
         }
           
         Iterator<MemoryDasm> iter=list.iterator();
@@ -642,35 +646,35 @@ public class Assembler {
                 case '+':
                   /// this is a memory in table label
                   int pos=memRel.address-memRel.related;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append("+").append(pos);
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append("+").append(pos);
-                  else str.append(type).append("$").append(ShortToExe((int)memRel.related)).append("+").append(pos);
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type, memRel2.userLocation+"+"+pos));
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type, memRel2.dasmLocation+"+"+pos));
+                  else str.append(getRightType(type,"$"+ShortToExe((int)memRel.related)+"+"+pos));
                   break;
                 case '^':
                   /// this is a memory in table label
                   int rel=(memRel.related>>16) & 0xFFFF;
                   pos=memRel.address-rel;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append("+").append(pos);
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append("+").append(pos);
-                  else str.append(type).append("$").append(ShortToExe(rel)).append("+").append(pos);
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type,memRel2.userLocation+"+"+pos));
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type,memRel2.dasmLocation+"+"+pos));
+                  else str.append(getRightType(type,"$"+ShortToExe(rel)+"+"+pos));
                   break;
                 case '-':
                   /// this is a memory in table label
                   pos=memRel.address-memRel.related;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(type).append(memRel2.userLocation).append(pos);  
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(type).append(memRel2.dasmLocation).append(pos);
-                  else str.append(type).append("$").append(ShortToExe((int)memRel.related)).append(pos);
+                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type,memRel2.userLocation+pos));  
+                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type,memRel2.dasmLocation+pos));
+                  else str.append(getRightType(type,"$"+ShortToExe((int)memRel.related)+pos));
                   break;             
                 default:
-                  if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
-                  else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
-                  else str.append(type).append("$").append(ShortToExe(memRel.address));          
+                  if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(getRightType(type,memRel.userLocation));
+                  else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(getRightType(type,memRel.dasmLocation));
+                  else str.append(getRightType(type,"$"+ShortToExe(memRel.address)));          
                   break;
               }                
             }           
-            else if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(type).append(memRel.userLocation);
-            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(type).append(memRel.dasmLocation);
-            else str.append(type).append("$").append(ShortToExe(memRel.address));              
+            else if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(getRightType(type,memRel.userLocation));
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(getRightType(type,memRel.dasmLocation));
+            else str.append(getRightType(type,"$"+ShortToExe(memRel.address)));              
           } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
           
           carets.add(start, str.length(), mem, Type.BYTE);
@@ -690,6 +694,25 @@ public class Assembler {
         }
         list.clear();
       }  
+      
+      /**
+       * Get the right type representation for M6502 or Z80 representation
+       * In M6502: <xx, >xx
+       * In Z80:   xx,  xx>>8
+       * 
+       * @param type the type to valuate
+       * @param value the value 
+       * @return the right type value
+       */
+      private String getRightType(char type, String value) {
+        switch (aByte) {
+            case DB_BYTE:
+              if (type=='<') return value;
+              else return value+">>8";
+            default:
+              return type+value;              
+        }  
+      }
       
       /**
        * Return the byte represented as by the given type
@@ -801,7 +824,8 @@ public class Assembler {
      DC_W_WORD,           //   dc.w $xxyy
      DOT_DBYTE,           // .dbyte $xxyy
      MARK_WORD,           //  !word $xxyy
-     SIXTEEN_WORD;        //    !16 $xxyy
+     SIXTEEN_WORD,        //    !16 $xxyy
+     DW_WORD;             //     dw $xxyy
      
      @Override
      public void flush(StringBuilder str) {         
@@ -841,6 +865,9 @@ public class Assembler {
          case SIXTEEN_WORD:
            str.append(getDataSpacesTabs()).append(("!16 "));  
            break;  
+         case DW_WORD:
+           str.append(getDataSpacesTabs()).append(("dw "));   
+           break;
        }
        
        int pos2=str.length();   // store final position
@@ -929,6 +956,7 @@ public class Assembler {
      MACRO1_WORD_SWAPPED,           //  [.mac] $yyxx    (KickAssembler)
      MACRO2_WORD_SWAPPED,           //  [.mac] $yyxx    (Acme)
      MACRO4_WORD_SWAPPED,           //  [.mac] $yyxx    (TMPx / Tass64)
+     MACRO5_WORD_SWAPPED,           //  [.amc] $yyxx    (Glass)
         ;
 
      @Override
@@ -961,8 +989,11 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append("+Swapped").append(index).append(" ");  
            break;
          case MACRO4_WORD_SWAPPED:
-           str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");    
+           str.append(getDataSpacesTabs()).append("#Swapped").append(index).append(" ");    
            break;
+         case MACRO5_WORD_SWAPPED:
+           str.append(getDataSpacesTabs()).append("Swapped").append(index).append(" ");    
+           break;   
        }
        
        int pos2=str.length();      // store final position
@@ -1110,7 +1141,7 @@ public class Assembler {
               .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
               .append(spaces).append("   .byte twobyte4 & 255, ( twobyte4 >> 8) & 255\n")          
               .append(spaces).append("}\n\n")
-              .append(spaces).append("!macro Swapped5 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n")
+              .append(spaces).append("!macro Swapped5 twobyte, twobyte2, twobyte3, twobyte4, twobyte5 {\n")
               .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
               .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
               .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
@@ -1134,7 +1165,7 @@ public class Assembler {
               .append(spaces).append("   .byte twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
               .append(spaces).append("   .byte twobyte7 & 255, ( twobyte7 >> 8) & 255\n")                      
               .append(spaces).append("}\n\n")
-              .append(spaces).append("!macro Swapped8 (twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n")
+              .append(spaces).append("!macro Swapped8 twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 {\n")
               .append(spaces).append("   .byte twobyte & 255, ( twobyte >> 8) & 255\n")
               .append(spaces).append("   .byte twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
               .append(spaces).append("   .byte twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
@@ -1200,9 +1231,63 @@ public class Assembler {
              "     .byte \\8 & 255, ( \\8 >> 8) & 255\n" +                     
              "  .endm\n\n"                 
            );                                  
-           break;                                                       
-          }
-        }       
+           break;        
+         case MACRO5_WORD_SWAPPED:
+           str.append(spaces).append("Swapped1: macro ?twobyte \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped2: macro ?twobyte, ?twobyte2 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n")        
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped3: macro ?twobyte, ?twobyte2, ?twobyte3 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n")         
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped4: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte4 & 255, ( ?twobyte4 >> 8) & 255\n")          
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped5: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte4 & 255, ( ?twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte5 & 255, ( ?twobyte5 >> 8) & 255\n")                      
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped6: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte4 & 255, ( ?twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte5 & 255, ( ?twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte6 & 255, ( ?twobyte6 >> 8) & 255\n")                      
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped7: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6, ?twobyte7 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte4 & 255, ( ?twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte5 & 255, ( ?twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte6 & 255, ( ?twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte7 & 255, ( ?twobyte7 >> 8) & 255\n")                      
+              .append(spaces).append("endm\n\n")
+              .append(spaces).append("Swapped8: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6, ?twobyte7, ?twobyte8 \n")
+              .append(spaces).append("   db ?twobyte & 255, ( ?twobyte >> 8) & 255\n")
+              .append(spaces).append("   db ?twobyte2 & 255, ( ?twobyte2 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte3 & 255, ( ?twobyte3 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte4 & 255, ( ?twobyte4 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte5 & 255, ( ?twobyte5 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte6 & 255, ( ?twobyte6 >> 8) & 255\n") 
+              .append(spaces).append("   db ?twobyte7 & 255, ( ?twobyte7 >> 8) & 255\n")  
+              .append(spaces).append("   db ?twobyte8 & 255, ( ?twobyte8 >> 8) & 255\n")                    
+              .append(spaces).append("endm\n\n");                                  
+           break;            
+        }
+      }       
    }
    
    /**
@@ -1213,6 +1298,7 @@ public class Assembler {
      MACRO1_TRIBYTE,           //  [.mac] $xxyyzz    (KickAssembler)
      MACRO3_TRIBYTE,           //  [.mac] $xxyyzz    (CA65) 
      MACRO4_TRIBYTE,           //  [.mac] $xxyyzz    (TMPx)
+     MACRO5_TRIBYTE,           //  [.mac] $xxyyzz    (Glass)
      DOT_LINT_TRIBYTE,         //   .lint $xxyyzz
      DOT_LONG_TRIBYTE,         //   .long $xxyyzz
      MARK_TWENTYFOUR_TRIBYTE   //     !24 $xxyyzz
@@ -1257,6 +1343,9 @@ public class Assembler {
          case MACRO4_TRIBYTE:
            str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");  
            break;
+         case MACRO5_TRIBYTE:  
+           str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" ");  
+           break;          
          case DOT_LINT_TRIBYTE:
            str.append(getDataSpacesTabs()).append((".lint "));   
            break;
@@ -1439,7 +1528,7 @@ public class Assembler {
             str.append(spaces).append(".macro Tribyte1 tribyte \n")
                .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
                .append(spaces).append(".endmacro\n\n")
-               .append(spaces).append(".macro Tribyte1 tribyte, tribyte2 \n")
+               .append(spaces).append(".macro Tribyte2 tribyte, tribyte2 \n")
                .append(spaces).append("  .byte tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
                .append(spaces).append("  .byte tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
                .append(spaces).append(".endmacro\n\n")
@@ -1543,7 +1632,60 @@ public class Assembler {
              "     .byte \\8 >> 16, ( \\8 >> 8) & 255,  \\8 & 255\n" +       
              "  .endm\n\n"                    
            );                       
-           break;             
+           break;                 
+         case MACRO5_TRIBYTE:
+            str.append(spaces).append("Tribyte1: macro ?tribyte \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte2: macro ?tribyte, ?tribyte2 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte3: macro ?tribyte, ?tribyte2, ?tribyte3 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n")          
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte4: macro ?tribyte, ?tribyte2, ?tribyte3, ?tribyte4 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n") 
+               .append(spaces).append("  db ?tribyte4 >> 16, ( ?tribyte4 >> 8) & 255,  ?tribyte4 & 255\n")        
+               .append(spaces).append("endm\n\n")                       
+               .append(spaces).append("Tribyte5: macro ?tribyte, ?tribyte2, ?tribyte3, ?tribyte4, ?tribyte5 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n")
+               .append(spaces).append("  db ?tribyte4 >> 16, ( ?tribyte4 >> 8) & 255,  ?tribyte4 & 255\n")
+               .append(spaces).append("  db ?tribyte5 >> 16, ( ?tribyte5 >> 8) & 255,  ?tribyte5 & 255\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte6: macro ?tribyte, ?tribyte2, ?tribyte3, ?tribyte4, ?tribyte5, ?tribyte6 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n")
+               .append(spaces).append("  db ?tribyte4 >> 16, ( ?tribyte4 >> 8) & 255,  ?tribyte4 & 255\n")
+               .append(spaces).append("  db ?tribyte5 >> 16, ( ?tribyte5 >> 8) & 255,  ?tribyte5 & 255\n")  
+               .append(spaces).append("  db ?tribyte6 >> 16, ( ?tribyte6 >> 8) & 255,  ?tribyte6 & 255\n")      
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte7: macro ?tribyte, ?tribyte2, ?tribyte3, ?tribyte4, ?tribyte5, ?tribyte6, ?tribyte7 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n") 
+               .append(spaces).append("  db ?tribyte4 >> 16, ( ?tribyte4 >> 8) & 255,  ?tribyte4 & 255\n")   
+               .append(spaces).append("  db ?tribyte5 >> 16, ( ?tribyte5 >> 8) & 255,  ?tribyte5 & 255\n")    
+               .append(spaces).append("  db ?tribyte6 >> 16, ( ?tribyte6 >> 8) & 255,  ?tribyte6 & 255\n")  
+               .append(spaces).append("  db ?tribyte7 >> 16, ( ?tribyte7 >> 8) & 255,  ?tribyte7 & 255\n")    
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Tribyte8: macro ?tribyte, ?tribyte2, ?tribyte3, ?tribyte4, ?tribyte5, ?tribyte6, ?tribyte7, ?tribyte8 \n")
+               .append(spaces).append("  db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+               .append(spaces).append("  db ?tribyte2 >> 16, ( ?tribyte2 >> 8) & 255,  ?tribyte2 & 255\n")
+               .append(spaces).append("  db ?tribyte3 >> 16, ( ?tribyte3 >> 8) & 255,  ?tribyte3 & 255\n") 
+               .append(spaces).append("  db ?tribyte4 >> 16, ( ?tribyte4 >> 8) & 255,  ?tribyte4 & 255\n")   
+               .append(spaces).append("  db ?tribyte5 >> 16, ( ?tribyte5 >> 8) & 255,  ?tribyte5 & 255\n")    
+               .append(spaces).append("  db ?tribyte7 >> 16, ( ?tribyte7 >> 8) & 255,  ?tribyte7 & 255\n") 
+               .append(spaces).append("  db ?tribyte8 >> 16, ( ?tribyte8 >> 8) & 255,  ?tribyte8 & 255\n")     
+               .append(spaces).append("endm\n\n");               
+           break;    
        }
      };     
    }   
@@ -1558,6 +1700,7 @@ public class Assembler {
      DOT_DC_L_LONG,        //  .dc.l $xxyyzzkk    
      DOT_DWORD_LONG,       // .dword $xxyyzzkk
      DOT_DLINT_LONG,       // .dlint $xxyyzzkk
+     DD_LONG,              //     dd $xxyyzzkk
      MARK_THIRTYTWO_LONG,  //    !32 $xxyyzzkk
      MACRO4_LONG           // [.mac] $xxyyzzkk  (TMPx)
         ;      
@@ -1604,7 +1747,10 @@ public class Assembler {
            break;    
          case DOT_DLINT_LONG:
            str.append(getDataSpacesTabs()).append(".dlint ");  
-           break;            
+           break;        
+         case DD_LONG:
+           str.append(getDataSpacesTabs()).append("dd ");  
+           break;   
          case MARK_THIRTYTWO_LONG:
            str.append(getDataSpacesTabs()).append("!32 ");  
            break;                                  
@@ -1754,6 +1900,7 @@ public class Assembler {
      WORD_ADDR,                //   word $xxyy
      DOT_ADDR_ADDR,            //  .addr $xxyy
      DC_W_ADDR,                //   dc.w $xxyy
+     DW_ADDR,                  //     dw $xxyy
      MARK_WORD_ADDR,           //  !word $xxyy
      SIXTEEN_WORD_ADDR;        //    !16 $xxyy//    !16 $xxyy
      
@@ -1783,6 +1930,9 @@ public class Assembler {
          case DC_W_ADDR:
            str.append(getDataSpacesTabs()).append(("dc.w "));  
            break;
+         case DW_ADDR:
+           str.append(getDataSpacesTabs()).append(("dw "));  
+           break;  
          case DOT_ADDR_ADDR:
            str.append(getDataSpacesTabs()).append((".addr "));   
            break;
@@ -1886,6 +2036,8 @@ public class Assembler {
      MACRO3_BIN,    // [.macro] %b..  (CA65)
      MACRO4_HEX,    // [.macro] %xx.. (TMPx)
      MACRO4_BIN,    // [.macro] %b..  (TMPx)
+     MACRO5_HEX,    // [.macro] %xx.. (Glass)
+     MACRO5_BIN,    // [.macro] %b..  (Glass)
      ;      
      
       @Override
@@ -1921,6 +2073,7 @@ public class Assembler {
               list.push(mem3);
               list.push(mem2);
               list.push(mem1);
+              
               tmp=new StringBuilder();
               aByte.flush(tmp);  
               tmpS=tmp.toString();
@@ -1936,6 +2089,7 @@ public class Assembler {
               list.push(mem3);
               list.push(mem2);
               list.push(mem1);
+              
               tmp=new StringBuilder();
               aByte.flush(tmp); 
               tmpS=tmp.toString();
@@ -1970,7 +2124,8 @@ public class Assembler {
                listRel2.pop();
                break;                
             case MACRO_HEX:
-            case MACRO3_HEX:    
+            case MACRO3_HEX: 
+            case MACRO5_HEX:
               str.append(getDataSpacesTabs())
                  .append("MonoSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -1986,7 +2141,8 @@ public class Assembler {
               listRel2.pop();
               break;
             case MACRO_BIN:
-            case MACRO3_BIN:    
+            case MACRO3_BIN:
+            case MACRO5_BIN:    
               str.append(getDataSpacesTabs())
                  .append("MonoSpriteLine %")
                  .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
@@ -2091,10 +2247,13 @@ public class Assembler {
               break;               
             }
           carets.add(start, str.length(), mem1, Type.MONO_SPRITE);
-          start=str.length();
+          ///start=str.length();
           
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
-          aComment.flush(str);
+          // flush comment only for macro as byte flush it itself
+          if (aMonoSprite!=BYTE_HEX && aMonoSprite!=BYTE_BIN) aComment.flush(str);
+          else str.append("\n");
+          
         } else {
             // force to be as byte
             aByte.flush(str);
@@ -2140,7 +2299,13 @@ public class Assembler {
              "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
              "  .endm\n\n"
            );           
-           break;             
+           break;  
+         case MACRO5_HEX:  
+         case MACRO5_BIN:          
+           str.append(getDataSpacesTabs()).append("MonoSpriteLine: macro ?tribyte \n")
+              .append(getDataSpacesTabs()).append(" db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("endm\n\n");                         
+           break;                
        }
      };
    }
@@ -2172,6 +2337,8 @@ public class Assembler {
      MACRO3_BIN,    // [.macro] %b..  (CA65)
      MACRO4_HEX,    // [.macro] %xx.. (TMPx)
      MACRO4_BIN,    // [.macro] %b..  (TMPx)
+     MACRO5_HEX,    // [.macro] %xx.. (Glass)
+     MACRO5_BIN,    // [.macro] %b..  (Glass)
      ;      
      @Override
      public void flush(StringBuilder str) {
@@ -2256,6 +2423,7 @@ public class Assembler {
               break;               
             case MACRO_HEX:
             case MACRO3_HEX:    
+            case MACRO5_HEX:
               str.append(getDataSpacesTabs()).append("MultiSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
@@ -2270,7 +2438,8 @@ public class Assembler {
               listRel2.pop();
               break;
             case MACRO_BIN:
-            case MACRO3_BIN:    
+            case MACRO3_BIN:  
+            case MACRO5_BIN:    
               str.append(getDataSpacesTabs()).append("MultiSpriteLine %")
                  .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
@@ -2376,9 +2545,11 @@ public class Assembler {
           carets.add(start, str.length(), mem1, Type.MULTI_SPRITE);
           
           str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
-          aComment.flush(str);
+          // flush comment only for macro as byte flush it itself
+          if (aMultiSprite!=BYTE_HEX && aMultiSprite!=BYTE_BIN) aComment.flush(str);
+          else str.append("\n");
           
-          start=str.length();
+          //start=str.length();
         } else {
             // force to be as byte
             aByte.flush(str);
@@ -2423,7 +2594,13 @@ public class Assembler {
              "     .byte \\1 >> 16, ( \\1 >> 8) & 255,  \\1 & 255\n" +
              "  .endm\n\n"
            );           
-           break;            
+           break;  
+         case MACRO5_HEX:  
+         case MACRO5_BIN:          
+           str.append(getDataSpacesTabs()).append("MultiSpriteLine: macro ?tribyte \n")
+              .append(getDataSpacesTabs()).append(" db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("endm\n\n");                         
+           break;  
        }
      };      
    } 
@@ -2445,6 +2622,7 @@ public class Assembler {
       DOT_BYTE_TEXT,      // .byte "xxx"
       DOT_BYT_TEXT,       //  .byt "xxx"
       BYTE_TEXT,          //  byte "xxx"
+      DB_BYTE_TEXT,       //    db "xxx"
       DC_BYTE_TEXT,       //    dc "xxx"
       DC_B_BYTE_TEXT,     //  dc.b "xxx"
       DOT_BYT_BYTE_TEXT,  //  .byt "xxx"
@@ -2473,6 +2651,9 @@ public class Assembler {
           case DOT_BYT_TEXT:
             str.append(getDataSpacesTabs()).append((".byt "));
             break;  
+          case DB_BYTE_TEXT:
+            str.append(getDataSpacesTabs()).append(("db "));  
+            break;            
           case BYTE_TEXT:
             str.append(getDataSpacesTabs()).append(("byte "));  
             break;
@@ -2687,7 +2868,69 @@ public class Assembler {
                         }  
                   str.append((char)val);  
                 }   
-              break;                          
+              break;    
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;
           }         
           carets.add(start, str.length(), mem, Type.TEXT);
           
@@ -4363,7 +4606,8 @@ public class Assembler {
       MACRO_STACKWORD,          // -> [.mac] $xxyyzz    (DASM)
       MACRO1_STACKWORD,         // -> [.mac] $xxyyzz    (KickAssembler)
       MACRO2_STACKWORD,         // -> [.mac] $xxyyzz    (Acme)
-      MACRO3_STACKWORD          // -> [.mac] $xxyyzz    (CA65) 
+      MACRO3_STACKWORD,          // -> [.mac] $xxyyzz    (CA65) 
+      MACRO4_STACKWORD          // -> [.mac] $xxyyzz    (Glass) 
       ;
 
       @Override
@@ -4385,7 +4629,8 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append((".rta "));  
            break;
          case MACRO_STACKWORD:
-         case MACRO3_STACKWORD:     
+         case MACRO3_STACKWORD: 
+         case MACRO4_STACKWORD:     
            str.append(getDataSpacesTabs()).append("Stack").append(index).append(" ");  
            break;           
          case MACRO1_STACKWORD:
@@ -4674,7 +4919,61 @@ public class Assembler {
                .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")   
                .append(spaces).append("  .word twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1, twobyte8-1\n")      
                .append(spaces).append(".endmacro\n\n");               
-           break;                                                      
+           break;     
+         case MACRO4_STACKWORD:
+            str.append(spaces).append("Stack1: macro ?twobyte \n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack2: macro ?twobyte, ?twobyte2 \n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack3: macro ?twobyte, ?twobyte2, ?twobyte3 \n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")   
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack4: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4 \n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")  
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1\n")          
+               .append(spaces).append("endm\n\n")                       
+               .append(spaces).append("Stack5: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5\n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")  
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1\n")
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack6: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6\n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")  
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1\n")     
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack7: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6, ?twobyte7\n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")   
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1\n")   
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1\n")   
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1, ?twobyte7-1\n")    
+               .append(spaces).append("endm\n\n")
+               .append(spaces).append("Stack8: macro ?twobyte, ?twobyte2, ?twobyte3, ?twobyte4, ?twobyte5, ?twobyte6, ?twobyte7, ?twobyte8\n")
+               .append(spaces).append("  db ?twobyte-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1\n")
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1\n")  
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1\n")   
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1\n")  
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1\n")     
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1, ?twobyte7-1\n")   
+               .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1, ?twobyte7-1, ?twobyte8-1\n")      
+               .append(spaces).append("endm\n\n");               
+           break;
           }
         }            
    }
@@ -5121,6 +5420,9 @@ public class Assembler {
                case KICK:
                  str.append(".const "+val+" = "+"$"+ByteToExe(j)+"\n");  
                  break;
+               case GLASS:
+                 str.append(val+" equ $"+ByteToExe(j)+"\n");
+                 break;  
                default:
                  str.append(val+" = "+"$"+ByteToExe(j)+"\n");
                  break;  

@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Starting">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Origin">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Comment">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64BlockComment">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Label">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Byte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Word">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64MonoSprite">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64MultiSprite">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Tribyte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64WordSwapped">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64WaordSwapped">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Text">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Long">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64NumText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64ZeroText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64Address">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64StackWord">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64HighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64ShiftText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64ScreenCode">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTass64PetasciiText">
+    </Component>
+  </NonVisualComponents>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelTass65PetasciiTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64StartingDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64OriginDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64CommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64BlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64LabelDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64ByteDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64WordDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass65WordSwappedDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64TribyteDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64LongDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64AddressDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64StackWordDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64MonoSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64MultiSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass65TextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64NumTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64ZeroTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64HighTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass64ShiftTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTass65ScreenTextDeclaration" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTass64DotCpuAStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64AsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64LabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLongTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotRtaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftlShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64ASterixOrigin" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonComment" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64LabelName" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotByte" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotWord" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroWordSwapped" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotLongTribyte" alignment="0" pref="143" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotDwordLong" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotAddrAddress" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotRtaStackWord" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotPTextNumText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotNullZeroText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftHighText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftlShiftText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextScreenText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextPetasciiText" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTass64DotCommentBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCharByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotSintWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLintTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDlintLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextNZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextSHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextLShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPaneTass64DotComment" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jRadioButtontass64DotIfFiBlockComment" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneTass64DotIfFiBlockComment" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace min="155" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPaneTass64DotTextLShiftText" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotTextSHighText" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotTextNZeroText" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotTextPNumChar" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotCharByte" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotSintWord" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotLintTribyte" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64DotDlintLong" alignment="0" pref="114" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64ByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64ByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonTass64MacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonTass64MacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPaneTass64MacroHexMultiSprite" alignment="0" pref="105" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64MacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonTass64MacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonTass64MacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPaneTass64MacroBinMonoSprite" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTass64MacroBinMultiSprite" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64StartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCpuAStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneDasmTass64DotCpuAStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64OriginDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64AsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ASterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64CommentDeclaration" alignment="2" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64BlockCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCommentBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotIfFiBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64LabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64LabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64LabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64ByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotCharByte" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64WordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotSintWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass65WordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64TribyteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotLongTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotLintTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64LongDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDwordLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotDwordLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotDlintLong" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64AddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64StackWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotRtaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotRtaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64MonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64MultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass65TextDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64NumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotPTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotPTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextPNumChar" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64ZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextNZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextNZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64HighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextSHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextSHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass64ShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftlShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftlShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextLShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextLShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass65ScreenTextDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTass65PetasciiTextDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabelTass64StartingDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Starting:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotCpuAStarting">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Starting"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotCpuAStartingItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmTass64DotCpuAStarting">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotCpuAStarting">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.cpu&lt;/b&gt; &quot;6502&quot;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64OriginDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Origin:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64AsterixOrigin">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Origin"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64AsterixOriginItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ASterixOrigin">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64AsterixOrigin">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;*=&lt;/b&gt;$xxyy&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64CommentDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comment:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64SemicolonComment">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Comment"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64SemicolonCommentItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64SemicolonComment">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64SemicolonComment">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64BlockCommentDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Block Comment:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64SemicolonBlockComment">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64BlockComment"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64SemicolonBlockCommentItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64SemicolonBlockComment">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64SemicolonBlockComment">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtontass64DotIfFiBlockComment">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64BlockComment"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtontass64DotIfFiBlockCommentItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotIfFiBlockComment">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass664DotIfFiBlockComment1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.if 0&lt;/b&gt; xxx &lt;b&apos;&gt;.fi&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotCommentBlockComment">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64BlockComment"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotCommentBlockCommentItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotComment">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotCommentBlockComment">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;.comment&lt;/b&gt; xxx &lt;b&apos;&gt;.endc&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64LabelDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Label:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64LabelNameColon">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Label"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64LabelNameColonItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64LabelName">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64LabelNameColon">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64WordDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Word:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTass64ByteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Byte:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotByte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Byte"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotByteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotWord">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Word"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotWordItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotWord">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotWord">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .word&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotByte">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotByte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .byte&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotCharByte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Byte"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotCharByteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotSintWord">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Word"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotSintWordItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotSintWord">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotSintWord">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .sint&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotCharByte">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotCharByte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .char&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .char&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .char&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; .char&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64MonoSpriteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Monocolor sprite:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTass64MultiSpriteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Multicolor sprite:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64ByteHexMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64ByteHexMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64ByteHexMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64ByteHexMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ByteHexMultiSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="TmpxPaneTass64ByteHexMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; [byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ByteHexMonoSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64ByteHexMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; [byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64ByteBinMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MonoSprite"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64ByteBinMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64ByteBinMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MultiSprite"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64ByteBinMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ByteBinMultiSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64ByteBinMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64ByteBinMonoSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64ByteBinMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64MacroHexMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64MacroHexMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64MacroHexMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64MacroHexMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64MacroHexMultiSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64MacroHexMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64MacroHexMonoSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64MacroHexMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64MacroBinMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64MacroBinMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64MacroBinMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64MultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64MacroBinMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64MacroBinMultiSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64MacroBinMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64MacroBinMonoSprite">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64MacroBinMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64TribyteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tribyte:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotLongTribyte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Tribyte"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotLongTribyteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotLongTribyte">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotLongTribyte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .long&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotLintTribyte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Tribyte"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotLintTribyteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotLintTribyte">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotLintTribyte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .lint&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64LongDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Long:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotDwordLong">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Long"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotDwordLongItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotDwordLong">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotDwordLong">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .dword&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzzkk&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotDlintLong">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Long"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotDlintLongItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotDlintLong">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotDlintLong">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .dint&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzzkk&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass65WordSwappedDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Word Swapped:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64MacroWordSwapped">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64WordSwapped"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64MacroWordSwappedItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64MacroWordSwapped">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64MacroWordSwapped">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$yyxx&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass65TextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Text"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;.text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64NumTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text #num chars:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotPTextNumText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64NumText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotPTextNumTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotPTextNumText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotPTextNumText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .ptext&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextPNumText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64NumText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextPNumTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextPNumChar">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextPNumChar">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text p&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64ZeroTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text 0 terminated:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotNullZeroText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64ZeroText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotNullZeroTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotNullZeroText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotNullZeroText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .null&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextNZeroText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64ZeroText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextNZeroTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextNZeroText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextNZeroText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text n&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64AddressDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Address:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotAddrAddress">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64Address"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotAddrAddressItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotAddrAddress">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotAddrAddress">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .addr&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64StackWordDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Stack Word:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotRtaStackWord">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64StackWord"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotRtaStackWordItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotRtaStackWord">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotRtaStackWord">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .addr&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64HighTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotShiftHighText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64HighText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotShiftHighTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotShiftHighText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotShiftHighText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shift&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextSHighText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64HighText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextSHighTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextSHighText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextSHighText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text s&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass64ShiftTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text left shifted:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotShiftlShiftText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64ShiftText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotShiftlShiftTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotShiftlShiftText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotShiftlShiftText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shiftl&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextLShiftText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64ShiftText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextLShiftTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextLShiftText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextLShiftText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text l&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass65ScreenTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text to screen code:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextScreenText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64ScreenCode"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextScreenTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextScreenText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextScreenText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;.text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTass65PetasciiTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text to petascii code:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTass64DotTextPetasciiText">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTass64PetasciiText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTass64DotTextPetasciiTextItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTass64DotTextPetasciiText">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTass64DotTextPetasciiText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;.text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

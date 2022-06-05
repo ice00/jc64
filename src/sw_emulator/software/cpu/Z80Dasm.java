@@ -3437,6 +3437,17 @@ public class Z80Dasm extends CpuDasm implements disassembler {
          pos=this.pos;                  
          break;         
     }    
+    
+    // add eventaul relative address of instructions
+    switch (steps) {
+        case 4:
+          setLabelPlus(pc,3);      
+        case 3:
+          setLabelPlus(pc,2);
+        case 2:
+          setLabelPlus(pc,1);
+    }
+    
     this.pc=pc+steps;
     this.pos=pos;  
     
@@ -3520,8 +3531,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     pos++;    
                       
     setLabel(addr);
-    setLabelPlus(pc,1);
-    setLabelPlus(pc,2);  
+    //setLabelPlus(pc,1);
+    //setLabelPlus(pc,2);  
     return reg+","+getLabel(addr);   
   }
   
@@ -3538,8 +3549,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     pos++;    
       
     setLabel(addr);
-    setLabelPlus(pc,1);
-    setLabelPlus(pc,2);
+    //setLabelPlus(pc,1);
+    //setLabelPlus(pc,2);
     return reg+",("+getLabel(addr)+")";
    }     
   
@@ -3556,8 +3567,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     pos++;  
         
     setLabel(addr);
-    setLabelPlus(pc,1);
-    setLabelPlus(pc,2);
+    //setLabelPlus(pc,1);
+    //setLabelPlus(pc,2);
     return getLabel(addr)+","+reg;    
   }
   
@@ -3574,8 +3585,8 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     pos++;  
         
     setLabel(addr);
-    setLabelPlus(pc,1);
-    setLabelPlus(pc,2);
+    //setLabelPlus(pc,1);
+    //setLabelPlus(pc,2);
     return "("+getLabel(addr)+"),"+reg;    
   }
   

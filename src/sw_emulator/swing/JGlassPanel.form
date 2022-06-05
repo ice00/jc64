@@ -1,0 +1,1297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassStarting">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassLabel">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassOrigin">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassByte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassWord">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassComment">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassBlockComment">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassWordSwapped">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassTribyte">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassLong">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassAddress">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassStackWord">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassMonoSprite">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassMultiSprite">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassNumText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassZeroText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassHighText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassShiftText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassScreenText">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGlassPetsciiText">
+    </Component>
+  </NonVisualComponents>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelGlassStartingDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassOriginDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassCommentDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelTmpxBlockCommentDeclaration1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassHighTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassShiftTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassScreenTextDeclaration" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelGlassLabelDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassByteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassWordDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassWordSwappedDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassTribyteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassLongDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassAddressDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxGlassStackWordDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassMonoSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassMultiSpriteDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassNumTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassZeroTextDeclaration" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="jLabelGlassPetasciiTextDeclaration" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonGlassFakeStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonBlockComment1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDwWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDdLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDwAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxPTextNumText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotNullZeroText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiftHighText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiflShiftText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotScreenText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotPetasciiText1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneGlassFakeStarting" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxAsterixOrigin1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonComment1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonBlockComment1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneGlassByte" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneGlassWord" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneGlassDotWord" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroWordSwapped1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroTribyte1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroLong1" alignment="0" pref="143" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotAddrAddress1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotRtaStackWord1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMonoSprite1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMultiSprite1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotTextNumText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotNullZeroText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftHighText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftlShiftText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotScreenText1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotPetasciiText1" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonGlassByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonGlassByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jScrollPaneTmpxByteBinMonoSprite1" alignment="0" pref="122" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneTmpxByteBinMultiSprite1" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jRadioButtonGlassLabelNameColon" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPaneDasmLabelNameColon" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonGlassMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneTmpxMacroHexMonoSprite1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMultiSprite1" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jRadioButtonGlassMacroBinMultiSprite" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPaneTmpxMacroBinMultiSprite1" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jRadioButtonGlassMacroBinMonoSprite" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPaneTmpxMacroBinMonoSprite1" min="-2" pref="107" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassStartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneGlassFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassOriginDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxAsterixOrigin1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonComment1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxBlockCommentDeclaration1" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonBlockComment1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonBlockComment1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassLabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneGlassByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneDasmLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneGlassWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDwWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneGlassDotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroWordSwapped1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassTribyteDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroTribyte1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassLongDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDdLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroLong1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassAddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDwAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotAddrAddress1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxGlassStackWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotRtaStackWord1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMonoSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMonoSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMonoSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroBinMonoSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassMultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMultiSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMultiSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMultiSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroBinMultiSprite1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxPTextNumText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotTextNumText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotNullZeroText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotNullZeroText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiftHighText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftHighText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiflShiftText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftlShiftText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassScreenTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotScreenText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotScreenText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelGlassPetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotPetasciiText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotPetasciiText1" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabelGlassLabelDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Label:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassLabelName">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassLabel"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassLabelNameItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneGlassByte">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassLabelName">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&#xa;    &lt;/p&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassByteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Byte:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDbByte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassByte"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDbByteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneGlassWord">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDbByte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; db&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; db&lt;/b&gt; &lt;font color=&apos;blue&apos;&gt;dd&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; db&lt;/b&gt; &lt;font color=&apos;green&apos;&gt;%bb&lt;/font&gt;&lt;br&gt;&#xa;     &lt;b&gt; db&lt;/b&gt; &lt;font color=&apos;purple&apos;&gt;&apos;c&apos;&lt;/font&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassWordDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Word:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDwWord">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDwWordItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneGlassDotWord">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDwWord">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; dw&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassCommentDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comment:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassSemicolonComment">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassComment"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassSemicolonCommentItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxSemicolonComment1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassSemicolonComment">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTmpxBlockCommentDeclaration1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Block Comment:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxSemicolonBlockComment1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassBlockComment"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxSemicolonBlockComment1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxSemicolonBlockComment1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxSemicolonBlockComment1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;;&lt;/b&gt; xxx&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassOriginDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Origin:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassOrigin">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassOrigin"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassOriginItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxAsterixOrigin1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassOrigin">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;org&lt;/b&gt; $xxyy&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassStartingDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Starting:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassFakeStarting">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassStarting"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassFakeStartingItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneGlassFakeStarting">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassFakeStarting">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;b&gt;cpu&lt;/b&gt;  equ 80&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassMonoSpriteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Monocolor sprite:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelGlassMultiSpriteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Multicolor sprite:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassByteHexMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassByteHexMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassByteHexMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassByteHexMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByteHexMultiSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="TmpxPaneGlassByteHexMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; [byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByteHexMonoSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassByteHexMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; [byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassByteBinMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMonoSprite"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassByteBinMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassByteBinMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMultiSprite"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassByteBinMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByteBinMultiSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassByteBinMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxByteBinMonoSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassByteBinMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[byte]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroHexMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroHexMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroHexMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroHexMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroHexMultiSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroHexMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroHexMonoSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroHexMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xx..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroBinMonoSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMonoSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroBinMonoSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroBinMultiSprite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassMultiSprite"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroBinMultiSpriteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroBinMultiSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroBinMultiSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroBinMonoSprite1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroBinMonoSprite">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac] &lt;/b&gt; &lt;font color=&apos;red&apos;&gt;%b..&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassTribyteDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tribyte:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroTribyte">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassTribyte"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroTribyteItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroTribyte1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroTribyte">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzz&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassLongDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Long:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDdLong">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassLong"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDdLongItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroLong1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroLong">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;dd&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyyzzkk&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassWordSwappedDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Word Swapped:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroWordSwapped">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassWordSwapped"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroWordSwappedItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxMacroWordSwapped1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroWordSwapped">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$yyxx&lt;/font&gt;&lt;br&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassText"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; db&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassNumTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text #num chars:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxPTextNumText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassNumText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxPTextNumText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotTextNumText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotTextNumText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .ptext&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[66, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassZeroTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text 0 terminated:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotNullZeroText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassZeroText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotNullZeroText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotNullZeroText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotNullZeroText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .null&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassAddressDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Address:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDwAddress">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassAddress"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDwAddressItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotAddrAddress1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDwAddress">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; dw&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelTmpxGlassStackWordDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Stack Word:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassMacroStackWord">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassWord"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassMacroStackWordItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotRtaStackWord1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassMacroStackWord">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt;[.mac]&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;$xxyy&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassHighTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiftHighText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassHighText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiftHighText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftHighText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotShiftHighText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shift&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[66, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassShiftTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text left shifted:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiflShiftText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassShiftText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiflShiftText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftlShiftText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotShiflShiftText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .shiftl&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[66, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassScreenTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text to screen code:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotScreenText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassScreenText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotScreenText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotScreenText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotScreenText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .screen&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabelGlassPetasciiTextDeclaration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Text to petascii code:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotPetasciiText1">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassPetsciiText"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotPetasciiText1ItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotPetasciiText1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotPetasciiText1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;      &lt;b&gt; .text&lt;/b&gt; &lt;font color=&apos;red&apos;&gt;&quot;xxx&quot;&lt;/font&gt;&lt;br&gt;&#xa;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassLabelNameColon">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGlassLabel"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassLabelNameColonItemStateChanged"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneDasmLabelNameColon">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassLabelNameColon">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;  &lt;head&gt;&#xa;&#xa;  &lt;/head&gt;&#xa;  &lt;body&gt;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xa;     &lt;font color=&apos;black&apos;&gt;zzzz&lt;/font&gt;&lt;b&gt;:&lt;/b&gt;&#xa;    &lt;/p&gt;&#xa;  &lt;/body&gt;&#xa;&lt;/html&gt;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

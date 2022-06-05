@@ -1142,6 +1142,29 @@ public class Disassembly {
         aScreenText=option.tass64ScreenText; 
         aPetasciiText=option.tass64PetasciiText;
         break;
+      case GLASS:
+        aStarting=option.glassStarting;
+        aOrigin=option.glassOrigin;
+        aLabel=option.glassLabel;
+        aComment=option.glassComment;
+        aBlockComment=option.glassBlockComment;
+        aByte=option.glassByte;
+        aWord=option.glassWord;
+        aWordSwapped=option.glassWordSwapped;
+        aTribyte=option.glassTribyte;
+        aLong=option.glassLong;
+        aAddress=option.glassAddress;
+        aStackWord=option.glassStackWord;
+        aMonoSprite=option.glassMonoSprite;
+        aMultiSprite=option.glassMultiSprite;
+        aText=option.glassText;
+     /*     aNumText=option.glassNumText;
+        aZeroText=option.glassZeroText;
+        aHighText=option.glassHighText;   
+        aShiftText=option.glassShiftText; 
+        aScreenText=option.glassScreenText; 
+        aPetasciiText=option.glassPetasciiText;*/
+        break;  
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
