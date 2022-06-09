@@ -151,22 +151,22 @@ public class DataTableModelConstant extends AbstractTableModel {
         constant.table[3][rowIndex]=(String)aValue;  
         break;    
       case T4:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[4][rowIndex]=(String)aValue;  
         break;   
       case T5:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[5][rowIndex]=(String)aValue;  
         break;  
       case T6:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[6][rowIndex]=(String)aValue;  
         break;   
       case T7:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[7][rowIndex]=(String)aValue;  
         break;  
       case T8:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[8][rowIndex]=(String)aValue;  
         break;  
       case T9:
-        constant.table[3][rowIndex]=(String)aValue;  
+        constant.table[9][rowIndex]=(String)aValue;  
         break;           
     }
   }
