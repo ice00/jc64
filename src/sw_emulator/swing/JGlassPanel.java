@@ -149,17 +149,17 @@ public class JGlassPanel extends javax.swing.JPanel {
         jScrollPaneTmpxMacroWordSwapped1 = new javax.swing.JScrollPane();
         jTextPaneGlassMacroWordSwapped = new javax.swing.JTextPane();
         jLabelGlassTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonTmpxDotText1 = new javax.swing.JRadioButton();
+        jRadioButtonGlassDbText = new javax.swing.JRadioButton();
         jScrollPaneTmpxDotText1 = new javax.swing.JScrollPane();
-        jTextPaneTmpxDotText1 = new javax.swing.JTextPane();
+        jTextPaneGlassDbText = new javax.swing.JTextPane();
         jLabelGlassNumTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonTmpxPTextNumText1 = new javax.swing.JRadioButton();
+        jRadioButtonGlassDbNumText = new javax.swing.JRadioButton();
         jScrollPaneTmpxDotTextNumText1 = new javax.swing.JScrollPane();
-        jTextPaneTmpxDotTextNumText1 = new javax.swing.JTextPane();
+        jTextPaneGlassDbNumText = new javax.swing.JTextPane();
         jLabelGlassZeroTextDeclaration = new javax.swing.JLabel();
-        jRadioButtonTmpxDotNullZeroText1 = new javax.swing.JRadioButton();
+        jRadioButtonGlassDbZeroText = new javax.swing.JRadioButton();
         jScrollPaneTmpxDotNullZeroText1 = new javax.swing.JScrollPane();
-        jTextPaneTmpxDotNullZeroText1 = new javax.swing.JTextPane();
+        jTextPaneGlassDbZeroText = new javax.swing.JTextPane();
         jLabelGlassAddressDeclaration = new javax.swing.JLabel();
         jRadioButtonGlassDwAddress = new javax.swing.JRadioButton();
         jScrollPaneTmpxDotAddrAddress1 = new javax.swing.JScrollPane();
@@ -493,56 +493,58 @@ public class JGlassPanel extends javax.swing.JPanel {
 
         jLabelGlassTextDeclaration.setText("Text:");
 
-        buttonGroupGlassText.add(jRadioButtonTmpxDotText1);
-        jRadioButtonTmpxDotText1.setSelected(true);
-        jRadioButtonTmpxDotText1.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupGlassText.add(jRadioButtonGlassDbText);
+        jRadioButtonGlassDbText.setSelected(true);
+        jRadioButtonGlassDbText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonTmpxDotText1ItemStateChanged(evt);
+                jRadioButtonGlassDbTextItemStateChanged(evt);
             }
         });
 
         jScrollPaneTmpxDotText1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneTmpxDotText1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneTmpxDotText1.setEditable(false);
-        jTextPaneTmpxDotText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
-        jScrollPaneTmpxDotText1.setViewportView(jTextPaneTmpxDotText1);
+        jTextPaneGlassDbText.setEditable(false);
+        jTextPaneGlassDbText.setContentType("text/html"); // NOI18N
+        jTextPaneGlassDbText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneTmpxDotText1.setViewportView(jTextPaneGlassDbText);
 
         jLabelGlassNumTextDeclaration.setText("Text #num chars:");
 
-        buttonGroupGlassNumText.add(jRadioButtonTmpxPTextNumText1);
-        jRadioButtonTmpxPTextNumText1.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupGlassNumText.add(jRadioButtonGlassDbNumText);
+        jRadioButtonGlassDbNumText.setSelected(true);
+        jRadioButtonGlassDbNumText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonTmpxPTextNumText1ItemStateChanged(evt);
+                jRadioButtonGlassDbNumTextItemStateChanged(evt);
             }
         });
 
         jScrollPaneTmpxDotTextNumText1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneTmpxDotTextNumText1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneTmpxDotTextNumText1.setEditable(false);
-        jTextPaneTmpxDotTextNumText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotTextNumText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .ptext</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
-        jTextPaneTmpxDotTextNumText1.setPreferredSize(new java.awt.Dimension(66, 20));
-        jScrollPaneTmpxDotTextNumText1.setViewportView(jTextPaneTmpxDotTextNumText1);
+        jTextPaneGlassDbNumText.setEditable(false);
+        jTextPaneGlassDbNumText.setContentType("text/html"); // NOI18N
+        jTextPaneGlassDbNumText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneGlassDbNumText.setPreferredSize(new java.awt.Dimension(66, 20));
+        jScrollPaneTmpxDotTextNumText1.setViewportView(jTextPaneGlassDbNumText);
 
         jLabelGlassZeroTextDeclaration.setText("Text 0 terminated:");
 
-        buttonGroupGlassZeroText.add(jRadioButtonTmpxDotNullZeroText1);
-        jRadioButtonTmpxDotNullZeroText1.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroupGlassZeroText.add(jRadioButtonGlassDbZeroText);
+        jRadioButtonGlassDbZeroText.setSelected(true);
+        jRadioButtonGlassDbZeroText.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButtonTmpxDotNullZeroText1ItemStateChanged(evt);
+                jRadioButtonGlassDbZeroTextItemStateChanged(evt);
             }
         });
 
         jScrollPaneTmpxDotNullZeroText1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneTmpxDotNullZeroText1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextPaneTmpxDotNullZeroText1.setEditable(false);
-        jTextPaneTmpxDotNullZeroText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotNullZeroText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .null</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
-        jScrollPaneTmpxDotNullZeroText1.setViewportView(jTextPaneTmpxDotNullZeroText1);
+        jTextPaneGlassDbZeroText.setEditable(false);
+        jTextPaneGlassDbZeroText.setContentType("text/html"); // NOI18N
+        jTextPaneGlassDbZeroText.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jScrollPaneTmpxDotNullZeroText1.setViewportView(jTextPaneGlassDbZeroText);
 
         jLabelGlassAddressDeclaration.setText("Address:");
 
@@ -594,7 +596,7 @@ public class JGlassPanel extends javax.swing.JPanel {
 
         jTextPaneTmpxDotShiftHighText1.setEditable(false);
         jTextPaneTmpxDotShiftHighText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotShiftHighText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .shift</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneTmpxDotShiftHighText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jTextPaneTmpxDotShiftHighText1.setPreferredSize(new java.awt.Dimension(66, 20));
         jScrollPaneTmpxDotShiftHighText1.setViewportView(jTextPaneTmpxDotShiftHighText1);
 
@@ -612,7 +614,7 @@ public class JGlassPanel extends javax.swing.JPanel {
 
         jTextPaneTmpxDotShiflShiftText1.setEditable(false);
         jTextPaneTmpxDotShiflShiftText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotShiflShiftText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .shiftl</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneTmpxDotShiflShiftText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jTextPaneTmpxDotShiflShiftText1.setPreferredSize(new java.awt.Dimension(66, 20));
         jScrollPaneTmpxDotShiftlShiftText1.setViewportView(jTextPaneTmpxDotShiflShiftText1);
 
@@ -630,7 +632,7 @@ public class JGlassPanel extends javax.swing.JPanel {
 
         jTextPaneTmpxDotScreenText1.setEditable(false);
         jTextPaneTmpxDotScreenText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotScreenText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .screen</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneTmpxDotScreenText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneTmpxDotScreenText1.setViewportView(jTextPaneTmpxDotScreenText1);
 
         jLabelGlassPetasciiTextDeclaration.setText("Text to petascii code:");
@@ -647,7 +649,7 @@ public class JGlassPanel extends javax.swing.JPanel {
 
         jTextPaneTmpxDotPetasciiText1.setEditable(false);
         jTextPaneTmpxDotPetasciiText1.setContentType("text/html"); // NOI18N
-        jTextPaneTmpxDotPetasciiText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> .text</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
+        jTextPaneTmpxDotPetasciiText1.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>\"xxx\"</font><br>\n\n    </p>\n  </body>\n</html>\n");
         jScrollPaneTmpxDotPetasciiText1.setViewportView(jTextPaneTmpxDotPetasciiText1);
 
         buttonGroupGlassLabel.add(jRadioButtonGlassLabelNameColon);
@@ -710,9 +712,9 @@ public class JGlassPanel extends javax.swing.JPanel {
                     .addComponent(jRadioButtonGlassMacroStackWord)
                     .addComponent(jRadioButtonGlassByteHexMonoSprite)
                     .addComponent(jRadioButtonGlassByteHexMultiSprite)
-                    .addComponent(jRadioButtonTmpxDotText1)
-                    .addComponent(jRadioButtonTmpxPTextNumText1)
-                    .addComponent(jRadioButtonTmpxDotNullZeroText1)
+                    .addComponent(jRadioButtonGlassDbText)
+                    .addComponent(jRadioButtonGlassDbNumText)
+                    .addComponent(jRadioButtonGlassDbZeroText)
                     .addComponent(jRadioButtonTmpxDotShiftHighText1)
                     .addComponent(jRadioButtonTmpxDotShiflShiftText1)
                     .addComponent(jRadioButtonTmpxDotScreenText1)
@@ -864,17 +866,17 @@ public class JGlassPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelGlassTextDeclaration)
-                    .addComponent(jRadioButtonTmpxDotText1)
+                    .addComponent(jRadioButtonGlassDbText)
                     .addComponent(jScrollPaneTmpxDotText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelGlassNumTextDeclaration)
-                    .addComponent(jRadioButtonTmpxPTextNumText1)
+                    .addComponent(jRadioButtonGlassDbNumText)
                     .addComponent(jScrollPaneTmpxDotTextNumText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelGlassZeroTextDeclaration)
-                    .addComponent(jRadioButtonTmpxDotNullZeroText1)
+                    .addComponent(jRadioButtonGlassDbZeroText)
                     .addComponent(jScrollPaneTmpxDotNullZeroText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -964,17 +966,17 @@ public class JGlassPanel extends javax.swing.JPanel {
        option.glassWordSwapped=Assembler.WordSwapped.MACRO5_WORD_SWAPPED;
     }//GEN-LAST:event_jRadioButtonGlassMacroWordSwappedItemStateChanged
 
-    private void jRadioButtonTmpxDotText1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotText1ItemStateChanged
+    private void jRadioButtonGlassDbTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonGlassDbTextItemStateChanged
        option.glassText=Assembler.Text.DB_BYTE_TEXT;
-    }//GEN-LAST:event_jRadioButtonTmpxDotText1ItemStateChanged
+    }//GEN-LAST:event_jRadioButtonGlassDbTextItemStateChanged
 
-    private void jRadioButtonTmpxPTextNumText1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxPTextNumText1ItemStateChanged
-        
-    }//GEN-LAST:event_jRadioButtonTmpxPTextNumText1ItemStateChanged
+    private void jRadioButtonGlassDbNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonGlassDbNumTextItemStateChanged
+       option.glassNumText=Assembler.NumText.DB_BYTE_NUMTEXT;  
+    }//GEN-LAST:event_jRadioButtonGlassDbNumTextItemStateChanged
 
-    private void jRadioButtonTmpxDotNullZeroText1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonTmpxDotNullZeroText1ItemStateChanged
-        
-    }//GEN-LAST:event_jRadioButtonTmpxDotNullZeroText1ItemStateChanged
+    private void jRadioButtonGlassDbZeroTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonGlassDbZeroTextItemStateChanged
+       option.glassZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;  
+    }//GEN-LAST:event_jRadioButtonGlassDbZeroTextItemStateChanged
 
     private void jRadioButtonGlassDwAddressItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonGlassDwAddressItemStateChanged
       option.glassAddress=Assembler.Address.DW_ADDR;
@@ -1062,6 +1064,9 @@ public class JGlassPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButtonGlassByteHexMonoSprite;
     private javax.swing.JRadioButton jRadioButtonGlassByteHexMultiSprite;
     private javax.swing.JRadioButton jRadioButtonGlassDbByte;
+    private javax.swing.JRadioButton jRadioButtonGlassDbNumText;
+    private javax.swing.JRadioButton jRadioButtonGlassDbText;
+    private javax.swing.JRadioButton jRadioButtonGlassDbZeroText;
     private javax.swing.JRadioButton jRadioButtonGlassDdLong;
     private javax.swing.JRadioButton jRadioButtonGlassDwAddress;
     private javax.swing.JRadioButton jRadioButtonGlassDwWord;
@@ -1077,13 +1082,10 @@ public class JGlassPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButtonGlassMacroWordSwapped;
     private javax.swing.JRadioButton jRadioButtonGlassOrigin;
     private javax.swing.JRadioButton jRadioButtonGlassSemicolonComment;
-    private javax.swing.JRadioButton jRadioButtonTmpxDotNullZeroText1;
     private javax.swing.JRadioButton jRadioButtonTmpxDotPetasciiText1;
     private javax.swing.JRadioButton jRadioButtonTmpxDotScreenText1;
     private javax.swing.JRadioButton jRadioButtonTmpxDotShiflShiftText1;
     private javax.swing.JRadioButton jRadioButtonTmpxDotShiftHighText1;
-    private javax.swing.JRadioButton jRadioButtonTmpxDotText1;
-    private javax.swing.JRadioButton jRadioButtonTmpxPTextNumText1;
     private javax.swing.JRadioButton jRadioButtonTmpxSemicolonBlockComment1;
     private javax.swing.JScrollPane jScrollPaneDasmLabelNameColon;
     private javax.swing.JScrollPane jScrollPaneGlassByte;
@@ -1117,6 +1119,9 @@ public class JGlassPanel extends javax.swing.JPanel {
     private javax.swing.JTextPane jTextPaneGlassByteBinMultiSprite;
     private javax.swing.JTextPane jTextPaneGlassByteHexMonoSprite;
     private javax.swing.JTextPane jTextPaneGlassDbByte;
+    private javax.swing.JTextPane jTextPaneGlassDbNumText;
+    private javax.swing.JTextPane jTextPaneGlassDbText;
+    private javax.swing.JTextPane jTextPaneGlassDbZeroText;
     private javax.swing.JTextPane jTextPaneGlassDwAddress;
     private javax.swing.JTextPane jTextPaneGlassDwWord;
     private javax.swing.JTextPane jTextPaneGlassFakeStarting;
@@ -1132,13 +1137,10 @@ public class JGlassPanel extends javax.swing.JPanel {
     private javax.swing.JTextPane jTextPaneGlassMacroWordSwapped;
     private javax.swing.JTextPane jTextPaneGlassOrigin;
     private javax.swing.JTextPane jTextPaneGlassSemicolonComment;
-    private javax.swing.JTextPane jTextPaneTmpxDotNullZeroText1;
     private javax.swing.JTextPane jTextPaneTmpxDotPetasciiText1;
     private javax.swing.JTextPane jTextPaneTmpxDotScreenText1;
     private javax.swing.JTextPane jTextPaneTmpxDotShiflShiftText1;
     private javax.swing.JTextPane jTextPaneTmpxDotShiftHighText1;
-    private javax.swing.JTextPane jTextPaneTmpxDotText1;
-    private javax.swing.JTextPane jTextPaneTmpxDotTextNumText1;
     private javax.swing.JTextPane jTextPaneTmpxSemicolonBlockComment1;
     // End of variables declaration//GEN-END:variables
  
@@ -1245,6 +1247,24 @@ public class JGlassPanel extends javax.swing.JPanel {
         jRadioButtonGlassMacroBinMultiSprite.setSelected(true);
         break;  
     }    
+    
+    switch (option.glassText) {
+      case DB_BYTE_TEXT:  
+        jRadioButtonGlassDbText.setSelected(true);
+        break;          
+    } 
+    
+    switch (option.glassNumText) {
+      case DB_BYTE_NUMTEXT:  
+        jRadioButtonGlassDbNumText.setSelected(true);
+        break;          
+    } 
+    
+    switch (option.glassZeroText) {
+      case DB_BYTE_ZEROTEXT:  
+        jRadioButtonGlassDbZeroText.setSelected(true);
+        break;          
+    }
   }
 }
 

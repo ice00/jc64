@@ -1035,6 +1035,12 @@ public class Option {
       
   /** Glass: text declaration type */
   public Assembler.Text glassText=Assembler.Text.DB_BYTE_TEXT;
+        
+  /** Glass: num text declaration type */
+  public Assembler.NumText glassNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
+  
+  /** Glass: zero text declaration type */
+  public Assembler.ZeroText glassZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
   
   
   

@@ -1158,9 +1158,9 @@ public class Disassembly {
         aMonoSprite=option.glassMonoSprite;
         aMultiSprite=option.glassMultiSprite;
         aText=option.glassText;
-     /*     aNumText=option.glassNumText;
+        aNumText=option.glassNumText;
         aZeroText=option.glassZeroText;
-        aHighText=option.glassHighText;   
+     /*   aHighText=option.glassHighText;   
         aShiftText=option.glassShiftText; 
         aScreenText=option.glassScreenText; 
         aPetasciiText=option.glassPetasciiText;*/

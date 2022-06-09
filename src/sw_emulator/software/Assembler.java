@@ -2955,6 +2955,7 @@ public class Assembler {
      DOT_TEXT_P_NUMTEXT,      // -> .text n"xxx" 
      DOT_BYTE_NUMTEXT,        // ->  .byte "xxx"
      DOT_BYT_NUMTEXT,         // ->   .byt "xxx"
+     DB_BYTE_NUMTEXT,         // ->     db "xxx"
      MARK_TEXT_NUMTEXT,       // ->  !text "xxx"
      MARK_TX_NUMTEXT,         // ->    !tx "xxx"
      MARK_RAW_NUMTEXT,        // ->   !raw "xxx"    
@@ -2988,7 +2989,10 @@ public class Assembler {
            break;
          case DOT_BYT_NUMTEXT:
            str.append(getDataSpacesTabs()).append((".byt "));
-           break;         
+           break;     
+         case DB_BYTE_NUMTEXT:
+            str.append(getDataSpacesTabs()).append(("db "));  
+            break;     
          case MARK_TEXT_NUMTEXT:
            str.append(getDataSpacesTabs()).append(("!text "));
            break;   
@@ -3213,7 +3217,75 @@ public class Assembler {
                         }  
                   str.append((char)val);  
                 }   
-              break;              
+              break;  
+              
+            case GLASS:
+              // don't use allowUTF  
+              if (isFirst) {  
+               str.append("$").append(ByteToExe(val)); 
+               isFirst=false;                   
+              } else {              
+                  if (
+                      (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                     ((( val<0x20 || (val>127))))   
+                     )     
+                  {
+                      if (isString) {
+                        str.append("\"");
+                        isString=false;  
+                      }
+                      if (isFirst) {
+                        str.append("$").append(ByteToExe(val)); 
+                        isFirst=false;
+                      } else str.append(", $").append(ByteToExe(val));      
+                  } else {
+                     if (isFirst) {
+                          isFirst=false;
+                          isString=true;
+                          str.append("\"");
+                     } else if (!isString) {
+                              str.append(", \"");
+                              isString=true;  
+                            }  
+
+                     switch (val) {
+                       case 0x00:
+                         str.append("\\0");  
+                         break;     
+                       case 0x07:
+                          str.append("\\a"); 
+                          break;
+                       case 0x09:
+                          str.append("\\t"); 
+                          break;  
+                       case 0x0A:
+                          str.append("\\n"); 
+                          break;  
+                       case 0x0C:
+                          str.append("\\f"); 
+                          break; 
+                       case 0x0D:
+                          str.append("\\r"); 
+                          break;  
+                       case 0x1B:
+                          str.append("\\e"); 
+                          break;  
+                       case 0x27:
+                          str.append("\\'"); 
+                          break; 
+                       case 0x22:
+                          str.append("\\\""); 
+                          break;     
+                       case 0x5C:
+                          str.append("\\\\");
+                          break;
+                       default:
+                          str.append((char)val); 
+                          break;
+                      }                                           
+                    }   
+                }
+              break;
           }   
           
           carets.add(start, str.length(), mem, Type.NUM_TEXT);
@@ -3237,6 +3309,7 @@ public class Assembler {
      DOT_TEXT_N_ZEROTEXT,     // ->   -text n"xxx" 
      DOT_BYTE_ZEROTEXT,       // ->   .byte "xxx"
      DOT_ASCIIZ_ZEROTEXT,     // -> .asciiz "xxx"
+     DB_BYTE_ZEROTEXT,        // ->      db "xxx"
      BYTE_ZEROTEXT,           // ->    byte "xxx"
      MARK_TEXT_ZEROTEXT,      // ->   !text "xxx"
      MARK_TX_ZEROTEXT,        // ->     !tx "xxx"
@@ -3273,6 +3346,9 @@ public class Assembler {
          case DOT_ASCIIZ_ZEROTEXT:
            str.append(getDataSpacesTabs()).append((".asciiz "));
            break;     
+         case DB_BYTE_ZEROTEXT:
+           str.append(getDataSpacesTabs()).append(("db "));
+           break;  
          case MARK_TEXT_ZEROTEXT:
            str.append(getDataSpacesTabs()).append(("!text "));
            break;   
@@ -3505,7 +3581,69 @@ public class Assembler {
                 listRel.pop();
                 listRel2.pop();
               }
-              break;               
+              break;   
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;              
           }   
           
           carets.add(start, str.length(), mem, Type.ZERO_TEXT);
