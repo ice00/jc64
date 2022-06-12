@@ -3668,6 +3668,7 @@ public class Assembler {
       DOT_BYT_HIGHTEXT,        // ->   .byt  "xxx"
       DOT_TEXT_HIGHTEXT,       // ->   .text "xxx"
       DOT_TEXT_S_HIGHTEXT,     // ->  .text s"xxx"
+      DB_BYTE_HIGHTEXT,        // ->      db "xxx"     
       BYTE_HIGHTEXT,           // ->    byte "xxx"
       MARK_TEXT_HIGHTEXT,      // ->   !text "xxx"      
       MARK_TX_HIGHTEXT,        // ->     !tx "xxx"
@@ -3702,7 +3703,10 @@ public class Assembler {
            break;
          case DOT_BYT_HIGHTEXT:
            str.append(getDataSpacesTabs()).append((".byt "));
-           break;     
+           break; 
+         case DB_BYTE_HIGHTEXT:
+           str.append(getDataSpacesTabs()).append(("db "));
+           break;   
          case MARK_TEXT_HIGHTEXT:
            str.append(getDataSpacesTabs()).append(("!text "));
            break;   
@@ -3923,7 +3927,69 @@ public class Assembler {
                 
                 str.append((char)(mem.copy & 0x7F));  
               }
-              break;               
+              break; 
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;   
           }   
           
            carets.add(start, str.length(), mem, Type.HIGH_TEXT);
@@ -3948,6 +4014,7 @@ public class Assembler {
       DOT_BYT_SHIFTTEXT,        // ->   .byt  "xxx"
       DOT_TEXT_SHIFTTEXT,       // ->   .text "xxx"
       DOT_TEXT_L_SHIFTTEXT,     // ->  .text l"xxx"
+      DB_BYTE_SHIFTTEXT,        // ->      db "xxx"
       BYTE_SHIFTTEXT,           // ->    byte "xxx"
       MARK_TEXT_SHIFTTEXT,      // ->   !text "xxx"      
       MARK_TX_SHIFTTEXT,        // ->     !tx "xxx"
@@ -3985,6 +4052,9 @@ public class Assembler {
           case DC_B_BYTE_SHIFTTEXT:
             str.append(getDataSpacesTabs()).append(("dc.b "));  
             break;
+         case DB_BYTE_SHIFTTEXT:
+           str.append(getDataSpacesTabs()).append(("db "));
+           break;   
           case MARK_TEXT_SHIFTTEXT:
             str.append(getDataSpacesTabs()).append(("!text "));  
             break;
@@ -4197,6 +4267,68 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;  
             }       
           
           carets.add(start, str.length(), mem, Type.SHIFT_TEXT);
@@ -4220,6 +4352,7 @@ public class Assembler {
       DOT_BYT_SCREENTEXT,        // ->   .byt  "xxx"
       DOT_TEXT_SCREENTEXT,       // ->   .text "xxx"
       DOT_SCREEN_SCREENTEXT,     // -> .screen "xxx"
+      DB_BYTE_SCREENTEXT,        // ->      db "xxx"
       BYTE_SCREENTEXT,           // ->    byte "xxx"
       MARK_SCR_SCREENTEXT,       // ->    !scr "xxx"
       DC_BYTE_SCREENTEXT,        // ->      dc "xxx"
@@ -4254,6 +4387,9 @@ public class Assembler {
           case DC_B_BYTE_SCREENTEXT:
             str.append(getDataSpacesTabs()).append(("dc.b "));  
             break;
+          case DB_BYTE_SCREENTEXT:
+           str.append(getDataSpacesTabs()).append(("db "));
+           break;    
           case MARK_SCR_SCREENTEXT:
             str.append(getDataSpacesTabs()).append(("!scr "));  
             break;            
@@ -4463,6 +4599,68 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;   
           }     
           
           carets.add(start, str.length(), mem, Type.SCREEN_TEXT);
@@ -4485,6 +4683,7 @@ public class Assembler {
       DOT_BYTE_PETASCIITEXT,       // ->   .byte "xxx"
       DOT_BYT_PETASCIITEXT,        // ->   .byt  "xxx"
       DOT_TEXT_PETASCIITEXT,       // ->   .text "xxx"
+      DB_BYTE_PETASCIITEXT,        // ->      db "xxx"
       BYTE_PETASCIITEXT,           // ->    byte "xxx"
       MARK_PET_PETASCIITEXT,       // ->    !pet "xxx"
       DC_BYTE_PETASCIITEXT,        // ->      dc "xxx"
@@ -4519,6 +4718,9 @@ public class Assembler {
           case DC_B_BYTE_PETASCIITEXT:
             str.append(getDataSpacesTabs()).append(("dc.b "));  
             break;
+          case DB_BYTE_PETASCIITEXT:
+            str.append(getDataSpacesTabs()).append(("db "));  
+            break;  
           case MARK_PET_PETASCIITEXT:
             str.append(getDataSpacesTabs()).append(("!pet "));  
             break;            
@@ -4721,6 +4923,68 @@ public class Assembler {
                   str.append((char)val);  
                 }   
               break;  
+            case GLASS:
+              // don't use allowUTF  
+              if (
+                  (val!=0x00 && val!=0x07 && val!=0x09 && val!=0x0A && val!=0x0C && val!=0x0D && val!=0x1B && val!=0x27) &&     
+                 ((( val<0x20 || (val>127))))   
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                 
+                 switch (val) {
+                   case 0x00:
+                     str.append("\\0");  
+                     break;     
+                   case 0x07:
+                      str.append("\\a"); 
+                      break;
+                   case 0x09:
+                      str.append("\\t"); 
+                      break;  
+                   case 0x0A:
+                      str.append("\\n"); 
+                      break;  
+                   case 0x0C:
+                      str.append("\\f"); 
+                      break; 
+                   case 0x0D:
+                      str.append("\\r"); 
+                      break;  
+                   case 0x1B:
+                      str.append("\\e"); 
+                      break;  
+                   case 0x27:
+                      str.append("\\'"); 
+                      break; 
+                   case 0x22:
+                      str.append("\\\""); 
+                      break;     
+                   case 0x5C:
+                      str.append("\\\\");
+                      break;
+                   default:
+                      str.append((char)val); 
+                      break;
+                  }                                           
+                }                  
+              break;     
           }           
           
           carets.add(start, str.length(), mem, Type.PETASCII_TEXT);

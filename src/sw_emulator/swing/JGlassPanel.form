@@ -104,10 +104,10 @@
                   <Component id="jRadioButtonGlassDbText" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonGlassDbNumText" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonGlassDbZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotShiftHighText1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotShiflShiftText1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotScreenText1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotPetasciiText1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -301,25 +301,25 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabelGlassHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotShiftHighText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbHighText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneTmpxDotShiftHighText1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabelGlassShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotShiflShiftText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneTmpxDotShiftlShiftText1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabelGlassScreenTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotScreenText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneTmpxDotScreenText1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabelGlassPetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonTmpxDotPetasciiText1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonGlassDbPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneTmpxDotPetasciiText1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -1123,14 +1123,15 @@
         <Property name="text" type="java.lang.String" value="Text &apos;1&apos; terminated:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiftHighText1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDbHighText">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroupGlassHighText"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiftHighText1ItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDbHighTextItemStateChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftHighText1">
@@ -1144,7 +1145,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotShiftHighText1">
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDbHighText">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -1161,14 +1162,15 @@
         <Property name="text" type="java.lang.String" value="Text left shifted:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotShiflShiftText1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDbShiftText">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroupGlassShiftText"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotShiflShiftText1ItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDbShiftTextItemStateChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotShiftlShiftText1">
@@ -1182,7 +1184,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotShiflShiftText1">
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDbShiftText">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -1199,14 +1201,15 @@
         <Property name="text" type="java.lang.String" value="Text to screen code:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotScreenText1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDbScreenText">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroupGlassScreenText"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotScreenText1ItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDbScreenTextItemStateChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotScreenText1">
@@ -1220,7 +1223,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotScreenText1">
+        <Component class="javax.swing.JTextPane" name="jTextPaneDbScreenText">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
@@ -1234,14 +1237,15 @@
         <Property name="text" type="java.lang.String" value="Text to petascii code:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonTmpxDotPetasciiText1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonGlassDbPetasciiText">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroupGlassPetsciiText"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonTmpxDotPetasciiText1ItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonGlassDbPetasciiTextItemStateChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneTmpxDotPetasciiText1">
@@ -1255,7 +1259,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneTmpxDotPetasciiText1">
+        <Component class="javax.swing.JTextPane" name="jTextPaneGlassDbPetasciiText">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>

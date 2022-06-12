@@ -1042,6 +1042,18 @@ public class Option {
   /** Glass: zero text declaration type */
   public Assembler.ZeroText glassZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
   
+  /** Glass: high text declaration type */
+  public Assembler.HighText glassHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
+  
+  /** Glass: shift text declaration type */
+  public Assembler.ShiftText glassShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
+  
+  /** Glass: screen text declaration type */
+  public Assembler.ScreenText glassScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT;
+  
+  /** Glass: petascii text declaration type */
+  public Assembler.PetasciiText glassPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT;
+  
   
   
   /** 64Tass: starting declaration */

@@ -1160,10 +1160,10 @@ public class Disassembly {
         aText=option.glassText;
         aNumText=option.glassNumText;
         aZeroText=option.glassZeroText;
-     /*   aHighText=option.glassHighText;   
+        aHighText=option.glassHighText;   
         aShiftText=option.glassShiftText; 
         aScreenText=option.glassScreenText; 
-        aPetasciiText=option.glassPetasciiText;*/
+        aPetasciiText=option.glassPetasciiText;
         break;  
     }
     

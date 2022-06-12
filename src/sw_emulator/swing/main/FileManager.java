@@ -371,7 +371,29 @@ public class FileManager {
       // 1.7
       option.pedantic=in.readBoolean();
       option.clickVlPatch=in.readBoolean();
-              
+      
+      // 2.1
+      option.glassStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.glassOrigin = Assembler.Origin.valueOf(in.readUTF());
+      option.glassLabel = Assembler.Label.valueOf(in.readUTF());
+      option.glassComment = Assembler.Comment.valueOf(in.readUTF());
+      option.glassBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.glassByte = Assembler.Byte.valueOf(in.readUTF());
+      option.glassWord = Assembler.Word.valueOf(in.readUTF());
+      option.glassWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
+      option.glassTribyte = Assembler.Tribyte.valueOf(in.readUTF());
+      option.glassLong = Assembler.Long.valueOf(in.readUTF());
+      option.glassAddress = Assembler.Address.valueOf(in.readUTF());
+      option.glassStackWord = Assembler.StackWord.valueOf(in.readUTF());
+      option.glassMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.glassMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.glassText = Assembler.Text.valueOf(in.readUTF());
+      option.glassNumText = Assembler.NumText.valueOf(in.readUTF());
+      option.glassZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
+      option.glassHighText = Assembler.HighText.valueOf(in.readUTF()); 
+      option.glassShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.glassScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
+      option.glassPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());        
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -688,6 +710,29 @@ public class FileManager {
       // 1.7
       out.writeBoolean(option.pedantic);
       out.writeBoolean(option.clickVlPatch);
+      
+      // 2.1
+      out.writeUTF(option.glassStarting.name());
+      out.writeUTF(option.glassOrigin.name());
+      out.writeUTF(option.glassLabel.name());
+      out.writeUTF(option.glassComment.name());
+      out.writeUTF(option.glassBlockComment.name());
+      out.writeUTF(option.glassByte.name());
+      out.writeUTF(option.glassWord.name());
+      out.writeUTF(option.glassWordSwapped.name());
+      out.writeUTF(option.glassTribyte.name()); 
+      out.writeUTF(option.glassLong.name());
+      out.writeUTF(option.glassAddress.name());
+      out.writeUTF(option.glassStackWord.name());
+      out.writeUTF(option.glassMonoSprite.name());
+      out.writeUTF(option.glassMultiSprite.name());   
+      out.writeUTF(option.glassText.name());
+      out.writeUTF(option.glassNumText.name());
+      out.writeUTF(option.glassZeroText.name()); 
+      out.writeUTF(option.glassHighText.name());
+      out.writeUTF(option.glassShiftText.name());
+      out.writeUTF(option.glassScreenText.name());
+      out.writeUTF(option.glassPetasciiText.name());
       
       out.flush();
       out.close();
