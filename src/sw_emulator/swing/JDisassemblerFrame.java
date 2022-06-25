@@ -4785,36 +4785,47 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;    
        case MEM_SUB_0:
          subAssign(0);  
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_1:  
          subAssign(1);
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_2:  
-         subAssign(2);  
+         subAssign(2); 
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_SUB_3:  
-         subAssign(3);  
+         subAssign(3); 
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_4:  
-         subAssign(4);  
+         subAssign(4); 
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_5:  
          subAssign(5);  
+         if (option.forceCompilation) disassembly(true);
          break;
        case MEM_SUB_6:  
          subAssign(6);  
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_7:  
          subAssign(7);  
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_8:  
          subAssign(8); 
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_9:  
          subAssign(9);  
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_SUB_CLEAR:  
-         subAssign(-1);  
+         subAssign(-1); 
+         if (option.forceCompilation) disassembly(true);
          break;  
        case MEM_WIZARD:
          wizard();  
