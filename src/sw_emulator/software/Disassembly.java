@@ -384,7 +384,7 @@ public class Disassembly {
           else assembler.setWord(builder, (byte)0, (byte)0, "play sound");
         }
         assembler.setWord(builder, inB[0x0E], inB[0x0F], "songs");
-        assembler.setWord(builder, inB[0x10], inB[0x12], "default song");
+        assembler.setWord(builder, inB[0x10], inB[0x11], "default song");
         assembler.setWord(builder, inB[0x12], inB[0x13], "speed");
         assembler.setWord(builder, inB[0x14], inB[0x15], "speed");
    
