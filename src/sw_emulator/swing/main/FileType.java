@@ -445,6 +445,56 @@ import sw_emulator.swing.Shared;
           return tmp.toString(); 
         }        
     },
+    NSF {
+        @Override
+        public String getDescription(byte[] inB) {
+          int nsfVersion;  // version of psid file
+          int nsfLAddr;    // nfs load address
+          int nsfIAddr;    // nfs init address
+          int nsfPAddr;    // nfs play address
+          int nfsSong;     // number of songs
+          int nfsSSong;    // start song
+    
+          StringBuilder tmp=new StringBuilder();
+          
+          nsfVersion=(int)inB[5];
+          nsfLAddr=Unsigned.done(inB[8])+Unsigned.done(inB[9])*256;
+          nsfIAddr=Unsigned.done(inB[10])+Unsigned.done(inB[11])*256;
+          nsfPAddr=Unsigned.done(inB[12])+Unsigned.done(inB[13])*256;
+          nfsSong=Unsigned.done(inB[6]);
+          nfsSSong=Unsigned.done(inB[7]);
+                    
+          tmp.append("NSF file version ").append(nsfVersion).append("\n");
+          tmp.append("Load Address: ").append(Integer.toHexString(nsfLAddr)).append("\n");
+          tmp.append("Init Address: ").append(Integer.toHexString(nsfIAddr)).append("\n");
+          tmp.append("Play Address: ").append(Integer.toHexString(nsfPAddr)).append("\n");
+          
+          tmp.append("name:      ");
+          for (int i=0x0E; i<0x2E; i++) {
+            if (inB[i]==0) break;
+            tmp.append((char)inB[i]);
+          }
+          tmp.append("\n");
+          
+          tmp.append("author:    ");
+          for (int i=0x2E; i<0x4E; i++) {
+            if (inB[i]==0) break;
+            tmp.append((char)inB[i]);
+          }
+          tmp.append("\n");
+          
+          tmp.append("copyright: ");
+          for (int i=0x4E; i<0x6E; i++) {
+            if (inB[i]==0) break;
+            tmp.append((char)inB[i]);
+          }
+          tmp.append("\n");
+         
+          tmp.append("songs: ").append(nfsSong).append(" (startsong: ")
+             .append(nfsSSong).append(")\n\n");
+          return tmp.toString();
+        }
+    },  // NFS
     MPR {
         @Override
         public String getDescription(byte[] inB) {
@@ -506,6 +556,7 @@ import sw_emulator.swing.Shared;
       if (isCRT(inB)) return CRT;
       if (isVSF(inB)) return VSF;
       if (isAY(inB))  return AY;
+      if (isNFS(inB)) return NSF;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -540,6 +591,27 @@ import sw_emulator.swing.Shared;
           if (psidVersion==1 && psidDOff==0x7C) return false;
           return true;
       
+      } catch (Exception e) {
+          System.err.println(e);
+        }  
+      
+      // file is too short for being a PSID
+      return false; 
+    }
+    
+    /**
+    * Determine if the input file is a NSF music tune
+    *
+    * @param inB the data
+    * @return true if the file is a PSID or RSID file
+    */    
+    private static boolean isNFS(byte[] inB) {
+      try {
+
+          // check header
+          if ((inB[0]!='N') 
+              ||(inB[1]!='E')||(inB[2]!='S')||(inB[3]!='M')||(inB[4] &0xFF)!=0x1A) return false;
+          return true;      
       } catch (Exception e) {
           System.err.println(e);
         }  

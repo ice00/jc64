@@ -91,6 +91,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("AY tune", "ay"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("NSF tune", "nsf"));
         fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
         memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
         memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
@@ -171,6 +172,9 @@ public class JProjectDialog extends javax.swing.JDialog {
           case AY:
             jRadioButtonAY.setSelected(true);
             break;      
+          case NSF:
+            jRadioButtonNSF.setSelected(true);  
+            break;  
         }
       } else {
           jRadioButtonPRG.setSelected(false);
@@ -179,6 +183,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonMPR.setSelected(false);  
           jRadioButtonCRT.setSelected(false);  
           jRadioButtonVSF.setSelected(false);  
+          jRadioButtonNSF.setSelected(false);  
         }
       if (project.targetType!=null) {
         switch (project.targetType) {
@@ -270,6 +275,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jRadioButtonC128Z = new javax.swing.JRadioButton();
         jRadioButtonAY = new javax.swing.JRadioButton();
+        jRadioButtonNSF = new javax.swing.JRadioButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -477,6 +483,10 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonAY.setText("AY");
         jRadioButtonAY.setEnabled(false);
 
+        buttonGroupFileType.add(jRadioButtonNSF);
+        jRadioButtonNSF.setText("NSF");
+        jRadioButtonNSF.setEnabled(false);
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -501,7 +511,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addComponent(jLabelPatch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonPatchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonPatchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                                     .addComponent(jButtonPatchAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -510,7 +520,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonAddNext)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPaneRelocate1)
+                            .addComponent(jScrollPaneRelocate1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                             .addComponent(jScrollPaneRelocate)))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -543,7 +553,9 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonVSF)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonAY))
+                                .addComponent(jRadioButtonAY)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonNSF))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jRadioButtonC64)
                                 .addGap(6, 6, 6)
@@ -594,7 +606,8 @@ public class JProjectDialog extends javax.swing.JDialog {
                             .addComponent(jRadioButtonCRT)
                             .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButtonVSF)
-                            .addComponent(jRadioButtonAY))
+                            .addComponent(jRadioButtonAY)
+                            .addComponent(jRadioButtonNSF))
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -695,6 +708,7 @@ public class JProjectDialog extends javax.swing.JDialog {
               jSpinnerCRT.setEnabled(true);
               break;      
             case SID:   
+            case NSF: // we did not have jet a NES target machine    
               jRadioButtonSID.setSelected(true);
               jRadioButtonC64.setSelected(true); 
               project.targetType=TargetType.C64;
@@ -704,7 +718,7 @@ public class JProjectDialog extends javax.swing.JDialog {
               jRadioButtonPlus4.setEnabled(false);
               jSpinnerCRT.setEnabled(false);
               jRadioButtonC128Z.setEnabled(false);
-              break;
+              break;            
             case MUS:
               jRadioButtonMUS.setSelected(true);
               project.targetType=TargetType.C64;
@@ -1011,6 +1025,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonCRT;
     private javax.swing.JRadioButton jRadioButtonMPR;
     private javax.swing.JRadioButton jRadioButtonMUS;
+    private javax.swing.JRadioButton jRadioButtonNSF;
     private javax.swing.JRadioButton jRadioButtonPRG;
     private javax.swing.JRadioButton jRadioButtonPlus4;
     private javax.swing.JRadioButton jRadioButtonSID;

@@ -5972,12 +5972,12 @@ public class Assembler {
      listRel.add(null);
      listRel2.add(null);
      
-     int size=0;
+     //int size=0;
      
      if (comment!=null) {
        highMem.userComment=comment;
        lastMem=highMem;
-       size=str.length();
+       //size=str.length();
      }
      
      actualType=aWord;
@@ -5990,6 +5990,39 @@ public class Assembler {
      //    str.append(SPACES.substring(0, SPACES.length()-size));
      //   aComment.flush(str);  
      // }
+   }
+   
+   /**
+    * Set a byte and put to ouptput stream (it deletes anything that threre are in queue)
+    * 
+    * @param str the output stream
+    * @param low the byte
+    * @param comment eventual comment to add
+    */
+   public void setByte(StringBuilder str, byte low, String comment) {
+     MemoryDasm lowMem=new MemoryDasm();
+     
+     lowMem.copy=low;
+     lowMem.dataType=DataType.BYTE_HEX;
+     lowMem.type='B';
+     lowMem.related=-1;
+     
+     list.clear();
+     listRel.clear();
+     listRel2.clear();
+     
+     list.add(lowMem);
+     listRel.add(null);
+     listRel2.add(null);
+     
+     if (comment!=null) {
+       lowMem.userComment=comment;
+       lastMem=lowMem;
+     }
+     
+     actualType=aWord;
+     flush(str);
+     actualType=null;    
    }
    
    /**

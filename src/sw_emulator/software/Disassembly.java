@@ -219,6 +219,9 @@ public class Disassembly {
       case SID:
         dissassemblySID(asSource);  
         break;
+      case NSF:
+        dissassemblyNSF(asSource);  
+        break;       
       case PRG:
         disassemlyPRG(asSource, targetType);  
         break;
@@ -401,6 +404,141 @@ public class Disassembly {
           if (option.createPSID) assembler.setWord(builder, inB[0x7C], inB[0x7D], "read load address"); 
           psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
       }
+      builder.append("\n");      
+    } else {
+        sid.upperCase=option.opcodeUpperCasePreview;
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
+      }  
+    
+    // add blocks from relocate
+    addRelocate(blocks); 
+    
+    disassemblyBlocks(asSource, sid, builder);
+    
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
+  }
+  
+  /**
+   * Disassembly a NSF file
+   * 
+   * @param asSource true if output should be as a source file
+   */
+  private void dissassemblyNSF(boolean asSource) {
+    int nsfDOff;     // psid data offeset   
+    int nsfLAddr;    // psid load address
+    int nsfIAddr;    // psid init address
+    int nsfPAddr;    // psid play address     
+    int nsfPos;       // Position in buffer of start of sid program     
+    int nsfPC;        // PC value of start of sid program 
+    Block block;
+    
+    setupAssembler();
+      
+    C64SidDasm sid=new C64SidDasm();
+    sid.setMemory(memory);
+    sid.setConstant(constant);
+    sid.setOption(option, assembler);      
+    sid.setMode(option.illegalOpcodeMode);
+  
+    nsfLAddr=Unsigned.done(inB[8])+Unsigned.done(inB[9])*256;    
+    nsfIAddr=Unsigned.done(inB[10])+Unsigned.done(inB[11])*256;
+    nsfPAddr=Unsigned.done(inB[12])+Unsigned.done(inB[13])*256;    
+    if (option.createPSID && !option.notMarkPSID) {
+      if (nsfIAddr!=0) memory[nsfIAddr].userLocation=option.psidInitSongsLabel;
+      if (nsfPAddr!=0) memory[nsfPAddr].userLocation=option.psidPlaySoundsLabel;
+    }  
+    
+    nsfDOff=0x80; // fixed point
+    
+    block=new Block();
+    
+    //calculate address for disassembler
+    nsfPos=nsfDOff;
+    nsfPC=nsfLAddr;
+    block.startAddress=nsfPC;
+    block.endAddress=nsfPC+inB.length-nsfPos-1;     
+  
+    
+    block.startBuffer=nsfPos;
+    block.endBuffer=nsfPos+(block.endAddress-block.startAddress);
+    block.inB=inB.clone();
+    blocks.add(block);
+
+    builder.setLength(0);
+    
+    if (asSource) {
+      sid.upperCase=option.opcodeUpperCaseSource;
+        
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(builder, mem);
+      
+      assembler.setConstant(builder, constant);
+      
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
+      
+      // calculate org for header
+      int header=nsfPC;   
+      
+      // look if there are relocate before that position
+      if (relocates!=null) {
+        for (int i=0; i<relocates.length; i++) {
+          if (relocates[i].toStart<header) header=relocates[i].toStart;
+        }   
+      }
+      
+      
+      header-=nsfPos;            
+      
+      if (option.createPSID) {
+        assembler.setOrg(builder, header);
+                
+        // create header of PSID
+        assembler.setText(builder, "NESM");
+      
+        assembler.setWord(builder, inB[0x04], inB[0x05], "version");
+        assembler.setByte(builder, inB[0x06], "songs");
+        assembler.setByte(builder, inB[0x07], "default song");
+        
+        assembler.setWord(builder, inB[0x08], inB[0x09], "load address");     
+        if (option.notMarkPSID) {
+          assembler.setWord(builder, inB[0xA], inB[0xB], "init songs");
+          assembler.setWord(builder, inB[0xC], inB[0xD], "play sound");
+        } else {
+          if (nsfIAddr!=0) assembler.setByteRelRev(builder, nsfIAddr, option.psidInitSongsLabel);
+          else assembler.setWord(builder, (byte)0, (byte)0, "init songs");
+          if (nsfPAddr!=0) assembler.setByteRelRev(builder, nsfPAddr, option.psidPlaySoundsLabel);          
+          else assembler.setWord(builder, (byte)0, (byte)0, "play sound");
+        }
+        
+        addString(builder, 0x0E, 0x2E);
+        addString(builder, 0x2E, 0x4E);
+        addString(builder, 0x4E, 0x6E);
+        
+        assembler.setWord(builder, inB[0x6E], inB[0x6F], "speed NTSC");  
+        assembler.setByte(builder, inB[0x70], null);
+        assembler.setByte(builder, inB[0x71], null);
+        assembler.setByte(builder, inB[0x72], null);
+        assembler.setByte(builder, inB[0x73], null);
+        assembler.setByte(builder, inB[0x74], null);
+        assembler.setByte(builder, inB[0x75], null);
+        assembler.setByte(builder, inB[0x76], null);
+        assembler.setByte(builder, inB[0x77], "Bankswitch init"); 
+        assembler.setWord(builder, inB[0x78], inB[0x79], "speed PAL"); 
+        assembler.setByte(builder, inB[0x7A], "PAL/NTSC bits");
+        assembler.setByte(builder, inB[0x7B], "Extra sound chips");
+        
+        assembler.setByte(builder, inB[0x7C], "Expansion 1");
+        assembler.setByte(builder, inB[0x7D], "Expansion 2");
+        assembler.setByte(builder, inB[0x7E], "Expansion 3");
+        assembler.setByte(builder, inB[0x7F], "Expansion 4");
+        
+        builder.append("\n");
+      }  
+
       builder.append("\n");      
     } else {
         sid.upperCase=option.opcodeUpperCasePreview;
