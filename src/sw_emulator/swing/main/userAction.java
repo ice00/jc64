@@ -293,6 +293,37 @@ public interface userAction {
   /** Show hex view */
   public static final int MEM_HEX = 89;
   
+  /** Memory sub 10 assigment */
+  public static final int MEM_SUB_10 = 90;
+  
+  /** Memory sub 11 assigment */
+  public static final int MEM_SUB_11 = 91;
+  
+  /** Memory sub 12 assigment */
+  public static final int MEM_SUB_12 = 92;
+  
+  /** Memory sub 13 assigment */
+  public static final int MEM_SUB_13 = 93;
+  
+  /** Memory sub 14 assigment */
+  public static final int MEM_SUB_14 = 94;
+  
+  /** Memory sub 15 assigment */
+  public static final int MEM_SUB_15 = 95;
+  
+  /** Memory sub 16 assigment */
+  public static final int MEM_SUB_16 = 96;
+  
+  /** Memory sub 17 assigment */
+  public static final int MEM_SUB_17 = 97;
+  
+  /** Memory sub 18 assigment */
+  public static final int MEM_SUB_18 = 98;
+  
+  /** Memory sub 19 assigment */
+  public static final int MEM_SUB_19 = 99;
+  
+  
   
   /**
    * Execute the passed user action

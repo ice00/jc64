@@ -842,7 +842,7 @@ public class FileManager {
       if (version>1) project.chip=in.readInt(); // version 2
       
       if (version>2)  {                         // version 3
-        for (int i=0; i<Constant.COLS; i++) {
+        for (int i=0; i<Constant.MIN_COLS; i++) {
           for (int j=0; j<Constant.MIN_ROWS; j++) {
             if (in.readBoolean()) project.constant.table[i][j]=in.readUTF();
             else project.constant.table[i][j]=null;   
@@ -881,7 +881,7 @@ public class FileManager {
       }  
       
       if (version>5)  {                         // version 6
-        for (int i=0; i<Constant.COLS; i++) {
+        for (int i=0; i<Constant.MIN_COLS; i++) {
           for (int j=Constant.MIN_ROWS; j<Constant.ROWS; j++) {
             if (in.readBoolean()) project.constant.table[i][j]=in.readUTF();
             else project.constant.table[i][j]=null;   
@@ -909,6 +909,15 @@ public class FileManager {
               }
             project.freezes[i]=freeze;
           }
+        }
+      }
+      
+      if (version>7)  {                         // version 8
+        for (int i=Constant.MIN_COLS; i<Constant.COLS; i++) {
+          for (int j=0; j<Constant.ROWS; j++) {
+            if (in.readBoolean()) project.constant.table[i][j]=in.readUTF();
+            else project.constant.table[i][j]=null;   
+          }  
         }
       }
     } catch (Exception e) {
@@ -1001,7 +1010,7 @@ public class FileManager {
       out.writeInt(project.chip);  // version 2
       
       // version 3
-      for (int i=0; i<Constant.COLS; i++) {
+      for (int i=0; i<Constant.MIN_COLS; i++) {
         for (int j=0; j<Constant.MIN_ROWS; j++) {
           if (project.constant.table[i][j]!=null) {
             out.writeBoolean(true);
@@ -1035,7 +1044,7 @@ public class FileManager {
       }    
       
       // version 6
-      for (int i=0; i<Constant.COLS; i++) {
+      for (int i=0; i<Constant.MIN_COLS; i++) {
         for (int j=Constant.MIN_ROWS; j<Constant.ROWS; j++) {
           if (project.constant.table[i][j]!=null) {
             out.writeBoolean(true);
@@ -1065,6 +1074,18 @@ public class FileManager {
             }
         }
       }  
+      
+      // version 8
+      for (int i=Constant.MIN_COLS; i<Constant.COLS; i++) {
+        for (int j=0; j<Constant.ROWS; j++) {
+          if (project.constant.table[i][j]!=null) {
+            out.writeBoolean(true);
+            out.writeUTF(project.constant.table[i][j]);  
+          } else {
+              out.writeBoolean(false);
+            } 
+        }  
+      }
       
       out.flush();
       out.close();

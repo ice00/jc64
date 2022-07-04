@@ -142,7 +142,44 @@ public class DataTableModelMemory extends AbstractTableModel {
           return memory.userBlockComment!=null;     
         case RE:
           String val="";  
-          if (memory.index!=-1) val=""+memory.index; 
+          if (memory.index!=-1) {
+            switch (memory.index) {
+              case 10:  
+                val="!";  
+                break;
+              case 11:  
+                val="\"";  
+                break; 
+              case 12:  
+                val="£";  
+                break;
+              case 13:  
+                val="$";  
+                break;  
+              case 14:  
+                val="%";  
+                break;
+              case 15:  
+                val="&";  
+                break;
+              case 16:  
+                val="/";  
+                break;
+              case 17:  
+                val="(";  
+                break;
+              case 18:  
+                val=")";  
+                break;
+              case 19:  
+                val="=";  
+                break;  
+              default:  
+                val=""+memory.index;
+                break;
+            }  
+              
+          } 
             
           if (memory.type!=' ') return ""+memory.dataType.getChar()+memory.type+val;
           else return ""+memory.dataType.getChar()+val;

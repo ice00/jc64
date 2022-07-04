@@ -36,7 +36,10 @@ public class Constant {
   private static final String notallowed="/*+-><()";
     
   /** Columns */  
-  public static final int COLS=10;  
+  public static final int COLS=20; 
+  
+  /** Min Columns */  
+  public static final int MIN_COLS=10;  
   
   /** Min Rows */
   public static final int MIN_ROWS=256;

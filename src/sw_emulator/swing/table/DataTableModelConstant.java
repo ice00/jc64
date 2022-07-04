@@ -30,7 +30,18 @@ public class DataTableModelConstant extends AbstractTableModel {
     T6("Table 6", String.class),
     T7("Table 7", String.class),
     T8("Table 8", String.class),
-    T9("Table 9", String.class);
+    T9("Table 9", String.class),
+    T10("Table !", String.class),
+    T11("Table \"", String.class),
+    T12("Table £", String.class),
+    T13("Table $", String.class),
+    T14("Table %", String.class),
+    T15("Table &", String.class),    
+    T16("Table /", String.class),    
+    T17("Table (", String.class),    
+    T18("Table )", String.class),    
+    T19("Table =", String.class),    
+    ;
       
     String columnsTip;
     Class type;
@@ -123,6 +134,26 @@ public class DataTableModelConstant extends AbstractTableModel {
         return constant.table[8][rowIndex];  
       case T9:
         return constant.table[9][rowIndex];  
+      case T10:
+        return constant.table[10][rowIndex];        
+      case T11:
+        return constant.table[11][rowIndex];        
+      case T12:
+        return constant.table[12][rowIndex];        
+      case T13:
+        return constant.table[13][rowIndex];          
+      case T14:
+        return constant.table[14][rowIndex];          
+      case T15:
+        return constant.table[15][rowIndex];                    
+      case T16:
+        return constant.table[16][rowIndex];                    
+      case T17:
+        return constant.table[17][rowIndex];                    
+      case T18:
+        return constant.table[18][rowIndex];                      
+      case T19:
+        return constant.table[19][rowIndex];                    
     }  
     
     return "";
@@ -167,7 +198,38 @@ public class DataTableModelConstant extends AbstractTableModel {
         break;  
       case T9:
         constant.table[9][rowIndex]=(String)aValue;  
+        break;
+      case T10:
+        constant.table[10][rowIndex]=(String)aValue;  
+        break;      
+      case T11:
+        constant.table[11][rowIndex]=(String)aValue;  
+        break;      
+      case T12:
+        constant.table[12][rowIndex]=(String)aValue;  
+        break;        
+      case T13:
+        constant.table[13][rowIndex]=(String)aValue;  
+        break;
+      case T14:
+        constant.table[14][rowIndex]=(String)aValue;  
         break;           
+      case T15:
+        constant.table[15][rowIndex]=(String)aValue;  
+        break;
+      case T16:
+        constant.table[16][rowIndex]=(String)aValue;  
+        break;  
+      case T17:
+        constant.table[17][rowIndex]=(String)aValue;  
+        break;    
+      case T18:
+        constant.table[18][rowIndex]=(String)aValue;  
+        break;        
+      case T19:
+        constant.table[19][rowIndex]=(String)aValue;  
+        break;        
+        
     }
   }
 
