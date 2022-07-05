@@ -98,7 +98,19 @@ public class DataTableModelConstant extends AbstractTableModel {
    */    
   @Override
   public String getColumnName(int column) {
-      return columns[column].name();
+      switch (column) {
+          case 11: return "T!";
+          case 12: return "T\"";
+          case 13: return "T£";
+          case 14: return "T$";
+          case 15: return "T%";
+          case 16: return "T&";
+          case 17: return "T/";
+          case 18: return "T(";
+          case 19: return "T)";
+          case 20: return "T=";
+          default: return columns[column].name();
+      }  
   }
    
   /**
