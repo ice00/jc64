@@ -159,10 +159,10 @@ public class CpuDasm implements disassembler {
     char type=memory[(int)addr].type;
     
     // this is a data declaration            
-    if (type=='<' || type=='>' || type=='^') {    
+    if (type=='<' || type=='>' || type=='^' || type=='\\') {    
       MemoryDasm memRel;
       // the byte is a reference
-      if (type=='^') memRel=memory[memory[(int)addr].related & 0xFFFF];   
+      if (type=='^' || type=='\\') memRel=memory[memory[(int)addr].related & 0xFFFF];   
       else memRel=memory[memory[(int)addr].related];   
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
@@ -198,7 +198,7 @@ public class CpuDasm implements disassembler {
       return "$"+ByteToExe((int)mem.related)+"+"+pos;  
     }
     
-    if (mem.type=='^') {
+    if (mem.type=='^' || mem.type=='\\') {
       /// this is a memory in table label
       int rel=mem.related>>16;
       int pos=mem.address-rel;
@@ -243,7 +243,7 @@ public class CpuDasm implements disassembler {
           return "$"+ShortToExe((int)mem.related)+"+"+pos;  
         }
 
-        if (mem.type=='^') {
+        if (mem.type=='^' || mem.type=='\\') {
           /// this is a memory in table label
           int rel=(mem.related>>16)&0xFFFF;
           int pos=mem.address-rel;
@@ -287,6 +287,7 @@ public class CpuDasm implements disassembler {
                 memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);
                 break;
             case '^':
+            case '\\':    
                 memory[mem.related & 0xFFFF].dasmLocation="W"+ShortToExe(mem.related & 0xFFFF);
                 break;
             default:

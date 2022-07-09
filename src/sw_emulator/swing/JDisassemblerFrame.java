@@ -5707,7 +5707,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /**
    * Set the memory with the given type
    * 
-   * @param mem the memroy location to set
+   * @param mem the memory location to set
    * @param dataType the new datatype to set
    * @param pos the position where it is in memory
    */
@@ -5726,7 +5726,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     } else if (option.erasePlus && mem.type=='^') {
               mem.related&=0xFFFF;
               mem.type='>';
-            }  
+            } else if (option.erasePlus && mem.type=='\\') {
+                     mem.related&=0xFFFF;
+                     mem.type='<';
+                   } 
   }
   
   /**
@@ -5783,9 +5786,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         mem.related=-1;
         mem.type=' ';
       } else if (option.erasePlus && mem.type=='^') {
-                     mem.related&=0xFFFF;
-                     mem.type='>';
-                   }
+               mem.related&=0xFFFF;
+               mem.type='>';
+             } else if (option.erasePlus && mem.type=='\\') {
+                 mem.related&=0xFFFF;
+                 mem.type='<';
+               }
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -5935,7 +5941,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         continue;
       }  
       
-      if (mem.type=='^') {
+      if (mem.type=='^' || mem.type=='\\') {
         MemoryDasm memr=project.memory[(mem.related>>16) & 0xFFFF];
         if (memr.userLocation!=null && !"".equals(memr.userLocation)) {
           total++;
@@ -6291,7 +6297,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
         }
     
-        if (memory.type=='^') {
+        if (memory.type=='^' || memory.type=='\\') {
           /// this is a memory in table label
           int rel=(memory.related>>16) &0xFFFF;
           int pos=memory.address-rel;
@@ -6324,17 +6330,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='>' || project.memory[row].type=='<' || project.memory[row].type=='^') {
+        if (project.memory[row].type=='>' || project.memory[row].type=='<' || 
+            project.memory[row].type=='^' || project.memory[row].type=='\\') {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
             project.memory[row].type=' ';
             project.memory[row].related=-1;
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
-      } else {         
-          project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
-          project.memory[row].type='<';
-        }
+      } else {                                
+           if (project.memory[row].type=='+') {
+               project.memory[row].type='\\';
+               project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+           } else {
+               project.memory[row].type='<';
+               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
+           }
+         }
        
       dataTableModelMemory.fireTableDataChanged();      
       jTableMemory.setRowSelectionInterval(row, row); 
@@ -6369,7 +6381,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
     
       low.related=address;          
-      low.type='<';
+      if (low.type=='+') high.type='\\';
+      else low.type='<';      
+      
       high.related=address;
       if (high.type=='+') high.type='^';
       else high.type='>';     
@@ -6407,7 +6421,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
     
       low.related=address;          
-      low.type='<';
+      if (low.type=='+') low.type='\\';
+      else low.type='<';
+      
+      
       high.related=address;
       if (high.type=='+') high.type='^';
       else high.type='>';     
@@ -6458,7 +6475,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
         }
     
-        if (memory.type=='^') {
+        if (memory.type=='^' || memory.type=='\\') {
           /// this is a memory in table label
           int rel=(memory.related>>16) &0xFFFF;;
           int pos=memory.address-rel;
@@ -6491,7 +6508,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
        int rowS=table.getSelectedRow();
        if (rowS<0) {
-         if (project.memory[row].type=='>' || project.memory[row].type=='<' || project.memory[row].type=='^') {
+         if (project.memory[row].type=='>' || project.memory[row].type=='<' || 
+             project.memory[row].type=='^' || project.memory[row].type=='\\') {
             if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
               // + and < ?
               if (project.memory[row].type=='^') { 
@@ -6668,16 +6686,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='+' || project.memory[row].type=='^') {
+        if (project.memory[row].type=='+' || project.memory[row].type=='^' || project.memory[row].type=='\\') {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
               // + and < ?
-              if (project.memory[row].type=='^') { 
-                  project.memory[row].type='>';
-                  project.memory[row].related&=0xFFFF;
-              } else {
-                  project.memory[row].type=' ';
-                  project.memory[row].related=-1;
-              }   
+              switch (project.memory[row].type) {
+                  case '^':
+                      project.memory[row].type='>';
+                      project.memory[row].related&=0xFFFF;
+                      break;
+                  case '\\':
+                      project.memory[row].type='<';
+                      project.memory[row].related&=0xFFFF;
+                      break;
+                  default:   
+                      project.memory[row].type=' ';
+                      project.memory[row].related=-1;
+                      break;
+              }
               
               // delete an automatic label if present, otherwise in code instruction it will be recreated if label is no more used
               project.memory[row].dasmLocation=null;
@@ -6685,13 +6710,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
       } else {         
-           if (project.memory[row].type=='>') {
-               project.memory[row].type='^';
-               project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
-           } else {
-               project.memory[row].type='+';
-               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
-           }
+          switch (project.memory[row].type) {
+              case '>':
+                  project.memory[row].type='^';
+                  project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
+                  break;
+              case '<':
+                  project.memory[row].type='\\';
+                  project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
+                  break;
+              default:
+                  project.memory[row].type='+';
+                  project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+                  break;
+          }
         }
        
       dataTableModelMemory.fireTableDataChanged();
