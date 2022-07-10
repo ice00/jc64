@@ -248,44 +248,9 @@ public class SidFreq {
     int low=-1;   
     
     // check for high frequency table
-    for (i=start; i<end-TABLE; i++) {
-      if (searchHigh(i)) {
-        high=i;
-        break;         
-      }
-    }  
-    
-    // look if high table was fount
-    if (high==-1) return false;      
-    
-    // check for low frequency table (first part)
-    if (high>TABLE) {
-      for (i=start; i<=high-TABLE; i++) {
-        if (searchLow(high, i)) {
-          low=i;
-          break;
-        }           
-      }
-    }  
-        
-    // check for high frequency table (second part)
-    if ((low==-1) && (high<end-TABLE*2)) {
-      for (i=high+TABLE; i<end-TABLE; i++) {
-        if (searchLow(high, i)) {
-          low=i;
-          break;
-        }                 
-      }
-    }
-      
-    
-    // look if low table was fount
-    if (low==-1) {         
-      if (inB[high]==0) {
-          
-        // This looked like a mastercomposer, then check if next is good instead
-        if (++high>end-TABLE) return false;      
-        if (!searchHigh(high)) return false;
+    for (int ii=start; ii<end-TABLE; ii++) {
+      if (searchHigh(ii)) {
+        high=ii;
         
         // check for low frequency table (first part)
         if (high>TABLE) {
@@ -296,7 +261,7 @@ public class SidFreq {
             }           
           }
         }  
-        
+
         // check for high frequency table (second part)
         if ((low==-1) && (high<end-TABLE*2)) {
           for (i=high+TABLE; i<end-TABLE; i++) {
@@ -306,10 +271,42 @@ public class SidFreq {
             }                 
           }
         }
-      
-        if (low==-1) return false;           
-      } else return false;
+        
+        if (low!=-1) break;  // exit loop as frequency is fount
+        
+        // look if low table was fount     
+        if (inB[high]==0) {
+
+          // This looked like a mastercomposer, then check if next is good instead
+          if (++high>end-TABLE) return false;      
+          if (!searchHigh(high)) return false;
+
+          // check for low frequency table (first part)
+          if (high>TABLE) {
+            for (i=start; i<=high-TABLE; i++) {
+              if (searchLow(high, i)) {
+                low=i;
+                break;
+              }           
+            }
+          }  
+
+          // check for high frequency table (second part)
+          if ((low==-1) && (high<end-TABLE*2)) {
+            for (i=high+TABLE; i<end-TABLE; i++) {
+              if (searchLow(high, i)) {
+                low=i;
+                break;
+              }                 
+            }
+          }                   
+        }         
+        if (low!=-1) break;           
+      }
     }  
+    
+    // look if high and low table was fount
+    if (high==-1 || low==-1) return false;                           
     
     if (checkGarbage(high, low)) return false;
     
