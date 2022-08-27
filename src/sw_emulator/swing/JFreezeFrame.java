@@ -476,7 +476,8 @@ public class JFreezeFrame extends javax.swing.JFrame {
      * @param newFreeze the new freeze
      */
     private void apply(Freeze newFreeze) {
-      if (freeze!=null) freeze.text=rSyntaxTextAreaSource.getText();
+      String text=rSyntaxTextAreaSource.getText();
+      if (freeze!=null && !text.equals("")) freeze.text=rSyntaxTextAreaSource.getText();
         
       rSyntaxTextAreaSource.setText(newFreeze.text);  
       rSyntaxTextAreaSource.setCaretPosition(0);
