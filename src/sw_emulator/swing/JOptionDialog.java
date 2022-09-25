@@ -222,6 +222,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         jCheckBoxRepositionate = new javax.swing.JCheckBox();
         jCheckBoxPedantic = new javax.swing.JCheckBox();
         jCheckBoxVlPatch = new javax.swing.JCheckBox();
+        jLabelDataSepOp = new javax.swing.JLabel();
+        jLabelDataSpaceOp = new javax.swing.JLabel();
+        jSpinnerDataSpacesOp = new javax.swing.JSpinner();
+        jLabelDataTabsOp = new javax.swing.JLabel();
+        jSpinnerDataTabsOp = new javax.swing.JSpinner();
         jPanelComment = new javax.swing.JPanel();
         jLabelautocomment = new javax.swing.JLabel();
         jTabbedPaneComm = new javax.swing.JTabbedPane();
@@ -868,6 +873,28 @@ public class JOptionDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelDataSepOp.setText("Separator from opcode and operand in source:");
+
+        jLabelDataSpaceOp.setText("Spaces:");
+
+        jSpinnerDataSpacesOp.setModel(new javax.swing.SpinnerNumberModel(2, 0, 15, 1));
+        jSpinnerDataSpacesOp.setToolTipText("");
+        jSpinnerDataSpacesOp.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDataSpacesOpStateChanged(evt);
+            }
+        });
+
+        jLabelDataTabsOp.setText("Tabs:");
+
+        jSpinnerDataTabsOp.setModel(new javax.swing.SpinnerNumberModel(0, 0, 8, 1));
+        jSpinnerDataTabsOp.setToolTipText("");
+        jSpinnerDataTabsOp.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDataTabsOpStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPreviewLayout = new javax.swing.GroupLayout(jPanelPreview);
         jPanelPreview.setLayout(jPanelPreviewLayout);
         jPanelPreviewLayout.setHorizontalGroup(
@@ -891,6 +918,27 @@ public class JOptionDialog extends javax.swing.JDialog {
                                 .addGap(222, 222, 222))
                             .addGroup(jPanelPreviewLayout.createSequentialGroup()
                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addComponent(jLabelTmpPath)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonBrowse))
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addGap(405, 405, 405)
+                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jCheckBoxAllowSIDFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(332, 332, 332)
+                                        .addComponent(jCheckBoxSetComment))
                                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanelPreviewLayout.createSequentialGroup()
@@ -904,13 +952,10 @@ public class JOptionDialog extends javax.swing.JDialog {
                                                     .addComponent(jLabelDataCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabelInstrCSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabelDataSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabelInstrSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jLabelInstrSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelDataSpaceOp, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(30, 30, 30)
                                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                                        .addComponent(jSpinnerDataCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelDataCTabs))
                                                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                                                         .addComponent(jSpinnerInstrCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
@@ -922,7 +967,15 @@ public class JOptionDialog extends javax.swing.JDialog {
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(jLabelInstrTabs)
-                                                            .addComponent(jLabelDataTabs)))))
+                                                            .addComponent(jLabelDataTabs)))
+                                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jSpinnerDataCSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSpinnerDataSpacesOp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(18, 18, 18)
+                                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabelDataTabsOp)
+                                                            .addComponent(jLabelDataCTabs)))))
                                             .addGroup(jPanelPreviewLayout.createSequentialGroup()
                                                 .addGap(352, 352, 352)
                                                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -952,7 +1005,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                                                                 .addComponent(jCheckBoxMarkMemory)
                                                                 .addGap(18, 18, 18)
                                                                 .addComponent(jCheckBoxSetLabels)))
-                                                        .addGap(97, 97, 97)))))
+                                                        .addGap(97, 97, 97))))
+                                            .addComponent(jLabelDataSepOp, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jSpinnerMaxWordAggregate)
@@ -962,28 +1016,8 @@ public class JOptionDialog extends javax.swing.JDialog {
                                             .addComponent(jSpinnerDataTabs)
                                             .addComponent(jSpinnerInstrTabs)
                                             .addComponent(jSpinnerMaxStackWordAggregate)
-                                            .addComponent(jSpinnerDataCTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabelAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addComponent(jLabelTmpPath)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonBrowse))
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addGap(405, 405, 405)
-                                        .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldSidFreqHi, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldSidFreqLo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldPlaySound, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldInitSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinnerMaxLength, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jCheckBoxAllowSIDFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(332, 332, 332)
-                                        .addComponent(jCheckBoxSetComment)))
+                                            .addComponent(jSpinnerDataCTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSpinnerDataTabsOp, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanelPreviewLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -1190,11 +1224,18 @@ public class JOptionDialog extends javax.swing.JDialog {
                             .addComponent(jSpinnerDataCTabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelDataCSep))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelDataSpaceOp)
+                    .addComponent(jSpinnerDataSpacesOp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataTabsOp)
+                    .addComponent(jSpinnerDataTabsOp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataSepOp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTmpPath)
                     .addComponent(jTextFieldTmpPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowse))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPanePreview.setViewportView(jPanelPreview);
@@ -3420,6 +3461,19 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.clickVlPatch=jCheckBoxVlPatch.isSelected();
     }//GEN-LAST:event_jCheckBoxVlPatchItemStateChanged
 
+    private void jSpinnerDataSpacesOpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDataSpacesOpStateChanged
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numTabsOp==0) jSpinnerDataSpacesOp.setValue(1);
+      else option.numSpacesOp=num; 
+    }//GEN-LAST:event_jSpinnerDataSpacesOpStateChanged
+
+    private void jSpinnerDataTabsOpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDataTabsOpStateChanged
+      option.numTabsOp=(Integer)((JSpinner) evt.getSource()).getValue();
+      int num=(Integer)((JSpinner) evt.getSource()).getValue();
+      if (num+option.numSpacesOp==0) jSpinnerDataTabsOp.setValue(1);
+      else option.numTabsOp=num;  
+    }//GEN-LAST:event_jSpinnerDataTabsOpStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3598,8 +3652,11 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDataCSpace;
     private javax.swing.JLabel jLabelDataCTabs;
     private javax.swing.JLabel jLabelDataSep;
+    private javax.swing.JLabel jLabelDataSepOp;
     private javax.swing.JLabel jLabelDataSpace;
+    private javax.swing.JLabel jLabelDataSpaceOp;
     private javax.swing.JLabel jLabelDataTabs;
+    private javax.swing.JLabel jLabelDataTabsOp;
     private javax.swing.JLabel jLabelFlatLaf;
     private javax.swing.JLabel jLabelHeather;
     private javax.swing.JLabel jLabelIllegalOpcodeStyle;
@@ -3678,7 +3735,9 @@ public class JOptionDialog extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinnerDataCSpaces;
     private javax.swing.JSpinner jSpinnerDataCTabs;
     private javax.swing.JSpinner jSpinnerDataSpaces;
+    private javax.swing.JSpinner jSpinnerDataSpacesOp;
     private javax.swing.JSpinner jSpinnerDataTabs;
+    private javax.swing.JSpinner jSpinnerDataTabsOp;
     private javax.swing.JSpinner jSpinnerInstrCSpaces;
     private javax.swing.JSpinner jSpinnerInstrCTabs;
     private javax.swing.JSpinner jSpinnerInstrSpaces;
@@ -3760,6 +3819,8 @@ public class JOptionDialog extends javax.swing.JDialog {
       jSpinnerInstrCTabs.setValue(option.numInstrCTabs);
       jSpinnerDataCSpaces.setValue(option.numDataCSpaces);
       jSpinnerDataCTabs.setValue(option.numDataCTabs);
+      jSpinnerDataSpacesOp.setValue(option.numSpacesOp);
+      jSpinnerDataTabsOp.setValue(option.numTabsOp);
       jCheckBoxLabel.setSelected(option.labelOnSepLine);
       jTextFieldTmpPath.setText(option.tmpPath);
       jCheckBoxDcErase.setSelected(option.clickDcErase);

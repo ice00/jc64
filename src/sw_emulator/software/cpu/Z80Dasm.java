@@ -1511,15 +1511,19 @@ public class Z80Dasm extends CpuDasm implements disassembler {
     if (upperCase) result=mnemonics[iType];
     else result=mnemonics[iType].toLowerCase();  
     
+    String nn=getSpacesTabsOp();
     switch (result.length()) {
         case 2:
-          result+="   ";
+          result+=nn;
           break;
         case 3: 
-          result+="  ";
+          if (option.numSpacesOp>1) result+=nn.substring(1,nn.length());
+          else result+=nn;
           break;
         case 4:
-          result+=" ";
+          if (option.numSpacesOp>2) result+=nn.substring(2,nn.length()); 
+          else if (option.numSpacesOp>1) result+=nn.substring(1,nn.length());
+          else result+=nn;  
           break;
     }          
     

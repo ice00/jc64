@@ -393,7 +393,11 @@ public class FileManager {
       option.glassHighText = Assembler.HighText.valueOf(in.readUTF()); 
       option.glassShiftText = Assembler.ShiftText.valueOf(in.readUTF());
       option.glassScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
-      option.glassPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());        
+      option.glassPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());   
+      
+      //2.3
+      option.numSpacesOp=in.readInt();
+      option.numTabsOp=in.readInt();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -733,6 +737,10 @@ public class FileManager {
       out.writeUTF(option.glassShiftText.name());
       out.writeUTF(option.glassScreenText.name());
       out.writeUTF(option.glassPetasciiText.name());
+      
+      //2.3
+      out.writeInt(option.numSpacesOp);
+      out.writeInt(option.numTabsOp);
       
       out.flush();
       out.close();

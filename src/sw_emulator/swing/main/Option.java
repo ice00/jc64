@@ -349,6 +349,12 @@ public class Option {
   /** Number of tabs after data for comment */
   public int numDataCTabs=0;
   
+  /** Number of spaces from opcode and operand */
+  public int numSpacesOp=2;
+  
+  /** Number of tabs from opcode and operand */
+  public int numTabsOp=0;
+  
   /** A label is on a sepatate line from instruction */
   public boolean labelOnSepLine=true;
   

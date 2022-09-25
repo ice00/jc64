@@ -359,9 +359,11 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     
     if (upperCase) result=mnemonics[iType];
     else result=mnemonics[iType].toLowerCase();
-        
-    if (result.length()==3) result+=" ";
-    result+=" ";
+      
+    // we now force NOOP to use the same spaces of 3 chars opcode with >1 space 
+    String nn=getSpacesTabsOp();
+    if (result.length()==4 && option.numSpacesOp>1) result+=nn.substring(1,nn.length());
+    else result+=nn;
 
     aType=tableModes[op];
     switch (aType) {

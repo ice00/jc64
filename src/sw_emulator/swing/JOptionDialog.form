@@ -125,7 +125,32 @@
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabelAggregate" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
+                                                  <Component id="jLabelMaxLength" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabelTmpPath" min="-2" max="-2" attributes="1"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jTextFieldTmpPath" min="-2" pref="320" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jButtonBrowse" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="405" pref="405" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                          <Component id="jTextFieldSidFreqLo" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                          <Component id="jTextFieldPlaySound" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                          <Component id="jTextFieldInitSongs" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
+                                                          <Component id="jSpinnerMaxLength" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxAllowSIDFreq" min="-2" pref="232" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="332" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxSetComment" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -140,14 +165,10 @@
                                                                   <Component id="jLabelInstrCSpace" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                                                   <Component id="jLabelDataSpace" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                                                   <Component id="jLabelInstrSpace" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                                                  <Component id="jLabelDataSpaceOp" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                                               </Group>
                                                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="jSpinnerDataCSpaces" min="-2" pref="53" max="-2" attributes="0"/>
-                                                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                                      <Component id="jLabelDataCTabs" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
                                                                   <Group type="102" alignment="0" attributes="0">
                                                                       <Component id="jSpinnerInstrCSpaces" min="-2" pref="53" max="-2" attributes="0"/>
                                                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -162,6 +183,17 @@
                                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                                           <Component id="jLabelInstrTabs" alignment="0" min="-2" max="-2" attributes="0"/>
                                                                           <Component id="jLabelDataTabs" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                  </Group>
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                                          <Component id="jSpinnerDataCSpaces" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                                                                          <Component id="jSpinnerDataSpacesOp" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                                          <Component id="jLabelDataTabsOp" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="jLabelDataCTabs" min="-2" max="-2" attributes="0"/>
                                                                       </Group>
                                                                   </Group>
                                                               </Group>
@@ -206,6 +238,7 @@
                                                                   </Group>
                                                               </Group>
                                                           </Group>
+                                                          <Component id="jLabelDataSepOp" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -217,32 +250,8 @@
                                                           <Component id="jSpinnerInstrTabs" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="jSpinnerMaxStackWordAggregate" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="jSpinnerDataCTabs" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                                          <Component id="jSpinnerDataTabsOp" min="-2" pref="52" max="-2" attributes="0"/>
                                                       </Group>
-                                                  </Group>
-                                                  <Component id="jLabelAggregate" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
-                                                  <Component id="jLabelMaxLength" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jLabelTmpPath" min="-2" max="-2" attributes="1"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jTextFieldTmpPath" min="-2" pref="320" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jButtonBrowse" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="405" pref="405" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jTextFieldSidFreqHi" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
-                                                          <Component id="jTextFieldSidFreqLo" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
-                                                          <Component id="jTextFieldPlaySound" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
-                                                          <Component id="jTextFieldInitSongs" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
-                                                          <Component id="jSpinnerMaxLength" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxAllowSIDFreq" min="-2" pref="232" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="332" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxSetComment" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -499,12 +508,20 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelDataSpaceOp" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataSpacesOp" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataTabsOp" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDataTabsOp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataSepOp" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabelTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextFieldTmpPath" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1216,6 +1233,43 @@
                       </Properties>
                       <Events>
                         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBoxVlPatchItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataSepOp">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Separator from opcode and operand in source:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataSpaceOp">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Spaces:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataSpacesOp">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="2" maximum="15" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataSpacesOpStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelDataTabsOp">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tabs:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerDataTabsOp">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" maximum="8" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDataTabsOpStateChanged"/>
                       </Events>
                     </Component>
                   </SubComponents>

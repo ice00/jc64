@@ -365,6 +365,15 @@ public class CpuDasm implements disassembler {
   protected String getInstrCSpacesTabs(int skip) {
     return SPACES.substring(0, (option.numInstrCSpaces-skip<0 ? 1:option.numInstrCSpaces-skip))+TABS.substring(0, option.numInstrCTabs);
   } 
+  
+  /**
+   * Return spaces/tabs to use for separate opcode from operand
+   * 
+   * @return the spaces/tabs
+   */
+  protected String getSpacesTabsOp() {
+    return SPACES.substring(0, (option.numSpacesOp))+TABS.substring(0, option.numTabsOp);  
+  }
 
   @Override
   public String dasm(byte[] buffer, int pos, long pc) {
