@@ -244,7 +244,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
         
         jOptionDialog.useOption(option);
-        
+       
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
         projectChooserFile.setAcceptAllFileFilterUsed(false);
         projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
@@ -5877,11 +5877,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }
   
   /**
+   * Use font size in option
+   */
+  private void useFont() {
+    Font font;
+       
+    font=rSyntaxTextAreaDis.getFont();
+    if (font.getSize() != option.sizePreviewFont) rSyntaxTextAreaDis.setFont(font.deriveFont(font.getStyle(), option.sizePreviewFont));  
+    
+    font=rSyntaxTextAreaSource.getFont();
+    if (font.getSize() != option.sizeSourceFont) rSyntaxTextAreaSource.setFont(font.deriveFont(font.getStyle(), option.sizeSourceFont));  
+  }
+  
+  /**
    * Disassembly the memory
    * 
    * @param storeUndo true if we store for the undo the compiled project
    */
   private void disassembly(boolean storeUndo) {
+    useFont();  
+      
     if (project==null) {
       disassembly.source="";
       disassembly.disassembly="";

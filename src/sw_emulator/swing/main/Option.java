@@ -354,6 +354,12 @@ public class Option {
   
   /** Number of tabs from opcode and operand */
   public int numTabsOp=0;
+    
+  /** Size of preview font */
+  public int sizePreviewFont=12;
+     
+  /** Size of source font */
+  public int sizeSourceFont=12;
   
   /** A label is on a sepatate line from instruction */
   public boolean labelOnSepLine=true;

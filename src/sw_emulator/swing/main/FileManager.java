@@ -398,6 +398,9 @@ public class FileManager {
       //2.3
       option.numSpacesOp=in.readInt();
       option.numTabsOp=in.readInt();
+      option.sizePreviewFont=in.readInt();
+      option.sizeSourceFont=in.readInt();
+      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -741,6 +744,8 @@ public class FileManager {
       //2.3
       out.writeInt(option.numSpacesOp);
       out.writeInt(option.numTabsOp);
+      out.writeInt(option.sizePreviewFont);
+      out.writeInt(option.sizeSourceFont);
       
       out.flush();
       out.close();
