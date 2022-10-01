@@ -282,6 +282,11 @@ public class JProjectDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Project");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanelCenter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -946,6 +951,17 @@ public class JProjectDialog extends javax.swing.JDialog {
     private void jRadioButtonC128ZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC128ZActionPerformed
       project.targetType=TargetType.C128Z; 
     }//GEN-LAST:event_jRadioButtonC128ZActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       project.name=jTextFieldProjectName.getText();
+       
+       if (project.file==null || "".equals(project.file)) {
+         if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION) setVisible(false);
+         else return;
+       }
+        
+       setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
     
     /**
      * @param args the command line arguments
