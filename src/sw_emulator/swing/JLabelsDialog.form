@@ -47,7 +47,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jTableLabels.putClientProperty(&quot;terminateEditOnFocusLost&quot;, Boolean.TRUE);&#xa;&#xa;"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableLabels.getColumnModel().getColumn(0).setPreferredWidth(10);&#xa;jTableLabels.getColumnModel().getColumn(1).setPreferredWidth(10);&#xa;&#xa;DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;centerRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;jTableLabels.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableLabels.getColumnModel().getColumn(0).setPreferredWidth(10);&#xa;jTableLabels.getColumnModel().getColumn(1).setPreferredWidth(10);&#xa;&#xa;//DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;labelsTableCellRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;jTableLabels.getColumnModel().getColumn(0).setCellRenderer( labelsTableCellRenderer );&#xa;&#xa;//jTableLabels.setDefaultRenderer(Integer.class, labelsTableCellRenderer);"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -37,6 +37,7 @@ import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.table.ConstantCellEditor;
 import sw_emulator.swing.table.DataTableModelLabels;
+import sw_emulator.swing.table.LabelsTableCellRenderer;
 
 /**
  * Dialog for labels
@@ -44,6 +45,9 @@ import sw_emulator.swing.table.DataTableModelLabels;
  * @author ice
  */
 public class JLabelsDialog extends javax.swing.JDialog {  
+    /** Memory cell renderer for table */
+    LabelsTableCellRenderer labelsTableCellRenderer=new LabelsTableCellRenderer();
+    
     /** Data model */
     DataTableModelLabels dataModel=new DataTableModelLabels();
     
@@ -201,6 +205,8 @@ public class JLabelsDialog extends javax.swing.JDialog {
       this.rSyntaxTextAreaDis=rSyntaxTextAreaDis;
       this.project=project;
       
+      labelsTableCellRenderer.setMemory(data);
+      
       SwingUtilities.invokeLater(new Runnable(){
 	public void run() {
           dataModel.fireTableDataChanged();
@@ -228,13 +234,14 @@ public class JLabelsDialog extends javax.swing.JDialog {
         setTitle("Constants definitions");
 
         jTableLabels.setModel(dataModel);
-        jTableLabels.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableLabels.getColumnModel().getColumn(0).setPreferredWidth(10);
         jTableLabels.getColumnModel().getColumn(1).setPreferredWidth(10);
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        jTableLabels.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        //DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        labelsTableCellRenderer.setHorizontalAlignment( JLabel.CENTER );
+        jTableLabels.getColumnModel().getColumn(0).setCellRenderer( labelsTableCellRenderer );
+
+        //jTableLabels.setDefaultRenderer(Integer.class, labelsTableCellRenderer);
         jScrollPaneTable.setViewportView(jTableLabels);
 
         getContentPane().add(jScrollPaneTable, java.awt.BorderLayout.CENTER);
