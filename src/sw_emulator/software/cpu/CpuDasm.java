@@ -167,7 +167,16 @@ public class CpuDasm implements disassembler {
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
-           else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
+           else {          
+              if (memRel.type=='+') {
+                 /// this is a memory in table label
+                 int pos=memRel.address-memRel.related;
+                 MemoryDasm mem2=memory[memRel.related];
+                 if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
+                 if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+                 return "$"+ByteToExe((int)memRel.related)+"+"+pos;  
+              } else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
+           }
     } else {        
         if (memory[(int)addr].index!=-1) {
           String res=constant.table[memory[(int)addr].index][(int)value];  
@@ -187,7 +196,7 @@ public class CpuDasm implements disassembler {
   protected String getLabelZero(long addr) {
     if (addr<0 || addr>0xffff) return "$??";
       
-    MemoryDasm mem=memory[(int)addr];
+    MemoryDasm mem=memory[(int)addr];          
     
     if (mem.type=='+') {
       /// this is a memory in table label
@@ -232,7 +241,7 @@ public class CpuDasm implements disassembler {
     if (addr<0 || addr>0xffff) return "$????";  
       
     MemoryDasm mem=memory[(int)addr];
-    
+
     try {    
         if (mem.type=='+') {
           /// this is a memory in table label
@@ -264,6 +273,8 @@ public class CpuDasm implements disassembler {
     } catch (Exception e) {
         return "$xxxx";
       }
+    
+
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
