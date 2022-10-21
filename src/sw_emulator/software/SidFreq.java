@@ -1133,10 +1133,12 @@ public class SidFreq {
         
       if (freq[11]<62000) continue;
 
-      addData(i+12, i, freq[9]/8);
-      markMemory(i+12, i+23, 1);
-      markMemory(i, i+12, 1);
-      break; // we force to find only the first
+      if (!checkGarbage(i, i+23)) {
+        addData(i+12, i, freq[9]/8);
+        markMemory(i+12, i+23, 1);
+        markMemory(i, i+12, 1);
+        break; // we force to find only the first
+      }
     }    
     
     return false;      
@@ -1180,10 +1182,12 @@ public class SidFreq {
         
         if (freq[11]<62000) continue;
 
-        addData(i+1, i, freq[9]/8);
-        markMemory(i+13, i+26, 1);
-        markMemory(i, i+13, 1);
-        break; // we force to find only the first 
+        if (!checkGarbage(i, i+26)) {
+          addData(i+1, i, freq[9]/8);
+          markMemory(i+13, i+26, 1);
+          markMemory(i, i+13, 1);
+          break; // we force to find only the first 
+        }
     }      
     
     return false;      
@@ -1227,10 +1231,12 @@ public class SidFreq {
         
         if (freq[11]>600) continue;
 
-        addData(i+1, i, freq[9]*16);
-        markMemory(i+13, i+26, 1);
-        markMemory(i, i+13, 1);
-        break; // we force to find only the first
+        if (!checkGarbage(i, i+26)) {
+          addData(i+1, i, freq[9]*16);
+          markMemory(i+13, i+26, 1);
+          markMemory(i, i+13, 1);
+          break; // we force to find only the first
+        }
     }      
     
     return false;      
@@ -1284,9 +1290,11 @@ public class SidFreq {
     // get the A4 note
     sid=Unsigned.done(inB[high-A4])*256+Unsigned.done(inB[low-A4]);  
 
-    addData(high-ALL+1, low-ALL+1, sid);
-    markMemory(high-ALL+1, high, 1);
-    markMemory(low-ALL+1, low, 1);
+    if (!checkGarbage(low-ALL+1, low) && !checkGarbage(high-ALL+1, high)) {
+      addData(high-ALL+1, low-ALL+1, sid);
+      markMemory(high-ALL+1, high, 1);
+      markMemory(low-ALL+1, low, 1);
+    }
  
     return true;    
   }
