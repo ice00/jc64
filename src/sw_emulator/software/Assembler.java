@@ -638,7 +638,10 @@ public class Assembler {
           
           if (mem.type=='<' || mem.type=='>' || mem.type=='^' || mem.type=='\\') {    
             char type;
-            memRel.dasmLocation="W"+ShortToExe(memRel.address); // add a automatic label onto references byte
+            // add a automatic label onto references byte
+            if (memRel.dasmLocation==null || "".equals(memRel.dasmLocation)) {
+              memRel.dasmLocation="W"+ShortToExe(memRel.address);
+            } 
             switch (mem.type) {
               case '^':
                   type='>';                  
@@ -904,7 +907,10 @@ public class Assembler {
            
            if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
-             memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address); // add a automatic label onto references byte
+             // add a automatic label onto references byte  
+             if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
+                 memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address);
+             } 
              
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
