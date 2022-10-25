@@ -61,7 +61,7 @@
          Now you can makes as garbage the code from $8000 that refers to code relocated in $C000 and continue to works on $C000 analysis.<br>
          The disadvantage of this is that the source code you obtain can not be compiled back to the original binary form.<br>
          Due to the nature of relocation implementation, when you apply a relocation address it copies the value from one position to another position in memory, so the order of application is important in case of multiple relocation. 
-         For this once added you cannot delete the relocations, so before adding it, save the project and reopen it if the relocation is wrong.
+         For this once added delete is not recommanded, so before adding it, save the project and reopen it if the relocation is wrong. If you use delete (that always removed the last added relocation) you can answer if the memory location should be make empty.
      </li>  
      <li><b>Edit Patch table:</b> you can insert a list of addresses and a patch value to apply in memory.<br>
          Please, note that only value that are inside the read data are patched, not the one in memory outside (thare are so all 0)<br>

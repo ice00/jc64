@@ -276,6 +276,7 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonC128Z = new javax.swing.JRadioButton();
         jRadioButtonAY = new javax.swing.JRadioButton();
         jRadioButtonNSF = new javax.swing.JRadioButton();
+        jButtonPatchRemove1 = new javax.swing.JButton();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -492,6 +493,14 @@ public class JProjectDialog extends javax.swing.JDialog {
         jRadioButtonNSF.setText("NSF");
         jRadioButtonNSF.setEnabled(false);
 
+        jButtonPatchRemove1.setText("Remove");
+        jButtonPatchRemove1.setToolTipText("Remove last inserted value");
+        jButtonPatchRemove1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPatchRemove1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -511,12 +520,13 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonRelocateAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButtonRelocateAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonPatchRemove1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addComponent(jLabelPatch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonPatchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(jButtonPatchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonPatchAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -525,7 +535,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonAddNext)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPaneRelocate1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                            .addComponent(jScrollPaneRelocate1)
                             .addComponent(jScrollPaneRelocate)))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -654,7 +664,9 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addGap(21, 21, 21)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonRelocateAdd)
-                            .addComponent(jLabelRelocate)))
+                            .addComponent(jLabelRelocate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPatchRemove1))
                     .addComponent(jScrollPaneRelocate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -962,6 +974,31 @@ public class JProjectDialog extends javax.swing.JDialog {
         
        setVisible(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonPatchRemove1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchRemove1ActionPerformed
+      if (project.relocates==null) return;
+      
+      if (JOptionPane.showConfirmDialog(this, "Empty the memory location of removed area?", "Information", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION ) {
+        Relocate relocate=project.relocates[project.relocates.length-1];  
+        
+        for (int i=relocate.toStart; i<=relocate.toEnd; i++) {
+          project.memory[i].copy=0;  
+        }
+      }
+      
+      if (project.relocates.length==1) {
+        project.relocates=null;
+        jTextAreaRelocate.setText("");
+        return;
+      }
+      
+      Relocate[] relocate2; //=new Relocate[project.relocates.length-1];
+      relocate2=Arrays.copyOf(project.relocates, project.relocates.length-1);
+      
+      project.relocates=relocate2;
+      
+      jTextAreaRelocate.setText(getRelocateDesc()); 
+    }//GEN-LAST:event_jButtonPatchRemove1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1016,6 +1053,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonInit;
     private javax.swing.JButton jButtonPatchAdd;
     private javax.swing.JButton jButtonPatchRemove;
+    private javax.swing.JButton jButtonPatchRemove1;
     private javax.swing.JButton jButtonRelocateAdd;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonSelect;
