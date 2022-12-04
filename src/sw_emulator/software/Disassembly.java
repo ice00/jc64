@@ -549,6 +549,7 @@ public class Disassembly {
     
     // add blocks from relocate
     addRelocate(blocks); 
+    addBlockForPatch();
     
     disassemblyBlocks(asSource, sid, builder);
     
