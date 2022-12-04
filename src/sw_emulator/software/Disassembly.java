@@ -413,6 +413,7 @@ public class Disassembly {
     
     // add blocks from relocate
     addRelocate(blocks); 
+    addBlockForPatch();
     
     disassemblyBlocks(asSource, sid, builder);
     
@@ -618,6 +619,7 @@ public class Disassembly {
     
     // add blocks from relocate
     addRelocate(blocks);
+    addBlockForPatch();
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -706,6 +708,7 @@ public class Disassembly {
             
     // add blocks from relocate
     addRelocate(blocks);    
+    addBlockForPatch();
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -810,7 +813,8 @@ public class Disassembly {
       }      
     
     // add blocks from relocate
-    addRelocate(blocks);    
+    addRelocate(blocks);   
+    addBlockForPatch();
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -880,6 +884,7 @@ public class Disassembly {
     
     // add blocks from relocate
     addRelocate(blocks);
+    addBlockForPatch();
     
     // add startup for DASM if this is the case
     if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
@@ -946,7 +951,7 @@ public class Disassembly {
         posPoint=((inB[posData+10] & 0xFF)<<8)+(inB[posData+11] & 0xFF)+posData+10;
         posAddr=((inB[posData+12] & 0xFF)<<8)+(inB[posData+13] & 0xFF)+posData+12;
             
-        // blocks are 0 temrinating, suppose to have max 256 of them
+        // blocks are 0 terminating, suppose to have max 256 of them
         for (int j=0; j<256; j++) {
           address=((inB[posAddr+j*6] & 0xFF)<<8)+(inB[posAddr+j*6+1] & 0xFF);
           if (address==0) break;
@@ -981,8 +986,8 @@ public class Disassembly {
       }   
     
     // add blocks from relocate
-    addRelocate(blocks);
-     
+    addRelocate(blocks);   
+    addBlockForPatch();
          
     disassemblyBlocks(asSource, prg, builder);
     
@@ -1062,6 +1067,36 @@ public class Disassembly {
       if (block.startAddress<=patch.address && patch.address<=block.endAddress) {
         block.inB[patch.address-block.startAddress+block.startBuffer]=(byte)patch.value;
       } 
+    }
+  }
+  
+  /**
+   * Add blocks for patch outside the existing blocks
+   */
+  private void addBlockForPatch() {
+    if (patches==null) return;
+        
+    boolean fount;
+    
+    for (Patch patch: patches) { 
+      fount=false;
+      
+      for (Block block: blocks) {
+        if (block.isInside(patch.address)) {
+          fount=true;  
+          break;
+        } 
+      }  
+      if (!fount) {
+        Block block=new Block();
+        block.inB=new byte[1];
+        block.inB[0]=(byte)patch.value;
+        block.startBuffer=0;
+        block.endBuffer=0;
+        block.startAddress=patch.address;
+        block.endAddress=patch.address;
+        blocks.add(block);
+      }      
     }
   }
   

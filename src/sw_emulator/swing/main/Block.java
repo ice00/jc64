@@ -43,4 +43,14 @@ public class Block {
   
   /** End address in memory of the position in buffer */
   public int endAddress;
+  
+  /**
+   * True if the given address is inside the block range
+   * 
+   * @param address the address to test
+   * @return true if it is inside
+   */
+  public boolean isInside(int address) {
+    return (address>=startAddress && address<=endAddress);
+  }
 }
