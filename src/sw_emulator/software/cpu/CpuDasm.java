@@ -147,6 +147,23 @@ public class CpuDasm implements disassembler {
   }
   
   /**
+   * Get notmalized type (<,>)
+   * 
+   * @param type 
+   * @return the normalized type
+   */
+  private char getNormType(char type) {
+    switch (type) {
+       case '^':
+         return '<';
+       case '\\':
+         return '>';
+       default:  
+         return type;
+    }
+  }
+  
+  /**
    * Get the label of immediate value
    * 
    * @param addr the address of the value
@@ -165,17 +182,17 @@ public class CpuDasm implements disassembler {
       if (type=='^' || type=='\\') memRel=memory[memory[(int)addr].related & 0xFFFF];   
       else memRel=memory[memory[(int)addr].related];   
               
-      if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memory[(int)addr].type+memRel.userLocation;
-      else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memory[(int)addr].type+memRel.dasmLocation;
+      if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getNormType(memory[(int)addr].type)+memRel.userLocation;
+      else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getNormType(memory[(int)addr].type)+memRel.dasmLocation;
            else {          
               if (memRel.type=='+') {
                  /// this is a memory in table label
                  int pos=memRel.address-memRel.related;
                  MemoryDasm mem2=memory[memRel.related];
-                 if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
-                 if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
+                 if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getNormType(memory[(int)addr].type)+mem2.userLocation+"+"+pos;
+                 if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getNormType(memory[(int)addr].type)+mem2.dasmLocation+"+"+pos;
                  return "$"+ByteToExe((int)memRel.related)+"+"+pos;  
-              } else return memory[(int)addr].type+"$"+ShortToExe(memRel.address);
+              } else return getNormType(memory[(int)addr].type)+"$"+ShortToExe(memRel.address);
            }
     } else {        
         if (memory[(int)addr].index!=-1) {
