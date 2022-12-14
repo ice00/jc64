@@ -319,11 +319,17 @@ public class Option {
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
   
-  /** Not mark psid addresses */
+  /** Not mark PSOD addresses */
   public boolean notMarkPSID=false;
   
   /** Create PSID heather */
   public boolean createPSID=true;
+  
+  /** Not mark SAP addresses */
+  public boolean notMarkSAP=false;
+  
+  /** Create Sap heather */
+  public boolean createSAP=true;  
   
   /** Number of spaces in starting row of instruction */
   public int numInstrSpaces=6;
@@ -669,6 +675,47 @@ public class Option {
   
   /** Vic20: Comment Kernal rom */
   public boolean commentVic20KernalRom=true;
+  
+  
+  /** Atari: Comment zero page */
+  public boolean commentAtariZeroPage=true;
+  
+  /** Atari: Comment stack area */
+  public boolean commentAtariStackArea=true;
+  
+  /** Atari: Comment 200 area */
+  public boolean commentAtari_200Area=true;
+  
+  /** Atari: Comment 300 area */
+  public boolean commentAtari_300Area=true;
+  
+  /** Atari: Comment 400 area */
+  public boolean commentAtari_400Area=true;
+  
+  /** Atari: Comment 500 area */
+  public boolean commentAtari_500Area=true;
+  
+  /** Atari: Comment cartridge B */
+  public boolean commentAtariCartridgeB=true;
+  
+  /** Atari: Comment cartridge A */
+  public boolean commentAtariCartridgeA=true; 
+  
+  /** Atari: Comment gtia */
+  public boolean commentAtariGtia=true; 
+  
+  /** Atari: Comment pokey */
+  public boolean commentAtariPokey=true;   
+  
+  /** Atari: Comment pia */
+  public boolean commentAtariPia=true;   
+  
+  /** Atari: Comment antic */
+  public boolean commentAtariAntic=true;  
+  
+  /** Atari: Comment kernal rom */
+  public boolean commentAtariKernalRom=true;  
+  
   
   
   // assembler

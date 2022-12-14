@@ -6056,7 +6056,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case C64:  
       case C1541:
       case PLUS4:    
-      case VIC20:            
+      case VIC20:     
+      case ATARI:
         // determine if it is of page zero or 16 bit
         switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
             case 1:  

@@ -30,6 +30,7 @@ import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.cpu.CpuDasm;
 import sw_emulator.software.cpu.M6510Dasm;
+import sw_emulator.software.machine.AtariDasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
 import sw_emulator.swing.Shared;
@@ -214,22 +215,25 @@ public class Disassembly {
         disassemblyCRT(asSource, targetType);  
         break;  
       case MUS:
-        dissassemblyMUS(asSource);                
+        disassemblyMUS(asSource);                
         break;
       case SID:
-        dissassemblySID(asSource);  
+        disassemblySID(asSource);  
         break;
       case NSF:
-        dissassemblyNSF(asSource);  
-        break;       
+        disassemblyNSF(asSource);  
+        break;   
+      case SAP:
+        disassemblySAP(asSource);  
+        break;          
       case PRG:
-        disassemlyPRG(asSource, targetType);  
+        disassemblyPRG(asSource, targetType);  
         break;
       case MPR:
-        disassemlyMPR(asSource, targetType);  
+        disassemblyMPR(asSource, targetType);  
         break;     
        case VSF:
-        disassemlyVSF(asSource, targetType);  
+        disassemblyVSF(asSource, targetType);  
         break;       
        case AY:
         disassemblyAY(asSource, targetType);
@@ -246,7 +250,7 @@ public class Disassembly {
    * 
    * @param asSource true if output should be as a source file
    */
-  private void dissassemblyMUS(boolean asSource) {    
+  private void disassemblyMUS(boolean asSource) {    
     int ind1;             // Mus file voice 1 address
     int ind2;             // Mus file voice 2 address
     int ind3;             // Mus file voice 3 address 
@@ -290,13 +294,13 @@ public class Disassembly {
    * 
    * @param asSource true if output should be as a source file
    */
-  private void dissassemblySID(boolean asSource) {
+  private void disassemblySID(boolean asSource) {
     int psidDOff;     // psid data offeset   
     int psidLAddr;    // psid load address
     int psidIAddr;    // psid init address
     int psidPAddr;    // psid play address     
-    int sidPos;       // Position in buffer of start of sid program     
-    int sidPC;        // PC value of start of sid program 
+    int sidPos;       // Position in buffer of start of atari program     
+    int sidPC;        // PC value of start of atari program 
     Block block;
     
     setupAssembler();
@@ -351,20 +355,26 @@ public class Disassembly {
       assembler.setStarting(builder);
       assembler.setMacro(builder, memory);
       
-      // calculate org for header
-      int header=sidPC;   
-      
-      // look if there are relocate before that position
-      if (relocates!=null) {
-        for (int i=0; i<relocates.length; i++) {
-          if (relocates[i].toStart<header) header=relocates[i].toStart;
-        }   
-      }
-      
-      
-      header-=sidPos;            
-      
       if (option.createPSID) {
+          
+        // calculate org for header
+        int header=sidPC;   
+      
+        // look if there are relocate before that position
+        if (relocates!=null) {
+          for (Relocate relocate : relocates) {
+              if (relocate.toStart < header) {
+                  header = relocate.toStart;   
+              }
+          }
+        }  
+        
+        header-=sidPos;   
+          
+        if (inB[0]=='P') mem.userBlockComment="*********************\n PSID header";
+        else mem.userBlockComment="*********************\n RSID header";
+        assembler.setBlockComment(builder, mem);
+        
         assembler.setOrg(builder, header);
                 
         // create header of PSID
@@ -403,7 +413,9 @@ public class Disassembly {
       if (psidLAddr==0) {
           if (option.createPSID) assembler.setWord(builder, inB[0x7C], inB[0x7D], "read load address"); 
           psidLAddr=Unsigned.done(inB[0x7C])+Unsigned.done(inB[0x7D])*256;  // modify this value as used for org starting
-      }
+      }      
+      mem.userBlockComment="*********************\n";
+      assembler.setBlockComment(builder, mem);
       builder.append("\n");      
     } else {
         sid.upperCase=option.opcodeUpperCasePreview;
@@ -426,13 +438,13 @@ public class Disassembly {
    * 
    * @param asSource true if output should be as a source file
    */
-  private void dissassemblyNSF(boolean asSource) {
+  private void disassemblyNSF(boolean asSource) {
     int nsfDOff;     // psid data offeset   
     int nsfLAddr;    // psid load address
     int nsfIAddr;    // psid init address
     int nsfPAddr;    // psid play address     
-    int nsfPos;       // Position in buffer of start of sid program     
-    int nsfPC;        // PC value of start of sid program 
+    int nsfPos;       // Position in buffer of start of atari program     
+    int nsfPC;        // PC value of start of atari program 
     Block block;
     
     setupAssembler();
@@ -579,7 +591,7 @@ public class Disassembly {
    * @param asSource true if output should be as a source file
    * @param targetType the target machine type
    */
-  private void disassemlyPRG(boolean asSource, TargetType targetType) {
+  private void disassemblyPRG(boolean asSource, TargetType targetType) {
     CpuDasm prg;
     Block block;
     
@@ -732,7 +744,7 @@ public class Disassembly {
    * @param asSource true if output should be as a source file
    * @param targetType the target machine type
    */
-  private void disassemlyVSF(boolean asSource, TargetType targetType) {
+  private void disassemblyVSF(boolean asSource, TargetType targetType) {
     CpuDasm prg;
     Block block;
     
@@ -838,7 +850,7 @@ public class Disassembly {
    * @param asSource true if output should be as a source file
    * @param targetType the target machine type
    */
-  private void disassemlyMPR(boolean asSource, TargetType targetType) {
+  private void disassemblyMPR(boolean asSource, TargetType targetType) {
     CpuDasm prg;
     Block block;
     
@@ -995,6 +1007,149 @@ public class Disassembly {
     if (asSource) source=builder.toString();
     else disassembly=builder.toString();            
   }
+  
+  /**
+   * Disassembly a SAP file
+   * 
+   * @param asSource true if output should be as a source file
+   */
+  private void disassemblySAP(boolean asSource) {
+    CpuDasm prg;
+    Block block;
+    
+    setupAssembler();
+    
+    AtariDasm atari=new AtariDasm();
+    atari.setMemory(memory);
+    atari.setConstant(constant);
+    atari.setOption(option, assembler);      
+    atari.setMode(option.illegalOpcodeMode);
+    
+    int sapIAddr=0;
+    int sapPAddr=0;
+    int addr=0;
+    
+    // search for init
+    for (int i=0; i<inB.length-14; i++) {
+      if (inB[i]=='I' && inB[i+1]=='N' && inB[i+2]=='I' && inB[i+3]=='T' && 
+          inB[i+4]==' ' && inB[i+9]==0x0D && inB [i+10]==0x0A) {        
+        try {
+          sapIAddr=Integer.parseInt(""+(char)inB[i+5]+(char)inB[i+6]+(char)inB[i+7]+(char)inB[i+8], 16);
+        } catch (NumberFormatException e) {
+            continue;
+          }  
+        addr=i;   // remember for later use  
+        break;
+      }   
+    }
+    
+    // search for play address
+    for (int i=addr; i<inB.length-16; i++) {
+      if (inB[i]=='P' && inB[i+1]=='L' && inB[i+2]=='A' && inB[i+3]=='Y' && 
+          inB[i+4]=='E' && inB[i+5]=='R' && inB[i+6]==' ' &&
+          inB[i+11]==0x0D && inB [i+12]==0x0A) {        
+        try {
+          sapPAddr=Integer.parseInt(""+(char)inB[i+7]+(char)inB[i+8]+(char)inB[i+9]+(char)inB[i+10], 16);
+        } catch (NumberFormatException e) {
+            continue;
+          }  
+        addr=i;   // remember for later use  
+        break;
+      }   
+    }
+        
+    if (option.createSAP && !option.notMarkSAP) {
+      if (sapIAddr!=0) memory[sapIAddr].userLocation=option.psidInitSongsLabel;
+      if (sapPAddr!=0) memory[sapPAddr].userLocation=option.psidPlaySoundsLabel;
+    }
+    
+    // go until binary header fount
+    while (addr<inB.length-4) {
+      if (inB[addr]==0x0d && inB[addr+1]==0x0a && inB[addr+2]==-1 && inB[addr+3]==-1) break;            
+      addr++;
+    }
+    addr+=4;
+                        
+    block=new Block();   
+    block.startAddress=Unsigned.done(inB[addr])+Unsigned.done(inB[addr+1])*256;
+    block.startBuffer=addr+4;
+    block.endAddress=Unsigned.done(inB[addr+2])+Unsigned.done(inB[addr+3])*256;
+    block.endBuffer=inB.length-1;
+    block.inB=inB.clone();            
+    blocks.add(block);
+
+    builder.setLength(0);
+    
+    if (asSource) {            
+      atari.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(builder, mem);
+      
+      assembler.setConstant(builder, constant);
+
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
+      
+      
+      if (option.createSAP) {
+        // calculate org for header
+        int header=block.startAddress;   
+      
+        // look if there are relocate before that position
+        if (relocates!=null) {
+          for (Relocate relocate : relocates) {
+              if (relocate.toStart < header) {
+                  header = relocate.toStart;   
+              }
+          }
+        }  
+        
+        header-=addr+4;    
+          
+        
+        mem.userBlockComment="*********************\n SAP header";
+        assembler.setBlockComment(builder, mem);
+        
+        assembler.setOrg(builder, header);   
+          
+        // we have string until addr-2 that there are 2 bytes
+        int init=0;
+        int last=0;
+        while (last<addr-3) {
+          if (inB[last]!=0x0D || inB[last+1]!=0x0A) {
+            last++;  
+            continue;
+          }
+          addString(builder, init, last+2);
+          init=last+2; 
+          last=init;
+        }
+        
+        assembler.setWord(builder, inB[last], inB[last+1], "Binary area");
+        
+        assembler.setWord(builder, inB[addr], inB[addr+1], "Start addess");  
+        assembler.setWord(builder, inB[addr+2], inB[addr+3], "End addess");  
+        builder.append("\n");
+        mem.userBlockComment="*********************\n";
+        assembler.setBlockComment(builder, mem);
+      }
+    } else {    
+        atari.upperCase=option.opcodeUpperCasePreview;
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
+      } 
+    
+    // add blocks from relocate
+    addRelocate(blocks);
+    addBlockForPatch();
+    
+    disassemblyBlocks(asSource, atari, builder);
+    
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
+  }   
   
   /**
    * Get the min starting address inside the blovks

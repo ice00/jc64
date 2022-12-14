@@ -278,6 +278,21 @@ import sw_emulator.swing.Shared;
           return tmp.toString();
         }
     },  // PSID/RSID
+    SAP {
+        @Override
+        public String getDescription(byte[] inB) {
+          StringBuilder tmp=new StringBuilder();
+
+          // go until binary header fount
+          for (int i=0; i<inB.length-4; i++) {
+            if (inB[i]==0x0d && inB[i+1]==0x0a && inB[i+2]==-1 && inB[i+3]==-1) break;
+            tmp.append((char)inB[i]);
+          }
+          
+          tmp.append("\n");                              
+          return tmp.toString();
+        }
+    },  // SAP
     MUS {
         @Override
         public String getDescription(byte[] inB) {
@@ -557,6 +572,7 @@ import sw_emulator.swing.Shared;
       if (isVSF(inB)) return VSF;
       if (isAY(inB))  return AY;
       if (isNFS(inB)) return NSF;
+      if (isSAP(inB)) return SAP;
       if (isPRG(inB)) return PRG;
       
       return UND;
@@ -600,6 +616,24 @@ import sw_emulator.swing.Shared;
     }
     
     /**
+    * Determine if the input file is a SAP file
+    *
+    * @param inB the data
+    * @return true if the file is a PSID or RSID file
+    */    
+    private static boolean isSAP(byte[] inB) {
+      try {
+          // check header
+          if ((inB[0]=='S') && (inB[1]=='A') && (inB[2]=='P') &&
+              (inB[3]==0x0d) && (inB[4]==0x0a)) return true;     
+      } catch (Exception e) {
+          System.err.println(e);
+        }  
+
+      return false; 
+    }
+    
+    /**
     * Determine if the input file is a NSF music tune
     *
     * @param inB the data
@@ -628,12 +662,9 @@ import sw_emulator.swing.Shared;
      */
     private static boolean isAY(byte[] inB) {
       try {
-
           // check header
-          if ((inB[0]!='Z') && (inB[1]!='X') && (inB[2]!='A') && (inB[3]!='Y') &&
-              (inB[4]!='E') && (inB[5]!='M') && (inB[6]!='U') && (inB[7]!='L'))return false;
-          return true;
-      
+          if ((inB[0]=='Z') && (inB[1]=='X') && (inB[2]=='A') && (inB[3]=='Y') &&
+              (inB[4]=='E') && (inB[5]=='M') && (inB[6]=='U') && (inB[7]=='L'))return true;     
       } catch (Exception e) {
           System.err.println(e);
         }  

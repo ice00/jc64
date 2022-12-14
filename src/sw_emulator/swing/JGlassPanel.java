@@ -261,6 +261,7 @@ public class JGlassPanel extends javax.swing.JPanel {
         jLabelTmpxBlockCommentDeclaration1.setText("Block Comment:");
 
         buttonGroupGlassBlockComment.add(jRadioButtonTmpxSemicolonBlockComment1);
+        jRadioButtonTmpxSemicolonBlockComment1.setSelected(true);
         jRadioButtonTmpxSemicolonBlockComment1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButtonTmpxSemicolonBlockComment1ItemStateChanged(evt);

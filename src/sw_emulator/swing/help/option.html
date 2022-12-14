@@ -46,6 +46,11 @@
           <li><b>Did not create PSID labels:</b> not generate the automatic labels for PSID init and play addresses.</li>
       </ul>
   </li>
+  <li><b>Create SAP heather:</b> create values in source for regenerating the binary as a SAP file and not PRG for tune. 
+      <ul>
+          <li><b>Did not create SAP labels:</b> not generate the automatic labels for SAP init and play addresses.</li>
+      </ul>
+  </li>  
   <li><b>Use SID Frequency catcher: </b> scan memory for music notes table
     <ul>
       <li><b>Mark memory:</b> mark the memory as of data type</li>
@@ -73,8 +78,8 @@
    </ul>
   </li>
   <li><b>Max lenght of label (some assembler has a limit)</b>: fix the max length of a label you can insert (minimun is fixed to 6) so you are sure to not go over the limitation of some assembler</li>
-  <li><b>PSID init songs label:</b> as Psid has a init routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
-  <li><b>PSID play sound label:</b> as Psid has a play routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
+  <li><b>PSID/SAP init songs label:</b> as Psid has a init routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
+  <li><b>PSID/SAP play sound label:</b> as Psid has a play routine to call, this label will be used automatically by disassembler engine as a user label definition (so you can't change it with label creation function)</li>
   <li><b>SID frequency table low label:</b> automatically detect a frequency table low part and create this user label for it (see the note at the end of this section)</li>
   <li><b>SID frequency table high label:</b> automatically detect a frequency table high part and create this user label for it (see the note at the end of this section)</li>
   <li><b>Instruction sepatarator in start of row of source:</b> select how many spaces/tabs you want to separate an instruction into the source from the beginning of row</li>
@@ -100,6 +105,7 @@
       <li>C128: <p align="center"><img src="./option9.png"></p></li> 
       <li>VIC20: <p align="center"><img src="./option10.png"></p></li> 
       <li>PLUS4: <p align="center"><img src="./option11.png"></p></li> 
+      <li>ATARI: <p align="center"><img src="./option21.png"></p></li> 
   </ul>
   
  <h3>Disassembler</h3> 
@@ -149,7 +155,10 @@
     </li>    
     <li><b>64Tass</b>
       <p align="center"><img src="./option19.png"></p>     
-    </li>    
+    </li>   
+    <li><b>Glass</b>
+      <p align="center"><img src="./option22.png"></p>     
+    </li>  
  </ul>
  
 <h3>Look & Feel</h3>

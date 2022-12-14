@@ -401,6 +401,22 @@ public class FileManager {
       option.sizePreviewFont=in.readInt();
       option.sizeSourceFont=in.readInt();
       
+      // 2.4
+      option.createSAP=in.readBoolean();
+      option.notMarkSAP=in.readBoolean();
+      option.commentAtariZeroPage=in.readBoolean();
+      option.commentAtariStackArea=in.readBoolean();
+      option.commentAtari_200Area=in.readBoolean();
+      option.commentAtari_300Area=in.readBoolean();
+      option.commentAtari_400Area=in.readBoolean();
+      option.commentAtari_500Area=in.readBoolean();
+      option.commentAtariCartridgeB=in.readBoolean();
+      option.commentAtariCartridgeA=in.readBoolean();
+      option.commentAtariGtia=in.readBoolean();
+      option.commentAtariPokey=in.readBoolean();
+      option.commentAtariPia=in.readBoolean();
+      option.commentAtariAntic=in.readBoolean();
+      option.commentAtariKernalRom=in.readBoolean();                                                       
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -746,6 +762,23 @@ public class FileManager {
       out.writeInt(option.numTabsOp);
       out.writeInt(option.sizePreviewFont);
       out.writeInt(option.sizeSourceFont);
+      
+      // 2.4
+      out.writeBoolean(option.createSAP);
+      out.writeBoolean(option.notMarkSAP);
+      out.writeBoolean(option.commentAtariZeroPage);
+      out.writeBoolean(option.commentAtariStackArea);
+      out.writeBoolean(option.commentAtari_200Area);
+      out.writeBoolean(option.commentAtari_300Area);
+      out.writeBoolean(option.commentAtari_400Area);
+      out.writeBoolean(option.commentAtari_500Area);
+      out.writeBoolean(option.commentAtariCartridgeB);
+      out.writeBoolean(option.commentAtariCartridgeA);
+      out.writeBoolean(option.commentAtariGtia);
+      out.writeBoolean(option.commentAtariPokey);
+      out.writeBoolean(option.commentAtariPia);
+      out.writeBoolean(option.commentAtariAntic);
+      out.writeBoolean(option.commentAtariKernalRom);
       
       out.flush();
       out.close();

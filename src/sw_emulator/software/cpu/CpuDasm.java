@@ -28,7 +28,6 @@ import sw_emulator.software.Assembler;
 import sw_emulator.software.MemoryDasm;
 import static sw_emulator.software.cpu.M6510Dasm.A_NUL;
 import static sw_emulator.software.cpu.M6510Dasm.M_JAM;
-import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.Option;
 

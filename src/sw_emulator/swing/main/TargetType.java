@@ -26,6 +26,7 @@ package sw_emulator.swing.main;
 import sw_emulator.software.cpu.CpuDasm;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
+import sw_emulator.software.machine.AtariDasm;
 import sw_emulator.software.machine.C128Dasm;
 import sw_emulator.software.machine.C1541Dasm;
 import sw_emulator.software.machine.C64Dasm;
@@ -43,7 +44,8 @@ import sw_emulator.software.machine.CVic20Dasm;
    C128,
    VIC20,
    PLUS4,
-   C128Z;              
+   C128Z,
+   ATARI;              
    
    /**
     * Get the appropriate disassembler for the target type
@@ -64,6 +66,8 @@ import sw_emulator.software.machine.CVic20Dasm;
         return new CPlus4Dasm();  
       case C128Z:
         return new Z80Dasm();
+      case ATARI:
+        return new AtariDasm();  
       default:  
         return new M6510Dasm();
      }    
