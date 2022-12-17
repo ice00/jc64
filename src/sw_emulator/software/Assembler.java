@@ -1988,9 +1988,13 @@ public class Assembler {
            memRelHigh=listRel.pop(); 
            listRel2.pop();
            
-           if ((memLow.type=='<' || memLow.type=='\\' ) && 
-               (memHigh.type=='>' || memHigh.type=='^') && 
-               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
+           if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
+               
+             // add a automatic label onto references byte  
+             if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
+                 memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address);
+             } 
+             
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
                   else str.append("$").append(ShortToExe(memRelLow.address));  
@@ -2013,7 +2017,12 @@ public class Assembler {
                  aByte.flush(str);
                }
                else {
-                 str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                            
+                 // look fopr constant  
+                 if (memLow.index!=-1 && memHigh.index!=-1 && memLow.index==memHigh.index) {
+                   String res=constant.table[memLow.index][(memLow.copy & 0xFF) + ((memHigh.copy & 0xFF)<<8)];  
+                   if (res!=null && !"".equals(res)) str.append(res);
+                   else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
+                 } else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                         
                  isFirst=false;  
                }    
              }
