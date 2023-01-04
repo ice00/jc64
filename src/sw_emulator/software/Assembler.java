@@ -115,16 +115,63 @@ public class Assembler {
     return ret.toUpperCase(Locale.ENGLISH);
   }   
   
+    
+  /**
+   * Convert an 8 bit 0/1 string to monocolor dots
+   * 
+   * @param bin the bin to convert
+   * @return the converted peace
+   */
+  protected static String BinToMono(String bin) {
+    String d0="";
+    String d1="";    
+      
+    switch (option.dotsType) {
+        case Option.DOTS_ASCII:
+          d0=".";  
+          d1="*";
+          break;  
+        case Option.DOTS_UTF16:
+          d0="\u2591";  
+          d1="\u2589";  
+          break;  
+    }                   
+      
+    return bin.replace("0", d0).replace("1", d1);
+  }
+                            
+  
   /**
    * Convert an 8 bit 0/1 string to multicolor dots
+   * 
    * @param bin the bin to convert
    * @return the converted peace
    */
   protected static String BinToMulti(String bin) {
-    String p0=bin.substring(0, 2).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
-    String p1=bin.substring(2, 4).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
-    String p2=bin.substring(4, 6).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
-    String p3=bin.substring(6, 8).replace("00", "..").replace("11", "**").replace("01", "@@").replace("10", "##");
+    String d00="";
+    String d11="";
+    String d01="";
+    String d10="";
+      
+    switch (option.dotsType) {
+        case Option.DOTS_ASCII:
+          d00="..";  
+          d01="@@";
+          d10="##";
+          d11="**";
+          break;  
+        case Option.DOTS_UTF16:
+          d00="\u2591\u2591";  
+          d01="\u2592\u2592";
+          d10="\u2593\u2593";
+          d11="\u2589\u2589";  
+          break;  
+    }
+      
+    String p0=bin.substring(0, 2).replace("00", d00).replace("11", d11).replace("01", d01).replace("10", d10);
+    String p1=bin.substring(2, 4).replace("00", d00).replace("11", d11).replace("01", d01).replace("10", d10);
+    String p2=bin.substring(4, 6).replace("00", d00).replace("11", d11).replace("01", d01).replace("10", d10);
+    String p3=bin.substring(6, 8).replace("00", d00).replace("11", d11).replace("01", d01).replace("10", d10);
     
     return p0+p1+p2+p3;
   }
@@ -2088,9 +2135,9 @@ public class Assembler {
           String tmpS;
            
           // add a dasm comment with pixels
-          mem3.dasmComment=Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*")+
-                           Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*")+
-                           Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1).replace("0", ".").replace("1", "*");
+          mem3.dasmComment=BinToMono(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))+
+                           BinToMono(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))+
+                           BinToMono(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1));
           lastMem=mem3;
           
           int initial=str.length();

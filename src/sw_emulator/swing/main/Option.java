@@ -107,9 +107,20 @@ import sw_emulator.swing.table.DataTableModelMemory;
  * @author ice
  */
 public class Option {
+  /** Standard header for source disassembly */  
   public static final int HEATHER_STANDARD=1;
+  
+  /** No header for source disassembly */
   public static final int HEATHER_NONE=2;
+  
+  /** Custom header for source disassembly */
   public static final int HEATHER_CUSTOM=3;       
+  
+  /** Dots type as ascii chars */
+  public static final int DOTS_ASCII=0;
+  
+  /** Dots type as utf chars */
+  public static final int DOTS_UTF16=1;
     
   // loook and feel options
     
@@ -405,6 +416,9 @@ public class Option {
   
   /** Be pedantic in read/save messages */
   public boolean pedantic=false;
+  
+  /** Dots type for comments */
+  public int dotsType=DOTS_UTF16;
   
   
   // comments C64

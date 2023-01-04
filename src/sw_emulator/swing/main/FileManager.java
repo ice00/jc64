@@ -416,7 +416,10 @@ public class FileManager {
       option.commentAtariPokey=in.readBoolean();
       option.commentAtariPia=in.readBoolean();
       option.commentAtariAntic=in.readBoolean();
-      option.commentAtariKernalRom=in.readBoolean();                                                       
+      option.commentAtariKernalRom=in.readBoolean();    
+      
+      // 2.5
+      option.dotsType=in.readInt();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -779,6 +782,9 @@ public class FileManager {
       out.writeBoolean(option.commentAtariPia);
       out.writeBoolean(option.commentAtariAntic);
       out.writeBoolean(option.commentAtariKernalRom);
+      
+      // 2.5
+      out.writeInt(option.dotsType);
       
       out.flush();
       out.close();

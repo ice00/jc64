@@ -77,7 +77,7 @@ public class JAboutDialog extends javax.swing.JDialog {
         jLabelVersion.setToolTipText("");
 
         jLabelYear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelYear.setText("(c) 2022");
+        jLabelYear.setText("(c) 2023");
         jLabelYear.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
