@@ -1501,7 +1501,7 @@ public class Disassembly {
                         aTribyte, aLong, aAddress, aStackWord,
                         aMonoSprite, aMultiSprite, 
                         aText, aNumText, aZeroText, aHighText, aShiftText,
-                        aScreenText, aPetasciiText, constant, actualCarets);      
+                        aScreenText, aPetasciiText, constant, actualCarets, memory);      
   }
   
   /**

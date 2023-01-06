@@ -47,7 +47,20 @@
   <p align="center"><img src="./memory4.png"></p> 
   <p>All other values inserted will be addes as global comment (with the format selected in option), so for example, here a screen that show what it was inserted in comment and what you got:</p>
    <p align="center"><img src="./memory5.png"></p>  
-   Another way to add/edit a block comment is to activate a flag in option that allow you to click in the UB column of memory area for adding it.   
+  <p>Another way to add/edit a block comment is to activate a flag in option that allow you to click in the UB column of memory area for adding it.</p>
+  <p>A new features added in version 2.5 is the macro block comments: using a special syntax is possible to make the generation in automatic of sprites/chars dots view of an block of NxM elements:
+  <ul>
+    <li><b>[&lt;CHAR#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
+    <li><b>[&lt;CHAR#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
+  </ul>
+  <p align="center"><img src="./memory19.png"></p> 
+  </p>
    
    <h2>Add user label</h2> 
    <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user's one will be used instead of the other.<br>

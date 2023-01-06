@@ -23,6 +23,7 @@
  */
 package sw_emulator.software;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -445,6 +446,32 @@ public class Assembler {
           
         // split by new line
         String[] lines = lastMem.userBlockComment.split("\\r?\\n");  
+        
+        // there macro in comment?
+        if (lastMem.userBlockComment.contains("[<")) {
+            
+          // expand them  
+          String tmp;
+          String[] tmpLines;
+          
+          ArrayList<String> alist=new ArrayList();
+          for (String line : lines) {
+            tmp=getMacro(line);
+            // if length differs, then it was exploded
+            if (tmp.length()>line.length()) {
+              tmpLines=tmp.split("\\r?\\n");
+              for (String tmpLine: tmpLines) {
+                alist.add(tmpLine);   
+              }
+            } else alist.add(tmp);
+          }
+          
+          // give back the list of (exploed) lines
+          lines=new String[alist.size()];
+          for (int i=0; i<lines.length; i++) {
+            lines[i]=alist.get(i);
+          }
+        }
      
         switch (aBlockComment) {
           case SEMICOLON:    
@@ -595,6 +622,177 @@ public class Assembler {
         } 
               
         carets.add(start, str.length(), lastMem, Type.BLOCK_COMMENT);
+      }
+      
+      /** Enum for direction of blocks in memory */
+      enum Dir {NONE, UPDN, DNUP};
+      
+      /** Enum for char block type */
+      enum Chars {NONE(0, 0), MONO(11, 7), MULTI(12, 7);
+        public int left;
+        public int right;
+      
+        Chars(int left, int right) {
+          this.left=left;  
+          this.right=right;
+        }
+      };      
+      
+      /** Enum for sprite block type */
+      enum Sprites {NONE(0, 0), MONO(13, 7), MULTI(14, 7);
+        public int left;
+        public int right;
+      
+        Sprites(int left, int right) {
+          this.left=left;  
+          this.right=right;
+        }
+      };
+
+      /**
+       * Get the line or macro explosion
+       * Possible macro: 
+       * <ul>
+       *  <li>[<CHAR#MONO#NxM#UPDN>]</li>
+       *  <li>[<CHAR#MONO#NxM#DNUP>]</li>
+       * <li>[<CHAR#MULTI#NxM#UPDN>]</li>
+       * <li>[<CHAR#MULTI#NxM#DNUP>]</li>
+       * <li>[<SPRITE#MONO#NxM#UPDN>]</li>
+       * <li>[<SPRITE#MONO#NxM#DNUP>] </li>
+       * <li>[<SPRITE#MULTI#NxM#UPDN>]</li>
+       * <li>[<SPRITE#MULTI#NxM#DNUP>]</li>
+       * </ul>
+       * 
+       * @param line the line to process
+       * 
+       * @return the line or macro explosion
+       */
+      private String getMacro(String line) {
+        Dir dir; 
+        Chars chars=Chars.NONE;
+        Sprites sprites=Sprites.NONE;
+        
+        String uline=line.toUpperCase();
+
+        // search for macro ending
+        if (uline.endsWith("#UPDN>]")) dir=Dir.UPDN;
+        else if (uline.endsWith("#DNUP>]")) dir=Dir.DNUP;
+        else return line;          
+          
+        // look for chars
+        if (uline.startsWith("[<CHAR#MONO#")) chars=Chars.MONO;
+        if (uline.startsWith("[<CHAR#MULTI#")) chars=Chars.MULTI;
+        
+         // look for sprites
+        if (uline.startsWith("[<SPRITE#MONO#")) sprites=Sprites.MONO;
+        if (uline.startsWith("[<SPRITE#MULTI#")) sprites=sprites.MULTI;
+                
+        if (chars==Chars.NONE && sprites==Sprites.NONE) return line;
+        
+        //determine the NxM size
+        String body="";
+        if (chars!=Chars.NONE) body=uline.substring(chars.left+1, uline.length()-chars.right).trim();
+        if (sprites!=Sprites.NONE) body=uline.substring(sprites.left+1, uline.length()-sprites.right).trim();   
+        
+        int pos=body.indexOf("X");
+        if (pos<=0) return line;
+        
+        int left=0;
+        int right=0;
+        
+        try {
+          left=Integer.parseInt(body.substring(0, pos));
+          right=Integer.parseInt(body.substring(pos+1));
+        } catch (Exception e) {
+          return line;
+        }
+        
+        if (left==0 || right==0) return line;
+        
+        StringBuffer buf=new StringBuffer();    
+        
+        // abort if users try to force to go ovet the actual memory  
+        try {
+            //lastMem.address
+         
+          if (chars!=Chars.NONE) {
+             // up to dx, then sx dn 
+             if (dir==Dir.UPDN) {
+               for (int r=0; r<right; r++) {  
+                 for (int i=0; i<8; i++) {
+                   buf.append(" ");
+                   for (int c=0; c<left; c++) {
+                     if (chars==Chars.MONO) buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+8*(r*left+c)+i].copy & 0xFF) + 0x100).substring(1)));
+                     else buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+8*(r*left+c)+i].copy & 0xFF) + 0x100).substring(1)));
+                   }
+                   buf.append("\n");
+                 } 
+               }  
+             } else {
+                 // dir is now sx to dn, then up to dx 
+                 for (int r=0; r<right; r++) {  
+                  for (int i=0; i<8; i++) {
+                    buf.append(" ");
+                    for (int c=0; c<left; c++) {
+                      if (chars==Chars.MONO) buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+8*(c*right+r)+i].copy & 0xFF) + 0x100).substring(1)));
+                      else buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+8*(c*right+r)+i].copy & 0xFF) + 0x100).substring(1)));
+                    }
+                    buf.append("\n");
+                   } 
+                 }  
+               }
+             
+             return buf.toString();
+          }
+          
+          if (sprites!=Sprites.NONE) {
+             // up to dx, then sx dn 
+             if (dir==Dir.UPDN) {
+               for (int r=0; r<right; r++) {  
+                 for (int i=0; i<21; i++) {
+                   buf.append(" ");
+                   for (int c=0; c<left; c++) {
+                     if (sprites==Sprites.MONO) {
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)].copy & 0xFF) + 0x100).substring(1)));
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)+1].copy & 0xFF) + 0x100).substring(1)));
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)+2].copy & 0xFF) + 0x100).substring(1)));
+                     } else {
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)].copy & 0xFF) + 0x100).substring(1)));
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)+1].copy & 0xFF) + 0x100).substring(1)));
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(r*left+c)+(i*3)+2].copy & 0xFF) + 0x100).substring(1)));
+                       }
+                   }
+                   buf.append("\n");
+                 } 
+               }  
+             } else {
+                 // dir is now sx to dn, then up to dx 
+                 for (int r=0; r<right; r++) {  
+                  for (int i=0; i<21; i++) {
+                    buf.append(" ");
+                    for (int c=0; c<left; c++) {
+                      if (sprites==Sprites.MONO) {
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)].copy & 0xFF) + 0x100).substring(1)));
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)+1].copy & 0xFF) + 0x100).substring(1)));
+                        buf.append(BinToMono(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)+2].copy & 0xFF) + 0x100).substring(1)));
+                      } else {
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)].copy & 0xFF) + 0x100).substring(1)));
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)+1].copy & 0xFF) + 0x100).substring(1)));
+                          buf.append(BinToMulti(Integer.toBinaryString((memory[lastMem.address+64*(c*right+r)+(i*3)+2].copy & 0xFF) + 0x100).substring(1)));                          
+                        }
+                    }
+                    buf.append("\n");
+                   } 
+                 }  
+               }
+             
+             return buf.toString();
+          }
+        } catch (Exception e) {
+            return line;
+        }
+          
+        return line;  
       }
     }    
       
@@ -5552,6 +5750,9 @@ public class Assembler {
    /** Carets to use */
    protected static Carets carets;
    
+   /** Memory dasm for block macro comments **/
+   protected static MemoryDasm[] memory;
+   
    /** Actual type being processed */
    ActionType actualType=null;
 
@@ -5569,6 +5770,7 @@ public class Assembler {
    
    /** Memory dasm with num or chars */
    MemoryDasm numText;
+   
         
    /**
     * Set the option to use
@@ -5597,6 +5799,7 @@ public class Assembler {
     * @param aPetasciiText the text to petascii code
     * @param constant the constants to use
     * @param carets the carets to use
+    * @param memory all memory for macro block comments
     */
    public void setOption(Option option, 
                          Assembler.Starting aStarting,
@@ -5621,7 +5824,8 @@ public class Assembler {
                          Assembler.ScreenText aScreenText,
                          Assembler.PetasciiText aPetasciiText,
                          Constant constant,
-                         Carets carets
+                         Carets carets,
+                         MemoryDasm[] memory
                          ) {
      Assembler.aStarting=aStarting;  
      Assembler.option=option;
@@ -5653,6 +5857,7 @@ public class Assembler {
      
      this.constant=constant;
      this.carets=carets;
+     this.memory=memory;
    } 
    
    /**
