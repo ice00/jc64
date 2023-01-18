@@ -128,7 +128,7 @@ public class DataTableModelLabels extends AbstractTableModel {
           return memory.dasmLocation;            
         case UL:            
           MemoryDasm  mem;
-          if (memory.type=='+' || memory.type=='-' || memory.type=='^') {
+          if (memory.type=='+' || memory.type=='-' || memory.type=='^' || memory.type=='\\') {
             
             if (memory.type=='+') {
               mem=data[memory.related];
@@ -142,7 +142,7 @@ public class DataTableModelLabels extends AbstractTableModel {
                   else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))return mem.dasmLocation+(memory.address-memory.related);
                        else return "$"+ShortToExe(mem.address)+(memory.address-memory.related);                 
             }   
-            if (memory.type=='^') {
+            if (memory.type=='^' || memory.type=='\\') {
               mem=data[(memory.related>>16) & 0xFFFF];  
               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF)); 
               else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF));
