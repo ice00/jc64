@@ -1094,6 +1094,8 @@ public class Assembler {
        MemoryDasm memHigh;
        MemoryDasm memRelLow;
        MemoryDasm memRelHigh;
+       MemoryDasm memRel2Low;
+       MemoryDasm memRel2High;
      
        int pos1=str.length();  // store initial position       
        int start=pos1;
@@ -1144,22 +1146,54 @@ public class Assembler {
          else {
            memLow=list.pop();
            memRelLow=listRel.pop();
-           listRel2.pop();
+           memRel2Low=listRel2.pop();
            
            memHigh=list.pop();
            memRelHigh=listRel.pop();           
-           listRel2.pop();
+           memRel2High=listRel2.pop();
            
            if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
-             // add a automatic label onto references byte  
-             if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
-                 memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address);
-             } 
-             
-             if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
-             else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                  else str.append("$").append(ShortToExe(memRelLow.address));  
+             if (memRel2Low!=null) {                
+               switch (memRelLow.type) {
+                 case '+':
+                   /// this is a memory in table label
+                   int pos=memRelLow.address-memRelLow.related;
+                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+"+"+pos);
+                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+"+"+pos);
+                   else str.append("$"+ShortToExe((int)memRelLow.related)+"+"+pos);
+                   break;
+                 case '^':
+                 case '\\':    
+                   /// this is a memory in table label
+                   int rel=(memRelLow.related>>16) & 0xFFFF;
+                   pos=memRelLow.address-rel;
+                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+"+"+pos);
+                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+"+"+pos);
+                   else str.append("$"+ShortToExe(rel)+"+"+pos);
+                   break;
+                 case '-':
+                   /// this is a memory in table label
+                   pos=memRelLow.address-memRelLow.related;
+                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+pos);  
+                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+pos);
+                   else str.append("$"+ShortToExe((int)memRelLow.related)+pos);
+                   break;             
+                 default:
+                   if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
+                   else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                   else str.append("$"+ShortToExe(memRelLow.address));          
+                   break;
+               }                
+             }  else {        
+                  if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
+                     memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address);
+                  } 
+              
+                  if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
+                  else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
+                       else str.append("$").append(ShortToExe(memRelLow.address));  
+                }
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
@@ -1180,7 +1214,7 @@ public class Assembler {
                else {
                  if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
                  else {
-                   // look fopr constant  
+                   // look for constant  
                    if (memLow.index!=-1 && memHigh.index!=-1 && memLow.index==memHigh.index) {
                      String res=constant.table[memLow.index][(memLow.copy & 0xFF) + ((memHigh.copy & 0xFF)<<8)];  
                      if (res!=null && !"".equals(res)) str.append(res);
