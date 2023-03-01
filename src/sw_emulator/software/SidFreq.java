@@ -652,14 +652,13 @@ public class SidFreq {
   } 
   
   
-   /**
+  /**
    * Search for the high frequency table in linear way for octave/note format
    *
    * @param index the index where to start the test
    * @return true if there is a high frequency table in that position 
    */ 
   private boolean searchOctNoteHigh(int index) {
-    int i=0;
     int oct;
     int actual=1;   
    
@@ -920,13 +919,16 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note6*2 - note7);
       
       // catch 4 errors into Vibrants/JO note table at 434Hz 
-      if (i==3 && diff==48) { errVibrantsJO=true; continue; }
+      if (i==3 && diff==48) { errVibrantsJO=true; continue; }      
       if (errVibrantsJO) {
         if (i==8 && diff==81) continue; 
         if (i==9 && diff==264) continue;   
         if (i==10 && diff==302) continue; 
       }   
       
+      // catch and arror in Megasound
+      if (i==3 && diff==16) continue;
+
       if (diff>ERROR) return false;
     }
    
@@ -1137,7 +1139,7 @@ public class SidFreq {
         addData(i+12, i, freq[9]/8);
         markMemory(i+12, i+23, 1);
         markMemory(i, i+12, 1);
-        break; // we force to find only the first
+        return true; // we force to find only the first
       }
     }    
     
@@ -1299,7 +1301,7 @@ public class SidFreq {
     return true;    
   }
    
-/**
+  /**
    * Search for the high frequency inverse table in linear way
    *
    * @param index the index where to start the test
@@ -1321,7 +1323,7 @@ public class SidFreq {
     return true;   
   }    
   
-/**
+  /**
    * Search for a low frequency inverse table in linear way
    * 
    * @param high the position of high table
