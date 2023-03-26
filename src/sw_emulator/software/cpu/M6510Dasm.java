@@ -356,6 +356,49 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     int op=Unsigned.done(buffer[pos++]); // instruction opcode
 
     iType=(int)tableMnemonics[op];   // store the type for creating comment
+            
+    switch (iType) {
+      case M_SLO:
+      case M_NOP0:
+      case M_NOP1:
+      case M_NOP2:
+      case M_RLA:
+      case M_SRE:
+      case M_RRA:
+      case M_SAX:
+      case M_LAX:
+      case M_DCP:
+      case M_ISB:
+      case M_USBC:
+      case M_ANC:
+      case M_ASR:
+      case M_ARR:
+      case M_ANE:
+      case M_SHA:
+      case M_SHS:
+      case M_SHY:
+      case M_SHX:
+      case M_SBX:
+      case M_LXA:
+      case M_LAS:
+      case M_JAM: 
+        if (option.noUndocumented) {
+          memory[(int)pc].isData=true;
+          memory[(int)pc].isCode=false;
+          
+          int size=tableSize[op];
+          if (size>1 && pc<0xFFFF) {
+            memory[(int)pc+1].isData=true;
+            memory[(int)pc+1].isCode=false;
+          }
+          
+          if (size>2 && pc<0xFFFF) {
+            memory[(int)pc+2].isData=true;
+            memory[(int)pc+2].isCode=false;
+          }
+        }
+        break;
+    }
     
     if (upperCase) result=mnemonics[iType];
     else result=mnemonics[iType].toLowerCase();

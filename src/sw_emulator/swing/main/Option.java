@@ -420,6 +420,9 @@ public class Option {
   /** Dots type for comments */
   public int dotsType=DOTS_UTF16;
   
+  /** No undocumented opcodes in source */
+  public boolean noUndocumented=false;
+  
   
   // comments C64
   

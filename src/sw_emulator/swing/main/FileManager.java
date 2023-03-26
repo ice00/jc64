@@ -420,6 +420,7 @@ public class FileManager {
       
       // 2.5
       option.dotsType=in.readInt();
+      option.noUndocumented=in.readBoolean();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -785,6 +786,7 @@ public class FileManager {
       
       // 2.5
       out.writeInt(option.dotsType);
+      out.writeBoolean(option.noUndocumented);
       
       out.flush();
       out.close();
