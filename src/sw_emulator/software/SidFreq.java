@@ -388,7 +388,7 @@ public class SidFreq {
    */
   private boolean combinedTable() {
     int sid;
-    int i;
+    int i, j;
     int high=-1;
     int low=-1;
      
@@ -396,26 +396,24 @@ public class SidFreq {
     for (i=start; i<end-TABLE*2; i++) {
       if (searchHigh2(i)) {
         high=i;
-        break;         
-      }
-    }  
-       
-    // look if high table was fount
-    if (high==-1) return false;  
-  
-    // check for low frequency table
-    for (i=start; i<end-TABLE*2; i++) {
-      if (i!=high) {
-        if (searchLow2(high, i)) {
-          low=i;
-          break;         
-        }
-      }
+        low=-1;
+        
+        // check for low frequency table
+        for (j=start; j<end-TABLE*2; j++) {
+          if (j!=high) {
+            if (searchLow2(high, j)) {
+              low=j;
+              break;         
+            }
+          }
+        }  
+        if (low!=-1) break;
+      }  
     }
-   
-    // look if low table was fount
-    if (low==-1) return false;  
-    
+        
+    // look if table was fount
+    if (high==-1 || low==-1) return false;  
+
     if (checkGarbage(high, low)) return false;
   
     // get the A4 note
