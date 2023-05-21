@@ -926,8 +926,11 @@ public class SidFreq {
         if (i==10 && diff==302) continue; 
       }   
       
-      // catch and arror in Megasound
+      // catch and error in Megasound
       if (i==3 && diff==16) continue;
+      
+      // catch and error in Megasound 
+      if (i==3 && diff==19) continue;
 
       if (diff>ERROR) return false;
     }
