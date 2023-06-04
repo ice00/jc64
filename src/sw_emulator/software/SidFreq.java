@@ -164,9 +164,9 @@ public class SidFreq {
       // for short table looks only if there are no solution before
       if (actIndex<0) shortLinearTable();
       if (actIndex<0) shortCombinedTable();
-      if (actIndex<0) highOctave12();
       if (actIndex<0) highOctaveCombined();
       if (actIndex<0) lowOctaveCombined();
+      if (actIndex<0) highOctave12();
     } catch (Exception e) {
         // catch errors to avoid blocking the program
         System.err.println(e);
@@ -317,6 +317,8 @@ public class SidFreq {
     markMemory(high, high+TABLE+6, 1);
     markMemory(low, low+TABLE+6, 1);
     
+    System.out.println("SIDFREQ: LinearTable");
+    
     return true;    
   }
   
@@ -378,6 +380,8 @@ public class SidFreq {
     markMemory(high, high+OCT_NOTE_TABLE+6, 1);
     markMemory(low, low+OCT_NOTE_TABLE+6, 1);
     
+    System.out.println("SIDFREQ: LinearOctNoteTable");
+    
     return true;    
   }
 
@@ -422,6 +426,8 @@ public class SidFreq {
     addData(high, low, sid);
     markMemory(high, high+(TABLE+6)*2, 2);
     markMemory(low, low+(TABLE+6)*2, 2);
+    
+    System.out.println("SIDFREQ: CombinedTable");
       
     return true;    
   }
@@ -1096,6 +1102,8 @@ public class SidFreq {
         addData(i+13, i, freq[9]/8);
         markMemory(i+13, i+26, 1);
         markMemory(i, i+13, 1);
+        
+        System.out.println("SIDFREQ: HighOctave");
       }  
     }   
         
@@ -1138,11 +1146,22 @@ public class SidFreq {
       if (freq[11]==0 || freq[11]<=freq[10] || Math.abs(freq[11]/freq[10]-STEP)>0.00001) continue;
         
       if (freq[11]<62000) continue;
+      
+      /**
+      if (inB[i]==0   && inB[i+1]==-1 &&
+          inB[i+2]==0 && inB[i+3]==-1 &&
+          inB[i+4]==0 && inB[i+5]==-1 &&
+          inB[i+6]==0 && inB[i+7]==-1 &&
+          inB[i+8]==0 && inB[i+9]==-1 && 
+          inB[i+10]==0 && inB[i+11]==-1) continue; // avoid strange low behavior 
+      */
 
       if (!checkGarbage(i, i+23)) {
         addData(i+12, i, freq[9]/8);
         markMemory(i+12, i+23, 1);
         markMemory(i, i+12, 1);
+        
+        System.out.println("SIDFREQ: HighOctave12");
         return true; // we force to find only the first
       }
     }    
@@ -1192,7 +1211,9 @@ public class SidFreq {
           addData(i+1, i, freq[9]/8);
           markMemory(i+13, i+26, 1);
           markMemory(i, i+13, 1);
-          break; // we force to find only the first 
+          
+          System.out.println("SIDFREQ: HighOctaveCombined");
+          return true; // we force to find only the first 
         }
     }      
     
@@ -1241,7 +1262,9 @@ public class SidFreq {
           addData(i+1, i, freq[9]*16);
           markMemory(i+13, i+26, 1);
           markMemory(i, i+13, 1);
-          break; // we force to find only the first
+          
+          System.out.println("SIDFREQ: LowOctaveCombined");
+          return true; // we force to find only the first
         }
     }      
     
@@ -1300,6 +1323,8 @@ public class SidFreq {
       addData(high-ALL+1, low-ALL+1, sid);
       markMemory(high-ALL+1, high, 1);
       markMemory(low-ALL+1, low, 1);
+      
+      System.out.println("SIDFREQ: LinearInverseTable");
     }
  
     return true;    

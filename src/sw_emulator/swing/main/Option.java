@@ -378,6 +378,9 @@ public class Option {
   /** Size of source font */
   public int sizeSourceFont=12;
   
+  /** Show perc in file chooser as colored icon */
+  public boolean chooserPerc=false;
+  
   /** A label is on a sepatate line from instruction */
   public boolean labelOnSepLine=true;
   

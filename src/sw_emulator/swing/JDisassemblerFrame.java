@@ -251,6 +251,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
         projectChooserFile.setAcceptAllFileFilterUsed(false);
         projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
+        projectChooserFile.setFileView(new ProjectFileView(option));
         
         projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
         exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));        

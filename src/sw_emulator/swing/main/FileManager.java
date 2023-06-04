@@ -421,6 +421,9 @@ public class FileManager {
       // 2.5
       option.dotsType=in.readInt();
       option.noUndocumented=in.readBoolean();
+      
+      // 2.6
+      option.chooserPerc=in.readBoolean();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -788,6 +791,9 @@ public class FileManager {
       out.writeInt(option.dotsType);
       out.writeBoolean(option.noUndocumented);
       
+      // 2.6
+      out.writeBoolean(option.chooserPerc);
+      
       out.flush();
       out.close();
     } catch (Exception e) {
@@ -811,7 +817,7 @@ public class FileManager {
       Patch patch;
       Freeze freeze;
       DataInputStream in;
-      
+    
       if (isGZipped(file)) in=new DataInputStream(
               new GZIPInputStream(
               new BufferedInputStream(
@@ -822,7 +828,7 @@ public class FileManager {
               new FileInputStream(file)));  
       
       byte version=in.readByte();
-    
+
       project.name=in.readUTF();
       project.file=in.readUTF();
       project.description=in.readUTF();
@@ -1149,6 +1155,110 @@ public class FileManager {
       }  
     return true;
   }  
+  
+  /**
+   * Read percent of the project from file 
+   * This is approssimate as not all rules as follow to speed up the read and
+   * else the MPR is not coved
+   * 
+   * @param file the file to read
+   * @return >0 as percent, -1 as error
+   */
+  public int readPercProjectFile(File file) {
+    int total=0;
+    int done=0;
+    
+    try {      
+      MemoryDasm mem;  
+      DataInputStream in;
+ 
+      if (isGZipped(file)) in=new DataInputStream(
+              new GZIPInputStream(
+              new BufferedInputStream(
+              new FileInputStream(file)))); 
+          
+      else in=new DataInputStream(
+              new BufferedInputStream(
+              new FileInputStream(file)));  
+      
+      byte version=in.readByte();
+
+      in.skipNBytes((int)in.readChar());    //name
+      in.skipNBytes((int)in.readChar());   // file 
+      in.skipNBytes((int)in.readChar());   // description 
+      in.skipNBytes((int)in.readChar());   // file type
+      if (version>0) in.skipNBytes((int)in.readChar()); //target 
+      
+      int size=in.readInt();   
+      in.skipNBytes(size);      // inB
+      
+      size=in.readInt();
+      in.skipNBytes(size);      // memoryFlags
+      
+      boolean isInside;
+      boolean isGarbage;
+      boolean dasmLoc;
+      boolean userLoc;
+
+      size=in.readInt();
+      for (int i=0; i<size; i++) {        
+        in.readInt(); // address
+        
+        if (in.readBoolean()) in.skipNBytes((int)in.readChar()); //dasmComment       
+        if (in.readBoolean()) in.skipNBytes((int)in.readChar());  // userComemnt        
+        if (in.readBoolean()) in.skipNBytes((int)in.readChar()); // userBlockComment
+        
+        if (in.readBoolean()) {
+          in.skipNBytes((int)in.readChar());  // dasmLocation
+          dasmLoc=true;
+        } else dasmLoc=false;
+        
+        
+        if (in.readBoolean()) {
+          in.skipNBytes((int)in.readChar());   // userLocation
+          userLoc=true;
+        } else userLoc=false;
+        
+        isInside=in.readBoolean(); // isInside
+        in.readBoolean(); // isCode
+        in.readBoolean(); // isData
+        
+        if (version>0) {
+            isGarbage=in.readBoolean();  // isGarbage
+            in.skipNBytes((int)in.readChar());      // datatype
+        } // version 1
+        else isGarbage=false;
+        
+        in.readByte();  // copy
+        in.readInt();   // related
+        in.readChar();  // type
+        
+        /**
+        if (project.fileType==FileType.MPR) {
+          project.mpr=new MPR();
+          project.mpr.getElements(project.inB);
+        }
+        */
+        
+        if (version>2) { // version 3
+          in.readByte();   // index
+        }
+        
+        if (!isInside ||isGarbage) continue;
+        if (userLoc) {
+          total++;
+          done++;
+        } else {
+            if (dasmLoc) total++;
+        }
+      }
+    } catch (Exception e) {
+        System.err.println(e);
+        return -1;
+      }  
+      
+    return (int)(done*100/total);  
+  }
   
   /**
    * Read the file to disassemble

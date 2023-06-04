@@ -40,7 +40,7 @@ public class Shared {
   public static final ArrayList framesList=new ArrayList();   
   
   /** Version of the application */
-  public static final String VERSION="2.5";
+  public static final String VERSION="2.6";
  
   /** Instance UUID */
   public static final UUID uuid=UUID.randomUUID();
