@@ -426,6 +426,9 @@ public class Option {
   /** No undocumented opcodes in source */
   public boolean noUndocumented=false;
   
+  /** Show miniature contents in scrollbars */
+  public boolean showMiniature=true;
+  
   
   // comments C64
   

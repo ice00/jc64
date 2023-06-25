@@ -141,7 +141,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   Disassembly disassembly=new Disassembly();
   
   /** Option dialog */
-  JOptionDialog jOptionDialog=new JOptionDialog(this, true, dataTableModelMemory);
+  JOptionDialog jOptionDialog;
   
   /** Project dialog */
   JProjectDialog jProjectDialog=new JProjectDialog(this, true);
@@ -217,197 +217,225 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   
     /**
-     * Creates new form JFrameDisassembler
-     */
-    public JDisassemblerFrame() {  
-        try {
-          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon128.png")).getImage());
-          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon64.png")).getImage());
-          iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon32.png")).getImage());
-        } catch (Exception e) {
-            System.err.println(e);
-          }        
-        
-        initComponents();
-
-        Shared.framesList.add(this);
-        Shared.framesList.add(projectChooserFile);
-        Shared.framesList.add(projectMergeFile);
-        Shared.framesList.add(exportAsChooserFile);
-        Shared.framesList.add(optionMPRLoadChooserFile);
-        Shared.framesList.add(optionMPRSaveChooserFile);
-        Shared.framesList.add(findDialogDis);
-        Shared.framesList.add(findDialogSource);
-        Shared.framesList.add(importLabelsChooserFile);
-        findDialogDis.setSearchString(" ");
-        findDialogSource.setSearchString(" ");
-        
-        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
-        //  if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
-        //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
-        
-        jOptionDialog.useOption(option);
-       
-        projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
-        projectChooserFile.setAcceptAllFileFilterUsed(false);
-        projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
-        projectChooserFile.setFileView(new ProjectFileView(option));
-        
-        projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
-        exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)","txt"));        
-        optionMPRLoadChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program (prg, bin)", "prg", "bin"));
-        optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
-        optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");    
-        optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
-        optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");  
-        importLabelsChooserFile.setDialogTitle("Select a memory label dump file from DASM"); 
-        compiler.setOption(option);   
-                
-        jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
-          MouseEvent last;  
-            
-          private Timer timer = new Timer(300, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              // timer has gone off, so treat as a single click
-              singleClick();
-              timer.stop();
-            }
-          });
-
-	  @Override
-	  public void mouseClicked(MouseEvent e) {
-            last=e;
-	    // Check if timer is running 
-	    // to know if there was an earlier click
-            if (timer.isRunning()) {
-              // There was an earlier click so we'll treat it as a double click
-              timer.stop();
-              doubleClick();
-            } else {
-               // (Re)start the timer and wait for 2nd click      	
-                timer.restart();
-              }
-	  }
-          
-          /**
-           * Single click on table
-           */ 
-          protected void singleClick() {
-            int row=jTableMemory.rowAtPoint(last.getPoint());
-            int col= jTableMemory.columnAtPoint(last.getPoint());
-          
-            switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
-              case UC:    // user comment
-                if (option.clickUcEdit) {
-                  addComment(row);
-                  if (option.forceCompilation) disassembly(true);
-                }
-                break;  
-              case UL:     // user label
-                if (option.clickUlEdit) {
-                  addLabel(row);
-                  if (option.forceCompilation) disassembly(true);
-                }  
-                break;
-              case UB:     // user global comment
-                if (option.clickUbEdit) {
-                  addBlock(row);
-                  if (option.forceCompilation) disassembly(true);
-                }   
-                break;
-              case DC:     // automatic comment
-                if (option.clickDcErase) {
-                  MemoryDasm mem=project.memory[row];
-                  if (mem.dasmComment!=null && mem.userComment==null) mem.userComment="";
-                  dataTableModelMemory.fireTableDataChanged();  
-                  if (option.forceCompilation) disassembly(true);
-                }                 
-                break;  
-              case DL:     // automatic label
-                if (option.clickDlErase) {
-                  MemoryDasm mem=project.memory[row];
-                  if (mem.dasmLocation!=null) mem.dasmLocation=null;
-                  dataTableModelMemory.fireTableDataChanged();  
-                  if (option.forceCompilation) disassembly(true);
-                }  
-                break;  
-              case VL:    // add patch
-                if (option.clickVlPatch){  
-                  MemoryDasm mem=project.memory[row];
-                  String value=JOptionPane.showInputDialog(null, "Insert the new value (in hex) for this location");
-                  if (value!=null) {
-                    Patch patch=new Patch();  
-                    patch.value=Integer.parseInt(value,16);
-      
-                    if (!patch.isValidRange()) {
-                      JOptionPane.showMessageDialog(null, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
-                      break;
-                    }
-      
-                    patch.address=mem.address;
-      
-                    int size=0;
-                    if (project.patches!=null) size=project.patches.length;
-      
-                    // copy the value in the list
-                    Patch[] patches2=new Patch[size+1];
-                    if (size>0) System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
-                    patches2[size]=patch;
-            
-                    project.patches=patches2;  
-                    
-                    dataTableModelMemory.fireTableDataChanged();  
-                    if (option.forceCompilation) disassembly(true);
-                  }
-                   
-                }
-                break;  
-            }
-	  }
-
-          /**
-           * Double click on table
-           */
-	  protected void doubleClick() {
-            int actual;  
-         
-            // get the address in hex format
-            int addr=jTableMemory.getSelectedRow();
-            int pos=0;        
-            
-            // try with carets
-            if (addr>=0) {
-              pos=disassembly.caretsPreview.getPosition(project.memory[addr]);
-              
-              if (pos!=-1) {
-                rSyntaxTextAreaDis.setCaretPosition(pos);
-                rSyntaxTextAreaDis.requestFocusInWindow();
-                return;
-              } else pos=0;  
-            }
-
-            // scan all lines for the memory location
-            try {
-              String preview=rSyntaxTextAreaDis.getText();
-              String lines[] = preview.split("\\r?\\n");
-              for (String line: lines) {
-                actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));   
-                if (actual==addr) {      
-                  // set preview in the find position  
-                  rSyntaxTextAreaDis.setCaretPosition(pos);
-                  rSyntaxTextAreaDis.requestFocusInWindow();
-                  break;
-                } else {
-                    pos+=line.length()+1;
-                  }
-              }
-            } catch (Exception e) {
-                System.err.println();  
-              }  
-          }             
-        });
+   * Creates new form JFrameDisassembler
+   */
+  public JDisassemblerFrame() {
+    try {
+      iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon128.png")).getImage());
+      iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon64.png")).getImage());
+      iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon32.png")).getImage());
+    } catch (Exception e) {
+      System.err.println(e);
     }
+
+    initComponents();
+    
+    jOptionDialog=new JOptionDialog(this, true, dataTableModelMemory, this);
+
+    Shared.framesList.add(this);
+    Shared.framesList.add(projectChooserFile);
+    Shared.framesList.add(projectMergeFile);
+    Shared.framesList.add(exportAsChooserFile);
+    Shared.framesList.add(optionMPRLoadChooserFile);
+    Shared.framesList.add(optionMPRSaveChooserFile);
+    Shared.framesList.add(findDialogDis);
+    Shared.framesList.add(findDialogSource);
+    Shared.framesList.add(importLabelsChooserFile);
+    findDialogDis.setSearchString(" ");
+    findDialogSource.setSearchString(" ");
+
+    FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
+    //  if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
+    //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
+
+    jOptionDialog.useOption(option);
+
+    projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
+    projectChooserFile.setAcceptAllFileFilterUsed(false);
+    projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
+    projectChooserFile.setFileView(new ProjectFileView(option));
+
+    projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
+    exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)", "txt"));
+    optionMPRLoadChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program (prg, bin)", "prg", "bin"));
+    optionMPRLoadChooserFile.setMultiSelectionEnabled(true);
+    optionMPRLoadChooserFile.setDialogTitle("Select all PRG to include into the MPR");
+    optionMPRSaveChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program (mpr)", "mpr"));
+    optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");
+    importLabelsChooserFile.setDialogTitle("Select a memory label dump file from DASM");
+    compiler.setOption(option);
+
+    jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
+      MouseEvent last;
+
+      private Timer timer = new Timer(300, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          // timer has gone off, so treat as a single click
+          singleClick();
+          timer.stop();
+        }
+      });
+
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        last = e;
+        // Check if timer is running 
+        // to know if there was an earlier click
+        if (timer.isRunning()) {
+          // There was an earlier click so we'll treat it as a double click
+          timer.stop();
+          doubleClick();
+        } else {
+          // (Re)start the timer and wait for 2nd click      	
+          timer.restart();
+        }
+      }
+
+      /**
+       * Single click on table
+       */
+      protected void singleClick() {
+        int row = jTableMemory.rowAtPoint(last.getPoint());
+        int col = jTableMemory.columnAtPoint(last.getPoint());
+
+        switch (DataTableModelMemory.columns[jTableMemory.convertColumnIndexToModel(col)]) {
+          case UC:    // user comment
+            if (option.clickUcEdit) {
+              addComment(row);
+              if (option.forceCompilation) {
+                disassembly(true);
+              }
+            }
+            break;
+          case UL:     // user label
+            if (option.clickUlEdit) {
+              addLabel(row);
+              if (option.forceCompilation) {
+                disassembly(true);
+              }
+            }
+            break;
+          case UB:     // user global comment
+            if (option.clickUbEdit) {
+              addBlock(row);
+              if (option.forceCompilation) {
+                disassembly(true);
+              }
+            }
+            break;
+          case DC:     // automatic comment
+            if (option.clickDcErase) {
+              MemoryDasm mem = project.memory[row];
+              if (mem.dasmComment != null && mem.userComment == null) {
+                mem.userComment = "";
+              }
+              dataTableModelMemory.fireTableDataChanged();
+              if (option.forceCompilation) {
+                disassembly(true);
+              }
+            }
+            break;
+          case DL:     // automatic label
+            if (option.clickDlErase) {
+              MemoryDasm mem = project.memory[row];
+              if (mem.dasmLocation != null) {
+                mem.dasmLocation = null;
+              }
+              dataTableModelMemory.fireTableDataChanged();
+              if (option.forceCompilation) {
+                disassembly(true);
+              }
+            }
+            break;
+          case VL:    // add patch
+            if (option.clickVlPatch) {
+              MemoryDasm mem = project.memory[row];
+              String value = JOptionPane.showInputDialog(null, "Insert the new value (in hex) for this location");
+              if (value != null) {
+                Patch patch = new Patch();
+                patch.value = Integer.parseInt(value, 16);
+
+                if (!patch.isValidRange()) {
+                  JOptionPane.showMessageDialog(null, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
+                  break;
+                }
+
+                patch.address = mem.address;
+
+                int size = 0;
+                if (project.patches != null) {
+                  size = project.patches.length;
+                }
+
+                // copy the value in the list
+                Patch[] patches2 = new Patch[size + 1];
+                if (size > 0) {
+                  System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
+                }
+                patches2[size] = patch;
+
+                project.patches = patches2;
+
+                dataTableModelMemory.fireTableDataChanged();
+                if (option.forceCompilation) {
+                  disassembly(true);
+                }
+              }
+
+            }
+            break;
+        }
+      }
+
+      /**
+       * Double click on table
+       */
+      protected void doubleClick() {
+        int actual;
+
+        // get the address in hex format
+        int addr = jTableMemory.getSelectedRow();
+        int pos = 0;
+
+        // try with carets
+        if (addr >= 0) {
+          pos = disassembly.caretsPreview.getPosition(project.memory[addr]);
+
+          if (pos != -1) {
+            rSyntaxTextAreaDis.setCaretPosition(pos);
+            rSyntaxTextAreaDis.requestFocusInWindow();
+            return;
+          } else {
+            pos = 0;
+          }
+        }
+
+        // scan all lines for the memory location
+        try {
+          String preview = rSyntaxTextAreaDis.getText();
+          String lines[] = preview.split("\\r?\\n");
+          for (String line : lines) {
+            actual = searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));
+            if (actual == addr) {
+              // set preview in the find position  
+              rSyntaxTextAreaDis.setCaretPosition(pos);
+              rSyntaxTextAreaDis.requestFocusInWindow();
+              break;
+            } else {
+              pos += line.length() + 1;
+            }
+          }
+        } catch (Exception e) {
+          System.err.println();
+        }
+      }
+    });
+
+    jScrollPaneLeftMin.setVisible(option.showMiniature);
+    jScrollPaneRightMin.setVisible(option.showMiniature);
+    pack();
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -561,10 +589,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jPanelPerc = new sw_emulator.swing.JPanelPerc();
     jSplitPaneExternal = new javax.swing.JSplitPane();
     jSplitPaneInternal = new javax.swing.JSplitPane();
+    jPanelLeft = new javax.swing.JPanel();
     jScrollPaneLeft = new javax.swing.JScrollPane();
     rSyntaxTextAreaDis = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    jScrollPaneLeftMin = new javax.swing.JScrollPane();
+    rSyntaxTextAreaDisMin = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    jPanelRight = new javax.swing.JPanel();
     jScrollPaneRight = new javax.swing.JScrollPane();
     rSyntaxTextAreaSource = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    jScrollPaneRightMin = new javax.swing.JScrollPane();
+    rSyntaxTextAreaSourceMin = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
     jScrollPaneMemory = new javax.swing.JScrollPane();
     jTableMemory = new javax.swing.JTable() {
       String[] hh={"Memory address location in Hex",
@@ -2052,6 +2086,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jSplitPaneInternal.setResizeWeight(0.5);
     jSplitPaneInternal.setToolTipText("");
 
+    jPanelLeft.setLayout(new java.awt.BorderLayout());
+
     rSyntaxTextAreaDis.setEditable(false);
     rSyntaxTextAreaDis.setColumns(20);
     rSyntaxTextAreaDis.setRows(5);
@@ -2115,14 +2151,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   );
   rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
-    public void mouseReleased(java.awt.event.MouseEvent evt) {
-      rSyntaxTextAreaDisMouseReleased(evt);
-    }
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaDisMouseClicked(evt);
     }
     public void mouseEntered(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaDisMouseEntered(evt);
+    }
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaDisMouseReleased(evt);
     }
   });
   rSyntaxTextAreaDis.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2132,10 +2168,34 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   });
   jScrollPaneLeft.setViewportView(rSyntaxTextAreaDis);
 
-  jSplitPaneInternal.setLeftComponent(jScrollPaneLeft);
+  jPanelLeft.add(jScrollPaneLeft, java.awt.BorderLayout.CENTER);
 
-  rSyntaxTextAreaSource.setEditable(false);
-  rSyntaxTextAreaSource.setColumns(20);
+  jScrollPaneLeftMin.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+  jScrollPaneLeftMin.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+  rSyntaxTextAreaDisMin.setEditable(false);
+  rSyntaxTextAreaDisMin.setColumns(40);
+  rSyntaxTextAreaDisMin.setRows(5);
+  rSyntaxTextAreaDisMin.setFont(new java.awt.Font("Monospaced", 0, 3)); // NOI18N
+  rSyntaxTextAreaDisMin.setMinimumSize(new java.awt.Dimension(671, 1000));
+  rSyntaxTextAreaDisMin.setSyntaxEditingStyle("text/asm6502");
+  rSyntaxTextAreaDisMin.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaDisMinMouseClicked(evt);
+    }
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaDisMinMouseReleased(evt);
+    }
+  });
+  jScrollPaneLeftMin.setViewportView(rSyntaxTextAreaDisMin);
+
+  jPanelLeft.add(jScrollPaneLeftMin, java.awt.BorderLayout.EAST);
+
+  jSplitPaneInternal.setLeftComponent(jPanelLeft);
+
+  jPanelRight.setLayout(new java.awt.BorderLayout());
+
+  rSyntaxTextAreaSource.setColumns(25);
   rSyntaxTextAreaSource.setRows(5);
   rSyntaxTextAreaSource.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
   rSyntaxTextAreaSource.setSyntaxEditingStyle("text/asm6502");
@@ -2177,19 +2237,42 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   );
   rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
-    public void mouseReleased(java.awt.event.MouseEvent evt) {
-      rSyntaxTextAreaSourceMouseReleased(evt);
-    }
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaSourceMouseClicked(evt);
     }
     public void mouseEntered(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaSourceMouseEntered(evt);
     }
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaSourceMouseReleased(evt);
+    }
   });
   jScrollPaneRight.setViewportView(rSyntaxTextAreaSource);
 
-  jSplitPaneInternal.setRightComponent(jScrollPaneRight);
+  jPanelRight.add(jScrollPaneRight, java.awt.BorderLayout.CENTER);
+
+  jScrollPaneRightMin.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+  jScrollPaneRightMin.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+  rSyntaxTextAreaSourceMin.setEditable(false);
+  rSyntaxTextAreaSourceMin.setColumns(35);
+  rSyntaxTextAreaSourceMin.setRows(5);
+  rSyntaxTextAreaSourceMin.setFont(new java.awt.Font("Monospaced", 0, 3)); // NOI18N
+  rSyntaxTextAreaSourceMin.setMinimumSize(new java.awt.Dimension(671, 1000));
+  rSyntaxTextAreaSourceMin.setSyntaxEditingStyle("text/asm6502");
+  rSyntaxTextAreaSourceMin.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaSourceMinMouseClicked(evt);
+    }
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+      rSyntaxTextAreaSourceMinMouseReleased(evt);
+    }
+  });
+  jScrollPaneRightMin.setViewportView(rSyntaxTextAreaSourceMin);
+
+  jPanelRight.add(jScrollPaneRightMin, java.awt.BorderLayout.EAST);
+
+  jSplitPaneInternal.setRightComponent(jPanelRight);
 
   jSplitPaneExternal.setRightComponent(jSplitPaneInternal);
 
@@ -3605,11 +3688,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
-      gotoMem(evt.getModifiersEx());
+      gotoMem(rSyntaxTextAreaDis, disassembly.caretsPreview, evt.getModifiersEx());
       if (evt.getClickCount() == 2 && !evt.isConsumed() && 
           ((evt.getModifiersEx() & CTRL_DOWN_MASK) == CTRL_DOWN_MASK)) {
         manageAction(disassembly.caretsPreview.getType(rSyntaxTextAreaDis.getCaretPosition()));
       }
+      rSyntaxTextAreaDisMin.setCaretPosition(rSyntaxTextAreaDis.getCaretPosition());
+      rSyntaxTextAreaDisMin.requestFocusInWindow();    
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -3658,6 +3743,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           ((evt.getModifiersEx() & CTRL_DOWN_MASK) == CTRL_DOWN_MASK)) {
         manageAction(disassembly.caretsSource.getType(rSyntaxTextAreaSource.getCaretPosition()));
       }
+      rSyntaxTextAreaSourceMin.setCaretPosition(rSyntaxTextAreaSource.getCaretPosition());
+      rSyntaxTextAreaSourceMin.requestFocusInWindow();  
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
     private void jMenuItemClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearDLabelActionPerformed
@@ -4567,6 +4654,89 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
      jPlayerDialog.setVisible(true);
   }//GEN-LAST:event_jMenuItemSidldPlayerActionPerformed
 
+  private void rSyntaxTextAreaDisMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMinMouseClicked
+    gotoMem(rSyntaxTextAreaDisMin, disassembly.caretsPreview, evt.getModifiersEx());
+    rSyntaxTextAreaDis.setCaretPosition(rSyntaxTextAreaDisMin.getCaretPosition());
+    rSyntaxTextAreaDis.requestFocusInWindow();    
+  }//GEN-LAST:event_rSyntaxTextAreaDisMinMouseClicked
+
+  private void rSyntaxTextAreaDisMinMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMinMouseReleased
+      String selected=rSyntaxTextAreaDisMin.getSelectedText();
+      
+      int actual;
+      
+      int min=0xffff+1;  // min find address
+      int max=-1;        // max find address
+      
+      // avoid no selected text
+      if (selected==null) return;
+      
+      try {
+        String lines[] = selected.split("\\r?\\n");
+        for (String line: lines) {
+          actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));  
+          if (actual==-1) continue;
+        
+          if (actual<min) min=actual;
+          if (actual>max) max=actual;
+        }
+      
+        // if max is not -1 we find a range
+        if (max==-1) return;
+      
+        //scroll to that point
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        Shared.scrollToCenter(jTableMemory, min, 0);
+        
+        // select those rows
+        jTableMemory.setRowSelectionInterval(min, max);       
+        
+      } catch (Exception e) {
+          System.err.println(e);;
+        }  
+  }//GEN-LAST:event_rSyntaxTextAreaDisMinMouseReleased
+
+  private void rSyntaxTextAreaSourceMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMinMouseClicked
+    gotoMem(rSyntaxTextAreaSourceMin, disassembly.caretsSource, evt.getModifiersEx());
+    rSyntaxTextAreaSource.setCaretPosition(rSyntaxTextAreaSourceMin.getCaretPosition());
+    rSyntaxTextAreaSource.requestFocusInWindow();   
+  }//GEN-LAST:event_rSyntaxTextAreaSourceMinMouseClicked
+
+  private void rSyntaxTextAreaSourceMinMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMinMouseReleased
+String selected=rSyntaxTextAreaSourceMin.getSelectedText();
+      
+      int actual;
+      
+      int min=0xffff+1;  // min find address
+      int max=-1;        // max find address
+      
+      // avoid no selected text
+      if (selected==null) return;
+      
+      try {
+        String lines[] = selected.split("\\r?\\n");
+        for (String line: lines) {
+          actual=searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));  
+          if (actual==-1) continue;
+        
+          if (actual<min) min=actual;
+          if (actual>max) max=actual;
+        }
+      
+        // if max is not -1 we find a range
+        if (max==-1) return;
+      
+        //scroll to that point
+        ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
+        Shared.scrollToCenter(jTableMemory, min, 0);
+        
+        // select this rows
+        jTableMemory.setRowSelectionInterval(min, max);        
+      } catch (Exception e) {
+          System.err.println(e);;
+        }  
+  }//GEN-LAST:event_rSyntaxTextAreaSourceMinMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -4840,15 +5010,19 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenu jMenuSource;
   private javax.swing.JMenu jMenuSub;
   private javax.swing.JMenu jMenuUndo;
+  private javax.swing.JPanel jPanelLeft;
   private sw_emulator.swing.JPanelPerc jPanelPerc;
+  private javax.swing.JPanel jPanelRight;
   private javax.swing.JPanel jPanelToolBar;
   private javax.swing.JPopupMenu jPopupMenuConstant;
   private javax.swing.JPopupMenu jPopupMenuData;
   private javax.swing.JPopupMenu jPopupMenuMemory;
   private javax.swing.JPopupMenu jPopupMenuSaveAs;
   private javax.swing.JScrollPane jScrollPaneLeft;
+  protected javax.swing.JScrollPane jScrollPaneLeftMin;
   private javax.swing.JScrollPane jScrollPaneMemory;
   private javax.swing.JScrollPane jScrollPaneRight;
+  protected javax.swing.JScrollPane jScrollPaneRightMin;
   private javax.swing.JPopupMenu.Separator jSeparator1;
   private javax.swing.JPopupMenu.Separator jSeparator2;
   private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -4894,7 +5068,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JToolBar jToolBarPerformance;
   private javax.swing.JToolBar jToolBarSource;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDis;
+  private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDisMin;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
+  private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSourceMin;
   // End of variables declaration//GEN-END:variables
 
   @Override
@@ -5291,6 +5467,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       savedProject=null;       
       rSyntaxTextAreaSource.setText("");
       rSyntaxTextAreaDis.setText("");
+      rSyntaxTextAreaDisMin.setText("");
+      rSyntaxTextAreaSourceMin.setText("");
       dataTableModelMemory.setData(null);
       dataTableModelMemory.fireTableDataChanged();
     } else {
@@ -5321,6 +5499,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     projectFile=null;
     rSyntaxTextAreaSource.setText("");
     rSyntaxTextAreaDis.setText("");
+    rSyntaxTextAreaDisMin.setText("");
+    rSyntaxTextAreaSourceMin.setText("");
     dataTableModelMemory.setData(null);
     dataTableModelMemory.fireTableDataChanged();
     jPanelPerc.setPerc(-1);
@@ -5931,7 +6111,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     } catch (BadLocationException ex) {
         System.err.println(ex);
     }
-    rSyntaxTextAreaSource.setText(disassembly.source);    
+    rSyntaxTextAreaSource.setText(disassembly.source); 
+    rSyntaxTextAreaSourceMin.setText(disassembly.source); 
     try {
       rSyntaxTextAreaSource.setCaretPosition(rSyntaxTextAreaSource.getDocument()
                         .getDefaultRootElement().getElement(lineS)
@@ -5942,6 +6123,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     rSyntaxTextAreaDis.setText(disassembly.disassembly);
+    rSyntaxTextAreaDisMin.setText(disassembly.disassembly);
     try {
       rSyntaxTextAreaDis.setCaretPosition(rSyntaxTextAreaDis.getDocument()
                         .getDefaultRootElement().getElement(lineD)
@@ -5954,7 +6136,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     memoryTableCellRenderer.setDisassembly(disassembly);
     
     // repositionate in memory if option is on
-    if (option.repositionate) gotoMem(0);
+    if (option.repositionate) gotoMem(rSyntaxTextAreaDis, disassembly.caretsPreview, 0);
     
     DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");    
     if (storeUndo) undo.store(df.format(new Date()), project);
@@ -7332,20 +7514,23 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /**
    * Got memory from preview
    * 
+   * @param rSyntaxTextArea syntax text area 
+   * @param caret cater used for disassembly
    * @param modifier the key modifier of mouse click
    */
-  private void gotoMem(int modifier) {
+  private void gotoMem(org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextArea, 
+                       Carets caret, int modifier) {
     try {  
       int pos;
       int addr=-1;  
         
       // try with carets
-      MemoryDasm mem=disassembly.caretsPreview.getMemory(rSyntaxTextAreaDis.getCaretPosition());
+      MemoryDasm mem=caret.getMemory(rSyntaxTextArea.getCaretPosition());
           
       if (mem==null) {
         // get starting position of clicked point  
-        pos=Utilities.getRowStart(rSyntaxTextAreaDis, rSyntaxTextAreaDis.getCaretPosition());
-        addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
+        pos=Utilities.getRowStart(rSyntaxTextArea, rSyntaxTextArea.getCaretPosition());
+        addr=searchAddress(rSyntaxTextArea.getDocument().getText(pos,option.maxLabelLength));
       } else addr=mem.address;
         
       if (addr==-1) return;
