@@ -5068,9 +5068,9 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JToolBar jToolBarPerformance;
   private javax.swing.JToolBar jToolBarSource;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDis;
-  private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDisMin;
+  protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDisMin;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
-  private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSourceMin;
+  protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSourceMin;
   // End of variables declaration//GEN-END:variables
 
   @Override
@@ -6111,8 +6111,10 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     } catch (BadLocationException ex) {
         System.err.println(ex);
     }
+    
     rSyntaxTextAreaSource.setText(disassembly.source); 
-    rSyntaxTextAreaSourceMin.setText(disassembly.source); 
+    if (option.showMiniature) rSyntaxTextAreaSourceMin.setText(disassembly.source); 
+    else rSyntaxTextAreaSourceMin.setText("");
     try {
       rSyntaxTextAreaSource.setCaretPosition(rSyntaxTextAreaSource.getDocument()
                         .getDefaultRootElement().getElement(lineS)
@@ -6123,7 +6125,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     }
     
     rSyntaxTextAreaDis.setText(disassembly.disassembly);
-    rSyntaxTextAreaDisMin.setText(disassembly.disassembly);
+    if (option.showMiniature) rSyntaxTextAreaDisMin.setText(disassembly.disassembly);
+    else rSyntaxTextAreaDisMin.setText("");
     try {
       rSyntaxTextAreaDis.setCaretPosition(rSyntaxTextAreaDis.getDocument()
                         .getDefaultRootElement().getElement(lineD)

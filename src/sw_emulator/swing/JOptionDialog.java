@@ -4588,6 +4588,13 @@ public class JOptionDialog extends javax.swing.JDialog {
       SwingUtilities.invokeLater(new Runnable() {
         public void run() {
           model.fireTableDataChanged();  
+          if (option.showMiniature) {
+            frame.rSyntaxTextAreaSourceMin.setText(frame.disassembly.source);
+            frame.rSyntaxTextAreaDisMin.setText(frame.disassembly.disassembly);
+          } else {
+            frame.rSyntaxTextAreaSourceMin.setText("");
+            frame.rSyntaxTextAreaDisMin.setText("");
+          }
           frame.jScrollPaneLeftMin.setVisible(option.showMiniature);
           frame.jScrollPaneRightMin.setVisible(option.showMiniature);
           frame.pack();
