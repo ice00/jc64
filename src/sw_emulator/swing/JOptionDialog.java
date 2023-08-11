@@ -31,7 +31,6 @@ import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.UIManager;
-import javax.swing.JScrollPane;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 

@@ -64,7 +64,7 @@ public class JConstantDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Shared.framesList.add(this);
-        Shared.framesList.add(constantCellEditor);
+        //Shared.framesList.add(constantCellEditor);
     }
     
     /**
