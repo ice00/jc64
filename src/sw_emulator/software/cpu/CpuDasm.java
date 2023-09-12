@@ -181,7 +181,7 @@ public class CpuDasm implements disassembler {
       MemoryDasm memRel;
       // the byte is a reference
       if (type=='^' || type=='\\') memRel=memory[memory[(int)addr].related & 0xFFFF];   
-      else memRel=memory[memory[(int)addr].related];   
+      else memRel=memory[memory[(int)addr].related & 0xFFFF];   
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getNormType(type)+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getNormType(type)+memRel.dasmLocation;
