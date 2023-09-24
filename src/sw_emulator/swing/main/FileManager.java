@@ -425,6 +425,9 @@ public class FileManager {
       // 2.6
       option.chooserPerc=in.readBoolean();
       option.showMiniature=in.readBoolean();
+      
+      // 2.6
+      option.syntaxTheme=in.readUTF();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -795,6 +798,9 @@ public class FileManager {
       // 2.6
       out.writeBoolean(option.chooserPerc);
       out.writeBoolean(option.showMiniature);
+      
+      // 2.7
+      out.writeUTF(option.syntaxTheme);
       
       out.flush();
       out.close();

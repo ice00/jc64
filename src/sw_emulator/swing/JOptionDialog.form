@@ -20,6 +20,8 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupDotsType">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupSyntax">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
@@ -3106,46 +3108,68 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jRadioButtonLookCWin" min="-2" pref="148" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelBracket" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelTheme" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonOcean" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonSteel" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonCharcoal" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonAqua" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonHighContrast" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonEmerald" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonRuby" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jRadioButtonLookSynth" max="32767" attributes="0"/>
-                                      <Component id="jLabelLook" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookJava" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookMac" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookMetal" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookWin" alignment="1" pref="133" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookNimbus" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jRadioButtonLookGtk" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jRadioButtonLookCWin" min="-2" pref="148" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelBracket" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jLabelTheme" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonOcean" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonSteel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonCharcoal" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonAqua" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonHighContrast" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonEmerald" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonRuby" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jRadioButtonLookSynth" max="32767" attributes="0"/>
+                                              <Component id="jLabelLook" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookJava" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookMac" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookMetal" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookWin" alignment="1" pref="133" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookNimbus" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonLookGtk" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelArrow" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelArrow" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPaneList" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jLabelFlatLaf" pref="221" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabelSyntax" max="32767" attributes="0"/>
+                                          <Component id="jRadioButtonDefault" max="32767" attributes="0"/>
+                                          <Component id="jRadioButtonDefaultAlt" alignment="0" pref="299" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jRadioButtonDark" alignment="0" pref="299" max="32767" attributes="0"/>
+                                      <Component id="jRadioButtonDruid" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jRadioButtonEclipse" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jRadioButtonIdea" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jRadioButtonMonokai" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jRadioButtonVS" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneSyntax" min="-2" pref="480" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jScrollPaneList" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLabelFlatLaf" pref="221" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="247" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3209,9 +3233,32 @@
                                       <Component id="jLabelArrow" min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLookSynth" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="567" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPaneSyntax" min="-2" pref="522" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabelSyntax" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDefault" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDefaultAlt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDark" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDruid" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonEclipse" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonIdea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonMonokai" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonVS" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3443,6 +3490,132 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Flat laf look &amp; feel:"/>
                   </Properties>
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="jScrollPaneSyntax">
+                  <Properties>
+                    <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaSyntax">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="text" type="java.lang.String" value=";-------------------------------------------------------------------------------&#xa;; LSS TRILOGY&#xa;; (C) 2012 by Ice00/Hokuto Force&#xa;;-------------------------------------------------------------------------------&#xa;; expected TAPE=0/1 &#xa;;-------------------------------------------------------------------------------&#xa;    .CPU 6502&#xa;    *=$0801&#xa;;-------------------&#xa;JOYSTICK = $03&#xa;GAME = $88&#xa;GO = $89&#xa;COUNTER = $92&#xa;;---------------------------------------&#xa;MAIN:&#xa;    LDA #1&#xa;    STA GAME                            ; first game is LSS1&#xa;;-------------------&#xa;    JSR INSTALL_IRQ&#xa;    JSR SHOW_PICTURES_FLIMSOFT&#xa;    JSR DELAY_EFFECT&#xa;;-------------------&#xa;    JSR SHOW_PICTURES_ICETEAM&#xa;    JSR DELAY_EFFECT&#xa;;-------------------&#xa;    JSR SHOW_PICTURES_DM&#xa;    JSR DELAY_EFFECT&#xa;;-------------------&#xa;    JSR SHOW_PICTURES_TRILOGY&#xa;    JSR SETUP_SPRITE&#xa;LOOP:&#xa;;------------------- &#xa;    JSR GET_JOYSTICK                    ; make movement as of user&#xa;    AND #JOY_FIRE&#xa;    BNE GO_GAME&#xa;;-------------------&#xa;    LDA JOYSTICK&#xa;    AND #JOY_LEFT&#xa;    BNE GO_LEFT&#xa;;-------------------&#xa;    LDA JOYSTICK&#xa;    AND #JOY_RIGHT&#xa;    BNE GO_RIGHT&#xa;;-------------------&#xa;    JMP LOOP   &#xa;;-------------------&#xa;&#xa;    .ALIGN $9800&#xa;BMP_DATA_TRILOGY&#xa;    .BINARY &quot;../bin/LSS TRILOGY [PK].PRG&quot;, $0002&#xa;;-------------------  &#xa;    .ALIGN $C000&#xa;SPRITE0:                               &#xa;    .BYTE $00, $00, $00, $00, $00, $00, $00, $00&#xa;    .BYTE $00, $00, $00, $00, $00, $00, $00, $00&#xa;    .BYTE $00, $00, $00, $00, $00, $00, $00, $00&#xa;    .BYTE $00, $00, $00, $00, $00, $00, $00, $00&#xa;    .BYTE $00, $00, $00, $00, $00, $C0, $00, $00&#xa;    .BYTE $30, $00, $00, $CC, $00, $00, $F3, $00&#xa;    .BYTE $CF, $00, $00, $33, $00, $00, $0C, $00&#xa;    .BYTE $00, $03, $00, $00, $00, $00, $00, $00"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Monospaced" size="12" style="0"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[671, 1000]"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="Full" noResource="true"/>
+                        <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSyntaxMouseClicked"/>
+                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSyntaxMouseEntered"/>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSyntaxMouseReleased"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rSyntaxTextAreaSyntaxKeyReleased"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JLabel" name="jLabelSyntax">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syntax highligth theme:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonDefault">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Default"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDefaultItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonDefaultAlt">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Default with standard style"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDefaultAltItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonDark">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Dark Obsidian"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDarkItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonDruid">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Druid"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonDruidItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonEclipse">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Eclipse"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonEclipseItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonIdea">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="IntelliJ IDEA"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonIdeaItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonMonokai">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Monokai"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonMonokaiItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonVS">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSyntax"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Visual Studio"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonVSItemStateChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

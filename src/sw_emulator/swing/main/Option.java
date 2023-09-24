@@ -95,6 +95,8 @@ import sw_emulator.swing.plaf.metal.RubyTheme;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.plaf.metal.OceanTheme;
 import javax.swing.plaf.metal.DefaultMetalTheme;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.Theme;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.swing.Shared;
@@ -232,6 +234,31 @@ public class Option {
   
   /** Ruby theme */
   public static final int THEME_RUBY     = 6;
+  
+  /** Syntax default theme */
+  public static final String SYNTAX_DEFAULT = "/org/fife/ui/rsyntaxtextarea/themes/default.xml";
+  
+  /** Syntax default alt theme */
+  public static final String SYNTAX_DEFAULT_ALT = "/org/fife/ui/rsyntaxtextarea/themes/default-alt.xml";
+  
+  /** Syntax dark theme */
+  public static final String SYNTAX_DARK = "/org/fife/ui/rsyntaxtextarea/themes/dark.xml";
+  
+  /** Syntax druid theme */
+  public static final String SYNTAX_DRUID = "/org/fife/ui/rsyntaxtextarea/themes/druid.xml";
+  
+  /** Syntax eclipse theme */
+  public static final String SYNTAX_ECLIPSE = "/org/fife/ui/rsyntaxtextarea/themes/eclipse.xml";
+  
+  /** Syntax idea theme */
+  public static final String SYNTAX_IDEA = "/org/fife/ui/rsyntaxtextarea/themes/idea.xml";
+  
+  /** Syntax monokai theme */
+  public static final String SYNTAX_MONOKAI = "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml";
+  
+  /** Syntax vs theme */
+  public static final String SYNTAX_VS = "/org/fife/ui/rsyntaxtextarea/themes/vs.xml"; 
+  
 
   /**
    * Install look & feel
@@ -250,7 +277,9 @@ public class Option {
 
   /** theme for flat laf*/
   protected String flatLaf="FlatLaf Light";
-
+  
+  /** Syntax highlight xml path theme */
+  public String syntaxTheme=SYNTAX_DEFAULT;
     
   /** Mode of the illegal opcode  */
   public byte illegalOpcodeMode = M6510Dasm.MODE1;
@@ -1299,6 +1328,33 @@ public class Option {
         System.out.println(e.toString());
       }    
   }  
+  
+  /**
+   * Use the given xml theme path for syntax highlight
+   * 
+   * @param themePath  xml theme path
+   */
+  public static void useSyntaxTheme(String themePath) {
+    try {      
+      RSyntaxTextArea syntax;
+      float size;
+      Theme theme;
+        
+      Iterator<RSyntaxTextArea> iter=Shared.syntaxList.iterator();
+
+      while (iter.hasNext()) {
+        theme = Theme.load(Option.class.getResourceAsStream(themePath));
+        syntax=iter.next();
+        //size=syntax.getFont().getSize();
+        theme.apply(syntax);
+        if ("Miniature".equals(syntax.getName())) size=3;
+        else size=13;
+        syntax.setFont(syntax.getFont().deriveFont(size));
+      }  
+    } catch (Exception e) {
+        System.out.println(e.toString());
+      }    
+  }
   
   /**
    * Use the given flat laf theme

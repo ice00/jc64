@@ -229,7 +229,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
 
     initComponents();
-    
+
     jOptionDialog=new JOptionDialog(this, true, dataTableModelMemory, this);
 
     Shared.framesList.add(this);
@@ -241,6 +241,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     Shared.framesList.add(findDialogDis);
     Shared.framesList.add(findDialogSource);
     Shared.framesList.add(importLabelsChooserFile);
+ 
+    Shared.syntaxList.add(rSyntaxTextAreaDis);
+    Shared.syntaxList.add(rSyntaxTextAreaSource);
+    Shared.syntaxList.add(rSyntaxTextAreaDisMin);
+    Shared.syntaxList.add(rSyntaxTextAreaSourceMin);
+    
     findDialogDis.setSearchString(" ");
     findDialogSource.setSearchString(" ");
 
@@ -249,6 +255,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
 
     jOptionDialog.useOption(option);
+    
+    Option.useSyntaxTheme(option.syntaxTheme);
 
     projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
     projectChooserFile.setAcceptAllFileFilterUsed(false);
@@ -431,7 +439,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
       }
     });
-
+   
     jScrollPaneLeftMin.setVisible(option.showMiniature);
     jScrollPaneRightMin.setVisible(option.showMiniature);
     pack();
@@ -2092,6 +2100,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     rSyntaxTextAreaDis.setColumns(20);
     rSyntaxTextAreaDis.setRows(5);
     rSyntaxTextAreaDis.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+    rSyntaxTextAreaDis.setName("Full"); // NOI18N
     rSyntaxTextAreaDis.setSyntaxEditingStyle("text/asm6502");
     findDialogDis=new FindDialog(this, new SearchListener() {
       @Override
@@ -2178,6 +2187,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaDisMin.setRows(5);
   rSyntaxTextAreaDisMin.setFont(new java.awt.Font("Monospaced", 0, 3)); // NOI18N
   rSyntaxTextAreaDisMin.setMinimumSize(new java.awt.Dimension(671, 1000));
+  rSyntaxTextAreaDisMin.setName("Miniature"); // NOI18N
   rSyntaxTextAreaDisMin.setSyntaxEditingStyle("text/asm6502");
   rSyntaxTextAreaDisMin.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2198,6 +2208,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaSource.setColumns(25);
   rSyntaxTextAreaSource.setRows(5);
   rSyntaxTextAreaSource.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+  rSyntaxTextAreaSource.setName("Full"); // NOI18N
   rSyntaxTextAreaSource.setSyntaxEditingStyle("text/asm6502");
   findDialogSource=new FindDialog(this, new SearchListener() {
     @Override
@@ -2259,6 +2270,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaSourceMin.setRows(5);
   rSyntaxTextAreaSourceMin.setFont(new java.awt.Font("Monospaced", 0, 3)); // NOI18N
   rSyntaxTextAreaSourceMin.setMinimumSize(new java.awt.Dimension(671, 1000));
+  rSyntaxTextAreaSourceMin.setName("Miniature"); // NOI18N
   rSyntaxTextAreaSourceMin.setSyntaxEditingStyle("text/asm6502");
   rSyntaxTextAreaSourceMin.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {

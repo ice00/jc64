@@ -80,6 +80,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                          JDisassemblerFrame frame) {
         super(parent, modal);
         initComponents();        
+        
         this.model=model;
         this.frame=frame;
 
@@ -87,7 +88,8 @@ public class JOptionDialog extends javax.swing.JDialog {
         for (Name val: Assembler.Name.values()) {
           jComboBoxAssembler.addItem(val.getName());
         }
-        Shared.framesList.add(this);        
+        Shared.framesList.add(this);   
+        Shared.syntaxList.add(rSyntaxTextAreaSyntax);
         
         chooserDir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         platformeEnable();
@@ -137,6 +139,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     buttonGroupMemoryValue = new javax.swing.ButtonGroup();
     buttonGroupHeather = new javax.swing.ButtonGroup();
     buttonGroupDotsType = new javax.swing.ButtonGroup();
+    buttonGroupSyntax = new javax.swing.ButtonGroup();
     jPanelOption = new javax.swing.JPanel();
     jTabbedPaneOption = new javax.swing.JTabbedPane();
     jScrollPanePreview = new javax.swing.JScrollPane();
@@ -401,6 +404,17 @@ public class JOptionDialog extends javax.swing.JDialog {
     jScrollPaneList = new javax.swing.JScrollPane();
     jListLaf = new javax.swing.JList<>();
     jLabelFlatLaf = new javax.swing.JLabel();
+    jScrollPaneSyntax = new javax.swing.JScrollPane();
+    rSyntaxTextAreaSyntax = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    jLabelSyntax = new javax.swing.JLabel();
+    jRadioButtonDefault = new javax.swing.JRadioButton();
+    jRadioButtonDefaultAlt = new javax.swing.JRadioButton();
+    jRadioButtonDark = new javax.swing.JRadioButton();
+    jRadioButtonDruid = new javax.swing.JRadioButton();
+    jRadioButtonEclipse = new javax.swing.JRadioButton();
+    jRadioButtonIdea = new javax.swing.JRadioButton();
+    jRadioButtonMonokai = new javax.swing.JRadioButton();
+    jRadioButtonVS = new javax.swing.JRadioButton();
     jPanelDn = new javax.swing.JPanel();
     jButtonLoad = new javax.swing.JButton();
     jButtonSave = new javax.swing.JButton();
@@ -2870,44 +2884,154 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     jLabelFlatLaf.setText("Flat laf look & feel:");
 
+    jScrollPaneSyntax.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+    rSyntaxTextAreaSyntax.setEditable(false);
+    rSyntaxTextAreaSyntax.setText(";-------------------------------------------------------------------------------\n; LSS TRILOGY\n; (C) 2012 by Ice00/Hokuto Force\n;-------------------------------------------------------------------------------\n; expected TAPE=0/1 \n;-------------------------------------------------------------------------------\n    .CPU 6502\n    *=$0801\n;-------------------\nJOYSTICK = $03\nGAME = $88\nGO = $89\nCOUNTER = $92\n;---------------------------------------\nMAIN:\n    LDA #1\n    STA GAME                            ; first game is LSS1\n;-------------------\n    JSR INSTALL_IRQ\n    JSR SHOW_PICTURES_FLIMSOFT\n    JSR DELAY_EFFECT\n;-------------------\n    JSR SHOW_PICTURES_ICETEAM\n    JSR DELAY_EFFECT\n;-------------------\n    JSR SHOW_PICTURES_DM\n    JSR DELAY_EFFECT\n;-------------------\n    JSR SHOW_PICTURES_TRILOGY\n    JSR SETUP_SPRITE\nLOOP:\n;------------------- \n    JSR GET_JOYSTICK                    ; make movement as of user\n    AND #JOY_FIRE\n    BNE GO_GAME\n;-------------------\n    LDA JOYSTICK\n    AND #JOY_LEFT\n    BNE GO_LEFT\n;-------------------\n    LDA JOYSTICK\n    AND #JOY_RIGHT\n    BNE GO_RIGHT\n;-------------------\n    JMP LOOP   \n;-------------------\n\n    .ALIGN $9800\nBMP_DATA_TRILOGY\n    .BINARY \"../bin/LSS TRILOGY [PK].PRG\", $0002\n;-------------------  \n    .ALIGN $C000\nSPRITE0:                               \n    .BYTE $00, $00, $00, $00, $00, $00, $00, $00\n    .BYTE $00, $00, $00, $00, $00, $00, $00, $00\n    .BYTE $00, $00, $00, $00, $00, $00, $00, $00\n    .BYTE $00, $00, $00, $00, $00, $00, $00, $00\n    .BYTE $00, $00, $00, $00, $00, $C0, $00, $00\n    .BYTE $30, $00, $00, $CC, $00, $00, $F3, $00\n    .BYTE $CF, $00, $00, $33, $00, $00, $0C, $00\n    .BYTE $00, $03, $00, $00, $00, $00, $00, $00");
+    rSyntaxTextAreaSyntax.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+    rSyntaxTextAreaSyntax.setMinimumSize(new java.awt.Dimension(671, 1000));
+    rSyntaxTextAreaSyntax.setName("Full"); // NOI18N
+    rSyntaxTextAreaSyntax.setSyntaxEditingStyle("text/asm6502");
+    rSyntaxTextAreaSyntax.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        rSyntaxTextAreaSyntaxMouseClicked(evt);
+      }
+      public void mouseEntered(java.awt.event.MouseEvent evt) {
+        rSyntaxTextAreaSyntaxMouseEntered(evt);
+      }
+      public void mouseReleased(java.awt.event.MouseEvent evt) {
+        rSyntaxTextAreaSyntaxMouseReleased(evt);
+      }
+    });
+    rSyntaxTextAreaSyntax.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyReleased(java.awt.event.KeyEvent evt) {
+        rSyntaxTextAreaSyntaxKeyReleased(evt);
+      }
+    });
+    jScrollPaneSyntax.setViewportView(rSyntaxTextAreaSyntax);
+
+    jLabelSyntax.setText("Syntax highligth theme:");
+
+    buttonGroupSyntax.add(jRadioButtonDefault);
+    jRadioButtonDefault.setSelected(true);
+    jRadioButtonDefault.setText("Default");
+    jRadioButtonDefault.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonDefaultItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonDefaultAlt);
+    jRadioButtonDefaultAlt.setText("Default with standard style");
+    jRadioButtonDefaultAlt.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonDefaultAltItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonDark);
+    jRadioButtonDark.setText("Dark Obsidian");
+    jRadioButtonDark.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonDarkItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonDruid);
+    jRadioButtonDruid.setText("Druid");
+    jRadioButtonDruid.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonDruidItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonEclipse);
+    jRadioButtonEclipse.setText("Eclipse");
+    jRadioButtonEclipse.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonEclipseItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonIdea);
+    jRadioButtonIdea.setText("IntelliJ IDEA");
+    jRadioButtonIdea.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonIdeaItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonMonokai);
+    jRadioButtonMonokai.setText("Monokai");
+    jRadioButtonMonokai.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonMonokaiItemStateChanged(evt);
+      }
+    });
+
+    buttonGroupSyntax.add(jRadioButtonVS);
+    jRadioButtonVS.setText("Visual Studio");
+    jRadioButtonVS.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jRadioButtonVSItemStateChanged(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanelLookLayout = new javax.swing.GroupLayout(jPanelLook);
     jPanelLook.setLayout(jPanelLookLayout);
     jPanelLookLayout.setHorizontalGroup(
       jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelLookLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addGroup(jPanelLookLayout.createSequentialGroup()
-            .addComponent(jRadioButtonLookCWin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabelBracket)
-            .addGap(13, 13, 13)
-            .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(jLabelTheme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonOcean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonSteel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonCharcoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonAqua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonHighContrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonEmerald, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonRuby, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(jPanelLookLayout.createSequentialGroup()
             .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(jRadioButtonLookSynth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jLabelLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookJava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookMac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookMetal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookWin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookNimbus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jRadioButtonLookGtk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(jPanelLookLayout.createSequentialGroup()
+                .addComponent(jRadioButtonLookCWin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelBracket)
+                .addGap(13, 13, 13)
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(jLabelTheme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonOcean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonSteel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonCharcoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonAqua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonHighContrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonEmerald, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonRuby, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addGroup(jPanelLookLayout.createSequentialGroup()
+                .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(jRadioButtonLookSynth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jLabelLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookJava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookMac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookMetal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookWin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookNimbus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jRadioButtonLookGtk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabelArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-          .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-        .addContainerGap(247, Short.MAX_VALUE))
+            .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+              .addComponent(jLabelFlatLaf, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLookLayout.createSequentialGroup()
+            .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabelSyntax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonDefault, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonDefaultAlt, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+              .addComponent(jRadioButtonDark, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+              .addComponent(jRadioButtonDruid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jRadioButtonEclipse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jRadioButtonIdea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jRadioButtonMonokai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jRadioButtonVS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPaneSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(26, 26, 26))))
     );
     jPanelLookLayout.setVerticalGroup(
       jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2958,8 +3082,29 @@ public class JOptionDialog extends javax.swing.JDialog {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabelArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jRadioButtonLookSynth))
-            .addContainerGap(567, Short.MAX_VALUE))))
+              .addComponent(jRadioButtonLookSynth))))
+        .addGap(18, 18, 18)
+        .addGroup(jPanelLookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPaneSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanelLookLayout.createSequentialGroup()
+            .addComponent(jLabelSyntax)
+            .addGap(18, 18, 18)
+            .addComponent(jRadioButtonDefault)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonDefaultAlt)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonDark)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonDruid)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonEclipse)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonIdea)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonMonokai)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jRadioButtonVS)))
+        .addGap(27, 27, 27))
     );
 
     jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
@@ -3902,6 +4047,78 @@ public class JOptionDialog extends javax.swing.JDialog {
     close();    
   }//GEN-LAST:event_formWindowClosing
 
+  private void rSyntaxTextAreaSyntaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSyntaxMouseClicked
+
+  }//GEN-LAST:event_rSyntaxTextAreaSyntaxMouseClicked
+
+  private void rSyntaxTextAreaSyntaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSyntaxMouseEntered
+
+  }//GEN-LAST:event_rSyntaxTextAreaSyntaxMouseEntered
+
+  private void rSyntaxTextAreaSyntaxMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSyntaxMouseReleased
+
+  }//GEN-LAST:event_rSyntaxTextAreaSyntaxMouseReleased
+
+  private void rSyntaxTextAreaSyntaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSyntaxKeyReleased
+
+  }//GEN-LAST:event_rSyntaxTextAreaSyntaxKeyReleased
+
+  private void jRadioButtonDefaultItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDefaultItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_DEFAULT;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }
+  }//GEN-LAST:event_jRadioButtonDefaultItemStateChanged
+
+  private void jRadioButtonDefaultAltItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDefaultAltItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_DEFAULT_ALT;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }    
+  }//GEN-LAST:event_jRadioButtonDefaultAltItemStateChanged
+
+  private void jRadioButtonDarkItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDarkItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_DARK;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }   
+  }//GEN-LAST:event_jRadioButtonDarkItemStateChanged
+
+  private void jRadioButtonDruidItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDruidItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_DRUID;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }       
+  }//GEN-LAST:event_jRadioButtonDruidItemStateChanged
+
+  private void jRadioButtonEclipseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonEclipseItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_ECLIPSE;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }   
+  }//GEN-LAST:event_jRadioButtonEclipseItemStateChanged
+
+  private void jRadioButtonIdeaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonIdeaItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_IDEA;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    } 
+  }//GEN-LAST:event_jRadioButtonIdeaItemStateChanged
+
+  private void jRadioButtonMonokaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonMonokaiItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_MONOKAI;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }     
+  }//GEN-LAST:event_jRadioButtonMonokaiItemStateChanged
+
+  private void jRadioButtonVSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonVSItemStateChanged
+    if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
+      option.syntaxTheme=Option.SYNTAX_VS;
+      Option.useSyntaxTheme(option.syntaxTheme);
+    }    
+  }//GEN-LAST:event_jRadioButtonVSItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3953,6 +4170,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.ButtonGroup buttonGroupLook;
   private javax.swing.ButtonGroup buttonGroupMemoryValue;
   private javax.swing.ButtonGroup buttonGroupOpcodeFormatting;
+  private javax.swing.ButtonGroup buttonGroupSyntax;
   private javax.swing.ButtonGroup buttonGroupTheme;
   private sw_emulator.swing.JAcmePanel jAcmePanel;
   private javax.swing.JButton jButtonBrowse;
@@ -4133,6 +4351,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabelPSIDplaysound;
   private javax.swing.JLabel jLabelSIDfreqHi;
   private javax.swing.JLabel jLabelSIDfreqLo;
+  private javax.swing.JLabel jLabelSyntax;
   private javax.swing.JLabel jLabelTheme;
   private javax.swing.JLabel jLabelTmpPath;
   private javax.swing.JLabel jLabelautocomment;
@@ -4152,10 +4371,16 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JRadioButton jRadioButtonAqua;
   private javax.swing.JRadioButton jRadioButtonCharcoal;
   private javax.swing.JRadioButton jRadioButtonCustom;
+  private javax.swing.JRadioButton jRadioButtonDark;
+  private javax.swing.JRadioButton jRadioButtonDefault;
+  private javax.swing.JRadioButton jRadioButtonDefaultAlt;
   private javax.swing.JRadioButton jRadioButtonDotsValueAscii;
   private javax.swing.JRadioButton jRadioButtonDotsValueUtf;
+  private javax.swing.JRadioButton jRadioButtonDruid;
+  private javax.swing.JRadioButton jRadioButtonEclipse;
   private javax.swing.JRadioButton jRadioButtonEmerald;
   private javax.swing.JRadioButton jRadioButtonHighContrast;
+  private javax.swing.JRadioButton jRadioButtonIdea;
   private javax.swing.JRadioButton jRadioButtonLangEnglish;
   private javax.swing.JRadioButton jRadioButtonLangItalian;
   private javax.swing.JRadioButton jRadioButtonLookCWin;
@@ -4168,6 +4393,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JRadioButton jRadioButtonLookWin;
   private javax.swing.JRadioButton jRadioButtonMemoryValueChar;
   private javax.swing.JRadioButton jRadioButtonMemoryValueHex;
+  private javax.swing.JRadioButton jRadioButtonMonokai;
   private javax.swing.JRadioButton jRadioButtonNone;
   private javax.swing.JRadioButton jRadioButtonOcean;
   private javax.swing.JRadioButton jRadioButtonRuby;
@@ -4176,6 +4402,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JRadioButton jRadioButtonStyle1;
   private javax.swing.JRadioButton jRadioButtonStyle2;
   private javax.swing.JRadioButton jRadioButtonStyle3;
+  private javax.swing.JRadioButton jRadioButtonVS;
   private javax.swing.JScrollPane jScrollPaneAcme;
   private javax.swing.JScrollPane jScrollPaneCa65;
   private javax.swing.JScrollPane jScrollPaneDasm;
@@ -4184,6 +4411,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JScrollPane jScrollPaneKickAssembler;
   private javax.swing.JScrollPane jScrollPaneList;
   private javax.swing.JScrollPane jScrollPanePreview;
+  private javax.swing.JScrollPane jScrollPaneSyntax;
   private javax.swing.JScrollPane jScrollPaneTMPx;
   private javax.swing.JScrollPane jScrollPaneTass64;
   private javax.swing.JSeparator jSeparator1;
@@ -4222,6 +4450,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JTextField jTextFieldSidFreqLo;
   private javax.swing.JTextField jTextFieldTmpPath;
   private sw_emulator.swing.JTmpxPanel jTmpxPanel;
+  private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSyntax;
   // End of variables declaration//GEN-END:variables
 
     /**
@@ -4313,7 +4542,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxRepositionate.setSelected(option.repositionate);
       jCheckBoxPedantic.setSelected(option.pedantic);
       jCheckBoxShowMiniature.setSelected(option.showMiniature);
-      
+     
       switch (option.heather) {
           case Option.HEATHER_STANDARD:
             jRadioButtonStandard.setSelected(true);
@@ -4326,7 +4555,7 @@ public class JOptionDialog extends javax.swing.JDialog {
             break;  
       }
       jTextAreaHeather.setText(option.custom);
-      
+     
       actualLEF=option.getLafName();
       actualTheme=option.getMethalTheme();
       actualLaf=option.getFlatLaf();
@@ -4346,9 +4575,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         name=(String)listModel.elementAt(i);
         if (name.equals(actualLaf)) jListLaf.setSelectedIndex(i);
       }  
-      
+    
       goFlat=true;
-      
+        
       // show the look and feel radio selected
       String lafName=option.getLafName();
       if (lafName.equals(Option.LAF_GTK)) jRadioButtonLookGtk.setSelected(true);
@@ -4362,13 +4591,14 @@ public class JOptionDialog extends javax.swing.JDialog {
         jRadioButtonLookSynth.setSelected(true);
         jListLaf.setEnabled(true);        
       }
-      
+        
       selectedTheme();
+      selectedSyntax();
       
       //assembler
       jComboBoxAssembler.setSelectedItem(null);
       jComboBoxAssembler.setSelectedItem(option.assembler.getName());      
-
+  
       
       jDasmPanel.applyOptionDasm();
       jTmpxPanel.applyOptionTmpx();
@@ -4383,7 +4613,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       applyCommentsPlus4();
       applyCommentsVic20();      
       applyCommentsC128();  
-      applyCommentsAtari();  
+      applyCommentsAtari();
     }
     
   /**
@@ -4440,6 +4670,38 @@ public class JOptionDialog extends javax.swing.JDialog {
         break;         
     }      
   } 
+  
+  /**
+   * Select the syntax in radio button
+   */
+  public void selectedSyntax() {
+    switch (option.syntaxTheme) {
+      case Option.SYNTAX_DARK:
+        jRadioButtonDark.setSelected(true);
+        break;
+      case Option.SYNTAX_DEFAULT:
+        jRadioButtonDefault.setSelected(true);
+        break;
+      case Option.SYNTAX_DEFAULT_ALT:
+        jRadioButtonDefaultAlt.setSelected(true);
+        break;
+      case Option.SYNTAX_DRUID:
+        jRadioButtonDruid.setSelected(true);
+        break;
+      case Option.SYNTAX_ECLIPSE:
+        jRadioButtonEclipse.setSelected(true);
+        break;
+      case Option.SYNTAX_IDEA:
+        jRadioButtonIdea.setSelected(true);
+        break;
+      case Option.SYNTAX_MONOKAI:
+        jRadioButtonMonokai.setSelected(true);
+        break;
+      case Option.SYNTAX_VS:
+        jRadioButtonVS.setSelected(true);
+        break;
+    }
+  }
 
   /**
    * Apply comments for C64

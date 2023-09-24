@@ -42,7 +42,7 @@ public class JC64Dis {
         
         if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
         else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());  
-        
+                
       SwingUtilities.invokeLater(new Runnable() {
         public void run() {
           jMainFrame=new JDisassemblerFrame();
