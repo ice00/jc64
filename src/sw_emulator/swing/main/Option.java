@@ -1334,7 +1334,7 @@ public class Option {
    * 
    * @param themePath  xml theme path
    */
-  public static void useSyntaxTheme(String themePath) {
+  public void useSyntaxTheme(String themePath) {
     try {      
       RSyntaxTextArea syntax;
       float size;
@@ -1348,7 +1348,8 @@ public class Option {
         //size=syntax.getFont().getSize();
         theme.apply(syntax);
         if ("Miniature".equals(syntax.getName())) size=3;
-        else size=13;
+        else if ("Dis".equals(syntax.getName())) size=sizePreviewFont;
+        else size=sizeSourceFont;
         syntax.setFont(syntax.getFont().deriveFont(size));
       }  
     } catch (Exception e) {

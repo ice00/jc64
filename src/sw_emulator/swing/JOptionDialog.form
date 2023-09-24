@@ -113,39 +113,6 @@
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCheckBoxShowMiniature" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jCheckBoxChooserIcon" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jSeparatorSourceHeder" min="-2" pref="2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jRadioButtonStandard" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jRadioButtonNone" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jLabelHeather" alignment="1" min="-2" pref="269" max="-2" attributes="0"/>
-                                          <Component id="jRadioButtonCustom" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jScrollPaneHeather" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxRepositionate" max="32767" attributes="0"/>
-                                      <EmptySpace pref="381" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxPedantic" max="32767" attributes="0"/>
-                                      <EmptySpace pref="409" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxNoUndocumented" pref="477" max="32767" attributes="0"/>
-                                      <EmptySpace pref="322" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
                                       <Component id="jLabelAggregate" min="-2" pref="322" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -185,11 +152,11 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabelIllegalOpcodeStyle" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabelLanguage" alignment="0" pref="254" max="32767" attributes="0"/>
+                                          <Component id="jLabelLanguage" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabelLanguage1" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
                                           <Component id="jLabelDotsType" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                               <Component id="jRadioButtonLangEnglish" alignment="0" max="32767" attributes="0"/>
@@ -225,10 +192,6 @@
                                                       <Component id="jCheckBoxNotUsePSID" min="-2" pref="209" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
-                                                      <Component id="jCheckBoxSetComment" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                                                       <Component id="jCheckBoxMarkMemory" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -237,6 +200,10 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                                                       <Component id="jCheckBoxNotUseSAP" min="-2" pref="209" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
+                                                      <Component id="jCheckBoxSetComment" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -327,45 +294,75 @@
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxUbEdit" max="32767" attributes="0"/>
-                                      <EmptySpace pref="422" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxUlEdit" max="32767" attributes="0"/>
-                                      <EmptySpace pref="442" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxDcErase" max="32767" attributes="0"/>
-                                      <EmptySpace pref="405" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxDlErase" max="32767" attributes="0"/>
-                                      <EmptySpace pref="420" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxVlPatch" max="32767" attributes="0"/>
-                                      <EmptySpace pref="414" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxLabel" max="32767" attributes="0"/>
-                                      <EmptySpace pref="427" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxForceCompilation" max="32767" attributes="0"/>
-                                      <EmptySpace pref="440" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxAllowUtf" max="32767" attributes="0"/>
-                                      <EmptySpace pref="429" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxUcEdit" max="32767" attributes="0"/>
-                                      <EmptySpace pref="427" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCheckBoxUndefinedCode" max="32767" attributes="0"/>
-                                      <EmptySpace pref="408" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxUbEdit" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxUlEdit" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxDcErase" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxDlErase" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxVlPatch" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxLabel" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxForceCompilation" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxUcEdit" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxUndefinedCode" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCheckBoxShowMiniature" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCheckBoxChooserIcon" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxRepositionate" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxPedantic" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCheckBoxNoUndocumented" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCheckBoxAllowUtf" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jSeparatorSourceHeder" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jRadioButtonStandard" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="jRadioButtonNone" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabelHeather" alignment="1" min="-2" pref="269" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonCustom" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPaneHeather" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1500,7 +1497,7 @@
                           <Component id="jLabelautocomment" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTabbedPaneComm" min="-2" pref="588" max="-2" attributes="0"/>
-                          <EmptySpace pref="222" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

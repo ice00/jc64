@@ -1041,32 +1041,6 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addGap(6, 6, 6)
         .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jCheckBoxShowMiniature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jCheckBoxChooserIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jSeparatorSourceHeder, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                .addComponent(jRadioButtonStandard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButtonNone)
-                .addGap(68, 68, 68))
-              .addComponent(jLabelHeather, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jRadioButtonCustom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jScrollPaneHeather))
-            .addGap(39, 39, 39))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(381, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxPedantic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(409, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxNoUndocumented, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
-            .addContainerGap(322, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
             .addComponent(jLabelAggregate, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1100,10 +1074,10 @@ public class JOptionDialog extends javax.swing.JDialog {
           .addGroup(jPanelPreviewLayout.createSequentialGroup()
             .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabelIllegalOpcodeStyle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jLabelLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+              .addComponent(jLabelLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(jLabelLanguage1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jLabelDotsType, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addComponent(jRadioButtonLangEnglish, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1132,16 +1106,16 @@ public class JOptionDialog extends javax.swing.JDialog {
                     .addGap(120, 120, 120)
                     .addComponent(jCheckBoxNotUsePSID, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                   .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                    .addGap(340, 340, 340)
-                    .addComponent(jCheckBoxSetComment))
-                  .addGroup(jPanelPreviewLayout.createSequentialGroup()
                     .addGap(120, 120, 120)
                     .addComponent(jCheckBoxMarkMemory)
                     .addGap(18, 18, 18)
                     .addComponent(jCheckBoxSetLabels))
                   .addGroup(jPanelPreviewLayout.createSequentialGroup()
                     .addGap(120, 120, 120)
-                    .addComponent(jCheckBoxNotUseSAP, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jCheckBoxNotUseSAP, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                    .addGap(340, 340, 340)
+                    .addComponent(jCheckBoxSetComment))))
               .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(jCheckBoxOpcodeFormattingPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCheckBoxOpcodeFormattingSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1213,35 +1187,59 @@ public class JOptionDialog extends javax.swing.JDialog {
               .addComponent(jCheckBoxErasePlus, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap())
           .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxUbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(422, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxUlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(442, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxDcErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(405, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxDlErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(420, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxVlPatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(414, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(427, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxForceCompilation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(440, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxAllowUtf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(429, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxUcEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(427, Short.MAX_VALUE))
-          .addGroup(jPanelPreviewLayout.createSequentialGroup()
-            .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap(408, Short.MAX_VALUE))))
+            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxUbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(179, 179, 179))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxUlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(220, 220, 220))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxDcErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(145, 145, 145))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxDlErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(176, 176, 176))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxVlPatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(164, 164, 164))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(190, 190, 190))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxForceCompilation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(216, 216, 216))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxUcEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(189, 189, 189))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxUndefinedCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(151, 151, 151))
+              .addComponent(jCheckBoxShowMiniature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jCheckBoxChooserIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxRepositionate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(94, 94, 94))
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxPedantic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(137, 137, 137))
+              .addComponent(jCheckBoxNoUndocumented, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jCheckBoxAllowUtf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(154, 154, 154)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jSeparatorSourceHeder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addGroup(jPanelPreviewLayout.createSequentialGroup()
+                .addComponent(jRadioButtonStandard)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonNone)
+                .addGap(68, 68, 68))
+              .addComponent(jLabelHeather, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jRadioButtonCustom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jScrollPaneHeather))
+            .addGap(39, 39, 39))))
     );
 
     jPanelPreviewLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jSpinnerDataCTabs, jSpinnerDataTabs, jSpinnerDataTabsOp, jSpinnerInstrCTabs, jSpinnerInstrTabs, jSpinnerSizeSource});
@@ -3956,10 +3954,12 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     private void jSpinnerSizePreviewStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSizePreviewStateChanged
       option.sizePreviewFont=(Integer)((JSpinner) evt.getSource()).getValue();
+      option.useSyntaxTheme(option.syntaxTheme);
     }//GEN-LAST:event_jSpinnerSizePreviewStateChanged
 
     private void jSpinnerSizeSourceStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSizeSourceStateChanged
       option.sizeSourceFont=(Integer)((JSpinner) evt.getSource()).getValue();
+      option.useSyntaxTheme(option.syntaxTheme);
     }//GEN-LAST:event_jSpinnerSizeSourceStateChanged
 
     private void jCheckBoxAtariKernalRomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxAtariKernalRomItemStateChanged
@@ -4066,56 +4066,56 @@ public class JOptionDialog extends javax.swing.JDialog {
   private void jRadioButtonDefaultItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDefaultItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_DEFAULT;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }
   }//GEN-LAST:event_jRadioButtonDefaultItemStateChanged
 
   private void jRadioButtonDefaultAltItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDefaultAltItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_DEFAULT_ALT;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }    
   }//GEN-LAST:event_jRadioButtonDefaultAltItemStateChanged
 
   private void jRadioButtonDarkItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDarkItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_DARK;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }   
   }//GEN-LAST:event_jRadioButtonDarkItemStateChanged
 
   private void jRadioButtonDruidItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonDruidItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_DRUID;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }       
   }//GEN-LAST:event_jRadioButtonDruidItemStateChanged
 
   private void jRadioButtonEclipseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonEclipseItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_ECLIPSE;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }   
   }//GEN-LAST:event_jRadioButtonEclipseItemStateChanged
 
   private void jRadioButtonIdeaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonIdeaItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_IDEA;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     } 
   }//GEN-LAST:event_jRadioButtonIdeaItemStateChanged
 
   private void jRadioButtonMonokaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonMonokaiItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_MONOKAI;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }     
   }//GEN-LAST:event_jRadioButtonMonokaiItemStateChanged
 
   private void jRadioButtonVSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonVSItemStateChanged
     if (evt.getStateChange()==java.awt.event.ItemEvent.SELECTED) {    
       option.syntaxTheme=Option.SYNTAX_VS;
-      Option.useSyntaxTheme(option.syntaxTheme);
+      option.useSyntaxTheme(option.syntaxTheme);
     }    
   }//GEN-LAST:event_jRadioButtonVSItemStateChanged
 

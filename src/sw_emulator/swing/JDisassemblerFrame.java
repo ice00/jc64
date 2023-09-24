@@ -256,7 +256,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     jOptionDialog.useOption(option);
     
-    Option.useSyntaxTheme(option.syntaxTheme);
+    option.useSyntaxTheme(option.syntaxTheme);
 
     projectChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
     projectChooserFile.setAcceptAllFileFilterUsed(false);
@@ -2100,7 +2100,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     rSyntaxTextAreaDis.setColumns(20);
     rSyntaxTextAreaDis.setRows(5);
     rSyntaxTextAreaDis.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-    rSyntaxTextAreaDis.setName("Full"); // NOI18N
+    rSyntaxTextAreaDis.setName("Dis"); // NOI18N
     rSyntaxTextAreaDis.setSyntaxEditingStyle("text/asm6502");
     findDialogDis=new FindDialog(this, new SearchListener() {
       @Override
@@ -2208,7 +2208,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaSource.setColumns(25);
   rSyntaxTextAreaSource.setRows(5);
   rSyntaxTextAreaSource.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-  rSyntaxTextAreaSource.setName("Full"); // NOI18N
+  rSyntaxTextAreaSource.setName("Source"); // NOI18N
   rSyntaxTextAreaSource.setSyntaxEditingStyle("text/asm6502");
   findDialogSource=new FindDialog(this, new SearchListener() {
     @Override
