@@ -964,6 +964,8 @@ public class Assembler {
        * @return the right type value
        */
       private String getRightType(char type, String value) {
+        // add () if there are relative address to avoid compilation errors like in Dasm
+        if (value.contains("+") || value.contains("-")) value="("+value+")";
         switch (aByte) {
             case DB_BYTE:
               if (type=='<') return value;
