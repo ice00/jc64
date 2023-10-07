@@ -323,7 +323,8 @@ public interface userAction {
   /** Memory sub 19 assigment */
   public static final int MEM_SUB_19 = 99;
   
-  
+  /** Un-ark memory */
+  public static final int MEM_UNMARK = 100;
   
   /**
    * Execute the passed user action

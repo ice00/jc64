@@ -545,6 +545,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemTextScreen2 = new javax.swing.JMenuItem();
     jMenuItemTextPetascii2 = new javax.swing.JMenuItem();
     jMenuItemGarbage = new javax.swing.JMenuItem();
+    jMenuItemUnmark = new javax.swing.JMenuItem();
     jSeparatorMem3 = new javax.swing.JPopupMenu.Separator();
     jMenuItemHex = new javax.swing.JMenuItem();
     jPanelToolBar = new javax.swing.JPanel();
@@ -1499,6 +1500,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     });
     jPopupMenuMemory.add(jMenuItemGarbage);
+
+    jMenuItemUnmark.setText("Un-Mark area");
+    jMenuItemUnmark.setToolTipText("");
+    jMenuItemUnmark.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemUnmarkActionPerformed(evt);
+      }
+    });
+    jPopupMenuMemory.add(jMenuItemUnmark);
     jPopupMenuMemory.add(jSeparatorMem3);
 
     jMenuItemHex.setText("Show hex/text/char view");
@@ -4749,6 +4759,10 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         }  
   }//GEN-LAST:event_rSyntaxTextAreaSourceMinMouseReleased
 
+  private void jMenuItemUnmarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnmarkActionPerformed
+    execute(MEM_UNMARK);
+  }//GEN-LAST:event_jMenuItemUnmarkActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4999,6 +5013,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemUndo7;
   private javax.swing.JMenuItem jMenuItemUndo8;
   private javax.swing.JMenuItem jMenuItemUndo9;
+  private javax.swing.JMenuItem jMenuItemUnmark;
   private javax.swing.JMenuItem jMenuItemUserLabel;
   private javax.swing.JMenuItem jMenuItemUserLabelOp;
   private javax.swing.JMenuItem jMenuItemViewLabels;
@@ -5266,7 +5281,11 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
        case MEM_MARKGARB:
          markAsGarbage();  
          if (option.forceCompilation) disassembly(true);
-         break;        
+         break;   
+       case MEM_UNMARK:
+         unmark();  
+         if (option.forceCompilation) disassembly(true);
+         break;  
        case MEM_ADDBLOCK:
          addBlock();
          if (option.forceCompilation) disassembly(true);
@@ -5700,6 +5719,29 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
     }
   } 
+  
+  /**
+   * Un-mark user selection
+   */
+  private void unmark() {
+    MemoryDasm mem;   
+      
+    int rows[]=jTableMemory.getSelectedRows();
+        
+    for (int i=0; i<rows.length; i++) {
+      mem= project.memory[rows[i]];
+      mem.isCode=false;
+      mem.isData=false;
+      mem.isGarbage=false;
+      mem.dataType=DataType.NONE;
+    }
+    
+    dataTableModelMemory.fireTableDataChanged();  
+    jTableMemory.clearSelection();
+    for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
+  }
   
   /**
    * Mark user selection as code

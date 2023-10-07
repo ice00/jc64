@@ -43,7 +43,7 @@
   <p>This function is essential for adding the right formatting to the source and appropriate comments to block of code.<br>
   The fist usage is for adding blank lines and so separating parts of code or data. The rule is simple: add a space (only one) and a carriage return (and iterate more times as you need). 
   That char will add a blank line, otherwise you will get a line formatted as comment that it is not good to read.<br><br>
-  Here an example with data that are separated every 8 lines (so we have a block of 8x8 area): you can see the comment inside memort address $2040
+  Here an example with data that are separated every 8 lines (so we have a block of 8x8 area): you can see the comment inside memort address $2040</p>
   <p align="center"><img src="./memory4.png"></p> 
   <p>All other values inserted will be addes as global comment (with the format selected in option), so for example, here a screen that show what it was inserted in comment and what you got:</p>
    <p align="center"><img src="./memory5.png"></p>  
@@ -60,7 +60,6 @@
     <li><b>[&lt;SPRITE#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
   </ul>
   <p align="center"><img src="./memory19.png"></p> 
-  </p>
    
    <h2>Add user label</h2> 
    <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user's one will be used instead of the other.<br>
@@ -167,6 +166,9 @@
    <h2>Mark as garbage</h2>
    The selected area are marked as garbase and so it will be ignored by the disassembler.<br>
    However if you had a user label, a memory comment or block comment, it will be shown in disassembler.
+   
+   <h2>Un-mark data</h2>
+   Remove previously assigned data type.
    
    <h2>Assign the selected address as +</h2>
    <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
