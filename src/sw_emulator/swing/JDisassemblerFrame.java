@@ -2199,6 +2199,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaDisMin.setMinimumSize(new java.awt.Dimension(671, 1000));
   rSyntaxTextAreaDisMin.setName("Miniature"); // NOI18N
   rSyntaxTextAreaDisMin.setSyntaxEditingStyle("text/asm6502");
+  rSyntaxTextAreaDisMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK),
+    new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        execute(SOURCE_FINDD);
+      }
+    }
+  );
   rSyntaxTextAreaDisMin.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaDisMinMouseClicked(evt);
@@ -2282,6 +2290,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   rSyntaxTextAreaSourceMin.setMinimumSize(new java.awt.Dimension(671, 1000));
   rSyntaxTextAreaSourceMin.setName("Miniature"); // NOI18N
   rSyntaxTextAreaSourceMin.setSyntaxEditingStyle("text/asm6502");
+  rSyntaxTextAreaSourceMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK),
+    new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        execute(SOURCE_FINDS);
+      }
+    }
+  );
   rSyntaxTextAreaSourceMin.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaSourceMinMouseClicked(evt);

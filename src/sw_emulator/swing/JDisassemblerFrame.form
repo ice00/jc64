@@ -3226,6 +3226,7 @@
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMinMouseReleased"/>
                       </Events>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaDisMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                       </AuxValues>
                     </Component>
@@ -3311,6 +3312,7 @@
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMinMouseReleased"/>
                       </Events>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaSourceMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDS); &#xa;                  }&#xa;                }&#xa;);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                       </AuxValues>
                     </Component>

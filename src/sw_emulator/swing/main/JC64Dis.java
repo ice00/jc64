@@ -23,6 +23,11 @@
  */
 package sw_emulator.swing.main;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
 
@@ -34,7 +39,7 @@ import sw_emulator.swing.JDisassemblerFrame;
 public class JC64Dis {
   private JDisassemblerFrame jMainFrame;
     
-    public JC64Dis() {
+    public JC64Dis() {               
         Option option=new Option();
         
         // read option file even if it will be reload again in JDisassemblerFrame
@@ -54,7 +59,27 @@ public class JC64Dis {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {     
+    public static void main(String[] args) {    
+      
+    /**  
+      // Log all focus messages.
+      final Logger rootLogger = Logger.getLogger("");
+      rootLogger.setLevel(Level.ALL);
+      final ConsoleHandler consoleHandler = new ConsoleHandler();
+      consoleHandler.setLevel(Level.ALL);
+      // Because there are a lot of focus messages, make them
+      // a little easier to read by logging only the message.
+      consoleHandler.setFormatter(new Formatter() {
+        @Override
+        public String format(LogRecord record) {
+          return "FOCUS: " + record.getMessage() + '\n';
+        }
+      });
+      final Logger logger = Logger.getLogger("java.awt.focus.Component");
+      logger.setLevel(Level.ALL);
+      logger.setUseParentHandlers(false);
+      logger.addHandler(consoleHandler);
+    */  
       new JC64Dis();
     }  
 }
