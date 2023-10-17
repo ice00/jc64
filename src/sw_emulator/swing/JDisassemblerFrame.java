@@ -206,6 +206,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Compiler */
   Compiler compiler=new Compiler();  
   
+  /** Dialog for Easter eggs */
+  FadeDialog fadeDialog;//=new FadeDialog();
+  
   /** Last directory for saving project  */
   public final static String LAST_DIR_PROJECT = "last.dir.project";  
      
@@ -219,7 +222,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     /**
    * Creates new form JFrameDisassembler
    */
-  public JDisassemblerFrame() {
+  public JDisassemblerFrame() {        
     try {
       iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon128.png")).getImage());
       iconImages.add(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/images/icon64.png")).getImage());
@@ -443,6 +446,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jScrollPaneLeftMin.setVisible(option.showMiniature);
     jScrollPaneRightMin.setVisible(option.showMiniature);
     pack();
+    
+    fadeDialog=new FadeDialog(option, this);
   }
 
     /**
