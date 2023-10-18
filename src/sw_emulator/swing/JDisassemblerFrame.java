@@ -2228,6 +2228,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
   jPanelRight.setLayout(new java.awt.BorderLayout());
 
+  rSyntaxTextAreaSource.setEditable(false);
   rSyntaxTextAreaSource.setColumns(25);
   rSyntaxTextAreaSource.setRows(5);
   rSyntaxTextAreaSource.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
