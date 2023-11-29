@@ -904,6 +904,11 @@ public class FileManager {
           mem.index=in.readByte();
         }
         
+        if (version>8) {  // version 9
+          mem.relatedAddressBase=in.readInt();
+          mem.relatedAddressDest=in.readInt();
+        }
+        
         project.memory[i]=mem;  
       }
       
@@ -1073,6 +1078,9 @@ public class FileManager {
           out.writeChar(memory.type);
           
           out.writeByte(memory.index);   // version 3
+          
+          out.writeInt(memory.relatedAddressBase); // version 9
+          out.writeInt(memory.relatedAddressDest); // version 9
       }  
       
       out.writeInt(project.chip);  // version 2

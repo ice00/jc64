@@ -6623,6 +6623,9 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
             "Select the address to use as #<", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
+      
+      project.memory[row].relatedAddressBase=0;
+      project.memory[row].relatedAddressDest=0;
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
@@ -6683,6 +6686,11 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       high.related=address;
       if (high.type=='+') high.type='^';
       else high.type='>';     
+      
+      low.relatedAddressBase=0;
+      low.relatedAddressDest=0;
+      high.relatedAddressBase=0;
+      high.relatedAddressDest=0;
     }
       
     dataTableModelMemory.fireTableDataChanged();      
@@ -6723,7 +6731,12 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       
       high.related=address;
       if (high.type=='+') high.type='^';
-      else high.type='>';     
+      else high.type='>';    
+      
+      low.relatedAddressBase=0;
+      low.relatedAddressDest=0;
+      high.relatedAddressBase=0;
+      high.relatedAddressDest=0;
     }     
       
     dataTableModelMemory.fireTableDataChanged();      
@@ -6802,6 +6815,9 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     if (JOptionPane.showConfirmDialog(null, new JScrollPane(table), 
            "Select the address to use as #>", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
         
+      project.memory[row].relatedAddressBase=0;
+      project.memory[row].relatedAddressDest=0;
+      
        int rowS=table.getSelectedRow();
        if (rowS<0) {
          if (project.memory[row].type=='>' || project.memory[row].type=='<' || 
@@ -7282,7 +7298,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
    */
   private void memAutoLoHi() {
     if (project==null) return;
-    jAutoLoHiDialog.setUp(project.memory);
+    jAutoLoHiDialog.setUp(project.memory, jTableMemory);
     jAutoLoHiDialog.setVisible(true);
   }
   

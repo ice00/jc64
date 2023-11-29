@@ -687,7 +687,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             memRel=mem.related!=-1 ? memory[mem.related & 0xFFFF]: null;
             if (memRel!=null) memRel2=memRel.related!=-1 ? memory[memRel.related & 0xFFFF]: null;
             else memRel2=null;
-            assembler.putValue(result, mem, memRel, memRel2); 
+            assembler.putValue(result, mem, memRel, memRel2, memory[mem.relatedAddressBase], memory[mem.relatedAddressDest]); 
             
             pos++;
             pc++;
@@ -799,7 +799,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
             memRel=mem.related!=-1 ? memory[mem.related & 0xFFFF]: null;
             if (memRel!=null) memRel2=memRel.related!=-1 ? memory[memRel.related & 0xFFFF]: null;
             else memRel2=null;
-            assembler.putValue(result, mem, memRel, memRel2);            
+            assembler.putValue(result, mem, memRel, memRel2, memory[mem.relatedAddressBase], memory[mem.relatedAddressDest]);            
             
             pos++;
             pc++;

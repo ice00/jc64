@@ -75,6 +75,12 @@ public class MemoryDasm implements Cloneable, Serializable {
   /** Type of relation for related < or > */
   public char type=' ';
   
+  /** Address of memory as base of relocation (0..$FFFF) */  
+  public int relatedAddressBase;  
+    
+  /** Address of memory as destination of relocation (0..$FFFF) */  
+  public int relatedAddressDest;  
+  
   /** Type of data */
   public DataType dataType=DataType.NONE;
 
@@ -104,6 +110,8 @@ public class MemoryDasm implements Cloneable, Serializable {
     if (this.type != d.type) return false;
     if (this.dataType != d.dataType) return false;
     if (this.index != d.index) return false;
+    if (this.relatedAddressBase != d.relatedAddressBase) return false;
+    if (this.relatedAddressDest != d.relatedAddressDest) return false;
     
     return true;
   }
@@ -126,6 +134,8 @@ public class MemoryDasm implements Cloneable, Serializable {
         hash = 53 * hash + this.type;
         hash = 53 * hash + this.index;
         hash = 53 * hash + Objects.hashCode(this.dataType);
+        hash = 53 * hash + this.relatedAddressBase;
+        hash = 53 * hash + this.relatedAddressDest;
         return hash;
     }
 
@@ -148,6 +158,8 @@ public class MemoryDasm implements Cloneable, Serializable {
     m.userLocation=this.userLocation;
     m.dataType=this.dataType;
     m.index=this.index;
+    m.relatedAddressBase=this.relatedAddressBase;
+    m.relatedAddressDest=this.relatedAddressDest;
           
     return m;    
   }  

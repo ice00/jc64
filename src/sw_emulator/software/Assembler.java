@@ -43,7 +43,7 @@ import sw_emulator.swing.main.Option;
 public class Assembler {
    private static final String SPACES="                                                                                                                        ";  
    private static final String TABS="\t\t\t\t\t\t\t\t\t\t";
-   
+     
   /**
    * Return spaces/tabs to use in start of data area
    * 
@@ -830,6 +830,8 @@ public class Assembler {
         MemoryDasm mem;
         MemoryDasm memRel;
         MemoryDasm memRel2;
+        MemoryDasm memBase;
+        MemoryDasm memDest;
         
         int initial=str.length();
         int start=initial;
@@ -880,6 +882,8 @@ public class Assembler {
           mem=iter.next();
           memRel=listRel.pop();
           memRel2=listRel2.pop();
+          memBase=listBase.pop();
+          memDest=listDest.pop();
           
           if (mem.type=='<' || mem.type=='>' || mem.type=='^' || mem.type=='\\') {    
             char type;
@@ -903,37 +907,29 @@ public class Assembler {
               switch (memRel.type) {
                 case '+':
                   /// this is a memory in table label
+                  int rel=memRel.related;
                   int pos=memRel.address-memRel.related;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type, memRel2.userLocation+"+"+pos));
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type, memRel2.dasmLocation+"+"+pos));
-                  else str.append(getRightType(type,"$"+ShortToExe((int)memRel.related)+"+"+pos));
+                  str.append(getLocationPos(mem, memBase, memDest, memRel2, rel, pos, type));
                   break;
                 case '^':
                 case '\\':    
                   /// this is a memory in table label
-                  int rel=(memRel.related>>16) & 0xFFFF;
+                  rel=(memRel.related>>16) & 0xFFFF;
                   pos=memRel.address-rel;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type,memRel2.userLocation+"+"+pos));
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type,memRel2.dasmLocation+"+"+pos));
-                  else str.append(getRightType(type,"$"+ShortToExe(rel)+"+"+pos));
+                  str.append(getLocationPos(mem, memBase, memDest, memRel2, rel, pos, type));
                   break;
                 case '-':
                   /// this is a memory in table label
+                  rel=memRel.related;
                   pos=memRel.address-memRel.related;
-                  if (memRel2.userLocation!=null && !"".equals(memRel2.userLocation)) str.append(getRightType(type,memRel2.userLocation+pos));  
-                  else if (memRel2.dasmLocation!=null && !"".equals(memRel2.dasmLocation)) str.append(getRightType(type,memRel2.dasmLocation+pos));
-                  else str.append(getRightType(type,"$"+ShortToExe((int)memRel.related)+pos));
+                  str.append(getLocationNeg(mem, memBase, memDest, memRel2, rel, pos, type));
                   break;             
                 default:
-                  if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(getRightType(type,memRel.userLocation));
-                  else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(getRightType(type,memRel.dasmLocation));
-                  else str.append(getRightType(type,"$"+ShortToExe(memRel.address)));          
+                  str.append(getLocation(mem, memBase, memDest, memRel, type));           
                   break;
               }                
             }           
-            else if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) str.append(getRightType(type,memRel.userLocation));
-            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) str.append(getRightType(type,memRel.dasmLocation));
-            else str.append(getRightType(type,"$"+ShortToExe(memRel.address)));              
+            else str.append(getLocation(mem, memBase, memDest, memRel, type));               
           } else str.append(getByteType(mem.dataType, mem.copy, mem.index));
           
           carets.add(start, str.length(), mem, Type.BYTE);
@@ -973,6 +969,109 @@ public class Assembler {
             default:
               return type+value;              
         }  
+      }
+      
+      /**
+       * Get the location (positive)
+       * 
+       * @param mem the memory location
+       * @param memBase the base memory location
+       * @param memDest the destination memory location
+       * @param memRel the memory relative location
+       * @param rel the rel address
+       * @param pos the position offset
+       * @param type the type 
+       * @return the string of the location 
+       */
+      private String getLocationPos(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos, char type) {
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation+"+"+pos);
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation+"+"+pos);
+          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+"+"+pos);
+        } else {
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation+"+"+pos);
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation+"+"+pos);
+            else return getRightType(type,"$"+ShortToExe(rel)+"+"+pos);
+          }
+      }
+      
+       /**
+       * Get the location (negative)
+       * 
+       * @param mem the memory location
+       * @param memBase the base memory location
+       * @param memDest the destination memory location
+       * @param memRel the memory relative location
+       * @param rel the rel address
+       * @param pos the position offset
+       * @param type the type 
+       * @return the string of the location 
+       */
+      private String getLocationNeg(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos, char type) {
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation+pos);
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation+pos);
+          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+pos);
+        } else {
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation+pos);  
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation+pos);
+            else return getRightType(type,"$"+ShortToExe(rel)+pos);
+          }
+      }
+      
+      /**
+       * Get the location
+       * 
+       * @param mem the memory location
+       * @param memBase the base memory location
+       * @param memDest the destination memory location
+       * @param memRel the memory relative location
+       * @param type the type
+       * @return 
+       */
+      private String getLocation(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, char type) {
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation);
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation);
+          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address));
+        } else {
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation);
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation);
+            else return getRightType(type,"$"+ShortToExe(memRel.address));
+          }    
       }
       
       /**
@@ -1098,6 +1197,10 @@ public class Assembler {
        MemoryDasm memRelHigh;
        MemoryDasm memRel2Low;
        MemoryDasm memRel2High;
+       MemoryDasm memBaseLo;
+       MemoryDasm memBaseHi;
+       MemoryDasm memDestLo;
+       MemoryDasm memDestHi;
      
        int pos1=str.length();  // store initial position       
        int start=pos1;
@@ -1149,10 +1252,14 @@ public class Assembler {
            memLow=list.pop();
            memRelLow=listRel.pop();
            memRel2Low=listRel2.pop();
+           memBaseLo=listBase.pop();
+           memDestLo=listDest.pop();
            
            memHigh=list.pop();
            memRelHigh=listRel.pop();           
            memRel2High=listRel2.pop();
+           memBaseHi=listBase.pop();
+           memDestHi=listDest.pop();
            
            if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
@@ -1160,41 +1267,32 @@ public class Assembler {
                switch (memRelLow.type) {
                  case '+':
                    /// this is a memory in table label
+                   int rel=memRelLow.related;
                    int pos=memRelLow.address-memRelLow.related;
-                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+"+"+pos);
-                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+"+"+pos);
-                   else str.append("$"+ShortToExe((int)memRelLow.related)+"+"+pos);
+                   str.append(getLocationPos(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
                    break;
                  case '^':
                  case '\\':    
                    /// this is a memory in table label
-                   int rel=(memRelLow.related>>16) & 0xFFFF;
+                   rel=(memRelLow.related>>16) & 0xFFFF;
                    pos=memRelLow.address-rel;
-                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+"+"+pos);
-                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+"+"+pos);
-                   else str.append("$"+ShortToExe(rel)+"+"+pos);
+                   str.append(getLocationPos(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
                    break;
                  case '-':
                    /// this is a memory in table label
+                   rel=memRelLow.related;
                    pos=memRelLow.address-memRelLow.related;
-                   if (memRel2Low.userLocation!=null && !"".equals(memRel2Low.userLocation)) str.append(memRel2Low.userLocation+pos);  
-                   else if (memRel2Low.dasmLocation!=null && !"".equals(memRel2Low.dasmLocation)) str.append(memRel2Low.dasmLocation+pos);
-                   else str.append("$"+ShortToExe((int)memRelLow.related)+pos);
+                   str.append(getLocationNeg(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
                    break;             
                  default:
-                   if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
-                   else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                   else str.append("$"+ShortToExe(memRelLow.address));          
+                   str.append(getLocation(memLow, memBaseLo, memDestLo, memRelLow));         
                    break;
                }                
              }  else {        
                   if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
                      memRelLow.dasmLocation="W"+ShortToExe(memRelLow.address);
-                  } 
-              
-                  if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
-                  else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                       else str.append("$").append(ShortToExe(memRelLow.address));  
+                  }               
+                  str.append(getLocation(memLow, memBaseLo, memDestLo, memRelLow));  
                 }
              isFirst=false;
            } else {
@@ -1207,6 +1305,11 @@ public class Assembler {
                  listRel.addFirst(memRelLow);
                  listRel2.addFirst(null);
                  listRel2.addFirst(null);
+                 listBase.addFirst(null);
+                 listBase.addFirst(null);
+                 listDest.addFirst(null);
+                 listDest.addFirst(null);
+                 
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
                    isFirst=false;
@@ -1244,6 +1347,105 @@ public class Assembler {
          }
        }
      } 
+     
+     /**
+      * Get location (positive)
+      * @param mem the memory location
+      * @param memBase the base memory location
+      * @param memDest the destination memory location
+      * @param memRel the memory location relative
+      * @param rel the relative position
+      * @param pos the offset position
+      * @return the location
+      */
+     private String getLocationPos(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos) {
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation+"+"+pos;
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation+"+"+pos;
+          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+"+"+pos;
+        } else {
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation+"+"+pos;
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation+"+"+pos;
+            else return "$"+ShortToExe(rel)+"+"+pos;
+          }
+     }
+     
+     /**
+      * Get location (negative)
+      * 
+      * @param mem the memory location
+      * @param memBase the base memory location
+      * @param memDest the destination memory location
+      * @param memRel the memory location relative
+      * @param rel the relative position
+      * @param pos the offset position
+      * @return the location
+      */
+     private String getLocationNeg(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos) {
+       if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation+pos;
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation+pos;
+          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+pos;
+        } else {       
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation+pos;
+            else  if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation+pos;
+            else return "$"+ShortToExe(rel)+pos;
+          }
+     }
+     
+     /**
+      * Get the location
+      * 
+      * @param mem the memory location
+      * @param memBase the base memory location
+      * @param memDest the destination memory location
+      * @param memRel the memory relative location
+      * @return the location
+      */
+     private String getLocation(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel) {
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+          String base;
+          String dest;
+          
+          if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
+          else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
+          else base="$"+ShortToExe(memBase.address);
+          
+          if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
+          else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
+          else dest="$"+ShortToExe(memDest.address);
+          
+          if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation;
+          else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation;
+          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address);
+        } else {
+            if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation;
+            else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation;
+            else return "$"+ShortToExe(memRel.address); 
+          }
+     }
    }
    
    /**
@@ -1314,10 +1516,14 @@ public class Assembler {
            memLow=list.pop();
            memRelLow=listRel.pop();
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            memHigh=list.pop();
            memRelHigh=listRel.pop();  
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && 
               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
@@ -1335,6 +1541,10 @@ public class Assembler {
                listRel.addFirst(memRelLow);
                listRel2.addFirst(null);
                listRel2.addFirst(null);
+               listBase.addFirst(null);
+               listBase.addFirst(null);
+               listDest.addFirst(null);
+               listDest.addFirst(null);
                
                if (isFirst) {
                  str.replace(pos1, pos2, "");
@@ -1680,6 +1890,14 @@ public class Assembler {
            listRel2.pop();
            listRel2.pop();
            listRel2.pop();
+           
+           listBase.pop();
+           listBase.pop();
+           listBase.pop();
+           
+           listDest.pop();
+           listDest.pop();
+           listDest.pop();
            
            if (aTribyte==DOT_LINT_TRIBYTE && mem1.copy<0) {
               str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
@@ -2090,6 +2308,16 @@ public class Assembler {
            listRel2.pop();
            listRel2.pop();
            
+           listBase.pop();
+           listBase.pop();
+           listBase.pop();
+           listBase.pop();
+           
+           listDest.pop();
+           listDest.pop();
+           listDest.pop();
+           listDest.pop();
+           
            if (aLong==DOT_DLINT_LONG && mem1.copy<0) {
               str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
                               .append(ByteToExe(Unsigned.done(mem2.copy)))
@@ -2264,10 +2492,14 @@ public class Assembler {
            memLow=list.pop();
            memRelLow=listRel.pop();
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            memHigh=list.pop();
            memRelHigh=listRel.pop(); 
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
@@ -2290,6 +2522,10 @@ public class Assembler {
                  listRel.addFirst(memRelLow);
                  listRel2.addFirst(null);
                  listRel2.addFirst(null);
+                 listBase.addFirst(null);
+                 listBase.addFirst(null);
+                 listDest.addFirst(null);
+                 listDest.addFirst(null);
                  
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
@@ -2417,13 +2653,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
@@ -2431,14 +2661,8 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop(); 
-               
-               listRel2.pop();
-               listRel2.pop();
-               listRel2.pop();
-               break;                
+              emptyPop();
+              break;                
             case MACRO_HEX:
             case MACRO3_HEX: 
             case MACRO5_HEX:
@@ -2448,13 +2672,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO_BIN:
             case MACRO3_BIN:
@@ -2465,14 +2683,8 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-               listRel.pop();
-               listRel.pop();
-               listRel.pop();  
-               
-               listRel2.pop();
-               listRel2.pop();
-               listRel2.pop();
-               break;  
+              emptyPop();
+              break;  
             case MACRO1_HEX:
               str.append(getDataSpacesTabs())
                  .append((option.kickColonMacro ? ":":""))
@@ -2481,13 +2693,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append(")  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO1_BIN:
               str.append(getDataSpacesTabs())
@@ -2497,13 +2703,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append(")  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop(); 
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine $")
@@ -2511,13 +2711,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MonoSpriteLine %")
@@ -2525,13 +2719,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop(); 
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;    
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine $")
@@ -2539,13 +2727,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MonoSpriteLine %")
@@ -2553,13 +2735,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();  
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;               
             }
           carets.add(start, str.length(), mem1, Type.MONO_SPRITE);
@@ -2575,6 +2751,27 @@ public class Assembler {
             aByte.flush(str);
           }            
       }   
+      
+      /**
+       * Empty pop to have stack corrected
+       */
+      private void emptyPop() {
+        listRel.pop();
+        listRel.pop();
+        listRel.pop();
+              
+        listRel2.pop();
+        listRel2.pop();
+        listRel2.pop();
+              
+        listBase.pop();
+        listBase.pop();
+        listBase.pop();
+              
+        listDest.pop();
+        listDest.pop();
+        listDest.pop();
+      }
       
      /** 
       * Setting up the action type if this is the case
@@ -2715,13 +2912,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case TWENTYFOUR_BIN:
               str.append(getDataSpacesTabs()).append("!24 %")
@@ -2729,13 +2920,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();  
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;               
             case MACRO_HEX:
             case MACRO3_HEX:    
@@ -2745,13 +2930,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO_BIN:
             case MACRO3_BIN:  
@@ -2761,13 +2940,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();  
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;  
             case MACRO1_HEX:
               str.append(getDataSpacesTabs())
@@ -2777,13 +2950,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append(")  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO1_BIN:
               str.append(getDataSpacesTabs())
@@ -2793,13 +2960,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append(")  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop(); 
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break; 
             case MACRO2_HEX:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine $")
@@ -2807,13 +2968,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO2_BIN:
               str.append(getDataSpacesTabs()).append("+MultiSpriteLine %")
@@ -2821,13 +2976,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();  
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;   
             case MACRO4_HEX:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine $")
@@ -2835,13 +2984,7 @@ public class Assembler {
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
                  .append(ByteToExe(Unsigned.done(mem3.copy)))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop();
-              
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;
             case MACRO4_BIN:
               str.append(getDataSpacesTabs()).append("#MultiSpriteLine %")
@@ -2849,13 +2992,7 @@ public class Assembler {
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
                  .append(Integer.toBinaryString((mem3.copy & 0xFF) + 0x100).substring(1))
                  .append("  ");
-              listRel.pop();
-              listRel.pop();
-              listRel.pop(); 
-               
-              listRel2.pop();
-              listRel2.pop();
-              listRel2.pop();
+              emptyPop();
               break;               
             }      
           carets.add(start, str.length(), mem1, Type.MULTI_SPRITE);
@@ -2871,6 +3008,27 @@ public class Assembler {
             aByte.flush(str);
           }    
      }   
+     
+      /**
+       * Empty pop to have stack corrected
+       */
+      private void emptyPop() {
+        listRel.pop();
+        listRel.pop();
+        listRel.pop();
+              
+        listRel2.pop();
+        listRel2.pop();
+        listRel2.pop();
+              
+        listBase.pop();
+        listBase.pop();
+        listBase.pop();
+              
+        listDest.pop();
+        listDest.pop();
+        listDest.pop();
+      }
       
      /** 
       * Setting up the action type if this is the case
@@ -3003,6 +3161,8 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -3051,6 +3211,8 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                   
                   aByte.flush(str);   
               } else {
@@ -3339,6 +3501,8 @@ public class Assembler {
          list.pop();
          listRel.pop();
          listRel2.pop();
+         listBase.pop();
+         listDest.pop();
        }
       
         while (!list.isEmpty()) {
@@ -3346,6 +3510,10 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -3398,6 +3566,8 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                   
                   aByte.flush(str);   
               } else {
@@ -3695,6 +3865,8 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -3742,6 +3914,9 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
+                  
                   aByte.flush(str);   
               } else {
                  if (isFirst) {
@@ -3759,6 +3934,8 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
               }
               break; 
             case CA65:
@@ -3790,6 +3967,8 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
               }
               break;  
            case ACME:                
@@ -3822,6 +4001,8 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
               }
               break;  
             case KICK:
@@ -3896,6 +4077,8 @@ public class Assembler {
                 list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
               }
               break;   
             case GLASS:
@@ -4052,6 +4235,8 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -4088,6 +4273,8 @@ public class Assembler {
                 mem=list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
                 
                 str.append((char)(mem.copy & 0x7F));  
               } 
@@ -4107,6 +4294,8 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                   
                   aByte.flush(str);   
               } else {
@@ -4240,6 +4429,8 @@ public class Assembler {
                 mem=list.pop();
                 listRel.pop();
                 listRel2.pop();
+                listBase.pop();
+                listDest.pop();
                 
                 str.append((char)(mem.copy & 0x7F));  
               }
@@ -4308,7 +4499,7 @@ public class Assembler {
               break;   
           }   
           
-           carets.add(start, str.length(), mem, Type.HIGH_TEXT);
+          carets.add(start, str.length(), mem, Type.HIGH_TEXT);
            
           if (list.isEmpty()) { 
             if (isString) str.append("\"\n");
@@ -4401,6 +4592,8 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -4449,6 +4642,8 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                           
                   aByte.flush(str);   
               } else {
@@ -4727,6 +4922,10 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -4773,6 +4972,10 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                   
                   aByte.flush(str);   
               } else {
@@ -5055,6 +5258,10 @@ public class Assembler {
           mem=list.pop();
           memRel=listRel.pop();
           listRel2.pop();
+          listBase.pop();
+          listDest.pop();
+          listBase.pop();
+          listDest.pop();
           
           // not all char can be converted in string
           
@@ -5102,6 +5309,10 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
+                  listBase.push(null);
+                  listDest.push(null);
                   
                   aByte.flush(str);   
               } else {
@@ -5375,10 +5586,14 @@ public class Assembler {
            memLow=list.pop();
            memRelLow=listRel.pop();
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            memHigh=list.pop();
            memRelHigh=listRel.pop();           
            listRel2.pop();
+           listBase.pop();
+           listDest.pop();
            
            if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation).append("+1");
@@ -5395,6 +5610,8 @@ public class Assembler {
                  listRel.addFirst(memRelLow);
                  listRel2.addFirst(null);
                  listRel2.addFirst(null);
+                 listBase.push(null);
+                 listDest.push(null);
                  
                  if (isFirst) {
                    str.replace(pos1, pos2, "");
@@ -5707,6 +5924,12 @@ public class Assembler {
    /** Fifo list of related memory locations of second kind */
    protected static LinkedList<MemoryDasm> listRel2=new LinkedList();
    
+   /** Fifo list of memory locations base  */
+   protected static LinkedList<MemoryDasm> listBase=new LinkedList();
+   
+   /** Fifo list of memory locations destination */
+   protected static LinkedList<MemoryDasm> listDest=new LinkedList();
+   
    /** Option to use */
    protected static Option option;
          
@@ -5912,8 +6135,10 @@ public class Assembler {
     * @param mem the memory being processed
     * @param memRel eventual memory related
     * @param memRel2 eventual memory related of second kind
+    * @param memBase evental memory base
+    * @param memDest eventual memory destination
     */
-   public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel, MemoryDasm memRel2) {
+   public void putValue(StringBuilder str, MemoryDasm mem, MemoryDasm memRel, MemoryDasm memRel2, MemoryDasm memBase, MemoryDasm memDest) {
      ActionType type=actualType;  
      lastMem=mem;
      
@@ -5958,12 +6183,13 @@ public class Assembler {
           actualType=type;
        }
      } 
-          
-     
+               
      list.add(mem);
      listRel.add(memRel);
      listRel2.add(memRel2);     
-     
+     listBase.add(memBase);
+     listDest.add(memDest);
+          
      // we are processing bytes?
      if (actualType instanceof Byte) {
        // look if it is time to aggregate data
@@ -6207,6 +6433,8 @@ public class Assembler {
      list.clear();
      listRel.clear();  
      listRel2.clear();  
+     listBase.clear();
+     listDest.clear();
      
      lowMem.type='<';
      lowMem.related=address;
@@ -6221,6 +6449,11 @@ public class Assembler {
      listRel.add(highMemRel);
      listRel2.add(null);
      listRel2.add(null);
+     
+     listBase.add(null);
+     listBase.add(null);
+     listDest.add(null);
+     listDest.add(null);
      
      actualType=aByte;
      flush(str);
@@ -6243,6 +6476,8 @@ public class Assembler {
      list.clear();
      listRel.clear();  
      listRel2.clear();  
+     listBase.clear();
+     listDest.clear();
      
      lowMem.type='<';
      lowMem.related=address;
@@ -6257,6 +6492,11 @@ public class Assembler {
      listRel.add(lowMemRel);
      listRel2.add(null);
      listRel2.add(null);
+     
+     listBase.add(null);
+     listBase.add(null);
+     listDest.add(null);
+     listDest.add(null);
      
      actualType=aByte;
      flush(str);
@@ -6287,6 +6527,8 @@ public class Assembler {
      list.clear();
      listRel.clear();
      listRel2.clear();
+     listBase.clear();
+     listDest.clear();
      
      list.add(lowMem);
      listRel.add(null);
@@ -6295,6 +6537,11 @@ public class Assembler {
      list.add(highMem);
      listRel.add(null);
      listRel2.add(null);
+     
+     listBase.add(null);
+     listBase.add(null);
+     listDest.add(null);
+     listDest.add(null);
      
      //int size=0;
      
@@ -6334,10 +6581,14 @@ public class Assembler {
      list.clear();
      listRel.clear();
      listRel2.clear();
+     listBase.clear();
+     listDest.clear();
      
      list.add(lowMem);
      listRel.add(null);
      listRel2.add(null);
+     listBase.add(null);
+     listDest.add(null);
      
      if (comment!=null) {
        lowMem.userComment=comment;
@@ -6361,6 +6612,8 @@ public class Assembler {
      list.clear();
      listRel.clear();
      listRel2.clear();
+     listBase.clear();
+     listDest.clear();
                
      for (char val: text.toCharArray()) {
        mem=new MemoryDasm();
@@ -6369,6 +6622,8 @@ public class Assembler {
        list.add(mem);
        listRel.add(null);
        listRel2.add(null);
+       listBase.push(null);
+       listDest.push(null);
      }
        
      actualType=aText;
