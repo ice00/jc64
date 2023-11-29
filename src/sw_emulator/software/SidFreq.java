@@ -766,7 +766,8 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note4*2 - note5);
       if (i<11) diff+=Math.abs(note5*2 - note6);  
       if (i<11) diff+=Math.abs(note6*2 - note7);
-   // System.err.println(high+"  "+index+"   "+i+" "+diff);    
+    
+      //if (i>0) System.err.println(high+"  "+index+"   "+i+" "+diff);    
 
       // catch error into Vibrants/JO note table at 416Hz  
       if (i==0 && diff==212) continue;  
@@ -789,6 +790,10 @@ public class SidFreq {
             continue;
         }        
       }
+      
+      // catch 2 errors in Kenneth Arnold player (table 424Hz)
+      if (i==1 && diff==8) continue;    
+      if (i==6 && diff==40) continue;  
          
       // catch an error on MUSICIANS/P/PseudoGrafx/Fonttime.sid (short table seems 476Hz)
       if (i==2 && diff==25) continue;    
@@ -825,9 +830,12 @@ public class SidFreq {
       
       // catch 1 error into Vibrants/JO note table at 440Hz
       if (i==4 && diff==127) continue;
-
+      
       // catch a big error on Music Mixer notes table (table 440Hz: F#4 - values 18E0 instead of 189C)
       if (i==6 && diff==206) continue;
+      
+      // catch a error on System 6581 note table at 424Hz 
+      if (i==7 && diff==29) continue;
       
       // catch a very big error (originated in high table) on Vibrants/JO note table at 424Hz 
       if (i==8 && diff==3074) continue;
@@ -837,6 +845,9 @@ public class SidFreq {
     
       // catch ha error on DEMOS/M-R/Max_Mix.sid (table 440Hz; A2 - values 0744 instead of 0751)
       if (i==9 && diff==42) continue;
+                  
+      // catch an error on Barry Leich (table 424Hz)
+      if (i==11 && diff==20) continue;    
       
       // catch errors onto Mon/Futurecomposer (table: 424Hz; B1 - values 03E0 instead of 03F4)
       if (i==11 && diff==25) continue;
