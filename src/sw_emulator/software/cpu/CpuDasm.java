@@ -26,6 +26,14 @@ package sw_emulator.software.cpu;
 import java.util.Locale;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.MemoryDasm;
+import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import static sw_emulator.software.cpu.M6510Dasm.A_NUL;
 import static sw_emulator.software.cpu.M6510Dasm.M_JAM;
 import sw_emulator.swing.main.Constant;
@@ -153,12 +161,14 @@ public class CpuDasm implements disassembler {
    */
   private char getNormType(char type) {
     switch (type) {
-       case '^':
-       case '<':  
-         return '<';
-       case '\\':
-       case '>':  
-         return '>';
+       case TYPE_PLUS_MINOR:
+       case TYPE_MINUS_MINOR:
+       case TYPE_MINOR:  
+         return TYPE_MINOR;
+       case TYPE_PLUS_MAJOR:
+       case TYPE_MINUS_MAJOR:  
+       case TYPE_MAJOR:  
+         return TYPE_MAJOR;
        default:  
          return type;
     }
@@ -177,17 +187,22 @@ public class CpuDasm implements disassembler {
     char type=memory[(int)addr].type;
     
     // this is a data declaration            
-    if (type=='<' || type=='>' || type=='^' || type=='\\') {    
+    if (type==TYPE_MINOR || 
+        type==TYPE_MAJOR || 
+        type==TYPE_PLUS_MAJOR || 
+        type==TYPE_PLUS_MINOR || 
+        type==TYPE_MINUS_MAJOR || 
+        type==TYPE_MINUS_MINOR) {    
       MemoryDasm memRel;
       // the byte is a reference
-      if (type=='^' || type=='\\') memRel=memory[memory[(int)addr].related & 0xFFFF];   
+      if (type==TYPE_PLUS_MAJOR || type==TYPE_PLUS_MINOR || type==TYPE_MINUS_MAJOR || type==TYPE_MINUS_MINOR) memRel=memory[memory[(int)addr].related & 0xFFFF];   
       else memRel=memory[memory[(int)addr].related & 0xFFFF];   
               
       if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getNormType(type)+memRel.userLocation;
       else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getNormType(type)+memRel.dasmLocation;
            else {   
               switch (memRel.type) {
-                case '+':
+                case TYPE_PLUS:
                   /// this is a memory in table label
                   int pos=memRel.address-memRel.related;
                   MemoryDasm mem2=memory[memRel.related];
@@ -195,7 +210,7 @@ public class CpuDasm implements disassembler {
                   if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getNormType(type)+mem2.dasmLocation+"+"+pos;
                   return getNormType(type)+"$"+ByteToExe((int)memRel.related)+"+"+pos;  
                   
-                case '-':
+                case TYPE_MINUS:
                   /// this is a memory in table label
                   pos=memRel.address-memRel.related;
                   mem2=memory[memRel.related];
@@ -226,7 +241,7 @@ public class CpuDasm implements disassembler {
       
     MemoryDasm mem=memory[(int)addr];          
     
-    if (mem.type=='+') {
+    if (mem.type==TYPE_PLUS) {
       /// this is a memory in table label
       int pos=mem.address-mem.related;
       MemoryDasm mem2=memory[mem.related];
@@ -235,7 +250,7 @@ public class CpuDasm implements disassembler {
       return "$"+ByteToExe((int)mem.related)+"+"+pos;  
     }
     
-    if (mem.type=='^' || mem.type=='\\') {
+    if (mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
       /// this is a memory in table label
       int rel=mem.related>>16;
       int pos=mem.address-rel;
@@ -245,7 +260,17 @@ public class CpuDasm implements disassembler {
       return "$"+ByteToExe(rel)+"+"+pos;  
     }    
     
-    if (mem.type=='-') {
+    if (mem.type==TYPE_MINUS_MAJOR || mem.type==TYPE_MINUS_MINOR) {
+      /// this is a memory in table label
+      int rel=mem.related>>16;
+      int pos=mem.address-rel;
+      MemoryDasm mem2=memory[rel];
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
+      return "$"+ByteToExe(rel)+pos;  
+    }      
+    
+    if (mem.type==TYPE_MINUS) {
       /// this is a memory in table label
       int pos=mem.address-mem.related;
       MemoryDasm mem2=memory[mem.related];
@@ -271,7 +296,7 @@ public class CpuDasm implements disassembler {
     MemoryDasm mem=memory[(int)addr];
 
     try {    
-        if (mem.type=='+') {
+        if (mem.type==TYPE_PLUS) {
           /// this is a memory in table label
           int pos=mem.address-mem.related;
           MemoryDasm mem2=memory[mem.related];
@@ -280,7 +305,7 @@ public class CpuDasm implements disassembler {
           return "$"+ShortToExe((int)mem.related)+"+"+pos;  
         }
 
-        if (mem.type=='^' || mem.type=='\\') {
+        if (mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
           /// this is a memory in table label
           int rel=(mem.related>>16)&0xFFFF;
           int pos=mem.address-rel;
@@ -289,8 +314,18 @@ public class CpuDasm implements disassembler {
           if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
           return "$"+ShortToExe(rel)+"+"+pos;  
         }    
+        
+        if (mem.type==TYPE_MINUS_MAJOR || mem.type==TYPE_MINUS_MINOR) {
+          /// this is a memory in table label
+          int rel=(mem.related>>16)&0xFFFF;
+          int pos=mem.address-rel;
+          MemoryDasm mem2=memory[rel];
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
+          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
+          return "$"+ShortToExe(rel)+pos;  
+        }          
 
-        if (mem.type=='-') {
+        if (mem.type==TYPE_MINUS) {
           /// this is a memory in table label
           int pos=mem.address-mem.related;
           MemoryDasm mem2=memory[mem.related];
@@ -321,12 +356,14 @@ public class CpuDasm implements disassembler {
            
     if (mem.isInside && !mem.isGarbage) {
         switch (mem.type) {
-            case '+':
-            case '-':
+            case TYPE_PLUS:
+            case TYPE_MINUS:
                 memory[mem.related].dasmLocation="W"+ShortToExe(mem.related);
                 break;
-            case '^':
-            case '\\':    
+            case TYPE_PLUS_MAJOR:
+            case TYPE_PLUS_MINOR: 
+            case TYPE_MINUS_MAJOR:
+            case TYPE_MINUS_MINOR:   
                 memory[mem.related & 0xFFFF].dasmLocation="W"+ShortToExe(mem.related & 0xFFFF);
                 break;
             default:
@@ -349,8 +386,8 @@ public class CpuDasm implements disassembler {
     
     if (mem.isInside) {
       // set as relative + unless it is already set (even by user)
-      if (mem.dasmLocation!=null && (mem.type!='+') && (mem.type!='-')) {
-        mem.type='+';
+      if (mem.dasmLocation!=null && (mem.type!=TYPE_PLUS) && (mem.type!=TYPE_MINUS)) {
+        mem.type=TYPE_PLUS;
         mem.related=(int)addr;
         setLabel(addr);
       } 
@@ -368,9 +405,9 @@ public class CpuDasm implements disassembler {
     
     MemoryDasm mem=memory[(int)addr-offset];
     
-    if (mem.isInside && mem.type!='+') {
+    if (mem.isInside && mem.type!=TYPE_PLUS) {
       if (mem.dasmLocation!=null) {
-        mem.type='-';
+        mem.type=TYPE_MINUS;
         mem.related=(int)addr;
         setLabel(addr);
       } 

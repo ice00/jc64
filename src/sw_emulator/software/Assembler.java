@@ -28,6 +28,14 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Carets.Type;
 import sw_emulator.swing.main.Constant;
@@ -885,18 +893,25 @@ public class Assembler {
           memBase=listBase.pop();
           memDest=listDest.pop();
           
-          if (mem.type=='<' || mem.type=='>' || mem.type=='^' || mem.type=='\\') {    
+          if (mem.type==TYPE_MINOR || 
+              mem.type==TYPE_MAJOR || 
+              mem.type==TYPE_PLUS_MAJOR || 
+              mem.type==TYPE_PLUS_MINOR || 
+              mem.type==TYPE_MINUS_MAJOR || 
+              mem.type==TYPE_MINUS_MINOR) {    
             char type;
             // add a automatic label onto references byte
             if (memRel.dasmLocation==null || "".equals(memRel.dasmLocation)) {
               memRel.dasmLocation="W"+ShortToExe(memRel.address);
             } 
             switch (mem.type) {
-              case '^':
-                  type='>';                  
+              case TYPE_PLUS_MAJOR:
+              case TYPE_MINUS_MAJOR:
+                  type=TYPE_MAJOR;                  
                   break;
-              case '\\':
-                  type='<';                  
+              case TYPE_PLUS_MINOR:
+              case TYPE_MINUS_MINOR:  
+                  type=TYPE_MINOR;                  
                   break;
               default:
                   type=mem.type;
@@ -905,20 +920,27 @@ public class Assembler {
             
             if (memRel2!=null) {                
               switch (memRel.type) {
-                case '+':
+                case TYPE_PLUS:
                   /// this is a memory in table label
                   int rel=memRel.related;
                   int pos=memRel.address-memRel.related;
                   str.append(getLocationPos(mem, memBase, memDest, memRel2, rel, pos, type));
                   break;
-                case '^':
-                case '\\':    
+                case TYPE_PLUS_MAJOR:
+                case TYPE_PLUS_MINOR:    
                   /// this is a memory in table label
                   rel=(memRel.related>>16) & 0xFFFF;
                   pos=memRel.address-rel;
                   str.append(getLocationPos(mem, memBase, memDest, memRel2, rel, pos, type));
                   break;
-                case '-':
+                case TYPE_MINUS_MAJOR:
+                case TYPE_MINUS_MINOR:    
+                  /// this is a memory in table label
+                  rel=(memRel.related>>16) & 0xFFFF;
+                  pos=memRel.address-rel;
+                  str.append(getLocationNeg(mem, memBase, memDest, memRel2, rel, pos, type));
+                  break;                  
+                case TYPE_MINUS:
                   /// this is a memory in table label
                   rel=memRel.related;
                   pos=memRel.address-memRel.related;
@@ -964,7 +986,7 @@ public class Assembler {
         if (value.contains("+") || value.contains("-")) value="("+value+")";
         switch (aByte) {
             case DB_BYTE:
-              if (type=='<') return value;
+              if (type==TYPE_MINOR) return value;
               else return value+">>8";
             default:
               return type+value;              
@@ -1261,24 +1283,39 @@ public class Assembler {
            memBaseHi=listBase.pop();
            memDestHi=listDest.pop();
            
-           if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
+           if ((
+                 ((memLow.type==TYPE_MINOR || memLow.type==TYPE_PLUS_MINOR) && 
+                  (memHigh.type==TYPE_MAJOR || memHigh.type==TYPE_PLUS_MAJOR)) 
+                   ||
+                 ((memLow.type==TYPE_MINOR || memLow.type==TYPE_MINUS_MINOR) && 
+                 (memHigh.type==TYPE_MAJOR || memHigh.type==TYPE_MINUS_MAJOR))
+               ) &&     
+                   
+               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
              if (memRel2Low!=null) {                
                switch (memRelLow.type) {
-                 case '+':
+                 case TYPE_PLUS:
                    /// this is a memory in table label
                    int rel=memRelLow.related;
                    int pos=memRelLow.address-memRelLow.related;
                    str.append(getLocationPos(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
                    break;
-                 case '^':
-                 case '\\':    
+                 case TYPE_PLUS_MAJOR:
+                 case TYPE_PLUS_MINOR:    
                    /// this is a memory in table label
                    rel=(memRelLow.related>>16) & 0xFFFF;
                    pos=memRelLow.address-rel;
                    str.append(getLocationPos(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
                    break;
-                 case '-':
+                case TYPE_MINUS_MAJOR:
+                 case TYPE_MINUS_MINOR:    
+                   /// this is a memory in table label
+                   rel=(memRelLow.related>>16) & 0xFFFF;
+                   pos=memRelLow.address-rel;
+                   str.append(getLocationNeg(memLow, memBaseLo, memDestLo, memRel2Low, rel, pos));
+                   break;                   
+                 case TYPE_MINUS:
                    /// this is a memory in table label
                    rel=memRelLow.related;
                    pos=memRelLow.address-memRelLow.related;
@@ -1297,8 +1334,18 @@ public class Assembler {
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
-               if (memLow.type=='<'  || memLow.type=='>'  || memLow.type=='^'  || memLow.type=='\\'  ||
-                   memHigh.type=='>' || memHigh.type=='<' || memHigh.type=='^' || memHigh.type=='\\' )  {
+               if (memLow.type==TYPE_MINOR  || 
+                   memLow.type==TYPE_MAJOR  || 
+                   memLow.type==TYPE_PLUS_MAJOR  || 
+                   memLow.type==TYPE_PLUS_MINOR  ||
+                   memLow.type==TYPE_MINUS_MAJOR  || 
+                   memLow.type==TYPE_MINUS_MINOR  ||    
+                   memHigh.type==TYPE_MINOR || 
+                   memHigh.type==TYPE_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MINOR || 
+                   memHigh.type==TYPE_MINUS_MAJOR || 
+                   memHigh.type==TYPE_MINUS_MINOR )  {
                  list.addFirst(memHigh);
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
@@ -1524,8 +1571,14 @@ public class Assembler {
            listRel2.pop();
            listBase.pop();
            listDest.pop();
-           
-           if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && 
+                     
+           if ((
+                 ((memLow.type==TYPE_MINOR || memLow.type==TYPE_PLUS_MINOR) && 
+                  (memHigh.type==TYPE_MAJOR || memHigh.type==TYPE_PLUS_MAJOR)) 
+                   ||
+                 ((memLow.type==TYPE_MINOR || memLow.type==TYPE_MINUS_MINOR) && 
+                 (memHigh.type==TYPE_MAJOR || memHigh.type==TYPE_MINUS_MAJOR))
+               ) &&                        
               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
@@ -1533,8 +1586,18 @@ public class Assembler {
              isFirst=false;
            } else {
              // if cannot make a word with relative locations, force all to be of byte type
-             if (memLow.type=='<' || memLow.type=='>' || memLow.type=='^' || memLow.type=='\\' || 
-                 memHigh.type=='>' || memHigh.type=='<' || memHigh.type=='^' || memHigh.type=='\\')  {
+             if (memLow.type==TYPE_MINOR || 
+                 memLow.type==TYPE_MAJOR || 
+                 memLow.type==TYPE_PLUS_MAJOR || 
+                 memLow.type==TYPE_PLUS_MINOR || 
+                 memLow.type==TYPE_MINUS_MAJOR || 
+                 memLow.type==TYPE_MINUS_MINOR ||     
+                 memHigh.type==TYPE_MINOR || 
+                 memHigh.type==TYPE_MAJOR || 
+                 memHigh.type==TYPE_PLUS_MAJOR || 
+                 memHigh.type==TYPE_PLUS_MINOR || 
+                 memHigh.type==TYPE_MINUS_MAJOR || 
+                 memHigh.type==TYPE_MINUS_MINOR)  {
                list.addFirst(memHigh);
                list.addFirst(memLow);
                listRel.addFirst(memRelHigh);
@@ -1835,7 +1898,8 @@ public class Assembler {
        while (iter.hasNext()) {
          mem=iter.next();
          // we cannot handle memory reference inside tribyte
-         if (mem.type=='<' || mem.type=='>' || mem.type=='^' || mem.type=='\\') {
+         if (mem.type==TYPE_MINOR || mem.type==TYPE_MAJOR || 
+             mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
            // force all to be as byte even if this breaks layout
            aByte.flush(str);
            return;
@@ -2244,7 +2308,8 @@ public class Assembler {
        while (iter.hasNext()) {
          mem=iter.next();
          // we cannot handle memory reference inside long
-         if (mem.type=='<' || mem.type=='>' || mem.type=='^' || mem.type=='\\') {
+         if (mem.type==TYPE_MINOR || mem.type==TYPE_MAJOR || 
+             mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
            // force all to be as byte even if this breaks layout
            aByte.flush(str);
            return;
@@ -2501,7 +2566,9 @@ public class Assembler {
            listBase.pop();
            listDest.pop();
            
-           if ((memLow.type=='<' || memLow.type=='\\') && (memHigh.type=='>' || memHigh.type=='^') && (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
+           if ((memLow.type==TYPE_MINOR || memLow.type==TYPE_PLUS_MINOR) && 
+               (memHigh.type==TYPE_MAJOR || memHigh.type==TYPE_PLUS_MAJOR) && 
+               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
                
              // add a automatic label onto references byte  
              if (memRelLow.dasmLocation==null || "".equals(memRelLow.dasmLocation)) {
@@ -2514,8 +2581,14 @@ public class Assembler {
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
-               if (memLow.type=='<'  || memLow.type=='>' || memLow.type=='^' || memLow.type=='\\' ||
-                   memHigh.type=='>' || memHigh.type=='<' || memHigh.type=='^' || memHigh.type=='\\')  {
+               if (memLow.type==TYPE_MINOR || 
+                   memLow.type==TYPE_MAJOR || 
+                   memLow.type==TYPE_PLUS_MAJOR || 
+                   memLow.type==TYPE_PLUS_MINOR ||
+                   memHigh.type==TYPE_MINOR || 
+                   memHigh.type==TYPE_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MINOR)  {
                  list.addFirst(memHigh);
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
@@ -5595,15 +5668,21 @@ public class Assembler {
            listBase.pop();
            listDest.pop();
            
-           if (memLow.type=='<' && memHigh.type=='>' && memLow.related==memHigh.related) {
+           if (memLow.type==TYPE_MINOR && memHigh.type==TYPE_MAJOR && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation).append("+1");
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation).append("+1");
                   else str.append("$").append(ShortToExe(memRelLow.address+1));  
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
-               if (memLow.type=='<'  || memLow.type=='>'  || memLow.type=='^'  || memLow.type=='\\' ||
-                   memHigh.type=='>' || memHigh.type=='<' || memHigh.type=='^' || memHigh.type=='\\')  {
+               if (memLow.type==TYPE_MINOR  || 
+                   memLow.type==TYPE_MAJOR  || 
+                   memLow.type==TYPE_PLUS_MAJOR  || 
+                   memLow.type==TYPE_PLUS_MINOR ||
+                   memHigh.type==TYPE_MINOR || 
+                   memHigh.type==TYPE_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MAJOR || 
+                   memHigh.type==TYPE_PLUS_MINOR)  {
                  list.addFirst(memHigh);
                  list.addFirst(memLow);
                  listRel.addFirst(memRelHigh);
@@ -6152,7 +6231,10 @@ public class Assembler {
      }     
        
      // if this is a label then the type will change  
-     if (!(lastMem.type=='+' || lastMem.type=='-' || lastMem.type=='^' || lastMem.type=='\\')) {
+     if (!(lastMem.type==TYPE_PLUS || 
+           lastMem.type==TYPE_MINUS || 
+           lastMem.type==TYPE_PLUS_MAJOR || 
+           lastMem.type==TYPE_PLUS_MINOR)) {
        if (mem.userLocation!=null && !"".equals(mem.userLocation)) type=aLabel;
        else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) type=aLabel;  
      }
@@ -6436,9 +6518,9 @@ public class Assembler {
      listBase.clear();
      listDest.clear();
      
-     lowMem.type='<';
+     lowMem.type=TYPE_MINOR;
      lowMem.related=address;
-     highMem.type='>';
+     highMem.type=TYPE_MAJOR;
      highMem.related=address;
      list.add(lowMem);
      list.add(highMem);
@@ -6479,9 +6561,9 @@ public class Assembler {
      listBase.clear();
      listDest.clear();
      
-     lowMem.type='<';
+     lowMem.type=TYPE_MINOR;
      lowMem.related=address;
-     highMem.type='>';
+     highMem.type=TYPE_MAJOR;
      highMem.related=address;
      list.add(highMem);
      list.add(lowMem);

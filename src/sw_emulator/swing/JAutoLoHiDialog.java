@@ -30,6 +30,11 @@ import javax.swing.JTable;
 import javax.swing.text.DefaultFormatter; 
 import javax.swing.text.DefaultFormatterFactory; 
 import sw_emulator.software.MemoryDasm;
+import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 
 /**
  * Dialog for low/high table
@@ -443,10 +448,10 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
         
         position=(low.copy & 0xFF)+((high.copy &0xFF)<<8);
         
-        low.type='<';
+        low.type=TYPE_MINOR;
         low.related=position;
         
-        high.type='>';
+        high.type=TYPE_MAJOR;
         high.related=position;
       }
       
@@ -484,10 +489,10 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
         high=memories[(int)(i*2+valStartHigh)];  
         
         position=(low.copy & 0xFF)+((high.copy &0xFF)<<8);
-        low.type='<';
+        low.type=TYPE_MINOR;
         low.related=position;
         
-        high.type='>';
+        high.type=TYPE_MAJOR;
         high.related=position;  
                 
         
@@ -538,12 +543,12 @@ public class JAutoLoHiDialog extends javax.swing.JDialog {
       address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8)-base+dest;
     
       low.related=address;          
-      if (low.type=='+') high.type='\\';
-      else low.type='<';      
+      if (low.type==TYPE_PLUS) high.type=TYPE_PLUS_MINOR;
+      else low.type=TYPE_MINOR;      
       
       high.related=address;
-      if (high.type=='+') high.type='^';
-      else high.type='>';     
+      if (high.type==TYPE_PLUS) high.type=TYPE_PLUS_MAJOR;
+      else high.type=TYPE_MAJOR;     
       
       low.relatedAddressBase=base;
       low.relatedAddressDest=dest;

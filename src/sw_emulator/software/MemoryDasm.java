@@ -33,6 +33,35 @@ import sw_emulator.swing.main.DataType;
  * @author ice
  */
 public class MemoryDasm implements Cloneable, Serializable {
+  /** Empty type */
+  public static final char TYPE_EMPTY=' ';
+  
+  /** Plus (+) type */
+  public static final char TYPE_PLUS = '+';
+  
+  /** Minus (-) type */
+  public static final char TYPE_MINUS = '-';
+  
+  /** Major (>) type */
+  public static final char TYPE_MAJOR = '>';
+  
+  /** Minur (<) type */
+  public static final char TYPE_MINOR = '<';  
+  
+  /** Plus & Major (^) type */
+  public static final char TYPE_PLUS_MAJOR = '^';  
+  
+  /** Plus & Minor (\) type */
+  public static final char TYPE_PLUS_MINOR = '\\';  
+  
+  /** Minus & Major (,) type */
+  public static final char TYPE_MINUS_MAJOR = ',';  
+  
+  /** Minus & Minor (;) type */
+  public static final char TYPE_MINUS_MINOR = ';';    
+  
+  
+  
   /** Address of memory (0..$FFFF) */  
   public int address;  
   
@@ -72,8 +101,8 @@ public class MemoryDasm implements Cloneable, Serializable {
   /** Related address (#< or #>)*/
   public int related=-1;
   
-  /** Type of relation for related < or > */
-  public char type=' ';
+  /** Type of relation for related */
+  public char type=TYPE_EMPTY;
   
   /** Address of memory as base of relocation (0..$FFFF) */  
   public int relatedAddressBase;  

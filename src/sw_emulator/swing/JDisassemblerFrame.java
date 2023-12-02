@@ -86,6 +86,15 @@ import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
+import static sw_emulator.software.MemoryDasm.TYPE_EMPTY;
+import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
 import sw_emulator.software.memory.memoryState;
@@ -668,15 +677,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             if ((Boolean)getValueAt(rowIndex, colIndex)) tip="<html>"+memory.userBlockComment.replace("\n", "<br>")+"</html>";
             break;
             case RE:
-            if (memory.type!=' ') {
+            if (memory.type!=TYPE_EMPTY) {
               MemoryDasm mem=dataTableModelMemory.getData()[memory.related];
               switch (memory.type) {
-                case '+':
+                case TYPE_PLUS:
                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+(memory.address-memory.related);
                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+(memory.address-memory.related);
                 else tip="$"+Shared.ShortToExe(mem.address)+"+"+(memory.address-memory.related);
                 break;
-                case '-':
+                case TYPE_MINUS:
                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related);
                 else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);
                 else tip="$"+Shared.ShortToExe(mem.address)+(memory.address-memory.related);
@@ -5995,16 +6004,25 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     if (mem.dataType!=dataType && mem.dataType==DataType.HIGH_TEXT) removeBelowType(pos, DataType.HIGH_TEXT);
     mem.dataType=dataType;
     if (option.eraseDComm) mem.dasmComment=null;
-    if (option.erasePlus && mem.type=='+') {
-      mem.related=-1;
-      mem.type=' ';
-    } else if (option.erasePlus && mem.type=='^') {
-              mem.related&=0xFFFF;
-              mem.type='>';
-            } else if (option.erasePlus && mem.type=='\\') {
-                     mem.related&=0xFFFF;
-                     mem.type='<';
-                   } 
+    if (option.erasePlus) {
+      switch (mem.type) {
+        case TYPE_PLUS:
+        case TYPE_MINUS:  
+          mem.related=-1;
+          mem.type=TYPE_EMPTY;
+          break;
+        case TYPE_PLUS_MAJOR:
+        case TYPE_MINUS_MAJOR:  
+          mem.related&=0xFFFF;
+          mem.type=TYPE_MAJOR;
+          break;
+        case TYPE_PLUS_MINOR:
+        case TYPE_MINUS_MINOR:  
+          mem.related&=0xFFFF; 
+          mem.type=TYPE_MINOR;
+          break;
+      }
+    }
   }
   
   /**
@@ -6057,16 +6075,25 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       mem.isGarbage=true;
       mem.dasmLocation=null;
       if (option.eraseDComm) mem.dasmComment=null;
-      if (option.erasePlus && mem.type=='+') {
-        mem.related=-1;
-        mem.type=' ';
-      } else if (option.erasePlus && mem.type=='^') {
-               mem.related&=0xFFFF;
-               mem.type='>';
-             } else if (option.erasePlus && mem.type=='\\') {
-                 mem.related&=0xFFFF;
-                 mem.type='<';
-               }
+      if (option.erasePlus) {         
+        switch (mem.type) {
+          case TYPE_PLUS:
+          case TYPE_MINUS:
+            mem.related=-1;
+            mem.type=TYPE_EMPTY;
+            break;
+          case TYPE_PLUS_MAJOR:
+          case TYPE_MINUS_MAJOR:
+            mem.related&=0xFFFF;
+            mem.type=TYPE_MAJOR;
+            break;
+          case TYPE_PLUS_MINOR:
+          case TYPE_MINUS_MINOR:  
+            mem.related&=0xFFFF;
+            mem.type=TYPE_MINOR;
+            break;
+        }
+      }
     }
     
     dataTableModelMemory.fireTableDataChanged();  
@@ -6227,7 +6254,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       if (!mem.isInside || mem.isGarbage) continue;
       
       // look for relative locations
-      if (mem.type=='+' || mem.type=='-') {
+      if (mem.type==TYPE_PLUS || mem.type==TYPE_MINUS) {
         MemoryDasm memr=project.memory[mem.related];
         if (memr.userLocation!=null && !"".equals(memr.userLocation)) {
           total++;
@@ -6236,7 +6263,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         continue;
       }  
       
-      if (mem.type=='^' || mem.type=='\\') {
+      if (mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR ||
+          mem.type==TYPE_MINUS_MAJOR || mem.type==TYPE_MINUS_MINOR) {
         MemoryDasm memr=project.memory[(mem.related>>16) & 0xFFFF];
         if (memr.userLocation!=null && !"".equals(memr.userLocation)) {
           total++;
@@ -6317,120 +6345,121 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
    * Add a user label to the next word address of selected memory address
    */
   private void addLabelOp() {
-    int row=jTableMemory.getSelectedRow();
-    if (row<0) {
-      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
+    int row = jTableMemory.getSelectedRow();
+    if (row < 0) {
+      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);
       return;
     }
-    
+
     // avoid to read over the end
-    if (row>=0xFFFE) {
-      JOptionPane.showMessageDialog(this, "Address locate over $FFFF boundary", "Warning", JOptionPane.WARNING_MESSAGE);  
-      return;        
+    if (row >= 0xFFFE) {
+      JOptionPane.showMessageDialog(this, "Address locate over $FFFF boundary", "Warning", JOptionPane.WARNING_MESSAGE);
+      return;
     }
-    
-    MemoryDasm mem=null;
-    
+
+    MemoryDasm mem = null;
+
     switch (project.targetType) {
       case C128:
-      case C64:  
+      case C64:
       case C1541:
-      case PLUS4:    
-      case VIC20:     
+      case PLUS4:
+      case VIC20:
       case ATARI:
         // determine if it is of page zero or 16 bit
         switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
-            case 1:  
-              JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-              return;           
-            case 2:
-              // avoid to use not defined bytes
-              if (!project.memory[row+1].isInside) {
-                JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-                return;         
-              }
+          case 1:
+            JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+          case 2:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside) {
+              JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+              return;
+            }
 
-              // get next address
-              mem=project.memory[project.memory[row+1].copy & 0xFF];   
-              break;          
-            case 3:
-              // avoid to use not defined bytes
-              if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
-                JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-                return;         
-              }
+            // get next address
+            mem = project.memory[project.memory[row + 1].copy & 0xFF];
+            break;
+          case 3:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside || !project.memory[row + 2].isInside) {
+              JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+              return;
+            }
 
-              // get next address
-              mem=project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];     
-              break;
+            // get next address
+            mem = project.memory[(project.memory[row + 2].copy & 0xFF) * 256 + (project.memory[row + 1].copy & 0xFF)];
+            break;
         }
         break;
       case C128Z:
-        int op, iType, steps;   
-        op=project.memory[row].copy & 0xFF;
-        
-        iType=Z80Dasm.tableMnemonics[op];   
-    
+        int op,
+         iType,
+         steps;
+        op = project.memory[row].copy & 0xFF;
+
+        iType = Z80Dasm.tableMnemonics[op];
+
         switch (iType) {
           case Z80Dasm.T_CB:
-            op=project.memory[row+1].copy & 0xFF;  
-            steps=Z80Dasm.tableSizeCB[op];
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeCB[op];
             break;
           case Z80Dasm.T_DD:
-            op=project.memory[row+1].copy & 0xFF;    
-            steps=Z80Dasm.tableSizeDD[op];
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeDD[op];
 
-            if (Z80Dasm.tableMnemonicsDD[op]==Z80Dasm.T_DDCB) {
+            if (Z80Dasm.tableMnemonicsDD[op] == Z80Dasm.T_DDCB) {
               // there are an extra table  
-              op=project.memory[row+2].copy & 0xFF; 
-              steps=Z80Dasm.tableSizeDDCB[op];          
+              op = project.memory[row + 2].copy & 0xFF;
+              steps = Z80Dasm.tableSizeDDCB[op];
             }
-            break;      
+            break;
           case Z80Dasm.T_ED:
-            op=project.memory[row+1].copy & 0xFF; 
-            steps=Z80Dasm.tableSizeED[op];
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeED[op];
             break;
           case Z80Dasm.T_FD:
-            op=project.memory[row+1].copy & 0xFF; 
-            steps=Z80Dasm.tableSizeFD[op];
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeFD[op];
 
-            if (Z80Dasm.tableMnemonicsFD[op]==Z80Dasm.T_FDCB) {
-              op=project.memory[row+2].copy & 0xFF;   
-              steps=Z80Dasm.tableSizeFDCB[op];  
+            if (Z80Dasm.tableMnemonicsFD[op] == Z80Dasm.T_FDCB) {
+              op = project.memory[row + 2].copy & 0xFF;
+              steps = Z80Dasm.tableSizeFDCB[op];
             }
             break;
           default:
-  
-            steps=Z80Dasm.tableSize[op];
-            break;
-        } 
-        
-      switch (steps) {
-        case 1:
-          JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-              return;        
-        case 3:
-          // avoid to use not defined bytes
-          if (!project.memory[row+1].isInside ||!project.memory[row+2].isInside) {
-            JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-            return;         
-          }
 
-          // get next address
-          mem=project.memory[(project.memory[row+2].copy & 0xFF)*256+(project.memory[row+1].copy & 0xFF)];     
-          break;  
-        default:
-         JOptionPane.showMessageDialog(this, "Not jet implemented for this combination of bytes. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);  
-              return;    
-      }
-        
-        break;        
-  }
-    
-    
+            steps = Z80Dasm.tableSize[op];
+            break;
+        }
+
+        switch (steps) {
+          case 1:
+            JOptionPane.showMessageDialog(this, "Instruction without operand. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+          case 3:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside || !project.memory[row + 2].isInside) {
+              JOptionPane.showMessageDialog(this, "Address is incomplete. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+              return;
+            }
+
+            // get next address
+            mem = project.memory[(project.memory[row + 2].copy & 0xFF) * 256 + (project.memory[row + 1].copy & 0xFF)];
+            break;
+          default:
+            JOptionPane.showMessageDialog(this, "Not jet implemented for this combination of bytes. Skip action", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        break;
+    }
+
     addLabel(mem);
-    dataTableModelMemory.fireTableDataChanged(); 
-    jTableMemory.setRowSelectionInterval(row, row);       
+    dataTableModelMemory.fireTableDataChanged();
+    jTableMemory.setRowSelectionInterval(row, row);
   }
   
   /**
@@ -6553,7 +6582,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   }  
 
   /**
-   * Assign a reference to memory as #<
+   * Assign a reference to memory as #< and manage + or - if present
    */
   private void memLow() {
     int row=jTableMemory.getSelectedRow();
@@ -6584,35 +6613,54 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         data.add(memory.userLocation);
         
         String res="";
-        if (memory.type=='+') {
-          /// this is a memory in table label
-          int pos=memory.address-memory.related;
-          MemoryDasm mem2=project.memory[memory.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
+        switch (memory.type) {
+          case TYPE_PLUS:
+            {
+              /// this is a memory in table label
+              int pos=memory.address-memory.related;
+              MemoryDasm mem2=project.memory[memory.related];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;  
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+              else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;
+              break;
+            }
+          case TYPE_PLUS_MAJOR:
+          case TYPE_PLUS_MINOR:
+            {
+              /// this is a memory in table label
+              int rel=(memory.related>>16) &0xFFFF;
+              int pos=memory.address-rel;
+              MemoryDasm mem2=project.memory[rel];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+              else res="$"+Shared.ShortToExe(rel)+"+"+pos;
+              break;
+            }
+          case TYPE_MINUS:
+            {
+              /// this is a memory in table label
+              int pos=memory.address-memory.related;
+              MemoryDasm mem2=project.memory[memory.related];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+              else res="$"+Shared.ShortToExe((int)memory.related)+pos;
+              break;
+            }
+          case TYPE_MINUS_MAJOR:
+          case TYPE_MINUS_MINOR:
+            {
+              /// this is a memory in table label
+              int rel=(memory.related>>16) &0xFFFF;
+              int pos=memory.address-rel;
+              MemoryDasm mem2=project.memory[rel];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+              else res="$"+Shared.ShortToExe(rel)+"+"+pos;
+              break;
+            }            
         }
-    
-        if (memory.type=='^' || memory.type=='\\') {
-          /// this is a memory in table label
-          int rel=(memory.related>>16) &0xFFFF;
-          int pos=memory.address-rel;
-          MemoryDasm mem2=project.memory[rel];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+Shared.ShortToExe(rel)+"+"+pos;  
-        }    
-    
-        if (memory.type=='-') {
-          /// this is a memory in table label
-          int pos=memory.address-memory.related;
-          MemoryDasm mem2=project.memory[memory.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
-          else res="$"+Shared.ShortToExe((int)memory.related)+pos;  
-        }         
-        data.add(res);
-          
+        
+        data.add(res);          
         rows.add(data);
       }
     }
@@ -6629,23 +6677,47 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='>' || project.memory[row].type=='<' || 
-            project.memory[row].type=='^' || project.memory[row].type=='\\') {
+        if (project.memory[row].type==TYPE_MAJOR || 
+            project.memory[row].type==TYPE_MINOR || 
+            project.memory[row].type==TYPE_PLUS_MAJOR || 
+            project.memory[row].type==TYPE_PLUS_MINOR || 
+            project.memory[row].type==TYPE_MINUS_MAJOR || 
+            project.memory[row].type==TYPE_MINUS_MINOR) {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-            project.memory[row].type=' ';
-            project.memory[row].related=-1;
+            // + and <, or - ans < ?
+              switch (project.memory[row].type) { 
+                case TYPE_PLUS_MAJOR:
+                  project.memory[row].type=TYPE_PLUS;
+                  project.memory[row].related>>=8;
+                  break;
+                case TYPE_MINUS_MAJOR:
+                  project.memory[row].type=TYPE_MINUS;
+                  project.memory[row].related>>=8;
+                  break;
+                default:
+                  project.memory[row].type=TYPE_EMPTY;
+                  project.memory[row].related=-1;
+                  break;
+              }
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
       } else {                                
-           if (project.memory[row].type=='+') {
-               project.memory[row].type='\\';
-               project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
-           } else {
-               project.memory[row].type='<';
-               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
-           }
-         }
+          switch (project.memory[row].type) {
+            case TYPE_PLUS:
+              project.memory[row].type=TYPE_PLUS_MINOR;
+              project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+              break;
+            case TYPE_MINUS:
+              project.memory[row].type=TYPE_MINUS_MINOR;
+              project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+              break;
+            default:
+              project.memory[row].type=TYPE_MINOR;
+              project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+              break;
+          }
+        }
        
       dataTableModelMemory.fireTableDataChanged();      
       jTableMemory.setRowSelectionInterval(row, row); 
@@ -6654,6 +6726,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
 
   /**
    * Assign two references to memory as #< and #>
+   * In presence of + or - it uses both definitions over < and >
    */
   private void memLowHigh() {
     int row=jTableMemory.getSelectedRow();
@@ -6680,12 +6753,30 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
     
       low.related=address;          
-      if (low.type=='+') high.type='\\';
-      else low.type='<';      
+      switch (low.type) {
+        case TYPE_PLUS:
+          high.type=TYPE_PLUS_MINOR;      
+          break;
+        case TYPE_MINUS:
+          high.type=TYPE_MINUS_MINOR;
+          break;
+        default:
+          low.type=TYPE_MINOR;
+          break;
+      }
       
       high.related=address;
-      if (high.type=='+') high.type='^';
-      else high.type='>';     
+      switch (high.type) {
+        case TYPE_PLUS:
+          high.type=TYPE_PLUS_MAJOR;     
+          break;
+        case TYPE_MINUS:
+          high.type=TYPE_MINUS_MAJOR;
+          break;
+        default:
+              high.type=TYPE_MAJOR;
+          break;
+      }
       
       low.relatedAddressBase=0;
       low.relatedAddressDest=0;
@@ -6698,7 +6789,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   }  
   
 /**
-   * Assign two references to memory as #> and #<
+   * Assign two references to memory as #> and #< 
+   * In presence of + or - it uses both definitions over < and >
    */
   private void memHighLow() {
     int row=jTableMemory.getSelectedRow();
@@ -6725,13 +6817,30 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       address=(low.copy & 0xFF) + ((high.copy & 0xFF)<<8);
     
       low.related=address;          
-      if (low.type=='+') low.type='\\';
-      else low.type='<';
-      
-      
+      switch (low.type) {
+        case TYPE_PLUS:
+          low.type=TYPE_PLUS_MINOR;
+          break;
+        case TYPE_MINUS:
+          low.type=TYPE_MINUS_MINOR;
+          break;
+        default:
+          low.type=TYPE_MINOR;
+          break;
+      }
+            
       high.related=address;
-      if (high.type=='+') high.type='^';
-      else high.type='>';    
+      switch (high.type) {
+        case TYPE_PLUS:
+          high.type=TYPE_PLUS_MAJOR;    
+          break;
+        case TYPE_MINUS:
+          high.type=TYPE_MINUS_MAJOR;
+          break;
+        default:
+          high.type=TYPE_MAJOR;
+          break;
+      }
       
       low.relatedAddressBase=0;
       low.relatedAddressDest=0;
@@ -6744,7 +6853,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   }    
   
   /**
-   * Assign a reference to memory as #>
+   * Assign a reference to memory as #> and manage + or - if present
    */
   private void memHigh() {
     int row=jTableMemory.getSelectedRow();
@@ -6775,35 +6884,54 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         data.add(memory.userLocation);
         
         String res="";
-        if (memory.type=='+') {
-          /// this is a memory in table label
-          int pos=memory.address-memory.related;
-          MemoryDasm mem2=project.memory[memory.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;  
+        switch (memory.type) {
+          case TYPE_PLUS:
+            {
+              /// this is a memory in table label
+              int pos=memory.address-memory.related;
+              MemoryDasm mem2=project.memory[memory.related];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;  
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+              else res="$"+Shared.ShortToExe((int)memory.related)+"+"+pos;
+              break;
+            }
+          case TYPE_PLUS_MAJOR:
+          case TYPE_PLUS_MINOR:
+            {
+              /// this is a memory in table label
+              int rel=(memory.related>>16) &0xFFFF;
+              int pos=memory.address-rel;
+              MemoryDasm mem2=project.memory[rel];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
+              else res="$"+Shared.ShortToExe(rel)+"+"+pos;
+              break;
+            }
+          case TYPE_MINUS:
+            {
+              /// this is a memory in table label
+              int pos=memory.address-memory.related;
+              MemoryDasm mem2=project.memory[memory.related];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+              else res="$"+Shared.ShortToExe((int)memory.related)+pos;
+              break;
+            }
+          case TYPE_MINUS_MAJOR:
+          case TYPE_MINUS_MINOR:
+            {
+              /// this is a memory in table label
+              int rel=(memory.related>>16) &0xFFFF;
+              int pos=memory.address-rel;
+              MemoryDasm mem2=project.memory[rel];
+              if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
+              else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
+              else res="$"+Shared.ShortToExe(rel)+pos;
+              break;
+            }            
         }
-    
-        if (memory.type=='^' || memory.type=='\\') {
-          /// this is a memory in table label
-          int rel=(memory.related>>16) &0xFFFF;;
-          int pos=memory.address-rel;
-          MemoryDasm mem2=project.memory[rel];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+"+"+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+"+"+pos;
-          else res="$"+Shared.ShortToExe(rel)+"+"+pos;  
-        }    
-    
-        if (memory.type=='-') {
-          /// this is a memory in table label
-          int pos=memory.address-memory.related;
-          MemoryDasm mem2=project.memory[memory.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) res=mem2.userLocation+pos;
-          else if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) res=mem2.dasmLocation+pos;
-          else res="$"+Shared.ShortToExe((int)memory.related)+pos;  
-        }         
-        data.add(res);
-          
+        
+        data.add(res);         
         rows.add(data);
       }
     }
@@ -6820,28 +6948,46 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       
        int rowS=table.getSelectedRow();
        if (rowS<0) {
-         if (project.memory[row].type=='>' || project.memory[row].type=='<' || 
-             project.memory[row].type=='^' || project.memory[row].type=='\\') {
+         if (project.memory[row].type==TYPE_MAJOR || 
+             project.memory[row].type==TYPE_MINOR || 
+             project.memory[row].type==TYPE_PLUS_MAJOR || 
+             project.memory[row].type==TYPE_PLUS_MINOR || 
+             project.memory[row].type==TYPE_MINUS_MAJOR || 
+             project.memory[row].type==TYPE_MINUS_MINOR) {
             if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-              // + and < ?
-              if (project.memory[row].type=='^') { 
-                  project.memory[row].type='+';
+              // + and <, or - ans < ?
+              switch (project.memory[row].type) { 
+                case TYPE_PLUS_MAJOR:
+                  project.memory[row].type=TYPE_PLUS;
                   project.memory[row].related>>=8;
-              } else {
-                  project.memory[row].type=' ';
+                  break;
+                case TYPE_MINUS_MAJOR:
+                  project.memory[row].type=TYPE_MINUS;
+                  project.memory[row].related>>=8;
+                  break;
+                default:
+                  project.memory[row].type=TYPE_EMPTY;
                   project.memory[row].related=-1;
-              }              
+                  break;
+              }
             }
          } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
          return;
        } else {                  
-           if (project.memory[row].type=='+') {
-               project.memory[row].type='^';
+           switch (project.memory[row].type) {
+             case TYPE_PLUS:
+               project.memory[row].type=TYPE_PLUS_MAJOR;
                project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
-           } else {
-               project.memory[row].type='>';
-               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);  
-           }
+               break;
+             case TYPE_MINUS:
+               project.memory[row].type=TYPE_MINUS_MAJOR;
+               project.memory[row].related=(project.memory[row].related<<16)+Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+               break;
+             default:
+               project.memory[row].type=TYPE_MAJOR;
+               project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+               break;
+        }
          }
        
        dataTableModelMemory.fireTableDataChanged();
@@ -6888,7 +7034,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     if ((data.length % 2)!=0) {        
       JOptionPane.showMessageDialog(this, "Invalid sequences of bytes. Bytes must be hex with 2 chars, like: 0x01 $02 03 ", "Warning", JOptionPane.WARNING_MESSAGE);
       return;
-    };
+    }
     
     int pos=jTableMemory.getSelectedRow()+1;
     // be dure to restart if this is the case
@@ -6998,20 +7144,22 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='+' || project.memory[row].type=='^' || project.memory[row].type=='\\') {
+        if (project.memory[row].type==TYPE_PLUS || 
+            project.memory[row].type==TYPE_PLUS_MAJOR || 
+            project.memory[row].type==TYPE_PLUS_MINOR) {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
               // + and < ?
               switch (project.memory[row].type) {
-                  case '^':
-                      project.memory[row].type='>';
+                  case TYPE_PLUS_MAJOR:
+                      project.memory[row].type=TYPE_MAJOR;
                       project.memory[row].related&=0xFFFF;
                       break;
-                  case '\\':
-                      project.memory[row].type='<';
+                  case TYPE_PLUS_MINOR:
+                      project.memory[row].type=TYPE_MINOR;
                       project.memory[row].related&=0xFFFF;
                       break;
                   default:   
-                      project.memory[row].type=' ';
+                      project.memory[row].type=TYPE_EMPTY;
                       project.memory[row].related=-1;
                       break;
               }
@@ -7023,16 +7171,16 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         return;
       } else {         
           switch (project.memory[row].type) {
-              case '>':
-                  project.memory[row].type='^';
+              case TYPE_MAJOR:
+                  project.memory[row].type=TYPE_PLUS_MAJOR;
                   project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
                   break;
-              case '<':
-                  project.memory[row].type='\\';
+              case TYPE_MINOR:
+                  project.memory[row].type=TYPE_PLUS_MINOR;
                   project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
                   break;
               default:
-                  project.memory[row].type='+';
+                  project.memory[row].type=TYPE_PLUS;
                   project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
                   break;
           }
@@ -7117,6 +7265,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
             if (memProject.dataType!=DataType.NONE) memProject.dataType=memMerge.dataType;
             
             if (memProject.index==-1) memProject.index=memMerge.index;
+            if (memProject.relatedAddressBase==0) memProject.relatedAddressBase=memMerge.relatedAddressBase;
+            if (memProject.relatedAddressDest==0) memProject.relatedAddressDest=memMerge.relatedAddressDest;
           }
        }
        
@@ -7186,16 +7336,29 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         
       int rowS=table.getSelectedRow();
       if (rowS<0) {
-        if (project.memory[row].type=='-') {
+        if (project.memory[row].type==TYPE_MINUS) {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-            project.memory[row].type=' ';
-            project.memory[row].related=-1;
+            // - and <,> ?
+            switch (project.memory[row].type) {
+                  case TYPE_MINUS_MAJOR:
+                      project.memory[row].type=TYPE_MAJOR;
+                      project.memory[row].related&=0xFFFF;
+                      break;
+                  case TYPE_MINUS_MINOR:
+                      project.memory[row].type=TYPE_MINOR;
+                      project.memory[row].related&=0xFFFF;
+                      break;
+                  default:   
+                      project.memory[row].type=TYPE_EMPTY;
+                      project.memory[row].related=-1;
+                      break;
+            }
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
       } else {         
            mem.related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);          
-           mem.type='-';
+           mem.type=TYPE_MINUS;
         }
        
       dataTableModelMemory.fireTableDataChanged();
@@ -7815,6 +7978,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
         memP.isGarbage=memC.isGarbage;
         memP.index=memC.index;
         memP.dataType=memC.dataType;
+        memP.relatedAddressBase=memC.relatedAddressBase;
+        memP.relatedAddressDest=memC.relatedAddressDest;
       }
     } catch (Exception e) {
         System.err.println(e);

@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
 import sw_emulator.software.MemoryDasm;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 
 /**
  * DataTableModel for labels
@@ -72,7 +76,8 @@ public class DataTableModelLabels extends AbstractTableModel {
     
     data2.clear();
     for (MemoryDasm mem:data) {
-      if ((mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) || (mem.userLocation!=null && !"".equals(mem.userLocation))) data2.add(mem);
+      if ((mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) || 
+          (mem.userLocation!=null && !"".equals(mem.userLocation))) data2.add(mem);
     }
   }
   
@@ -128,21 +133,24 @@ public class DataTableModelLabels extends AbstractTableModel {
           return memory.dasmLocation;            
         case UL:            
           MemoryDasm  mem;
-          if (memory.type=='+' || memory.type=='-' || memory.type=='^' || memory.type=='\\') {
+          if (memory.type==TYPE_PLUS || 
+              memory.type==TYPE_MINUS || 
+              memory.type==TYPE_PLUS_MAJOR || 
+              memory.type==TYPE_PLUS_MINOR) {
             
-            if (memory.type=='+') {
+            if (memory.type==TYPE_PLUS) {
               mem=data[memory.related];
               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-memory.related); 
               else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-memory.related);
                    else return "$"+ShortToExe(mem.address)+"+"+(memory.address-memory.related);
             } 
-            if (memory.type=='-') {
+            if (memory.type==TYPE_MINUS) {
                mem=data[memory.related];
                if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+(memory.address-memory.related); 
                   else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation))return mem.dasmLocation+(memory.address-memory.related);
                        else return "$"+ShortToExe(mem.address)+(memory.address-memory.related);                 
             }   
-            if (memory.type=='^' || memory.type=='\\') {
+            if (memory.type==TYPE_PLUS_MAJOR || memory.type==TYPE_PLUS_MINOR) {
               mem=data[(memory.related>>16) & 0xFFFF];  
               if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF)); 
               else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation+"+"+(memory.address-((memory.related>>16) & 0xFFFF));
