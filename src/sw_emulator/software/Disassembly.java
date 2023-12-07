@@ -1192,16 +1192,40 @@ public class Disassembly {
       markInside(block.inB, block.startAddress, block.endAddress, block.startBuffer);            
      
       // search for SID frequency table
-      if (option.useSidFreq)
+      if (option.useSidFreq) {
           SidFreq.instance.identifyFreq(block.inB, memory, block.startBuffer, 
              block.endBuffer, block.startAddress-block.startBuffer,
              option.sidFreqLoLabel, option.sidFreqHiLabel, 
              option.sidFreqMarkMem, option.sidFreqCreateLabel,
-             option.sidFreqCreateComment);      
+             option.sidFreqCreateComment);    
+      }
+      
+      String player="";
+      
+      if (option.showSidId) {
+        int[] buf=new int[block.endAddress-block.startAddress+1];
+        int j=0;
+        for (int i=block.startBuffer; i<=block.startBuffer+block.endAddress-block.startAddress; i++) {
+          buf[j]=(char)block.inB[i] & 0xFF;
+          j++;
+        }                 
+        
+        player=SidId.instance.identifyBuffer(buf, buf.length);
+      }
 
       // add an offset due to previous strings added
       if (asSource) {
-        assembler.setOrg(tmp, block.startAddress);        
+        assembler.setOrg(tmp, block.startAddress);  
+        if (!"".equals(player)) {
+          
+          MemoryDasm mem=new MemoryDasm();
+          mem.userBlockComment=" \n"+
+                               "*********************\n"+
+                               " PLAYER: "+player+"\n"+
+                               "*********************\n"+
+                               " \n"; 
+          assembler.setBlockComment(builder, mem);
+        }
         actualCarets.setOffset(tmp.length());
         tmp.append(prg.csdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
       } else {    

@@ -426,8 +426,12 @@ public class FileManager {
       option.chooserPerc=in.readBoolean();
       option.showMiniature=in.readBoolean();
       
-      // 2.6
+      // 2.7
       option.syntaxTheme=in.readUTF();
+      
+      // 2.8
+      option.showSidId=in.readBoolean();
+      option.sidIdPath=in.readUTF();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -801,6 +805,10 @@ public class FileManager {
       
       // 2.7
       out.writeUTF(option.syntaxTheme);
+      
+      // 2.8
+      out.writeBoolean(option.showSidId);
+      out.writeUTF(option.sidIdPath);
       
       out.flush();
       out.close();

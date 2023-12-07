@@ -265,7 +265,7 @@ public class Option {
    */
   public static void installLook()  {   
     for (FlatLaf laf : LAF_SYNTH_FLAT) {
-      FlatLaf.setup(laf);
+      //FlatLaf.setup(laf);
     }
   }  
     
@@ -335,6 +335,9 @@ public class Option {
   /** Temporary path */
   public String tmpPath="";
   
+  /** SidId file path */
+  public String sidIdPath="";
+  
   /** Use SID frequency*/
   public boolean useSidFreq=true;
   
@@ -370,6 +373,9 @@ public class Option {
   
   /** Create Sap heather */
   public boolean createSAP=true;  
+  
+  /** Show SidId player information */
+  public boolean showSidId=false;
   
   /** Number of spaces in starting row of instruction */
   public int numInstrSpaces=6;

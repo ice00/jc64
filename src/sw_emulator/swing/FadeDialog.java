@@ -97,6 +97,7 @@ public class FadeDialog extends JDialog {
     if (egg==null) return;
       
     super.setLocationRelativeTo(parent);
+    super.setLocation(0, 0);
     setAlwaysOnTop(true);
     
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
