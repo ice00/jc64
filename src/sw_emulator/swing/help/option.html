@@ -26,7 +26,7 @@
   <li><b>Language of comments</b>: automatic comments added by disassembler engine can be in English or Italian</li>
   <li><b>Memory value in left panel</b>: select the format from exadecimal or char for the value in the merory panel table</li>
   <li><b>Type of dots (sprite/char) in comment:</b> select to use ASCII chars or UTF16 chars for dots of sprites/chars used in comment to show the outfit<br>
-       <img src="./option23.png"></p>  
+       <img src="./option23.png"> 
   </li>
   <li><b>Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for preview</b>: in preview of source uses upper or lower text case formatting</li>
   <li><b>Opcode formatting as Upper case (NOP, JMP, ...) insteas of Lower case (nop, jmp, ...) for source</b>: in source uses upper or lower text case formatting</li>
@@ -47,6 +47,7 @@
   <li><b>Code with undocument opcodes are forced to be of data type</b>: automatically force code to be data to avoid the use of illegal opcodes</li>
   <li><b>Show miniature scrollbars</b>: use a right miniature of the source dor better slelecting area</li>
   <li><b>Project file chooser shows colored icons based onto % of disassembly</b>: this slow down the file opening when there are manu files in the directory, but the colored icons gives an idea of percentual of disassembly (it is not precise for being quick)</li>
+  <li><b>Show SIDid player information</b>: use the Sidid.cfg for showing the player if it is recognized</li>
   <li><b>Create PSID header:</b> create values in source for regenerating the binary as a PSID file and not PRG for tune. 
       <ul>
           <li><b>Did not create PSID labels:</b> not generate the automatic labels for PSID init and play addresses.</li>
@@ -95,6 +96,7 @@
   <li><b>Separator from opcode and operand in source:</b> select how many spaces/tabs you want to separate opcode and operand. Due to the different length of opcode in processors, with 1 or 2 spaces it can break the aligment. Optimal minimal is 2 for M6502 and 3 for Z80.</li>
   <li><b>Font size for editor:</b> select the font size for preview and source text.</li>
   <li><b>Temp path for assembler compilation:</b> a path used for generating the binary of assembler. The best way is to use a memory drive (/tmp in most of Linux ditribution for example) as the generated files are to be considearte temporary</li>
+  <li><b>SIDid configuration file:</b> the path to the Sidiid.cfg file used by SIDid program to determine the player</li>
  </ul>
  The disassembler engine used the SidFreq class implemented in XSidplay2 for detecting the A4 frequency that a tune is playing by searching in memory for the low and high part of table frequency of the octaves the SID can play.<br>
  Where such area is find, it will be marked ad data kind and the label for low and high position are generated as user label and a comment is added for giving the A4 frequency information<br>

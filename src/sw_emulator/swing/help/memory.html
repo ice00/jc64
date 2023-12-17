@@ -204,11 +204,26 @@
    <p>This declare the selected couple of bytes as #&lt; #&gt; of the address formed by his low/high value</p>
  
    <h2>Assign the 2 tables as #&gt; #&lt;</h2>
-   <p>This open a dialog that ask for starting and ending position of low addresses and the starting and ending position of high address. 
-   Then it automatically assign the correct values in the two tables as a memory word pointer.
-   </p>
    
-  <p align="center"><img src="./memory17.png"></p> 
+   <p align="center"><img src="./memory17.png"></p> 
+   
+   <p>This open a dialog that has three parts:</p>
+    <ol>   
+       <li>Automatic assign of low/high pointers from two tables. The first table is done by selecting <i>Starting of low values</i> and 
+           <i>Ending of low values</i>, the second by <i>Starting of high value</i> and <i>Ending of high value</i>. Pressing the OK button, 
+           then it automatically assign the correct values in the two tables as a memory word pointer.
+       </li>
+       <li>This allow to generate the low/high address from low and high table of a given size, and generate the label automatically (using <i>Start</i> prefix and a number of numeric <i>Digit</i>)           
+       </li>
+       <li>Assign #&lt; #&gt; related relative address. This fuction operated to the selected memory area and assume that you are selecting couples of low and high memory pointes.<br>
+           It ask for the <i>Base (real) address</i> and for the <i>Destination address</i>. This is for mapping some relative memory pointes to an area that will be relocated before use it.<br>
+           So, for example, the reference to <i>t1Patt05</i> that is relative to <i>t1Patt00</i> in the declaration of it (left panel in the image), is instead refetenced to <i>dataBuffer</i> when used at run-time (right panel in the image)
+       </li>
+    </ol>     
+   
+   <p align="center"><img src="./memory20.png"></p> 
+   
+   <p>The first tow functions are bettere replaced by the Wizard that allow to see the result in real-time before apply it.</p>
   
    <h2>Assign the 2 selected addresss as #&gt; #&lt;</h2>
    <p>This declare the selected couple of bytes as #&gt; #&lt; of the address formed by his high/low value</p>
