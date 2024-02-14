@@ -165,6 +165,7 @@ public class SidFreq {
       if (actIndex<0) shortLinearTable();
       if (actIndex<0) shortCombinedTable();
       if (actIndex<0) highOctaveCombined();
+      if (actIndex<0) highOctaveCombinedInv();
       if (actIndex<0) lowOctaveCombined();
       if (actIndex<0) highOctave12();
     } catch (Exception e) {
@@ -553,10 +554,11 @@ public class SidFreq {
          ( ((int)inB[index+0]!=1) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1) ) &&
          ( ((int)inB[index+0]!=0) || ((int)inB[index+1]!=1) || ((int)inB[index+2]!=1) || ((int)inB[index+3]!=1))
        ) return false;
-   
+
     // search for increasing numbers
     for (i=index+3; i<index+TABLE; i++) {
       if ((int)(inB[i]& 0xFF)<actual) {
+        System.err.println(""+actual+" "+(int)(inB[i]& 0xFF));
         // catch a very big error on Vibrants/JO note table at 424Hz 
         if (actual==7 && (int)(inB[i]& 0xFF)==3 && (int)(inB[i-2]& 0xFF)==3)  actual=((int)inB[i]& 0xFF); 
         else return false;
@@ -745,7 +747,7 @@ public class SidFreq {
     boolean errSoundTracker=false;
     boolean errGrooPsygon=false;
     boolean errVibrantsJO=false;
-    
+ 
     // only accept Mastercomposer 0-ff initial value
     if (inB[high]==0 && inB[index]!= -1) return false;
     
@@ -767,8 +769,8 @@ public class SidFreq {
       if (i<11) diff+=Math.abs(note5*2 - note6);  
       if (i<11) diff+=Math.abs(note6*2 - note7);
     
-      //if (i>0) System.err.println(high+"  "+index+"   "+i+" "+diff);    
-
+      if (i>0) System.err.println(high+"  "+index+"   "+i+" "+diff);    
+      
       // catch error into Vibrants/JO note table at 416Hz  
       if (i==0 && diff==212) continue;  
       
@@ -790,6 +792,9 @@ public class SidFreq {
             continue;
         }        
       }
+      
+      // catch errors in Odie tiny (table 440Hz)
+      if (i==1 && diff==10) continue;    
       
       // catch 2 errors in Kenneth Arnold player (table 424Hz)
       if (i==1 && diff==8) continue;    
@@ -1181,7 +1186,7 @@ public class SidFreq {
   }    
   
   /**
-   * Looks for an high octave table
+   * Looks for an high octave table in low/high format
    * 
    * @return true if it is find
    */
@@ -1224,6 +1229,57 @@ public class SidFreq {
           markMemory(i, i+13, 1);
           
           System.out.println("SIDFREQ: HighOctaveCombined");
+          return true; // we force to find only the first 
+        }
+    }      
+    
+    return false;      
+  }  
+  
+  /**
+   * Looks for an high octave table in high/low format
+   * 
+   * @return true if it is find
+   */
+  private boolean highOctaveCombinedInv() {
+    final double STEP=Math.pow(2, 1/12);
+    int[] freq=new int[12];
+      
+    for (int i=start; i<end-13*2; i++) {
+
+        freq[0]=(int)(inB[i]& 0xFF)*256+(int)(inB[i+1]& 0xFF); 
+        if (freq[0]==0) continue;
+        freq[1]=(int)(inB[i+2]& 0xFF)*256+(int)(inB[i+3]& 0xFF);
+        if (freq[1]==0 || freq[1]<=freq[0] || Math.abs(freq[1]/freq[0]-STEP)>0.00001) continue;        
+        freq[2]=(int)(inB[i+4]& 0xFF)*256+(int)(inB[i+5]& 0xFF);
+        if (freq[2]==0 || freq[2]<=freq[1] || Math.abs(freq[2]/freq[1]-STEP)>0.00001) continue;
+        freq[3]=(int)(inB[i+6]& 0xFF)*256+(int)(inB[i+7]& 0xFF);
+        if (freq[3]==0 || freq[3]<=freq[2] || Math.abs(freq[3]/freq[2]-STEP)>0.00001) continue;
+        freq[4]=(int)(inB[i+8]& 0xFF)*256+(int)(inB[i+9]& 0xFF);
+        if (freq[4]==0 || freq[4]<=freq[3] || Math.abs(freq[4]/freq[3]-STEP)>0.00001) continue;
+        freq[5]=(int)(inB[i+10]& 0xFF)*256+(int)(inB[i+11]& 0xFF);        
+        if (freq[5]==0 || freq[5]<=freq[4] || Math.abs(freq[5]/freq[4]-STEP)>0.00001) continue;
+        freq[6]=(int)(inB[i+12]& 0xFF)*256+(int)(inB[i+13]& 0xFF);
+        if (freq[6]==0 || freq[6]<=freq[5] || Math.abs(freq[6]/freq[5]-STEP)>0.00001) continue;
+        freq[7]=(int)(inB[i+14]& 0xFF)*256+(int)(inB[i+15]& 0xFF);
+        if (freq[7]==0 || freq[7]<=freq[6] || Math.abs(freq[7]/freq[6]-STEP)>0.00001) continue;
+        freq[8]=(int)(inB[i+16]& 0xFF)*256+(int)(inB[i+17]& 0xFF);
+        if (freq[8]==0 || freq[8]<=freq[7] || Math.abs(freq[8]/freq[7]-STEP)>0.00001) continue;
+        freq[9]=(int)(inB[i+18]& 0xFF)*256+(int)(inB[i+19]& 0xFF);
+        if (freq[9]==0 || freq[9]<=freq[8] || Math.abs(freq[9]/freq[8]-STEP)>0.00001) continue;
+        freq[10]=(int)(inB[i+20]& 0xFF)*256+(int)(inB[i+21]& 0xFF);
+        if (freq[10]==0 || freq[10]<=freq[9] || Math.abs(freq[10]/freq[9]-STEP)>0.00001) continue;
+        freq[11]=(int)(inB[i+22]& 0xFF)*256+(int)(inB[i+23]& 0xFF);
+        if (freq[11]==0 || freq[11]<=freq[10] || Math.abs(freq[11]/freq[10]-STEP)>0.00001) continue;
+        
+        if (freq[11]<62000) continue;
+
+        if (!checkGarbage(i, i+26)) {
+          addData(i+1, i, freq[9]/8);
+          markMemory(i+13, i+26, 1);
+          markMemory(i, i+13, 1);
+          
+          System.out.println("SIDFREQ: HighOctaveCombinedInv");
           return true; // we force to find only the first 
         }
     }      
