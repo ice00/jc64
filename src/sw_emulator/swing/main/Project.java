@@ -41,13 +41,14 @@ import sw_emulator.software.MemoryDasm;
  * Version 6: add constants for 16bits
  * Version 7: gzip format
  * Version 8: add 16 constants instead of 10
- * Version 9: memorydasm has related address base/dest
+ * Version 9: add related relocation addresses
+ * Version 10: add basic type
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=9;       
+  public static final byte ACTUAL_VERSION=10;       
     
   /** Type of the file */
   public FileType fileType;

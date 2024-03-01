@@ -323,9 +323,125 @@ public interface userAction {
   /** Memory sub 19 assigment */
   public static final int MEM_SUB_19 = 99;
   
-  /** Un-ark memory */
+  /** Un-mark memory */
   public static final int MEM_UNMARK = 100;
   
+  /** Un-mark basic memory */
+  public static final int MEM_BASIC_NONE = 101;
+  
+  /** Basic V2.0 memory area */
+  public static final int MEM_BASIC_V2_0 = 102;
+  
+  /** Basic V3.5 memory area */
+  public static final int MEM_BASIC_V3_5 = 103;  
+  
+  /** Basic V4.0 memory area */
+  public static final int MEM_BASIC_V4_0 = 104;
+  
+  /** Basic V7.0 memory area */
+  public static final int MEM_BASIC_V7_0 = 105;   
+  
+  /** Basic Simon memory area */
+  public static final int MEM_BASIC_SIMON = 106;   
+  
+  /** Basic Andre Fschat memory area */
+  public static final int MEM_BASIC_ANDRE_FACHAT = 107;   
+  
+  /** Basic Speech memory area */
+  public static final int MEM_BASIC_SPEECH = 108;   
+  
+  /** Basic Final Cartridge III memory area */
+  public static final int MEM_BASIC_FINAL_CART3 = 109;  
+  
+  /** Basic Ultrabasic memory area */
+  public static final int MEM_BASIC_ULTRABASIC = 110;  
+  
+  /** Basic Graphics memory area */
+  public static final int MEM_BASIC_GRAPHICS = 111;  
+
+  /** Basic WS memory area */
+  public static final int MEM_BASIC_WS = 112;
+  
+  /** Basic Pegasus v4.0 memory area */
+  public static final int MEM_BASIC_PEGASUS = 113;  
+  
+  /** Basic Xbasic memory area */
+  public static final int MEM_BASIC_XBASIC = 114;  
+  
+  /** Basic Drago v2.2 memory area */
+  public static final int MEM_BASIC_DRAGO = 115;
+  
+  /** Basic Reu memory area */
+  public static final int MEM_BASIC_REU = 116;  
+  
+  /** Basic Lightning memory area */
+  public static final int MEM_BASIC_LIGHTNING = 117;
+  
+  /** Basic Magic memory area */
+  public static final int MEM_BASIC_MAGIC = 118;  
+
+  /** Basic Blark memory area */
+  public static final int MEM_BASIC_BLARG = 119;  
+  
+  /** Basic WS Final memory area */
+  public static final int MEM_BASIC_WS_FINAL = 120;  
+  
+  /** Basic Game memory area */
+  public static final int MEM_BASIC_GAME = 121;  
+  
+  /** Basic Basex memory area */
+  public static final int MEM_BASIC_BASEX = 122;   
+  
+  /** Basic Super memory area */
+  public static final int MEM_BASIC_SUPER = 123;    
+  
+  /** Basic Expanded memory area */
+  public static final int MEM_BASIC_EXPANDED = 124;    
+  
+  /** Basic Super Expander Chip memory area */
+  public static final int MEM_BASIC_SUPER_EXPANDER_CHIP = 125;   
+   
+  /** Basic Warsaw memory area */
+  public static final int MEM_BASIC_WARSAW = 126; 
+  
+  /** Basic DBS memory area */
+  public static final int MEM_BASIC_DBS = 127;   
+  
+  /** Basic Kipper memory area */
+  public static final int MEM_BASIC_KIPPER = 128;  
+  
+  /** Basic Bails memory area */
+  public static final int MEM_BASIC_BAILS = 129;   
+  
+  /** Basic Eve memory area */
+  public static final int MEM_BASIC_EVE = 130;   
+  
+  /** Basic Tool memory area */
+  public static final int MEM_BASIC_TOOL = 131;  
+  
+  /** Basic Super Expander memory area */
+  public static final int MEM_BASIC_SUPER_EXPANDER = 132;    
+  
+  /** Basic Turtle memory area */
+  public static final int MEM_BASIC_TURTLE = 133;   
+  
+  /** Basic Easy memory area */
+  public static final int MEM_BASIC_EASY = 134;
+  
+  /** Basic V4 memory area */
+  public static final int MEM_BASIC_V4 = 135;  
+  
+  /** Basic V5 memory area */
+  public static final int MEM_BASIC_V5 = 136;    
+  
+  /** Basic Expanded V20 memory area */
+  public static final int MEM_BASIC_EXPANDED_V20 = 137;   
+  
+  /** Basic Handy memory area */
+  public static final int MEM_BASIC_HANDY = 138;  
+  
+  /** Basic V8 memory area */
+  public static final int MEM_BASIC_V8 = 139;  
   /**
    * Execute the passed user action
    * 

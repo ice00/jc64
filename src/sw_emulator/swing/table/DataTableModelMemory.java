@@ -24,6 +24,7 @@
 package sw_emulator.swing.table;
 
 import javax.swing.table.AbstractTableModel;
+import sw_emulator.software.BasicDetokenize.BasicType;
 import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Option;
@@ -142,6 +143,8 @@ public class DataTableModelMemory extends AbstractTableModel {
           return memory.userBlockComment!=null;     
         case RE:
           String val="";  
+          
+          // show constant number/symbols
           if (memory.index!=-1) {
             switch (memory.index) {
               case 10:  
@@ -180,10 +183,12 @@ public class DataTableModelMemory extends AbstractTableModel {
             }  
               
           } 
-            
+          
+          // add Basic data indicator (it is generic)
+          if (memory.basicType != BasicType.NONE) val+="|";  
+                    
           if (memory.type!=' ') return ""+memory.dataType.getChar()+memory.type+val;
           else return ""+memory.dataType.getChar()+val;
-                 
     }  
     return "";
   }

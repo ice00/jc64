@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import sw_emulator.software.BasicDetokenize.BasicType;
 import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
 import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
@@ -196,6 +197,15 @@ public class Assembler {
       */   
       void flush(StringBuilder str);
       
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem
+       * @param option the option to use
+       */
+      void putValue(StringBuilder str, MemoryDasm mem, Option option);
+      
       /** 
        * Setting up the action type if this is the case
        * 
@@ -316,6 +326,17 @@ public class Assembler {
             break;     
         }  
       }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {       
+      }
    } 
    
    /**
@@ -348,6 +369,17 @@ public class Assembler {
             break;
         }    
       }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {     
+      }      
    }
    
    /**
@@ -379,6 +411,17 @@ public class Assembler {
         }
         
         carets.add(start, str.length(), lastMem, Type.LABEL);
+      }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {       
       }
     }    
    
@@ -420,6 +463,17 @@ public class Assembler {
         
         carets.add(start, str.length(), lastMem, Type.COMMENT);
       }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {        
+      }      
     }  
    
    /**
@@ -457,7 +511,7 @@ public class Assembler {
         
         // there macro in comment?
         if (lastMem.userBlockComment.contains("[<")) {
-            
+
           // expand them  
           String tmp;
           String[] tmpLines;
@@ -631,6 +685,17 @@ public class Assembler {
               
         carets.add(start, str.length(), lastMem, Type.BLOCK_COMMENT);
       }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {  
+      }      
       
       /** Enum for direction of blocks in memory */
       enum Dir {NONE, UPDN, DNUP};
@@ -831,6 +896,8 @@ public class Assembler {
       ZEROEIGHT_BYTE,     //   !08 $xx   
       DB_BYTE;            //    db $xx
       
+      BasicDetokenize basicList=new BasicDetokenize();
+      
       @Override
       public void flush(StringBuilder str) {
         if (list.isEmpty()) return; 
@@ -971,6 +1038,34 @@ public class Assembler {
         }
         list.clear();
       }  
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {        
+        // look if it is time to aggregate data
+        if (list.size()==option.maxByteAggregate) flush(str);     
+        
+        if (mem.basicType!=BasicType.NONE) {
+          basicList.add(mem.copy);
+          
+          if (basicList.isComplete()) mem.dasmComment=basicList.detokenizedCommand(mem.basicType);
+        } else {
+           basicList.clear();
+        }
+       
+        if (mem.dasmLocation==null && mem.userLocation==null) {
+          // look for comment inside
+          String comment=lastMem.dasmComment;
+          if (lastMem.userComment != null) comment=lastMem.userComment;        
+          if (!(comment==null || "".equals(comment))) flush(str);  
+        }          
+      }      
       
       /**
        * Get the right type representation for M6502 or Z80 representation
@@ -1395,6 +1490,26 @@ public class Assembler {
        }
      } 
      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {        
+        // look if it is time to aggregate data
+        if (list.size()==option.maxWordAggregate*2) flush(str);   
+       
+        if (mem.dasmLocation==null && mem.userLocation==null) {
+          // look for comment inside
+          String comment=lastMem.dasmComment;
+          if (lastMem.userComment != null) comment=lastMem.userComment;        
+          if (!(comment==null || "".equals(comment))) flush(str);  
+        }
+      }
+     
      /**
       * Get location (positive)
       * @param mem the memory location
@@ -1639,7 +1754,28 @@ public class Assembler {
          }
        }
      }
+     
+    /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+             // look if it is time to aggregate data
+       if (list.size()==option.maxSwappedAggregate*2) flush(str);   
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) flush(str);  
+       }
+    }     
 
+    
      @Override
      public void setting(StringBuilder str) {
        String spaces=getDataSpacesTabs(); 
@@ -1865,6 +2001,8 @@ public class Assembler {
            break;            
         }
       }       
+
+    
    }
    
    /**
@@ -1991,6 +2129,26 @@ public class Assembler {
          }
        }   
      } 
+     
+     /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+      // look if it is time to aggregate data
+      if (list.size()==option.maxTribyteAggregate*3) flush(str);        
+       
+      if (mem.dasmLocation==null && mem.userLocation==null) {
+        // look for comment inside
+        String comment=lastMem.dasmComment;
+        if (lastMem.userComment != null) comment=lastMem.userComment;        
+        if (!(comment==null || "".equals(comment))) flush(str);  
+      }
+    }
      
      /** 
       * Setting up the action type if this is the case
@@ -2412,6 +2570,27 @@ public class Assembler {
          }
        }   
       } 
+     
+          /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+      // look if it is time to aggregate data
+      if (list.size()==option.maxLongAggregate*4) flush(str);  
+
+      if (mem.dasmLocation==null && mem.userLocation==null) {
+        // look for comment inside
+        String comment=lastMem.dasmComment;
+        if (lastMem.userComment != null) comment=lastMem.userComment;        
+        if (!(comment==null || "".equals(comment))) flush(str);  
+      }  
+    }
+     
       
      /** 
       * Setting up the action type if this is the case
@@ -2634,8 +2813,28 @@ public class Assembler {
          }
        }
      } 
+     
+               /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxAddressAggregate*2) flush(str); 
+       
+       if (mem.dasmLocation==null && mem.userLocation==null) {
+         // look for comment inside
+         String comment=lastMem.dasmComment;
+         if (lastMem.userComment != null) comment=lastMem.userComment;        
+         if (!(comment==null || "".equals(comment))) flush(str);  
+       }
+    }
    }   
-   
+         
    /**
     * Mono sprite declaration type
     * 
@@ -2824,6 +3023,22 @@ public class Assembler {
             aByte.flush(str);
           }            
       }   
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+         if ((sizeMonoSpriteBlock % 3)==0) flush(str);
+         else if (sizeMonoSpriteBlock>=64) {
+           flush(str);
+           sizeMonoSpriteBlock=0;
+         }
+      }      
       
       /**
        * Empty pop to have stack corrected
@@ -3081,6 +3296,22 @@ public class Assembler {
             aByte.flush(str);
           }    
      }   
+     
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {        
+         if ((sizeMultiSpriteBlock % 3)==0) flush(str);
+         else if (sizeMultiSpriteBlock>=64) {
+           flush(str);
+           sizeMultiSpriteBlock=0;
+         }          
+      }     
      
       /**
        * Empty pop to have stack corrected
@@ -3401,7 +3632,7 @@ public class Assembler {
                    (val>127)))                      
                  ) {
                   if (isString) {
-                    str.append("\"");
+                   str.append("\"");
                     isString=false;  
                   }
                   if (isFirst) {
@@ -3494,6 +3725,19 @@ public class Assembler {
           start=str.length();
         }
       }
+      
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) { 
+        // look if it is time to aggregate data
+        if (list.size()==option.maxTextAggregate) flush(str);    
+      }      
    }
    
    
@@ -3857,6 +4101,25 @@ public class Assembler {
           start=str.length();
        }     
      }       
+     
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+        
+        if (numText==null) numText=mem;
+        // look if it is time to aggregate data
+        if (list.size()==numText.copy+1) {
+          flush(str);
+          numText=null;
+        }   
+        
+      }     
    }   
    
    /**
@@ -4229,6 +4492,19 @@ public class Assembler {
           start=str.length();
        }     
      }
+     
+      /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {  
+        // look if it is time to aggregate data
+        if (mem.copy==0) flush(str);  
+      }     
    }
    
       
@@ -4584,6 +4860,18 @@ public class Assembler {
         }
       }
        
+            /**
+       * Put a value to the stream
+       * 
+       * @param str the otput stream
+       * @param mem the memory dasm
+       * @param option the option to use
+       */
+      @Override
+      public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+        // look if it is time to aggregate data
+        if ((mem.copy & 0X80) !=0) flush(str); 
+      }
    }
    
    /**
@@ -4925,7 +5213,20 @@ public class Assembler {
           
           start=str.length();
         }
-      }            
+      }           
+        
+       /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) flush(str);   
+    }        
    }  
    
    /**
@@ -5266,6 +5567,19 @@ public class Assembler {
           start=str.length();
         }
       }
+      
+                /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) flush(str);   
+    }
    }  
    
    /**
@@ -5598,6 +5912,19 @@ public class Assembler {
           start=str.length();
         }
       }
+      
+          /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {
+       // look if it is time to aggregate data
+       if (list.size()==option.maxTextAggregate) flush(str);   
+    }
    }  
    
    /**
@@ -5713,6 +6040,19 @@ public class Assembler {
          }
        }           
       }
+      
+    /**
+     * Put a value to the stream
+     * 
+     * @param str the otput stream
+     * @param mem the memory dasm
+     * @param option the option to use
+     */
+    @Override
+    public void putValue(StringBuilder str, MemoryDasm mem, Option option) {   
+       // look if it is time to aggregate data
+       if (list.size()==option.maxStackWordAggregate*2) flush(str);
+    }   
 
       @Override
       public void setting(StringBuilder str) {
@@ -6098,17 +6438,17 @@ public class Assembler {
    boolean isMonoSpriteBlock=false;
    
    /** Actual size of monocromatic sprite block */
-   int sizeMonoSpriteBlock=0;
+   protected static int sizeMonoSpriteBlock=0;
    
    /** True if this is a block of multicolor sprite */
    boolean isMultiSpriteBlock=false;
    
    /** Actual size of multicolor sprite block */
-   int sizeMultiSpriteBlock=0;
+   protected static int sizeMultiSpriteBlock=0;
    
    /** Memory dasm with num or chars */
-   MemoryDasm numText;
-   
+   protected static MemoryDasm numText;
+     
         
    /**
     * Set the option to use
@@ -6271,139 +6611,8 @@ public class Assembler {
      listRel2.add(memRel2);     
      listBase.add(memBase);
      listDest.add(memDest);
-          
-     // we are processing bytes?
-     if (actualType instanceof Byte) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxByteAggregate) actualType.flush(str);     
-       
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }  
-     } else
-     // we are processing word?    
-     if (actualType instanceof Word) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxWordAggregate*2) actualType.flush(str);   
-       
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }
-     } else
-     // we are processing word swapped?    
-     if (actualType instanceof WordSwapped) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxSwappedAggregate*2) actualType.flush(str);   
-       
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }
-     } else         
-     // we are processing tribyte?    
-     if (actualType instanceof Tribyte) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxTribyteAggregate*3) actualType.flush(str);        
-       
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }
-     } else
-     // we are processing long?    
-     if (actualType instanceof Long) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxLongAggregate*4) actualType.flush(str);  
-
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }       
-     } else
-     // we are processing address?    
-     if (actualType instanceof Address) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxAddressAggregate*2) actualType.flush(str); 
-       
-       if (mem.dasmLocation==null && mem.userLocation==null) {
-         // look for comment inside
-         String comment=lastMem.dasmComment;
-         if (lastMem.userComment != null) comment=lastMem.userComment;        
-         if (!(comment==null || "".equals(comment))) actualType.flush(str);  
-       }
-     } else
-     // we are processing address?    
-     if (actualType instanceof StackWord) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxStackWordAggregate*2) actualType.flush(str); 
-     } else    
-     // we are processing mono sprite?    
-     if (actualType instanceof MonoSprite) {
-       if ((sizeMonoSpriteBlock % 3)==0) actualType.flush(str);
-       else if (sizeMonoSpriteBlock>=64) {
-         actualType.flush(str);
-         sizeMonoSpriteBlock=0;
-       }
-     } else
-     // we are processing multi sprite?    
-     if (actualType instanceof MultiSprite) {
-       if ((sizeMultiSpriteBlock % 3)==0) actualType.flush(str);
-       else if (sizeMultiSpriteBlock>=64) {
-         actualType.flush(str);
-         sizeMultiSpriteBlock=0;
-       } 
-     } else
-     // we are processing text?
-     if (actualType instanceof Text) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxTextAggregate) actualType.flush(str);    
-     } else
-     // we are processing text?
-     if (actualType instanceof NumText) {
-       if (numText==null) numText=mem;
-       // look if it is time to aggregate data
-       if (list.size()==numText.copy+1) {
-         actualType.flush(str);
-         numText=null;
-       }         
-     } else
-     // we are processing zero text?
-     if (actualType instanceof ZeroText) {
-       // look if it is time to aggregate data
-       if (mem.copy==0) actualType.flush(str);         
-     } else
-     // we are processing high text?
-     if (actualType instanceof HighText) {
-       // look if it is time to aggregate data
-       if ((mem.copy & 0X80) !=0) actualType.flush(str);         
-     } else
-     // we are processing left shift text?
-     if (actualType instanceof ShiftText) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
-     } else
-     // we are processing text to screen code?
-     if (actualType instanceof ScreenText) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
-     } else
-     // we are processing text to petascii code?
-     if (actualType instanceof PetasciiText) {
-       // look if it is time to aggregate data
-       if (list.size()==option.maxTextAggregate) actualType.flush(str);         
-     } 
+     
+     actualType.putValue(str, mem, option);
    }
    
    /**
@@ -6646,7 +6855,7 @@ public class Assembler {
    }
    
    /**
-    * Set a byte and put to ouptput stream (it deletes anything that threre are in queue)
+    * Set a byte and put to ouptput stream (it deletes anything that there are in queue)
     * 
     * @param str the output stream
     * @param low the byte

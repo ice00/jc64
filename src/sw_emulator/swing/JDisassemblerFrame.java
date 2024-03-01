@@ -83,6 +83,7 @@ import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
 import sw_emulator.software.Assembler.Name;
+import sw_emulator.software.BasicDetokenize.BasicType;
 import sw_emulator.software.asm.Compiler;
 import sw_emulator.software.Disassembly;
 import sw_emulator.software.MemoryDasm;
@@ -469,6 +470,50 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private void initComponents() {
 
     jPopupMenuData = new javax.swing.JPopupMenu();
+    jMenuBasic = new javax.swing.JMenu();
+    jMenuItemBasicNone = new javax.swing.JMenuItem();
+    jSeparatorStandard = new javax.swing.JPopupMenu.Separator();
+    jMenuItemBasicV2_0 = new javax.swing.JMenuItem();
+    jMenuItemBasicV3_5 = new javax.swing.JMenuItem();
+    jMenuItemBasicV4_0 = new javax.swing.JMenuItem();
+    jMenuItemBasicV7_0 = new javax.swing.JMenuItem();
+    jSeparatorV2 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemSimon = new javax.swing.JMenuItem();
+    jMenuItemAndreFachat = new javax.swing.JMenuItem();
+    jMenuItemSpeech = new javax.swing.JMenuItem();
+    jMenuItemFinalCart3 = new javax.swing.JMenuItem();
+    jMenuItemUltrabasic = new javax.swing.JMenuItem();
+    jMenuItemGraphics = new javax.swing.JMenuItem();
+    jMenuItemWS = new javax.swing.JMenuItem();
+    jMenuItemPegasus = new javax.swing.JMenuItem();
+    jMenuItemXbasic = new javax.swing.JMenuItem();
+    jMenuItemDrago = new javax.swing.JMenuItem();
+    jMenuItemReu = new javax.swing.JMenuItem();
+    jMenuItemLightninig = new javax.swing.JMenuItem();
+    jMenuItemMagic = new javax.swing.JMenuItem();
+    jMenuItemBlark = new javax.swing.JMenuItem();
+    jMenuItemWSFinal = new javax.swing.JMenuItem();
+    jMenuItemGame = new javax.swing.JMenuItem();
+    jMenuItemBasex = new javax.swing.JMenuItem();
+    jMenuItemSuper = new javax.swing.JMenuItem();
+    jMenuItemExpanded = new javax.swing.JMenuItem();
+    jMenuItemSuperExpanderChip = new javax.swing.JMenuItem();
+    jMenuItemWarsaw = new javax.swing.JMenuItem();
+    jMenuItemDbs = new javax.swing.JMenuItem();
+    jMenuItemKipper = new javax.swing.JMenuItem();
+    jMenuItemBails = new javax.swing.JMenuItem();
+    jMenuItemEve = new javax.swing.JMenuItem();
+    jMenuItemTool = new javax.swing.JMenuItem();
+    jSeparatorV128 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemV8 = new javax.swing.JMenuItem();
+    jSeparatorV20 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemSuperExpander = new javax.swing.JMenuItem();
+    jMenuItemTurtle = new javax.swing.JMenuItem();
+    jMenuItemEasy = new javax.swing.JMenuItem();
+    jMenuItemV4 = new javax.swing.JMenuItem();
+    jMenuItemV5 = new javax.swing.JMenuItem();
+    jMenuItemExpandedV20 = new javax.swing.JMenuItem();
+    jMenuItemHandy = new javax.swing.JMenuItem();
     jMenuItemByteHex = new javax.swing.JMenuItem();
     jMenuItemByteDec = new javax.swing.JMenuItem();
     jMenuItemByteBin = new javax.swing.JMenuItem();
@@ -743,6 +788,51 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemMarkCode = new javax.swing.JMenuItem();
     jMenuItemMarkData = new javax.swing.JMenuItem();
     jSubMenu = new javax.swing.JMenu();
+    jMenuBasic1 = new javax.swing.JMenu();
+    jMenuItemBasicNone1 = new javax.swing.JMenuItem();
+    jSeparatorStandard1 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemBasicV2_1 = new javax.swing.JMenuItem();
+    jMenuItemBasicV3_5_1 = new javax.swing.JMenuItem();
+    jMenuItemBasicV4_0_1 = new javax.swing.JMenuItem();
+    jMenuItemBasicV7_0_1 = new javax.swing.JMenuItem();
+    jSeparatorV3 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemSimon1 = new javax.swing.JMenuItem();
+    jMenuItemAndreFachat1 = new javax.swing.JMenuItem();
+    jMenuItemSpeech1 = new javax.swing.JMenuItem();
+    jMenuItemFinalCart4 = new javax.swing.JMenuItem();
+    jMenuItemUltrabasic1 = new javax.swing.JMenuItem();
+    jMenuItemGraphics1 = new javax.swing.JMenuItem();
+    jMenuItemWS1 = new javax.swing.JMenuItem();
+    jMenuItemPegasus1 = new javax.swing.JMenuItem();
+    jMenuItemXbasic1 = new javax.swing.JMenuItem();
+    jMenuItemDrago1 = new javax.swing.JMenuItem();
+    jMenuItemReu1 = new javax.swing.JMenuItem();
+    jMenuItemLightninig1 = new javax.swing.JMenuItem();
+    jMenuItemMagic1 = new javax.swing.JMenuItem();
+    jMenuItemBlark1 = new javax.swing.JMenuItem();
+    jMenuItemWSFinal1 = new javax.swing.JMenuItem();
+    jMenuItemGame1 = new javax.swing.JMenuItem();
+    jMenuItemBasex1 = new javax.swing.JMenuItem();
+    jMenuItemSuper1 = new javax.swing.JMenuItem();
+    jMenuItemExpanded1 = new javax.swing.JMenuItem();
+    jMenuItemSuperExpanderChip1 = new javax.swing.JMenuItem();
+    jMenuItemWarsaw1 = new javax.swing.JMenuItem();
+    jMenuItemDbs1 = new javax.swing.JMenuItem();
+    jMenuItemKipper1 = new javax.swing.JMenuItem();
+    jMenuItemBails1 = new javax.swing.JMenuItem();
+    jMenuItemEve1 = new javax.swing.JMenuItem();
+    jMenuItemTool1 = new javax.swing.JMenuItem();
+    jSeparatorV129 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemV9 = new javax.swing.JMenuItem();
+    jSeparatorV21 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemSuperExpander1 = new javax.swing.JMenuItem();
+    jMenuItemTurtle1 = new javax.swing.JMenuItem();
+    jMenuItemEasy1 = new javax.swing.JMenuItem();
+    jMenuItemV6 = new javax.swing.JMenuItem();
+    jMenuItemV7 = new javax.swing.JMenuItem();
+    jMenuItemExpandedV21 = new javax.swing.JMenuItem();
+    jMenuItemHandy1 = new javax.swing.JMenuItem();
+    jSeparator7 = new javax.swing.JPopupMenu.Separator();
     jMenuItemByteHex1 = new javax.swing.JMenuItem();
     jMenuItemByteDec1 = new javax.swing.JMenuItem();
     jMenuItemByteBin1 = new javax.swing.JMenuItem();
@@ -847,6 +937,326 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemUndo7 = new javax.swing.JMenuItem();
     jMenuItemUndo8 = new javax.swing.JMenuItem();
     jMenuItemUndo9 = new javax.swing.JMenuItem();
+
+    jMenuBasic.setText("Data as Basic");
+
+    jMenuItemBasicNone.setText("no BASIC");
+    jMenuItemBasicNone.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasicNoneActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasicNone);
+    jMenuBasic.add(jSeparatorStandard);
+
+    jMenuItemBasicV2_0.setText(BasicType.BASIC_V2_0.getName());
+    jMenuItemBasicV2_0.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasicV2_0ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasicV2_0);
+
+    jMenuItemBasicV3_5.setText(BasicType.BASIC_V3_5.getName());
+    jMenuItemBasicV3_5.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasicV3_5ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasicV3_5);
+
+    jMenuItemBasicV4_0.setText(BasicType.BASIC_V4_0.getName());
+    jMenuItemBasicV4_0.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasicV4_0ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasicV4_0);
+
+    jMenuItemBasicV7_0.setText(BasicType.BASIC_V7_0.getName());
+    jMenuItemBasicV7_0.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasicV7_0ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasicV7_0);
+    jMenuBasic.add(jSeparatorV2);
+
+    jMenuItemSimon.setText(BasicType.BASIC_SIMON.getName());
+    jMenuItemSimon.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSimonActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemSimon);
+
+    jMenuItemAndreFachat.setText(BasicType.BASIC_ANDRE_FACHAT.getName());
+    jMenuItemAndreFachat.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemAndreFachatActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemAndreFachat);
+
+    jMenuItemSpeech.setText(BasicType.BASIC_SPEECH.getName());
+    jMenuItemSpeech.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSpeechActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemSpeech);
+
+    jMenuItemFinalCart3.setText(BasicType.BASIC_FINAL_CART3.getName());
+    jMenuItemFinalCart3.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemFinalCart3ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemFinalCart3);
+
+    jMenuItemUltrabasic.setText(BasicType.BASIC_ULTRABASIC.getName());
+    jMenuItemUltrabasic.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemUltrabasicActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemUltrabasic);
+
+    jMenuItemGraphics.setText(BasicType.BASIC_GRAPHICS.getName());
+    jMenuItemGraphics.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemGraphicsActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemGraphics);
+
+    jMenuItemWS.setText(BasicType.BASIC_WS.getName());
+    jMenuItemWS.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemWSActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemWS);
+
+    jMenuItemPegasus.setText(BasicType.BASIC_PEGASUS.getName());
+    jMenuItemPegasus.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemPegasusActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemPegasus);
+
+    jMenuItemXbasic.setText(BasicType.BASIC_XBASIC.getName());
+    jMenuItemXbasic.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemXbasicActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemXbasic);
+
+    jMenuItemDrago.setText(BasicType.BASIC_DRAGO.getName());
+    jMenuItemDrago.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemDragoActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemDrago);
+
+    jMenuItemReu.setText(BasicType.BASIC_REU.getName());
+    jMenuItemReu.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemReuActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemReu);
+
+    jMenuItemLightninig.setText(BasicType.BASIC_LIGHTNING.getName());
+    jMenuItemLightninig.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemLightninigActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemLightninig);
+
+    jMenuItemMagic.setText(BasicType.BASIC_MAGIC.getName());
+    jMenuItemMagic.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemMagicActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemMagic);
+
+    jMenuItemBlark.setText(BasicType.BASIC_BLARG.getName());
+    jMenuItemBlark.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBlarkActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBlark);
+
+    jMenuItemWSFinal.setText(BasicType.BASIC_WS_FINAL.getName());
+    jMenuItemWSFinal.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemWSFinalActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemWSFinal);
+
+    jMenuItemGame.setText(BasicType.BASIC_GAME.getName());
+    jMenuItemGame.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemGameActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemGame);
+
+    jMenuItemBasex.setText(BasicType.BASIC_BASEX.getName());
+    jMenuItemBasex.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBasexActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBasex);
+
+    jMenuItemSuper.setText(BasicType.BASIC_SUPER.getName());
+    jMenuItemSuper.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSuperActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemSuper);
+
+    jMenuItemExpanded.setText(BasicType.BASIC_EXPANDED.getName());
+    jMenuItemExpanded.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemExpandedActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemExpanded);
+
+    jMenuItemSuperExpanderChip.setText(BasicType.BASIC_SUPER_EXPANDER_CHIP.getName());
+    jMenuItemSuperExpanderChip.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSuperExpanderChipActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemSuperExpanderChip);
+
+    jMenuItemWarsaw.setText(BasicType.BASIC_WARSAW.getName());
+    jMenuItemWarsaw.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemWarsawActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemWarsaw);
+
+    jMenuItemDbs.setText(BasicType.BASIC_DBS.getName());
+    jMenuItemDbs.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemDbsActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemDbs);
+
+    jMenuItemKipper.setText(BasicType.BASIC_KIPPER.getName());
+    jMenuItemKipper.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemKipperActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemKipper);
+
+    jMenuItemBails.setText(BasicType.BASIC_BAILS.getName());
+    jMenuItemBails.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBailsActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemBails);
+
+    jMenuItemEve.setText(BasicType.BASIC_EVE.getName());
+    jMenuItemEve.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemEveActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemEve);
+
+    jMenuItemTool.setText(BasicType.BASIC_TOOL.getName());
+    jMenuItemTool.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemToolActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemTool);
+    jMenuBasic.add(jSeparatorV128);
+
+    jMenuItemV8.setText(BasicType.BASIC_V8.getName());
+    jMenuItemV8.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemV8ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemV8);
+    jMenuBasic.add(jSeparatorV20);
+
+    jMenuItemSuperExpander.setText(BasicType.BASIC_SUPER_EXPANDER.getName());
+    jMenuItemSuperExpander.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSuperExpanderActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemSuperExpander);
+
+    jMenuItemTurtle.setText(BasicType.BASIC_TURTLE.getName());
+    jMenuItemTurtle.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemTurtleActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemTurtle);
+
+    jMenuItemEasy.setText(BasicType.BASIC_EASY.getName());
+    jMenuItemEasy.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemEasyActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemEasy);
+
+    jMenuItemV4.setText(BasicType.BASIC_V4.getName());
+    jMenuItemV4.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemV4ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemV4);
+
+    jMenuItemV5.setText(BasicType.BASIC_V5.getName());
+    jMenuItemV5.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemV5ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemV5);
+
+    jMenuItemExpandedV20.setText(BasicType.BASIC_EXPANDED_V20.getName());
+    jMenuItemExpandedV20.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemExpandedV20ActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemExpandedV20);
+
+    jMenuItemHandy.setText(BasicType.BASIC_HANDY.getName());
+    jMenuItemHandy.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemHandyActionPerformed(evt);
+      }
+    });
+    jMenuBasic.add(jMenuItemHandy);
+
+    jPopupMenuData.add(jMenuBasic);
 
     jMenuItemByteHex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
     jMenuItemByteHex.setText("(B) Mark data as Byte (HEX)");
@@ -2666,6 +3076,327 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   jMenuMemory.add(jMenuItemMarkData);
 
   jSubMenu.setText("(more specific data selection)");
+
+  jMenuBasic1.setText("Data as Basic");
+
+  jMenuItemBasicNone1.setText("no BASIC");
+  jMenuItemBasicNone1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasicNone1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasicNone1);
+  jMenuBasic1.add(jSeparatorStandard1);
+
+  jMenuItemBasicV2_1.setText(BasicType.BASIC_V2_0.getName());
+  jMenuItemBasicV2_1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasicV2_1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasicV2_1);
+
+  jMenuItemBasicV3_5_1.setText(BasicType.BASIC_V3_5.getName());
+  jMenuItemBasicV3_5_1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasicV3_5_1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasicV3_5_1);
+
+  jMenuItemBasicV4_0_1.setText(BasicType.BASIC_V4_0.getName());
+  jMenuItemBasicV4_0_1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasicV4_0_1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasicV4_0_1);
+
+  jMenuItemBasicV7_0_1.setText(BasicType.BASIC_V7_0.getName());
+  jMenuItemBasicV7_0_1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasicV7_0_1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasicV7_0_1);
+  jMenuBasic1.add(jSeparatorV3);
+
+  jMenuItemSimon1.setText(BasicType.BASIC_SIMON.getName());
+  jMenuItemSimon1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSimon1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemSimon1);
+
+  jMenuItemAndreFachat1.setText(BasicType.BASIC_ANDRE_FACHAT.getName());
+  jMenuItemAndreFachat1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemAndreFachat1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemAndreFachat1);
+
+  jMenuItemSpeech1.setText(BasicType.BASIC_SPEECH.getName());
+  jMenuItemSpeech1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSpeech1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemSpeech1);
+
+  jMenuItemFinalCart4.setText(BasicType.BASIC_FINAL_CART3.getName());
+  jMenuItemFinalCart4.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemFinalCart4ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemFinalCart4);
+
+  jMenuItemUltrabasic1.setText(BasicType.BASIC_ULTRABASIC.getName());
+  jMenuItemUltrabasic1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemUltrabasic1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemUltrabasic1);
+
+  jMenuItemGraphics1.setText(BasicType.BASIC_GRAPHICS.getName());
+  jMenuItemGraphics1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemGraphics1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemGraphics1);
+
+  jMenuItemWS1.setText(BasicType.BASIC_WS.getName());
+  jMenuItemWS1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemWS1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemWS1);
+
+  jMenuItemPegasus1.setText(BasicType.BASIC_PEGASUS.getName());
+  jMenuItemPegasus1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemPegasus1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemPegasus1);
+
+  jMenuItemXbasic1.setText(BasicType.BASIC_XBASIC.getName());
+  jMenuItemXbasic1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemXbasic1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemXbasic1);
+
+  jMenuItemDrago1.setText(BasicType.BASIC_DRAGO.getName());
+  jMenuItemDrago1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemDrago1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemDrago1);
+
+  jMenuItemReu1.setText(BasicType.BASIC_REU.getName());
+  jMenuItemReu1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemReu1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemReu1);
+
+  jMenuItemLightninig1.setText(BasicType.BASIC_LIGHTNING.getName());
+  jMenuItemLightninig1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemLightninig1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemLightninig1);
+
+  jMenuItemMagic1.setText(BasicType.BASIC_MAGIC.getName());
+  jMenuItemMagic1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemMagic1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemMagic1);
+
+  jMenuItemBlark1.setText(BasicType.BASIC_BLARG.getName());
+  jMenuItemBlark1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBlark1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBlark1);
+
+  jMenuItemWSFinal1.setText(BasicType.BASIC_WS_FINAL.getName());
+  jMenuItemWSFinal1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemWSFinal1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemWSFinal1);
+
+  jMenuItemGame1.setText(BasicType.BASIC_GAME.getName());
+  jMenuItemGame1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemGame1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemGame1);
+
+  jMenuItemBasex1.setText(BasicType.BASIC_BASEX.getName());
+  jMenuItemBasex1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBasex1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBasex1);
+
+  jMenuItemSuper1.setText(BasicType.BASIC_SUPER.getName());
+  jMenuItemSuper1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSuper1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemSuper1);
+
+  jMenuItemExpanded1.setText(BasicType.BASIC_EXPANDED.getName());
+  jMenuItemExpanded1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemExpanded1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemExpanded1);
+
+  jMenuItemSuperExpanderChip1.setText(BasicType.BASIC_SUPER_EXPANDER_CHIP.getName());
+  jMenuItemSuperExpanderChip1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSuperExpanderChip1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemSuperExpanderChip1);
+
+  jMenuItemWarsaw1.setText(BasicType.BASIC_WARSAW.getName());
+  jMenuItemWarsaw1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemWarsaw1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemWarsaw1);
+
+  jMenuItemDbs1.setText(BasicType.BASIC_DBS.getName());
+  jMenuItemDbs1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemDbs1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemDbs1);
+
+  jMenuItemKipper1.setText(BasicType.BASIC_KIPPER.getName());
+  jMenuItemKipper1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemKipper1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemKipper1);
+
+  jMenuItemBails1.setText(BasicType.BASIC_BAILS.getName());
+  jMenuItemBails1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemBails1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemBails1);
+
+  jMenuItemEve1.setText(BasicType.BASIC_EVE.getName());
+  jMenuItemEve1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemEve1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemEve1);
+
+  jMenuItemTool1.setText(BasicType.BASIC_TOOL.getName());
+  jMenuItemTool1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemTool1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemTool1);
+  jMenuBasic1.add(jSeparatorV129);
+
+  jMenuItemV9.setText(BasicType.BASIC_V8.getName());
+  jMenuItemV9.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemV9ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemV9);
+  jMenuBasic1.add(jSeparatorV21);
+
+  jMenuItemSuperExpander1.setText(BasicType.BASIC_SUPER_EXPANDER.getName());
+  jMenuItemSuperExpander1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSuperExpander1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemSuperExpander1);
+
+  jMenuItemTurtle1.setText(BasicType.BASIC_TURTLE.getName());
+  jMenuItemTurtle1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemTurtle1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemTurtle1);
+
+  jMenuItemEasy1.setText(BasicType.BASIC_EASY.getName());
+  jMenuItemEasy1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemEasy1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemEasy1);
+
+  jMenuItemV6.setText(BasicType.BASIC_V4.getName());
+  jMenuItemV6.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemV6ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemV6);
+
+  jMenuItemV7.setText(BasicType.BASIC_V5.getName());
+  jMenuItemV7.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemV7ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemV7);
+
+  jMenuItemExpandedV21.setText(BasicType.BASIC_EXPANDED_V20.getName());
+  jMenuItemExpandedV21.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemExpandedV21ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemExpandedV21);
+
+  jMenuItemHandy1.setText(BasicType.BASIC_HANDY.getName());
+  jMenuItemHandy1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemHandy1ActionPerformed(evt);
+    }
+  });
+  jMenuBasic1.add(jMenuItemHandy1);
+
+  jSubMenu.add(jMenuBasic1);
+  jSubMenu.add(jSeparator7);
 
   jMenuItemByteHex1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
   jMenuItemByteHex1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/B.png"))); // NOI18N
@@ -4756,7 +5487,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }//GEN-LAST:event_rSyntaxTextAreaSourceMinMouseClicked
 
   private void rSyntaxTextAreaSourceMinMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceMinMouseReleased
-String selected=rSyntaxTextAreaSourceMin.getSelectedText();
+      String selected=rSyntaxTextAreaSourceMin.getSelectedText();
       
       int actual;
       
@@ -4793,6 +5524,318 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private void jMenuItemUnmarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnmarkActionPerformed
     execute(MEM_UNMARK);
   }//GEN-LAST:event_jMenuItemUnmarkActionPerformed
+
+  private void jMenuItemBasicNoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicNoneActionPerformed
+    execute(MEM_BASIC_NONE);
+  }//GEN-LAST:event_jMenuItemBasicNoneActionPerformed
+
+  private void jMenuItemBasicV2_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV2_0ActionPerformed
+    execute(MEM_BASIC_V2_0);
+  }//GEN-LAST:event_jMenuItemBasicV2_0ActionPerformed
+
+  private void jMenuItemBasicV3_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV3_5ActionPerformed
+    execute(MEM_BASIC_V3_5);
+  }//GEN-LAST:event_jMenuItemBasicV3_5ActionPerformed
+
+  private void jMenuItemBasicV4_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV4_0ActionPerformed
+    execute(MEM_BASIC_V4_0);
+  }//GEN-LAST:event_jMenuItemBasicV4_0ActionPerformed
+
+  private void jMenuItemBasicV7_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV7_0ActionPerformed
+    execute(MEM_BASIC_V7_0);
+  }//GEN-LAST:event_jMenuItemBasicV7_0ActionPerformed
+
+  private void jMenuItemSimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimonActionPerformed
+    execute(MEM_BASIC_SIMON);
+  }//GEN-LAST:event_jMenuItemSimonActionPerformed
+
+  private void jMenuItemAndreFachatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAndreFachatActionPerformed
+    execute(MEM_BASIC_ANDRE_FACHAT);
+  }//GEN-LAST:event_jMenuItemAndreFachatActionPerformed
+
+  private void jMenuItemSpeechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpeechActionPerformed
+    execute(MEM_BASIC_SPEECH);
+  }//GEN-LAST:event_jMenuItemSpeechActionPerformed
+
+  private void jMenuItemFinalCart3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFinalCart3ActionPerformed
+    execute(MEM_BASIC_FINAL_CART3);
+  }//GEN-LAST:event_jMenuItemFinalCart3ActionPerformed
+
+  private void jMenuItemUltrabasicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUltrabasicActionPerformed
+    execute(MEM_BASIC_ULTRABASIC);
+  }//GEN-LAST:event_jMenuItemUltrabasicActionPerformed
+
+  private void jMenuItemGraphicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGraphicsActionPerformed
+    execute(MEM_BASIC_GRAPHICS);
+  }//GEN-LAST:event_jMenuItemGraphicsActionPerformed
+    
+  private void jMenuItemWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWSActionPerformed
+    execute(MEM_BASIC_WS);
+  }//GEN-LAST:event_jMenuItemWSActionPerformed
+
+  private void jMenuItemPegasusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPegasusActionPerformed
+    execute(MEM_BASIC_PEGASUS);
+  }//GEN-LAST:event_jMenuItemPegasusActionPerformed
+
+  private void jMenuItemXbasicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemXbasicActionPerformed
+    execute(MEM_BASIC_XBASIC);
+  }//GEN-LAST:event_jMenuItemXbasicActionPerformed
+
+  private void jMenuItemDragoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDragoActionPerformed
+    execute(MEM_BASIC_DRAGO);
+  }//GEN-LAST:event_jMenuItemDragoActionPerformed
+
+  private void jMenuItemReuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReuActionPerformed
+    execute(MEM_BASIC_REU);
+  }//GEN-LAST:event_jMenuItemReuActionPerformed
+
+  private void jMenuItemLightninigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLightninigActionPerformed
+    execute(MEM_BASIC_LIGHTNING);
+  }//GEN-LAST:event_jMenuItemLightninigActionPerformed
+
+  private void jMenuItemMagicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMagicActionPerformed
+    execute(MEM_BASIC_MAGIC);
+  }//GEN-LAST:event_jMenuItemMagicActionPerformed
+
+  private void jMenuItemBlarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBlarkActionPerformed
+    execute(MEM_BASIC_BLARG);
+  }//GEN-LAST:event_jMenuItemBlarkActionPerformed
+
+  private void jMenuItemWSFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWSFinalActionPerformed
+    execute(MEM_BASIC_WS_FINAL);
+  }//GEN-LAST:event_jMenuItemWSFinalActionPerformed
+
+  private void jMenuItemGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGameActionPerformed
+    execute(MEM_BASIC_GAME);
+  }//GEN-LAST:event_jMenuItemGameActionPerformed
+
+  private void jMenuItemBasexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasexActionPerformed
+    execute(MEM_BASIC_BASEX);
+  }//GEN-LAST:event_jMenuItemBasexActionPerformed
+
+  private void jMenuItemSuperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuperActionPerformed
+    execute(MEM_BASIC_SUPER);
+  }//GEN-LAST:event_jMenuItemSuperActionPerformed
+
+  private void jMenuItemExpandedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExpandedActionPerformed
+    execute(MEM_BASIC_EXPANDED);
+  }//GEN-LAST:event_jMenuItemExpandedActionPerformed
+
+  private void jMenuItemSuperExpanderChipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuperExpanderChipActionPerformed
+    execute(MEM_BASIC_SUPER_EXPANDER_CHIP);
+  }//GEN-LAST:event_jMenuItemSuperExpanderChipActionPerformed
+
+  private void jMenuItemWarsawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWarsawActionPerformed
+    execute(MEM_BASIC_WARSAW);
+  }//GEN-LAST:event_jMenuItemWarsawActionPerformed
+
+  private void jMenuItemDbsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDbsActionPerformed
+    execute(MEM_BASIC_DBS);
+  }//GEN-LAST:event_jMenuItemDbsActionPerformed
+
+  private void jMenuItemKipperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKipperActionPerformed
+    execute(MEM_BASIC_KIPPER);
+  }//GEN-LAST:event_jMenuItemKipperActionPerformed
+
+  private void jMenuItemBailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBailsActionPerformed
+    execute(MEM_BASIC_BAILS);
+  }//GEN-LAST:event_jMenuItemBailsActionPerformed
+
+  private void jMenuItemEveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEveActionPerformed
+    execute(MEM_BASIC_EVE);
+  }//GEN-LAST:event_jMenuItemEveActionPerformed
+
+  private void jMenuItemToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemToolActionPerformed
+    execute(MEM_BASIC_TOOL);
+  }//GEN-LAST:event_jMenuItemToolActionPerformed
+
+  private void jMenuItemSuperExpanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuperExpanderActionPerformed
+    execute(MEM_BASIC_SUPER_EXPANDER);
+  }//GEN-LAST:event_jMenuItemSuperExpanderActionPerformed
+
+  private void jMenuItemTurtleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTurtleActionPerformed
+    execute(MEM_BASIC_TURTLE);
+  }//GEN-LAST:event_jMenuItemTurtleActionPerformed
+
+  private void jMenuItemEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEasyActionPerformed
+    execute(MEM_BASIC_EASY);
+  }//GEN-LAST:event_jMenuItemEasyActionPerformed
+
+  private void jMenuItemV4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV4ActionPerformed
+    execute(MEM_BASIC_V4);
+  }//GEN-LAST:event_jMenuItemV4ActionPerformed
+
+  private void jMenuItemV5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV5ActionPerformed
+    execute(MEM_BASIC_V5);
+  }//GEN-LAST:event_jMenuItemV5ActionPerformed
+
+  private void jMenuItemExpandedV20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExpandedV20ActionPerformed
+    execute(MEM_BASIC_EXPANDED_V20);
+  }//GEN-LAST:event_jMenuItemExpandedV20ActionPerformed
+
+  private void jMenuItemHandyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHandyActionPerformed
+    execute(MEM_BASIC_HANDY);
+  }//GEN-LAST:event_jMenuItemHandyActionPerformed
+
+  private void jMenuItemBasicNone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicNone1ActionPerformed
+    execute(MEM_BASIC_NONE);
+  }//GEN-LAST:event_jMenuItemBasicNone1ActionPerformed
+
+  private void jMenuItemBasicV2_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV2_1ActionPerformed
+    execute(MEM_BASIC_V2_0);
+  }//GEN-LAST:event_jMenuItemBasicV2_1ActionPerformed
+
+  private void jMenuItemBasicV3_5_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV3_5_1ActionPerformed
+   execute(MEM_BASIC_V3_5);
+  }//GEN-LAST:event_jMenuItemBasicV3_5_1ActionPerformed
+
+  private void jMenuItemBasicV4_0_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV4_0_1ActionPerformed
+    execute(MEM_BASIC_V4_0);
+  }//GEN-LAST:event_jMenuItemBasicV4_0_1ActionPerformed
+
+  private void jMenuItemBasicV7_0_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasicV7_0_1ActionPerformed
+    execute(MEM_BASIC_V7_0);
+  }//GEN-LAST:event_jMenuItemBasicV7_0_1ActionPerformed
+
+  private void jMenuItemSimon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimon1ActionPerformed
+    execute(MEM_BASIC_SIMON);
+  }//GEN-LAST:event_jMenuItemSimon1ActionPerformed
+
+  private void jMenuItemAndreFachat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAndreFachat1ActionPerformed
+     execute(MEM_BASIC_ANDRE_FACHAT);
+  }//GEN-LAST:event_jMenuItemAndreFachat1ActionPerformed
+
+  private void jMenuItemSpeech1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSpeech1ActionPerformed
+    execute(MEM_BASIC_SPEECH);    
+  }//GEN-LAST:event_jMenuItemSpeech1ActionPerformed
+
+  private void jMenuItemFinalCart4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFinalCart4ActionPerformed
+    execute(MEM_BASIC_FINAL_CART3); 
+  }//GEN-LAST:event_jMenuItemFinalCart4ActionPerformed
+
+  private void jMenuItemUltrabasic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUltrabasic1ActionPerformed
+    execute(MEM_BASIC_ULTRABASIC);    
+  }//GEN-LAST:event_jMenuItemUltrabasic1ActionPerformed
+
+  private void jMenuItemGraphics1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGraphics1ActionPerformed
+    execute(MEM_BASIC_GRAPHICS);    
+  }//GEN-LAST:event_jMenuItemGraphics1ActionPerformed
+
+  private void jMenuItemWS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWS1ActionPerformed
+    execute(MEM_BASIC_WS);  
+  }//GEN-LAST:event_jMenuItemWS1ActionPerformed
+
+  private void jMenuItemPegasus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPegasus1ActionPerformed
+    execute(MEM_BASIC_PEGASUS); 
+  }//GEN-LAST:event_jMenuItemPegasus1ActionPerformed
+
+  private void jMenuItemXbasic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemXbasic1ActionPerformed
+    execute(MEM_BASIC_XBASIC);  
+  }//GEN-LAST:event_jMenuItemXbasic1ActionPerformed
+
+  private void jMenuItemDrago1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDrago1ActionPerformed
+    execute(MEM_BASIC_DRAGO); 
+  }//GEN-LAST:event_jMenuItemDrago1ActionPerformed
+
+  private void jMenuItemReu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReu1ActionPerformed
+    execute(MEM_BASIC_REU);      
+  }//GEN-LAST:event_jMenuItemReu1ActionPerformed
+
+  private void jMenuItemLightninig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLightninig1ActionPerformed
+    execute(MEM_BASIC_LIGHTNING);     
+  }//GEN-LAST:event_jMenuItemLightninig1ActionPerformed
+
+  private void jMenuItemMagic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMagic1ActionPerformed
+    execute(MEM_BASIC_MAGIC);  
+  }//GEN-LAST:event_jMenuItemMagic1ActionPerformed
+
+  private void jMenuItemBlark1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBlark1ActionPerformed
+    execute(MEM_BASIC_BLARG);    
+  }//GEN-LAST:event_jMenuItemBlark1ActionPerformed
+
+  private void jMenuItemWSFinal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWSFinal1ActionPerformed
+     execute(MEM_BASIC_WS_FINAL);
+  }//GEN-LAST:event_jMenuItemWSFinal1ActionPerformed
+
+  private void jMenuItemGame1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGame1ActionPerformed
+     execute(MEM_BASIC_GAME);    
+  }//GEN-LAST:event_jMenuItemGame1ActionPerformed
+
+  private void jMenuItemBasex1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBasex1ActionPerformed
+    execute(MEM_BASIC_BASEX);  
+  }//GEN-LAST:event_jMenuItemBasex1ActionPerformed
+
+  private void jMenuItemSuper1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuper1ActionPerformed
+     execute(MEM_BASIC_SUPER);  
+  }//GEN-LAST:event_jMenuItemSuper1ActionPerformed
+
+  private void jMenuItemExpanded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExpanded1ActionPerformed
+     execute(MEM_BASIC_EXPANDED);   
+  }//GEN-LAST:event_jMenuItemExpanded1ActionPerformed
+
+  private void jMenuItemSuperExpanderChip1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuperExpanderChip1ActionPerformed
+   execute(MEM_BASIC_SUPER_EXPANDER_CHIP);    
+  }//GEN-LAST:event_jMenuItemSuperExpanderChip1ActionPerformed
+
+  private void jMenuItemWarsaw1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWarsaw1ActionPerformed
+     execute(MEM_BASIC_WARSAW);   
+  }//GEN-LAST:event_jMenuItemWarsaw1ActionPerformed
+
+  private void jMenuItemDbs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDbs1ActionPerformed
+    execute(MEM_BASIC_DBS);    
+  }//GEN-LAST:event_jMenuItemDbs1ActionPerformed
+
+  private void jMenuItemKipper1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKipper1ActionPerformed
+    execute(MEM_BASIC_KIPPER); 
+  }//GEN-LAST:event_jMenuItemKipper1ActionPerformed
+
+  private void jMenuItemBails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBails1ActionPerformed
+     execute(MEM_BASIC_BAILS);
+  }//GEN-LAST:event_jMenuItemBails1ActionPerformed
+
+  private void jMenuItemEve1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEve1ActionPerformed
+    execute(MEM_BASIC_EVE);   
+  }//GEN-LAST:event_jMenuItemEve1ActionPerformed
+
+  private void jMenuItemTool1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTool1ActionPerformed
+    execute(MEM_BASIC_TOOL);     
+  }//GEN-LAST:event_jMenuItemTool1ActionPerformed
+
+  private void jMenuItemSuperExpander1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSuperExpander1ActionPerformed
+    execute(MEM_BASIC_SUPER_EXPANDER);   
+  }//GEN-LAST:event_jMenuItemSuperExpander1ActionPerformed
+
+  private void jMenuItemTurtle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTurtle1ActionPerformed
+    execute(MEM_BASIC_TURTLE);     
+  }//GEN-LAST:event_jMenuItemTurtle1ActionPerformed
+
+  private void jMenuItemEasy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEasy1ActionPerformed
+    execute(MEM_BASIC_EASY);    
+  }//GEN-LAST:event_jMenuItemEasy1ActionPerformed
+
+  private void jMenuItemV6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV6ActionPerformed
+    execute(MEM_BASIC_V4);   
+  }//GEN-LAST:event_jMenuItemV6ActionPerformed
+
+  private void jMenuItemV7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV7ActionPerformed
+    execute(MEM_BASIC_V5);    
+  }//GEN-LAST:event_jMenuItemV7ActionPerformed
+
+  private void jMenuItemExpandedV21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExpandedV21ActionPerformed
+    execute(MEM_BASIC_EXPANDED_V20);  
+  }//GEN-LAST:event_jMenuItemExpandedV21ActionPerformed
+
+  private void jMenuItemHandy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHandy1ActionPerformed
+    execute(MEM_BASIC_HANDY);    
+  }//GEN-LAST:event_jMenuItemHandy1ActionPerformed
+
+  private void jMenuItemV8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV8ActionPerformed
+    execute(MEM_BASIC_V8);    
+  }//GEN-LAST:event_jMenuItemV8ActionPerformed
+
+  private void jMenuItemV9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemV9ActionPerformed
+    execute(MEM_BASIC_V8);
+  }//GEN-LAST:event_jMenuItemV9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4874,6 +5917,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JButton jButtonViewProject;
   private javax.swing.JButton jButtonWizard;
   private javax.swing.JMenuBar jMenuBar;
+  private javax.swing.JMenu jMenuBasic;
+  private javax.swing.JMenu jMenuBasic1;
   private javax.swing.JMenu jMenuDataSel;
   private javax.swing.JMenu jMenuFile;
   private javax.swing.JMenu jMenuHelpContents;
@@ -4886,9 +5931,27 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemAddress;
   private javax.swing.JMenuItem jMenuItemAddress1;
   private javax.swing.JMenuItem jMenuItemAddress2;
+  private javax.swing.JMenuItem jMenuItemAndreFachat;
+  private javax.swing.JMenuItem jMenuItemAndreFachat1;
   private javax.swing.JMenuItem jMenuItemAssembly;
   private javax.swing.JMenuItem jMenuItemAutComment;
   private javax.swing.JMenuItem jMenuItemAutLabel;
+  private javax.swing.JMenuItem jMenuItemBails;
+  private javax.swing.JMenuItem jMenuItemBails1;
+  private javax.swing.JMenuItem jMenuItemBasex;
+  private javax.swing.JMenuItem jMenuItemBasex1;
+  private javax.swing.JMenuItem jMenuItemBasicNone;
+  private javax.swing.JMenuItem jMenuItemBasicNone1;
+  private javax.swing.JMenuItem jMenuItemBasicV2_0;
+  private javax.swing.JMenuItem jMenuItemBasicV2_1;
+  private javax.swing.JMenuItem jMenuItemBasicV3_5;
+  private javax.swing.JMenuItem jMenuItemBasicV3_5_1;
+  private javax.swing.JMenuItem jMenuItemBasicV4_0;
+  private javax.swing.JMenuItem jMenuItemBasicV4_0_1;
+  private javax.swing.JMenuItem jMenuItemBasicV7_0;
+  private javax.swing.JMenuItem jMenuItemBasicV7_0_1;
+  private javax.swing.JMenuItem jMenuItemBlark;
+  private javax.swing.JMenuItem jMenuItemBlark1;
   private javax.swing.JMenuItem jMenuItemByteBin;
   private javax.swing.JMenuItem jMenuItemByteBin1;
   private javax.swing.JMenuItem jMenuItemByteBin2;
@@ -4953,21 +6016,47 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemCopy;
   private javax.swing.JMenuItem jMenuItemCredits;
   private javax.swing.JMenuItem jMenuItemData;
+  private javax.swing.JMenuItem jMenuItemDbs;
+  private javax.swing.JMenuItem jMenuItemDbs1;
   private javax.swing.JMenuItem jMenuItemDiss;
   private javax.swing.JMenuItem jMenuItemDissSaveAs;
+  private javax.swing.JMenuItem jMenuItemDrago;
+  private javax.swing.JMenuItem jMenuItemDrago1;
+  private javax.swing.JMenuItem jMenuItemEasy;
+  private javax.swing.JMenuItem jMenuItemEasy1;
+  private javax.swing.JMenuItem jMenuItemEve;
+  private javax.swing.JMenuItem jMenuItemEve1;
   private javax.swing.JMenuItem jMenuItemExit;
+  private javax.swing.JMenuItem jMenuItemExpanded;
+  private javax.swing.JMenuItem jMenuItemExpanded1;
+  private javax.swing.JMenuItem jMenuItemExpandedV20;
+  private javax.swing.JMenuItem jMenuItemExpandedV21;
+  private javax.swing.JMenuItem jMenuItemFinalCart3;
+  private javax.swing.JMenuItem jMenuItemFinalCart4;
   private javax.swing.JMenuItem jMenuItemFindAddr;
   private javax.swing.JMenuItem jMenuItemFindDis;
   private javax.swing.JMenuItem jMenuItemFindSeq;
   private javax.swing.JMenuItem jMenuItemFindSource;
+  private javax.swing.JMenuItem jMenuItemGame;
+  private javax.swing.JMenuItem jMenuItemGame1;
   private javax.swing.JMenuItem jMenuItemGarbage;
+  private javax.swing.JMenuItem jMenuItemGraphics;
+  private javax.swing.JMenuItem jMenuItemGraphics1;
+  private javax.swing.JMenuItem jMenuItemHandy;
+  private javax.swing.JMenuItem jMenuItemHandy1;
   private javax.swing.JMenuItem jMenuItemHex;
   private javax.swing.JMenuItem jMenuItemImportLabels;
+  private javax.swing.JMenuItem jMenuItemKipper;
+  private javax.swing.JMenuItem jMenuItemKipper1;
   private javax.swing.JMenuItem jMenuItemLicense;
+  private javax.swing.JMenuItem jMenuItemLightninig;
+  private javax.swing.JMenuItem jMenuItemLightninig1;
   private javax.swing.JMenuItem jMenuItemLong;
   private javax.swing.JMenuItem jMenuItemLong1;
   private javax.swing.JMenuItem jMenuItemLong2;
   private javax.swing.JMenuItem jMenuItemMPR;
+  private javax.swing.JMenuItem jMenuItemMagic;
+  private javax.swing.JMenuItem jMenuItemMagic1;
   private javax.swing.JMenuItem jMenuItemMarkCode;
   private javax.swing.JMenuItem jMenuItemMarkData;
   private javax.swing.JMenuItem jMenuItemMarkGarbage;
@@ -4983,6 +6072,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemNumText2;
   private javax.swing.JMenuItem jMenuItemOpenProject;
   private javax.swing.JMenuItem jMenuItemPaste;
+  private javax.swing.JMenuItem jMenuItemPegasus;
+  private javax.swing.JMenuItem jMenuItemPegasus1;
   private javax.swing.JMenuItem jMenuItemPlus;
   private javax.swing.JMenuItem jMenuItemRecent1;
   private javax.swing.JMenuItem jMenuItemRecent2;
@@ -4994,6 +6085,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemRecent8;
   private javax.swing.JMenuItem jMenuItemRecent9;
   private javax.swing.JMenuItem jMenuItemRefactorLabels;
+  private javax.swing.JMenuItem jMenuItemReu;
+  private javax.swing.JMenuItem jMenuItemReu1;
   private javax.swing.JMenuItem jMenuItemSIDLD;
   private javax.swing.JMenuItem jMenuItemSaveAsAcme;
   private javax.swing.JMenuItem jMenuItemSaveAsAcme1;
@@ -5010,7 +6103,11 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemSaveAsTmpx1;
   private javax.swing.JMenuItem jMenuItemSaveProject;
   private javax.swing.JMenuItem jMenuItemSidldPlayer;
+  private javax.swing.JMenuItem jMenuItemSimon;
+  private javax.swing.JMenuItem jMenuItemSimon1;
   private javax.swing.JMenuItem jMenuItemSourceSaveAs;
+  private javax.swing.JMenuItem jMenuItemSpeech;
+  private javax.swing.JMenuItem jMenuItemSpeech1;
   private javax.swing.JMenuItem jMenuItemSpriteMono;
   private javax.swing.JMenuItem jMenuItemSpriteMono1;
   private javax.swing.JMenuItem jMenuItemSpriteMono2;
@@ -5020,6 +6117,12 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemStackWord;
   private javax.swing.JMenuItem jMenuItemStackWord1;
   private javax.swing.JMenuItem jMenuItemStackWord2;
+  private javax.swing.JMenuItem jMenuItemSuper;
+  private javax.swing.JMenuItem jMenuItemSuper1;
+  private javax.swing.JMenuItem jMenuItemSuperExpander;
+  private javax.swing.JMenuItem jMenuItemSuperExpander1;
+  private javax.swing.JMenuItem jMenuItemSuperExpanderChip;
+  private javax.swing.JMenuItem jMenuItemSuperExpanderChip1;
   private javax.swing.JMenuItem jMenuItemText;
   private javax.swing.JMenuItem jMenuItemText1;
   private javax.swing.JMenuItem jMenuItemText2;
@@ -5032,9 +6135,15 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemTextZero;
   private javax.swing.JMenuItem jMenuItemTextZero1;
   private javax.swing.JMenuItem jMenuItemTextZero2;
+  private javax.swing.JMenuItem jMenuItemTool;
+  private javax.swing.JMenuItem jMenuItemTool1;
   private javax.swing.JMenuItem jMenuItemTribyte;
   private javax.swing.JMenuItem jMenuItemTribyte1;
   private javax.swing.JMenuItem jMenuItemTribyte2;
+  private javax.swing.JMenuItem jMenuItemTurtle;
+  private javax.swing.JMenuItem jMenuItemTurtle1;
+  private javax.swing.JMenuItem jMenuItemUltrabasic;
+  private javax.swing.JMenuItem jMenuItemUltrabasic1;
   private javax.swing.JMenuItem jMenuItemUndo1;
   private javax.swing.JMenuItem jMenuItemUndo2;
   private javax.swing.JMenuItem jMenuItemUndo3;
@@ -5047,8 +6156,20 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemUnmark;
   private javax.swing.JMenuItem jMenuItemUserLabel;
   private javax.swing.JMenuItem jMenuItemUserLabelOp;
+  private javax.swing.JMenuItem jMenuItemV4;
+  private javax.swing.JMenuItem jMenuItemV5;
+  private javax.swing.JMenuItem jMenuItemV6;
+  private javax.swing.JMenuItem jMenuItemV7;
+  private javax.swing.JMenuItem jMenuItemV8;
+  private javax.swing.JMenuItem jMenuItemV9;
   private javax.swing.JMenuItem jMenuItemViewLabels;
   private javax.swing.JMenuItem jMenuItemViewProject;
+  private javax.swing.JMenuItem jMenuItemWS;
+  private javax.swing.JMenuItem jMenuItemWS1;
+  private javax.swing.JMenuItem jMenuItemWSFinal;
+  private javax.swing.JMenuItem jMenuItemWSFinal1;
+  private javax.swing.JMenuItem jMenuItemWarsaw;
+  private javax.swing.JMenuItem jMenuItemWarsaw1;
   private javax.swing.JMenuItem jMenuItemWizard;
   private javax.swing.JMenuItem jMenuItemWord;
   private javax.swing.JMenuItem jMenuItemWord1;
@@ -5056,6 +6177,8 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JMenuItem jMenuItemWordSwapped;
   private javax.swing.JMenuItem jMenuItemWordSwapped1;
   private javax.swing.JMenuItem jMenuItemWordSwapped2;
+  private javax.swing.JMenuItem jMenuItemXbasic;
+  private javax.swing.JMenuItem jMenuItemXbasic1;
   private javax.swing.JMenuItem jMenuItemtextHighOne;
   private javax.swing.JMenuItem jMenuItemtextHighOne1;
   private javax.swing.JMenuItem jMenuItemtextHighOne2;
@@ -5087,6 +6210,7 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JPopupMenu.Separator jSeparator4;
   private javax.swing.JPopupMenu.Separator jSeparator5;
   private javax.swing.JPopupMenu.Separator jSeparator6;
+  private javax.swing.JPopupMenu.Separator jSeparator7;
   private javax.swing.JPopupMenu.Separator jSeparatorByte;
   private javax.swing.JPopupMenu.Separator jSeparatorByte1;
   private javax.swing.JPopupMenu.Separator jSeparatorByte2;
@@ -5111,6 +6235,14 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
   private javax.swing.JPopupMenu.Separator jSeparatorSprite;
   private javax.swing.JPopupMenu.Separator jSeparatorSprite1;
   private javax.swing.JPopupMenu.Separator jSeparatorSprite2;
+  private javax.swing.JPopupMenu.Separator jSeparatorStandard;
+  private javax.swing.JPopupMenu.Separator jSeparatorStandard1;
+  private javax.swing.JPopupMenu.Separator jSeparatorV128;
+  private javax.swing.JPopupMenu.Separator jSeparatorV129;
+  private javax.swing.JPopupMenu.Separator jSeparatorV2;
+  private javax.swing.JPopupMenu.Separator jSeparatorV20;
+  private javax.swing.JPopupMenu.Separator jSeparatorV21;
+  private javax.swing.JPopupMenu.Separator jSeparatorV3;
   private javax.swing.JPopupMenu.Separator jSeparatorWord;
   private javax.swing.JPopupMenu.Separator jSeparatorWord1;
   private javax.swing.JPopupMenu.Separator jSeparatorWord2;
@@ -5443,7 +6575,165 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
          break;
        case MEM_HEX:
          showHex();  
+         break;         
+         
+       case MEM_BASIC_NONE:     
+         markAsBasicData(BasicType.NONE);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+       case MEM_BASIC_V2_0:     
+         markAsBasicData(BasicType.BASIC_V2_0);      
+         if (option.forceCompilation) disassembly(true);
+         break;     
+       case MEM_BASIC_V3_5:    
+         markAsBasicData(BasicType.BASIC_V3_5);      
+         if (option.forceCompilation) disassembly(true);
+         break;        
+       case MEM_BASIC_V4_0:     
+         markAsBasicData(BasicType.BASIC_V4_0);      
+         if (option.forceCompilation) disassembly(true);
+         break;
+       case MEM_BASIC_V7_0:      
+         markAsBasicData(BasicType.BASIC_V7_0);      
+         if (option.forceCompilation) disassembly(true);
+         break;        
+       case MEM_BASIC_SIMON:   
+         markAsBasicData(BasicType.BASIC_SIMON);      
+         if (option.forceCompilation) disassembly(true);
+         break;     
+       case MEM_BASIC_ANDRE_FACHAT:   
+         markAsBasicData(BasicType.BASIC_ANDRE_FACHAT);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+       case MEM_BASIC_SPEECH:   
+         markAsBasicData(BasicType.BASIC_SPEECH);      
+         if (option.forceCompilation) disassembly(true);
+         break;              
+       case MEM_BASIC_FINAL_CART3:   
+         markAsBasicData(BasicType.BASIC_FINAL_CART3);      
+         if (option.forceCompilation) disassembly(true);
+         break;         
+       case MEM_BASIC_ULTRABASIC:   
+         markAsBasicData(BasicType.BASIC_ULTRABASIC);      
+         if (option.forceCompilation) disassembly(true);
+         break;         
+       case MEM_BASIC_GRAPHICS:   
+         markAsBasicData(BasicType.BASIC_GRAPHICS);      
+         if (option.forceCompilation) disassembly(true);
+         break;            
+       case MEM_BASIC_WS:   
+         markAsBasicData(BasicType.BASIC_WS);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+       case MEM_BASIC_PEGASUS:   
+         markAsBasicData(BasicType.BASIC_PEGASUS);      
+         if (option.forceCompilation) disassembly(true);
+         break;      
+       case MEM_BASIC_XBASIC:   
+         markAsBasicData(BasicType.BASIC_XBASIC);      
+         if (option.forceCompilation) disassembly(true);
+         break;       
+       case MEM_BASIC_DRAGO:   
+         markAsBasicData(BasicType.BASIC_DRAGO);      
+         if (option.forceCompilation) disassembly(true);
+         break;         
+       case MEM_BASIC_REU:   
+         markAsBasicData(BasicType.BASIC_REU);      
+         if (option.forceCompilation) disassembly(true);
+         break;      
+       case MEM_BASIC_LIGHTNING:   
+         markAsBasicData(BasicType.BASIC_LIGHTNING);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+       case MEM_BASIC_MAGIC:   
+         markAsBasicData(BasicType.BASIC_MAGIC);      
+         if (option.forceCompilation) disassembly(true);
+         break;       
+       case MEM_BASIC_BLARG:   
+         markAsBasicData(BasicType.BASIC_BLARG);      
+         if (option.forceCompilation) disassembly(true);
+         break;    
+       case MEM_BASIC_WS_FINAL:   
+         markAsBasicData(BasicType.BASIC_WS_FINAL);      
+         if (option.forceCompilation) disassembly(true);
+         break;    
+       case MEM_BASIC_GAME:   
+         markAsBasicData(BasicType.BASIC_GAME);      
+         if (option.forceCompilation) disassembly(true);
+         break;      
+       case MEM_BASIC_BASEX:   
+         markAsBasicData(BasicType.BASIC_BASEX);      
+         if (option.forceCompilation) disassembly(true);
          break;           
+       case MEM_BASIC_SUPER:   
+         markAsBasicData(BasicType.BASIC_SUPER);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+       case MEM_BASIC_EXPANDED:   
+         markAsBasicData(BasicType.BASIC_EXPANDED);      
+         if (option.forceCompilation) disassembly(true);
+         break;           
+       case MEM_BASIC_SUPER_EXPANDER_CHIP:   
+         markAsBasicData(BasicType.BASIC_SUPER_EXPANDER_CHIP);      
+         if (option.forceCompilation) disassembly(true);
+         break;         
+       case MEM_BASIC_WARSAW:   
+         markAsBasicData(BasicType.BASIC_WARSAW);      
+         if (option.forceCompilation) disassembly(true);
+         break;           
+       case MEM_BASIC_DBS:   
+         markAsBasicData(BasicType.BASIC_DBS);      
+         if (option.forceCompilation) disassembly(true);
+         break;            
+       case MEM_BASIC_KIPPER:   
+         markAsBasicData(BasicType.BASIC_KIPPER);      
+         if (option.forceCompilation) disassembly(true);
+         break;        
+       case MEM_BASIC_BAILS:   
+         markAsBasicData(BasicType.BASIC_BAILS);      
+         if (option.forceCompilation) disassembly(true);
+         break;     
+       case MEM_BASIC_EVE:   
+         markAsBasicData(BasicType.BASIC_EVE);      
+         if (option.forceCompilation) disassembly(true);
+         break;      
+       case MEM_BASIC_TOOL:   
+         markAsBasicData(BasicType.BASIC_TOOL);      
+         if (option.forceCompilation) disassembly(true);
+         break;      
+       case MEM_BASIC_SUPER_EXPANDER:   
+         markAsBasicData(BasicType.BASIC_SUPER_EXPANDER);      
+         if (option.forceCompilation) disassembly(true);
+         break;     
+       case MEM_BASIC_TURTLE:   
+         markAsBasicData(BasicType.BASIC_TURTLE);      
+         if (option.forceCompilation) disassembly(true);
+         break;        
+       case MEM_BASIC_EASY:   
+         markAsBasicData(BasicType.BASIC_EASY);      
+         if (option.forceCompilation) disassembly(true);
+         break;    
+       case MEM_BASIC_V4:   
+         markAsBasicData(BasicType.BASIC_V4);      
+         if (option.forceCompilation) disassembly(true);
+         break; 
+       case MEM_BASIC_V5:   
+         markAsBasicData(BasicType.BASIC_V5);      
+         if (option.forceCompilation) disassembly(true);
+         break;    
+       case MEM_BASIC_EXPANDED_V20:   
+         markAsBasicData(BasicType.BASIC_EXPANDED_V20);      
+         if (option.forceCompilation) disassembly(true);
+         break;     
+       case MEM_BASIC_HANDY:   
+         markAsBasicData(BasicType.BASIC_HANDY);      
+         if (option.forceCompilation) disassembly(true);
+         break;           
+       case MEM_BASIC_V8:   
+         markAsBasicData(BasicType.BASIC_V8);      
+         if (option.forceCompilation) disassembly(true);
+         break;          
+         
          
        case SOURCE_DASM:
          export(Name.DASM);
@@ -5949,6 +7239,31 @@ String selected=rSyntaxTextAreaSourceMin.getSelectedText();
     dataTableModelMemory.fireTableDataChanged();  
     jTableMemory.clearSelection();
     for (int i=0; i<rows.length; i++) {
+      jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
+    }
+  }
+  
+   /**
+   * Mark user selection as basic type data
+   * 
+   * @param basicType the type of basic data
+   */
+  private void markAsBasicData(BasicType basicType) {
+    MemoryDasm mem;   
+      
+    int rows[]=jTableMemory.getSelectedRows();
+    
+    for (int i=0; i<rows.length; i++) {
+      mem=project.memory[rows[i]];
+      mem.basicType=basicType;
+      mem.isData=true;
+      mem.isCode=false;
+      mem.isGarbage=false;
+      // force byte data type
+      if (mem.dataType!=DataType.BYTE_BIN && 
+          mem.dataType!=DataType.BYTE_CHAR && 
+          mem.dataType!=DataType.BYTE_DEC && 
+          mem.dataType!=DataType.BYTE_HEX) mem.dataType=DataType.BYTE_HEX;
       jTableMemory.addRowSelectionInterval(rows[i], rows[i]);  
     }
   }

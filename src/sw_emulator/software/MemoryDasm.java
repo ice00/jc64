@@ -25,6 +25,7 @@ package sw_emulator.software;
 
 import java.io.Serializable;
 import java.util.Objects;
+import sw_emulator.software.BasicDetokenize.BasicType;
 import sw_emulator.swing.main.DataType;
 
 /**
@@ -112,6 +113,9 @@ public class MemoryDasm implements Cloneable, Serializable {
   
   /** Type of data */
   public DataType dataType=DataType.NONE;
+  
+  /** Type of basic for data */
+  public BasicType basicType=BasicType.NONE;
 
     /**
      * Test if a given object is equal to this

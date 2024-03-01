@@ -39,6 +39,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
+import sw_emulator.software.BasicDetokenize.BasicType;
 import sw_emulator.software.MemoryDasm;
 
 /**
@@ -917,6 +918,10 @@ public class FileManager {
           mem.relatedAddressDest=in.readInt();
         }
         
+        if (version>9) {  // version 10
+          mem.basicType=BasicType.valueOf(in.readUTF());
+        }        
+        
         project.memory[i]=mem;  
       }
       
@@ -1089,6 +1094,7 @@ public class FileManager {
           
           out.writeInt(memory.relatedAddressBase); // version 9
           out.writeInt(memory.relatedAddressDest); // version 9
+          out.writeUTF(memory.basicType.name());   // version 10
       }  
       
       out.writeInt(project.chip);  // version 2
