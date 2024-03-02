@@ -1,5 +1,5 @@
 /**
- * @(#)ConstantTableCelleRenderer.java 2021/05/15
+ * @(#)ConstantCelleEditor.java 2021/05/15
  *
  * ICE Team Free Software Group
  *
@@ -93,6 +93,7 @@ public class ConstantCellEditor extends DefaultCellEditor {
     public Component getTableCellEditorComponent(JTable table,
         Object value, boolean isSelected, int row, int column) {
         textField.setBorder(black);
+        
         return super.getTableCellEditorComponent(
             table, value, isSelected, row, column);
     }

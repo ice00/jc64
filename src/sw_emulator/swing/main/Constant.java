@@ -49,21 +49,30 @@ public class Constant {
     
   /** String tables of constants  */  
   public String[][] table=new String[COLS][ROWS];
+  
+  /** String comments of constants  */  
+  public String[][] comment=new String[COLS][ROWS];  
 
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;
     }
+    
     if (obj == null) {
       return false;
     }
+    
     if (getClass() != obj.getClass()) {
       return false;
     }
 
     final Constant other = (Constant) obj;
     if (!Arrays.deepEquals(this.table, other.table)) {
+      return false;
+    }
+    
+    if (!Arrays.deepEquals(this.comment, other.comment)) {
       return false;
     }
     return true;
@@ -76,6 +85,7 @@ public class Constant {
      for (int i=0; i<COLS; i++) {
        for (int j=0; j<ROWS; j++) {
          res.table[i][j]=table[i][j];
+         res.comment[i][j]=comment[i][j];
        }     
      }  
      

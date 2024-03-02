@@ -42,7 +42,7 @@ import sw_emulator.software.MemoryDasm;
  * Version 7: gzip format
  * Version 8: add 16 constants instead of 10
  * Version 9: add related relocation addresses
- * Version 10: add basic type
+ * Version 10: add basic type, add comments for constants
  * 
  * @author ice
  */

@@ -446,7 +446,7 @@ public class FileManager {
       option.sidFreqHiOctCombinedTable=in.readBoolean();
       option.sidFreqHiOctCombinedInvertedTable=in.readBoolean();
       option.sidFreqLoOctCombinedTable=in.readBoolean();
-      option.sidFreqHiOct12Table=in.readBoolean();     
+      option.sidFreqHiOct12Table=in.readBoolean();      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -837,7 +837,7 @@ public class FileManager {
       out.writeBoolean(option.sidFreqHiOctCombinedTable);
       out.writeBoolean(option.sidFreqHiOctCombinedInvertedTable);
       out.writeBoolean(option.sidFreqLoOctCombinedTable);
-      out.writeBoolean(option.sidFreqHiOct12Table);
+      out.writeBoolean(option.sidFreqHiOct12Table); 
       
       out.flush();
       out.close();
@@ -1034,6 +1034,15 @@ public class FileManager {
           }  
         }
       }
+      
+      if (version>9)  {                         // version 10
+        for (int i=0; i<Constant.COLS; i++) {
+          for (int j=0; j<Constant.ROWS; j++) {
+            if (in.readBoolean()) project.constant.comment[i][j]=in.readUTF();
+            else project.constant.comment[i][j]=null;   
+          }  
+        }
+      }      
     } catch (Exception e) {
         System.err.println(e);
         return false;
@@ -1202,8 +1211,20 @@ public class FileManager {
           } else {
               out.writeBoolean(false);
             } 
-        }  
+        }          
       }
+      
+      // version 10
+      for (int i=0; i<Constant.COLS; i++) {
+        for (int j=0; j<Constant.ROWS; j++) {
+          if (project.constant.comment[i][j]!=null) {
+            out.writeBoolean(true);
+            out.writeUTF(project.constant.comment[i][j]);  
+          } else {
+              out.writeBoolean(false);
+            } 
+        }          
+      }      
       
       out.flush();
       out.close();

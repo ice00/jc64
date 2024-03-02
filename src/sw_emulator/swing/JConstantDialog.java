@@ -37,6 +37,7 @@ import sw_emulator.software.MemoryDasm;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.table.ConstantCellEditor;
+import sw_emulator.swing.table.ConstantTableCellRenderer;
 import sw_emulator.swing.table.DataTableModelConstant;
 
 /**
@@ -47,6 +48,8 @@ import sw_emulator.swing.table.DataTableModelConstant;
 public class JConstantDialog extends javax.swing.JDialog {
     /** Constant of tables value */
     Constant constant=new Constant();
+    
+    ConstantTableCellRenderer constantTableCellRenderer=new ConstantTableCellRenderer();
     
     /** Data model */
     DataTableModelConstant dataModel=new DataTableModelConstant(constant);
@@ -74,7 +77,8 @@ public class JConstantDialog extends javax.swing.JDialog {
      * @param memories the memory
      */
     public void setUp(Constant constant, MemoryDasm[] memories) {
-      this.constant=constant;  
+      this.constant=constant; 
+      constantTableCellRenderer.setConstant(constant);
       dataModel=new DataTableModelConstant(constant);
       jTableConstant.setModel(dataModel);    
       constantCellEditor.setCostant(constant, memories);
@@ -99,6 +103,8 @@ public class JConstantDialog extends javax.swing.JDialog {
         jTableConstant.setDefaultEditor(String.class, constantCellEditor);
         jTableConstant.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         jPanelDn = new javax.swing.JPanel();
+        jButtonAddComment = new javax.swing.JButton();
+        jButtonRemoveComment = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
 
         jMenuItemLoad.setText("Load from file");
@@ -130,6 +136,8 @@ public class JConstantDialog extends javax.swing.JDialog {
         setTitle("Constants definitions");
 
         jTableConstant.setModel(dataModel);
+        jTableConstant.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableConstant.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         ActionMap am = this.getRootPane().getActionMap();
 
@@ -143,6 +151,8 @@ public class JConstantDialog extends javax.swing.JDialog {
         });
 
         ((InputMap)UIManager.get("Table.ancestorInputMap")).put(KeyStroke.getKeyStroke("control F"), "none");
+
+        jTableConstant.setDefaultRenderer(String.class, constantTableCellRenderer);
         jTableConstant.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableConstantMousePressed(evt);
@@ -154,6 +164,22 @@ public class JConstantDialog extends javax.swing.JDialog {
         jScrollPaneTable.setViewportView(jTableConstant);
 
         getContentPane().add(jScrollPaneTable, java.awt.BorderLayout.CENTER);
+
+        jButtonAddComment.setText("Add constant comment");
+        jButtonAddComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddCommentActionPerformed(evt);
+            }
+        });
+        jPanelDn.add(jButtonAddComment);
+
+        jButtonRemoveComment.setText("Remove constant comment");
+        jButtonRemoveComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveCommentActionPerformed(evt);
+            }
+        });
+        jPanelDn.add(jButtonRemoveComment);
 
         jButtonClose.setText("Close");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +217,31 @@ public class JConstantDialog extends javax.swing.JDialog {
     private void jTableConstantMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConstantMouseReleased
       if (evt.isPopupTrigger()) jPopupMenuConstant.show(evt.getComponent(),evt.getX(), evt.getY());
     }//GEN-LAST:event_jTableConstantMouseReleased
+
+    private void jButtonAddCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCommentActionPerformed
+        int row=jTableConstant.getSelectedRow();
+        int col=jTableConstant.getSelectedColumn();
+        
+        if (row<0 || col<1) {
+            JOptionPane.showMessageDialog(this, "Select a cell for adding a comment to it.");
+            return;
+        }
+        
+        String comment=JOptionPane.showInputDialog(this, "Insert the comment for the selected memory location", constant.comment[col-1][row]);  
+        if (comment!=null) constant.comment[col-1][row]=comment;          
+
+        dataModel.fireTableDataChanged();       
+    }//GEN-LAST:event_jButtonAddCommentActionPerformed
+
+    private void jButtonRemoveCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCommentActionPerformed
+        int row=jTableConstant.getSelectedRow();
+        int col=jTableConstant.getSelectedColumn();
+        
+        if (row<0 || col<1) return;
+        
+        constant.comment[col-1][row]="";
+        dataModel.fireTableDataChanged();
+    }//GEN-LAST:event_jButtonRemoveCommentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,7 +339,9 @@ public class JConstantDialog extends javax.swing.JDialog {
     }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddComment;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonRemoveComment;
     private javax.swing.JMenuItem jMenuItemGoto;
     private javax.swing.JMenuItem jMenuItemLoad;
     private javax.swing.JMenuItem jMenuItemSave;

@@ -6644,14 +6644,18 @@ public class Assembler {
    public void setConstant(StringBuilder str, Constant constant) {
      boolean already;  
      String val;
+     String comment;
+     int pos1;
      
      for (int i=0; i<Constant.COLS; i++) {
        already=false;
        
        for (int j=0; j<Constant.ROWS; j++) {
          val=constant.table[i][j];
+         comment=constant.comment[i][j];
          if (val!=null && !"".equals(val) && constant.isConstant(val)) {
            if (!already) {             
+             // show block comment for the connstant type  
              MemoryDasm mem=new MemoryDasm();
              mem.userBlockComment=" \nConstants of type "+i;
              setBlockComment(str, mem);
@@ -6659,18 +6663,27 @@ public class Assembler {
              already=true;  
            }  
            
+           pos1=str.length();          
            switch (option.assembler) {
                case KICK:
-                 str.append(".const "+val+" = "+"$"+ByteToExe(j)+"\n");  
+                 str.append(".const "+val+" = "+"$"+ByteToExe(j));  
                  break;
                case GLASS:
-                 str.append(val+" equ $"+ByteToExe(j)+"\n");
+                 str.append(val+" equ $"+ByteToExe(j));
                  break;  
                default:
-                 str.append(val+" = "+"$"+ByteToExe(j)+"\n");
+                 str.append(val+" = "+"$"+ByteToExe(j));
                  break;  
            }
            
+           // append the constant comment if present
+           MemoryDasm mem=new MemoryDasm();
+           if (comment!=null && !"".equals(comment)) {             
+             mem.userComment=comment;             
+           }
+           // gives the right spaces
+           str.append(getDataCSpacesTabs(str.length()-pos1-getDataSpacesTabs().length()));
+           setComment(str, mem);
          }
        }         
      } 
@@ -7074,8 +7087,7 @@ public class Assembler {
   /**
    * Add constants to the source
    * 
-   * @add constant to source that are in memory
-   * 
+   * @param memory the memories
    * @return the constants
    */
   protected String addConstants(MemoryDasm[] memory) {
