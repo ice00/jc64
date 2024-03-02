@@ -89,7 +89,7 @@ public class SidFreq {
   
   /** Create comment */
   boolean createComment;
-  
+    
   /** Actual index (-1=no find) */
   int actIndex=-1;
   
@@ -122,11 +122,37 @@ public class SidFreq {
  * @param markMemory mark the memory
  * @param createLabel create the label
  * @param createComment crete the comment 
+ * @param linearTable allow linear table search
+ * @param combinedTable allow combined table search 
+ * @param inverseLinearTable allow inverse linear table search 
+ * @param linearOctNoteTable allow linear octave/note table search 
+ * @param hiOct13Table allow high octave (13) table search 
+ * @param linearScaleTable allow linear scale table search
+ * @param shortLinearTable allow short lineat table search
+ * @param shortCombinedTable 
+ * @param hiOctCombinedTable 
+ * @param hiOctCombinedInvertedTable 
+ * @param loOctCombinedTable 
+ * @param hiOct12Table 
  */  
   public void identifyFreq(byte[] inB, MemoryDasm[] memory, int start, int end,
                            int offset, String lowLabel, String highLabel,
                            boolean markMemory, boolean createLabel,
-                           boolean createComment) {
+                           boolean createComment,
+                           
+                           boolean linearTable,
+                           boolean combinedTable,
+                           boolean inverseLinearTable,
+                           boolean linearOctNoteTable,
+                           boolean hiOct13Table,
+                           boolean linearScaleTable,
+                           boolean shortLinearTable,
+                           boolean shortCombinedTable,
+                           boolean hiOctCombinedTable,
+                           boolean hiOctCombinedInvertedTable,
+                           boolean loOctCombinedTable,
+                           boolean hiOct12Table                            
+                           ) {
     this.inB=inB;  
     this.memory=memory;
     this.start=start;
@@ -136,38 +162,55 @@ public class SidFreq {
     this.highLabel=highLabel;
     this.markMemory=markMemory;
     this.createLabel=createLabel;
-    this.createComment=createComment;
+    this.createComment=createComment;   
     
     try {
-      while (linearTable()) {}
-      this.start=start;
+      // search for linear table if allowed
+      if (linearTable) {
+        while (linearTable()) {}
+        this.start=start;
+      }
     
-      while (combinedTable()) {}
-      this.start=start;
+      // search for combined table if allowed
+      if (combinedTable) {
+        while (combinedTable()) {}
+        this.start=start;
+      }
     
-    
-      while (linearInverseTable()) {
-        this.end=this.start;
-        this.start=Math.min(0, start-TABLE);  
+      // search for inverse linear table if allowed
+      if (inverseLinearTable) {
+        while (linearInverseTable()) {
+          this.end=this.start;
+          this.start=Math.min(0, start-TABLE);  
+        }
       }
       this.start=start;
         
-      while (linearOctNoteTable()) {}
-      this.start=start;   
+      // search for octave/note table if allowed
+      if (linearOctNoteTable) {
+        while (linearOctNoteTable()) {}
+        this.start=start;   
+      }  
     
-      while (highOctave()) {}
-      this.start=start;    
+      // search for octave note (13) table if allowed
+      if (hiOct13Table) {
+        while (highOctave()) {}
+        this.start=start;  
+      }
       
-      while (linearScaleTable()) {}
-      this.start=start;
+      // serch for linear scale table if allowed
+      if (linearScaleTable) {
+        while (linearScaleTable()) {}
+        this.start=start;
+      }
     
       // for short table looks only if there are no solution before
-      if (actIndex<0) shortLinearTable();
-      if (actIndex<0) shortCombinedTable();
-      if (actIndex<0) highOctaveCombined();
-      if (actIndex<0) highOctaveCombinedInv();
-      if (actIndex<0) lowOctaveCombined();
-      if (actIndex<0) highOctave12();
+      if (actIndex<0 && shortLinearTable) shortLinearTable();
+      if (actIndex<0 && shortCombinedTable) shortCombinedTable();
+      if (actIndex<0 && hiOctCombinedTable) highOctaveCombined();
+      if (actIndex<0 && hiOctCombinedInvertedTable) highOctaveCombinedInv();
+      if (actIndex<0 && loOctCombinedTable) lowOctaveCombined();
+      if (actIndex<0 && hiOct12Table) highOctave12();
     } catch (Exception e) {
         // catch errors to avoid blocking the program
         System.err.println(e);
@@ -1115,11 +1158,13 @@ public class SidFreq {
         
         if (freq[11]<62000) continue;
 
-        addData(i+13, i, freq[9]/8);
-        markMemory(i+13, i+26, 1);
-        markMemory(i, i+13, 1);
+        if (!checkGarbage(i, i+26)) {
+          addData(i+13, i, freq[9]/8);
+          markMemory(i+13, i+26, 1);
+          markMemory(i, i+13, 1);
         
-        System.out.println("SIDFREQ: HighOctave");
+          System.out.println("SIDFREQ: HighOctave");
+        }
       }  
     }   
         

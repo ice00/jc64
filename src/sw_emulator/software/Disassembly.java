@@ -1197,7 +1197,21 @@ public class Disassembly {
              block.endBuffer, block.startAddress-block.startBuffer,
              option.sidFreqLoLabel, option.sidFreqHiLabel, 
              option.sidFreqMarkMem, option.sidFreqCreateLabel,
-             option.sidFreqCreateComment);    
+             option.sidFreqCreateComment,
+             
+             option.sidFreqLinearTable,
+             option.sidFreqCombinedTable,
+             option.sidFreqInverseLinearTable,
+             option.sidFreqLinearOctNoteTable,
+             option.sidFreqHiOct13Table,
+             option.sidFreqLinearScaleTable,
+             option.sidFreqShortLinearTable,
+             option.sidFreqShortCombinedTable,
+             option.sidFreqHiOctCombinedTable,
+             option.sidFreqHiOctCombinedInvertedTable,
+             option.sidFreqLoOctCombinedTable,
+             option.sidFreqHiOct12Table                        
+           );    
       }
       
       String player="";

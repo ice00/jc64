@@ -465,6 +465,44 @@ public class Option {
   public boolean showMiniature=true;
   
   
+  /** SidFreq: linear table */
+  public boolean sidFreqLinearTable=true;
+  
+  /** SidFreq: combined table */
+  public boolean sidFreqCombinedTable=true;
+  
+  /** SidFreq: inverse linear table */
+  public boolean sidFreqInverseLinearTable=true;
+  
+  /** SidFreq: linear octave note table */
+  public boolean sidFreqLinearOctNoteTable=true;
+  
+  /** SidFreq: high octave 13 table */
+  public boolean sidFreqHiOct13Table=true;
+  
+  /** SidFreq: linear scale table */
+  public boolean sidFreqLinearScaleTable=true;
+  
+  /** SidFreq: short linear table */
+  public boolean sidFreqShortLinearTable=true;
+  
+  /** SidFreq: short combined table */
+  public boolean sidFreqShortCombinedTable=true;
+  
+  /** SidFreq: high octave combined table */
+  public boolean sidFreqHiOctCombinedTable=true;
+  
+  /** SidFreq: high octave combined inverted table */
+  public boolean sidFreqHiOctCombinedInvertedTable=true;  
+  
+  /** SidFreq: low octave combined table */
+  public boolean sidFreqLoOctCombinedTable=true;
+  
+  /** SidFreq: high octave 12 table */
+  public boolean sidFreqHiOct12Table=true;
+  
+  
+  
   // comments C64
   
   /** Comment zero page area */

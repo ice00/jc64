@@ -433,6 +433,20 @@ public class FileManager {
       // 2.8
       option.showSidId=in.readBoolean();
       option.sidIdPath=in.readUTF();
+      
+      // 2.9
+      option.sidFreqLinearTable=in.readBoolean();
+      option.sidFreqCombinedTable=in.readBoolean();
+      option.sidFreqInverseLinearTable=in.readBoolean();
+      option.sidFreqLinearOctNoteTable=in.readBoolean();
+      option.sidFreqHiOct13Table=in.readBoolean();
+      option.sidFreqLinearScaleTable=in.readBoolean();
+      option.sidFreqShortLinearTable=in.readBoolean();
+      option.sidFreqShortCombinedTable=in.readBoolean();
+      option.sidFreqHiOctCombinedTable=in.readBoolean();
+      option.sidFreqHiOctCombinedInvertedTable=in.readBoolean();
+      option.sidFreqLoOctCombinedTable=in.readBoolean();
+      option.sidFreqHiOct12Table=in.readBoolean();     
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -810,6 +824,20 @@ public class FileManager {
       // 2.8
       out.writeBoolean(option.showSidId);
       out.writeUTF(option.sidIdPath);
+      
+      // 2.9
+      out.writeBoolean(option.sidFreqLinearTable);
+      out.writeBoolean(option.sidFreqCombinedTable);
+      out.writeBoolean(option.sidFreqInverseLinearTable);
+      out.writeBoolean(option.sidFreqLinearOctNoteTable);
+      out.writeBoolean(option.sidFreqHiOct13Table);
+      out.writeBoolean(option.sidFreqLinearScaleTable);
+      out.writeBoolean(option.sidFreqShortLinearTable);
+      out.writeBoolean(option.sidFreqShortCombinedTable);
+      out.writeBoolean(option.sidFreqHiOctCombinedTable);
+      out.writeBoolean(option.sidFreqHiOctCombinedInvertedTable);
+      out.writeBoolean(option.sidFreqLoOctCombinedTable);
+      out.writeBoolean(option.sidFreqHiOct12Table);
       
       out.flush();
       out.close();

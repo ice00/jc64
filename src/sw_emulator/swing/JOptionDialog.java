@@ -391,6 +391,53 @@ public class JOptionDialog extends javax.swing.JDialog {
     jTass64Panel = new sw_emulator.swing.JTass64Panel();
     jScrollPaneGlass = new javax.swing.JScrollPane();
     jGlassPanel = new sw_emulator.swing.JGlassPanel();
+    jScrollPaneSidFreq = new javax.swing.JScrollPane();
+    jPanelSidFreq = new javax.swing.JPanel();
+    jLabelSidFreq = new javax.swing.JLabel();
+    jCheckBoxLinearTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearTableLH = new javax.swing.JScrollPane();
+    jTextPaneLinearTableLH = new javax.swing.JTextPane();
+    jScrollPaneLinearTableHL = new javax.swing.JScrollPane();
+    jTextPaneLinearTableHL = new javax.swing.JTextPane();
+    jCheckBoxCombinedTable = new javax.swing.JCheckBox();
+    jScrollPaneCombinedTableLH = new javax.swing.JScrollPane();
+    jTextPaneCombinedTableLH = new javax.swing.JTextPane();
+    jScrollPaneCombinedTableHL = new javax.swing.JScrollPane();
+    jTextPanecombinedTableHL = new javax.swing.JTextPane();
+    jCheckBoxInverseLinearTable = new javax.swing.JCheckBox();
+    jScrollPaneInverseLinearTableLH = new javax.swing.JScrollPane();
+    jTextPaneInverseLinearTableLH = new javax.swing.JTextPane();
+    jScrollPaneInverseLinearTableHL = new javax.swing.JScrollPane();
+    jTextPaneInverseLinearTableHL = new javax.swing.JTextPane();
+    jCheckBoxLinearOctNoteTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearOctBNoteTableLH = new javax.swing.JScrollPane();
+    jTextPaneLinearOctBNoteTableLH = new javax.swing.JTextPane();
+    LinearOctBNoteTableHL = new javax.swing.JScrollPane();
+    jTextPaneLinearOctNoteTableHL = new javax.swing.JTextPane();
+    jCheckBoxHiOct13Table = new javax.swing.JCheckBox();
+    jScrollPaneLinearHiOct13Table = new javax.swing.JScrollPane();
+    jTextPaneLinearHiOct13Table = new javax.swing.JTextPane();
+    jCheckBoxHiOct12Table = new javax.swing.JCheckBox();
+    jScrollPaneLinearHiOct12Table = new javax.swing.JScrollPane();
+    jTextPaneLinearHiOct12Table = new javax.swing.JTextPane();
+    jCheckBoxLinearScaleTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearScaleTableLH = new javax.swing.JScrollPane();
+    jTextPaneLinearScaleTableLH = new javax.swing.JTextPane();
+    jScrollPaneLinearScaleTableHL = new javax.swing.JScrollPane();
+    jTextPaneLinearScaleTableHL = new javax.swing.JTextPane();
+    jCheckBoxShortLinearTable = new javax.swing.JCheckBox();
+    jTextFieldShortLinearTable = new javax.swing.JTextField();
+    jCheckBoxShortCombinedTable = new javax.swing.JCheckBox();
+    jTextFieldCombinedTable = new javax.swing.JTextField();
+    jCheckBoxHiOctCombinedTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearHiOctCombinedTable = new javax.swing.JScrollPane();
+    jTextPaneLinearHiOctCombinedTable = new javax.swing.JTextPane();
+    jCheckBoxHiOctCombinedInvertedTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearHiOctCombinedInvertedTable = new javax.swing.JScrollPane();
+    jTextPaneLinearHiOctCombinedInvertedTable = new javax.swing.JTextPane();
+    jCheckBoxLoOctCombinedTable = new javax.swing.JCheckBox();
+    jScrollPaneLinearLoOctCombinedTable = new javax.swing.JScrollPane();
+    jTextPaneLinearLoOctCombinedTable = new javax.swing.JTextPane();
     jPanelLook = new javax.swing.JPanel();
     jRadioButtonLookJava = new javax.swing.JRadioButton();
     jRadioButtonLookMac = new javax.swing.JRadioButton();
@@ -1075,7 +1122,7 @@ public class JOptionDialog extends javax.swing.JDialog {
                 .addComponent(jCheckBoxUbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(179, 179, 179))
               .addGroup(jPanelPreviewLayout.createSequentialGroup()
-                .addComponent(jCheckBoxUlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addComponent(jCheckBoxUlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(220, 220, 220))
               .addGroup(jPanelPreviewLayout.createSequentialGroup()
                 .addComponent(jCheckBoxDcErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2770,10 +2817,318 @@ public class JOptionDialog extends javax.swing.JDialog {
           .addComponent(jLabelAutoComment)
           .addComponent(jComboBoxAssembler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
+        .addComponent(jTabbedPaneAssembler, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
     );
 
     jTabbedPaneOption.addTab("Disassembler", jPanelDisassembler);
+
+    jScrollPaneSidFreq.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+    jLabelSidFreq.setText("Algorithms to activate for SidFrequency catcher (in the order they are executed):");
+
+    jCheckBoxLinearTable.setSelected(true);
+    jCheckBoxLinearTable.setText("Linear table");
+    jCheckBoxLinearTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxLinearTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearTableLH.setContentType("text/html"); // NOI18N
+    jTextPaneLinearTableLH.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearTableLH.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo00, lo01, lo02, lo03<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi01, hi02, hi03<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearTableLH.setViewportView(jTextPaneLinearTableLH);
+
+    jTextPaneLinearTableHL.setContentType("text/html"); // NOI18N
+    jTextPaneLinearTableHL.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearTableHL.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi01, hi02, hi03<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo00, lo01, lo02, lo03<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearTableHL.setViewportView(jTextPaneLinearTableHL);
+
+    jCheckBoxCombinedTable.setSelected(true);
+    jCheckBoxCombinedTable.setText("Combined table");
+    jCheckBoxCombinedTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxCombinedTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneCombinedTableLH.setContentType("text/html"); // NOI18N
+    jTextPaneCombinedTableLH.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneCombinedTableLH.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo00<br>  \n <b>high</b>:<br>\n  &nbsp;&nbsp;hi00<br> <br>\n  &nbsp;&nbsp;lo01, hi01, lo02, hi02<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo5E, hi5E, lo5F, hi5F<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneCombinedTableLH.setViewportView(jTextPaneCombinedTableLH);
+
+    jTextPanecombinedTableHL.setContentType("text/html"); // NOI18N
+    jTextPanecombinedTableHL.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPanecombinedTableHL.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n     <b>high</b>:<br>\n  &nbsp;&nbsp;hi00<br>  \n <b>low</b>:<br>\n  &nbsp;&nbsp;lo00<br> <br>\n  &nbsp;&nbsp;hi01, lo01, hi02, lo02<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi5E, lo5E, hi5F, lo5F<br>\n    </p>\n  </body>\n</html>\n\n");
+    jScrollPaneCombinedTableHL.setViewportView(jTextPanecombinedTableHL);
+
+    jCheckBoxInverseLinearTable.setSelected(true);
+    jCheckBoxInverseLinearTable.setText("Inverse linear table");
+    jCheckBoxInverseLinearTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxInverseLinearTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneInverseLinearTableLH.setContentType("text/html"); // NOI18N
+    jTextPaneInverseLinearTableLH.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneInverseLinearTableLH.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo5F, lo5E, lo5D, lo5C<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo03, lo02, lo01, lo00<br>\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi5F, hi5E, hi5D, hi5C<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi03, hi02, hi01, hi00<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneInverseLinearTableLH.setViewportView(jTextPaneInverseLinearTableLH);
+
+    jTextPaneInverseLinearTableHL.setContentType("text/html"); // NOI18N
+    jTextPaneInverseLinearTableHL.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneInverseLinearTableHL.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi5F, hi5E, hi5D, hi5C<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi03, hi02, hi01, hi00<br>\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo5F, lo5E, lo5D, lo5C<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo03, lo02, lo01, lo00<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneInverseLinearTableHL.setViewportView(jTextPaneInverseLinearTableHL);
+
+    jCheckBoxLinearOctNoteTable.setSelected(true);
+    jCheckBoxLinearOctNoteTable.setText("Linear octave/note table");
+    jCheckBoxLinearOctNoteTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxLinearOctNoteTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearOctBNoteTableLH.setContentType("text/html"); // NOI18N
+    jTextPaneLinearOctBNoteTableLH.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearOctBNoteTableLH.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo00, lo01, lo02, lo03<br>  \n  &nbsp;&nbsp;lo04, lo05, lo06, lo07<br> \n &nbsp;&nbsp;lo08, lo09, lo0A, lo0B<br>   \n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>\n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi01, hi02, hi03,<br>  \n  &nbsp;&nbsp;hi04, hi05, hi06, hi07<br> \n &nbsp;&nbsp;hi08, hi09, hi0A, hi0B<br>   \n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>\n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearOctBNoteTableLH.setViewportView(jTextPaneLinearOctBNoteTableLH);
+
+    jTextPaneLinearOctNoteTableHL.setContentType("text/html"); // NOI18N
+    jTextPaneLinearOctNoteTableHL.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearOctNoteTableHL.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi01, hi02, hi03,<br>  \n  &nbsp;&nbsp;hi04, hi05, hi06, hi07<br> \n &nbsp;&nbsp;hi08, hi09, hi0A, hi0B<br>   \n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>\n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n     <b> \nlow</b>:<br>\n  &nbsp;&nbsp;lo00, lo01, lo02, lo03<br>  \n  &nbsp;&nbsp;lo04, lo05, lo06, lo07<br> \n &nbsp;&nbsp;lo08, lo09, lo0A, lo0B<br>   \n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>\n&nbsp;&nbsp; &nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0, &nbsp;&nbsp;&nbsp;0<br>  \n    </p>\r\n  </body>\r\n</html>\r\n");
+    LinearOctBNoteTableHL.setViewportView(jTextPaneLinearOctNoteTableHL);
+
+    jCheckBoxHiOct13Table.setSelected(true);
+    jCheckBoxHiOct13Table.setText("High octave (13) table");
+    jCheckBoxHiOct13Table.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxHiOct13TableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearHiOct13Table.setContentType("text/html"); // NOI18N
+    jTextPaneLinearHiOct13Table.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearHiOct13Table.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br> \n  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br>\n  &nbsp;&nbsp;lo54, lo55, lo56, lo57<br> \n &nbsp;&nbsp;lo58, lo59, lo5A, lo5B<br>   \n &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>   \n<b>high</b>:<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br>\n  &nbsp;&nbsp;hi54, hi55, hi56, hi57<br> \n &nbsp;&nbsp;hi58, hi59, hi5A, hi5B<br>   \n &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>   \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearHiOct13Table.setViewportView(jTextPaneLinearHiOct13Table);
+
+    jCheckBoxHiOct12Table.setSelected(true);
+    jCheckBoxHiOct12Table.setText("High octave (12) table");
+    jCheckBoxHiOct12Table.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxHiOct12TableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearHiOct12Table.setContentType("text/html"); // NOI18N
+    jTextPaneLinearHiOct12Table.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearHiOct12Table.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br> \n  &nbsp;&nbsp;lo54, lo55, lo56, lo57<br> \n &nbsp;&nbsp;lo58, lo59, lo5A, lo5B<br>   \n &nbsp;&nbsp;lo5C, lo5D, lo5E, lo5F<br>   \n<b>high</b>:<br>\n  &nbsp;&nbsp;hi54, hi55, hi56, hi57<br> \n &nbsp;&nbsp;hi58, hi59, hi5A, hi5B<br>   \n &nbsp;&nbsp;hi5C, hi5D, hi5E, hi5F<br>   \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearHiOct12Table.setViewportView(jTextPaneLinearHiOct12Table);
+
+    jCheckBoxLinearScaleTable.setSelected(true);
+    jCheckBoxLinearScaleTable.setText("Linear scale (CDEFGAB) table");
+    jCheckBoxLinearScaleTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxLinearScaleTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearScaleTableLH.setContentType("text/html"); // NOI18N
+    jTextPaneLinearScaleTableLH.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearScaleTableLH.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br>\n  &nbsp;&nbsp;lo00, lo02, lo04, lo05<br>  \n  &nbsp;&nbsp;lo07, lo09, lo0B<br>\n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo57, lo59, lo5B<br>\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi02, hi04, hi05<br>  \n  &nbsp;&nbsp;hi07, hi09, hi0B<br>\n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi57, hi59, hi5B<br>\n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearScaleTableLH.setViewportView(jTextPaneLinearScaleTableLH);
+
+    jTextPaneLinearScaleTableHL.setContentType("text/html"); // NOI18N
+    jTextPaneLinearScaleTableHL.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearScaleTableHL.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00, hi02, hi04, hi05<br>  \n  &nbsp;&nbsp;hi07, hi09, hi0B<br>\n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;hi57, hi59, hi5B<br>\n     <b> low</b>:<br>\n  &nbsp;&nbsp;lo00, lo02, lo04, lo05<br>  \n  &nbsp;&nbsp;lo07, lo09, lo0B<br>\n  &nbsp;&nbsp;...<br>\n  &nbsp;&nbsp;lo57, lo59, lo5B<br>\n    </p>\n  </body>\n</html>\n\n");
+    jScrollPaneLinearScaleTableHL.setViewportView(jTextPaneLinearScaleTableHL);
+
+    jCheckBoxShortLinearTable.setSelected(true);
+    jCheckBoxShortLinearTable.setText("Short linear table");
+    jCheckBoxShortLinearTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxShortLinearTableItemStateChanged(evt);
+      }
+    });
+
+    jTextFieldShortLinearTable.setText("As \"Linear Table\" but limited to first 7 octaves");
+
+    jCheckBoxShortCombinedTable.setSelected(true);
+    jCheckBoxShortCombinedTable.setText("Short combined table");
+    jCheckBoxShortCombinedTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxShortCombinedTableItemStateChanged(evt);
+      }
+    });
+
+    jTextFieldCombinedTable.setText("As \"Combined Table\" but limited to first 7 octaves");
+
+    jCheckBoxHiOctCombinedTable.setSelected(true);
+    jCheckBoxHiOctCombinedTable.setText("High octave combined table");
+    jCheckBoxHiOctCombinedTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxHiOctCombinedTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearHiOctCombinedTable.setContentType("text/html"); // NOI18N
+    jTextPaneLinearHiOctCombinedTable.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearHiOctCombinedTable.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br> \n  &nbsp;&nbsp;lo54<br> \n<b>high</b>:<br>\n  &nbsp;&nbsp;hi54<br><br>\n  &nbsp;&nbsp;lo55, hi55, lo56, hi56<br> \n&nbsp;&nbsp;...<br>\n &nbsp;&nbsp;lo5E, hi5E, lo5F, hi5F<br>   \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearHiOctCombinedTable.setViewportView(jTextPaneLinearHiOctCombinedTable);
+
+    jCheckBoxHiOctCombinedInvertedTable.setSelected(true);
+    jCheckBoxHiOctCombinedInvertedTable.setText("High octave combined invered table");
+    jCheckBoxHiOctCombinedInvertedTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxHiOctCombinedInvertedTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearHiOctCombinedInvertedTable.setContentType("text/html"); // NOI18N
+    jTextPaneLinearHiOctCombinedInvertedTable.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearHiOctCombinedInvertedTable.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rhigh:</b>:<br> \n  &nbsp;&nbsp;hi54<br> \n<b> low:</b>:<br>\n  &nbsp;&nbsp;lo54<br><br>\n  &nbsp;&nbsp;hi55, loi55, hi56, lo56<br> \n&nbsp;&nbsp;...<br>\n &nbsp;&nbsp;hi5E, lo5E, hi5F, lo5F<br>   \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearHiOctCombinedInvertedTable.setViewportView(jTextPaneLinearHiOctCombinedInvertedTable);
+
+    jCheckBoxLoOctCombinedTable.setSelected(true);
+    jCheckBoxLoOctCombinedTable.setText("Low octave combined table");
+    jCheckBoxLoOctCombinedTable.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxLoOctCombinedTableItemStateChanged(evt);
+      }
+    });
+
+    jTextPaneLinearLoOctCombinedTable.setContentType("text/html"); // NOI18N
+    jTextPaneLinearLoOctCombinedTable.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+    jTextPaneLinearLoOctCombinedTable.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n     <b> \rlow</b>:<br> \n  &nbsp;&nbsp;lo00<br> \n<b>high</b>:<br>\n  &nbsp;&nbsp;hi00<br><br>\n  &nbsp;&nbsp;lo01, hi01, lo02, hi02<br> \n&nbsp;&nbsp;...<br>\n &nbsp;&nbsp;lo08, hi09, lo0A, hi0B<br>   \n    </p>\r\n  </body>\r\n</html>\r\n");
+    jScrollPaneLinearLoOctCombinedTable.setViewportView(jTextPaneLinearLoOctCombinedTable);
+
+    javax.swing.GroupLayout jPanelSidFreqLayout = new javax.swing.GroupLayout(jPanelSidFreq);
+    jPanelSidFreq.setLayout(jPanelSidFreqLayout);
+    jPanelSidFreqLayout.setHorizontalGroup(
+      jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+            .addComponent(jLabelSidFreq)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+            .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                  .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxLinearTable)
+                    .addComponent(jCheckBoxCombinedTable)
+                    .addComponent(jCheckBoxInverseLinearTable))
+                  .addGap(116, 116, 116)
+                  .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                      .addComponent(jScrollPaneInverseLinearTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jScrollPaneInverseLinearTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                      .addComponent(jScrollPaneLinearTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addGap(28, 28, 28)
+                      .addComponent(jScrollPaneLinearTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                      .addComponent(jScrollPaneCombinedTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jScrollPaneCombinedTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                  .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxLinearOctNoteTable)
+                    .addComponent(jCheckBoxHiOct13Table)
+                    .addComponent(jCheckBoxShortLinearTable)
+                    .addComponent(jCheckBoxShortCombinedTable)
+                    .addComponent(jCheckBoxHiOctCombinedTable)
+                    .addComponent(jCheckBoxHiOctCombinedInvertedTable))
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jScrollPaneLinearHiOct13Table, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+                        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(jScrollPaneLinearOctBNoteTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(jScrollPaneLinearScaleTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(jScrollPaneLinearScaleTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(LinearOctBNoteTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                      .addComponent(jTextFieldShortLinearTable)
+                      .addComponent(jTextFieldCombinedTable))
+                    .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                      .addComponent(jScrollPaneLinearHiOctCombinedInvertedTable, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jScrollPaneLinearHiOctCombinedTable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jScrollPaneLinearLoOctCombinedTable, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jScrollPaneLinearHiOct12Table, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+              .addComponent(jCheckBoxLinearScaleTable)
+              .addComponent(jCheckBoxLoOctCombinedTable)
+              .addComponent(jCheckBoxHiOct12Table))
+            .addGap(0, 110, Short.MAX_VALUE))))
+    );
+    jPanelSidFreqLayout.setVerticalGroup(
+      jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelSidFreqLayout.createSequentialGroup()
+        .addGap(18, 18, 18)
+        .addComponent(jLabelSidFreq)
+        .addGap(18, 18, 18)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxLinearTable)
+          .addComponent(jScrollPaneLinearTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jScrollPaneLinearTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jCheckBoxCombinedTable)
+          .addComponent(jScrollPaneCombinedTableHL)
+          .addComponent(jScrollPaneCombinedTableLH))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxInverseLinearTable)
+          .addComponent(jScrollPaneInverseLinearTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jScrollPaneInverseLinearTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jCheckBoxLinearOctNoteTable)
+          .addComponent(jScrollPaneLinearOctBNoteTableLH)
+          .addComponent(LinearOctBNoteTableHL))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxHiOct13Table)
+          .addComponent(jScrollPaneLinearHiOct13Table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxLinearScaleTable)
+          .addComponent(jScrollPaneLinearScaleTableLH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jScrollPaneLinearScaleTableHL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jTextFieldShortLinearTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jCheckBoxShortLinearTable))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jTextFieldCombinedTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jCheckBoxShortCombinedTable))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPaneLinearHiOctCombinedTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jCheckBoxHiOctCombinedTable))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxHiOctCombinedInvertedTable)
+          .addComponent(jScrollPaneLinearHiOctCombinedInvertedTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jCheckBoxLoOctCombinedTable)
+          .addComponent(jScrollPaneLinearLoOctCombinedTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelSidFreqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPaneLinearHiOct12Table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jCheckBoxHiOct12Table))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    jScrollPaneSidFreq.setViewportView(jPanelSidFreq);
+
+    jTabbedPaneOption.addTab("SidFreq", jScrollPaneSidFreq);
 
     buttonGroupLook.add(jRadioButtonLookJava);
     jRadioButtonLookJava.setText("Java");
@@ -3149,7 +3504,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     jTabbedPaneOption.addTab("Look & Feel", jPanelLook);
 
-    jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.CENTER);
+    jPanelOption.add(jTabbedPaneOption, java.awt.BorderLayout.PAGE_START);
 
     jButtonLoad.setText("Load");
     jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -4174,6 +4529,54 @@ public class JOptionDialog extends javax.swing.JDialog {
     readSidId();
   }//GEN-LAST:event_jCheckBoxShowSidIdActionPerformed
 
+    private void jCheckBoxLinearTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxLinearTableItemStateChanged
+      option.sidFreqLinearTable=jCheckBoxLinearTable.isSelected();        
+    }//GEN-LAST:event_jCheckBoxLinearTableItemStateChanged
+
+    private void jCheckBoxCombinedTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxCombinedTableItemStateChanged
+      option.sidFreqCombinedTable=jCheckBoxCombinedTable.isSelected();   
+    }//GEN-LAST:event_jCheckBoxCombinedTableItemStateChanged
+
+    private void jCheckBoxInverseLinearTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxInverseLinearTableItemStateChanged
+      option.sidFreqInverseLinearTable=jCheckBoxInverseLinearTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxInverseLinearTableItemStateChanged
+
+    private void jCheckBoxLinearOctNoteTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxLinearOctNoteTableItemStateChanged
+      option.sidFreqLinearOctNoteTable=jCheckBoxLinearOctNoteTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxLinearOctNoteTableItemStateChanged
+
+    private void jCheckBoxHiOct13TableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxHiOct13TableItemStateChanged
+      option.sidFreqHiOct13Table=jCheckBoxHiOct13Table.isSelected();
+    }//GEN-LAST:event_jCheckBoxHiOct13TableItemStateChanged
+
+    private void jCheckBoxLinearScaleTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxLinearScaleTableItemStateChanged
+      option.sidFreqLinearScaleTable=  jCheckBoxLinearScaleTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxLinearScaleTableItemStateChanged
+
+    private void jCheckBoxShortLinearTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxShortLinearTableItemStateChanged
+      option.sidFreqShortLinearTable=jCheckBoxShortLinearTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxShortLinearTableItemStateChanged
+
+    private void jCheckBoxShortCombinedTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxShortCombinedTableItemStateChanged
+      option.sidFreqShortCombinedTable=jCheckBoxShortCombinedTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxShortCombinedTableItemStateChanged
+
+    private void jCheckBoxHiOctCombinedTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxHiOctCombinedTableItemStateChanged
+      option.sidFreqHiOctCombinedTable=jCheckBoxHiOctCombinedTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxHiOctCombinedTableItemStateChanged
+
+    private void jCheckBoxHiOctCombinedInvertedTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxHiOctCombinedInvertedTableItemStateChanged
+      option.sidFreqHiOctCombinedInvertedTable=jCheckBoxHiOctCombinedInvertedTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxHiOctCombinedInvertedTableItemStateChanged
+
+    private void jCheckBoxLoOctCombinedTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxLoOctCombinedTableItemStateChanged
+      option.sidFreqLoOctCombinedTable=jCheckBoxLoOctCombinedTable.isSelected();
+    }//GEN-LAST:event_jCheckBoxLoOctCombinedTableItemStateChanged
+
+    private void jCheckBoxHiOct12TableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxHiOct12TableItemStateChanged
+      option.sidFreqHiOct12Table=jCheckBoxHiOct12Table.isSelected();
+    }//GEN-LAST:event_jCheckBoxHiOct12TableItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -4217,6 +4620,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JScrollPane LinearOctBNoteTableHL;
   private javax.swing.ButtonGroup buttonGroupCodeData;
   private javax.swing.ButtonGroup buttonGroupDotsType;
   private javax.swing.ButtonGroup buttonGroupHeather;
@@ -4292,6 +4696,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JCheckBox jCheckBoxC64_200Area;
   private javax.swing.JCheckBox jCheckBoxC64_300Area;
   private javax.swing.JCheckBox jCheckBoxChooserIcon;
+  private javax.swing.JCheckBox jCheckBoxCombinedTable;
   private javax.swing.JCheckBox jCheckBoxCreatePSID;
   private javax.swing.JCheckBox jCheckBoxCreateSAP;
   private javax.swing.JCheckBox jCheckBoxDcErase;
@@ -4299,7 +4704,16 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JCheckBox jCheckBoxEraseDComm;
   private javax.swing.JCheckBox jCheckBoxErasePlus;
   private javax.swing.JCheckBox jCheckBoxForceCompilation;
+  private javax.swing.JCheckBox jCheckBoxHiOct12Table;
+  private javax.swing.JCheckBox jCheckBoxHiOct13Table;
+  private javax.swing.JCheckBox jCheckBoxHiOctCombinedInvertedTable;
+  private javax.swing.JCheckBox jCheckBoxHiOctCombinedTable;
+  private javax.swing.JCheckBox jCheckBoxInverseLinearTable;
   private javax.swing.JCheckBox jCheckBoxLabel;
+  private javax.swing.JCheckBox jCheckBoxLinearOctNoteTable;
+  private javax.swing.JCheckBox jCheckBoxLinearScaleTable;
+  private javax.swing.JCheckBox jCheckBoxLinearTable;
+  private javax.swing.JCheckBox jCheckBoxLoOctCombinedTable;
   private javax.swing.JCheckBox jCheckBoxMarkMemory;
   private javax.swing.JCheckBox jCheckBoxNoUndocumented;
   private javax.swing.JCheckBox jCheckBoxNotUsePSID;
@@ -4333,6 +4747,8 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JCheckBox jCheckBoxRepositionate;
   private javax.swing.JCheckBox jCheckBoxSetComment;
   private javax.swing.JCheckBox jCheckBoxSetLabels;
+  private javax.swing.JCheckBox jCheckBoxShortCombinedTable;
+  private javax.swing.JCheckBox jCheckBoxShortLinearTable;
   private javax.swing.JCheckBox jCheckBoxShowMiniature;
   private javax.swing.JCheckBox jCheckBoxShowSidId;
   private javax.swing.JCheckBox jCheckBoxUbEdit;
@@ -4408,6 +4824,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabelPSIDplaysound;
   private javax.swing.JLabel jLabelSIDfreqHi;
   private javax.swing.JLabel jLabelSIDfreqLo;
+  private javax.swing.JLabel jLabelSidFreq;
   private javax.swing.JLabel jLabelSyntax;
   private javax.swing.JLabel jLabelTheme;
   private javax.swing.JLabel jLabelTmpPath;
@@ -4425,6 +4842,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JPanel jPanelOption;
   private javax.swing.JPanel jPanelPlus4Comm;
   private javax.swing.JPanel jPanelPreview;
+  private javax.swing.JPanel jPanelSidFreq;
   private javax.swing.JPanel jPanelVic20Comm;
   private javax.swing.JRadioButton jRadioButtonAqua;
   private javax.swing.JRadioButton jRadioButtonCharcoal;
@@ -4463,12 +4881,27 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JRadioButton jRadioButtonVS;
   private javax.swing.JScrollPane jScrollPaneAcme;
   private javax.swing.JScrollPane jScrollPaneCa65;
+  private javax.swing.JScrollPane jScrollPaneCombinedTableHL;
+  private javax.swing.JScrollPane jScrollPaneCombinedTableLH;
   private javax.swing.JScrollPane jScrollPaneDasm;
   private javax.swing.JScrollPane jScrollPaneGlass;
   private javax.swing.JScrollPane jScrollPaneHeather;
+  private javax.swing.JScrollPane jScrollPaneInverseLinearTableHL;
+  private javax.swing.JScrollPane jScrollPaneInverseLinearTableLH;
   private javax.swing.JScrollPane jScrollPaneKickAssembler;
+  private javax.swing.JScrollPane jScrollPaneLinearHiOct12Table;
+  private javax.swing.JScrollPane jScrollPaneLinearHiOct13Table;
+  private javax.swing.JScrollPane jScrollPaneLinearHiOctCombinedInvertedTable;
+  private javax.swing.JScrollPane jScrollPaneLinearHiOctCombinedTable;
+  private javax.swing.JScrollPane jScrollPaneLinearLoOctCombinedTable;
+  private javax.swing.JScrollPane jScrollPaneLinearOctBNoteTableLH;
+  private javax.swing.JScrollPane jScrollPaneLinearScaleTableHL;
+  private javax.swing.JScrollPane jScrollPaneLinearScaleTableLH;
+  private javax.swing.JScrollPane jScrollPaneLinearTableHL;
+  private javax.swing.JScrollPane jScrollPaneLinearTableLH;
   private javax.swing.JScrollPane jScrollPaneList;
   private javax.swing.JScrollPane jScrollPanePreview;
+  private javax.swing.JScrollPane jScrollPaneSidFreq;
   private javax.swing.JScrollPane jScrollPaneSyntax;
   private javax.swing.JScrollPane jScrollPaneTMPx;
   private javax.swing.JScrollPane jScrollPaneTass64;
@@ -4502,12 +4935,29 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JTabbedPane jTabbedPaneOption;
   private sw_emulator.swing.JTass64Panel jTass64Panel;
   private javax.swing.JTextArea jTextAreaHeather;
+  private javax.swing.JTextField jTextFieldCombinedTable;
   private javax.swing.JTextField jTextFieldInitSongs;
   private javax.swing.JTextField jTextFieldPlaySound;
+  private javax.swing.JTextField jTextFieldShortLinearTable;
   private javax.swing.JTextField jTextFieldSidFreqHi;
   private javax.swing.JTextField jTextFieldSidFreqLo;
   private javax.swing.JTextField jTextFieldTmpPath;
   private javax.swing.JTextField jTextFieldTmpPathSidId;
+  private javax.swing.JTextPane jTextPaneCombinedTableLH;
+  private javax.swing.JTextPane jTextPaneInverseLinearTableHL;
+  private javax.swing.JTextPane jTextPaneInverseLinearTableLH;
+  private javax.swing.JTextPane jTextPaneLinearHiOct12Table;
+  private javax.swing.JTextPane jTextPaneLinearHiOct13Table;
+  private javax.swing.JTextPane jTextPaneLinearHiOctCombinedInvertedTable;
+  private javax.swing.JTextPane jTextPaneLinearHiOctCombinedTable;
+  private javax.swing.JTextPane jTextPaneLinearLoOctCombinedTable;
+  private javax.swing.JTextPane jTextPaneLinearOctBNoteTableLH;
+  private javax.swing.JTextPane jTextPaneLinearOctNoteTableHL;
+  private javax.swing.JTextPane jTextPaneLinearScaleTableHL;
+  private javax.swing.JTextPane jTextPaneLinearScaleTableLH;
+  private javax.swing.JTextPane jTextPaneLinearTableHL;
+  private javax.swing.JTextPane jTextPaneLinearTableLH;
+  private javax.swing.JTextPane jTextPanecombinedTableHL;
   private sw_emulator.swing.JTmpxPanel jTmpxPanel;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSyntax;
   // End of variables declaration//GEN-END:variables
@@ -4603,6 +5053,19 @@ public class JOptionDialog extends javax.swing.JDialog {
       jCheckBoxRepositionate.setSelected(option.repositionate);
       jCheckBoxPedantic.setSelected(option.pedantic);
       jCheckBoxShowMiniature.setSelected(option.showMiniature);
+      
+      jCheckBoxLinearTable.setSelected(option.sidFreqLinearTable);
+      jCheckBoxCombinedTable.setSelected(option.sidFreqCombinedTable);
+      jCheckBoxInverseLinearTable.setSelected(option.sidFreqInverseLinearTable);
+      jCheckBoxLinearOctNoteTable.setSelected((option.sidFreqLinearOctNoteTable));
+      jCheckBoxHiOct13Table.setSelected(option.sidFreqHiOct13Table);
+      jCheckBoxLinearScaleTable.setSelected(option.sidFreqLinearScaleTable);
+      jCheckBoxShortLinearTable.setSelected(option.sidFreqShortLinearTable);
+      jCheckBoxShortCombinedTable.setSelected(option.sidFreqShortCombinedTable);
+      jCheckBoxHiOctCombinedTable.setSelected(option.sidFreqHiOctCombinedTable);
+      jCheckBoxHiOctCombinedInvertedTable.setSelected(option.sidFreqHiOctCombinedInvertedTable);
+      jCheckBoxLoOctCombinedTable.setSelected(option.sidFreqLoOctCombinedTable);
+      jCheckBoxHiOct12Table.setSelected(option.sidFreqHiOct12Table);
      
       switch (option.heather) {
           case Option.HEATHER_STANDARD:
