@@ -898,6 +898,13 @@ public class Assembler {
       
       BasicDetokenize basicList=new BasicDetokenize();
       
+      /**
+       * Clear the BASIC list
+       */
+      public void clearBasic() {
+        basicList.clear();
+      }
+      
       @Override
       public void flush(StringBuilder str) {
         if (list.isEmpty()) return; 
@@ -3829,8 +3836,6 @@ public class Assembler {
           listRel2.pop();
           listBase.pop();
           listDest.pop();
-          listBase.pop();
-          listDest.pop();
           
           // not all char can be converted in string
           
@@ -5298,8 +5303,6 @@ public class Assembler {
           listRel2.pop();
           listBase.pop();
           listDest.pop();
-          listBase.pop();
-          listDest.pop();
           
           // not all char can be converted in string
           
@@ -5346,8 +5349,6 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
-                  listBase.push(null);
-                  listDest.push(null);
                   listBase.push(null);
                   listDest.push(null);
                   
@@ -5647,8 +5648,6 @@ public class Assembler {
           listRel2.pop();
           listBase.pop();
           listDest.pop();
-          listBase.pop();
-          listDest.pop();
           
           // not all char can be converted in string
           
@@ -5696,8 +5695,6 @@ public class Assembler {
                   list.push(mem);
                   listRel.push(memRel);
                   listRel2.push(null);
-                  listBase.push(null);
-                  listDest.push(null);
                   listBase.push(null);
                   listDest.push(null);
                   
@@ -6536,6 +6533,14 @@ public class Assembler {
      this.constant=constant;
      this.carets=carets;
      this.memory=memory;
+     
+     // clear up all list that can be still not empty from previous usage
+     list.clear();
+     listRel.clear();
+     listRel2.clear();
+     listBase.clear();
+     listDest.clear();
+     aByte.clearBasic();
    } 
    
    /**
