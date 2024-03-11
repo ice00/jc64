@@ -217,5 +217,14 @@ public class PSID {
 
     processSIDfile(c64, SIDfileData, SIDfileData.length );
   }
+  
+  /**
+   * Get the max tune into the SID
+   * 
+   * @return the max tune number
+   */
+  public int getMaxTune() {
+      return subtuneAmount;
+  }
 }
 

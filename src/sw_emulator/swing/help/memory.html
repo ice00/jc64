@@ -50,14 +50,14 @@
   <p>Another way to add/edit a block comment is to activate a flag in option that allow you to click in the UB column of memory area for adding it.</p>
   <p>A new features added in version 2.5 is the macro block comments: using a special syntax is possible to make the generation in automatic of sprites/chars dots view of an block of NxM elements:
   <ul>
-    <li><b>[&lt;CHAR#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
-    <li><b>[&lt;CHAR#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
-    <li><b>[&lt;CHAR#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
-    <li><b>[&lt;CHAR#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
-    <li><b>[&lt;SPRITE#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
-    <li><b>[&lt;SPRITE#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
-    <li><b>[&lt;SPRITE#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to up/dx and then go below of oneline and so on.</li>
-    <li><b>[&lt;SPRITE#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to dx/sx and then go rigth of oneline and so on.</li>
+    <li><b>[&lt;CHAR#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;CHAR#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to dn/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
   </ul>
   <p align="center"><img src="./memory19.png"></p> 
    
@@ -204,26 +204,11 @@
    <p>This declare the selected couple of bytes as #&lt; #&gt; of the address formed by his low/high value</p>
  
    <h2>Assign the 2 tables as #&gt; #&lt;</h2>
+   <p>This open a dialog that ask for starting and ending position of low addresses and the starting and ending position of high address. 
+   Then it automatically assign the correct values in the two tables as a memory word pointer.
+   </p>
    
-   <p align="center"><img src="./memory17.png"></p> 
-   
-   <p>This open a dialog that has three parts:</p>
-    <ol>   
-       <li>Automatic assign of low/high pointers from two tables. The first table is done by selecting <i>Starting of low values</i> and 
-           <i>Ending of low values</i>, the second by <i>Starting of high value</i> and <i>Ending of high value</i>. Pressing the OK button, 
-           then it automatically assign the correct values in the two tables as a memory word pointer.
-       </li>
-       <li>This allow to generate the low/high address from low and high table of a given size, and generate the label automatically (using <i>Start</i> prefix and a number of numeric <i>Digit</i>)           
-       </li>
-       <li>Assign #&lt; #&gt; related relative address. This fuction operated to the selected memory area and assume that you are selecting couples of low and high memory pointes.<br>
-           It ask for the <i>Base (real) address</i> and for the <i>Destination address</i>. This is for mapping some relative memory pointes to an area that will be relocated before use it.<br>
-           So, for example, the reference to <i>t1Patt05</i> that is relative to <i>t1Patt00</i> in the declaration of it (left panel in the image), is instead refetenced to <i>dataBuffer</i> when used at run-time (right panel in the image)
-       </li>
-    </ol>     
-   
-   <p align="center"><img src="./memory20.png"></p> 
-   
-   <p>The first tow functions are bettere replaced by the Wizard that allow to see the result in real-time before apply it.</p>
+  <p align="center"><img src="./memory17.png"></p> 
   
    <h2>Assign the 2 selected addresss as #&gt; #&lt;</h2>
    <p>This declare the selected couple of bytes as #&gt; #&lt; of the address formed by his high/low value</p>

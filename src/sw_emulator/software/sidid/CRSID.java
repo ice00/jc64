@@ -209,8 +209,9 @@ public class CRSID extends Thread {
    * 
    * @param filename the file to play
    * @param subtune the tune to play
+   * @return the SID handler
    */
-  public void playSIDfile(String filename, int subtune) {
+  public PSID playSIDfile(String filename, int subtune) {
     
     PSID psid=new PSID();
     psid.loadSIDtune(c64,filename);
@@ -220,6 +221,7 @@ public class CRSID extends Thread {
     playing = true;
     paused = false;
     c64.playbackSpeed=1;    
+    return psid;
   }
   
   @Override
