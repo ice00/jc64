@@ -51,7 +51,8 @@
          The constant that start with a char and not contains +, -, /, *, &lt; , &gt;  are assumed as true constant, all the others are assumed to be relative to other constants (it is left to the user to declare them correctly and it can be used even labels that will not be refactored when changing  the name).<br>
          You can create constant of type 0..9, so you can then have different constants for the same value. It is allowed to create constant for value over 255, and so it will be used only in data declared as word.<br>
          With the right key press onto one column, you can load or save those values to disk. Ctrl+F will let you find and hex address into the table for fast positioning.
-     <p align="center"><img src="./constant1.png"></p>    
+     <p align="center"><img src="./constant1.png"></p>   
+     <p>By pressing "Add Constant comment" you can add a comment to the selected constant.</p>
      </li>
      <li><b>Edit Relocate table:</b> you can insert a list of addresses that are code relocated.<br>
          For example: this code takes the contents from $8000 to $8CFF and relocates it to $C000:$CCFF
