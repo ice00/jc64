@@ -42,6 +42,7 @@ package sw_emulator.swing;
 
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Year;
@@ -129,12 +130,10 @@ public class FadeDialog extends JDialog {
 
     byte[] data;
     
-    try {
-      Path path = new File(getClass().getResource(egg.sid).getFile()).toPath();
-      
-      data = Files.readAllBytes(path);
-
-            
+    try {      
+      InputStream in=getClass().getResourceAsStream(egg.sid);
+      data = in.readAllBytes();
+                 
       File file=new File(option.tmpPath+File.separator+"SID.sid");     
     
       // write the file in temporary path
@@ -231,7 +230,7 @@ public class FadeDialog extends JDialog {
 /**
  * Easter eggs events with images and tunes 
  */
-enum EasterEgg{
+enum EasterEgg{  
   HALLOWEEN(31, 10, "/sw_emulator/swing/images/hw.png", "/sw_emulator/swing/images/Driller_Hub_Style.sid", 1),
   CHRISTMAS(25, 12, "/sw_emulator/swing/images/ch.png", "/sw_emulator/swing/images/Silent_Night.sid", 1),
   EASTER("/sw_emulator/swing/images/ea.png","/sw_emulator/swing/images/Turtle.sid",  1);
@@ -271,7 +270,7 @@ enum EasterEgg{
     Calendar cal=findHolyDay(Year.now().getValue());
     
     this.day=cal.get(Calendar.DAY_OF_MONTH);
-    this.month=cal.get(Calendar.MONTH);
+    this.month=cal.get(Calendar.MONTH)+1;
     this.image=image;
     this.sid = sid;
     this.tune=tune;
