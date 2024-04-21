@@ -26,12 +26,17 @@ package sw_emulator.swing;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultFormatter;
+import javax.swing.text.DefaultFormatterFactory;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.swing.main.FileManager;
 import sw_emulator.swing.main.Patch;
@@ -63,6 +68,29 @@ public class JProjectDialog extends javax.swing.JDialog {
     /** Last address added in patch*/
     int lastAddress=-1;
     
+  private static class HexFormatterFactory extends DefaultFormatterFactory { 
+        @Override
+        public JFormattedTextField.AbstractFormatter getDefaultFormatter() { 
+           return new HexFormatter(); 
+       } 
+  } 
+
+  private static class HexFormatter extends DefaultFormatter { 
+      @Override
+      public Object stringToValue(String text) throws ParseException { 
+         try { 
+            return Integer.valueOf(text, 16); 
+         } catch (NumberFormatException nfe) { 
+            throw new ParseException(text,0); 
+         } 
+     } 
+
+      @Override
+     public String valueToString(Object value) throws ParseException { 
+        return Integer.toHexString(((Integer)value)).toUpperCase(); 
+     } 
+ }     
+    
       
   /** Last direcotry for load file in project */
   public final static String LAST_DIR_FILE = "last.dir.file";
@@ -93,9 +121,13 @@ public class JProjectDialog extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("AY tune", "ay"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("NSF tune", "nsf"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SAP tune (Atari)", "sap"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("BIN dump (Odyssey)", "bin"));
         fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
         memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
         memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
+        
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor)jSpinnerAddr.getEditor(); 
+        editor.getTextField().setFormatterFactory(new HexFormatterFactory());
     }
         
     /**
@@ -147,7 +179,10 @@ public class JProjectDialog extends javax.swing.JDialog {
       jTextFieldInputFile.setText(project.file);
       if (project.description!=null) jTextAreaDescr.setText(project.description);
       else jTextAreaDescr.setText("");
+      
       jSpinnerCRT.setValue(project.chip);
+      jSpinnerAddr.setValue(project.binAddress);
+      
       if (project.fileType!=null) {
         jRadioButtonC128Z.setEnabled(true);  
         switch (project.fileType) {
@@ -157,6 +192,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           case SID:
             jRadioButtonSID.setSelected(true);
             jRadioButtonC128Z.setEnabled(false);
+            jRadioButtonOdyssey.setEnabled(false);
             break;
           case MUS:
             jRadioButtonMUS.setSelected(true);
@@ -179,6 +215,9 @@ public class JProjectDialog extends javax.swing.JDialog {
           case SAP:
             jRadioButtonSAP.setSelected(true);  
             break;  
+          case BIN:
+            jRadioButtonBIN.setSelected(true);  
+            break;    
         }
       } else {
           jRadioButtonPRG.setSelected(false);
@@ -189,6 +228,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonVSF.setSelected(false);  
           jRadioButtonNSF.setSelected(false);  
           jRadioButtonSAP.setSelected(false);  
+          jRadioButtonBIN.setSelected(false);  
         }
       if (project.targetType!=null) {
         switch (project.targetType) {
@@ -213,6 +253,9 @@ public class JProjectDialog extends javax.swing.JDialog {
           case ATARI:  
             jRadioButtonAtari.setSelected(true);
             break;    
+          case ODYSSEY:
+            jRadioButtonOdyssey.setSelected(true);
+            break;              
         }          
       } else {
           jRadioButtonC64.setSelected(true);       
@@ -222,6 +265,7 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonPlus4.setSelected(false);
           jRadioButtonC128Z.setSelected(false);
           jRadioButtonAtari.setSelected(false);
+          jRadioButtonOdyssey.setSelected(false);
         }
       jTextAreaRelocate.setText(getRelocateDesc());
       jTextAreaPatch.setText(getPatchDesc());    
@@ -288,6 +332,10 @@ public class JProjectDialog extends javax.swing.JDialog {
         jButtonPatchRemove1 = new javax.swing.JButton();
         jRadioButtonSAP = new javax.swing.JRadioButton();
         jRadioButtonAtari = new javax.swing.JRadioButton();
+        jLabelI8048 = new javax.swing.JLabel();
+        jRadioButtonOdyssey = new javax.swing.JRadioButton();
+        jRadioButtonBIN = new javax.swing.JRadioButton();
+        jSpinnerAddr = new javax.swing.JSpinner();
         jPanelDn = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
 
@@ -318,14 +366,18 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonSID);
         jRadioButtonSID.setText("SID");
+        jRadioButtonSID.setToolTipText("PSID/RSID C64 music emulator file");
         jRadioButtonSID.setEnabled(false);
 
         buttonGroupFileType.add(jRadioButtonMUS);
         jRadioButtonMUS.setText("MUS");
+        jRadioButtonMUS.setToolTipText("Compute's Gazette C64 music emulation file");
         jRadioButtonMUS.setEnabled(false);
 
         buttonGroupFileType.add(jRadioButtonPRG);
+        jRadioButtonPRG.setSelected(true);
         jRadioButtonPRG.setText("PRG");
+        jRadioButtonPRG.setToolTipText("Binary program with starting loading address");
         jRadioButtonPRG.setEnabled(false);
 
         jLabelFileDes.setText("File description:");
@@ -364,6 +416,7 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonMPR);
         jRadioButtonMPR.setText("MPR");
+        jRadioButtonMPR.setToolTipText("Proprietary multi-PRG file format");
         jRadioButtonMPR.setEnabled(false);
 
         jLabelFileTarget.setText("Target machine:");
@@ -411,9 +464,11 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonCRT);
         jRadioButtonCRT.setText("CRT");
+        jRadioButtonCRT.setToolTipText("Cartridge emulation format for Commodore (need chip selection)");
         jRadioButtonCRT.setEnabled(false);
 
         jSpinnerCRT.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerCRT.setToolTipText("number of cartridge chip to use");
         jSpinnerCRT.setEnabled(false);
         jSpinnerCRT.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -433,6 +488,7 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonVSF);
         jRadioButtonVSF.setText("VSF");
+        jRadioButtonVSF.setToolTipText("VICE snapshot emulator file format");
         jRadioButtonVSF.setEnabled(false);
 
         jLabelRelocate.setText("Relocate table:");
@@ -498,10 +554,12 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonAY);
         jRadioButtonAY.setText("AY");
+        jRadioButtonAY.setToolTipText("AY chip music emulator file format");
         jRadioButtonAY.setEnabled(false);
 
         buttonGroupFileType.add(jRadioButtonNSF);
         jRadioButtonNSF.setText("NSF");
+        jRadioButtonNSF.setToolTipText("NES music emulator file format");
         jRadioButtonNSF.setEnabled(false);
 
         jButtonPatchRemove1.setText("Remove");
@@ -514,6 +572,7 @@ public class JProjectDialog extends javax.swing.JDialog {
 
         buttonGroupFileType.add(jRadioButtonSAP);
         jRadioButtonSAP.setText("SAP");
+        jRadioButtonSAP.setToolTipText("Atari music emulator file format");
         jRadioButtonSAP.setEnabled(false);
 
         buttonGroupTarget.add(jRadioButtonAtari);
@@ -524,84 +583,39 @@ public class JProjectDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabelI8048.setText("I8048");
+
+        buttonGroupTarget.add(jRadioButtonOdyssey);
+        jRadioButtonOdyssey.setText("Odyssey/Videopack");
+        jRadioButtonOdyssey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonOdysseyActionPerformed(evt);
+            }
+        });
+
+        buttonGroupFileType.add(jRadioButtonBIN);
+        jRadioButtonBIN.setText("BIN");
+        jRadioButtonBIN.setToolTipText("Cartridge emulation format for Commodore (need chip selection)");
+        jRadioButtonBIN.setEnabled(false);
+
+        jSpinnerAddr.setModel(new javax.swing.SpinnerNumberModel(0, 0, 65535, 1));
+        jSpinnerAddr.setToolTipText("Loading address (in Hex)");
+        jSpinnerAddr.setEnabled(false);
+        jSpinnerAddr.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerAddrStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCenterLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPaneDescr)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelFileDes)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabelFileType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                        .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3)))
-                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelZ80, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelM6502)))
-                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addComponent(jRadioButtonSID)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButtonMUS)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonC64)
-                                .addGap(6, 6, 6)
-                                .addComponent(jRadioButtonC1541)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonC128)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonVic20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonPlus4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonAtari))
-                            .addComponent(jRadioButtonC128Z)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jRadioButtonPRG)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonMPR)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonCRT)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonVSF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonAY)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonNSF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonSAP))))
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldProjectName)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSelect)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSave))))
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(341, 341, 341)
-                        .addComponent(jButtonInit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAddNext))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCenterLayout.createSequentialGroup()
                                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -623,8 +637,80 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPaneRelocate1)
-                            .addComponent(jScrollPaneRelocate)))
-                    .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPaneRelocate)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jButtonInit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddNext)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCenterLayout.createSequentialGroup()
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonSID)
+                                    .addComponent(jRadioButtonVSF))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonMUS)
+                                    .addComponent(jRadioButtonAY))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jRadioButtonPRG)
+                                    .addComponent(jRadioButtonNSF))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonMPR)
+                                    .addComponent(jRadioButtonSAP))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonCRT)
+                                    .addComponent(jRadioButtonBIN))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSpinnerAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldProjectName)
+                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                        .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonSelect)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonSave))))
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelZ80, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelM6502)
+                                    .addComponent(jLabelI8048))
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                        .addComponent(jRadioButtonC64)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jRadioButtonC1541)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonC128)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonVic20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonPlus4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonAtari))
+                                    .addComponent(jRadioButtonC128Z)
+                                    .addComponent(jRadioButtonOdyssey)))
+                            .addComponent(jLabelFileDes))
+                        .addGap(0, 110, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelCenterLayout.setVerticalGroup(
@@ -642,7 +728,27 @@ public class JProjectDialog extends javax.swing.JDialog {
                     .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonCRT)
+                            .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelFileType)
+                        .addComponent(jRadioButtonSID)
+                        .addComponent(jRadioButtonMUS)
+                        .addComponent(jRadioButtonPRG)
+                        .addComponent(jRadioButtonMPR)))
+                .addGap(5, 5, 5)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonVSF, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRadioButtonAY, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRadioButtonNSF, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRadioButtonSAP, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRadioButtonBIN, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSpinnerAddr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButtonC64)
                             .addComponent(jRadioButtonC1541)
@@ -654,29 +760,20 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelZ80)
-                            .addComponent(jRadioButtonC128Z)))
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabelFileTarget))
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelFileType)
-                            .addComponent(jRadioButtonSID)
-                            .addComponent(jRadioButtonMUS)
-                            .addComponent(jRadioButtonPRG)
-                            .addComponent(jRadioButtonMPR)
-                            .addComponent(jRadioButtonCRT)
-                            .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonVSF)
-                            .addComponent(jRadioButtonAY)
-                            .addComponent(jRadioButtonNSF)
-                            .addComponent(jRadioButtonSAP))
+                            .addComponent(jRadioButtonC128Z))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelI8048)
+                            .addComponent(jRadioButtonOdyssey)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelCenterLayout.createSequentialGroup()
+                            .addGap(38, 38, 38)
+                            .addComponent(jLabelFileTarget))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jLabelFileDes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
@@ -707,7 +804,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonPatchRemove))
                     .addComponent(jScrollPaneRelocate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -928,13 +1025,14 @@ public class JProjectDialog extends javax.swing.JDialog {
 
             // go to read the file
             try {
-                project.setData(FileManager.instance.readFile(project.file));
+                project.setData(FileManager.instance.readFile(project.file), project.file.endsWith("bin"));
                 jTextAreaDescr.setText(project.description);
                 jRadioButtonC128Z.setEnabled(true);
                 switch (project.fileType) {
                   case CRT:
                     jRadioButtonCRT.setSelected(true);
                     jSpinnerCRT.setEnabled(true);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C64;                    
                     jRadioButtonC64.setSelected(true);
@@ -944,11 +1042,13 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonC128.setEnabled(true);
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);
+                    jRadioButtonOdyssey.setEnabled(false); 
 
                     break;
                   case SID:
                     jRadioButtonSID.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C64;
                     jRadioButtonC64.setSelected(true);  
@@ -959,10 +1059,12 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonVic20.setEnabled(false);
                     jRadioButtonPlus4.setEnabled(false);                   
                     jRadioButtonC128Z.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(false); 
                     break;
                   case NSF: // we did not have jet a NES target machine
                     jRadioButtonNSF.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     jRadioButtonC64.setSelected(false);
                     project.targetType=TargetType.C64;
@@ -973,10 +1075,12 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonPlus4.setEnabled(false);                    
                     jRadioButtonC128Z.setEnabled(false);
                     jRadioButtonAtari.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(false); 
                     break;                    
                   case SAP:  
                     jRadioButtonSAP.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.ATARI;
                     jRadioButtonAtari.setSelected(true);
@@ -987,11 +1091,13 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonC128.setEnabled(false);
                     jRadioButtonVic20.setEnabled(false);
                     jRadioButtonPlus4.setEnabled(false);                    
-                    jRadioButtonC128Z.setEnabled(false);                      
+                    jRadioButtonC128Z.setEnabled(false);     
+                    jRadioButtonOdyssey.setEnabled(false); 
                     break;
                   case MUS:
                     jRadioButtonMUS.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C64;
                     
@@ -1001,10 +1107,12 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonVic20.setEnabled(false);
                     jRadioButtonPlus4.setEnabled(false);                    
                     jRadioButtonAtari.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(false); 
                     break;
                   case PRG:
                     jRadioButtonPRG.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C64;
                     
@@ -1014,10 +1122,12 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);                  
                     jRadioButtonAtari.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(true); 
                     break;
                   case MPR:
                     jRadioButtonMPR.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C64;
                     
@@ -1027,10 +1137,12 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);                    
                     jRadioButtonAtari.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(true); 
                     break;
                   case AY:
                     jRadioButtonAY.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     
                     project.targetType=TargetType.C128Z;
                     
@@ -1040,11 +1152,13 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);                    
                     jRadioButtonAtari.setEnabled(false);
+                    jRadioButtonOdyssey.setEnabled(true); 
                     
                     break;
                   case VSF:
                     jRadioButtonVSF.setSelected(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                                         
                     project.targetType=TargetType.C64;                    
                     
@@ -1053,8 +1167,25 @@ public class JProjectDialog extends javax.swing.JDialog {
                     jRadioButtonC128.setEnabled(true);
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);
-                    
+                    jRadioButtonOdyssey.setEnabled(true);                     
                     jRadioButtonAtari.setEnabled(false);
+                    break;
+                  case BIN:
+                    jRadioButtonBIN.setSelected(true);
+                    jSpinnerCRT.setEnabled(false);
+                    
+                    project.targetType=TargetType.ODYSSEY;                    
+                    jRadioButtonOdyssey.setSelected(true);
+                    
+                    jRadioButtonC64.setEnabled(true);                    
+                    jRadioButtonC1541.setEnabled(true);
+                    jRadioButtonC128.setEnabled(true);
+                    jRadioButtonVic20.setEnabled(true);
+                    jRadioButtonPlus4.setEnabled(true);                    
+                    jRadioButtonAtari.setEnabled(true);
+                    jRadioButtonOdyssey.setEnabled(true); 
+                    
+                    jSpinnerAddr.setEnabled(true);
                     break;
                   case UND:
                     jRadioButtonSID.setSelected(false);
@@ -1064,12 +1195,15 @@ public class JProjectDialog extends javax.swing.JDialog {
                     
                     jRadioButtonC64.setEnabled(true);
                     project.targetType=TargetType.C64;
+                    
                     jRadioButtonC1541.setEnabled(true);
                     jRadioButtonC128.setEnabled(true);
                     jRadioButtonVic20.setEnabled(true);
                     jRadioButtonPlus4.setEnabled(true);
                     jSpinnerCRT.setEnabled(false);
+                    jSpinnerAddr.setEnabled(false);
                     jRadioButtonAtari.setEnabled(true);
+                    jRadioButtonOdyssey.setEnabled(true); 
                     break;
                 }
             } catch (FileNotFoundException e) {
@@ -1078,7 +1212,7 @@ public class JProjectDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            project.fileType=project.fileType.getFileType(project.inB);
+            project.fileType=project.fileType.getFileType(project.inB, project.file.endsWith("bin"));
             jTextAreaRelocate.setText(getRelocateDesc());
         }
     }//GEN-LAST:event_jButtonSelectActionPerformed
@@ -1086,6 +1220,14 @@ public class JProjectDialog extends javax.swing.JDialog {
     private void jRadioButtonAtariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAtariActionPerformed
         project.targetType=TargetType.ATARI;
     }//GEN-LAST:event_jRadioButtonAtariActionPerformed
+
+    private void jRadioButtonOdysseyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOdysseyActionPerformed
+        project.targetType=TargetType.ODYSSEY;
+    }//GEN-LAST:event_jRadioButtonOdysseyActionPerformed
+
+    private void jSpinnerAddrStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerAddrStateChanged
+        project.binAddress=(Integer)jSpinnerAddr.getValue();
+    }//GEN-LAST:event_jSpinnerAddrStateChanged
     
     /**
      * @param args the command line arguments
@@ -1149,6 +1291,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelFileDes;
     private javax.swing.JLabel jLabelFileTarget;
     private javax.swing.JLabel jLabelFileType;
+    private javax.swing.JLabel jLabelI8048;
     private javax.swing.JLabel jLabelInputFile;
     private javax.swing.JLabel jLabelM6502;
     private javax.swing.JLabel jLabelPatch;
@@ -1160,6 +1303,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelDn;
     private javax.swing.JRadioButton jRadioButtonAY;
     private javax.swing.JRadioButton jRadioButtonAtari;
+    private javax.swing.JRadioButton jRadioButtonBIN;
     private javax.swing.JRadioButton jRadioButtonC128;
     private javax.swing.JRadioButton jRadioButtonC128Z;
     private javax.swing.JRadioButton jRadioButtonC1541;
@@ -1168,6 +1312,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonMPR;
     private javax.swing.JRadioButton jRadioButtonMUS;
     private javax.swing.JRadioButton jRadioButtonNSF;
+    private javax.swing.JRadioButton jRadioButtonOdyssey;
     private javax.swing.JRadioButton jRadioButtonPRG;
     private javax.swing.JRadioButton jRadioButtonPlus4;
     private javax.swing.JRadioButton jRadioButtonSAP;
@@ -1177,6 +1322,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneDescr;
     private javax.swing.JScrollPane jScrollPaneRelocate;
     private javax.swing.JScrollPane jScrollPaneRelocate1;
+    private javax.swing.JSpinner jSpinnerAddr;
     private javax.swing.JSpinner jSpinnerCRT;
     private javax.swing.JTextArea jTextAreaDescr;
     private javax.swing.JTextArea jTextAreaPatch;

@@ -403,7 +403,10 @@ public class JFreezeFrame extends javax.swing.JFrame {
           }
           
           Disassembly dis=new Disassembly();        
-          dis.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
+          dis.dissassembly(project.fileType, project.inB, option, project.memory,
+                           project.constant, project.mpr, project.relocates, 
+                           project.patches, project.chip, project.binAddress,
+                           project.targetType, true);
           option.assembler=actual;
           freeze.text=dis.source;
       } else freeze.text=disassembly.source;

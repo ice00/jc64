@@ -442,6 +442,10 @@ public interface userAction {
   
   /** Basic V8 memory area */
   public static final int MEM_BASIC_V8 = 139;  
+  
+  /** Block labels memory area */
+  public static final int MEM_BLOCKLABELS = 140;  
+  
   /**
    * Execute the passed user action
    * 

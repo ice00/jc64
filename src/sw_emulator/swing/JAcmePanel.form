@@ -177,14 +177,15 @@
                   <Component id="jRadioButtonAcmeMark08Byte" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPaneAcmeMacroHexMultiSprite" alignment="0" pref="98" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawNumText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawHighText" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPaneAcmeMarkRawShiftText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawHighText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawNumText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroHexMultiSprite" alignment="0" pref="100" max="32767" attributes="0"/>
                   <Component id="jScrollPaneAcmeMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark08Byte" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -194,18 +195,11 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jScrollPaneAcmeMacroBinMonoSprite" alignment="0" pref="108" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneAcmeMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPaneAcmeMarkByByte" min="-2" pref="103" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMonoSprite" alignment="0" pref="108" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkByByte" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="500" max="32767" attributes="0"/>
-              <Component id="jScrollPaneAcmeMark08Byte" min="-2" pref="98" max="-2" attributes="0"/>
-              <EmptySpace min="147" pref="147" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

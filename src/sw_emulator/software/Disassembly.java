@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
 import sw_emulator.software.cpu.CpuDasm;
+import sw_emulator.software.cpu.I8048Dasm;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.machine.AtariDasm;
 import sw_emulator.software.machine.C64MusDasm;
@@ -37,6 +38,8 @@ import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Block;
 import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
+import sw_emulator.swing.main.CpuFamily;
+import static sw_emulator.swing.main.CpuFamily.I8048;
 import sw_emulator.swing.main.FileType;
 import sw_emulator.swing.main.MPR;
 import sw_emulator.swing.main.Option;
@@ -74,6 +77,9 @@ public class Disassembly {
   
   /** Eventual CRT chip */
   private int chip;
+  
+  /** Eventual raw binary starting address */
+  private int binAddress;
   
   /** The type of file */
   private FileType fileType;
@@ -178,18 +184,21 @@ public class Disassembly {
    * @param relocates eventual relocates to use
    * @param patches eventual patches to apply
    * @param chip eventual CRT chip
+   * @param binAddress eventual raw binary starting address
    * @param targetType target machine type
    * @param asSource true if disassembly output should be as a source file
    */
   public void dissassembly(FileType fileType, byte[] inB, Option option,  
                            MemoryDasm[] memory, Constant constant, MPR mpr,
                            Relocate[] relocates, Patch[] patches,
-                           int chip, TargetType targetType, boolean asSource) {
+                           int chip, int binAddress, TargetType targetType, 
+                           boolean asSource) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
     this.mpr=mpr;
     this.chip=chip;
+    this.binAddress=binAddress;
     this.constant=constant;
     this.relocates=relocates;
     this.patches=patches;
@@ -218,13 +227,13 @@ public class Disassembly {
         disassemblyMUS(asSource);                
         break;
       case SID:
-        disassemblySID(asSource);  
+        disassemblySID(asSource, targetType);  
         break;
       case NSF:
-        disassemblyNSF(asSource);  
+        disassemblyNSF(asSource, targetType);  
         break;   
       case SAP:
-        disassemblySAP(asSource);  
+        disassemblySAP(asSource, targetType);  
         break;          
       case PRG:
         disassemblyPRG(asSource, targetType);  
@@ -238,6 +247,9 @@ public class Disassembly {
        case AY:
         disassemblyAY(asSource, targetType);
         break;   
+       case BIN:
+        disassemblyBIN(asSource, targetType);
+        break;
       case UND:            
         source="";
         disassembly="";   
@@ -293,8 +305,9 @@ public class Disassembly {
    * Disassembly a SID file
    * 
    * @param asSource true if output should be as a source file
+   * @param targetType the target machine
    */
-  private void disassemblySID(boolean asSource) {
+  private void disassemblySID(boolean asSource, TargetType targetType) {
     int psidDOff;     // psid data offeset   
     int psidLAddr;    // psid load address
     int psidIAddr;    // psid init address
@@ -303,7 +316,7 @@ public class Disassembly {
     int sidPC;        // PC value of start of atari program 
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
       
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
@@ -437,8 +450,9 @@ public class Disassembly {
    * Disassembly a NSF file
    * 
    * @param asSource true if output should be as a source file
+   * @param targetType the target machine
    */
-  private void disassemblyNSF(boolean asSource) {
+  private void disassemblyNSF(boolean asSource, TargetType targetType) {
     int nsfDOff;     // psid data offeset   
     int nsfLAddr;    // psid load address
     int nsfIAddr;    // psid init address
@@ -447,8 +461,8 @@ public class Disassembly {
     int nsfPC;        // PC value of start of atari program 
     Block block;
     
-    setupAssembler();
-      
+    setupAssembler(targetType.cpuFamily);
+          
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
     sid.setConstant(constant);
@@ -585,6 +599,70 @@ public class Disassembly {
     assembler.setText(tmp, str);
   }
   
+/**
+   * Disassembly a BIN file
+   * 
+   * @param asSource true if output should be as a source file
+   * @param targetType the target machine type
+   */
+  private void disassemblyBIN(boolean asSource, TargetType targetType) {
+    CpuDasm bin;
+    Block block;
+    
+    setupAssembler(targetType.cpuFamily);
+    
+    bin=targetType.getDasm();   
+    bin.setMemory(memory);
+    bin.setConstant(constant);
+    bin.setOption(option,  assembler);
+    if (bin instanceof M6510Dasm) ((M6510Dasm)bin).setMode(option.illegalOpcodeMode);
+    
+    block=new Block();   
+    block.startAddress=binAddress;
+    block.startBuffer=0;
+    block.endAddress=inB.length-1-block.startBuffer+block.startAddress;
+    block.endBuffer=inB.length-1;
+    block.inB=inB.clone();            
+    blocks.add(block);
+
+    builder.setLength(0);
+    
+    if (asSource) {
+      bin.upperCase=option.opcodeUpperCaseSource;  
+
+      MemoryDasm mem=new MemoryDasm();
+      mem.userBlockComment=getAssemblerDescription();
+      assembler.setBlockComment(builder, mem);
+      
+      assembler.setConstant(builder, constant);
+
+      assembler.setStarting(builder);
+      assembler.setMacro(builder, memory);
+    } else {    
+        bin.upperCase=option.opcodeUpperCasePreview;
+        builder.append(fileType.getDescription(inB));
+        builder.append("\n");
+      } 
+    
+    // add blocks from relocate
+    addRelocate(blocks);
+    addBlockForPatch();
+    
+    // add startup for DASM if this is the case
+    if (asSource && option.assembler==Assembler.Name.DASM && option.dasmF3Comp) {
+      int start=Math.max(0, getMinAddress());
+        
+      assembler.setOrg(builder, start); 
+      assembler.setWord(builder, (byte)(start & 0xFF), (byte)(start>>8), null);
+      builder.append("\n");
+    } 
+    
+    disassemblyBlocks(asSource, bin, builder);
+    
+    if (asSource) source=builder.toString();
+    else disassembly=builder.toString();
+  }     
+  
   /**
    * Disassembly a PRG file
    * 
@@ -595,7 +673,7 @@ public class Disassembly {
     CpuDasm prg;
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
     
     prg=targetType.getDasm();   
     prg.setMemory(memory);
@@ -659,7 +737,7 @@ public class Disassembly {
     CpuDasm prg;
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
       
     prg=targetType.getDasm();          
     prg.setMemory(memory);
@@ -748,7 +826,7 @@ public class Disassembly {
     CpuDasm prg;
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
       
     prg=targetType.getDasm();    
     
@@ -854,7 +932,7 @@ public class Disassembly {
     CpuDasm prg;
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
       
     prg=targetType.getDasm();
        
@@ -927,7 +1005,7 @@ public class Disassembly {
     CpuDasm prg;
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
       
     prg=targetType.getDasm();
        
@@ -1012,12 +1090,12 @@ public class Disassembly {
    * Disassembly a SAP file
    * 
    * @param asSource true if output should be as a source file
+   * @param targetType the target machine
    */
-  private void disassemblySAP(boolean asSource) {
-    CpuDasm prg;
+  private void disassemblySAP(boolean asSource, TargetType targetType) {
     Block block;
     
-    setupAssembler();
+    setupAssembler(targetType.cpuFamily);
     
     AtariDasm atari=new AtariDasm();
     atari.setMemory(memory);
@@ -1369,7 +1447,7 @@ public class Disassembly {
   /**
    * Set up the assembler
    */
-  private void setupAssembler() {   
+  private void setupAssembler(CpuFamily cpuFamily) {   
     switch (option.assembler) {
       case DASM:
         aStarting=option.dasmStarting;
@@ -1532,6 +1610,53 @@ public class Disassembly {
         aScreenText=option.glassScreenText; 
         aPetasciiText=option.glassPetasciiText;
         break;  
+      case AS:
+        if (cpuFamily==I8048) {
+        aStarting=option.asiStarting;
+        aOrigin=option.asiOrigin;
+        aLabel=option.asiLabel;
+        aComment=option.asiComment;
+        aBlockComment=option.asiBlockComment;
+        aByte=option.asiByte;
+        aWord=option.asiWord;
+        aWordSwapped=option.asiWordSwapped;
+        aTribyte=option.asiTribyte;
+        aLong=option.asiLong;
+        aAddress=option.asiAddress;
+        aStackWord=option.asiStackWord;
+        aMonoSprite=option.asiMonoSprite;
+        aMultiSprite=option.asiMultiSprite;
+        aText=option.asiText;
+        aNumText=option.asiNumText;
+        aZeroText=option.asiZeroText;
+        aHighText=option.asiHighText;   
+        aShiftText=option.asiShiftText; 
+        aScreenText=option.asiScreenText; 
+        aPetasciiText=option.asiPetasciiText;     
+        } else {
+        aStarting=option.asmStarting;
+        aOrigin=option.asmOrigin;
+        aLabel=option.asmLabel;
+        aComment=option.asmComment;
+        aBlockComment=option.asmBlockComment;
+        aByte=option.asmByte;
+        aWord=option.asmWord;
+        aWordSwapped=option.asmWordSwapped;
+        aTribyte=option.asmTribyte;
+        aLong=option.asmLong;
+        aAddress=option.asmAddress;
+        aStackWord=option.asmStackWord;
+        aMonoSprite=option.asmMonoSprite;
+        aMultiSprite=option.asmMultiSprite;
+        aText=option.asmText;
+        aNumText=option.asmNumText;
+        aZeroText=option.asmZeroText;
+        aHighText=option.asmHighText;   
+        aShiftText=option.asmShiftText; 
+        aScreenText=option.asmScreenText; 
+        aPetasciiText=option.asmPetasciiText; 
+          }
+        break;
     }
     
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 

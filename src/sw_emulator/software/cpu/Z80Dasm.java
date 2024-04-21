@@ -3625,17 +3625,6 @@ public class Z80Dasm extends CpuDasm implements disassembler {
        
     return reg+",("+reg2+"+"+getLabelZero(addr)+")";  
   }
-  
-  /**
-   * Return the mnemonic assembler instruction rapresent by passed code bytes,
-   * using last position an program counter.
-   *
-   * @param buffer the buffer containg the data 
-   * @return a string menemonic rapresentation of instruction
-   */
-  public String dasm(byte[] buffer) {
-    return dasm(buffer, pos, pc);
-  }
 
   /**
    * Comment and Disassemble a region of the buffer

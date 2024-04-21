@@ -36,77 +36,79 @@ import sw_emulator.swing.main.Carets.Type;
  * @version 1.00 11/04/2024
  */
 public class I8048Dasm extends CpuDasm implements disassembler {
+
+    public I8048Dasm() {
+        defaultMode=false; // mode for Hex as h
+    }        
+    
   // legal instruction
-  
-    public static final byte M_ADD = 0;
-    public static final byte M_ADDC = 1;
-    public static final byte M_ANL = 2;
-    public static final byte M_ANLD = 3;
-    public static final byte M_CALL = 4;
-    public static final byte M_CLR = 5;
-    public static final byte M_CLC = 6;
-    public static final byte M_CPL = 7;
-    public static final byte M_DA = 8;
-    public static final byte M_DEC = 9;
-    public static final byte M_DIS = 10;
-    public static final byte M_DJNZ = 11;
-    public static final byte M_EN = 12;
-    public static final byte M_ENT0 = 13;
-    public static final byte M_INC = 14;
-    public static final byte M_IN = 15;
-    public static final byte M_INS = 16;
-    public static final byte M_JB0 = 17;
-    public static final byte M_JB1 = 18;
-    public static final byte M_JB2 = 19;
-    public static final byte M_JB3 = 20;
-    public static final byte M_JB4 = 21;
-    public static final byte M_JB5 = 22;
-    public static final byte M_JB6 = 23;
-    public static final byte M_JB7 = 24;
-    public static final byte M_JC = 25;
-    public static final byte M_JF0 = 26;
-    public static final byte M_JF1 = 27;
-    public static final byte M_JMPP = 28;
-    public static final byte M_JMP = 29;
-    public static final byte M_JNC = 30;
-    public static final byte M_JNI = 31;
-    public static final byte M_JNT0 = 32;
-    public static final byte M_JNT1 = 33;
-    public static final byte M_JNZ = 34;
-    public static final byte M_JTF = 35;
-    public static final byte M_JT0 = 36;
-    public static final byte M_JT1 = 37;
-    public static final byte M_JZ = 38;
-    public static final byte M_MOVD = 39;
-    public static final byte M_MOVX = 40;
-    public static final byte M_MOVP3 = 41;
-    public static final byte M_MOVP = 42;
-    public static final byte M_MOV = 43;
-    public static final byte M_NOP = 44;
-    public static final byte M_ORL = 45;
-    public static final byte M_ORLD = 46;
-    public static final byte M_OUTL = 47;
-    public static final byte M_RETL = 48;
-    public static final byte M_RETR = 49;
-    public static final byte M_RET = 50;
-    public static final byte M_RL = 51;
-    public static final byte M_RLC = 52;
-    public static final byte M_RR = 53;
-    public static final byte M_RRC = 54;
-    public static final byte M_SEL = 55;
-    public static final byte M_STRT = 56;
-    public static final byte M_STOP = 57;
-    public static final byte M_SWAP = 58;
-    public static final byte M_XCHD = 59;
-    public static final byte M_XCH = 60;
-    public static final byte M_XCR = 61;
-    public static final byte M_XRL = 62;
+  public static final byte M_ADD = 0;
+public static final byte M_ADDC = 1;
+public static final byte M_ANL = 2;
+public static final byte M_ANLD = 3;
+public static final byte M_CALL = 4;
+public static final byte M_CLR = 5;
+public static final byte M_CPL = 6;
+public static final byte M_DA = 7;
+public static final byte M_DEC = 8;
+public static final byte M_DIS = 9;
+public static final byte M_DJNZ = 10;
+public static final byte M_EN = 11;
+public static final byte M_ENT0 = 12;
+public static final byte M_INC = 13;
+public static final byte M_IN = 14;
+public static final byte M_INS = 15;
+public static final byte M_JB0 = 16;
+public static final byte M_JB1 = 17;
+public static final byte M_JB2 = 18;
+public static final byte M_JB3 = 19;
+public static final byte M_JB4 = 20;
+public static final byte M_JB5 = 21;
+public static final byte M_JB6 = 22;
+public static final byte M_JB7 = 23;
+public static final byte M_JC = 24;
+public static final byte M_JF0 = 25;
+public static final byte M_JF1 = 26;
+public static final byte M_JMPP = 27;
+public static final byte M_JMP = 28;
+public static final byte M_JNC = 29;
+public static final byte M_JNI = 30;
+public static final byte M_JNT0 = 31;
+public static final byte M_JNT1 = 32;
+public static final byte M_JNZ = 33;
+public static final byte M_JTF = 34;
+public static final byte M_JT0 = 35;
+public static final byte M_JT1 = 36;
+public static final byte M_JZ = 37;
+public static final byte M_MOVD = 38;
+public static final byte M_MOVX = 39;
+public static final byte M_MOVP3 = 40;
+public static final byte M_MOVP = 41;
+public static final byte M_MOV = 42;
+public static final byte M_NOP = 43;
+public static final byte M_ORL = 44;
+public static final byte M_ORLD = 45;
+public static final byte M_OUTL = 46;
+public static final byte M_RETL = 47;
+public static final byte M_RETR = 48;
+public static final byte M_RET = 49;
+public static final byte M_RL = 50;
+public static final byte M_RLC = 51;
+public static final byte M_RR = 52;
+public static final byte M_RRC = 53;
+public static final byte M_SEL = 54;
+public static final byte M_STRT = 55;
+public static final byte M_STOP = 56;
+public static final byte M_SWAP = 57;
+public static final byte M_XCHD = 58;
+public static final byte M_XCH = 59;
+public static final byte M_XRL = 60;  
   
   // no instruction
-  public static final byte M_JAM=63;    
+  public static final byte M_JAM=61;    
   
   // undocument instruction
-  public static final byte M_ID1=64;    
+  public static final byte M_ID1=62;    
   
   // addressing mode
   public static final byte A_NUL  =0;  // nothing else
@@ -159,7 +161,6 @@ public class I8048Dasm extends CpuDasm implements disassembler {
         "ANLD ",
         "CALL ",
         "CLR  ",
-        "CLC  ",
         "CPL  ",
         "DA   ",
         "DEC  ",
@@ -214,10 +215,9 @@ public class I8048Dasm extends CpuDasm implements disassembler {
         "SWAP ",
         "XCHD ",
         "XCH  ",
-        "XCR  ",
         "XRL  ",
-        "ID1  ",
-        "???  "
+        "???  ",
+        "ID1  "
     };
   
   /** Contains the mnemonics reference for the instruction */
@@ -227,7 +227,7 @@ public class I8048Dasm extends CpuDasm implements disassembler {
     M_INC,  M_INC,  M_JB0,  M_ADDC, M_CALL, M_DIS,  M_JTF,  M_INC,  // 10
     M_INC,  M_INC,  M_INC,  M_INC,  M_INC,  M_INC,  M_INC,  M_INC,
     M_XCH,  M_XCH,  M_JAM,  M_MOV,  M_JMP,  M_EN,   M_JNT0, M_CLR,  // 20
-    M_XCR,  M_XCR,  M_XCR,  M_XCR,  M_XCR,  M_XCR,  M_XCR,  M_XCR,
+    M_XCH,  M_XCH,  M_XCH,  M_XCH,  M_XCH,  M_XCH,  M_XCH,  M_XCH,
     M_XCHD, M_XCHD, M_JB1,  M_JAM,  M_CALL, M_DIS,  M_JT0,  M_CPL,  // 30
     M_JAM,  M_OUTL, M_OUTL, M_JAM,  M_MOVD, M_MOVD, M_MOVD, M_MOVD,
     M_ORL,  M_ORL,  M_MOV,  M_ORL,  M_JMP,  M_STRT, M_JNT1, M_SWAP, // 40
@@ -240,7 +240,7 @@ public class I8048Dasm extends CpuDasm implements disassembler {
     M_ADDC, M_ADDC, M_ADDC, M_ADDC, M_ADDC, M_ADDC, M_ADDC, M_ADDC,
     M_MOVX, M_MOVX, M_JAM,  M_RET,  M_JMP,  M_CLR,  M_JNI,  M_JAM,  // 80
     M_ORL,  M_ORL,  M_ORL,  M_JAM,  M_ORLD, M_ORLD, M_ORLD, M_ORLD,
-    M_MOVX, M_MOVX, M_JB4,  M_RETR, M_CALL, M_CPL,  M_JNZ,  M_CLC,  // 90
+    M_MOVX, M_MOVX, M_JB4,  M_RETR, M_CALL, M_CPL,  M_JNZ,  M_CLR,  // 90
     M_ANL,  M_ANL,  M_ANL,  M_JAM,  M_ANLD, M_ANLD, M_ANLD, M_ANLD,
     M_MOV,  M_MOV,  M_JAM,  M_MOVP, M_JMP,  M_CLR,  M_JAM,  M_CPL,  // A0
     M_MOV,  M_MOV,  M_MOV,  M_MOV,  M_MOV,  M_MOV,  M_MOV,  M_MOV,
@@ -532,7 +532,7 @@ public class I8048Dasm extends CpuDasm implements disassembler {
         if (pos<buffer.length) addr=(pc & 0xFF00)+(buffer[pos++] & 0xFF);
         else addr=-1;    
           
-        result+="R"+(op&0x07)+" "+getLabel(addr);
+        result+="R"+(op&0x07)+","+getLabel(addr);
         setLabel(addr);
         setLabelPlus(pc,1);
         pc+=2;

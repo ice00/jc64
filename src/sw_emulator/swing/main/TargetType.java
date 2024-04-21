@@ -32,6 +32,10 @@ import sw_emulator.software.machine.C1541Dasm;
 import sw_emulator.software.machine.C64Dasm;
 import sw_emulator.software.machine.CPlus4Dasm;
 import sw_emulator.software.machine.CVic20Dasm;
+import sw_emulator.software.machine.OdysseyDasm;
+import static sw_emulator.swing.main.CpuFamily.I8048;
+import static sw_emulator.swing.main.CpuFamily.M6502;
+import static sw_emulator.swing.main.CpuFamily.Z80;
 
 /**
  * Target machine type for disassembly
@@ -39,13 +43,26 @@ import sw_emulator.software.machine.CVic20Dasm;
  * @author ice
  */
  public enum TargetType {
-   C64,
-   C1541,
-   C128,
-   VIC20,
-   PLUS4,
-   C128Z,
-   ATARI;              
+   C64(M6502),
+   C1541(M6502),
+   C128(M6502),
+   VIC20(M6502),
+   PLUS4(M6502),
+   C128Z(Z80),
+   ATARI(M6502),
+   ODYSSEY(I8048);         
+   
+   /** Cpu fmaily of this target */
+   public CpuFamily cpuFamily;
+
+    /**
+     * Construct the cpu family     
+     */
+    private TargetType(CpuFamily cpuFamily) {
+        this.cpuFamily = cpuFamily;
+    }
+   
+   
    
    /**
     * Get the appropriate disassembler for the target type
@@ -68,6 +85,8 @@ import sw_emulator.software.machine.CVic20Dasm;
         return new Z80Dasm();
       case ATARI:
         return new AtariDasm();  
+      case ODYSSEY:
+        return new OdysseyDasm();
       default:  
         return new M6510Dasm();
      }    

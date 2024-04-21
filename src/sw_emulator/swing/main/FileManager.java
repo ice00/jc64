@@ -446,7 +446,53 @@ public class FileManager {
       option.sidFreqHiOctCombinedTable=in.readBoolean();
       option.sidFreqHiOctCombinedInvertedTable=in.readBoolean();
       option.sidFreqLoOctCombinedTable=in.readBoolean();
-      option.sidFreqHiOct12Table=in.readBoolean();      
+      option.sidFreqHiOct12Table=in.readBoolean();  
+      
+      // 3.0
+      option.asmStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.asmOrigin = Assembler.Origin.valueOf(in.readUTF());
+      option.asmLabel = Assembler.Label.valueOf(in.readUTF());
+      option.asmComment = Assembler.Comment.valueOf(in.readUTF());
+      option.asmBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.asmByte = Assembler.Byte.valueOf(in.readUTF());
+      option.asmWord = Assembler.Word.valueOf(in.readUTF());
+      option.asmWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
+      option.asmTribyte = Assembler.Tribyte.valueOf(in.readUTF());
+      option.asmLong = Assembler.Long.valueOf(in.readUTF());
+      option.asmAddress = Assembler.Address.valueOf(in.readUTF());
+      option.asmStackWord = Assembler.StackWord.valueOf(in.readUTF());
+      option.asmMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.asmMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.asmText = Assembler.Text.valueOf(in.readUTF());
+      option.asmNumText = Assembler.NumText.valueOf(in.readUTF());
+      option.asmZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
+      option.asmHighText = Assembler.HighText.valueOf(in.readUTF()); 
+      option.asmShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.asmScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
+      option.asmPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());         
+      
+      option.asiStarting = Assembler.Starting.valueOf(in.readUTF());
+      option.asiOrigin = Assembler.Origin.valueOf(in.readUTF());
+      option.asiLabel = Assembler.Label.valueOf(in.readUTF());
+      option.asiComment = Assembler.Comment.valueOf(in.readUTF());
+      option.asiBlockComment = Assembler.BlockComment.valueOf(in.readUTF());
+      option.asiByte = Assembler.Byte.valueOf(in.readUTF());
+      option.asiWord = Assembler.Word.valueOf(in.readUTF());
+      option.asiWordSwapped = Assembler.WordSwapped.valueOf(in.readUTF()); 
+      option.asiTribyte = Assembler.Tribyte.valueOf(in.readUTF());
+      option.asiLong = Assembler.Long.valueOf(in.readUTF());
+      option.asiAddress = Assembler.Address.valueOf(in.readUTF());
+      option.asiStackWord = Assembler.StackWord.valueOf(in.readUTF());
+      option.asiMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
+      option.asiMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.asiText = Assembler.Text.valueOf(in.readUTF());
+      option.asiNumText = Assembler.NumText.valueOf(in.readUTF());
+      option.asiZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
+      option.asiHighText = Assembler.HighText.valueOf(in.readUTF()); 
+      option.asiShiftText = Assembler.ShiftText.valueOf(in.readUTF());
+      option.asiScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
+      option.asiPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());       
+      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -838,7 +884,52 @@ public class FileManager {
       out.writeBoolean(option.sidFreqHiOctCombinedInvertedTable);
       out.writeBoolean(option.sidFreqLoOctCombinedTable);
       out.writeBoolean(option.sidFreqHiOct12Table); 
+
+      // 3.0
+      out.writeUTF(option.asmStarting.name());
+      out.writeUTF(option.asmOrigin.name());
+      out.writeUTF(option.asmLabel.name());
+      out.writeUTF(option.asmComment.name());
+      out.writeUTF(option.asmBlockComment.name());
+      out.writeUTF(option.asmByte.name());
+      out.writeUTF(option.asmWord.name());
+      out.writeUTF(option.asmWordSwapped.name());
+      out.writeUTF(option.asmTribyte.name()); 
+      out.writeUTF(option.asmLong.name());
+      out.writeUTF(option.asmAddress.name());
+      out.writeUTF(option.asmStackWord.name());
+      out.writeUTF(option.asmMonoSprite.name());
+      out.writeUTF(option.asmMultiSprite.name());   
+      out.writeUTF(option.asmText.name());
+      out.writeUTF(option.asmNumText.name());
+      out.writeUTF(option.asmZeroText.name()); 
+      out.writeUTF(option.asmHighText.name());
+      out.writeUTF(option.asmShiftText.name());
+      out.writeUTF(option.asmScreenText.name());
+      out.writeUTF(option.asmPetasciiText.name());
       
+      out.writeUTF(option.asiStarting.name());
+      out.writeUTF(option.asiOrigin.name());
+      out.writeUTF(option.asiLabel.name());
+      out.writeUTF(option.asiComment.name());
+      out.writeUTF(option.asiBlockComment.name());
+      out.writeUTF(option.asiByte.name());
+      out.writeUTF(option.asiWord.name());
+      out.writeUTF(option.asiWordSwapped.name());
+      out.writeUTF(option.asiTribyte.name()); 
+      out.writeUTF(option.asiLong.name());
+      out.writeUTF(option.asiAddress.name());
+      out.writeUTF(option.asiStackWord.name());
+      out.writeUTF(option.asiMonoSprite.name());
+      out.writeUTF(option.asiMultiSprite.name());   
+      out.writeUTF(option.asiText.name());
+      out.writeUTF(option.asiNumText.name());
+      out.writeUTF(option.asiZeroText.name()); 
+      out.writeUTF(option.asiHighText.name());
+      out.writeUTF(option.asiShiftText.name());
+      out.writeUTF(option.asiScreenText.name());
+      out.writeUTF(option.asiPetasciiText.name());
+
       out.flush();
       out.close();
     } catch (Exception e) {
@@ -1042,7 +1133,9 @@ public class FileManager {
             else project.constant.comment[i][j]=null;   
           }  
         }
-      }      
+      }    
+      
+      if (version>10) project.binAddress=in.readInt(); // version 11
     } catch (Exception e) {
         System.err.println(e);
         return false;
@@ -1225,6 +1318,9 @@ public class FileManager {
             } 
         }          
       }      
+      
+      // version 11
+      out.writeInt(project.binAddress);  
       
       out.flush();
       out.close();

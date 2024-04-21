@@ -42,13 +42,14 @@ import sw_emulator.software.MemoryDasm;
  * Version 7: gzip format
  * Version 8: add 16 constants instead of 10
  * Version 9: add related relocation addresses
- * Version 10: add basic type, add comments for constants
+ * Version 10: add basic type, add comments for contants
+ * Version 11: add raw binary starting adddess
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=10;       
+  public static final byte ACTUAL_VERSION=11;       
     
   /** Type of the file */
   public FileType fileType;
@@ -80,6 +81,9 @@ public class Project implements Cloneable {
   /** CRT chip */
   public int chip;
   
+  /** Raw binary starting address */
+  public int binAddress;
+  
   /** Constant for assembler */
   public Constant constant=new Constant();
   
@@ -102,9 +106,14 @@ public class Project implements Cloneable {
    }
   }  
     
-  public void setData(byte[] inB) {
+  /**
+   * Set the data of the file
+   * @param inB file contents
+   * @param isRawBin true if this is a raw binary file (no format)
+   */
+  public void setData(byte[] inB, boolean isRawBin) {
     this.inB=inB;
-    fileType=FileType.getFileType(inB);
+    fileType=FileType.getFileType(inB, isRawBin);
     description=fileType.getDescription(inB);
     
     if (fileType==FileType.MPR) {
@@ -126,6 +135,7 @@ public class Project implements Cloneable {
     hash = 89 * hash + Objects.hashCode(this.targetType);
     hash = 89 * hash + MPR.hashCode(this.mpr); 
     hash = 89 * hash + this.chip;
+    hash = 89 * hash + this.binAddress;
     hash = 89 * hash + Arrays.hashCode(this.constant.table);
     hash = 89 * hash + Arrays.hashCode(this.relocates);
     hash = 89 * hash + Arrays.hashCode(this.patches);
@@ -151,6 +161,7 @@ public class Project implements Cloneable {
     }
     
     p.chip=this.chip;    
+    p.binAddress=this.binAddress;
     p.constant=(Constant)this.constant.clone();
         
     if (p.relocates!=null) {
@@ -200,6 +211,7 @@ public class Project implements Cloneable {
     }   
     
     if (this.chip!=p.chip) return false;
+    if (this.binAddress!=p.binAddress) return false;
     if (!this.constant.equals(p.constant)) return false;
     
     if (this.relocates!=null && p.relocates!=null) {

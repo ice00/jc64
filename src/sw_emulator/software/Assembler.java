@@ -125,6 +125,17 @@ public class Assembler {
     return ret.toUpperCase(Locale.ENGLISH);
   }   
   
+  /**
+   * Return the hex number string with appropriate prefix/suffix ($ of h)
+   * 
+   * @param value the string value of the hex number
+   * @param defaultMode the mode $ as default
+   * @return the hex string with prefix
+   */
+  protected static String HexNum(String value, boolean defaultMode) {
+    if (defaultMode) return "$"+value;
+    else return value+"h";
+  }  
     
   /**
    * Convert an 8 bit 0/1 string to monocolor dots
@@ -259,6 +270,12 @@ public class Assembler {
        public String getName() {
          return "Glass";
        }
+     },
+     AS {
+       @Override
+       public String getName() {
+         return "(Macro Assembler) AS";
+       }  
      }
      
      ;        
@@ -291,7 +308,9 @@ public class Assembler {
       DOT_CPU_UND,      // .cpu _6502
       DOT_SETCPU,       // .setcpu 6502x
       DOT_P02,          // .p02
-      MARK_CPU;         // !cpu 6510
+      MARK_CPU,         // !cpu 6510
+      CPU_M,            // cpu 6502   
+      CPU_I;            // cpu 8048
        
        
       @Override
@@ -324,6 +343,12 @@ public class Assembler {
           case MARK_CPU:
             str.append(getDataSpacesTabs()).append("!cpu 6510\n\n");
             break;     
+          case CPU_M:
+            str.append(getDataSpacesTabs()).append("cpu 6502\n\n");
+            break;    
+          case CPU_I:
+            str.append(getDataSpacesTabs()).append("cpu 8048\n\n");
+            break;                         
         }  
       }
       
@@ -350,7 +375,8 @@ public class Assembler {
       ORG,              //  org $xxyy
       DOT_ORG,          // .org $xxyy
       ASTERISK,         //   *= $xxyy
-      DOT_PC;           //  .pc $xxyy
+      DOT_PC,           //  .pc $xxyy
+      ORG_H;            //  org xxyyh
            
       @Override
       public void flush(StringBuilder str) {
@@ -367,6 +393,9 @@ public class Assembler {
           case DOT_PC:
               str.append(getDataSpacesTabs()).append(".pc $").append(ShortToExe(lastPC)).append("\n\n");
             break;
+          case ORG_H:
+              str.append(getDataSpacesTabs()).append("org ").append(ShortToExe(lastPC)).append("h\n\n");
+            break;  
         }    
       }
       
@@ -894,7 +923,8 @@ public class Assembler {
       MARK_BY_BYTE,       //  !by $xx
       EIGHT_BYTE,         //    !8 $xx   
       ZEROEIGHT_BYTE,     //   !08 $xx   
-      DB_BYTE;            //    db $xx
+      DB_BYTE,            //    db $xx
+      DB_BYTE_H;          //    db xxh
       
       BasicDetokenize basicList=new BasicDetokenize();
       
@@ -921,6 +951,7 @@ public class Assembler {
         // create starting command according to the kind of byte
         switch (aByte) {
           case DOT_BYTE:
+          case DB_BYTE_H:    
             str.append(getDataSpacesTabs()).append((".byte "));
             break;
           case DOT_CHAR:
@@ -955,7 +986,7 @@ public class Assembler {
             break;    
           case DB_BYTE:
             str.append(getDataSpacesTabs()).append(("db "));    
-            break;  
+            break;            
         }
           
         Iterator<MemoryDasm> iter=list.iterator();
@@ -1108,25 +1139,27 @@ public class Assembler {
        * @return the string of the location 
        */
       private String getLocationPos(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos, char type) {
+        boolean defaultMode=(aByte!=DB_BYTE_H);
+          
         if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation+"+"+pos);
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation+"+"+pos);
-          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+"+"+pos);
+          else return getRightType(type,base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode)+"+"+pos);
         } else {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation+"+"+pos);
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation+"+"+pos);
-            else return getRightType(type,"$"+ShortToExe(rel)+"+"+pos);
+            else return getRightType(type,HexNum(ShortToExe(rel), defaultMode)+"+"+pos);
           }
       }
       
@@ -1143,25 +1176,27 @@ public class Assembler {
        * @return the string of the location 
        */
       private String getLocationNeg(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos, char type) {
+        boolean defaultMode=(aByte!=DB_BYTE_H);  
+          
         if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation+pos);
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation+pos);
-          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+pos);
+          else return getRightType(type,base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode)+pos);
         } else {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation+pos);  
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation+pos);
-            else return getRightType(type,"$"+ShortToExe(rel)+pos);
+            else return getRightType(type, HexNum(ShortToExe(rel), defaultMode)+pos);
           }
       }
       
@@ -1176,25 +1211,27 @@ public class Assembler {
        * @return 
        */
       private String getLocation(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, char type) {
+        boolean defaultMode=(aByte!=DB_BYTE_H);  
+          
         if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.userLocation);
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, base+"-"+dest+"+"+memRel.dasmLocation);
-          else return getRightType(type,base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address));
+          else return getRightType(type,base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode));
         } else {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getRightType(type, memRel.userLocation);
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getRightType(type, memRel.dasmLocation);
-            else return getRightType(type,"$"+ShortToExe(memRel.address));
+            else return getRightType(type, HexNum(ShortToExe(memRel.address), defaultMode));
           }    
       }
       
@@ -1207,6 +1244,8 @@ public class Assembler {
        * @return the converted string
        */
       private String getByteType(DataType dataType, byte value, byte index) {
+        boolean defaultMode=(aByte!=DB_BYTE_H);          
+          
         if (aByte==DOT_CHAR && value<0) {
           switch (dataType)   {
               case BYTE_DEC:
@@ -1218,7 +1257,7 @@ public class Assembler {
                 return "-'"+(char)Math.abs(value);
               case BYTE_HEX:
               default:
-                return "-$"+ByteToExe(Math.abs(value));
+                return "-"+HexNum(ByteToExe(Math.abs(value)), defaultMode);
            }            
         } else {
             if (index!=-1) {
@@ -1238,26 +1277,26 @@ public class Assembler {
                     if (
                        (!option.allowUtf && (val<0x20 || val==0x22 || (val>127))) ||     
                        (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x22) || (val>127)))  
-                       ) return "$"+ByteToExe(Unsigned.done(value));
+                       ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);
                     else return "'"+(char)Unsigned.done(value); 
                   case TMPX:
                     if (
                         (!option.allowUtf && (val<=0x19) || (val==0x22) || (val>127)) ||    
                         (option.allowUtf && ((val==0x08) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
-                       ) return "$"+ByteToExe(Unsigned.done(value));
+                       ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);
                     else return "'"+(char)Unsigned.done(value); 
                   case CA65:
                     if (
                         (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
                         (option.allowUtf && ((val==0x0A) || (val==0x22) || (val>127)))   
-                       ) return "$"+ByteToExe(Unsigned.done(value));
+                       ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);
                     else if (val>=0x20) return "'"+(char)Unsigned.done(value)+"'"; 
                          else return "\""+(char)Unsigned.done(value)+"\""; 
                   case ACME:
                     if (
                         (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) ||    
                         (option.allowUtf && ( (val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val>127)))   
-                       ) return "$"+ByteToExe(Unsigned.done(value));
+                       ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);
                     else  if (val==0x27 || val==0x5C) return "'\\"+(char)Unsigned.done(value)+"'"; 
                           else return "'"+(char)Unsigned.done(value)+"'";   
                   case KICK:
@@ -1276,14 +1315,14 @@ public class Assembler {
                         (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
                         (option.allowUtf && ((val==0x0A) || (val==0x0D) ||
                          (val==0x22) || (val>127)))                      
-                       ) return "$"+ByteToExe(Unsigned.done(value));    
+                       ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);    
                     else return "\""+(char)Unsigned.done(value)+"\"";
                   default:
                     return "'"+(char)Unsigned.done(value); 
                 }  
               case BYTE_HEX:
               default:
-                return "$"+ByteToExe(Unsigned.done(value));
+                return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);
            }
         }
       }

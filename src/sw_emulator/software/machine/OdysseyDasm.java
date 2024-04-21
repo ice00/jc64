@@ -23,9 +23,11 @@
  */
 package sw_emulator.software.machine;
 
+import sw_emulator.software.cpu.CpuDasm;
+import sw_emulator.software.cpu.I8048Dasm;
 import static sw_emulator.software.cpu.I8048Dasm.A_CADR;
 import static sw_emulator.software.cpu.I8048Dasm.A_REGA;
-import sw_emulator.software.cpu.M6510Dasm;
+import static sw_emulator.software.cpu.I8048Dasm.A_REL;
 
 /**
  * Comment the memory location of Odyssey/Videopack for the disassembler
@@ -33,7 +35,7 @@ import sw_emulator.software.cpu.M6510Dasm;
  * 
  * @author ice
  */
-public class OdysseyDasm extends M6510Dasm {
+public class OdysseyDasm extends I8048Dasm {
   // Available language
   public static final byte LANG_ENGLISH=1;
   public static final byte LANG_ITALIAN=2;
@@ -52,7 +54,7 @@ public class OdysseyDasm extends M6510Dasm {
     byte language=option.commentLanguage;  
     switch (aType) {
       case A_CADR:
-      case sw_emulator.software.cpu.I8048Dasm.A_REL:
+      case A_REL:
       case A_REGA:          
         switch (language) {
           case LANG_ITALIAN:
@@ -94,6 +96,13 @@ public class OdysseyDasm extends M6510Dasm {
               case 0x3B1: return "[Sconosciuto]";
               case 0x3CF: return "[Sconosciuto]";
               case 0x3EA: return "Scrittura del carattere";
+              
+              case 0x400: return "Riavvio";
+              case 0x402: return "Interruzione VBlank (Esterna)";
+              case 0x404: return "Interruzione Timer/Orologio";
+              case 0x406: return "Vettore Routine VBlank (se $402 = JMP $009)";
+              case 0x408: return "Fine della Selezione del Gioco, A = Selezione";
+              case 0x40A: return "Continuazione di VBlank (se $406 = JMP $01A)";
             }
           default:
             switch ((int)addr) {    
@@ -134,6 +143,13 @@ public class OdysseyDasm extends M6510Dasm {
               case 0x3B1: return "[Unknown]";
               case 0x3CF: return "[Unknown]";
               case 0x3EA: return "Character Write";
+              
+              case 0x400: return "Restart";
+              case 0x402: return "VBlank (External) Interrupt";
+              case 0x404: return "Timer/Clock Interrupt";
+              case 0x406: return "VBlank Routine Vector (if $402 = JMP $009)";
+              case 0x408: return "End of Select Game, A = Selection";
+              case 0x40A: return "Continuation of VBlank (if $406 = JMP $01A)";
               }    
         }
     }

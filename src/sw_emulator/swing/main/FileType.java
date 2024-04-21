@@ -509,7 +509,7 @@ import sw_emulator.swing.Shared;
              .append(nfsSSong).append(")\n\n");
           return tmp.toString();
         }
-    },  // NFS
+    },  // NFS   
     MPR {
         @Override
         public String getDescription(byte[] inB) {
@@ -525,7 +525,13 @@ import sw_emulator.swing.Shared;
           int start=Unsigned.done(inB[0])+Unsigned.done(inB[1])*256;
           return "Starting address="+Integer.toHexString(start)+"\n";
         }
-    };  // program
+    }, // program
+    BIN {
+        @Override
+        public String getDescription(byte[] inB) {
+          return "Raw binary without starting address\n";
+        }
+    }; // binary file 
     
     /**
      * Get the description from the given data
@@ -562,9 +568,11 @@ import sw_emulator.swing.Shared;
      * Get the file type
      * 
      * @param inB the input data
+     * @param isRawBin true id this is a raw binary (no format)
      * @return the file type
      */
-    public static FileType getFileType(byte[] inB) {
+    public static FileType getFileType(byte[] inB, boolean isRawBin) {
+      if (isRawBin) return BIN;  
       if (isPSID(inB)) return SID;
       if (isMUS(inB)) return MUS;
       if (isMPR(inB)) return MPR;

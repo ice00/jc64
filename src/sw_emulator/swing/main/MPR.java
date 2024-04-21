@@ -113,7 +113,7 @@ public class MPR implements Cloneable {
        for (File file: files) {
          inB=FileManager.instance.readFile(file.getCanonicalPath());
          
-         if (FileType.getFileType(inB)!=FileType.PRG) return false;
+         if (FileType.getFileType(inB, file.getCanonicalPath().endsWith("bin"))!=FileType.PRG) return false;
          
          block++;
          blocks.add(inB);

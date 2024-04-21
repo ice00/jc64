@@ -1275,6 +1275,138 @@ public class Option {
   public Assembler.PetasciiText tass64PetasciiText=Assembler.PetasciiText.DOT_TEXT_PETASCIITEXT;
   
   
+  // AS (for MOS6502)
+  
+  /** AS(M): starting declaration */
+  public Assembler.Starting asmStarting=Assembler.Starting.CPU_M; 
+  
+  /** AS(M): origin declaration */
+  public Assembler.Origin asmOrigin=Assembler.Origin.ORG_H;    
+  
+  /** AS(M): label declaration */
+  public Assembler.Label asmLabel=Assembler.Label.NAME_COLON;    
+    
+  /** AS(M): comment declaration */
+  public Assembler.Comment asmComment=Assembler.Comment.SEMICOLON; 
+  
+  /** AS(M): block comment declaration */
+  public Assembler.BlockComment asmBlockComment=Assembler.BlockComment.SEMICOLON; 
+  
+  /** AS(M): byte declaration */
+  public Assembler.Byte asmByte=Assembler.Byte.DB_BYTE;
+  
+  /** AS(M): word declaration */
+  public Assembler.Word asmWord=Assembler.Word.DOT_WORD;
+  
+  /** AS(M): word swapped declaration */
+  public Assembler.WordSwapped asmWordSwapped=Assembler.WordSwapped.DC_DOT_S_WORD_SWAPPED;
+  
+  /** AS(M): tribyte declaration */
+  public Assembler.Tribyte asmTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
+  
+  /** AS(M): long declaration */
+  public Assembler.Long asmLong=Assembler.Long.DOT_LONG; 
+  
+  /** AS(M): address declaration */
+  public Assembler.Address asmAddress=Assembler.Address.DOT_WORD_ADDR;
+  
+  /** AS(M): stack words declaration */
+  public Assembler.StackWord asmStackWord=Assembler.StackWord.MACRO_STACKWORD;
+  
+  /** AS(M): mono color sprite declaration */
+  public Assembler.MonoSprite asmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
+   
+  /** AS(M): multi color sprite declaration */
+  public Assembler.MultiSprite asmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  
+  /** AS(M): text declaration */
+  public Assembler.Text asmText=Assembler.Text.DOT_BYTE_TEXT;
+  
+  /** AS(M): text with num chars declaration */
+  public Assembler.NumText asmNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  
+  /** AS(M): text null terminated declaration */
+  public Assembler.ZeroText asmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
+  
+  /** AS(M): text terminated with high bit 1 declaration */
+  public Assembler.HighText asmHighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  
+  /** AS(M): text left shifted declaration */
+  public Assembler.ShiftText asmShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
+  
+  /** AS(M): text to screen code declaration */
+  public Assembler.ScreenText asmScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT; 
+  
+  /** AS(M): text to petascii code declaration */
+  public Assembler.PetasciiText asmPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT; 
+  
+  
+  // AS (for Intel8048)
+  
+  /** AS(I): starting declaration */
+  public Assembler.Starting asiStarting=Assembler.Starting.CPU_I; 
+  
+  /** AS(I): origin declaration */
+  public Assembler.Origin asiOrigin=Assembler.Origin.ORG_H;    
+  
+  /** AS(I): label declaration */
+  public Assembler.Label asiLabel=Assembler.Label.NAME_COLON;    
+    
+  /** AS(I): comment declaration */
+  public Assembler.Comment asiComment=Assembler.Comment.SEMICOLON; 
+  
+  /** AS(I): block comment declaration */
+  public Assembler.BlockComment asiBlockComment=Assembler.BlockComment.SEMICOLON; 
+  
+  /** AS(I): byte declaration */
+  public Assembler.Byte asiByte=Assembler.Byte.DB_BYTE_H;
+  
+  /** AS(I): word declaration */
+  public Assembler.Word asiWord=Assembler.Word.DOT_WORD;
+  
+  /** AS(I): word swapped declaration */
+  public Assembler.WordSwapped asiWordSwapped=Assembler.WordSwapped.DC_DOT_S_WORD_SWAPPED;
+  
+  /** AS(I): tribyte declaration */
+  public Assembler.Tribyte asiTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
+  
+  /** AS(I): long declaration */
+  public Assembler.Long asiLong=Assembler.Long.DOT_LONG; 
+  
+  /** AS(I): address declaration */
+  public Assembler.Address asiAddress=Assembler.Address.DOT_WORD_ADDR;
+  
+  /** AS(I): stack words declaration */
+  public Assembler.StackWord asiStackWord=Assembler.StackWord.MACRO_STACKWORD;
+  
+  /** AS(I): mono color sprite declaration */
+  public Assembler.MonoSprite asiMonoSprite=Assembler.MonoSprite.MACRO_BIN;
+   
+  /** AS(I): multi color sprite declaration */
+  public Assembler.MultiSprite asiMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  
+  /** AS(I): text declaration */
+  public Assembler.Text asiText=Assembler.Text.DOT_BYTE_TEXT;
+  
+  /** AS(I): text with num chars declaration */
+  public Assembler.NumText asiNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  
+  /** AS(I): text null terminated declaration */
+  public Assembler.ZeroText asiZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
+  
+  /** AS(I): text terminated with high bit 1 declaration */
+  public Assembler.HighText asiHighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  
+  /** AS(I): text left shifted declaration */
+  public Assembler.ShiftText asiShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
+  
+  /** AS(I): text to screen code declaration */
+  public Assembler.ScreenText asiScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT; 
+  
+  /** AS(I): text to petascii code declaration */
+  public Assembler.PetasciiText asiPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT; 
+  
+  
   /**
    * Get the flat laf theme
    * 

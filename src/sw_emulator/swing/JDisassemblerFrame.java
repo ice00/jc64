@@ -204,6 +204,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Hex dialog */
   JHexDialog jHexDialog=new JHexDialog(this, true);
   
+  /** Block dialog */
+  JBlockDialog jBlockDialog=new JBlockDialog(this, true);  
+  
   /** Player dialog */
   JPlayerDialog jPlayerDialog=new JPlayerDialog(this, false);
   
@@ -607,6 +610,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemUnmark = new javax.swing.JMenuItem();
     jSeparatorMem3 = new javax.swing.JPopupMenu.Separator();
     jMenuItemHex = new javax.swing.JMenuItem();
+    jMenuItemBlockLabel = new javax.swing.JMenuItem();
     jPanelToolBar = new javax.swing.JPanel();
     jToolBarFile = new javax.swing.JToolBar();
     jButtonNewProject = new javax.swing.JButton();
@@ -1942,6 +1946,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     });
     jPopupMenuMemory.add(jMenuItemHex);
+
+    jMenuItemBlockLabel.setText("Sequential labeled blocks");
+    jMenuItemBlockLabel.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemBlockLabelActionPerformed(evt);
+      }
+    });
+    jPopupMenuMemory.add(jMenuItemBlockLabel);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("JC64Dis");
@@ -5837,6 +5849,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(MEM_BASIC_V8);
   }//GEN-LAST:event_jMenuItemV9ActionPerformed
 
+  private void jMenuItemBlockLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBlockLabelActionPerformed
+    execute(MEM_BLOCKLABELS);
+  }//GEN-LAST:event_jMenuItemBlockLabelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5952,6 +5968,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItemBasicV7_0_1;
   private javax.swing.JMenuItem jMenuItemBlark;
   private javax.swing.JMenuItem jMenuItemBlark1;
+  private javax.swing.JMenuItem jMenuItemBlockLabel;
   private javax.swing.JMenuItem jMenuItemByteBin;
   private javax.swing.JMenuItem jMenuItemByteBin1;
   private javax.swing.JMenuItem jMenuItemByteBin2;
@@ -6575,6 +6592,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_HEX:
          showHex();  
+       case MEM_BLOCKLABELS:
+         createBlockLabels();
          break;         
          
        case MEM_BASIC_NONE:     
@@ -7518,8 +7537,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       disassembly.source="";
       disassembly.disassembly="";
     } else {
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, false);
-        disassembly.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
+        disassembly.dissassembly(project.fileType, project.inB, option, 
+                                 project.memory, project.constant, project.mpr, 
+                                 project.relocates, project.patches, 
+                                 project.chip, project.binAddress, 
+                                 project.targetType, false);
+        disassembly.dissassembly(project.fileType, project.inB, option,
+                                 project.memory, project.constant, project.mpr,
+                                 project.relocates, project.patches, 
+                                 project.chip, project.binAddress,
+                                 project.targetType, true);
       }  
     int lineS=0;
     int lineD=0;
@@ -8791,7 +8818,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     Name actual=option.assembler;    
     option.assembler=name;
     Disassembly dis=new Disassembly();        
-    dis.dissassembly(project.fileType, project.inB, option, project.memory, project.constant, project.mpr, project.relocates, project.patches, project.chip, project.targetType, true);
+    dis.dissassembly(project.fileType, project.inB, option, project.memory,
+                     project.constant, project.mpr, project.relocates, 
+                     project.patches, project.chip, project.binAddress,
+                     project.targetType, true);
      option.assembler=actual;
     
     exportAs(dis.source);     
@@ -8812,7 +8842,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void refactor() {      
     if (project==null) {
-      JOptionPane.showMessageDialog(this, "Open a project before usinmg this function");
+      JOptionPane.showMessageDialog(this, "Open a project before using this function");
       return;
     }
     
@@ -9647,5 +9677,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       jHexDialog.setUp(project.memory, row, end-1);
       jHexDialog.setVisible(true);
+    }
+
+    /**
+     * Create sequential labeled blocks
+     */
+    private void createBlockLabels() {
+      int row=jTableMemory.getSelectedRow();
+      if (row==-1) return;
+      
+      int[] rows=jTableMemory.getSelectedRows();
+      
+      jBlockDialog.setUp(project.memory, rows[0], rows[rows.length-1]);
+      jBlockDialog.setVisible(true);
     }
 }
