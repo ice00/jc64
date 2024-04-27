@@ -28,6 +28,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import sw_emulator.math.Unsigned;
+import static sw_emulator.software.Assembler.Byte.DB_BYTE_H;
+import static sw_emulator.software.Assembler.Word.DW_WORD_H;
 import sw_emulator.software.BasicDetokenize.BasicType;
 import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
@@ -1338,6 +1340,8 @@ public class Assembler {
     *  -> .dbyte $xxyy
     *  -> !word $xxyy
     *  -> !16 $xxyy
+    *  ->  dw $xxyy
+    *  ->  dw xxyyh 
     */
    public enum Word implements ActionType {
      DOT_WORD,            //  .word $xxyy
@@ -1348,7 +1352,8 @@ public class Assembler {
      DOT_DBYTE,           // .dbyte $xxyy
      MARK_WORD,           //  !word $xxyy
      SIXTEEN_WORD,        //    !16 $xxyy
-     DW_WORD;             //     dw $xxyy
+     DW_WORD,             //     dw $xxyy
+     DW_WORD_H;           //     dw xxyyh
      
      @Override
      public void flush(StringBuilder str) {         
@@ -1395,6 +1400,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append(("!16 "));  
            break;  
          case DW_WORD:
+         case DW_WORD_H:
            str.append(getDataSpacesTabs()).append(("dw "));   
            break;
        }
@@ -1507,12 +1513,18 @@ public class Assembler {
                else {
                  if (aWord==DOT_SINT && memHigh.copy<0) str.append("-$").append(ByteToExe(Math.abs(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
                  else {
+                   boolean defaultMode=(aWord!=DW_WORD_H);
+                   
                    // look for constant  
                    if (memLow.index!=-1 && memHigh.index!=-1 && memLow.index==memHigh.index) {
                      String res=constant.table[memLow.index][(memLow.copy & 0xFF) + ((memHigh.copy & 0xFF)<<8)];  
                      if (res!=null && !"".equals(res)) str.append(res);
-                     else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
-                   } else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
+                     else str.append(
+                              HexNum(ByteToExe(Unsigned.done(memHigh.copy))+ByteToExe(Unsigned.done(memLow.copy)), defaultMode)
+                           );
+                   } else str.append(
+                            HexNum(ByteToExe(Unsigned.done(memHigh.copy))+ByteToExe(Unsigned.done(memLow.copy)), defaultMode)
+                          );
                  }                            
                  isFirst=false;  
                }    
@@ -1567,25 +1579,27 @@ public class Assembler {
       * @return the location
       */
      private String getLocationPos(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos) {
-        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
+        boolean defaultMode=(aWord!=DW_WORD_H);
+       
+        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {          
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation+"+"+pos;
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation+"+"+pos;
-          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+"+"+pos;
+          else return base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode)+"+"+pos;
         } else {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation+"+"+pos;
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation+"+"+pos;
-            else return "$"+ShortToExe(rel)+"+"+pos;
+            else return HexNum(ShortToExe(rel), defaultMode)+"+"+pos;
           }
      }
      
@@ -1601,25 +1615,27 @@ public class Assembler {
       * @return the location
       */
      private String getLocationNeg(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel, int rel, int pos) {
+       boolean defaultMode=(aWord!=DW_WORD_H);
+       
        if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation+pos;
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation+pos;
-          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address)+pos;
+          else return base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode)+pos;
         } else {       
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation+pos;
             else  if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation+pos;
-            else return "$"+ShortToExe(rel)+pos;
+            else return HexNum(ShortToExe(rel), defaultMode)+pos;
           }
      }
      
@@ -1633,25 +1649,27 @@ public class Assembler {
       * @return the location
       */
      private String getLocation(MemoryDasm mem, MemoryDasm memBase, MemoryDasm memDest, MemoryDasm memRel) {
+        boolean defaultMode=(aWord!=DW_WORD_H);
+        
         if (mem.relatedAddressBase+mem.relatedAddressDest !=0) {
           String base;
           String dest;
           
           if (memBase.userLocation!=null && !"".equals(memBase.userLocation)) base=memBase.userLocation;
           else if (memBase.dasmLocation!=null && !"".equals(memBase.dasmLocation)) base=memBase.dasmLocation;
-          else base="$"+ShortToExe(memBase.address);
+          else base=HexNum(ShortToExe(memBase.address), defaultMode);
           
           if (memDest.userLocation!=null && !"".equals(memDest.userLocation)) dest=memDest.userLocation;
           else if (memDest.dasmLocation!=null && !"".equals(memDest.dasmLocation)) dest=memDest.dasmLocation;
-          else dest="$"+ShortToExe(memDest.address);
+          else dest=HexNum(ShortToExe(memDest.address), defaultMode);
           
           if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return base+"-"+dest+"+"+memRel.userLocation;
           else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return  base+"-"+dest+"+"+memRel.dasmLocation;
-          else return base+"-"+dest+"+"+ "$"+ShortToExe(memRel.address);
+          else return base+"-"+dest+"+"+ HexNum(ShortToExe(memRel.address), defaultMode);
         } else {
             if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return memRel.userLocation;
             else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return memRel.dasmLocation;
-            else return "$"+ShortToExe(memRel.address); 
+            else return HexNum(ShortToExe(memRel.address), defaultMode); 
           }
      }
    }
@@ -1669,6 +1687,7 @@ public class Assembler {
      MACRO2_WORD_SWAPPED,           //  [.mac] $yyxx    (Acme)
      MACRO4_WORD_SWAPPED,           //  [.mac] $yyxx    (TMPx / Tass64)
      MACRO5_WORD_SWAPPED,           //  [.amc] $yyxx    (Glass)
+     MACRO6_WORD_SWAPPED,           //  [macro] $yyxx   (AS)
         ;
 
      @Override
@@ -1704,12 +1723,16 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append("#Swapped").append(index).append(" ");    
            break;
          case MACRO5_WORD_SWAPPED:
+         case MACRO6_WORD_SWAPPED:  
            str.append(getDataSpacesTabs()).append("Swapped").append(index).append(" ");    
            break;   
        }
        
        int pos2=str.length();      // store final position
        boolean isFirst=true;       // true if this is the first output
+       
+       // we use byte, so check for his default mode
+       boolean defaultMode=(aByte!=DB_BYTE_H);  
        
        while (!list.isEmpty()) {
          // if only 1 byte left, use byte coding
@@ -1743,7 +1766,7 @@ public class Assembler {
               (memLow.related & 0xFFFF)==(memHigh.related & 0xFFFF)) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                  else str.append("$").append(ShortToExe(memRelLow.address)); 
+                  else str.append(HexNum(ShortToExe(memRelLow.address), defaultMode)); 
              isFirst=false;
            } else {
              // if cannot make a word with relative locations, force all to be of byte type
@@ -1777,7 +1800,7 @@ public class Assembler {
                aByte.flush(str);
              }
              else {
-               str.append("$").append(ByteToExe(Unsigned.done(memLow.copy))).append(ByteToExe(Unsigned.done(memHigh.copy)));
+               str.append(HexNum(ByteToExe(Unsigned.done(memLow.copy))+ByteToExe(Unsigned.done(memHigh.copy)), defaultMode));
                isFirst=false;
              }                            
            }
@@ -2044,11 +2067,63 @@ public class Assembler {
               .append(spaces).append("   db ?twobyte7 & 255, ( ?twobyte7 >> 8) & 255\n")  
               .append(spaces).append("   db ?twobyte8 & 255, ( ?twobyte8 >> 8) & 255\n")                    
               .append(spaces).append("endm\n\n");                                  
-           break;            
+           break;      
+         case MACRO6_WORD_SWAPPED:
+           str.append("Swapped1: macro twobyte \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append(" endm\n\n")
+              .append("Swapped2: macro twobyte, twobyte2 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n")        
+              .append(" endm\n\n")
+              .append("Swapped3: macro twobyte, twobyte2, ?twobyte3 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n")         
+              .append(" endm\n\n")
+              .append("Swapped4: macro twobyte, twobyte2, twobyte3, twobyte4 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append("   db twobyte4 & 255, ( twobyte4 >> 8) & 255\n")          
+              .append(" endm\n\n")
+              .append("Swapped5: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append("   db twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append("   db twobyte5 & 255, ( twobyte5 >> 8) & 255\n")                      
+              .append(" endm\n\n")
+              .append("Swapped6: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append("   db twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append("   db twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append("   db twobyte6 & 255, ( twobyte6 >> 8) & 255\n")                      
+              .append(" endm\n\n")
+              .append("Swapped7: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append("   db twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append("   db twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append("   db twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append("   db twobyte7 & 255, ( twobyte7 >> 8) & 255\n")                      
+              .append(" endm\n\n")
+              .append("Swapped8: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8 \n")
+              .append("   db twobyte & 255, ( twobyte >> 8) & 255\n")
+              .append("   db twobyte2 & 255, ( twobyte2 >> 8) & 255\n") 
+              .append("   db twobyte3 & 255, ( twobyte3 >> 8) & 255\n") 
+              .append("   db twobyte4 & 255, ( twobyte4 >> 8) & 255\n")  
+              .append("   db twobyte5 & 255, ( twobyte5 >> 8) & 255\n")  
+              .append("   db twobyte6 & 255, ( twobyte6 >> 8) & 255\n") 
+              .append("   db twobyte7 & 255, ( twobyte7 >> 8) & 255\n")  
+              .append("   db twobyte8 & 255, ( twobyte8 >> 8) & 255\n")                    
+              .append(" endm\n\n");                                  
+           break;                 
         }
-      }       
-
-    
+      }          
    }
    
    /**
@@ -2060,6 +2135,7 @@ public class Assembler {
      MACRO3_TRIBYTE,           //  [.mac] $xxyyzz    (CA65) 
      MACRO4_TRIBYTE,           //  [.mac] $xxyyzz    (TMPx)
      MACRO5_TRIBYTE,           //  [.mac] $xxyyzz    (Glass)
+     MACRO6_TRIBYTE,           //  [.mac] xxyyzzh    (AS)
      DOT_LINT_TRIBYTE,         //   .lint $xxyyzz
      DOT_LONG_TRIBYTE,         //   .long $xxyyzz
      MARK_TWENTYFOUR_TRIBYTE   //     !24 $xxyyzz
@@ -2106,6 +2182,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append("#Tribyte").append(index).append(" ");  
            break;
          case MACRO5_TRIBYTE:  
+         case MACRO6_TRIBYTE:  
            str.append(getDataSpacesTabs()).append("Tribyte").append(index).append(" ");  
            break;          
          case DOT_LINT_TRIBYTE:
@@ -2122,6 +2199,9 @@ public class Assembler {
        MemoryDasm mem1;
        MemoryDasm mem2;
        MemoryDasm mem3;
+       
+       // we use byte, so check for his default mode
+       boolean defaultMode=(aByte!=DB_BYTE_H);  
        
        while (!list.isEmpty()) {
          // if only 1 or 2 bytes left, use byte coding
@@ -2148,13 +2228,17 @@ public class Assembler {
            listDest.pop();
            
            if (aTribyte==DOT_LINT_TRIBYTE && mem1.copy<0) {
-              str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
-                              .append(ByteToExe(Unsigned.done(mem2.copy)))
-                              .append(ByteToExe(Unsigned.done(mem3.copy)));;
+              str.append("-").append(
+                  HexNum(ByteToExe(Math.abs(mem1.copy))+
+                         ByteToExe(Unsigned.done(mem2.copy))+
+                         ByteToExe(Unsigned.done(mem3.copy)), defaultMode)
+                  );        
            } else {
-               str.append("$").append(ByteToExe(Unsigned.done(mem1.copy)))
-                              .append(ByteToExe(Unsigned.done(mem2.copy)))
-                              .append(ByteToExe(Unsigned.done(mem3.copy)));
+               str.append(
+                  HexNum(ByteToExe(Math.abs(mem1.copy))+
+                         ByteToExe(Unsigned.done(mem2.copy))+
+                         ByteToExe(Unsigned.done(mem3.copy)), defaultMode)
+                  );        
            }
            
            carets.add(start, str.length(), mem1, Type.TRIBYTE);
@@ -2476,6 +2560,59 @@ public class Assembler {
                .append(spaces).append("  db ?tribyte8 >> 16, ( ?tribyte8 >> 8) & 255,  ?tribyte8 & 255\n")     
                .append(spaces).append("endm\n\n");               
            break;    
+        case MACRO6_TRIBYTE:
+            str.append("Tribyte1: macro tribyte \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append(" endm\n\n")
+               .append("Tribyte2: macro tribyte, tribyte2 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append(" endm\n\n")
+               .append("Tribyte3: macro tribyte, tribyte2, tribyte3 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")          
+               .append(" endm\n\n")
+               .append("Tribyte4: macro tribyte, tribyte2, tribyte3, tribyte4 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append("  db tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")        
+               .append(" endm\n\n")                       
+               .append("Tribyte5: macro tribyte, tribyte2, tribyte3, tribyte4, tribyte5 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+               .append("  db tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
+               .append("  db tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")
+               .append(" endm\n\n")
+               .append("Tribyte6: macro tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n")
+               .append("  db tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")
+               .append("  db tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")  
+               .append("  db tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")      
+               .append(" endm\n\n")
+               .append("Tribyte7: macro tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append("  db tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
+               .append("  db tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
+               .append("  db tribyte6 >> 16, ( tribyte6 >> 8) & 255,  tribyte6 & 255\n")  
+               .append("  db tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n")    
+               .append(" endm\n\n")
+               .append("Tribyte8: macro tribyte, tribyte2, tribyte3, tribyte4, tribyte5, tribyte6, tribyte7, tribyte8 \n")
+               .append("  db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+               .append("  db tribyte2 >> 16, ( tribyte2 >> 8) & 255,  tribyte2 & 255\n")
+               .append("  db tribyte3 >> 16, ( tribyte3 >> 8) & 255,  tribyte3 & 255\n") 
+               .append("  db tribyte4 >> 16, ( tribyte4 >> 8) & 255,  tribyte4 & 255\n")   
+               .append("  db tribyte5 >> 16, ( tribyte5 >> 8) & 255,  tribyte5 & 255\n")    
+               .append("  db tribyte7 >> 16, ( tribyte7 >> 8) & 255,  tribyte7 & 255\n") 
+               .append("  db tribyte8 >> 16, ( tribyte8 >> 8) & 255,  tribyte8 & 255\n")     
+               .append(" endm\n\n");               
+           break;    
        }
      };     
    }   
@@ -2491,6 +2628,7 @@ public class Assembler {
      DOT_DWORD_LONG,       // .dword $xxyyzzkk
      DOT_DLINT_LONG,       // .dlint $xxyyzzkk
      DD_LONG,              //     dd $xxyyzzkk
+     DD_LONG_H,            //     dd xxyyzzkkh
      MARK_THIRTYTWO_LONG,  //    !32 $xxyyzzkk
      MACRO4_LONG           // [.mac] $xxyyzzkk  (TMPx)
         ;      
@@ -2540,6 +2678,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append(".dlint ");  
            break;        
          case DD_LONG:
+         case DD_LONG_H:
            str.append(getDataSpacesTabs()).append("dd ");  
            break;   
          case MARK_THIRTYTWO_LONG:
@@ -2587,16 +2726,24 @@ public class Assembler {
            listDest.pop();
            listDest.pop();
            
+           boolean defaultMode=(aLong!=DD_LONG_H);
+           
            if (aLong==DOT_DLINT_LONG && mem1.copy<0) {
-              str.append("-$").append(ByteToExe(Math.abs(mem1.copy)))
-                              .append(ByteToExe(Unsigned.done(mem2.copy)))
-                              .append(ByteToExe(Unsigned.done(mem3.copy)))
-                              .append(ByteToExe(Unsigned.done(mem4.copy)));
+              str.append("-").append(
+                                HexNum(
+                                  ByteToExe(Math.abs(mem1.copy))+
+                                  ByteToExe(Unsigned.done(mem2.copy))+
+                                  ByteToExe(Unsigned.done(mem3.copy))+
+                                  ByteToExe(Unsigned.done(mem4.copy)), defaultMode)
+                              );
            } else {
-               str.append("$").append(ByteToExe(Unsigned.done(mem1.copy)))
-                              .append(ByteToExe(Unsigned.done(mem2.copy)))
-                              .append(ByteToExe(Unsigned.done(mem3.copy)))
-                              .append(ByteToExe(Unsigned.done(mem4.copy)));
+               str.append(
+                        HexNum(
+                          ByteToExe(Math.abs(mem1.copy))+
+                          ByteToExe(Unsigned.done(mem2.copy))+
+                          ByteToExe(Unsigned.done(mem3.copy))+
+                          ByteToExe(Unsigned.done(mem4.copy)), defaultMode)
+                         );
            }
            
            carets.add(start, str.length(), mem1, Type.LONG);
@@ -2617,7 +2764,7 @@ public class Assembler {
        }   
       } 
      
-          /**
+    /**
      * Put a value to the stream
      * 
      * @param str the otput stream
@@ -2723,6 +2870,7 @@ public class Assembler {
      DOT_ADDR_ADDR,            //  .addr $xxyy
      DC_W_ADDR,                //   dc.w $xxyy
      DW_ADDR,                  //     dw $xxyy
+     DW_ADDR_H,                //     dw xxyyh
      MARK_WORD_ADDR,           //  !word $xxyy
      SIXTEEN_WORD_ADDR;        //    !16 $xxyy//    !16 $xxyy
      
@@ -2753,6 +2901,7 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append(("dc.w "));  
            break;
          case DW_ADDR:
+         case DW_ADDR_H:  
            str.append(getDataSpacesTabs()).append(("dw "));  
            break;  
          case DOT_ADDR_ADDR:
@@ -2768,6 +2917,7 @@ public class Assembler {
        
        int pos2=str.length();   // store final position
        boolean isFirst=true;       // true if this is the first output
+       boolean defaultMode=(aAddress!=DW_ADDR_H);
        
        while (!list.isEmpty()) {
          // if only 1 byte left, use byte coding
@@ -2802,7 +2952,7 @@ public class Assembler {
              
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation);
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation);
-                  else str.append("$").append(ShortToExe(memRelLow.address));  
+                  else str.append(HexNum(ShortToExe(memRelLow.address), defaultMode));  
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
@@ -2836,8 +2986,8 @@ public class Assembler {
                  if (memLow.index!=-1 && memHigh.index!=-1 && memLow.index==memHigh.index) {
                    String res=constant.table[memLow.index][(memLow.copy & 0xFF) + ((memHigh.copy & 0xFF)<<8)];  
                    if (res!=null && !"".equals(res)) str.append(res);
-                   else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));
-                 } else str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe(Unsigned.done(memLow.copy)));                         
+                   else str.append(HexNum(ByteToExe(Unsigned.done(memHigh.copy))+ByteToExe(Unsigned.done(memLow.copy)), defaultMode));
+                 } else str.append(HexNum(ByteToExe(Unsigned.done(memHigh.copy))+ByteToExe(Unsigned.done(memLow.copy)), defaultMode));                         
                  isFirst=false;  
                }    
              }
@@ -5968,11 +6118,12 @@ public class Assembler {
     */
    public enum StackWord implements ActionType {
       DOT_RTA_STACKWORD,        // ->   .rta $xxyy
-      MACRO_STACKWORD,          // -> [.mac] $xxyyzz    (DASM)
-      MACRO1_STACKWORD,         // -> [.mac] $xxyyzz    (KickAssembler)
-      MACRO2_STACKWORD,         // -> [.mac] $xxyyzz    (Acme)
-      MACRO3_STACKWORD,          // -> [.mac] $xxyyzz    (CA65) 
-      MACRO4_STACKWORD          // -> [.mac] $xxyyzz    (Glass) 
+      MACRO_STACKWORD,          // -> [.mac] $xxyy    (DASM)
+      MACRO1_STACKWORD,         // -> [.mac] $xxyy    (KickAssembler)
+      MACRO2_STACKWORD,         // -> [.mac] $xxyy    (Acme)
+      MACRO3_STACKWORD,         // -> [.mac] $xxyy    (CA65) 
+      MACRO4_STACKWORD,         // -> [.mac] $xxyy    (Glass) 
+      MACRO5_STACKWORD          // -> [.mac] xxyyz    (AS) 
       ;
 
       @Override
@@ -5996,6 +6147,7 @@ public class Assembler {
          case MACRO_STACKWORD:
          case MACRO3_STACKWORD: 
          case MACRO4_STACKWORD:     
+         case MACRO5_STACKWORD:     
            str.append(getDataSpacesTabs()).append("Stack").append(index).append(" ");  
            break;           
          case MACRO1_STACKWORD:
@@ -6007,7 +6159,11 @@ public class Assembler {
        }
        
        int pos2=str.length();   // store final position
-       boolean isFirst=true;       // true if this is the first output
+       boolean isFirst=true;    // true if this is the first output
+       
+       // we use word, so check for his default mode
+       boolean defaultMode=(aWord!=DW_WORD_H);  
+       
        
        while (!list.isEmpty()) {
          // if only 1 byte left, use byte coding
@@ -6034,7 +6190,7 @@ public class Assembler {
            if (memLow.type==TYPE_MINOR && memHigh.type==TYPE_MAJOR && memLow.related==memHigh.related) {
              if (memRelLow.userLocation!=null && !"".equals(memRelLow.userLocation)) str.append(memRelLow.userLocation).append("+1");
              else if (memRelLow.dasmLocation!=null && !"".equals(memRelLow.dasmLocation)) str.append(memRelLow.dasmLocation).append("+1");
-                  else str.append("$").append(ShortToExe(memRelLow.address+1));  
+                  else str.append(HexNum(ShortToExe(memRelLow.address+1), defaultMode));  
              isFirst=false;
            } else {
                // if cannot make a word with relative locations, force all to be of byte type
@@ -6062,7 +6218,9 @@ public class Assembler {
                  aByte.flush(str);
                }
                else {
-                 str.append("$").append(ByteToExe(Unsigned.done(memHigh.copy))).append(ByteToExe((Unsigned.done(memLow.copy)+1)& 0xFF));                            
+                 str.append(
+                    HexNum(ByteToExe(Unsigned.done(memHigh.copy))+ByteToExe((Unsigned.done(memLow.copy)+1)& 0xFF), defaultMode)
+                 );                            
                  isFirst=false;  
                }    
              }
@@ -6365,6 +6523,60 @@ public class Assembler {
                .append(spaces).append("  db ?twobyte-1, ?twobyte2-1, ?twobyte3-1, ?twobyte4-1, ?twobyte5-1, ?twobyte6-1, ?twobyte7-1, ?twobyte8-1\n")      
                .append(spaces).append("endm\n\n");               
            break;
+        case MACRO5_STACKWORD:
+            str.append("Stack1: macro twobyte \n")
+               .append("  db twobyte-1\n")
+               .append(" endm\n\n")
+               .append("Stack2: macro twobyte, twobyte2 \n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append(" endm\n\n")
+               .append("Stack3: macro twobyte, twobyte2, twobyte3 \n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")   
+               .append(" endm\n\n")
+               .append("Stack4: macro twobyte, twobyte2, twobyte3, twobyte4 \n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")          
+               .append(" endm\n\n")                       
+               .append("Stack5: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5\n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+               .append(" endm\n\n")
+               .append("Stack6: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6\n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")     
+               .append(" endm\n\n")
+               .append("Stack7: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7\n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")   
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")   
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")   
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")    
+               .append(" endm\n\n")
+               .append("Stack8: macro twobyte, twobyte2, twobyte3, twobyte4, twobyte5, twobyte6, twobyte7, twobyte8\n")
+               .append("  db twobyte-1\n")
+               .append("  db twobyte-1, twobyte2-1\n")
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1\n")  
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1\n")   
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1\n")  
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1\n")     
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1\n")   
+               .append("  db twobyte-1, twobyte2-1, twobyte3-1, twobyte4-1, twobyte5-1, twobyte6-1, twobyte7-1, twobyte8-1\n")      
+               .append(" endm\n\n");               
+           break;           
           }
         }            
    }

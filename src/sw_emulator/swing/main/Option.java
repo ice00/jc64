@@ -1296,22 +1296,22 @@ public class Option {
   public Assembler.Byte asmByte=Assembler.Byte.DB_BYTE;
   
   /** AS(M): word declaration */
-  public Assembler.Word asmWord=Assembler.Word.DOT_WORD;
+  public Assembler.Word asmWord=Assembler.Word.DW_WORD;
   
   /** AS(M): word swapped declaration */
-  public Assembler.WordSwapped asmWordSwapped=Assembler.WordSwapped.DC_DOT_S_WORD_SWAPPED;
+  public Assembler.WordSwapped asmWordSwapped=Assembler.WordSwapped.MACRO6_WORD_SWAPPED;
   
   /** AS(M): tribyte declaration */
-  public Assembler.Tribyte asmTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
+  public Assembler.Tribyte asmTribyte=Assembler.Tribyte.MACRO6_TRIBYTE;
   
   /** AS(M): long declaration */
-  public Assembler.Long asmLong=Assembler.Long.DOT_LONG; 
+  public Assembler.Long asmLong=Assembler.Long.DD_LONG; 
   
   /** AS(M): address declaration */
-  public Assembler.Address asmAddress=Assembler.Address.DOT_WORD_ADDR;
+  public Assembler.Address asmAddress=Assembler.Address.DW_ADDR;
   
   /** AS(M): stack words declaration */
-  public Assembler.StackWord asmStackWord=Assembler.StackWord.MACRO_STACKWORD;
+  public Assembler.StackWord asmStackWord=Assembler.StackWord.MACRO5_STACKWORD;
   
   /** AS(M): mono color sprite declaration */
   public Assembler.MonoSprite asmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
@@ -1362,22 +1362,22 @@ public class Option {
   public Assembler.Byte asiByte=Assembler.Byte.DB_BYTE_H;
   
   /** AS(I): word declaration */
-  public Assembler.Word asiWord=Assembler.Word.DOT_WORD;
+  public Assembler.Word asiWord=Assembler.Word.DW_WORD_H;
   
   /** AS(I): word swapped declaration */
-  public Assembler.WordSwapped asiWordSwapped=Assembler.WordSwapped.DC_DOT_S_WORD_SWAPPED;
+  public Assembler.WordSwapped asiWordSwapped=Assembler.WordSwapped.MACRO6_WORD_SWAPPED;
   
   /** AS(I): tribyte declaration */
-  public Assembler.Tribyte asiTribyte=Assembler.Tribyte.MACRO_TRIBYTE;
+  public Assembler.Tribyte asiTribyte=Assembler.Tribyte.MACRO6_TRIBYTE;
   
   /** AS(I): long declaration */
-  public Assembler.Long asiLong=Assembler.Long.DOT_LONG; 
+  public Assembler.Long asiLong=Assembler.Long.DD_LONG_H; 
   
   /** AS(I): address declaration */
-  public Assembler.Address asiAddress=Assembler.Address.DOT_WORD_ADDR;
+  public Assembler.Address asiAddress=Assembler.Address.DW_ADDR_H;
   
   /** AS(I): stack words declaration */
-  public Assembler.StackWord asiStackWord=Assembler.StackWord.MACRO_STACKWORD;
+  public Assembler.StackWord asiStackWord=Assembler.StackWord.MACRO5_STACKWORD;
   
   /** AS(I): mono color sprite declaration */
   public Assembler.MonoSprite asiMonoSprite=Assembler.MonoSprite.MACRO_BIN;
