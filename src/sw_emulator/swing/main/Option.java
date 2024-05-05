@@ -1320,25 +1320,25 @@ public class Option {
   public Assembler.MultiSprite asmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
   
   /** AS(M): text declaration */
-  public Assembler.Text asmText=Assembler.Text.DOT_BYTE_TEXT;
+  public Assembler.Text asmText=Assembler.Text.DB_BYTE_TEXT;
   
   /** AS(M): text with num chars declaration */
-  public Assembler.NumText asmNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  public Assembler.NumText asmNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
   
   /** AS(M): text null terminated declaration */
-  public Assembler.ZeroText asmZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
+  public Assembler.ZeroText asmZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
   
   /** AS(M): text terminated with high bit 1 declaration */
-  public Assembler.HighText asmHighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  public Assembler.HighText asmHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
   
   /** AS(M): text left shifted declaration */
-  public Assembler.ShiftText asmShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
+  public Assembler.ShiftText asmShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
   
   /** AS(M): text to screen code declaration */
-  public Assembler.ScreenText asmScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT; 
+  public Assembler.ScreenText asmScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT; 
   
   /** AS(M): text to petascii code declaration */
-  public Assembler.PetasciiText asmPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT; 
+  public Assembler.PetasciiText asmPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT; 
   
   
   // AS (for Intel8048)
@@ -1386,25 +1386,25 @@ public class Option {
   public Assembler.MultiSprite asiMultiSprite=Assembler.MultiSprite.MACRO_BIN;
   
   /** AS(I): text declaration */
-  public Assembler.Text asiText=Assembler.Text.DOT_BYTE_TEXT;
+  public Assembler.Text asiText=Assembler.Text.DB_BYTE_TEXT;
   
   /** AS(I): text with num chars declaration */
-  public Assembler.NumText asiNumText=Assembler.NumText.DOT_BYTE_NUMTEXT;
+  public Assembler.NumText asiNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
   
   /** AS(I): text null terminated declaration */
-  public Assembler.ZeroText asiZeroText=Assembler.ZeroText.DOT_BYTE_ZEROTEXT;
+  public Assembler.ZeroText asiZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
   
   /** AS(I): text terminated with high bit 1 declaration */
-  public Assembler.HighText asiHighText=Assembler.HighText.DOT_BYTE_HIGHTEXT;
+  public Assembler.HighText asiHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
   
   /** AS(I): text left shifted declaration */
-  public Assembler.ShiftText asiShiftText=Assembler.ShiftText.DOT_BYTE_SHIFTTEXT;
+  public Assembler.ShiftText asiShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
   
   /** AS(I): text to screen code declaration */
-  public Assembler.ScreenText asiScreenText=Assembler.ScreenText.DOT_BYTE_SCREENTEXT; 
+  public Assembler.ScreenText asiScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT; 
   
   /** AS(I): text to petascii code declaration */
-  public Assembler.PetasciiText asiPetasciiText=Assembler.PetasciiText.DOT_BYTE_PETASCIITEXT; 
+  public Assembler.PetasciiText asiPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT; 
   
   
   /**

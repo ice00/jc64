@@ -196,7 +196,7 @@ public class JASPanel extends javax.swing.JPanel {
 
     jTextPaneASDbByte.setEditable(false);
     jTextPaneASDbByte.setContentType("text/html"); // NOI18N
-    jTextPaneASDbByte.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>$xx</font> | <b> db</b> <font color='red'>xxh</font><br>\n     <b> db</b> <font color='blue'>dd</font> | <b> db</b> <font color='blue'>dd</font><br>\n     <b> db</b> <font color='green'>%bb</font> | <b> db</b> <font color='green'>%bb</font><br>\n     <b> db</b> <font color='purple'>'c'</font>  |  <b> db</b> <font color='purple'>'c'</font>\n    </p>\n  </body>\n</html>\n");
+    jTextPaneASDbByte.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b> db</b> <font color='red'>$xx</font> | <b> db</b> <font color='red'>xxh</font><br>\n     <b> db</b> <font color='blue'>dd</font> | <b> db</b> <font color='blue'>dd</font><br>\n     <b> db</b> <font color='green'>%nn</font> | <b> db</b> <font color='green'>nnb</font><br>\n     <b> db</b> <font color='purple'>'c'</font>  |  <b> db</b> <font color='purple'>'c'</font>\n    </p>\n  </body>\n</html>\n");
     jScrollPaneASWord.setViewportView(jTextPaneASDbByte);
 
     jLabelASWordDeclaration.setText("Word:");
@@ -943,15 +943,18 @@ public class JASPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButtonASMacroWordSwappedItemStateChanged
 
     private void jRadioButtonASDbTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbTextItemStateChanged
-        option.glassText=Assembler.Text.DB_BYTE_TEXT;
+        option.asmText=Assembler.Text.DB_BYTE_TEXT;
+        option.asiText=Assembler.Text.DB_BYTE_TEXT;
     }//GEN-LAST:event_jRadioButtonASDbTextItemStateChanged
 
     private void jRadioButtonASDbNumTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbNumTextItemStateChanged
-        option.glassNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
+        option.asmNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
+        option.asiNumText=Assembler.NumText.DB_BYTE_NUMTEXT;
     }//GEN-LAST:event_jRadioButtonASDbNumTextItemStateChanged
 
     private void jRadioButtonASDbZeroTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbZeroTextItemStateChanged
-        option.glassZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
+        option.asmZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
+        option.asiZeroText=Assembler.ZeroText.DB_BYTE_ZEROTEXT;
     }//GEN-LAST:event_jRadioButtonASDbZeroTextItemStateChanged
 
     private void jRadioButtonASDwAddressItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDwAddressItemStateChanged
@@ -965,19 +968,23 @@ public class JASPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButtonASMacroStackWordItemStateChanged
 
     private void jRadioButtonASDbHighTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbHighTextItemStateChanged
-        option.glassHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
+        option.asmHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
+        option.asiHighText=Assembler.HighText.DB_BYTE_HIGHTEXT;
     }//GEN-LAST:event_jRadioButtonASDbHighTextItemStateChanged
 
     private void jRadioButtonASDbShiftTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbShiftTextItemStateChanged
-        option.glassShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
+        option.asmShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
+        option.asiShiftText=Assembler.ShiftText.DB_BYTE_SHIFTTEXT;
     }//GEN-LAST:event_jRadioButtonASDbShiftTextItemStateChanged
 
     private void jRadioButtonASDbScreenTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbScreenTextItemStateChanged
-        option.glassScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT;
+        option.asmScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT;
+        option.asiScreenText=Assembler.ScreenText.DB_BYTE_SCREENTEXT;
     }//GEN-LAST:event_jRadioButtonASDbScreenTextItemStateChanged
 
     private void jRadioButtonASDbPetasciiTextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASDbPetasciiTextItemStateChanged
-        option.glassPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT;
+        option.asmPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT;
+        option.asiPetasciiText=Assembler.PetasciiText.DB_BYTE_PETASCIITEXT;
     }//GEN-LAST:event_jRadioButtonASDbPetasciiTextItemStateChanged
 
     private void jRadioButtonASLabelNameColonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButtonASLabelNameColonItemStateChanged

@@ -138,6 +138,18 @@ public class Assembler {
     if (defaultMode) return "$"+value;
     else return value+"h";
   }  
+  
+  /**
+   * Return the bin number string with appropriate prefix/suffix ($ of b)
+   * 
+   * @param value the string value of the bin number
+   * @param defaultMode the mode % as default
+   * @return the bin string with prefix
+   */
+  protected static String BinNum(String value, boolean defaultMode) {
+    if (defaultMode) return "%"+value;
+    else return value+"b";
+  }    
     
   /**
    * Convert an 8 bit 0/1 string to monocolor dots
@@ -1253,7 +1265,7 @@ public class Assembler {
               case BYTE_DEC:
                 return "-"+Math.abs(value);
               case BYTE_BIN:
-                return "-%"+Integer.toBinaryString((Math.abs(value) & 0xFF) + 0x100).substring(1);
+                return "-"+BinNum(Integer.toBinaryString((Math.abs(value) & 0xFF) + 0x100).substring(1), defaultMode);
               case BYTE_CHAR:
                 //return "\""+(char)Unsigned.done(value)+"\"";
                 return "-'"+(char)Math.abs(value);
@@ -1271,7 +1283,7 @@ public class Assembler {
               case BYTE_DEC:
                 return ""+Unsigned.done(value);
               case BYTE_BIN:
-                return "%"+Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
+                return BinNum(Integer.toBinaryString((value & 0xFF) + 0x100).substring(1), defaultMode);
               case BYTE_CHAR:
                 int val=(value & 0xFF);
                 switch (option.assembler) {
@@ -1302,7 +1314,7 @@ public class Assembler {
                     else  if (val==0x27 || val==0x5C) return "'\\"+(char)Unsigned.done(value)+"'"; 
                           else return "'"+(char)Unsigned.done(value)+"'";   
                   case KICK:
-                    if (!option.allowUtf &&  (val<=0x1F || val>=0x80)) return "$"+ByteToExe(Unsigned.done(value));                      
+                    if (!option.allowUtf &&  (val<=0x1F || val>=0x80)) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);                        
                     if (val==0x0A || (val>=0x0C && val<=0x0F) 
                                   || val==0x040 || val==0x05B 
                                   || val==0x05D
@@ -1310,7 +1322,7 @@ public class Assembler {
                                   || val==0x7F
                                   || val==0xA0
                                   || val==0xA3
-                        ) return "$"+ByteToExe(Unsigned.done(value));
+                        ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);  
                     else return "'"+(char)Unsigned.done(value)+"'";      
                   case TASS64:
                     if (
