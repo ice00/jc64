@@ -1395,12 +1395,12 @@ public class FileManager {
         } else userLoc=false;
         
         isInside=in.readBoolean(); // isInside
-        in.readBoolean(); // isCode
-        in.readBoolean(); // isData
+        in.readBoolean();          // isCode
+        in.readBoolean();          // isData
         
         if (version>0) {
-            isGarbage=in.readBoolean();  // isGarbage
-            in.skipNBytes((int)in.readChar());      // datatype
+            isGarbage=in.readBoolean();         // isGarbage
+            in.skipNBytes((int)in.readChar());  // datatype
         } // version 1
         else isGarbage=false;
         
@@ -1415,9 +1415,18 @@ public class FileManager {
         }
         */
         
-        if (version>2) { // version 3
-          in.readByte();   // index
+        if (version>2) {  // version 3
+          in.readByte();  // index
         }
+        
+        if (version>8) {  // version 9
+          in.readInt();   // related base
+          in.readInt();   // related dest
+        }
+        
+        if (version>9) {  // version 10
+          in.readUTF();   // basic type
+        }            
         
         if (!isInside ||isGarbage) continue;
         if (userLoc) {
@@ -1427,12 +1436,12 @@ public class FileManager {
             if (dasmLoc) total++;
         }
       }
+      
+      return (int)(done*100/total);  // avoid that total should be zero
     } catch (Exception e) {
         System.err.println(e);
         return -1;
-      }  
-      
-    return (int)(done*100/total);  
+      }        
   }
   
   /**

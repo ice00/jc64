@@ -362,7 +362,7 @@ public class Option {
   /** Sid high frequency table label */
   public String sidFreqHiLabel = "frequencyHi";
   
-  /** Not mark PSOD addresses */
+  /** Not mark PSID addresses */
   public boolean notMarkPSID=false;
   
   /** Create PSID heather */
