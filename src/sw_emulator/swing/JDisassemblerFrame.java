@@ -7853,7 +7853,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
       
     MemoryDasm mem= project.memory[row];
-    JTextArea area=new JTextArea(20,40);
+    JTextArea area=new JTextArea(20,80);
     area.setText(mem.userBlockComment);
     area.setFont(new Font("monospaced", Font.PLAIN, 12)); 
 
