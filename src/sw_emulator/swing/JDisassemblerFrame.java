@@ -35,6 +35,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -55,6 +56,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.prefs.Preferences;
@@ -221,6 +223,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /** Dialog for Easter eggs */
   FadeDialog fadeDialog;//=new FadeDialog();
+  
+  /** Stack for call of jumps */
+  Stack<Integer> callStack = new Stack();
   
   /** Last directory for saving project  */
   public final static String LAST_DIR_PROJECT = "last.dir.project";  
@@ -641,6 +646,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jButtonMarkHighLow = new javax.swing.JButton();
     jButtonMarkMax = new javax.swing.JButton();
     jButtonWizard = new javax.swing.JButton();
+    jButtonJumpBack = new javax.swing.JButton();
+    jButtonJumpFollow = new javax.swing.JButton();
     jToolBarOption = new javax.swing.JToolBar();
     jButtonConfigure = new javax.swing.JButton();
     jButtonSIDLD = new javax.swing.JButton();
@@ -2330,6 +2337,30 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     });
     jToolBarMemory.add(jButtonWizard);
+
+    jButtonJumpBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/back.png"))); // NOI18N
+    jButtonJumpBack.setToolTipText("Jump back position");
+    jButtonJumpBack.setFocusable(false);
+    jButtonJumpBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonJumpBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jButtonJumpBack.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonJumpBackActionPerformed(evt);
+      }
+    });
+    jToolBarMemory.add(jButtonJumpBack);
+
+    jButtonJumpFollow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/forward.png"))); // NOI18N
+    jButtonJumpFollow.setToolTipText("Jump follow position");
+    jButtonJumpFollow.setFocusable(false);
+    jButtonJumpFollow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonJumpFollow.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jButtonJumpFollow.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonJumpFollowActionPerformed(evt);
+      }
+    });
+    jToolBarMemory.add(jButtonJumpFollow);
 
     jPanelToolBar.add(jToolBarMemory);
 
@@ -4485,12 +4516,21 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     private void rSyntaxTextAreaDisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisMouseClicked
       gotoMem(rSyntaxTextAreaDis, disassembly.caretsPreview, evt.getModifiersEx());
+      
+      if (evt.getClickCount() == 2 && !evt.isConsumed() && 
+          ((evt.getModifiersEx() & ALT_DOWN_MASK) == ALT_DOWN_MASK)) {
+        this.gotoLabelOp();        
+        return;
+      }      
+      
       if (evt.getClickCount() == 2 && !evt.isConsumed() && 
           ((evt.getModifiersEx() & CTRL_DOWN_MASK) == CTRL_DOWN_MASK)) {
         manageAction(disassembly.caretsPreview.getType(rSyntaxTextAreaDis.getCaretPosition()));
       }
       rSyntaxTextAreaDisMin.setCaretPosition(rSyntaxTextAreaDis.getCaretPosition());
       rSyntaxTextAreaDisMin.requestFocusInWindow();    
+      
+
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -4637,7 +4677,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         }
       
         // if max is not -1 we find a range
-        if (max==-1) return;
+        if (max==-1) return;        
+        
+        // try with carets if first line were partially covered (only with a selection of more lines)
+        MemoryDasm mem= disassembly.caretsPreview.getMemory(rSyntaxTextAreaDis.getCaretPosition()-selected.length());
+        if (mem != null && mem.address<min && selected.contains("\n")) min=mem.address;        
       
         //scroll to that point
         ///jTableMemory.scrollRectToVisible(jTableMemory.getCellRect(min,0, true)); 
@@ -4647,7 +4691,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         jTableMemory.setRowSelectionInterval(min, max);       
         
       } catch (Exception e) {
-          System.err.println(e);;
+          System.err.println(e);
         }  
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseReleased
 
@@ -5853,6 +5897,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(MEM_BLOCKLABELS);
   }//GEN-LAST:event_jMenuItemBlockLabelActionPerformed
 
+  private void jButtonJumpBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJumpBackActionPerformed
+    execute(MEM_JUMPBACK);
+  }//GEN-LAST:event_jButtonJumpBackActionPerformed
+
+  private void jButtonJumpFollowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJumpFollowActionPerformed
+    execute(MEM_JUMPFOLLOW);
+  }//GEN-LAST:event_jButtonJumpFollowActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5911,6 +5963,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JButton jButtonFindDis;
   private javax.swing.JButton jButtonFindMem;
   private javax.swing.JButton jButtonFindSource;
+  private javax.swing.JButton jButtonJumpBack;
+  private javax.swing.JButton jButtonJumpFollow;
   private javax.swing.JButton jButtonMPR;
   private javax.swing.JButton jButtonMarkBoth;
   private javax.swing.JButton jButtonMarkCode;
@@ -6592,9 +6646,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case MEM_HEX:
          showHex();  
+         break;
        case MEM_BLOCKLABELS:
          createBlockLabels();
+         break;
+       case MEM_JUMPBACK:
+         jumpBack();
+         break;
+       case MEM_JUMPFOLLOW:
+         this.gotoLabelOp();
          break;         
+         
          
        case MEM_BASIC_NONE:     
          markAsBasicData(BasicType.NONE);      
@@ -7830,6 +7892,192 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       mem.userLocation=label;
     }  
+  }
+  
+  /**
+   * Go to the label onto the instructions (like JMP, ...)
+   */
+  private void gotoLabelOp() {
+    int row = jTableMemory.getSelectedRow();
+    if (row < 0 || row >= 0xFFFE) return;  // avoid invalid address
+    
+    MemoryDasm mem = null;
+
+    switch (project.targetType) {
+      case C128:
+      case C64:
+      case C1541:
+      case PLUS4:
+      case VIC20:
+      case ATARI:
+        // determine if it is of page zero or 16 bit
+        switch (M6510Dasm.tableSize[project.memory[row].copy & 0xFF]) {
+          case 2:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside)  return;
+
+            // get next address
+            mem = project.memory[project.memory[row + 1].copy & 0xFF];
+            break;
+          case 3:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside || !project.memory[row + 2].isInside) return;
+
+            // get next address
+            mem = project.memory[(project.memory[row + 2].copy & 0xFF) * 256 + (project.memory[row + 1].copy & 0xFF)];
+            break;
+        }
+        break;
+      case C128Z:
+        int op,
+         iType,
+         steps;
+        op = project.memory[row].copy & 0xFF;
+
+        iType = Z80Dasm.tableMnemonics[op];
+
+        switch (iType) {
+          case Z80Dasm.T_CB:
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeCB[op];
+            break;
+          case Z80Dasm.T_DD:
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeDD[op];
+
+            if (Z80Dasm.tableMnemonicsDD[op] == Z80Dasm.T_DDCB) {
+              // there are an extra table  
+              op = project.memory[row + 2].copy & 0xFF;
+              steps = Z80Dasm.tableSizeDDCB[op];
+            }
+            break;
+          case Z80Dasm.T_ED:
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeED[op];
+            break;
+          case Z80Dasm.T_FD:
+            op = project.memory[row + 1].copy & 0xFF;
+            steps = Z80Dasm.tableSizeFD[op];
+
+            if (Z80Dasm.tableMnemonicsFD[op] == Z80Dasm.T_FDCB) {
+              op = project.memory[row + 2].copy & 0xFF;
+              steps = Z80Dasm.tableSizeFDCB[op];
+            }
+            break;
+          default:
+
+            steps = Z80Dasm.tableSize[op];
+            break;
+        }
+
+        switch (steps) {
+          case 3:
+            // avoid to use not defined bytes
+            if (!project.memory[row + 1].isInside || !project.memory[row + 2].isInside) return;
+
+            // get next address
+            mem = project.memory[(project.memory[row + 2].copy & 0xFF) * 256 + (project.memory[row + 1].copy & 0xFF)];
+            break;
+          default:
+            return;
+        }
+
+        break;
+    }
+
+    // avoid invlaid memory detected
+    if (mem==null) return;
+    
+    int actual;
+
+    // get the address in hex format
+    int addr = mem.address;
+    int pos = 0;
+    
+    // save current memory position
+    callStack.push(project.memory[row].address);
+
+    // try with carets
+    if (addr >= 0) {
+      pos = disassembly.caretsPreview.getPosition(project.memory[addr]);
+
+      if (pos != -1) {
+        rSyntaxTextAreaDis.setCaretPosition(pos);
+        rSyntaxTextAreaDis.requestFocusInWindow();
+        return;
+      } else {
+        pos = 0;
+      }
+    }
+
+    // scan all lines for the memory location
+    try {
+      String preview = rSyntaxTextAreaDis.getText();
+      String lines[] = preview.split("\\r?\\n");
+      for (String line : lines) {
+        actual = searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));
+        if (actual == addr) {
+          // set preview in the find position  
+          rSyntaxTextAreaDis.setCaretPosition(pos);
+          rSyntaxTextAreaDis.requestFocusInWindow();
+          break;
+        } else {
+          pos += line.length() + 1;
+        }
+      }
+    } catch (Exception e) {
+      System.err.println();
+    }
+    
+    dataTableModelMemory.fireTableDataChanged();
+    jTableMemory.setRowSelectionInterval(row, row);
+  }
+  
+  /**
+   * Jump back in stacked flow
+   */
+  private void jumpBack() {
+    if (callStack.isEmpty()) {
+      JOptionPane.showMessageDialog(this, "Empty calling stack", "Warning", JOptionPane.WARNING_MESSAGE); 
+      return;
+    }
+    
+    int actual;
+    
+    int addr=callStack.pop();
+    int pos=0;
+
+    // try with carets
+    if (addr >= 0) {
+      pos = disassembly.caretsPreview.getPosition(project.memory[addr]);
+
+      if (pos != -1) {
+        rSyntaxTextAreaDis.setCaretPosition(pos);
+        rSyntaxTextAreaDis.requestFocusInWindow();
+        return;
+      } else {
+        pos = 0;
+      }
+    }
+
+    // scan all lines for the memory location
+    try {
+      String preview = rSyntaxTextAreaDis.getText();
+      String lines[] = preview.split("\\r?\\n");
+      for (String line : lines) {
+        actual = searchAddress(line.substring(0, Math.min(line.length(), option.maxLabelLength)));
+        if (actual == addr) {
+          // set preview in the find position  
+          rSyntaxTextAreaDis.setCaretPosition(pos);
+          rSyntaxTextAreaDis.requestFocusInWindow();
+          break;
+        } else {
+          pos += line.length() + 1;
+        }
+      }
+    } catch (Exception e) {
+      System.err.println();
+    }
   }
 
   /**

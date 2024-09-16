@@ -446,6 +446,12 @@ public interface userAction {
   /** Block labels memory area */
   public static final int MEM_BLOCKLABELS = 140;  
   
+  /** Jump back position */
+  public static final int MEM_JUMPBACK = 141;  
+  
+  /** Jump follow position */
+  public static final int MEM_JUMPFOLLOW = 142;  
+  
   /**
    * Execute the passed user action
    * 
