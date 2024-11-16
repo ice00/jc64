@@ -1307,6 +1307,7 @@ public class Disassembly {
 
       // add an offset due to previous strings added
       if (asSource) {
+        actualCarets.setOffset(tmp.length());
         assembler.setOrg(tmp, block.startAddress);  
         if (!"".equals(player)) {
           
