@@ -1327,7 +1327,7 @@ public class Assembler {
                   case TASS64:
                     if (
                         (!option.allowUtf && ((val<=0x1F) || (val==0x22) || (val>127))) || 
-                        (option.allowUtf && ((val==0x0A) || (val==0x0D) ||
+                        (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) ||
                          (val==0x22) || (val>127)))                      
                        ) return HexNum(ByteToExe(Unsigned.done(value)), defaultMode);    
                     else return "\""+(char)Unsigned.done(value)+"\"";
