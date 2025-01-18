@@ -491,7 +491,9 @@ public class FileManager {
       option.asiHighText = Assembler.HighText.valueOf(in.readUTF()); 
       option.asiShiftText = Assembler.ShiftText.valueOf(in.readUTF());
       option.asiScreenText = Assembler.ScreenText.valueOf(in.readUTF()); 
-      option.asiPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());       
+      option.asiPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());     
+      
+      option.mergeBlocks = in.readBoolean();
       
     } catch (FileNotFoundException e) {
          return true; 
@@ -929,6 +931,8 @@ public class FileManager {
       out.writeUTF(option.asiShiftText.name());
       out.writeUTF(option.asiScreenText.name());
       out.writeUTF(option.asiPetasciiText.name());
+      
+      out.writeBoolean(option.mergeBlocks);
 
       out.flush();
       out.close();

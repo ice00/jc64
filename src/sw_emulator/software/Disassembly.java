@@ -1252,6 +1252,9 @@ public class Disassembly {
    */
   private void disassemblyBlocks(boolean asSource, CpuDasm prg, StringBuilder tmp) {
     Block block;
+    
+    // merge blocks with adiacent area
+    if (option.mergeBlocks) mergeBlocks(); 
 
     // sort by asc memory address
     Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
@@ -1325,6 +1328,61 @@ public class Disassembly {
           actualCarets.setOffset(tmp.length());
           tmp.append(prg.cdasm(block.inB, block.startBuffer, block.endBuffer, block.startAddress));
         }       
+    }
+  }
+  
+  /**
+   * Merge blocks thare are in adjacent area, so the disassembly can be uniform
+   */
+  private void mergeBlocks() {
+    // one blocks did not need to be merged
+    if (blocks.size()==1) return;
+    
+    Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
+    
+    Block curBlock;
+    Block nextBlock;
+    Block newBlock;
+    int end;
+    int size;
+    
+    int i=0;
+    while (i<blocks.size()-1) {
+      curBlock=blocks.get(i);
+      nextBlock=blocks.get(i+1);
+      
+      // are the block intersected or attached?
+      if (curBlock.endAddress-nextBlock.startAddress>=-1) {
+        // we must merge the blocks
+        newBlock=new Block();        
+        newBlock.startAddress=curBlock.startAddress;
+        newBlock.endAddress=nextBlock.endAddress;
+        newBlock.startBuffer=0;
+        end=newBlock.endAddress-newBlock.startAddress;
+        newBlock.endBuffer=end;
+        newBlock.inB=new byte[end+1];
+        
+        size=curBlock.endAddress-curBlock.startAddress+1;
+        
+        // fill the block with first part
+        for (int j=0; j<size; j++) {
+          newBlock.inB[j]=curBlock.inB[j+curBlock.startBuffer];
+        }
+        
+        end=nextBlock.endAddress-nextBlock.startAddress+1;
+        
+        // fill the block with second part
+        for (int j=0; j<end; j++) {
+          newBlock.inB[j+size]=nextBlock.inB[j + nextBlock.startBuffer];
+        }
+        
+        // remove next block
+        blocks.remove(i+1);
+        
+        // replace current block with new one
+        blocks.set(i, newBlock);        
+      }
+      i++;
     }
   }
   

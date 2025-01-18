@@ -464,6 +464,9 @@ public class Option {
   /** Show miniature contents in scrollbars */
   public boolean showMiniature=true;
   
+  /** Merge adjacent blocks */
+  public boolean mergeBlocks=false;
+  
   
   /** SidFreq: linear table */
   public boolean sidFreqLinearTable=true;
