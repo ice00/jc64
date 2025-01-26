@@ -60,277 +60,263 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="793" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelTmpxStartingDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxOriginDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxLabelDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxByteDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxWordDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxWordSwappedDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxTribyteDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxLongDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxAddressDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxStackWordDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxMonoSpriteDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxMultiSpriteDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxTextDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxNumTextDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxZeroTextDeclaration" alignment="0" pref="140" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxHighTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxShiftTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxScreenTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelTmpxPetasciiTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jRadioButtonTmpxFakeStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotRdaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotShiflShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPaneTmpxFakeStarting" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxAsterixOrigin" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxSemicolonComment" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByte" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxWord" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotWord" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroLong" alignment="0" pref="160" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotAddrAddress" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotRtaStackWord" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotTextNumText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotNullZeroText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotShiftHighText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotShiftlShiftText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotScreenText" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotPetasciiText" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jRadioButtonTmpxDotIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jScrollPaneTmpxByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotIfBlockComment" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteBinMultiSprite" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jRadioButtonTmpxMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPaneTmpxMacroHexMonoSprite" alignment="0" pref="103" max="32767" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroHexMultiSprite" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jRadioButtonTmpxMacroBinMultiSprite" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTmpxMacroBinMultiSprite" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jRadioButtonTmpxMacroBinMonoSprite" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTmpxMacroBinMonoSprite" min="-2" pref="107" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelTmpxStartingDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxOriginDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxCommentDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxBlockCommentDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxLabelDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxByteDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxWordDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxWordSwappedDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxTribyteDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxLongDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxAddressDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxStackWordDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxMonoSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxMultiSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxNumTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxZeroTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxHighTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxShiftTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxScreenTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="jLabelTmpxPetasciiTextDeclaration" linkSize="1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTmpxFakeStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotRdaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiflShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jScrollPaneTmpxDotShiftlShiftText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotShiftHighText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotNullZeroText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotTextNumText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxByteHexMultiSprite" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxByteHexMonoSprite" linkSize="6" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotPetasciiText" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotScreenText" linkSize="6" alignment="1" pref="138" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPaneTmpxDotRtaStackWord" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxMacroLong" linkSize="6" alignment="0" pref="138" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxMacroTribyte" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxMacroWordSwapped" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotWord" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxWord" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxByte" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxSemicolonBlockComment" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxSemicolonComment" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxAsterixOrigin" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxFakeStarting" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneTmpxDotAddrAddress" linkSize="6" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTmpxDotIfBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneTmpxDotIfBlockComment" linkSize="3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMonoSprite" linkSize="3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMultiSprite" linkSize="3" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTmpxMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneTmpxMacroHexMonoSprite" linkSize="4" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMultiSprite" linkSize="4" alignment="0" pref="102" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTmpxMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneTmpxMacroBinMonoSprite" linkSize="5" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroBinMultiSprite" linkSize="5" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="816" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxStartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxOriginDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jRadioButtonTmpxDotIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxDotIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxBlockCommentDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxLabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxDotByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxDotWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxDotWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxTribyteDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxLongDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxMacroLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxMacroLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxAddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxDotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxDotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelTmpxStackWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonTmpxDotRdaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneTmpxDotRtaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxMultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxPTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotShiflShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotShiftlShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxScreenTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabelTmpxPetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxStartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxFakeStarting" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxOriginDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxBlockCommentDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxLabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByte" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxTribyteDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroTribyte" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxLongDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroLong" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxAddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotAddrAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxStackWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotRdaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotRtaStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxMultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxByteBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxPTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotTextNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotNullZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotShiflShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotShiftlShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxScreenTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelTmpxPetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTmpxDotPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -60,146 +60,151 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelKickStartingDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickOriginDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickBlockCommentDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickLabelDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickWordDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickWordSwappedDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickTribyteDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickLongDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickStackWordDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickMonoSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickMultiSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickAddressDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickNumTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickZeroTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickHighTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickShiftTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickScreenTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabelKickPetasciiTextDeclaration" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jRadioButtonKickDotTextPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotTextScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotTextShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotTextHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotTextZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDoubleBarBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDoubleBarComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotCpuUndStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jScrollPaneKickDotTextScreenText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotTextShiftText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotTextHighText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotTextZeroText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotTextNumText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickByteHexMultiSprite" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickByteHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickMacroStackWord" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotWordAddress" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDwordLong" alignment="0" pref="156" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickMacroTribyte" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickMacroWordSwapped" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotWord" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotByte" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickLabelNameColon" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDoubleBarBlockComment" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDoubleBarComment" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotCpuUndStarting" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickAsterixOrigin" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneKickDotTextPetasciiText" alignment="1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jRadioButtonKickDotPcOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotByByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotWoWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotDwLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickDotWoWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPaneKickDotPcOrigin" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jScrollPaneKickCstyleBlockComment" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickDotByByte" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickDotWoWord" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickDotWoWordAddress" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickByteBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickByteBinMonoSprite" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickDotDwLong" alignment="0" pref="116" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonDasmSharpIfPBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelKickPetasciiTextDeclaration" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelKickScreenTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickShiftTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickHighTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickZeroTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickNumTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickTextDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickMultiSpriteDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickMonoSpriteDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickStackWordDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickAddressDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickLongDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickTribyteDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickWordSwappedDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickWordDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickByteDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickLabelDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickBlockCommentDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickCommentDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickOriginDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jLabelKickStartingDeclaration" linkSize="5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonKickDotTextPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotTextScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotTextShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotTextHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotTextZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickMacroStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickMacroTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickMacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickLabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDoubleBarBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDoubleBarComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickAsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotCpuUndStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPaneKickDotTextPetasciiText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotTextScreenText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotTextShiftText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotTextHighText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotTextZeroText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotTextNumText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotText" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickByteHexMultiSprite" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickByteHexMonoSprite" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickMacroStackWord" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotWordAddress" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDwordLong" linkSize="1" alignment="0" pref="140" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickMacroTribyte" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickMacroWordSwapped" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotWord" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotByte" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickLabelNameColon" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDoubleBarBlockComment" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDoubleBarComment" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickAsterixOrigin" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickDotCpuUndStarting" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonKickDotPcOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickCstyleBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotByByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotWoWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotDwLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickDotWoWordAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPaneKickByteBinMultiSprite" linkSize="2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickCstyleBlockComment" linkSize="2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickByteBinMonoSprite" linkSize="2" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonKickMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonDasmSharpIfPBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPaneDasmSharpIfPBlockComment" linkSize="3" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPaneKickMacroHexMultiSprite" pref="111" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButtonKickMacroBinMultiSprite" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPaneKickMacroHexMonoSprite" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButtonKickMacroBinMonoSprite" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPaneKickMacroHexMultiSprite" linkSize="3" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneKickMacroHexMonoSprite" linkSize="3" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jRadioButtonKickMacroBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPanekickMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPaneKickMacroBinMonoSprite" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPaneKickMacroBinMonoSprite" linkSize="4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPanekickMacroBinMultiSprite" linkSize="4" alignment="0" pref="112" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPaneDasmSharpIfPBlockComment" min="-2" pref="101" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="jCheckBoxKickColonMacro" min="-2" pref="332" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneKickDotWoWordAddress" linkSize="2" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneKickDotDwLong" linkSize="2" pref="116" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneKickDotWoWord" linkSize="2" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneKickDotByByte" linkSize="2" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneKickDotPcOrigin" linkSize="2" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-              <Component id="jCheckBoxKickColonMacro" min="-2" pref="332" max="-2" attributes="0"/>
-              <EmptySpace pref="417" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -208,32 +213,25 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jCheckBoxKickColonMacro" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelKickStartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonKickDotCpuUndStarting" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneKickDotCpuUndStarting" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelKickOriginDeclaration" alignment="2" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonKickAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneKickAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonKickDotPcOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelKickCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonKickDoubleBarComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneKickDoubleBarComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneKickDotPcOrigin" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelKickStartingDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonKickDotCpuUndStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneKickDotCpuUndStarting" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelKickOriginDeclaration" alignment="2" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonKickAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneKickAsterixOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonKickDotPcOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneKickDotPcOrigin" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelKickCommentDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonKickDoubleBarComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneKickDoubleBarComment" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
@@ -374,7 +372,7 @@
                   <Component id="jRadioButtonKickDotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneKickDotTextPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

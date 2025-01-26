@@ -63,28 +63,28 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelAcmeWordSwappedDeclaration" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                  <Component id="jLabelAcmeWordSwappedDeclaration" linkSize="1" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jLabelAcmeStartingDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelScmeOriginDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeBlockCommentDeclaration" alignment="0" pref="167" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeLabelDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeByteDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeTribyteDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeLongDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeAddressDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeStackWordDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeMonoSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeMultiSpriteDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeNumTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeZeroTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeShiftTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeScreenTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmePetasciiTextDeclaration" alignment="0" pref="167" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeHighTextDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeWordDeclaration" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAcmeCommentDeclaration1" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeStartingDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelScmeOriginDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeBlockCommentDeclaration" linkSize="1" alignment="0" pref="167" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeLabelDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeByteDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeTribyteDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeLongDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeAddressDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeStackWordDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeMonoSpriteDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeMultiSpriteDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeNumTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeZeroTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeShiftTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeScreenTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmePetasciiTextDeclaration" linkSize="1" alignment="0" pref="167" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeHighTextDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeWordDeclaration" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAcmeCommentDeclaration1" linkSize="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -113,27 +113,27 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPaneAcmeMarkScrScreenText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkShiftText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkHighText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkZeroText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkNumText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeByteHexMultiSprite" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcme24HexMonoSprite" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMacroStackWord" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkWordAddress" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkThirtytwoLong" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeTwentyfourTribyte" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMacroWordSwapped" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkWord" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkByte" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeLabelName" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeSemicolonBlockComment" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeSemicolonComment" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneDasmLabelAsterixOrigin" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeLabelMarkCpuStarting" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkPetPetasciiText" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkScrScreenText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkShiftText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkHighText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkZeroText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkNumText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeByteHexMultiSprite" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24HexMonoSprite" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroStackWord" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkWordAddress" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkThirtytwoLong" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeTwentyfourTribyte" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroWordSwapped" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkWord" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkByte" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeLabelName" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeSemicolonBlockComment" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeSemicolonComment" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneDasmLabelAsterixOrigin" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeLabelMarkCpuStarting" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkPetPetasciiText" linkSize="2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -152,40 +152,40 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPaneAcmeMarkIfBlockComment" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeLabelNameColon" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMark8Byte" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMark16Word" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMark16WordAddress" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcme24BinMonoSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcme24BinMultiSprite" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkTxText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkTxNumText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkTxZeroText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkTxHighText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkTxShiftText" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkIfBlockComment" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeLabelNameColon" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark8Byte" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark16Word" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark16WordAddress" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24BinMonoSprite" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24BinMultiSprite" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxText" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxNumText" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxZeroText" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxHighText" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxShiftText" linkSize="3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jRadioButtonAcmeMarkRawShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMarkRawHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMarkRawNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMarkRawText" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonAcmeMark08Byte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPaneAcmeMarkRawShiftText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawHighText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawNumText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkRawText" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMacroHexMultiSprite" alignment="0" pref="100" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMacroHexMonoSprite" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMark08Byte" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark08Byte" linkSize="4" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroHexMonoSprite" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroHexMultiSprite" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawText" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawNumText" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawZeroText" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawHighText" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawShiftText" linkSize="4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -195,11 +195,11 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPaneAcmeMacroBinMultiSprite" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMacroBinMonoSprite" alignment="0" pref="108" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneAcmeMarkByByte" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkByByte" linkSize="5" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMonoSprite" linkSize="5" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMultiSprite" linkSize="5" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -225,197 +225,155 @@
                   <Component id="jScrollPaneAcmeSemicolonComment" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeBlockCommentDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeLabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMark8Byte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark8Byte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMark08Byte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark08Byte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkByByte" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkByByte" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMark16Word" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark16Word" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeBlockCommentDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeSemicolonBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeLabelDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeLabelName" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkByByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkByByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMark08Byte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMark08Byte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkByte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeByteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeWordDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeWordSwappedDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroWordSwapped" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPaneAcmeTwentyfourTribyte" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jRadioButtonAcmeMarkTwentyfourTribyte" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelAcmeTribyteDeclaration" min="-2" pref="15" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeLongDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkThirtytwoLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkThirtytwoLong" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeAddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkWordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkWordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeStackWordDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcme24HexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcme24HexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelAcmeMultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcme24HexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkRawText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkRawText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkRawNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkRawNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAcmeShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPaneAcmeTwentyfourTribyte" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcmeMarkIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkIfBlockComment" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonAcmeMarkTwentyfourTribyte" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelAcmeTribyteDeclaration" min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcmeLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeLabelNameColon" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMark8Byte" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMark8Byte" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcmeMark16Word" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMark16Word" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcmeMark16WordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMark16WordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcme24BinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcme24BinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jRadioButtonAcme24BinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcme24BinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkTxText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkTxText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkTxNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkTxNumText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkTxZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkTxZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jScrollPaneAcmeMarkTxShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkTxShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneAcmeMarkRawShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonAcmeMarkRawShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeLongDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkThirtytwoLong" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkThirtytwoLong" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeAddressDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkWordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkWordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMark16WordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMark16WordAddress" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeStackWordDeclaration" alignment="2" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroStackWord" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeMonoSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcme24HexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24HexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcme24BinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24BinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroHexMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMonoSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeMultiSpriteDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcme24HexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeByteHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcme24BinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcme24BinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkTxText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeNumTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkTxNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawNumText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeZeroTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkTxZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawZeroText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeHighTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawHighText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelAcmeShiftTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkTxShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkTxShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonAcmeMarkRawShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneAcmeMarkRawShiftText" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jScrollPaneAcmeMarkScrScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonAcmeMarkScrScreenText" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -427,7 +385,7 @@
                   <Component id="jRadioButtonAcmeMarkPetPetasciiText" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelAcmePetasciiTextDeclaration" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
