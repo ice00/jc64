@@ -577,6 +577,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemSaveAsAcme = new javax.swing.JMenuItem();
     jMenuItemSaveAsKickAssembler = new javax.swing.JMenuItem();
     jMenuItemSaveAsTass64 = new javax.swing.JMenuItem();
+    jMenuItemSaveAsGlass = new javax.swing.JMenuItem();
+    jMenuItemSaveAsAS = new javax.swing.JMenuItem();
     jPopupMenuMemory = new javax.swing.JPopupMenu();
     jMenuItemCopy = new javax.swing.JMenuItem();
     jMenuItemPaste = new javax.swing.JMenuItem();
@@ -920,10 +922,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuSub = new javax.swing.JMenu();
     jMenuItemSaveAsDasm1 = new javax.swing.JMenuItem();
     jMenuItemSaveAsTmpx1 = new javax.swing.JMenuItem();
-    jMenuItemSaveAsCa66 = new javax.swing.JMenuItem();
+    jMenuItemSaveAsCa65_1 = new javax.swing.JMenuItem();
     jMenuItemSaveAsAcme1 = new javax.swing.JMenuItem();
     jMenuItemSaveAsKickAssembler1 = new javax.swing.JMenuItem();
-    jMenuItemSaveAsTass65 = new javax.swing.JMenuItem();
+    jMenuItemSaveAsTass64_1 = new javax.swing.JMenuItem();
+    jMenuItemSaveAsGlass1 = new javax.swing.JMenuItem();
+    jMenuItemSaveAsAS1 = new javax.swing.JMenuItem();
     jMenuItem3 = new javax.swing.JMenuItem();
     jMenuHelpContents = new javax.swing.JMenu();
     jMenuItemContents = new javax.swing.JMenuItem();
@@ -1690,6 +1694,26 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     });
     jPopupMenuSaveAs.add(jMenuItemSaveAsTass64);
+
+    jMenuItemSaveAsGlass.setText("Save in Glass format");
+    jMenuItemSaveAsGlass.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSaveAsGlassActionPerformed(evt);
+      }
+    });
+    jPopupMenuSaveAs.add(jMenuItemSaveAsGlass);
+    jMenuItemSaveAsGlass.getAccessibleContext().setAccessibleName("Save in Glass format");
+
+    jMenuItemSaveAsAS.setText("Save in AS format");
+    jMenuItemSaveAsAS.setToolTipText("");
+    jMenuItemSaveAsAS.setActionCommand("Save in AS format");
+    jMenuItemSaveAsAS.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemSaveAsASActionPerformed(evt);
+      }
+    });
+    jPopupMenuSaveAs.add(jMenuItemSaveAsAS);
+    jMenuItemSaveAsAS.getAccessibleContext().setAccessibleName("Save in AS format");
 
     jMenuItemCopy.setText("Copy into this instance");
     jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -4114,14 +4138,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   });
   jMenuSub.add(jMenuItemSaveAsTmpx1);
 
-  jMenuItemSaveAsCa66.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
-  jMenuItemSaveAsCa66.setText("Save in CA65 format");
-  jMenuItemSaveAsCa66.addActionListener(new java.awt.event.ActionListener() {
+  jMenuItemSaveAsCa65_1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
+  jMenuItemSaveAsCa65_1.setText("Save in CA65 format");
+  jMenuItemSaveAsCa65_1.addActionListener(new java.awt.event.ActionListener() {
     public void actionPerformed(java.awt.event.ActionEvent evt) {
-      jMenuItemSaveAsCa66ActionPerformed(evt);
+      jMenuItemSaveAsCa65_1ActionPerformed(evt);
     }
   });
-  jMenuSub.add(jMenuItemSaveAsCa66);
+  jMenuSub.add(jMenuItemSaveAsCa65_1);
 
   jMenuItemSaveAsAcme1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK));
   jMenuItemSaveAsAcme1.setText("Save in Acme format");
@@ -4141,14 +4165,32 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   });
   jMenuSub.add(jMenuItemSaveAsKickAssembler1);
 
-  jMenuItemSaveAsTass65.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_DOWN_MASK));
-  jMenuItemSaveAsTass65.setText("Save in Tass64 format");
-  jMenuItemSaveAsTass65.addActionListener(new java.awt.event.ActionListener() {
+  jMenuItemSaveAsTass64_1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_DOWN_MASK));
+  jMenuItemSaveAsTass64_1.setText("Save in Tass64 format");
+  jMenuItemSaveAsTass64_1.addActionListener(new java.awt.event.ActionListener() {
     public void actionPerformed(java.awt.event.ActionEvent evt) {
-      jMenuItemSaveAsTass65ActionPerformed(evt);
+      jMenuItemSaveAsTass64_1ActionPerformed(evt);
     }
   });
-  jMenuSub.add(jMenuItemSaveAsTass65);
+  jMenuSub.add(jMenuItemSaveAsTass64_1);
+
+  jMenuItemSaveAsGlass1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_DOWN_MASK));
+  jMenuItemSaveAsGlass1.setText("Save in Glass format");
+  jMenuItemSaveAsGlass1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSaveAsGlass1ActionPerformed(evt);
+    }
+  });
+  jMenuSub.add(jMenuItemSaveAsGlass1);
+
+  jMenuItemSaveAsAS1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_DOWN_MASK));
+  jMenuItemSaveAsAS1.setText("Save in AS format");
+  jMenuItemSaveAsAS1.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemSaveAsAS1ActionPerformed(evt);
+    }
+  });
+  jMenuSub.add(jMenuItemSaveAsAS1);
 
   jMenuSource.add(jMenuSub);
 
@@ -4528,9 +4570,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         manageAction(disassembly.caretsPreview.getType(rSyntaxTextAreaDis.getCaretPosition()));
       }
       rSyntaxTextAreaDisMin.setCaretPosition(rSyntaxTextAreaDis.getCaretPosition());
+      
+      // scroll to miniature position
       rSyntaxTextAreaDisMin.requestFocusInWindow();    
       
-
+      // scrolla back to area otherwise focus stay on miniature
+      rSyntaxTextAreaDis.requestFocusInWindow();    
     }//GEN-LAST:event_rSyntaxTextAreaDisMouseClicked
 
     private void jMenuItemFindDisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisActionPerformed
@@ -4580,7 +4625,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         manageAction(disassembly.caretsSource.getType(rSyntaxTextAreaSource.getCaretPosition()));
       }
       rSyntaxTextAreaSourceMin.setCaretPosition(rSyntaxTextAreaSource.getCaretPosition());
-      rSyntaxTextAreaSourceMin.requestFocusInWindow();  
+      
+      // scroll to miniature position
+      rSyntaxTextAreaSourceMin.requestFocusInWindow(); 
+            
+      // scrolla back to area otherwise focus stay on miniature
+      rSyntaxTextAreaSource.requestFocusInWindow(); 
     }//GEN-LAST:event_rSyntaxTextAreaSourceMouseClicked
 
     private void jMenuItemClearDLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearDLabelActionPerformed
@@ -5157,9 +5207,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_TMPX);
     }//GEN-LAST:event_jMenuItemSaveAsTmpx1ActionPerformed
 
-    private void jMenuItemSaveAsCa66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsCa66ActionPerformed
+    private void jMenuItemSaveAsCa65_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsCa65_1ActionPerformed
       execute(SOURCE_CA65);
-    }//GEN-LAST:event_jMenuItemSaveAsCa66ActionPerformed
+    }//GEN-LAST:event_jMenuItemSaveAsCa65_1ActionPerformed
 
     private void jMenuItemSaveAsAcme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsAcme1ActionPerformed
       execute(SOURCE_ACME);
@@ -5169,9 +5219,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       execute(SOURCE_KICK);
     }//GEN-LAST:event_jMenuItemSaveAsKickAssembler1ActionPerformed
 
-    private void jMenuItemSaveAsTass65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTass65ActionPerformed
+    private void jMenuItemSaveAsTass64_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsTass64_1ActionPerformed
       execute(SOURCE_TASS64);
-    }//GEN-LAST:event_jMenuItemSaveAsTass65ActionPerformed
+    }//GEN-LAST:event_jMenuItemSaveAsTass64_1ActionPerformed
 
     private void jMenuItemImportLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportLabelsActionPerformed
       execute(HELP_IMPORT);
@@ -5905,6 +5955,22 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(MEM_JUMPFOLLOW);
   }//GEN-LAST:event_jButtonJumpFollowActionPerformed
 
+  private void jMenuItemSaveAsGlassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsGlassActionPerformed
+    execute(SOURCE_GLASS);
+  }//GEN-LAST:event_jMenuItemSaveAsGlassActionPerformed
+
+  private void jMenuItemSaveAsASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsASActionPerformed
+    execute(SOURCE_AS);
+  }//GEN-LAST:event_jMenuItemSaveAsASActionPerformed
+
+  private void jMenuItemSaveAsGlass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsGlass1ActionPerformed
+    execute(SOURCE_GLASS);
+  }//GEN-LAST:event_jMenuItemSaveAsGlass1ActionPerformed
+
+  private void jMenuItemSaveAsAS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsAS1ActionPerformed
+    execute(SOURCE_AS);
+  }//GEN-LAST:event_jMenuItemSaveAsAS1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6159,17 +6225,21 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItemReu;
   private javax.swing.JMenuItem jMenuItemReu1;
   private javax.swing.JMenuItem jMenuItemSIDLD;
+  private javax.swing.JMenuItem jMenuItemSaveAsAS;
+  private javax.swing.JMenuItem jMenuItemSaveAsAS1;
   private javax.swing.JMenuItem jMenuItemSaveAsAcme;
   private javax.swing.JMenuItem jMenuItemSaveAsAcme1;
   private javax.swing.JMenuItem jMenuItemSaveAsCa65;
-  private javax.swing.JMenuItem jMenuItemSaveAsCa66;
+  private javax.swing.JMenuItem jMenuItemSaveAsCa65_1;
   private javax.swing.JMenuItem jMenuItemSaveAsDasm;
   private javax.swing.JMenuItem jMenuItemSaveAsDasm1;
+  private javax.swing.JMenuItem jMenuItemSaveAsGlass;
+  private javax.swing.JMenuItem jMenuItemSaveAsGlass1;
   private javax.swing.JMenuItem jMenuItemSaveAsKickAssembler;
   private javax.swing.JMenuItem jMenuItemSaveAsKickAssembler1;
   private javax.swing.JMenuItem jMenuItemSaveAsProject;
   private javax.swing.JMenuItem jMenuItemSaveAsTass64;
-  private javax.swing.JMenuItem jMenuItemSaveAsTass65;
+  private javax.swing.JMenuItem jMenuItemSaveAsTass64_1;
   private javax.swing.JMenuItem jMenuItemSaveAsTmpx;
   private javax.swing.JMenuItem jMenuItemSaveAsTmpx1;
   private javax.swing.JMenuItem jMenuItemSaveProject;
@@ -6833,7 +6903,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;
        case SOURCE_TASS64:
          export(Name.TASS64);
-         break;                        
+         break;      
+       case SOURCE_GLASS:
+         export(Name.GLASS);
+         break;     
+       case SOURCE_AS:
+         export(Name.AS);
+         break;        
+         
          
        case HELP_CONTENTS: 
          jHelpFrame.setVisible(true);

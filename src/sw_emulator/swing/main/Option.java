@@ -1284,7 +1284,7 @@ public class Option {
   public Assembler.Starting asmStarting=Assembler.Starting.CPU_M; 
   
   /** AS(M): origin declaration */
-  public Assembler.Origin asmOrigin=Assembler.Origin.ORG_H;    
+  public Assembler.Origin asmOrigin=Assembler.Origin.ORG;    
   
   /** AS(M): label declaration */
   public Assembler.Label asmLabel=Assembler.Label.NAME_COLON;    
@@ -1317,10 +1317,10 @@ public class Option {
   public Assembler.StackWord asmStackWord=Assembler.StackWord.MACRO5_STACKWORD;
   
   /** AS(M): mono color sprite declaration */
-  public Assembler.MonoSprite asmMonoSprite=Assembler.MonoSprite.MACRO_BIN;
+  public Assembler.MonoSprite asmMonoSprite=Assembler.MonoSprite.MACRO6_BIN;
    
   /** AS(M): multi color sprite declaration */
-  public Assembler.MultiSprite asmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  public Assembler.MultiSprite asmMultiSprite=Assembler.MultiSprite.MACRO6_BIN;
   
   /** AS(M): text declaration */
   public Assembler.Text asmText=Assembler.Text.DB_BYTE_TEXT;
@@ -1383,10 +1383,10 @@ public class Option {
   public Assembler.StackWord asiStackWord=Assembler.StackWord.MACRO5_STACKWORD;
   
   /** AS(I): mono color sprite declaration */
-  public Assembler.MonoSprite asiMonoSprite=Assembler.MonoSprite.MACRO_BIN;
+  public Assembler.MonoSprite asiMonoSprite=Assembler.MonoSprite.MACRO6_BIN;
    
   /** AS(I): multi color sprite declaration */
-  public Assembler.MultiSprite asiMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  public Assembler.MultiSprite asiMultiSprite=Assembler.MultiSprite.MACRO6_BIN;
   
   /** AS(I): text declaration */
   public Assembler.Text asiText=Assembler.Text.DB_BYTE_TEXT;

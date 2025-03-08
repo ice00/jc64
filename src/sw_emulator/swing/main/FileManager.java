@@ -931,7 +931,7 @@ public class FileManager {
       out.writeUTF(option.asiShiftText.name());
       out.writeUTF(option.asiScreenText.name());
       out.writeUTF(option.asiPetasciiText.name());
-      
+            
       out.writeBoolean(option.mergeBlocks);
 
       out.flush();

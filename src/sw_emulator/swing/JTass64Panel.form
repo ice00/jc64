@@ -63,98 +63,91 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelTass64StartingDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64OriginDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64CommentDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64BlockCommentDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64LabelDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64ByteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64WordDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass65WordSwappedDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64TribyteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64LongDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64AddressDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64StackWordDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64MonoSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64MultiSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass65TextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64NumTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64ZeroTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64HighTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass64ShiftTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass65ScreenTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabelTass65PetasciiTextDeclaration" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButtonTass64DotCpuAStarting" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64AsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64SemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64LabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64MacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotLongTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotRtaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64ByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotShiftlShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPaneDasmTass64DotCpuAStarting" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64ASterixOrigin" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64SemicolonComment" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64SemicolonBlockComment" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64LabelName" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotByte" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotWord" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64MacroWordSwapped" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotLongTribyte" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotDwordLong" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotAddrAddress" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotRtaStackWord" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64ByteHexMonoSprite" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64ByteHexMultiSprite" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotPTextNumText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotNullZeroText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotShiftHighText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotShiftlShiftText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotTextScreenText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneTass64DotTextPetasciiText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotCharByte" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotSintWord" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotLintTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotDlintLong" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64ByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextPNumText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextNZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextSHighText" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonTass64DotTextLShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="141" pref="141" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonTass64DotText" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabelTass64StartingDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64OriginDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64CommentDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64BlockCommentDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64LabelDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64ByteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64WordDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass65WordSwappedDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64TribyteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64LongDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64AddressDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64StackWordDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64MonoSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64MultiSpriteDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass65TextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64NumTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64ZeroTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64HighTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass64ShiftTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass65ScreenTextDeclaration" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jLabelTass65PetasciiTextDeclaration" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtonTass64DotText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotPTextNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotNullZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotShiftlShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextScreenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPetasciiText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteHexMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotRtaStackWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotAddrAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDwordLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLongTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64MacroWordSwapped" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64LabelNameColon" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64SemicolonComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64AsterixOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCpuAStarting" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneDasmTass64DotCpuAStarting" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ASterixOrigin" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonComment" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64SemicolonBlockComment" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64LabelName" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotByte" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotWord" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64MacroWordSwapped" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotLongTribyte" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotDwordLong" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotAddrAddress" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotRtaStackWord" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMonoSprite" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64ByteHexMultiSprite" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotPTextNumText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotNullZeroText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftHighText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotShiftlShiftText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextScreenText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneTass64DotTextPetasciiText" linkSize="2" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jRadioButtontass64DotIfFiBlockComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotCharByte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotSintWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotLintTribyte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotDlintLong" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMonoSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64ByteBinMultiSprite" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextPNumText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextNZeroText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextSHighText" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTass64DotTextLShiftText" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -196,7 +189,7 @@
                   </Group>
                   <Component id="jScrollPaneTass64DotComment" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

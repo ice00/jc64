@@ -452,6 +452,12 @@ public interface userAction {
   /** Jump follow position */
   public static final int MEM_JUMPFOLLOW = 142;  
   
+  /** Export source as  glass format */
+  public static final int SOURCE_GLASS = 143;
+  
+  /** Export source as AS format */
+  public static final int SOURCE_AS = 144;
+  
   /**
    * Execute the passed user action
    * 

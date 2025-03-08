@@ -1124,6 +1124,8 @@ public class Assembler {
        * In M6502: <xx, >xx
        * In Z80:   xx,  xx>>8
        * 
+       * Note: As uses xx % $FF,  xx>>8
+       * 
        * @param type the type to valuate
        * @param value the value 
        * @return the right type value
@@ -1133,8 +1135,13 @@ public class Assembler {
         if (value.contains("+") || value.contains("-")) value="("+value+")";
         switch (aByte) {
             case DB_BYTE:
-              if (type==TYPE_MINOR) return value;
-              else return value+">>8";
+              if (option.assembler==Name.AS) {
+                  if (type==TYPE_MINOR) return value+" & $FF";
+                  else return value+">>8";
+              } else {
+                  if (type==TYPE_MINOR) return value;
+                  else return value+">>8";
+              }
             default:
               return type+value;              
         }  
@@ -3070,6 +3077,8 @@ public class Assembler {
      MACRO4_BIN,    // [.macro] %b..  (TMPx)
      MACRO5_HEX,    // [.macro] %xx.. (Glass)
      MACRO5_BIN,    // [.macro] %b..  (Glass)
+     MACRO6_HEX,    // [.macro] %xx.. (AS)
+     MACRO6_BIN,    // [.macro] %b..  (AS)
      ;      
      
       @Override
@@ -3146,6 +3155,7 @@ public class Assembler {
             case MACRO_HEX:
             case MACRO3_HEX: 
             case MACRO5_HEX:
+            case MACRO6_HEX:  
               str.append(getDataSpacesTabs())
                  .append("MonoSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
@@ -3156,7 +3166,8 @@ public class Assembler {
               break;
             case MACRO_BIN:
             case MACRO3_BIN:
-            case MACRO5_BIN:    
+            case MACRO5_BIN:  
+            case MACRO6_BIN:   
               str.append(getDataSpacesTabs())
                  .append("MonoSpriteLine %")
                  .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
@@ -3314,7 +3325,13 @@ public class Assembler {
            str.append(getDataSpacesTabs()).append("MonoSpriteLine: macro ?tribyte \n")
               .append(getDataSpacesTabs()).append(" db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
               .append(getDataSpacesTabs()).append("endm\n\n");                         
-           break;                
+           break;   
+         case MACRO6_HEX:  
+         case MACRO6_BIN:          
+           str.append(getDataSpacesTabs()).append("MonoSpriteLine: macro tribyte \n")
+              .append(getDataSpacesTabs()).append(" db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("endm\n\n");                         
+           break;           
        }
      };
    }
@@ -3348,6 +3365,8 @@ public class Assembler {
      MACRO4_BIN,    // [.macro] %b..  (TMPx)
      MACRO5_HEX,    // [.macro] %xx.. (Glass)
      MACRO5_BIN,    // [.macro] %b..  (Glass)
+     MACRO6_HEX,    // [.macro] %xx.. (AS)
+     MACRO6_BIN,    // [.macro] %b..  (AS)    
      ;      
      @Override
      public void flush(StringBuilder str) {
@@ -3421,6 +3440,7 @@ public class Assembler {
             case MACRO_HEX:
             case MACRO3_HEX:    
             case MACRO5_HEX:
+            case MACRO6_HEX: 
               str.append(getDataSpacesTabs()).append("MultiSpriteLine $")
                  .append(ByteToExe(Unsigned.done(mem1.copy)))
                  .append(ByteToExe(Unsigned.done(mem2.copy)))
@@ -3431,6 +3451,7 @@ public class Assembler {
             case MACRO_BIN:
             case MACRO3_BIN:  
             case MACRO5_BIN:    
+            case MACRO6_BIN:   
               str.append(getDataSpacesTabs()).append("MultiSpriteLine %")
                  .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1))
                  .append(Integer.toBinaryString((mem2.copy & 0xFF) + 0x100).substring(1))        
@@ -3587,6 +3608,12 @@ public class Assembler {
               .append(getDataSpacesTabs()).append(" db ?tribyte >> 16, ( ?tribyte >> 8) & 255,  ?tribyte & 255\n")
               .append(getDataSpacesTabs()).append("endm\n\n");                         
            break;  
+         case MACRO6_HEX:  
+         case MACRO6_BIN:          
+           str.append(getDataSpacesTabs()).append("MultiSpriteLine: macro tribyte \n")
+              .append(getDataSpacesTabs()).append(" db tribyte >> 16, ( tribyte >> 8) & 255,  tribyte & 255\n")
+              .append(getDataSpacesTabs()).append("endm\n\n");                         
+           break;    
        }
      };      
    } 
