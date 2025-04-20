@@ -494,6 +494,7 @@ public class FileManager {
       option.asiPetasciiText = Assembler.PetasciiText.valueOf(in.readUTF());     
       
       option.mergeBlocks = in.readBoolean();
+      option.commentOdysseyBiosRam = in.readBoolean();
       
     } catch (FileNotFoundException e) {
          return true; 
@@ -933,6 +934,7 @@ public class FileManager {
       out.writeUTF(option.asiPetasciiText.name());
             
       out.writeBoolean(option.mergeBlocks);
+      out.writeBoolean(option.commentOdysseyBiosRam);
 
       out.flush();
       out.close();

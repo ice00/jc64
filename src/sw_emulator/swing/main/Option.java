@@ -816,6 +816,12 @@ public class Option {
   public boolean commentAtariKernalRom=true;  
   
   
+  // comment odyssy
+  
+  /** Odyssey: Comment bios ram */
+  public boolean commentOdysseyBiosRam=true;  
+  
+  
   
   // assembler
   

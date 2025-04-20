@@ -54,7 +54,10 @@ public class OdysseyDasm extends I8048Dasm {
     switch (aType) {
       case A_CADR:
       case A_REL:
-      case A_REGA:          
+      case A_REGA:     
+        // do not get comment if appropriate option is not selected  
+        if ((int)addr<=0x40A && !option.commentOdysseyBiosRam) return "";
+        
         switch (language) {
           case LANG_ITALIAN:
             switch ((int)addr) {
@@ -90,7 +93,7 @@ public class OdysseyDasm extends I8048Dasm {
               case 0x300: return "Dati di frequenza";
               case 0x34A: return "Dati della melodia";
               case 0x376: return "Fine della routine di ingresso della tastiera";
-              case 0x37E: return "Gestori di interruzioni varie per ROM bancate";
+              case 0x37E: return "Gestori di interruzioni varie per ROM nei bachi";
               case 0x38F: return "Leggi il joystick";
               case 0x3B1: return "[Sconosciuto]";
               case 0x3CF: return "[Sconosciuto]";

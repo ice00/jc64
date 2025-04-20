@@ -376,6 +376,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     jCheckBoxAtari400Area = new javax.swing.JCheckBox();
     jCheckBoxAtari500Area = new javax.swing.JCheckBox();
     jPanelOdyssey = new javax.swing.JPanel();
+    jCheckBoxOdysseyBiosRam = new javax.swing.JCheckBox();
     jPanelDisassembler = new javax.swing.JPanel();
     jLabelAutoComment = new javax.swing.JLabel();
     jComboBoxAssembler = new javax.swing.JComboBox<>();
@@ -2777,15 +2778,29 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     jTabbedPaneComm.addTab("Atari", jPanelAtariComm);
 
+    jCheckBoxOdysseyBiosRam.setSelected(true);
+    jCheckBoxOdysseyBiosRam.setText("Ram/Bios ($00..$40A)");
+    jCheckBoxOdysseyBiosRam.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jCheckBoxOdysseyBiosRamItemStateChanged(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanelOdysseyLayout = new javax.swing.GroupLayout(jPanelOdyssey);
     jPanelOdyssey.setLayout(jPanelOdysseyLayout);
     jPanelOdysseyLayout.setHorizontalGroup(
       jPanelOdysseyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 805, Short.MAX_VALUE)
+      .addGroup(jPanelOdysseyLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jCheckBoxOdysseyBiosRam, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(433, Short.MAX_VALUE))
     );
     jPanelOdysseyLayout.setVerticalGroup(
       jPanelOdysseyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 553, Short.MAX_VALUE)
+      .addGroup(jPanelOdysseyLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jCheckBoxOdysseyBiosRam)
+        .addContainerGap(524, Short.MAX_VALUE))
     );
 
     jTabbedPaneComm.addTab("Odyssey", jPanelOdyssey);
@@ -4655,6 +4670,10 @@ public class JOptionDialog extends javax.swing.JDialog {
       option.mergeBlocks=jCheckBoxMergeBlocks.isSelected();
   }//GEN-LAST:event_jCheckBoxMergeBlocksActionPerformed
 
+  private void jCheckBoxOdysseyBiosRamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxOdysseyBiosRamItemStateChanged
+      option.commentOdysseyBiosRam=jCheckBoxOdysseyBiosRam.isSelected();
+  }//GEN-LAST:event_jCheckBoxOdysseyBiosRamItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -4798,6 +4817,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JCheckBox jCheckBoxNoUndocumented;
   private javax.swing.JCheckBox jCheckBoxNotUsePSID;
   private javax.swing.JCheckBox jCheckBoxNotUseSAP;
+  private javax.swing.JCheckBox jCheckBoxOdysseyBiosRam;
   private javax.swing.JCheckBox jCheckBoxOpcodeFormattingPreview;
   private javax.swing.JCheckBox jCheckBoxOpcodeFormattingSource;
   private javax.swing.JCheckBox jCheckBoxPedantic;
@@ -5224,6 +5244,7 @@ public class JOptionDialog extends javax.swing.JDialog {
       applyCommentsVic20();      
       applyCommentsC128();  
       applyCommentsAtari();
+      applyCommentsOdyssey();
       
       readSidId();
     }
@@ -5452,6 +5473,13 @@ public class JOptionDialog extends javax.swing.JDialog {
     jCheckBoxAtariKernalRom.setSelected(option.commentAtariKernalRom);
   }
   
+  
+  /**
+   * Apply comments for Odyssey
+   */
+  private void applyCommentsOdyssey() {
+    jCheckBoxOdysseyBiosRam.setSelected(option.commentOdysseyBiosRam);
+  }
   
   /**
    * Close the dialog
