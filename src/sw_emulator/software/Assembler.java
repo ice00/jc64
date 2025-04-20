@@ -136,8 +136,9 @@ public class Assembler {
    */
   protected static String HexNum(String value, boolean defaultMode) {
     if (defaultMode) return "$"+value;
-    else return value+"h";
-  }  
+    else if (!Character.isDigit(value.charAt(0))) return "0"+value+"h";
+         return value+"h";
+  }
   
   /**
    * Return the bin number string with appropriate prefix/suffix ($ of b)
@@ -965,7 +966,6 @@ public class Assembler {
         // create starting command according to the kind of byte
         switch (aByte) {
           case DOT_BYTE:
-          case DB_BYTE_H:    
             str.append(getDataSpacesTabs()).append((".byte "));
             break;
           case DOT_CHAR:
@@ -999,6 +999,7 @@ public class Assembler {
             str.append(getDataSpacesTabs()).append(("!08 "));  
             break;    
           case DB_BYTE:
+          case DB_BYTE_H:     
             str.append(getDataSpacesTabs()).append(("db "));    
             break;            
         }
@@ -3948,6 +3949,32 @@ public class Assembler {
                   }                                           
                 }                  
               break;
+            case AS:
+              if (
+                 (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                 (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127)))  
+                 )     
+              {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
           }         
           carets.add(start, str.length(), mem, Type.TEXT);
           
@@ -4321,6 +4348,37 @@ public class Assembler {
                       }                                           
                     }   
                 }
+              break;
+              
+            case AS:
+              if (isFirst) {  
+               str.append("$").append(ByteToExe(val)); 
+               isFirst=false;                   
+              } else {  
+                  if (
+                      (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                      (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127)))  
+                     )  {
+                      if (isString) {
+                        str.append("\"");
+                        isString=false;  
+                      }
+                      if (isFirst) {
+                        str.append("$").append(ByteToExe(val)); 
+                        isFirst=false;
+                      } else str.append(", $").append(ByteToExe(val));      
+                  } else {
+                    if (isFirst) {
+                         isFirst=false;
+                         isString=true;
+                         str.append("\"");
+                    } else if (!isString) {
+                             str.append(", \"");
+                             isString=true;  
+                           }  
+                     str.append((char)val);  
+                  }     
+              }
               break;
           }   
           
@@ -4711,7 +4769,32 @@ public class Assembler {
                       break;
                   }                                           
                 }                  
-              break;              
+              break;  
+            case AS:
+              if (
+                  (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127)))  
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;  
           }   
           
           carets.add(start, str.length(), mem, Type.ZERO_TEXT);
@@ -5079,6 +5162,31 @@ public class Assembler {
                   }                                           
                 }                  
               break;   
+            case AS:
+              if (
+                  (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127))) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }  
+              break;
           }   
           
           carets.add(start, str.length(), mem, Type.HIGH_TEXT);
@@ -5434,6 +5542,31 @@ public class Assembler {
                   }                                           
                 }                  
               break;  
+            case AS:
+              if (
+                  (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127)))   
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
             }       
           
           carets.add(start, str.length(), mem, Type.SHIFT_TEXT);
@@ -5783,6 +5916,31 @@ public class Assembler {
                   }                                           
                 }                  
               break;   
+            case AS:
+              if (
+                  (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127)))   
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
           }     
           
           carets.add(start, str.length(), mem, Type.SCREEN_TEXT);
@@ -6123,7 +6281,32 @@ public class Assembler {
                       break;
                   }                                           
                 }                  
-              break;     
+              break;    
+            case AS:
+              if (
+                  (!option.allowUtf && ((val<0x20 || val==0x22 || val==0x5c || (val>127)))) ||     
+                  (option.allowUtf && ((val==0x00) || (val==0x0A) || (val==0x0D) || (val==0x22) || (val==0x5c) || (val>127))) 
+                 )  {
+                  if (isString) {
+                    str.append("\"");
+                    isString=false;  
+                  }
+                  if (isFirst) {
+                    str.append("$").append(ByteToExe(val)); 
+                    isFirst=false;
+                  } else str.append(", $").append(ByteToExe(val));      
+              } else {
+                 if (isFirst) {
+                      isFirst=false;
+                      isString=true;
+                      str.append("\"");
+                 } else if (!isString) {
+                          str.append(", \"");
+                          isString=true;  
+                        }  
+                  str.append((char)val);  
+                }                  
+              break;
           }           
           
           carets.add(start, str.length(), mem, Type.PETASCII_TEXT);

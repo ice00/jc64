@@ -1558,4 +1558,14 @@ public class Option {
           System.out.println(e.toString());
        }      
   }
+  
+  /**
+   * Retrun true if < and > low/high of address is supported by the compiler 
+   * 
+   * @return true if < and > are supported
+   */
+  public boolean isMajorMinorSyntaxSupported() {
+    if (assembler == Assembler.Name.AS) return false;
+    else return true;
+  }
 }

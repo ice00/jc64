@@ -165,7 +165,8 @@ public class CpuDasm implements disassembler {
    */
   protected static String HexNum(String value, boolean defaultMode) {
     if (defaultMode) return "$"+value;
-    else return value+"h";
+    else if (!Character.isDigit(value.charAt(0))) return "0"+value+"h";
+         return value+"h";
   } 
   
   /**
@@ -187,6 +188,23 @@ public class CpuDasm implements disassembler {
        default:  
          return type;
     }
+  }
+  
+  /**
+   * Get the major/minor representation of the isntruction 
+   * 
+   * @param type the type of major/minor
+   * @param value the address value
+   * @return the formatted string
+   */
+  private String getMajorMinor(char type, String value) {
+    type=getNormType(type);  // get only < or >
+    
+    if (option.isMajorMinorSyntaxSupported()) return type+value;
+    else if (type=='<') {
+      if (defaultMode) return "("+value+" & $FF)";
+      else return "("+value+" & 0FFh)";
+    } else return  "("+value+" >> 8)";
   }
   
   /**
@@ -213,26 +231,26 @@ public class CpuDasm implements disassembler {
       if (type==TYPE_PLUS_MAJOR || type==TYPE_PLUS_MINOR || type==TYPE_MINUS_MAJOR || type==TYPE_MINUS_MINOR) memRel=memory[memory[(int)addr].related & 0xFFFF];   
       else memRel=memory[memory[(int)addr].related & 0xFFFF];   
               
-      if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getNormType(type)+memRel.userLocation;
-      else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getNormType(type)+memRel.dasmLocation;
+      if (memRel.userLocation!=null && !"".equals(memRel.userLocation)) return getMajorMinor(type,memRel.userLocation);
+      else if (memRel.dasmLocation!=null && !"".equals(memRel.dasmLocation)) return getMajorMinor(type,memRel.dasmLocation);
            else {   
               switch (memRel.type) {
                 case TYPE_PLUS:
                   /// this is a memory in table label
                   int pos=memRel.address-memRel.related;
                   MemoryDasm mem2=memory[memRel.related];
-                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getNormType(type)+mem2.userLocation+"+"+pos;
-                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getNormType(type)+mem2.dasmLocation+"+"+pos;
+                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+"+"+pos);
+                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+"+"+pos);
                   return getNormType(type)+HexNum(ByteToExe((int)memRel.related), defaultMode)+"+"+pos;  
                   
                 case TYPE_MINUS:
                   /// this is a memory in table label
                   pos=memRel.address-memRel.related;
                   mem2=memory[memRel.related];
-                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getNormType(type)+mem2.userLocation+pos;
-                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getNormType(type)+mem2.dasmLocation+pos;
-                  return getNormType(type)+HexNum(ByteToExe((int)memRel.related), defaultMode)+pos;    
-                default: return getNormType(memory[(int)addr].type)+HexNum(ShortToExe(memRel.address), defaultMode);
+                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+pos);
+                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+pos);
+                  return getMajorMinor(type, HexNum(ByteToExe((int)memRel.related), defaultMode)+pos);    
+                default: return getMajorMinor(memory[(int)addr].type, HexNum(ShortToExe(memRel.address), defaultMode));
               }
            }
     } else {        

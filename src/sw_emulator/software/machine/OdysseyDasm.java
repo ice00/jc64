@@ -23,7 +23,6 @@
  */
 package sw_emulator.software.machine;
 
-import sw_emulator.software.cpu.CpuDasm;
 import sw_emulator.software.cpu.I8048Dasm;
 import static sw_emulator.software.cpu.I8048Dasm.A_CADR;
 import static sw_emulator.software.cpu.I8048Dasm.A_REGA;

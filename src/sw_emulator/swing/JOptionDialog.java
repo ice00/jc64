@@ -375,6 +375,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     jCheckBoxAtari300Area = new javax.swing.JCheckBox();
     jCheckBoxAtari400Area = new javax.swing.JCheckBox();
     jCheckBoxAtari500Area = new javax.swing.JCheckBox();
+    jPanelOdyssey = new javax.swing.JPanel();
     jPanelDisassembler = new javax.swing.JPanel();
     jLabelAutoComment = new javax.swing.JLabel();
     jComboBoxAssembler = new javax.swing.JComboBox<>();
@@ -2776,6 +2777,19 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     jTabbedPaneComm.addTab("Atari", jPanelAtariComm);
 
+    javax.swing.GroupLayout jPanelOdysseyLayout = new javax.swing.GroupLayout(jPanelOdyssey);
+    jPanelOdyssey.setLayout(jPanelOdysseyLayout);
+    jPanelOdysseyLayout.setHorizontalGroup(
+      jPanelOdysseyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 805, Short.MAX_VALUE)
+    );
+    jPanelOdysseyLayout.setVerticalGroup(
+      jPanelOdysseyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 553, Short.MAX_VALUE)
+    );
+
+    jTabbedPaneComm.addTab("Odyssey", jPanelOdyssey);
+
     javax.swing.GroupLayout jPanelCommentLayout = new javax.swing.GroupLayout(jPanelComment);
     jPanelComment.setLayout(jPanelCommentLayout);
     jPanelCommentLayout.setHorizontalGroup(
@@ -4905,6 +4919,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JPanel jPanelDisassembler;
   private javax.swing.JPanel jPanelDn;
   private javax.swing.JPanel jPanelLook;
+  private javax.swing.JPanel jPanelOdyssey;
   private javax.swing.JPanel jPanelOption;
   private javax.swing.JPanel jPanelPlus4Comm;
   private javax.swing.JPanel jPanelPreview;

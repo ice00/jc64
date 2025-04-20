@@ -61,7 +61,7 @@ public class Compiler {
    * @return the io message from the appplication
    */
   public String compile(File input, File output) {
-    if (option==null) return "Internal erro: no option selected";
+    if (option==null) return "Internal error: no option selected";
     
     String res="";  
       
@@ -86,6 +86,9 @@ public class Compiler {
         break;  
       case GLASS:
         res=glassCompile(input, output);
+        break;
+      case AS:
+        res=asCompile(input, output);
         break;
     }
     
@@ -457,5 +460,95 @@ public class Compiler {
     
     return result;   
     
+  }
+  
+  /**
+   * Compile the input file to the output file with AS (Macro assembler)
+   * 
+   * @param input the input file 
+   * @param output the output file
+   * @return the io message from the appplication
+   */ 
+  public String asCompile(File input, File output) {
+    PrintStream orgStream;
+    PrintStream errStream;
+    PrintStream fileStream;
+        
+    orgStream = System.out;
+    errStream = System.err;
+    
+    
+    String result="No result obtained!!";
+    String[] args=new String[2];
+   
+    args[0]=" ";
+    args[1]=input.getAbsolutePath();
+    
+    String[] args2=new String[2];
+   
+    args2[0]=" ";
+    args2[1]=option.tmpPath+File.separator+"input.p";
+
+   
+    try {
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      System.setOut(fileStream);
+      System.setErr(fileStream);
+        
+      Class cl = Class.forName("sw_emulator.software.asm.Asl");
+      Method mMain = cl.getMethod("run", new Class[]{String[].class});
+      mMain.invoke(cl.newInstance(), new Object[]{args});
+      
+      fileStream.close();
+      
+    } catch (Exception e) {
+        System.err.println(e);      
+      }    
+    
+    System.setOut(orgStream);
+    System.setErr(errStream);
+    
+    try {
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
+       if (pos==0) result="Compilation done";
+    } catch (Exception e) {
+        System.err.println(e);
+      }   
+    
+    String result2="";               
+    
+    try {
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      System.setOut(fileStream);
+      System.setErr(fileStream);
+             
+      Class cl = Class.forName("sw_emulator.software.asm.P2bin");
+      Method mMain = cl.getMethod("run", new Class[]{String[].class});
+      mMain.invoke(cl.newInstance(), new Object[]{args2});
+      
+      
+      fileStream.close();
+      
+    } catch (Exception e) {
+        System.err.println(e);      
+      }    
+    
+    System.setOut(orgStream);
+    System.setErr(errStream);
+    
+    try {
+       result2 = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result2.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result2=result2.substring(0, pos);
+       if (pos==0) result2="Linking done";
+    } catch (Exception e) {
+        System.err.println(e);
+      }   
+
+    return result+"\n"+result2;    
   }
 }
