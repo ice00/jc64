@@ -217,7 +217,7 @@ public class JProjectDialog extends javax.swing.JDialog {
             break;  
           case BIN:
             jRadioButtonBIN.setSelected(true);  
-            break;    
+            break;   
         }
       } else {
           jRadioButtonPRG.setSelected(false);
@@ -268,7 +268,8 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonOdyssey.setSelected(false);
         }
       jTextAreaRelocate.setText(getRelocateDesc());
-      jTextAreaPatch.setText(getPatchDesc());    
+      jTextAreaPatch.setText(getPatchDesc());            
+      jSpinnerAddr.setEnabled(jRadioButtonBIN.isSelected());
        }
       });
     }
