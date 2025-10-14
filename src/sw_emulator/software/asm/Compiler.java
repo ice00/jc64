@@ -26,6 +26,7 @@ package sw_emulator.software.asm;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -142,7 +143,7 @@ public class Compiler {
   }
   
   /**
-   * Compile the input file to the output file with Kick Assembler
+   * Compile the input file to the output file with KickAssembler
    * 
    * @param input the input file 
    * @param output the output file
@@ -150,57 +151,56 @@ public class Compiler {
    */ 
   public String kickCompile(File input, File output) {
     PrintStream orgStream = System.out;
-    PrintStream fileStream;  
+    PrintStream fileStream = null;
     
-    String result="No result obtained!!";
-      
-    String[] args=new String[3];
-    
-       
-    args[0]=input.getAbsolutePath();
-    args[1]="-o";
-    args[2]=output.getAbsolutePath();  
+    String[] args = new String[3];
+    args[0] = input.getAbsolutePath();
+    args[1] = "-o";
+    args[2] = output.getAbsolutePath();  
     
     try {
-      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      fileStream = new PrintStream(option.tmpPath + File.separator + "tmp.tmp");
       System.setOut(fileStream);
-      
-     // install security manager to avoid System.exit() call from lib
-     SecurityManager   previousSecurityManager = System.getSecurityManager();
-     final SecurityManager securityManager  = new SecurityManager() {
-        @Override public void checkPermission(final Permission permission) {
-        if (permission.getName() != null && permission.getName().startsWith("exitVM")) {
-          throw new SecurityException();
-         }
-      }
-    };
-    System.setSecurityManager(securityManager);
-
-    try {
-      kickass.KickAssembler.main(args);
-    } catch (SecurityException e) {
-      // Say hi to your favorite creator of closed source software that includes System.exit() in his code.
-      } finally {
-          System.setSecurityManager(previousSecurityManager);
-        }   
-    } catch (Exception e) {
-       System.err.println(e);
-    }
-    
-    System.setOut(orgStream);
-    
-    try {
-       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
-       // remove the extra error message
-       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
-       if (pos>0) result=result.substring(0, pos);
-       if ("".equals(result)) result="Compilation done";
+        
+      ClassLoader transformingLoader = new TransformingKickAssemblerLoader(
+            getClass().getClassLoader()
+      );
+        
+      Class<?> kickAssClass = transformingLoader.loadClass("kickass.KickAssembler");
+      Method mainMethod = kickAssClass.getMethod("main", String[].class);
+        
+      try {
+          mainMethod.invoke(null, (Object) args);
+      } catch (InvocationTargetException e) {
+          Throwable target = e.getTargetException();
+          if (target instanceof RuntimeException && 
+              target.getMessage() != null && 
+              target.getMessage().contains("System.exit")) {
+            } else {
+                throw e;
+              }
+        }
+        
     } catch (Exception e) {
         System.err.println(e);
-      }   
+    } finally {
+        if (fileStream != null) {
+            fileStream.close();
+        }
+        System.setOut(orgStream);
+    }
     
-    return result;   
-    
+    try {
+        String result = new String(Files.readAllBytes(Paths.get(option.tmpPath + File.separator + "tmp.tmp")), 
+                                 StandardCharsets.UTF_8);
+        int pos = result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+        if (pos > 0) result = result.substring(0, pos);
+        if ("".equals(result)) result = "Compilation done";
+        return result;
+    } catch (Exception e) {
+        System.err.println(e);
+        return "Error reading compilation result";
+    }   
   }
 
   /**
