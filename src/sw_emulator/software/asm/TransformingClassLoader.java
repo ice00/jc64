@@ -1,5 +1,5 @@
 /**
- * @(#)TransformingKickAssemblerLoader 2025/10/14
+ * @(#)TransformingClassLoader 2025/10/14
  *
  * ICE Team free software group
  *
@@ -24,8 +24,7 @@
 package sw_emulator.software.asm;
 
 import java.io.*;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import net.bytebuddy.jar.asm.ClassReader;
 import net.bytebuddy.jar.asm.ClassVisitor;
@@ -33,18 +32,30 @@ import net.bytebuddy.jar.asm.ClassWriter;
 import net.bytebuddy.jar.asm.MethodVisitor;
 import net.bytebuddy.jar.asm.Opcodes;
 
-public class TransformingKickAssemblerLoader extends ClassLoader {
+/**
+ * Load a class by replacing System.exit to avoid termination of JVM
+ * 
+ * @author ice
+ */
+public class TransformingClassLoader extends ClassLoader {
 
   private final Map<String, Class<?>> loadedClasses = new ConcurrentHashMap<>();
-  private final Set<String> kickAssemblerPackages = Set.of("kickass");
+  private final Set<String> packagesToTransform;
 
-  public TransformingKickAssemblerLoader(ClassLoader parent) {
+  /**
+   * Construct the class loader with the given package to intercept
+   * 
+   * @param parent the normal class loader
+   * @param packagesToTransform the packages to intercept
+   */
+  public TransformingClassLoader(ClassLoader parent, Set<String> packagesToTransform) {
     super(parent);
+    this.packagesToTransform = packagesToTransform;
   }
 
   @Override
   protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-    // Se è una classe di KickAssembler, caricala con trasformazione senza delegare al parent
+    // Se è una classe da trasformare, caricala con trasformazione
     if (shouldTransform(name)) {
       synchronized (getClassLoadingLock(name)) {
         Class<?> c = loadedClasses.get(name);
@@ -58,7 +69,6 @@ public class TransformingKickAssemblerLoader extends ClassLoader {
         return c;
       }
     }
-    // Altrimenti delega al parent
     return super.loadClass(name, resolve);
   }
 
@@ -84,10 +94,23 @@ public class TransformingKickAssemblerLoader extends ClassLoader {
     return super.findClass(name);
   }
 
+  /**
+   * Determine if the given package is to transform
+   * 
+   * @param className the package to check
+   * @return true if it is to transform
+   */
   private boolean shouldTransform(String className) {
-    return kickAssemblerPackages.stream().anyMatch(className::startsWith);
+    return packagesToTransform.stream().anyMatch(className::startsWith);
   }
-
+  
+ /**
+  * Read all bytes for the stream
+  * 
+  * @param is the stream to read
+  * @returnthe read bytes
+  * @throws IOException  in case of errors
+  */
   private byte[] readAllBytes(InputStream is) throws IOException {
     ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     byte[] data = new byte[8192];
@@ -100,8 +123,16 @@ public class TransformingKickAssemblerLoader extends ClassLoader {
     return buffer.toByteArray();
   }
 
+  /**
+   * Transform the given bytecodes to the patched one
+   * 
+   * @param originalBytecode the orginal bytecodes
+   * @param className the class name to process
+   * @return the converted bytecodes
+   */
   private byte[] transformBytecode(byte[] originalBytecode, String className) {
     try {
+      System.out.println("Transforming: " + className);
       ClassReader cr = new ClassReader(originalBytecode);
       ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
       ClassVisitor cv = new ExitCallClassAdapter(cw);
@@ -114,6 +145,10 @@ public class TransformingKickAssemblerLoader extends ClassLoader {
   }
 }
 
+
+/**
+ * Adapter for exit calling
+ */
 class ExitCallClassAdapter extends ClassVisitor {
 
   public ExitCallClassAdapter(ClassVisitor cv) {
@@ -128,8 +163,10 @@ class ExitCallClassAdapter extends ClassVisitor {
   }
 }
 
+/**
+ * New method for exit calling 
+ */
 class ExitCallMethodAdapter extends MethodVisitor {
-
   public ExitCallMethodAdapter(MethodVisitor mv) {
     super(Opcodes.ASM9, mv);
   }
@@ -142,7 +179,6 @@ class ExitCallMethodAdapter extends MethodVisitor {
             && "exit".equals(name)
             && "(I)V".equals(descriptor)) {
 
-      // Invece di System.exit(status), chiama il nostro metodo
       super.visitMethodInsn(Opcodes.INVOKESTATIC,
               "sw_emulator/software/asm/ExitInterceptor",
               "throwInsteadOfExit",
@@ -151,12 +187,5 @@ class ExitCallMethodAdapter extends MethodVisitor {
     } else {
       super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
     }
-  }
-}
-
-class ExitInterceptor {
-
-  public static void throwInsteadOfExit(int status) {
-    throw new RuntimeException("System.exit(" + status + ") intercettato");
   }
 }
