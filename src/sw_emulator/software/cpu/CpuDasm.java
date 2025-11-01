@@ -36,6 +36,7 @@ import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import static sw_emulator.software.cpu.M6510Dasm.A_NUL;
 import static sw_emulator.software.cpu.M6510Dasm.M_JAM;
+import sw_emulator.software.memory.XRefManager;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.Option;
 
@@ -81,6 +82,9 @@ public class CpuDasm implements disassembler {
   /** Default mode for Hex ($)*/
   protected boolean defaultMode=true;
   
+  /** Manager of xref generation */
+  protected XRefManager xRefManager=new XRefManager();
+  
   /** String builder global to reduce GC call */
   final StringBuilder result=new StringBuilder ("");     
   
@@ -92,6 +96,16 @@ public class CpuDasm implements disassembler {
   public void setMemory(MemoryDasm[] memory) {
     this.memory=memory;  
   }
+  
+  /**
+   * Set the xRefManager to use
+   * 
+   * @param xRefManager the manager of xref
+   */
+  public void setXRefManager(XRefManager xRefManager) {
+    this.xRefManager=xRefManager;  
+  }
+  
   
   /**
    * Set the constant to use

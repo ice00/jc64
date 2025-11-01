@@ -48,6 +48,7 @@ import sw_emulator.swing.main.Freeze;
 import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Project;
 import sw_emulator.software.asm.Compiler;
+import sw_emulator.software.memory.XRefManager;
 
 /**
  *
@@ -406,7 +407,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
           dis.dissassembly(project.fileType, project.inB, option, project.memory,
                            project.constant, project.mpr, project.relocates, 
                            project.patches, project.chip, project.binAddress,
-                           project.targetType, true);
+                           project.targetType, true, new XRefManager());
           option.assembler=actual;
           freeze.text=dis.source;
       } else freeze.text=disassembly.source;

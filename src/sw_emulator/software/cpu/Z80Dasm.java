@@ -1525,7 +1525,9 @@ public class Z80Dasm extends CpuDasm implements disassembler {
           else if (option.numSpacesOp>1) result+=nn.substring(1,nn.length());
           else result+=nn;  
           break;
-    }          
+    }   
+    
+    addr=-1;
     
     switch (aType) {
       case A_NUL:     // nothing
@@ -3683,6 +3685,7 @@ public class Z80Dasm extends CpuDasm implements disassembler {
           actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
           assembler.getCarets().setOffset(result.length()+actualOffset+21);             // use new offset
           tmp=dasm(buffer);                                                             // this is an instruction
+          xRefManager.processInstructionZ80((int)pc, tmp.split("\\s+")[0], (int)addr, tmp);
           assembler.getCarets().setOffset(actualOffset);                                // set old offset 
           
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));

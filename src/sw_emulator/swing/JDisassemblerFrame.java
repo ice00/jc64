@@ -59,6 +59,8 @@ import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -100,6 +102,7 @@ import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
+import sw_emulator.software.memory.XRefManager;
 import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
@@ -114,6 +117,7 @@ import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.RecentItems;
 import sw_emulator.swing.main.Serial;
 import sw_emulator.swing.main.UndoManager;
+import sw_emulator.swing.main.XRefToolTipManager;
 import sw_emulator.swing.main.userAction;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
@@ -226,6 +230,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /** Stack for call of jumps */
   Stack<Integer> callStack = new Stack();
+  
+  /** Manager for XRef */
+  XRefManager xRefManager = new XRefManager();
+  
+  /** Tool tip manager for Xref for preview */
+  XRefToolTipManager tooltipManagerDis;
+  
+  /** Tool tip manager for xref for soruce*/
+  XRefToolTipManager tooltipManagerSource;
+  
   
   /** Last directory for saving project  */
   public final static String LAST_DIR_PROJECT = "last.dir.project";  
@@ -459,6 +473,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           System.err.println();
         }
       }
+    });
+    
+    
+    tooltipManagerDis = new XRefToolTipManager(rSyntaxTextAreaDis, xRefManager, caretPosition -> {
+      return getAddressFromCaretPositionDis(caretPosition);
+    });
+    
+    tooltipManagerSource = new XRefToolTipManager(rSyntaxTextAreaSource, xRefManager, caretPosition -> {
+      return getAddressFromCaretPositionSource(caretPosition);
     });
    
     jScrollPaneLeftMin.setVisible(option.showMiniature);
@@ -7680,12 +7703,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                                  project.memory, project.constant, project.mpr, 
                                  project.relocates, project.patches, 
                                  project.chip, project.binAddress, 
-                                 project.targetType, false);
+                                 project.targetType, false, xRefManager);
         disassembly.dissassembly(project.fileType, project.inB, option,
                                  project.memory, project.constant, project.mpr,
                                  project.relocates, project.patches, 
                                  project.chip, project.binAddress,
-                                 project.targetType, true);
+                                 project.targetType, true, xRefManager);
       }  
     int lineS=0;
     int lineD=0;
@@ -9146,7 +9169,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     dis.dissassembly(project.fileType, project.inB, option, project.memory,
                      project.constant, project.mpr, project.relocates, 
                      project.patches, project.chip, project.binAddress,
-                     project.targetType, true);
+                     project.targetType, true, xRefManager);
      option.assembler=actual;
     
     exportAs(dis.source);     
@@ -10015,5 +10038,53 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       
       jBlockDialog.setUp(project.memory, rows[0], rows[rows.length-1]);
       jBlockDialog.setVisible(true);
+    }
+    
+    /**
+     * Get the memory address from current caret postion from preview source
+     * 
+     * @param caretPosition the carte position
+     * @return the address of -1
+     */
+    private int getAddressFromCaretPositionDis(int caretPosition) {
+      int pos, addr;
+      
+      MemoryDasm mem=disassembly.caretsPreview.getMemory(caretPosition);
+          
+      if (mem==null) {
+        try {
+          // get starting position of clicked point
+          pos=Utilities.getRowStart(rSyntaxTextAreaDis, caretPosition);
+          addr=searchAddress(rSyntaxTextAreaDis.getDocument().getText(pos,option.maxLabelLength));
+        } catch (BadLocationException ex) {
+          return -1;
+        }
+      } else addr=mem.address;
+        
+      return addr;
+    }
+    
+    /**
+     * Get the memory address from current caret postion from source
+     * 
+     * @param caretPosition the carte position
+     * @return the address of -1
+     */
+    private int getAddressFromCaretPositionSource(int caretPosition) {
+      int pos, addr;
+      
+      MemoryDasm mem=disassembly.caretsSource.getMemory(caretPosition);
+          
+      if (mem==null) {
+        try {
+          // get starting position of clicked point
+          pos=Utilities.getRowStart(rSyntaxTextAreaSource, caretPosition);
+          addr=searchAddress(rSyntaxTextAreaSource.getDocument().getText(pos,option.maxLabelLength));
+        } catch (BadLocationException ex) {
+          return -1;
+        }
+      } else addr=mem.address;
+        
+      return addr;
     }
 }

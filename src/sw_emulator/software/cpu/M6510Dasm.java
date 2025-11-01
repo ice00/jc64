@@ -412,13 +412,16 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     switch (aType) {
       case A_NUL:     // nothing
         pc++;
+        addr=-1;
         break;
       case A_ACC:     // accumulator
         ///result+="A";
         pc++;
+        addr=-1;
         break;
       case A_IMP:     // implicit
         pc++;
+        addr=-1;
         break;
       case A_IMM:     // immediate
         if (pos<buffer.length) value=Unsigned.done(buffer[pos++]);
@@ -426,8 +429,9 @@ public class M6510Dasm extends CpuDasm implements disassembler {
         
         result+="#"+getLabelImm(pc+1, value);
         setLabelPlus(pc,1);
-        
+   
         pc+=2;
+        addr=-1;
         break;
       case A_ZPG:     // zero page
         if (pos<buffer.length) addr=Unsigned.done(buffer[pos++]);
@@ -577,7 +581,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
     MemoryDasm mem;              // memory dasm
     MemoryDasm memRel;           // memory related
     MemoryDasm memRel2;          // memory related of second kind
-    int actualOffset;            // actual offset for caret action
+    int actualOffset;            // actual offset for caret action      
             
     int pos=start;               // actual position in buffer
     boolean isCode=true;         // true if we are decoding an instruction
@@ -618,6 +622,7 @@ public class M6510Dasm extends CpuDasm implements disassembler {
           actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
           assembler.getCarets().setOffset(result.length()+actualOffset+17);             // use new offset
           tmp=dasm(buffer);                                                             // this is an instruction
+          xRefManager.processInstructionM6510((int)pc, tmp.split("\\s+")[0], (int)addr, tmp);
           assembler.getCarets().setOffset(actualOffset);                                // set old offset     
                
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));

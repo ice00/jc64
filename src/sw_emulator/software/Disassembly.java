@@ -34,6 +34,7 @@ import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.machine.AtariDasm;
 import sw_emulator.software.machine.C64MusDasm;
 import sw_emulator.software.machine.C64SidDasm;
+import sw_emulator.software.memory.XRefManager;
 import sw_emulator.swing.Shared;
 import sw_emulator.swing.main.Block;
 import sw_emulator.swing.main.Carets;
@@ -102,6 +103,9 @@ public class Disassembly {
   
   /** Memory dasm */
   public MemoryDasm[] memory;
+  
+  /** Manager of xref*/
+  public XRefManager xRefManager=new XRefManager();
   
   /** The assembler to use  */
   protected Assembler assembler=new Assembler();
@@ -192,7 +196,7 @@ public class Disassembly {
                            MemoryDasm[] memory, Constant constant, MPR mpr,
                            Relocate[] relocates, Patch[] patches,
                            int chip, int binAddress, TargetType targetType, 
-                           boolean asSource) {
+                           boolean asSource, XRefManager xRefManager) {
     this.inB=inB;
     this.fileType=fileType;
     this.option=option;
@@ -204,6 +208,7 @@ public class Disassembly {
     this.patches=patches;
 
     this.memory=memory;
+    this.xRefManager=xRefManager;
     
     // clear previus carets identification and associate the actual caret to use
     if (asSource) actualCarets=caretsSource;
@@ -215,7 +220,9 @@ public class Disassembly {
       source="";
       disassembly="";
       return;
-    }    
+    }   
+    
+    if (!asSource) xRefManager.clear();
     
     blocks=new ArrayList();
     
@@ -320,6 +327,7 @@ public class Disassembly {
       
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
+    sid.setXRefManager(xRefManager);
     sid.setConstant(constant);
     sid.setOption(option, assembler);      
     sid.setMode(option.illegalOpcodeMode);
@@ -465,6 +473,7 @@ public class Disassembly {
           
     C64SidDasm sid=new C64SidDasm();
     sid.setMemory(memory);
+    sid.setXRefManager(xRefManager);
     sid.setConstant(constant);
     sid.setOption(option, assembler);      
     sid.setMode(option.illegalOpcodeMode);
@@ -613,6 +622,7 @@ public class Disassembly {
     
     bin=targetType.getDasm();   
     bin.setMemory(memory);
+    bin.setXRefManager(xRefManager);
     bin.setConstant(constant);
     bin.setOption(option,  assembler);
     if (bin instanceof M6510Dasm) ((M6510Dasm)bin).setMode(option.illegalOpcodeMode);
@@ -677,6 +687,7 @@ public class Disassembly {
     
     prg=targetType.getDasm();   
     prg.setMemory(memory);
+    prg.setXRefManager(xRefManager);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
     if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
@@ -741,6 +752,7 @@ public class Disassembly {
       
     prg=targetType.getDasm();          
     prg.setMemory(memory);
+    prg.setXRefManager(xRefManager);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
     if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
@@ -831,6 +843,7 @@ public class Disassembly {
     prg=targetType.getDasm();    
     
     prg.setMemory(memory);
+    prg.setXRefManager(xRefManager);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
     if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
@@ -937,6 +950,7 @@ public class Disassembly {
     prg=targetType.getDasm();
        
     prg.setMemory(memory);
+    prg.setXRefManager(xRefManager);
     prg.setConstant(constant);
     prg.setOption(option,  assembler);
     if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
@@ -1011,6 +1025,7 @@ public class Disassembly {
        
     prg.setMemory(memory);
     prg.setConstant(constant);
+    prg.setXRefManager(xRefManager);
     prg.setOption(option,  assembler);
     if (prg instanceof M6510Dasm) ((M6510Dasm)prg).setMode(option.illegalOpcodeMode);
     
@@ -1099,6 +1114,7 @@ public class Disassembly {
     
     AtariDasm atari=new AtariDasm();
     atari.setMemory(memory);
+    atari.setXRefManager(xRefManager);
     atari.setConstant(constant);
     atari.setOption(option, assembler);      
     atari.setMode(option.illegalOpcodeMode);

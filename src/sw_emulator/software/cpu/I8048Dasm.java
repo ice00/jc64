@@ -350,6 +350,8 @@ public static final byte M_XRL = 60;
       
     String nn=getSpacesTabsOp();
     result+=nn;
+    
+    addr=-1;
 
     aType=tableModes[op];
     switch (aType) {
@@ -631,6 +633,7 @@ public static final byte M_XRL = 60;
           actualOffset=assembler.getCarets().getOffset();                               // rember actual offset
           assembler.getCarets().setOffset(result.length()+actualOffset+17);             // use new offset
           tmp=dasm(buffer);                                                             // this is an instruction
+          xRefManager.processInstructionI8048((int)pc, tmp.split("\\s+")[0], (int)addr, tmp);
           assembler.getCarets().setOffset(actualOffset);                                // set old offset     
                
           tmp2=ShortToExe((int)pc)+"  "+ByteToExe(Unsigned.done(buffer[pos]));
