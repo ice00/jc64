@@ -50,4 +50,16 @@ public class XRefUIConstants {
     
     /** Milliseconds delay for native Swing tooltip for the initial delay */
     public static final int NATIVE_TOOLTIP_INITIAL_DELAY_MS = 500;   
+    
+    /** Type width for column in table */
+    public static final int COLUMN_TYPE_WIDTH = 60;
+    
+    /** Address width for column in table */
+    public static final int COLUMN_ADDRESS_WIDTH = 80;
+    
+    /** Instruction width for column in table */
+    public static final int COLUMN_INSTRUCTION_WIDTH = 150;
+    
+     /** Context width for column in table */
+    public static final int COLUMN_CONTEXT_WIDTH = 110;
 }

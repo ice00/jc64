@@ -226,7 +226,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   Compiler compiler=new Compiler();  
   
   /** Dialog for Easter eggs */
-  FadeDialog fadeDialog;//=new FadeDialog();
+  FadeDialog fadeDialog;
   
   /** Stack for call of jumps */
   Stack<Integer> callStack = new Stack();
@@ -481,9 +481,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     
     tooltipManagerSource = new XRefToolTipManager(rSyntaxTextAreaSource, xRefManager, caretPosition -> {
-      return getAddressFromCaretPositionSource(caretPosition);
+      return getAddressFromCaretPositionSource(caretPosition);            
     });
    
+    xRefPanelDis.setup(xRefManager, rSyntaxTextAreaDis, disassembly.caretsPreview, option);
+    xRefPanelSource.setup(xRefManager, rSyntaxTextAreaSource, disassembly.caretsSource, option);
+    
     jScrollPaneLeftMin.setVisible(option.showMiniature);
     jScrollPaneRightMin.setVisible(option.showMiniature);
     pack();
@@ -693,16 +696,20 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jPanelPerc = new sw_emulator.swing.JPanelPerc();
     jSplitPaneExternal = new javax.swing.JSplitPane();
     jSplitPaneInternal = new javax.swing.JSplitPane();
+    jSplitPaneLeft = new javax.swing.JSplitPane();
     jPanelLeft = new javax.swing.JPanel();
     jScrollPaneLeft = new javax.swing.JScrollPane();
     rSyntaxTextAreaDis = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
     jScrollPaneLeftMin = new javax.swing.JScrollPane();
     rSyntaxTextAreaDisMin = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    xRefPanelDis = new sw_emulator.swing.XRefPanel();
+    jSplitPaneRight = new javax.swing.JSplitPane();
     jPanelRight = new javax.swing.JPanel();
     jScrollPaneRight = new javax.swing.JScrollPane();
     rSyntaxTextAreaSource = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
     jScrollPaneRightMin = new javax.swing.JScrollPane();
     rSyntaxTextAreaSourceMin = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+    xRefPanelSource = new sw_emulator.swing.XRefPanel();
     jScrollPaneMemory = new javax.swing.JScrollPane();
     jTableMemory = new javax.swing.JTable() {
       String[] hh={"Memory address location in Hex",
@@ -1725,18 +1732,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     });
     jPopupMenuSaveAs.add(jMenuItemSaveAsGlass);
-    jMenuItemSaveAsGlass.getAccessibleContext().setAccessibleName("Save in Glass format");
 
     jMenuItemSaveAsAS.setText("Save in AS format");
     jMenuItemSaveAsAS.setToolTipText("");
-    jMenuItemSaveAsAS.setActionCommand("Save in AS format");
     jMenuItemSaveAsAS.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jMenuItemSaveAsASActionPerformed(evt);
       }
     });
     jPopupMenuSaveAs.add(jMenuItemSaveAsAS);
-    jMenuItemSaveAsAS.getAccessibleContext().setAccessibleName("Save in AS format");
 
     jMenuItemCopy.setText("Copy into this instance");
     jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -2618,6 +2622,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jSplitPaneInternal.setResizeWeight(0.5);
     jSplitPaneInternal.setToolTipText("");
 
+    jSplitPaneLeft.setDividerLocation(400);
+    jSplitPaneLeft.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+    jSplitPaneLeft.setResizeWeight(1.0);
+    jSplitPaneLeft.setToolTipText("");
+
     jPanelLeft.setLayout(new java.awt.BorderLayout());
 
     rSyntaxTextAreaDis.setEditable(false);
@@ -2683,6 +2692,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     }
   );
+  rSyntaxTextAreaDis.addCaretListener(new javax.swing.event.CaretListener() {
+    public void caretUpdate(javax.swing.event.CaretEvent evt) {
+      rSyntaxTextAreaDisCaretUpdate(evt);
+    }
+  });
   rSyntaxTextAreaDis.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaDisMouseClicked(evt);
@@ -2733,7 +2747,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
   jPanelLeft.add(jScrollPaneLeftMin, java.awt.BorderLayout.EAST);
 
-  jSplitPaneInternal.setLeftComponent(jPanelLeft);
+  jSplitPaneLeft.setTopComponent(jPanelLeft);
+  jSplitPaneLeft.setBottomComponent(xRefPanelDis);
+
+  jSplitPaneInternal.setLeftComponent(jSplitPaneLeft);
+
+  jSplitPaneRight.setDividerLocation(400);
+  jSplitPaneRight.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+  jSplitPaneRight.setResizeWeight(1.0);
+  jSplitPaneRight.setToolTipText("");
 
   jPanelRight.setLayout(new java.awt.BorderLayout());
 
@@ -2780,6 +2802,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     }
   );
+  rSyntaxTextAreaSource.addCaretListener(new javax.swing.event.CaretListener() {
+    public void caretUpdate(javax.swing.event.CaretEvent evt) {
+      rSyntaxTextAreaSourceCaretUpdate(evt);
+    }
+  });
   rSyntaxTextAreaSource.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
       rSyntaxTextAreaSourceMouseClicked(evt);
@@ -2825,7 +2852,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
   jPanelRight.add(jScrollPaneRightMin, java.awt.BorderLayout.EAST);
 
-  jSplitPaneInternal.setRightComponent(jPanelRight);
+  jSplitPaneRight.setTopComponent(jPanelRight);
+  jSplitPaneRight.setBottomComponent(xRefPanelSource);
+
+  jSplitPaneInternal.setRightComponent(jSplitPaneRight);
 
   jSplitPaneExternal.setRightComponent(jSplitPaneInternal);
 
@@ -5994,6 +6024,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(SOURCE_AS);
   }//GEN-LAST:event_jMenuItemSaveAsAS1ActionPerformed
 
+  private void rSyntaxTextAreaDisCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaDisCaretUpdate
+    asmTextAreaDisCaretUpdate(evt);
+  }//GEN-LAST:event_rSyntaxTextAreaDisCaretUpdate
+
+  private void rSyntaxTextAreaSourceCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rSyntaxTextAreaSourceCaretUpdate
+    asmTextAreaSourceCaretUpdate(evt);
+  }//GEN-LAST:event_rSyntaxTextAreaSourceCaretUpdate
+
     /**
      * @param args the command line arguments
      */
@@ -6412,6 +6450,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JPopupMenu.Separator jSeparatorWord2;
   private javax.swing.JSplitPane jSplitPaneExternal;
   private javax.swing.JSplitPane jSplitPaneInternal;
+  private javax.swing.JSplitPane jSplitPaneLeft;
+  private javax.swing.JSplitPane jSplitPaneRight;
   private javax.swing.JMenu jSubMenu;
   private javax.swing.JMenu jSubMenuC;
   private javax.swing.JTable jTableMemory;
@@ -6425,6 +6465,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaDisMin;
   private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSource;
   protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea rSyntaxTextAreaSourceMin;
+  private sw_emulator.swing.XRefPanel xRefPanelDis;
+  private sw_emulator.swing.XRefPanel xRefPanelSource;
   // End of variables declaration//GEN-END:variables
 
   @Override
@@ -6972,7 +7014,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
        case APP_PASTE:
          appPaste();  
          if (option.forceCompilation) disassembly(true);   
-         break;
+         break;        
     }
         
   }
@@ -7004,9 +7046,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       rSyntaxTextAreaSourceMin.setText("");
       dataTableModelMemory.setData(null);
       dataTableModelMemory.fireTableDataChanged();
+      xRefPanelDis.clean();
+      xRefPanelSource.clean();
     } else {
       dataTableModelMemory.setData(project.memory);
       dataTableModelMemory.fireTableDataChanged();
+      xRefPanelDis.setMemory(project.memory);
+      xRefPanelSource.setMemory(project.memory);
       execute(SOURCE_DISASS);
     }
           
@@ -7037,6 +7083,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     dataTableModelMemory.setData(null);
     dataTableModelMemory.fireTableDataChanged();
     jPanelPerc.setPerc(-1);
+    xRefPanelDis.clean();
+    xRefPanelSource.clean();
   }
   
   /**
@@ -7063,10 +7111,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
           execute(SOURCE_DISASS);
         }
-        savedProject=project.clone();
-        dataTableModelMemory.setData(project.memory);
-        dataTableModelMemory.fireTableDataChanged();
-      }
+      savedProject=project.clone();
+      dataTableModelMemory.setData(project.memory);
+      dataTableModelMemory.fireTableDataChanged();
+      xRefPanelDis.setMemory(project.memory);
+      xRefPanelSource.setMemory(project.memory);
+    }
                 
   }
   
@@ -7137,6 +7187,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          jProjectDialog.setVisible(true);
          dataTableModelMemory.setData(project.memory);
          dataTableModelMemory.fireTableDataChanged();
+         xRefPanelDis.setMemory(project.memory);
+         xRefPanelSource.setMemory(project.memory);
          execute(SOURCE_DISASS);
         }      
   }
@@ -9438,7 +9490,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     savedProject=project.clone();
     dataTableModelMemory.setData(project.memory);
     dataTableModelMemory.fireTableDataChanged();
-                  
+    xRefPanelDis.setMemory(project.memory);
+    xRefPanelSource.setMemory(project.memory);              
   }
   
   /**
@@ -10087,4 +10140,32 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         
       return addr;
     }
+    
+    /**
+     * Display the cross reference in preview area based onto caret positon
+     * 
+     * @param evt the caret event
+     */
+    private void asmTextAreaDisCaretUpdate(javax.swing.event.CaretEvent evt) {
+      int caretPos = rSyntaxTextAreaDis.getCaretPosition();
+      int address = getAddressFromCaretPositionDis(caretPos);
+        
+      if (xRefPanelDis != null && address != -1) {
+        xRefPanelDis.showXRefsForAddress(address);
+      }
+    }    
+    
+    /**
+     * Display the cross reference in source area based onto caret positon
+     * 
+     * @param evt the caret event
+     */
+    private void asmTextAreaSourceCaretUpdate(javax.swing.event.CaretEvent evt) {
+      int caretPos = rSyntaxTextAreaSource.getCaretPosition();
+      int address = getAddressFromCaretPositionSource(caretPos);
+        
+      if (xRefPanelSource != null && address != -1) {
+        xRefPanelSource.showXRefsForAddress(address);
+      }
+    }      
 }

@@ -4029,179 +4029,229 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanelLeft">
+            <Container class="javax.swing.JSplitPane" name="jSplitPaneLeft">
+              <Properties>
+                <Property name="dividerLocation" type="int" value="400"/>
+                <Property name="orientation" type="int" value="0"/>
+                <Property name="resizeWeight" type="double" value="1.0"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
                   <JSplitPaneConstraints position="left"/>
                 </Constraint>
               </Constraints>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPaneLeft">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
+                <Container class="javax.swing.JPanel" name="jPanelLeft">
                   <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Center"/>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                      <JSplitPaneConstraints position="top"/>
                     </Constraint>
                   </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                   <SubComponents>
-                    <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaDis">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="columns" type="int" value="20"/>
-                        <Property name="rows" type="int" value="5"/>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Monospaced" size="12" style="0"/>
-                        </Property>
-                        <Property name="name" type="java.lang.String" value="Dis" noResource="true"/>
-                        <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseClicked"/>
-                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseEntered"/>
-                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseReleased"/>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rSyntaxTextAreaDisKeyReleased"/>
-                      </Events>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneLeft">
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogDis=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaDis);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaDis.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_PLUS); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_MINUS); &#xa;                  }&#xa;                }&#xa;);"/>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Container class="javax.swing.JScrollPane" name="jScrollPaneLeftMin">
-                  <Properties>
-                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="verticalScrollBarPolicy" type="int" value="22"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="East"/>
-                    </Constraint>
-                  </Constraints>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaDisMin">
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaDis">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Monospaced" size="12" style="0"/>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="Dis" noResource="true"/>
+                            <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="rSyntaxTextAreaDisCaretUpdate"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseClicked"/>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseEntered"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMouseReleased"/>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rSyntaxTextAreaDisKeyReleased"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogDis=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaDis, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaDis);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaDis.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_PLUS); &#xa;                  }&#xa;                }&#xa;);&#xa;&#xa;// force menu key not working otherwise&#xa;rSyntaxTextAreaDis.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(MEM_MINUS); &#xa;                  }&#xa;                }&#xa;);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneLeftMin">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="columns" type="int" value="40"/>
-                        <Property name="rows" type="int" value="5"/>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Monospaced" size="3" style="0"/>
-                        </Property>
-                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[671, 1000]"/>
-                        </Property>
-                        <Property name="name" type="java.lang.String" value="Miniature" noResource="true"/>
-                        <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMinMouseClicked"/>
-                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMinMouseReleased"/>
-                      </Events>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaDisMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
-                    </Component>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="East"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaDisMin">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="40"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Monospaced" size="3" style="0"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[671, 1000]"/>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="Miniature" noResource="true"/>
+                            <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMinMouseClicked"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaDisMinMouseReleased"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaDisMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDD); &#xa;                  }&#xa;                }&#xa;);"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
+                <Component class="sw_emulator.swing.XRefPanel" name="xRefPanelDis">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                      <JSplitPaneConstraints position="bottom"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanelRight">
+            <Container class="javax.swing.JSplitPane" name="jSplitPaneRight">
+              <Properties>
+                <Property name="dividerLocation" type="int" value="400"/>
+                <Property name="orientation" type="int" value="0"/>
+                <Property name="resizeWeight" type="double" value="1.0"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
                   <JSplitPaneConstraints position="right"/>
                 </Constraint>
               </Constraints>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPaneRight">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
+                <Container class="javax.swing.JPanel" name="jPanelRight">
                   <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Center"/>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                      <JSplitPaneConstraints position="top"/>
                     </Constraint>
                   </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                   <SubComponents>
-                    <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaSource">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="columns" type="int" value="25"/>
-                        <Property name="rows" type="int" value="5"/>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Monospaced" size="12" style="0"/>
-                        </Property>
-                        <Property name="name" type="java.lang.String" value="Source" noResource="true"/>
-                        <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseClicked"/>
-                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseEntered"/>
-                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseReleased"/>
-                      </Events>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneRight">
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogSource=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaSource);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaSource.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaSource.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDS); &#xa;                  }&#xa;                }&#xa;);"/>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Container class="javax.swing.JScrollPane" name="jScrollPaneRightMin">
-                  <Properties>
-                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="verticalScrollBarPolicy" type="int" value="22"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="East"/>
-                    </Constraint>
-                  </Constraints>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaSourceMin">
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaSource">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="25"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Monospaced" size="12" style="0"/>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="Source" noResource="true"/>
+                            <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="rSyntaxTextAreaSourceCaretUpdate"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseClicked"/>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseEntered"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMouseReleased"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="findDialogSource=new FindDialog(this, new SearchListener() {&#xa;      @Override&#xa;      public void searchEvent(SearchEvent e) {&#xa;                SearchEvent.Type type = e.getType();&#xa;&#x9;&#x9;SearchContext context = e.getSearchContext();&#xa;&#x9;&#x9;SearchResult result;&#xa;&#xa;&#x9;&#x9;switch (type) {&#xa;&#x9;&#x9;&#x9;default: // Prevent FindBugs warning later&#xa;&#x9;&#x9;&#x9;case MARK_ALL:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.markAll(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;&#x9;case FIND:&#xa;&#x9;&#x9;&#x9;&#x9;result = SearchEngine.find(rSyntaxTextAreaSource, context);&#xa;&#x9;&#x9;&#x9;&#x9;if (!result.wasFound()) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;UIManager.getLookAndFeel().provideErrorFeedback(rSyntaxTextAreaSource);&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;break;&#xa;&#x9;&#x9;}&#xa;          &#xa;      }&#xa;&#xa;      @Override&#xa;      public String getSelectedText() {&#xa;        return rSyntaxTextAreaSource.getSelectedText();&#xa;      }&#xa;}&#xa;);&#xa;&#xa;rSyntaxTextAreaSource.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDS); &#xa;                  }&#xa;                }&#xa;);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPaneRightMin">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="columns" type="int" value="35"/>
-                        <Property name="rows" type="int" value="5"/>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Monospaced" size="3" style="0"/>
-                        </Property>
-                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[671, 1000]"/>
-                        </Property>
-                        <Property name="name" type="java.lang.String" value="Miniature" noResource="true"/>
-                        <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                        <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMinMouseClicked"/>
-                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMinMouseReleased"/>
-                      </Events>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaSourceMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDS); &#xa;                  }&#xa;                }&#xa;);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
-                    </Component>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="East"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="rSyntaxTextAreaSourceMin">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="35"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Monospaced" size="3" style="0"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[671, 1000]"/>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="Miniature" noResource="true"/>
+                            <Property name="syntaxEditingStyle" type="java.lang.String" value="text/asm6502"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMinMouseClicked"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSyntaxTextAreaSourceMinMouseReleased"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rSyntaxTextAreaSourceMin.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), &#xa;                new AbstractAction() {&#xa;                  @Override&#xa;                  public void actionPerformed(ActionEvent e) {&#xa;                    execute(SOURCE_FINDS); &#xa;                  }&#xa;                }&#xa;);"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
+                <Component class="sw_emulator.swing.XRefPanel" name="xRefPanelSource">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+                      <JSplitPaneConstraints position="bottom"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
