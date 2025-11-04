@@ -461,8 +461,17 @@ public class Option {
   /** No undocumented opcodes in source */
   public boolean noUndocumented=false;
   
-  /** Show miniature contents in scrollbars */
-  public boolean showMiniature=true;
+  /** Show preview miniature contents in scrollbars */
+  public boolean showMiniaturePreview=true;
+  
+  /** Show source miniature contents in scrollbars */
+  public boolean showMiniatureSource=true;
+  
+  /** Show preview xref contents in scrollbars */
+  public boolean showXRefPreview=true;
+  
+  /** Show source xref contents in scrollbars */
+  public boolean showXRefSource=true;
   
   /** Merge adjacent blocks */
   public boolean mergeBlocks=false;

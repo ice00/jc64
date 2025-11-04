@@ -425,7 +425,7 @@ public class FileManager {
       
       // 2.6
       option.chooserPerc=in.readBoolean();
-      option.showMiniature=in.readBoolean();
+      option.showMiniaturePreview=in.readBoolean();
       
       // 2.7
       option.syntaxTheme=in.readUTF();
@@ -495,6 +495,11 @@ public class FileManager {
       
       option.mergeBlocks = in.readBoolean();
       option.commentOdysseyBiosRam = in.readBoolean();
+      
+      // 3.1
+      option.showMiniatureSource = in.readBoolean();
+      option.showXRefPreview = in.readBoolean();
+      option.showXRefSource = in.readBoolean();
       
     } catch (FileNotFoundException e) {
          return true; 
@@ -865,7 +870,7 @@ public class FileManager {
       
       // 2.6
       out.writeBoolean(option.chooserPerc);
-      out.writeBoolean(option.showMiniature);
+      out.writeBoolean(option.showMiniaturePreview);
       
       // 2.7
       out.writeUTF(option.syntaxTheme);
@@ -935,6 +940,11 @@ public class FileManager {
             
       out.writeBoolean(option.mergeBlocks);
       out.writeBoolean(option.commentOdysseyBiosRam);
+      
+      // 3.1
+      out.writeBoolean(option.showMiniatureSource);
+      out.writeBoolean(option.showXRefPreview);
+      out.writeBoolean(option.showXRefSource);
 
       out.flush();
       out.close();
