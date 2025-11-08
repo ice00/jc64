@@ -5344,8 +5344,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             @Override
                 public void run() {
                     System.gc();
-                    System.runFinalization();
-                    System.gc();
                 }
             }.run();
     }//GEN-LAST:event_heapViewMouseClicked

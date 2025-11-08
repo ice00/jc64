@@ -253,8 +253,6 @@ public class HeapView extends JComponent {
             @Override
                 public void run() {
                     System.gc();
-                    System.runFinalization();
-                    System.gc();
                 }
             };
         }
