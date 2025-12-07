@@ -389,8 +389,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       Freeze freeze=new Freeze();
       freeze.name=name;
       
-      if (with) {
-      
+      if (with) {      
           if (project==null) return;
     
           Assembler.Name actual=option.assembler;    
@@ -428,8 +427,10 @@ public class JFreezeFrame extends javax.swing.JFrame {
       
       DefaultTableModel model = (DefaultTableModel)jTableFreeze.getModel();
       model.addRow(new Object[]{freeze.name});
-      jTableFreeze.setRowSelectionInterval(model.getRowCount()-1, model.getRowCount()-1);
-      model.fireTableDataChanged();
+
+      int lastRow = model.getRowCount() - 1;
+      jTableFreeze.setRowSelectionInterval(lastRow, lastRow);
+      jTableFreeze.scrollRectToVisible(jTableFreeze.getCellRect(lastRow, 0, true));
     }
     
     /**
@@ -455,6 +456,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       }
       project.freezes=freezes2;
       popolateTable();
+      rSyntaxTextAreaSource.setText("");
     }
     
     /**
