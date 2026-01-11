@@ -116,7 +116,7 @@
     <Component class="javax.swing.JLabel" name="jLabelYear">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="(c) 2025"/>
+        <Property name="text" type="java.lang.String" value="(c) 2026"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>

@@ -28,8 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -41,7 +39,9 @@ import javax.swing.text.DefaultFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 import sw_emulator.software.memory.MemoryFlags;
 import sw_emulator.software.memory.ViceMemMapParser;
+import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.FileManager;
+import sw_emulator.swing.main.Option;
 import sw_emulator.swing.main.Patch;
 import sw_emulator.swing.main.Project;
 import sw_emulator.swing.main.Relocate;
@@ -49,219 +49,239 @@ import sw_emulator.swing.main.TargetType;
 
 /**
  * Dialog for project
- * 
+ *
  * @author ice
  */
 public class JProjectDialog extends javax.swing.JDialog {
-    /** File chooser */
-    JFileChooser fileChooser=new JFileChooser();    
-    
-     /** File chooser for memory flags */
-    JFileChooser memFileChooser=new JFileChooser();    
-    
-    /** File chooser for export */
-    JFileChooser exportFileChooser=new JFileChooser();     
-    
-    /** The project to use (create an emty one not used) */
-    Project project=new Project();
-    
-    /** Dialog for constants table */
-    JConstantDialog jConstantDialog=new JConstantDialog(null, true);
-    
-    /** Last address added in patch*/
-    int lastAddress=-1;
-    
-  private static class HexFormatterFactory extends DefaultFormatterFactory { 
-        @Override
-        public JFormattedTextField.AbstractFormatter getDefaultFormatter() { 
-           return new HexFormatter(); 
-       } 
-  } 
 
-  private static class HexFormatter extends DefaultFormatter { 
-      @Override
-      public Object stringToValue(String text) throws ParseException { 
-         try { 
-            return Integer.valueOf(text, 16); 
-         } catch (NumberFormatException nfe) { 
-            throw new ParseException(text,0); 
-         } 
-     } 
+  /** File chooser */
+  JFileChooser fileChooser = new JFileChooser();
 
-      @Override
-     public String valueToString(Object value) throws ParseException { 
-        return Integer.toHexString(((Integer)value)).toUpperCase(); 
-     } 
- }     
-    
-      
+  /** File chooser for memory flags */
+  JFileChooser memFileChooser = new JFileChooser();
+
+  /** File chooser for export */
+  JFileChooser exportFileChooser = new JFileChooser();
+
+  /** The project to use (create an emty one not used) */
+  Project project = new Project();
+
+  /** Dialog for constants table */
+  JConstantDialog jConstantDialog = new JConstantDialog(null, true);
+
+  /** Program option */
+  Option option;
+
+  /** Last address added in patch */
+  int lastAddress = -1;
+
+  private static class HexFormatterFactory extends DefaultFormatterFactory {
+
+    @Override
+    public JFormattedTextField.AbstractFormatter getDefaultFormatter() {
+      return new HexFormatter();
+    }
+  }
+
+  private static class HexFormatter extends DefaultFormatter {
+
+    @Override
+    public Object stringToValue(String text) throws ParseException {
+      try {
+        return Integer.valueOf(text, 16);
+      } catch (NumberFormatException nfe) {
+        throw new ParseException(text, 0);
+      }
+    }
+
+    @Override
+    public String valueToString(Object value) throws ParseException {
+      return Integer.toHexString(((Integer) value)).toUpperCase();
+    }
+  }
+
   /** Last direcotry for load file in project */
   public final static String LAST_DIR_FILE = "last.dir.file";
-  
+
   /** Last direcotry for load file in project */
   public final static String LAST_DIR2_FILE = "last.dir2.file";
-  
+
   /** Preference system file */
-  private Preferences m_prefNode=Preferences.userRoot().node(this.getClass().getName());
+  private Preferences m_prefNode = Preferences.userRoot().node(this.getClass().getName());
+
+  /**
+   * Creates new form JDialogProject
+   *
+   * @param parent parent window
+   * @param modal modal window
+   * @param option option of jc64dis
+   */
+  public JProjectDialog(java.awt.Frame parent, boolean modal, Option option) {
+    super(parent, modal);
+    this.option = option;
+
+    initComponents();
+    Shared.framesList.add(this);
+    Shared.framesList.add(fileChooser);
+    Shared.framesList.add(memFileChooser);
+    Shared.framesList.add(exportFileChooser);
+
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PSID/RSID tune", "sid"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MUS tune", "mus"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program", "mpr"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("AY tune", "ay"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("NSF tune", "nsf"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SAP tune (Atari)", "sap"));
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("BIN dump (Odyssey)", "bin"));
+    fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
+    memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
+    memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
+
+    JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) jSpinnerAddr.getEditor();
+    editor.getTextField().setFormatterFactory(new HexFormatterFactory());
     
-    /**
-     * Creates new form JDialogProject
-     */
-    public JProjectDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        Shared.framesList.add(this);
-        Shared.framesList.add(fileChooser);
-        Shared.framesList.add(memFileChooser);
-        Shared.framesList.add(exportFileChooser);
-        
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PSID/RSID tune", "sid"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MUS tune", "mus"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Multi PRG C64 program", "mpr"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PRG C64 program", "prg", "bin"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CRT C64 cartridge", "crt"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("VSF Vice snapshot file", "vsf"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("AY tune", "ay"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("NSF tune", "nsf"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SAP tune (Atari)", "sap"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("BIN dump (Odyssey)", "bin"));
-        fileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_FILE, "")));
-        memFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SIDLD binary", "bin"));
-        memFileChooser.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR2_FILE, "")));
-        
-        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor)jSpinnerAddr.getEditor(); 
-        editor.getTextField().setFormatterFactory(new HexFormatterFactory());
+    addNotify();
+    jConstantDialog.setLocationRelativeTo(this);
+  }
+
+  /**
+   * Get relocate table as string description
+   *
+   * @return the string description
+   */
+  private String getRelocateDesc() {
+    if (project == null || project.relocates == null) {
+      return "";
     }
-        
-    /**
-     * Get relocate table as string description
-     * 
-     * @return the string description
-     */
-    private String getRelocateDesc() {
-      if (project==null || project.relocates==null) return "";
-      
-      String res="";
-      for (Relocate relocate:project.relocates) {
-        res+=Shared.ShortToExe(relocate.fromStart)+":"+Shared.ShortToExe(relocate.fromEnd)+" => "+
-             Shared.ShortToExe(relocate.toStart)+":"+Shared.ShortToExe(relocate.toEnd)+"\n";
-      }
-      
-      return res;
+
+    String res = "";
+    for (Relocate relocate : project.relocates) {
+      res += Shared.ShortToExe(relocate.fromStart) + ":" + Shared.ShortToExe(relocate.fromEnd) + " => "
+              + Shared.ShortToExe(relocate.toStart) + ":" + Shared.ShortToExe(relocate.toEnd) + "\n";
     }
-    
-    /**
-     * Get relocate table as string description
-     * 
-     * @return the string description
-     */
-    private String getPatchDesc() {
-      if (project==null || project.patches==null) return "";
-      
-      String res="";
-      for (Patch patch:project.patches) {
-        res+=Shared.ShortToExe(patch.address)+" => "+Shared.ByteToExe(patch.value)+"\n";
-      }
-      
-      return res;
+
+    return res;
+  }
+
+  /**
+   * Get relocate table as string description
+   *
+   * @return the string description
+   */
+  private String getPatchDesc() {
+    if (project == null || project.patches == null) {
+      return "";
     }
-    
-    /**
-     * Set up the dialog with the project to use 
-     * 
-     * @param project the project to use 
-     */
-    public void setUp(Project project) {
-      this.project=project;  
-      jConstantDialog.setUp(project.constant, project.memory);
-      
-      SwingUtilities.invokeLater(new Runnable(){
-	public void run() {
-      
-      jTextFieldProjectName.setText(project.name);
-      jTextFieldInputFile.setText(project.file);
-      if (project.description!=null) jTextAreaDescr.setText(project.description);
-      else jTextAreaDescr.setText("");
-      
-      jSpinnerCRT.setValue(project.chip);
-      jSpinnerAddr.setValue(project.binAddress);
-      
-      if (project.fileType!=null) {
-        jRadioButtonC128Z.setEnabled(true);  
-        switch (project.fileType) {
-          case PRG:
-            jRadioButtonPRG.setSelected(true);
-            break;
-          case SID:
-            jRadioButtonSID.setSelected(true);
-            jRadioButtonC128Z.setEnabled(false);
-            jRadioButtonOdyssey.setEnabled(false);
-            break;
-          case MUS:
-            jRadioButtonMUS.setSelected(true);
-            break;
-          case MPR:
-            jRadioButtonMPR.setSelected(true);
-            break;    
-          case CRT:
-            jRadioButtonCRT.setSelected(true);
-            break;   
-          case VSF:
-            jRadioButtonVSF.setSelected(true);
-            break;    
-          case AY:
-            jRadioButtonAY.setSelected(true);
-            break;      
-          case NSF:
-            jRadioButtonNSF.setSelected(true);  
-            break;  
-          case SAP:
-            jRadioButtonSAP.setSelected(true);  
-            break;  
-          case BIN:
-            jRadioButtonBIN.setSelected(true);  
-            break;   
+
+    String res = "";
+    for (Patch patch : project.patches) {
+      res += Shared.ShortToExe(patch.address) + " => " + Shared.ByteToExe(patch.value) + "\n";
+    }
+
+    return res;
+  }
+
+  /**
+   * Set up the dialog with the project to use
+   *
+   * @param project the project to use
+   */
+  public void setUp(Project project) {
+    this.project = project;
+    jConstantDialog.setUp(project.constant, project.memory);
+
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        jTextFieldProjectName.setText(project.name);
+        jTextFieldInputFile.setText(project.file);
+        if (project.description != null) {
+          jTextAreaDescr.setText(project.description);
+        } else {
+          jTextAreaDescr.setText("");
         }
-      } else {
+
+        jSpinnerCRT.setValue(project.chip);
+        jSpinnerAddr.setValue(project.binAddress);
+
+        if (project.fileType != null) {
+          jRadioButtonC128Z.setEnabled(true);
+          switch (project.fileType) {
+            case PRG:
+              jRadioButtonPRG.setSelected(true);
+              break;
+            case SID:
+              jRadioButtonSID.setSelected(true);
+              jRadioButtonC128Z.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(false);
+              break;
+            case MUS:
+              jRadioButtonMUS.setSelected(true);
+              break;
+            case MPR:
+              jRadioButtonMPR.setSelected(true);
+              break;
+            case CRT:
+              jRadioButtonCRT.setSelected(true);
+              break;
+            case VSF:
+              jRadioButtonVSF.setSelected(true);
+              break;
+            case AY:
+              jRadioButtonAY.setSelected(true);
+              break;
+            case NSF:
+              jRadioButtonNSF.setSelected(true);
+              break;
+            case SAP:
+              jRadioButtonSAP.setSelected(true);
+              break;
+            case BIN:
+              jRadioButtonBIN.setSelected(true);
+              break;
+          }
+        } else {
           jRadioButtonPRG.setSelected(false);
           jRadioButtonSID.setSelected(false);
           jRadioButtonMUS.setSelected(false);
-          jRadioButtonMPR.setSelected(false);  
-          jRadioButtonCRT.setSelected(false);  
-          jRadioButtonVSF.setSelected(false);  
-          jRadioButtonNSF.setSelected(false);  
-          jRadioButtonSAP.setSelected(false);  
-          jRadioButtonBIN.setSelected(false);  
+          jRadioButtonMPR.setSelected(false);
+          jRadioButtonCRT.setSelected(false);
+          jRadioButtonVSF.setSelected(false);
+          jRadioButtonNSF.setSelected(false);
+          jRadioButtonSAP.setSelected(false);
+          jRadioButtonBIN.setSelected(false);
         }
-      if (project.targetType!=null) {
-        switch (project.targetType) {
-          case C64:
-            jRadioButtonC64.setSelected(true);
-            break;
-          case C1541:
-            jRadioButtonC1541.setSelected(true);
-            break;
-          case C128:  
-            jRadioButtonC128.setSelected(true);
-            break;  
-          case VIC20:
-            jRadioButtonVic20.setSelected(true);
-            break;   
-          case PLUS4:
-            jRadioButtonPlus4.setSelected(true);
-            break; 
-          case C128Z:  
-            jRadioButtonC128Z.setSelected(true);
-            break;
-          case ATARI:  
-            jRadioButtonAtari.setSelected(true);
-            break;    
-          case ODYSSEY:
-            jRadioButtonOdyssey.setSelected(true);
-            break;              
-        }          
-      } else {
-          jRadioButtonC64.setSelected(true);       
+        if (project.targetType != null) {
+          switch (project.targetType) {
+            case C64:
+              jRadioButtonC64.setSelected(true);
+              break;
+            case C1541:
+              jRadioButtonC1541.setSelected(true);
+              break;
+            case C128:
+              jRadioButtonC128.setSelected(true);
+              break;
+            case VIC20:
+              jRadioButtonVic20.setSelected(true);
+              break;
+            case PLUS4:
+              jRadioButtonPlus4.setSelected(true);
+              break;
+            case C128Z:
+              jRadioButtonC128Z.setSelected(true);
+              break;
+            case ATARI:
+              jRadioButtonAtari.setSelected(true);
+              break;
+            case ODYSSEY:
+              jRadioButtonOdyssey.setSelected(true);
+              break;
+          }
+        } else {
+          jRadioButtonC64.setSelected(true);
           jRadioButtonC1541.setSelected(false);
           jRadioButtonC128.setSelected(false);
           jRadioButtonVic20.setSelected(false);
@@ -270,19 +290,19 @@ public class JProjectDialog extends javax.swing.JDialog {
           jRadioButtonAtari.setSelected(false);
           jRadioButtonOdyssey.setSelected(false);
         }
-      jTextAreaRelocate.setText(getRelocateDesc());
-      jTextAreaPatch.setText(getPatchDesc());            
-      jSpinnerAddr.setEnabled(jRadioButtonBIN.isSelected());
-       }
-      });
-    }
+        jTextAreaRelocate.setText(getRelocateDesc());
+        jTextAreaPatch.setText(getPatchDesc());
+        jSpinnerAddr.setEnabled(jRadioButtonBIN.isSelected());
+      }
+    });
+  }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+  /**
+   * This method is called from within the constructor to initialize the form.
+   * WARNING: Do NOT modify this code. The content of this method is always
+   * regenerated by the Form Editor.
+   */
+  @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
@@ -341,6 +361,7 @@ public class JProjectDialog extends javax.swing.JDialog {
     jRadioButtonBIN = new javax.swing.JRadioButton();
     jSpinnerAddr = new javax.swing.JSpinner();
     jButtonAddVice = new javax.swing.JButton();
+    jButtonInitApply = new javax.swing.JButton();
     jPanelDn = new javax.swing.JPanel();
     jButtonClose = new javax.swing.JButton();
 
@@ -613,10 +634,18 @@ public class JProjectDialog extends javax.swing.JDialog {
     });
 
     jButtonAddVice.setText("Add Vice mem map");
-    jButtonAddVice.setToolTipText("Add next SIDLD file to memory flag");
+    jButtonAddVice.setToolTipText("Add next Vice memmapshow log to memory flag");
     jButtonAddVice.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButtonAddViceActionPerformed(evt);
+      }
+    });
+
+    jButtonInitApply.setText("Apply");
+    jButtonInitApply.setToolTipText("Apply SIDLD flags to memory");
+    jButtonInitApply.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonInitApplyActionPerformed(evt);
       }
     });
 
@@ -626,8 +655,79 @@ public class JProjectDialog extends javax.swing.JDialog {
       jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jScrollPaneDescr)
+        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(jPanelCenterLayout.createSequentialGroup()
+            .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(jScrollPaneDescr)
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCenterLayout.createSequentialGroup()
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(jPanelCenterLayout.createSequentialGroup()
+                    .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(25, 25, 25)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonSID)
+                      .addComponent(jRadioButtonVSF))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonMUS)
+                      .addComponent(jRadioButtonAY))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                      .addComponent(jRadioButtonPRG)
+                      .addComponent(jRadioButtonNSF))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonMPR)
+                      .addComponent(jRadioButtonSAP))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonCRT)
+                      .addComponent(jRadioButtonBIN))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jSpinnerAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                  .addGroup(jPanelCenterLayout.createSequentialGroup()
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(44, 44, 44)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jTextFieldProjectName)
+                      .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSelect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSave))))
+                  .addGroup(jPanelCenterLayout.createSequentialGroup()
+                    .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jLabelZ80, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jLabelM6502)
+                      .addComponent(jLabelI8048))
+                    .addGap(42, 42, 42)
+                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addComponent(jRadioButtonC64)
+                        .addGap(6, 6, 6)
+                        .addComponent(jRadioButtonC1541)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonC128)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonVic20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonPlus4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonAtari))
+                      .addComponent(jRadioButtonC128Z)
+                      .addComponent(jRadioButtonOdyssey)))
+                  .addComponent(jLabelFileDes))
+                .addGap(0, 97, Short.MAX_VALUE)))
+            .addContainerGap())
           .addGroup(jPanelCenterLayout.createSequentialGroup()
             .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanelCenterLayout.createSequentialGroup()
@@ -657,76 +757,9 @@ public class JProjectDialog extends javax.swing.JDialog {
                 .addComponent(jButtonAddNext)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAddVice)
-                .addGap(0, 0, Short.MAX_VALUE))))
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCenterLayout.createSequentialGroup()
-            .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(jPanelCenterLayout.createSequentialGroup()
-                .addComponent(jLabelFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonSID)
-                  .addComponent(jRadioButtonVSF))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonMUS)
-                  .addComponent(jRadioButtonAY))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                  .addComponent(jRadioButtonPRG)
-                  .addComponent(jRadioButtonNSF))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonMPR)
-                  .addComponent(jRadioButtonSAP))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonCRT)
-                  .addComponent(jRadioButtonBIN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jSpinnerAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jSpinnerCRT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-              .addGroup(jPanelCenterLayout.createSequentialGroup()
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jLabelInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(jLabelProjectName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jTextFieldProjectName)
-                  .addGroup(jPanelCenterLayout.createSequentialGroup()
-                    .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButtonSelect)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButtonSave))))
-              .addGroup(jPanelCenterLayout.createSequentialGroup()
-                .addComponent(jLabelFileTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jLabelZ80, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jLabelM6502)
-                  .addComponent(jLabelI8048))
-                .addGap(42, 42, 42)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(jPanelCenterLayout.createSequentialGroup()
-                    .addComponent(jRadioButtonC64)
-                    .addGap(6, 6, 6)
-                    .addComponent(jRadioButtonC1541)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jRadioButtonC128)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jRadioButtonVic20)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jRadioButtonPlus4)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jRadioButtonAtari))
-                  .addComponent(jRadioButtonC128Z)
-                  .addComponent(jRadioButtonOdyssey)))
-              .addComponent(jLabelFileDes))
-            .addGap(0, 97, Short.MAX_VALUE)))
-        .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonInitApply, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())))))
     );
     jPanelCenterLayout.setVerticalGroup(
       jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -795,7 +828,8 @@ public class JProjectDialog extends javax.swing.JDialog {
           .addComponent(jLabelSidLd)
           .addComponent(jButtonAddNext)
           .addComponent(jButtonInit)
-          .addComponent(jButtonAddVice))
+          .addComponent(jButtonAddVice)
+          .addComponent(jButtonInitApply))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelConstant)
@@ -842,468 +876,531 @@ public class JProjectDialog extends javax.swing.JDialog {
   }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
-       project.name=jTextFieldProjectName.getText();
-       
-       if (project.file==null || "".equals(project.file)) {
-         if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION) setVisible(false);
-         else return;
-       }
-        
-       setVisible(false);
+      project.name = jTextFieldProjectName.getText();
+
+      if (project.file == null || "".equals(project.file)) {
+        if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION) {
+          setVisible(false);
+        } else {
+          return;
+        }
+      }
+
+      setVisible(false);
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       project.name=jTextFieldProjectName.getText();
-       
-       if (project.file==null || "".equals(project.file)) {
-         if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION) setVisible(false);
-         else return;
-       }
-        
-       setVisible(false);
+      project.name = jTextFieldProjectName.getText();
+
+      if (project.file == null || "".equals(project.file)) {
+        if (JOptionPane.showConfirmDialog(this, "No file inserted. Closing will erase all in project. Do you want to close anywere?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION) {
+          setVisible(false);
+        } else {
+          return;
+        }
+      }
+
+      setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
     private void jButtonPatchRemove1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchRemove1ActionPerformed
-        if (project.relocates==null) return;
+      if (project.relocates == null) {
+        return;
+      }
 
-        if (JOptionPane.showConfirmDialog(this, "Empty the memory location of removed area?", "Information", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION ) {
-            Relocate relocate=project.relocates[project.relocates.length-1];
+      if (JOptionPane.showConfirmDialog(this, "Empty the memory location of removed area?", "Information", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION) {
+        Relocate relocate = project.relocates[project.relocates.length - 1];
 
-            for (int i=relocate.toStart; i<=relocate.toEnd; i++) {
-                project.memory[i].copy=0;
-            }
+        for (int i = relocate.toStart; i <= relocate.toEnd; i++) {
+          project.memory[i].copy = 0;
         }
+      }
 
-        if (project.relocates.length==1) {
-            project.relocates=null;
-            jTextAreaRelocate.setText("");
-            return;
-        }
+      if (project.relocates.length == 1) {
+        project.relocates = null;
+        jTextAreaRelocate.setText("");
+        return;
+      }
 
-        Relocate[] relocate2; //=new Relocate[project.relocates.length-1];
-        relocate2=Arrays.copyOf(project.relocates, project.relocates.length-1);
+      Relocate[] relocate2; //=new Relocate[project.relocates.length-1];
+      relocate2 = Arrays.copyOf(project.relocates, project.relocates.length - 1);
 
-        project.relocates=relocate2;
+      project.relocates = relocate2;
 
-        jTextAreaRelocate.setText(getRelocateDesc());
+      jTextAreaRelocate.setText(getRelocateDesc());
     }//GEN-LAST:event_jButtonPatchRemove1ActionPerformed
 
     private void jRadioButtonC128ZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC128ZActionPerformed
-        project.targetType=TargetType.C128Z;
+      project.targetType = TargetType.C128Z;
     }//GEN-LAST:event_jRadioButtonC128ZActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        if (project.inB!=null) {
-            File file=new File(project.file);
-            exportFileChooser.setSelectedFile(new File(file.getName()));
-            int retValue=exportFileChooser.showOpenDialog(this);
+      if (project.inB != null) {
+        File file = new File(project.file);
+        exportFileChooser.setSelectedFile(new File(file.getName()));
+        int retValue = exportFileChooser.showOpenDialog(this);
 
-            if (retValue==JFileChooser.APPROVE_OPTION) {
-                file=exportFileChooser.getSelectedFile();
-                if (FileManager.instance.writeFile(file, project.inB)) JOptionPane.showMessageDialog(this, "Saving of file done");
-                else JOptionPane.showMessageDialog(this, "Error", "Error in saving file", JOptionPane.ERROR_MESSAGE);
-            }
+        if (retValue == JFileChooser.APPROVE_OPTION) {
+          file = exportFileChooser.getSelectedFile();
+          if (FileManager.instance.writeFile(file, project.inB)) {
+            JOptionPane.showMessageDialog(this, "Saving of file done");
+          } else {
+            JOptionPane.showMessageDialog(this, "Error", "Error in saving file", JOptionPane.ERROR_MESSAGE);
+          }
         }
+      }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonPatchRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchRemoveActionPerformed
-        if (project.patches==null) return;
+      if (project.patches == null) {
+        return;
+      }
 
-        if (project.patches.length==1) {
-            project.patches=null;
-            jTextAreaPatch.setText("");
-            return;
-        }
+      if (project.patches.length == 1) {
+        project.patches = null;
+        jTextAreaPatch.setText("");
+        return;
+      }
 
-        Patch[] patches2=new Patch[project.patches.length-1];
-        patches2=Arrays.copyOf(project.patches, project.patches.length-1);
+      Patch[] patches2 = new Patch[project.patches.length - 1];
+      patches2 = Arrays.copyOf(project.patches, project.patches.length - 1);
 
-        project.patches=patches2;
+      project.patches = patches2;
 
-        jTextAreaPatch.setText(getPatchDesc());
+      jTextAreaPatch.setText(getPatchDesc());
     }//GEN-LAST:event_jButtonPatchRemoveActionPerformed
 
     private void jButtonPatchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPatchAddActionPerformed
-        Patch patch=new Patch();
+      Patch patch = new Patch();
 
-        if (lastAddress==-1) patch.address=Integer.parseInt(JOptionPane.showInputDialog("Address (in hex) where to insert the new value"),16);
-        else patch.address=Integer.parseInt(JOptionPane.showInputDialog(this, "Address (in hex) where to insert the new value", Integer.toHexString(lastAddress+1)),16);
-        patch.value=Integer.parseInt(JOptionPane.showInputDialog("Value (in hex) to put into memory"),16);
+      if (lastAddress == -1) {
+        patch.address = Integer.parseInt(JOptionPane.showInputDialog("Address (in hex) where to insert the new value"), 16);
+      } else {
+        patch.address = Integer.parseInt(JOptionPane.showInputDialog(this, "Address (in hex) where to insert the new value", Integer.toHexString(lastAddress + 1)), 16);
+      }
+      patch.value = Integer.parseInt(JOptionPane.showInputDialog("Value (in hex) to put into memory"), 16);
 
-        if (!patch.isValidRange()) {
-            JOptionPane.showMessageDialog(this, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+      if (!patch.isValidRange()) {
+        JOptionPane.showMessageDialog(this, "Invalid address or value", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
 
-        lastAddress=patch.address;
+      lastAddress = patch.address;
 
-        int size=0;
-        if (project.patches!=null) size=project.patches.length;
+      int size = 0;
+      if (project.patches != null) {
+        size = project.patches.length;
+      }
 
-        // copy the value in the list
-        Patch[] patches2=new Patch[size+1];
-        if (size>0) System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
-        patches2[size]=patch;
+      // copy the value in the list
+      Patch[] patches2 = new Patch[size + 1];
+      if (size > 0) {
+        System.arraycopy(project.patches, 0, patches2, 0, project.patches.length);
+      }
+      patches2[size] = patch;
 
-        project.patches=patches2;
+      project.patches = patches2;
 
-        jTextAreaPatch.setText(getPatchDesc());
+      jTextAreaPatch.setText(getPatchDesc());
     }//GEN-LAST:event_jButtonPatchAddActionPerformed
 
     private void jButtonRelocateAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelocateAddActionPerformed
-        Relocate relocate=new Relocate();
+      Relocate relocate = new Relocate();
 
-        relocate.fromStart=Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) from where to copy"),16);
-        relocate.fromEnd=Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) from where to copy"),16);
-        relocate.toStart=Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) to where to copy"), 16);
-        relocate.toEnd=Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) to where to copy"), 16);
+      relocate.fromStart = Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) from where to copy"), 16);
+      relocate.fromEnd = Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) from where to copy"), 16);
+      relocate.toStart = Integer.parseInt(JOptionPane.showInputDialog("Starting address (in hex) to where to copy"), 16);
+      relocate.toEnd = Integer.parseInt(JOptionPane.showInputDialog("Ending address (in hex) to where to copy"), 16);
 
-        if (!relocate.isValidRange()) {
-            JOptionPane.showMessageDialog(this, "Invalid range of addresses", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+      if (!relocate.isValidRange()) {
+        JOptionPane.showMessageDialog(this, "Invalid range of addresses", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
 
-        int size=0;
-        if (project.relocates!=null) size=project.relocates.length;
+      int size = 0;
+      if (project.relocates != null) {
+        size = project.relocates.length;
+      }
 
-        // copy the value in the list
-        Relocate[] relocates2=new Relocate[size+1];
-        if (size>0) System.arraycopy(project.relocates, 0, relocates2, 0, project.relocates.length);
-        relocates2[size]=relocate;
+      // copy the value in the list
+      Relocate[] relocates2 = new Relocate[size + 1];
+      if (size > 0) {
+        System.arraycopy(project.relocates, 0, relocates2, 0, project.relocates.length);
+      }
+      relocates2[size] = relocate;
 
-        project.relocates=relocates2;
+      project.relocates = relocates2;
 
-        jTextAreaRelocate.setText(getRelocateDesc());
+      jTextAreaRelocate.setText(getRelocateDesc());
     }//GEN-LAST:event_jButtonRelocateAddActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        jConstantDialog.setVisible(true);
+      jConstantDialog.setVisible(true);
     }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jSpinnerCRTStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCRTStateChanged
-        project.chip=(Integer)jSpinnerCRT.getValue();
+      project.chip = (Integer) jSpinnerCRT.getValue();
     }//GEN-LAST:event_jSpinnerCRTStateChanged
 
     private void jRadioButtonPlus4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPlus4ActionPerformed
-        project.targetType=TargetType.PLUS4;
+      project.targetType = TargetType.PLUS4;
     }//GEN-LAST:event_jRadioButtonPlus4ActionPerformed
 
     private void jRadioButtonVic20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVic20ActionPerformed
-        project.targetType=TargetType.VIC20;
+      project.targetType = TargetType.VIC20;
     }//GEN-LAST:event_jRadioButtonVic20ActionPerformed
 
     private void jRadioButtonC128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC128ActionPerformed
-        project.targetType=TargetType.C128;
+      project.targetType = TargetType.C128;
     }//GEN-LAST:event_jRadioButtonC128ActionPerformed
 
     private void jRadioButtonC1541ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC1541ActionPerformed
-        project.targetType=TargetType.C1541;
+      project.targetType = TargetType.C1541;
     }//GEN-LAST:event_jRadioButtonC1541ActionPerformed
 
     private void jRadioButtonC64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonC64ActionPerformed
-        project.targetType=TargetType.C64;
+      project.targetType = TargetType.C64;
     }//GEN-LAST:event_jRadioButtonC64ActionPerformed
 
     private void jButtonInitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInitActionPerformed
-        // set as executable
-        MemoryFlags memoryFlags=new MemoryFlags((String[])null);
-        project.memoryFlags=memoryFlags.getMemoryState(0, 0x10000);
+      // set as executable
+      MemoryFlags memoryFlags = new MemoryFlags((String[]) null);
+      project.memoryFlags = memoryFlags.getMemoryState(0, 0x10000);
     }//GEN-LAST:event_jButtonInitActionPerformed
 
     private void jButtonAddNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNextActionPerformed
-        if (project.memoryFlags==null) project.memoryFlags=new byte[0x10000];
+      if (project.memoryFlags == null) {
+        project.memoryFlags = new byte[0x10000];
+      }
 
-        int retValue=memFileChooser.showOpenDialog(this);
+      int retValue = memFileChooser.showOpenDialog(this);
 
-        if (retValue==JFileChooser.APPROVE_OPTION) {
-            m_prefNode.put(LAST_DIR2_FILE, memFileChooser.getSelectedFile().getPath());
+      if (retValue == JFileChooser.APPROVE_OPTION) {
+        m_prefNode.put(LAST_DIR2_FILE, memFileChooser.getSelectedFile().getPath());
 
-            String[] file=new String[1];
-            file[0]=memFileChooser.getSelectedFile().getAbsolutePath();
-            MemoryFlags memoryFlags=new MemoryFlags(file);
-            project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);
-        }
+        String[] file = new String[1];
+        file[0] = memFileChooser.getSelectedFile().getAbsolutePath();
+        MemoryFlags memoryFlags = new MemoryFlags(file);
+        project.memoryFlags = memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);
+      }
     }//GEN-LAST:event_jButtonAddNextActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
-        // clear memory flags
-        project.memoryFlags=new byte[0x10000];
+      // clear memory flags
+      project.memoryFlags = new byte[0x10000];
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
-        int retValue=fileChooser.showOpenDialog(this);
+      int retValue = fileChooser.showOpenDialog(this);
 
-        if (retValue==JFileChooser.APPROVE_OPTION) {
-            project.file=fileChooser.getSelectedFile().getAbsolutePath();
-            jTextFieldInputFile.setText(project.file);
+      if (retValue == JFileChooser.APPROVE_OPTION) {
+        project.file = fileChooser.getSelectedFile().getAbsolutePath();
+        jTextFieldInputFile.setText(project.file);
 
-            m_prefNode.put(LAST_DIR_FILE, fileChooser.getSelectedFile().getPath());
+        m_prefNode.put(LAST_DIR_FILE, fileChooser.getSelectedFile().getPath());
 
-            // go to read the file
-            try {
-                project.setData(FileManager.instance.readFile(project.file), project.file.endsWith("bin"));
-                jTextAreaDescr.setText(project.description);
-                jRadioButtonC128Z.setEnabled(true);
-                switch (project.fileType) {
-                  case CRT:
-                    jRadioButtonCRT.setSelected(true);
-                    jSpinnerCRT.setEnabled(true);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C64;                    
-                    jRadioButtonC64.setSelected(true);
-                    
-                    jRadioButtonC64.setEnabled(true);
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);
-                    jRadioButtonOdyssey.setEnabled(false); 
+        // go to read the file
+        try {
+          project.setData(FileManager.instance.readFile(project.file), project.file.endsWith("bin"));
+          jTextAreaDescr.setText(project.description);
+          jRadioButtonC128Z.setEnabled(true);
+          switch (project.fileType) {
+            case CRT:
+              jRadioButtonCRT.setSelected(true);
+              jSpinnerCRT.setEnabled(true);
+              jSpinnerAddr.setEnabled(false);
 
-                    break;
-                  case SID:
-                    jRadioButtonSID.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C64;
-                    jRadioButtonC64.setSelected(true);  
-                    
-                    jRadioButtonC64.setEnabled(true);
-                    jRadioButtonC1541.setEnabled(false);
-                    jRadioButtonC128.setEnabled(false);
-                    jRadioButtonVic20.setEnabled(false);
-                    jRadioButtonPlus4.setEnabled(false);                   
-                    jRadioButtonC128Z.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(false); 
-                    break;
-                  case NSF: // we did not have jet a NES target machine
-                    jRadioButtonNSF.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    jRadioButtonC64.setSelected(false);
-                    project.targetType=TargetType.C64;
-                    
-                    jRadioButtonC1541.setEnabled(false);
-                    jRadioButtonC128.setEnabled(false);
-                    jRadioButtonVic20.setEnabled(false);
-                    jRadioButtonPlus4.setEnabled(false);                    
-                    jRadioButtonC128Z.setEnabled(false);
-                    jRadioButtonAtari.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(false); 
-                    break;                    
-                  case SAP:  
-                    jRadioButtonSAP.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.ATARI;
-                    jRadioButtonAtari.setSelected(true);
-                    
-                    jRadioButtonAtari.setEnabled(true);
-                    jRadioButtonC64.setEnabled(false);
-                    jRadioButtonC1541.setEnabled(false);
-                    jRadioButtonC128.setEnabled(false);
-                    jRadioButtonVic20.setEnabled(false);
-                    jRadioButtonPlus4.setEnabled(false);                    
-                    jRadioButtonC128Z.setEnabled(false);     
-                    jRadioButtonOdyssey.setEnabled(false); 
-                    break;
-                  case MUS:
-                    jRadioButtonMUS.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C64;
-                    
-                    jRadioButtonC64.setEnabled(false);
-                    jRadioButtonC1541.setEnabled(false);
-                    jRadioButtonC128.setEnabled(false);
-                    jRadioButtonVic20.setEnabled(false);
-                    jRadioButtonPlus4.setEnabled(false);                    
-                    jRadioButtonAtari.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(false); 
-                    break;
-                  case PRG:
-                    jRadioButtonPRG.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C64;
-                    
-                    jRadioButtonC64.setEnabled(true);                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);                  
-                    jRadioButtonAtari.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(true); 
-                    break;
-                  case MPR:
-                    jRadioButtonMPR.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C64;
-                    
-                    jRadioButtonC64.setEnabled(true);                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);                    
-                    jRadioButtonAtari.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(true); 
-                    break;
-                  case AY:
-                    jRadioButtonAY.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    
-                    project.targetType=TargetType.C128Z;
-                    
-                    jRadioButtonC64.setEnabled(true);                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);                    
-                    jRadioButtonAtari.setEnabled(false);
-                    jRadioButtonOdyssey.setEnabled(true); 
-                    
-                    break;
-                  case VSF:
-                    jRadioButtonVSF.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                                        
-                    project.targetType=TargetType.C64;                    
-                    
-                    jRadioButtonC64.setEnabled(true);                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);
-                    jRadioButtonOdyssey.setEnabled(true);                     
-                    jRadioButtonAtari.setEnabled(false);
-                    break;
-                  case BIN:
-                    jRadioButtonBIN.setSelected(true);
-                    jSpinnerCRT.setEnabled(false);
-                    
-                    project.targetType=TargetType.ODYSSEY;                    
-                    jRadioButtonOdyssey.setSelected(true);
-                    
-                    jRadioButtonC64.setEnabled(true);                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);                    
-                    jRadioButtonAtari.setEnabled(true);
-                    jRadioButtonOdyssey.setEnabled(true); 
-                    
-                    jSpinnerAddr.setEnabled(true);
-                    break;
-                  case UND:
-                    jRadioButtonSID.setSelected(false);
-                    jRadioButtonMUS.setSelected(false);
-                    jRadioButtonPRG.setSelected(false);
-                    jRadioButtonMPR.setSelected(false);
-                    
-                    jRadioButtonC64.setEnabled(true);
-                    project.targetType=TargetType.C64;
-                    
-                    jRadioButtonC1541.setEnabled(true);
-                    jRadioButtonC128.setEnabled(true);
-                    jRadioButtonVic20.setEnabled(true);
-                    jRadioButtonPlus4.setEnabled(true);
-                    jSpinnerCRT.setEnabled(false);
-                    jSpinnerAddr.setEnabled(false);
-                    jRadioButtonAtari.setEnabled(true);
-                    jRadioButtonOdyssey.setEnabled(true); 
-                    break;
-                }
-            } catch (FileNotFoundException e) {
-                JOptionPane.showMessageDialog(this, "File not found.", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch(IOException e) {
-                JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+              project.targetType = TargetType.C64;
+              jRadioButtonC64.setSelected(true);
 
-            project.fileType=project.fileType.getFileType(project.inB, project.file.endsWith("bin"));
-            jTextAreaRelocate.setText(getRelocateDesc());
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonOdyssey.setEnabled(false);
+
+              break;
+            case SID:
+              jRadioButtonSID.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C64;
+              jRadioButtonC64.setSelected(true);
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);
+              jRadioButtonC128Z.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(false);
+              break;
+            case NSF: // we did not have jet a NES target machine
+              jRadioButtonNSF.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              jRadioButtonC64.setSelected(false);
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);
+              jRadioButtonC128Z.setEnabled(false);
+              jRadioButtonAtari.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(false);
+              break;
+            case SAP:
+              jRadioButtonSAP.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.ATARI;
+              jRadioButtonAtari.setSelected(true);
+
+              jRadioButtonAtari.setEnabled(true);
+              jRadioButtonC64.setEnabled(false);
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);
+              jRadioButtonC128Z.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(false);
+              break;
+            case MUS:
+              jRadioButtonMUS.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC64.setEnabled(false);
+              jRadioButtonC1541.setEnabled(false);
+              jRadioButtonC128.setEnabled(false);
+              jRadioButtonVic20.setEnabled(false);
+              jRadioButtonPlus4.setEnabled(false);
+              jRadioButtonAtari.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(false);
+              break;
+            case PRG:
+              jRadioButtonPRG.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonAtari.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(true);
+              break;
+            case MPR:
+              jRadioButtonMPR.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonAtari.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(true);
+              break;
+            case AY:
+              jRadioButtonAY.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C128Z;
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonAtari.setEnabled(false);
+              jRadioButtonOdyssey.setEnabled(true);
+
+              break;
+            case VSF:
+              jRadioButtonVSF.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonOdyssey.setEnabled(true);
+              jRadioButtonAtari.setEnabled(false);
+              break;
+            case BIN:
+              jRadioButtonBIN.setSelected(true);
+              jSpinnerCRT.setEnabled(false);
+
+              project.targetType = TargetType.ODYSSEY;
+              jRadioButtonOdyssey.setSelected(true);
+
+              jRadioButtonC64.setEnabled(true);
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jRadioButtonAtari.setEnabled(true);
+              jRadioButtonOdyssey.setEnabled(true);
+
+              jSpinnerAddr.setEnabled(true);
+              break;
+            case UND:
+              jRadioButtonSID.setSelected(false);
+              jRadioButtonMUS.setSelected(false);
+              jRadioButtonPRG.setSelected(false);
+              jRadioButtonMPR.setSelected(false);
+
+              jRadioButtonC64.setEnabled(true);
+              project.targetType = TargetType.C64;
+
+              jRadioButtonC1541.setEnabled(true);
+              jRadioButtonC128.setEnabled(true);
+              jRadioButtonVic20.setEnabled(true);
+              jRadioButtonPlus4.setEnabled(true);
+              jSpinnerCRT.setEnabled(false);
+              jSpinnerAddr.setEnabled(false);
+              jRadioButtonAtari.setEnabled(true);
+              jRadioButtonOdyssey.setEnabled(true);
+              break;
+          }
+        } catch (FileNotFoundException e) {
+          JOptionPane.showMessageDialog(this, "File not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+          JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        project.fileType = project.fileType.getFileType(project.inB, project.file.endsWith("bin"));
+        jTextAreaRelocate.setText(getRelocateDesc());
+      }
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
     private void jRadioButtonAtariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAtariActionPerformed
-        project.targetType=TargetType.ATARI;
+      project.targetType = TargetType.ATARI;
     }//GEN-LAST:event_jRadioButtonAtariActionPerformed
 
     private void jRadioButtonOdysseyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOdysseyActionPerformed
-        project.targetType=TargetType.ODYSSEY;
+      project.targetType = TargetType.ODYSSEY;
     }//GEN-LAST:event_jRadioButtonOdysseyActionPerformed
 
     private void jSpinnerAddrStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerAddrStateChanged
-        project.binAddress=(Integer)jSpinnerAddr.getValue();
+      project.binAddress = (Integer) jSpinnerAddr.getValue();
     }//GEN-LAST:event_jSpinnerAddrStateChanged
 
   private void jButtonAddViceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddViceActionPerformed
-    if (project.memoryFlags==null) project.memoryFlags=new byte[0x10000];
-      int retValue=memFileChooser.showOpenDialog(this);
-      if (retValue==JFileChooser.APPROVE_OPTION) {
-        m_prefNode.put(LAST_DIR2_FILE, memFileChooser.getSelectedFile().getPath());
-
-        String file=memFileChooser.getSelectedFile().getAbsolutePath();
-        MemoryFlags memoryFlags;
-        try {
-          memoryFlags = ViceMemMapParser.parseViceMemMap(file);
-          project.memoryFlags=memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
-          }          
-        }
-  }//GEN-LAST:event_jButtonAddViceActionPerformed
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JProjectDialog dialog = new JProjectDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    if (project.memoryFlags == null) {
+      project.memoryFlags = new byte[0x10000];
     }
+    int retValue = memFileChooser.showOpenDialog(this);
+    if (retValue == JFileChooser.APPROVE_OPTION) {
+      m_prefNode.put(LAST_DIR2_FILE, memFileChooser.getSelectedFile().getPath());
+
+      String file = memFileChooser.getSelectedFile().getAbsolutePath();
+      MemoryFlags memoryFlags;
+      try {
+        memoryFlags = ViceMemMapParser.parseViceMemMap(file);
+        project.memoryFlags = memoryFlags.orMemory(memoryFlags.getMemoryState(0, 0x10000), project.memoryFlags);
+      } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
+      }
+    }
+  }//GEN-LAST:event_jButtonAddViceActionPerformed
+
+  private void jButtonInitApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInitApplyActionPerformed
+    optionSIDLD();
+  }//GEN-LAST:event_jButtonInitApplyActionPerformed
+
+  /**
+   * Apply SIDLD flags to memory
+   */
+  private void optionSIDLD() {
+    if (project == null) {
+      JOptionPane.showMessageDialog(this, "No project are actually being used.", "Warning", JOptionPane.WARNING_MESSAGE);
+    } else {
+      int res = JOptionPane.showConfirmDialog(this, "Confirm to apply SIDLD memory flags to code/data in table?", "Information", JOptionPane.YES_NO_OPTION);
+      if (res == JFileChooser.APPROVE_OPTION) {
+
+        for (int i = 0; i < project.memoryFlags.length; i++) {
+          project.memory[i].isData = (project.memoryFlags[i]
+                  & (memoryState.MEM_READ | memoryState.MEM_READ_FIRST
+                  | memoryState.MEM_WRITE | memoryState.MEM_WRITE_FIRST
+                  | memoryState.MEM_SAMPLE)) != 0;
+
+          project.memory[i].isCode = (project.memoryFlags[i]
+                  & (memoryState.MEM_EXECUTE | memoryState.MEM_EXECUTE_FIRST)) != 0;
+
+          // code execution has priority over data access
+          if (project.memory[i].isCode) {
+            project.memory[i].isData = false;
+          }
+        }
+        if (option.pedantic) {
+          JOptionPane.showMessageDialog(this, "Operation done.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+    }
+  }
+
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    try {
+      for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          javax.swing.UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (ClassNotFoundException ex) {
+      java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+      java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+      java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+      java.util.logging.Logger.getLogger(JProjectDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    //</editor-fold>
+    //</editor-fold>
+
+    /* Create and display the dialog */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        JProjectDialog dialog = new JProjectDialog(new javax.swing.JFrame(), true, new Option());
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+          @Override
+          public void windowClosing(java.awt.event.WindowEvent e) {
+            System.exit(0);
+          }
+        });
+        dialog.setVisible(true);
+      }
+    });
+  }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroupFileType;
@@ -1314,6 +1411,7 @@ public class JProjectDialog extends javax.swing.JDialog {
   private javax.swing.JButton jButtonClose;
   private javax.swing.JButton jButtonEdit;
   private javax.swing.JButton jButtonInit;
+  private javax.swing.JButton jButtonInitApply;
   private javax.swing.JButton jButtonPatchAdd;
   private javax.swing.JButton jButtonPatchRemove;
   private javax.swing.JButton jButtonPatchRemove1;

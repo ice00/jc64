@@ -132,7 +132,6 @@ public class TransformingClassLoader extends ClassLoader {
    */
   private byte[] transformBytecode(byte[] originalBytecode, String className) {
     try {
-      System.out.println("Transforming: " + className);
       ClassReader cr = new ClassReader(originalBytecode);
       ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
       ClassVisitor cv = new ExitCallClassAdapter(cw);

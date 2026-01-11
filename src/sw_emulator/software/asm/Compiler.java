@@ -156,7 +156,11 @@ public class Compiler {
     args[1] = "-o";
     args[2] = output.getAbsolutePath();
     
-    Set<String> kickAssemblerPackages = Set.of("kickass");
+    Set<String> kickAssemblerPackages = Set.of(
+      "kickass",
+      "sw_emulator.software.asm"
+    );
+
     
     String result = SafeLibraryExecutor.executeInIsolatedClassLoader(
         "kickass.KickAssembler", args, kickAssemblerPackages, option

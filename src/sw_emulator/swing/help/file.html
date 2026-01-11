@@ -15,7 +15,7 @@
   The project windows gives you the ability to insert:
     <ul>
      <li><b>Project name:</b> a name to give to the project</li>
-     <li><b>File to disassemble:</b> it let you choose the file that you want to disassemble. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF, AY) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemble using the spinner<br>
+     <li><b>File to disassemble:</b> it let you choose the file that you want to disassemble. Once done, you will see the type (SID, MUS, PRG, MPG, CRT, VSF, AY, NSF, SAP, BIN) detected and some information extracted from the file. In case of a cartridge you have to select the number of chip to disassemble using the spinner<br>
         Once selected the file will remain inside the DIS file as an internal copy, so if you get a DIS file and want to see the original binary, you can use the save function after the Select buttom to create a copy of this file.
         You can still change the file used inside a DIS by reading another one over it. This can be used when you are analysing program with a common core, so all what you have done before can be as base for the new analysins.
      </li>
@@ -27,10 +27,16 @@
              <li><b>C128</b></li>
              <li><b>VIC20</b></li>
              <li><b>PLUS4</b></li>
+             <li><b>Atari</b></li>
            </ul></li>
             <li>Z80:
                <ul>
                    <li><b>C128</b></li>  
+               </ul>  
+            </li>
+              <li>I8048:
+               <ul>
+                   <li><b>Odyssey/Videopack</b></li>  
                </ul>  
             </li>
          </ul>
@@ -45,14 +51,15 @@
            </ol>
          If you have such files you can simple use <b>Add next</b> button to add one by one. If you want to reset the situation, just use the <b>clear</b>
           button or if you want a memory marked as all of code, than use <b>init</b> button.<br>
-          Take present that you must apply the use of SIDLD with the function into the option menu
+          Take present that you must apply the use of SIDLD with the <b>Apply</b> button. If you have the memmapshow log file from Vice, you can use it with <b>Add Vice mem map</b> button.
      </li>
      <li><b>Edit Constant Table:</b> create constants that you can associate to better format the code. 
          The constant that start with a char and not contains +, -, /, *, &lt; , &gt;  are assumed as true constant, all the others are assumed to be relative to other constants (it is left to the user to declare them correctly and it can be used even labels that will not be refactored when changing  the name).<br>
-         You can create constant of type 0..9, so you can then have different constants for the same value. It is allowed to create constant for value over 255, and so it will be used only in data declared as word.<br>
+         You can create constant of type 0..9 (and with Shift 0..9), so you can then have different constants for the same value. It is allowed to create constant for value over 255, and so it will be used only in data declared as word.<br>
          With the right key press onto one column, you can load or save those values to disk. Ctrl+F will let you find and hex address into the table for fast positioning.
      <p align="center"><img src="./constant1.png"></p>   
-     <p>By pressing "Add Constant comment" you can add a comment to the selected constant.</p>
+     <p>By pressing <b>Add Constant comment</b> you can add a comment to the selected constant.</p>
+     <p>You can delete the comment with <b>Remove constant comment</b></p>
      </li>
      <li><b>Edit Relocate table:</b> you can insert a list of addresses that are code relocated.<br>
          For example: this code takes the contents from $8000 to $8CFF and relocates it to $C000:$CCFF

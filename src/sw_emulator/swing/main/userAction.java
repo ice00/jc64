@@ -74,8 +74,8 @@ public interface userAction {
   /** Mark memory of data kind */
   public static final int MEM_MARKDATA = 15;
   
-  /** Apply SIDLD of option */
-  public static final int OPTION_SIDLD = 16;
+  /** Open constant table */
+  public static final int OPTION_CONSTANTS = 16;
   
   /** Help contents */
   public static final int HELP_CONTENTS = 17;

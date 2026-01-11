@@ -51,21 +51,17 @@ public class ViceMemMapParser {
 
       while ((line = br.readLine()) != null) {
 
-        // Scarta tutto ciò che non inizia con "xxxx:"
-        if (!line.matches("^[0-9A-Fa-f]{4}:.*")) {
-          continue;
-        }
-
+        // Skip all that not starts with "xxxx:"
+        if (!line.matches("^[0-9A-Fa-f]{4}:.*")) continue;
+        
         Matcher m = LINE.matcher(line);
-        if (!m.matches()) {
-          continue;
-        }
+        if (!m.matches()) continue;
 
         int address = Integer.parseInt(m.group(1), 16);
 
-        String ioFlags = m.group(2); // ignorati
-        String romFlags = m.group(3); // ignorati
-        String ramFlags = m.group(4); // *** colonna RAM ***
+        String ioFlags = m.group(2);  // ignored
+        String romFlags = m.group(3); // ignored
+        String ramFlags = m.group(4); // *** coloum RAM ***
 
         byte sidFlags = 0;
 
