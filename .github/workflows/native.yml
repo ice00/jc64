@@ -17,12 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install GraalVM
-        uses: graalvm/setup-graalvm@v1
+        - name: Install GraalVM
+         uses: graalvm/setup-graalvm@v1
         with:
-          version: '22.3.2'
-          java-version: '17'
-          components: 'native-image'
+            distribution: 'graalvm'
+            java-version: '17'
+            components: 'native-image'
+
 
       - name: Install UPX (Linux)
         if: runner.os == 'Linux'
