@@ -17,13 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- Linux: download Liberica Full (contains NIK) and install system libs; fallback to NIK if needed ---
-      - name: Install Liberica Full (Linux amd64) and system libs
+      - name: Install Liberica Full and run native-image (Linux)
         if: runner.os == 'Linux'
         run: |
           set -euo pipefail
 
-          # URL Liberica Full (contains NIK in the Full distribution)
+          # URL Liberica Full (Full distribution includes NIK/native-image)
           URL="https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-linux-amd64.tar.gz"
           TARBALL=$(basename "$URL")
 
@@ -46,7 +45,7 @@ jobs:
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
-          # determine extracted directory without piping tar to head (avoids SIGPIPE)
+          # find extracted directory reliably
           EX_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
           if [ -z "$EX_DIR" ]; then
             echo "ERROR: could not find extracted Liberica directory under /opt"
@@ -54,65 +53,42 @@ jobs:
             exit 2
           fi
 
-          echo "/opt/${EX_DIR}/bin" >> $GITHUB_PATH
-          echo "JAVA_HOME=/opt/${EX_DIR}" >> $GITHUB_ENV
-          sudo chmod -R a+rx /opt/${EX_DIR}/bin
+          LIB_DIR="/opt/${EX_DIR}"
+          echo "Found Liberica at: ${LIB_DIR}"
 
-          # Install system libs required by AWT/Swing
+          # make sure native-image is executable and available in this shell
+          if [ -x "${LIB_DIR}/bin/native-image" ]; then
+            echo "native-image found in ${LIB_DIR}/bin"
+          else
+            echo "native-image non trovato o non eseguibile in ${LIB_DIR}/bin"
+            ls -la "${LIB_DIR}/bin" || true
+            exit 2
+          fi
+
+          # install system libs required by AWT/Swing
           sudo apt-get update
           sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
 
-          # Verify native-image presence; if missing, download NIK Full as fallback
-          if ! command -v native-image >/dev/null 2>&1; then
-            echo "native-image non trovato nella Liberica Full. Provo a scaricare NIK 25 (fallback)."
+          # Export PATH in the same shell so we can run native-image immediately
+          export PATH="${LIB_DIR}/bin:$PATH"
+          export JAVA_HOME="${LIB_DIR}"
 
-            NIK_VERSION=25.0.1
-            NIK_TARBALL=bellsoft-liberica-nik-full-${NIK_VERSION}-linux-amd64.tar.gz
-            NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
+          echo "native-image version:"
+          native-image --version
 
-            echo "Controllo URL: ${NIK_URL}"
-            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${NIK_URL}" || true)
-            echo "HTTP status: ${HTTP_STATUS}"
+          # Build fat JAR with Ant (if not already built)
+          ant -f build-github.xml jar
 
-            if [ "${HTTP_STATUS}" != "200" ]; then
-              echo "ERRORE: NIK tarball non trovato (HTTP ${HTTP_STATUS})."
-              echo "Verifica la pagina ufficiale NIK per la versione corretta: https://bell-sw.com/pages/downloads/native-image-kit/"
-              exit 2
-            fi
+          # Run native-image using the native-image from the extracted Liberica Full
+          native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
 
-            echo "Downloading NIK from: ${NIK_URL}"
-            curl -fSL --retry 5 --retry-delay 5 -C - -o "${NIK_TARBALL}" "${NIK_URL}"
-
-            echo "Checking MIME type for NIK tarball:"
-            file --brief --mime-type "${NIK_TARBALL}" || true
-
-            if ! gzip -t "${NIK_TARBALL}" >/dev/null 2>&1; then
-              echo "ERROR: gzip integrity check failed for ${NIK_TARBALL}"
-              exit 2
-            fi
-
-            sudo tar -xzf "${NIK_TARBALL}" -C /opt
-
-            NIK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica-nik' | head -n 1)
-            if [ -z "$NIK_DIR" ]; then
-              # fallback: try any bellsoft-liberica dir if naming differs
-              NIK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
-            fi
-
-            if [ -z "$NIK_DIR" ]; then
-              echo "ERROR: could not find extracted NIK directory under /opt"
-              ls -la /opt
-              exit 2
-            fi
-
-            echo "/opt/${NIK_DIR}/bin" >> $GITHUB_PATH
-            echo "JAVA_HOME=/opt/${NIK_DIR}" >> $GITHUB_ENV
-            sudo chmod -R a+rx /opt/${NIK_DIR}/bin
-
-            echo "NIK installed to /opt/${NIK_DIR}"
-          else
-            echo "native-image trovato: $(which native-image)"
+          # compress with upx if available
+          if command -v upx >/dev/null 2>&1; then
+            upx --best --lzma jc64 || true
           fi
+
+          # list produced binary
+          ls -lh jc64* || true
 
       # --- macOS and Windows: install GraalVM native-image as before ---
       - name: Install GraalVM (macOS and Windows)
@@ -123,11 +99,7 @@ jobs:
           java-version: '17'
           components: 'native-image'
 
-      # Install UPX
-      - name: Install UPX (Linux)
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y upx
-
+      # Install UPX (macOS/Windows) and Linux UPX for later steps (Linux handled above)
       - name: Install UPX (macOS)
         if: runner.os == 'macOS'
         run: brew install upx
@@ -136,8 +108,9 @@ jobs:
         if: runner.os == 'Windows'
         run: choco install upx
 
-      # Build JAR (fat jar) using Ant
-      - name: Build JAR with Ant
+      # Build JAR (fat jar) for macOS/Windows
+      - name: Build JAR with Ant (macOS/Windows)
+        if: runner.os != 'Linux'
         run: ant -f build-github.xml jar
 
       # Upload JAR artifact
@@ -147,46 +120,21 @@ jobs:
           name: jc64-jar-${{ runner.os }}
           path: dist/jc64.jar
 
-      # Verify native-image (Linux) - optional extra check
-      - name: Verify native-image (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          echo "PATH: $PATH"
-          which native-image || true
-          native-image --version
-
-      # Native Image build Linux using Liberica Full / NIK
-      - name: Build Native Image (Linux with Liberica/NIK)
-        if: runner.os == 'Linux'
-        run: |
-          set -euo pipefail
-          echo "Using native-image from: $(which native-image || true)"
-          native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
-
-      # Native Image build macOS using GraalVM (unchanged)
+      # Native Image build macOS using GraalVM
       - name: Build Native Image (macOS)
         if: runner.os == 'macOS'
-        run: native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+        run: |
+          native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+          # UPX not supported on macOS runner by default; skip compression
 
-      # Native Image build Windows using GraalVM (unchanged)
+      # Native Image build Windows using GraalVM
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
-        run: native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+        run: |
+          native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+          upx --best --lzma jc64.exe || true
 
-      # UPX compression
-      - name: Compress with UPX (Linux)
-        if: runner.os == 'Linux'
-        run: upx --best --lzma jc64
-
-      - name: Compress with UPX (Windows)
-        if: runner.os == 'Windows'
-        run: upx --best --lzma jc64.exe
-
-      - name: Skip UPX on macOS
-        if: runner.os == 'macOS'
-        run: echo "UPX not supported on macOS, skipping"
-
-      # Upload final executable
+      # Upload final executable(s)
       - name: Upload Native Executable
         uses: actions/upload-artifact@v4
         with:
