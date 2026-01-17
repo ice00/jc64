@@ -36,9 +36,6 @@ jobs:
           echo "MIME type:"
           file --brief --mime-type "$TARBALL" || true
 
-          echo "Tar listing (first 40 entries):"
-          tar -tzf "$TARBALL" | head -n 40 || true
-
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
