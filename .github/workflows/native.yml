@@ -40,13 +40,18 @@ jobs:
         run: ant -f build-github.xml jar
 
 
-      - name: Build Native Image
-        run: |
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            native-image --no-fallback -jar dist/jc64.jar jc64.exe
-          else
-            native-image --no-fallback -jar dist/jc64.jar jc64
-          fi
+      - name: Build Native Image (Linux)
+        if: runner.os == 'Linux'
+        run: native-image --no-fallback -jar dist/jc64.jar jc64
+
+      - name: Build Native Image (macOS)
+        if: runner.os == 'macOS'
+        run: native-image --no-fallback -jar dist/jc64.jar jc64
+
+      - name: Build Native Image (Windows)
+        if: runner.os == 'Windows'
+        run: native-image --no-fallback -jar dist/jc64.jar jc64.exe
+
 
       - name: Compress with UPX
         run: |
