@@ -1,0 +1,22 @@
+
+
+{
+  "resources": {
+    "includes": [
+      { "pattern": "com/formdev/flatlaf/.*\\.properties$" },
+      { "pattern": "com/formdev/flatlaf/.*\\.json$" },
+      { "pattern": "com/formdev/flatlaf/.*\\.png$" },
+      { "pattern": "com/formdev/flatlaf/.*\\.svg$" },
+
+      { "pattern": "com/formdev/flatlaf/intellijthemes/.*\\.properties$" },
+      { "pattern": "com/formdev/flatlaf/intellijthemes/.*\\.json$" },
+      { "pattern": "com/formdev/flatlaf/intellijthemes/.*\\.png$" },
+      { "pattern": "com/formdev/flatlaf/intellijthemes/.*\\.svg$" },
+
+      { "pattern": ".*\\.properties$" },
+      { "pattern": ".*\\.png$" },
+      { "pattern": ".*\\.gif$" },
+      { "pattern": ".*\\.svg$" }
+    ]
+  }
+}

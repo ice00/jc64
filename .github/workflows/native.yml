@@ -47,18 +47,24 @@ jobs:
             path: dist/jc64.jar
 
 
+    - name: Build Native Image (Linux)
+    if: runner.os == 'Linux'
+    run: native-image \
+      --no-fallback \
+      -H:ConfigurationFileDirectories=native-image-config \
+      -jar dist/jc64.jar jc64
 
-      - name: Build Native Image (Linux)
-        if: runner.os == 'Linux'
-        run: native-image --no-fallback -jar dist/jc64.jar jc64
+    - name: Build Native Image (macOS)
+    if: runner.os == 'macOS'
+    run: native-image \
+      --no-fallback \
+      -H:ConfigurationFileDirectories=native-image-config \
+      -jar dist/jc64.jar jc64
 
-      - name: Build Native Image (macOS)
-        if: runner.os == 'macOS'
-        run: native-image --no-fallback -jar dist/jc64.jar jc64
+    - name: Build Native Image (Windows)
+    if: runner.os == 'Windows'
+    run: native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
 
-      - name: Build Native Image (Windows)
-        if: runner.os == 'Windows'
-        run: native-image --no-fallback -jar dist/jc64.jar jc64
 
 
 

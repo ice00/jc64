@@ -1,0 +1,53 @@
+[
+  {
+    "name": "com.formdev.flatlaf.FlatLaf",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.FlatLightLaf",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.FlatDarkLaf",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.FlatDarculaLaf",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.FlatIntelliJLaf",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+
+  {
+    "name": "com.formdev.flatlaf.intellijthemes.FlatArcIJTheme",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+
+  {
+    "name": "javax.swing.UIManager",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "javax.swing.UIManager$LookAndFeelInfo",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  }
+]
