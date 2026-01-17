@@ -36,9 +36,14 @@
         <mkdir dir="${dist.dir}"/>
 
         <jar destfile="${dist.dir}/jc64.jar" basedir="${classes.dir}">
-            <!-- Include resources if present -->
+            <manifest>
+                <attribute name="Main-Class" value="sw_emulator.swing.main.JC64Dis"/>
+            </manifest>
+
+            <!-- Include risorse non-java -->
             <fileset dir="${src.dir}" excludes="**/*.java"/>
         </jar>
     </target>
+
 
 </project>
