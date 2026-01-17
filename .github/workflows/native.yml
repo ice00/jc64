@@ -64,11 +64,21 @@ jobs:
 
           # Verify native-image presence; if missing, download NIK Full as fallback
           if ! command -v native-image >/dev/null 2>&1; then
-            echo "native-image non trovato nella Liberica Full. Scarico NIK Full (fallback)."
+            echo "native-image non trovato nella Liberica Full. Provo a scaricare NIK 25 (fallback)."
 
-            NIK_VERSION=22.3.1
+            NIK_VERSION=25.0.1
             NIK_TARBALL=bellsoft-liberica-nik-full-${NIK_VERSION}-linux-amd64.tar.gz
             NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
+
+            echo "Controllo URL: ${NIK_URL}"
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${NIK_URL}" || true)
+            echo "HTTP status: ${HTTP_STATUS}"
+
+            if [ "${HTTP_STATUS}" != "200" ]; then
+              echo "ERRORE: NIK tarball non trovato (HTTP ${HTTP_STATUS})."
+              echo "Verifica la pagina ufficiale NIK per la versione corretta: https://bell-sw.com/pages/downloads/native-image-kit/"
+              exit 2
+            fi
 
             echo "Downloading NIK from: ${NIK_URL}"
             curl -fSL --retry 5 --retry-delay 5 -C - -o "${NIK_TARBALL}" "${NIK_URL}"
