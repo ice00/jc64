@@ -31,19 +31,27 @@
         </javac>
     </target>
 
-    <!-- === Create JAR === -->
+    <!-- === Create FAT JAR (include libs) === -->
     <target name="jar" depends="compile">
         <mkdir dir="${dist.dir}"/>
 
-        <jar destfile="${dist.dir}/jc64.jar" basedir="${classes.dir}">
+        <jar destfile="${dist.dir}/jc64.jar">
+
+            <!-- Manifest -->
             <manifest>
                 <attribute name="Main-Class" value="sw_emulator.swing.main.JC64Dis"/>
             </manifest>
 
-            <!-- Include risorse non-java -->
+            <!-- Include compiled classes -->
+            <fileset dir="${classes.dir}"/>
+
+            <!-- Include resources -->
             <fileset dir="${src.dir}" excludes="**/*.java"/>
+
+            <!-- Include all JARs from lib/ -->
+            <zipgroupfileset dir="lib" includes="**/*.jar"/>
+
         </jar>
     </target>
-
 
 </project>
