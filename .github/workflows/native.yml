@@ -46,7 +46,14 @@ jobs:
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
-          EX_DIR=$(tar -tzf "$TARBALL" | head -1 | cut -f1 -d"/")
+          # determine extracted directory without piping tar to head (avoids SIGPIPE)
+          EX_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
+          if [ -z "$EX_DIR" ]; then
+            echo "ERROR: could not find extracted Liberica directory under /opt"
+            ls -la /opt
+            exit 2
+          fi
+
           echo "/opt/${EX_DIR}/bin" >> $GITHUB_PATH
           echo "JAVA_HOME=/opt/${EX_DIR}" >> $GITHUB_ENV
           sudo chmod -R a+rx /opt/${EX_DIR}/bin
@@ -75,7 +82,19 @@ jobs:
             fi
 
             sudo tar -xzf "${NIK_TARBALL}" -C /opt
-            NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
+
+            NIK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica-nik' | head -n 1)
+            if [ -z "$NIK_DIR" ]; then
+              # fallback: try any bellsoft-liberica dir if naming differs
+              NIK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
+            fi
+
+            if [ -z "$NIK_DIR" ]; then
+              echo "ERROR: could not find extracted NIK directory under /opt"
+              ls -la /opt
+              exit 2
+            fi
+
             echo "/opt/${NIK_DIR}/bin" >> $GITHUB_PATH
             echo "JAVA_HOME=/opt/${NIK_DIR}" >> $GITHUB_ENV
             sudo chmod -R a+rx /opt/${NIK_DIR}/bin
