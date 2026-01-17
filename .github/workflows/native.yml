@@ -53,13 +53,19 @@ jobs:
         run: native-image --no-fallback -jar dist/jc64.jar jc64.exe
 
 
-      - name: Compress with UPX
-        run: |
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            upx --best --lzma jc64.exe
-          else
-            upx --best --lzma jc64
-          fi
+      - name: Compress with UPX (Linux)
+        if: runner.os == 'Linux'
+        run: upx --best --lzma jc64
+
+      - name: Compress with UPX (Windows)
+        if: runner.os == 'Windows'
+        run: upx --best --lzma jc64.exe
+
+        # macOS: NO UPX
+      - name: Skip UPX on macOS
+        if: runner.os == 'macOS'
+        run: echo "UPX not supported on macOS, skipping"
+
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
