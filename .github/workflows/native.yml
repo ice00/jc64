@@ -19,35 +19,54 @@ jobs:
         uses: actions/checkout@v4
 
       # --- Linux: install Liberica NIK; macOS/Windows: keep GraalVM setup as before ---
-      - name: Install Liberica NIK (Linux amd64)
+           - name: Install Liberica Full (Linux amd64)
         if: runner.os == 'Linux'
         run: |
           set -euo pipefail
-          NIK_VERSION=22.3.1
-          NIK_TARBALL=bellsoft-liberica-nik-full-${NIK_VERSION}-linux-amd64.tar.gz
-          NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
-          echo "Downloading Liberica NIK from: ${NIK_URL}"
-          # -f : fail on HTTP errors; -S show errors; -L follow redirects; -o output file
-          curl -fSL -o "${NIK_TARBALL}" "${NIK_URL"
-          # Quick sanity checks
+
+          # URL Liberica Full che hai fornito
+          URL="https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-linux-amd64.tar.gz"
+          TARBALL=$(basename "$URL")
+
+          echo "Downloading: $URL"
+          curl -fSL -o "$TARBALL" "$URL"
+
           echo "Downloaded file size:"
-          ls -lh "${NIK_TARBALL}"
-          # Check MIME/type to ensure it's a gzip tarball
-          FILE_TYPE=$(file --brief --mime-type "${NIK_TARBALL}" || true)
-          echo "Detected MIME type: ${FILE_TYPE}"
-          if [[ "${FILE_TYPE}" != "application/gzip" && "${FILE_TYPE}" != "application/x-gzip" ]]; then
-            echo "ERROR: downloaded file is not a gzip tarball. Showing first 200 bytes for debugging:"
-            head -c 200 "${NIK_TARBALL}" || true
-            exit 2
-          fi
-          # Extract to /opt
+          ls -lh "$TARBALL"
+
+          echo "MIME type:"
+          file --brief --mime-type "$TARBALL" || true
+
+          # sanity check: show first lines of tar listing
+          echo "Tar listing (first 40 entries):"
+          tar -tzf "$TARBALL" | head -n 40
+
+          # extract to /opt
           sudo mkdir -p /opt
-          sudo tar -xzf "${NIK_TARBALL}" -C /opt
-          # Find extracted dir and add bin to PATH
-          NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
-          echo "/opt/${NIK_DIR}/bin" >> $GITHUB_PATH
-          echo "JAVA_HOME=/opt/${NIK_DIR}" >> $GITHUB_ENV
-          sudo chmod -R a+rx /opt/${NIK_DIR}/bin
+          sudo tar -xzf "$TARBALL" -C /opt
+
+          # find extracted dir and add bin to PATH and JAVA_HOME
+          EX_DIR=$(tar -tzf "$TARBALL" | head -1 | cut -f1 -d"/")
+          echo "/opt/${EX_DIR}/bin" >> $GITHUB_PATH
+          echo "JAVA_HOME=/opt/${EX_DIR}" >> $GITHUB_ENV
+          sudo chmod -R a+rx /opt/${EX_DIR}/bin
+
+      - name: Install system libs required by AWT (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
+
+      - name: Verify native-image (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          echo "native-image path: $(which native-image || true)"
+          if ! command -v native-image >/dev/null 2>&1; then
+            echo "native-image non trovato. Se la tarball Full non include NIK, scarica NIK Full (vedi commento nel workflow)."
+            exit 1
+          fi
+          native-image --version
+
 
       - name: Install system libs required by AWT (Linux)
         if: runner.os == 'Linux'
