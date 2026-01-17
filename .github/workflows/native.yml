@@ -1,0 +1,62 @@
+name: Build Native Executables
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: '22.3.2'
+          java-version: '17'
+          components: 'native-image'
+
+      - name: Install UPX (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y upx
+
+      - name: Install UPX (macOS)
+        if: runner.os == 'macOS'
+        run: brew install upx
+
+      - name: Install UPX (Windows)
+        if: runner.os == 'Windows'
+        run: choco install upx
+
+      - name: Build JAR
+        run: ant clean jar
+
+      - name: Build Native Image
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            native-image --no-fallback -jar dist/jc64.jar jc64.exe
+          else
+            native-image --no-fallback -jar dist/jc64.jar jc64
+          fi
+
+      - name: Compress with UPX
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            upx --best --lzma jc64.exe
+          else
+            upx --best --lzma jc64
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jc64-${{ runner.os }}
+          path: |
+            jc64*
