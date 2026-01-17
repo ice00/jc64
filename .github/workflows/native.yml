@@ -1,4 +1,3 @@
-
 name: Build Native Executables
 
 on:
@@ -18,17 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- Linux: install Liberica NIK; macOS/Windows: keep GraalVM setup as before ---
-           - name: Install Liberica Full (Linux amd64)
+      # --- Linux: install Liberica Full (contains NIK) and system libs; fallback to NIK if needed ---
+      - name: Install Liberica Full (Linux amd64) and system libs
         if: runner.os == 'Linux'
         run: |
           set -euo pipefail
 
-          # URL Liberica Full che hai fornito
+          # URL Liberica Full (contains NIK in the Full distribution)
           URL="https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-linux-amd64.tar.gz"
           TARBALL=$(basename "$URL")
 
-          echo "Downloading: $URL"
+          echo "Downloading Liberica Full from: $URL"
           curl -fSL -o "$TARBALL" "$URL"
 
           echo "Downloaded file size:"
@@ -37,64 +36,47 @@ jobs:
           echo "MIME type:"
           file --brief --mime-type "$TARBALL" || true
 
-          # sanity check: show first lines of tar listing
           echo "Tar listing (first 40 entries):"
           tar -tzf "$TARBALL" | head -n 40
 
-          # extract to /opt
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
-          # find extracted dir and add bin to PATH and JAVA_HOME
           EX_DIR=$(tar -tzf "$TARBALL" | head -1 | cut -f1 -d"/")
           echo "/opt/${EX_DIR}/bin" >> $GITHUB_PATH
           echo "JAVA_HOME=/opt/${EX_DIR}" >> $GITHUB_ENV
           sudo chmod -R a+rx /opt/${EX_DIR}/bin
 
-      - name: Install system libs required by AWT (Linux)
-        if: runner.os == 'Linux'
-        run: |
+          # Install system libs required by AWT/Swing
           sudo apt-get update
           sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
 
-      - name: Verify native-image (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          echo "native-image path: $(which native-image || true)"
+          # Verify native-image presence; if missing, download NIK Full as fallback
           if ! command -v native-image >/dev/null 2>&1; then
-            echo "native-image non trovato. Se la tarball Full non include NIK, scarica NIK Full (vedi commento nel workflow)."
-            exit 1
+            echo "native-image non trovato nella Liberica Full. Scarico NIK Full (fallback)."
+
+            NIK_VERSION=22.3.1
+            NIK_TARBALL=bellsoft-liberica-nik-full-${NIK_VERSION}-linux-amd64.tar.gz
+            NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
+
+            echo "Downloading NIK from: ${NIK_URL}"
+            curl -fSL -o "${NIK_TARBALL}" "${NIK_URL}"
+
+            echo "Checking MIME type for NIK tarball:"
+            file --brief --mime-type "${NIK_TARBALL}" || true
+
+            sudo tar -xzf "${NIK_TARBALL}" -C /opt
+            NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
+            echo "/opt/${NIK_DIR}/bin" >> $GITHUB_PATH
+            echo "JAVA_HOME=/opt/${NIK_DIR}" >> $GITHUB_ENV
+            sudo chmod -R a+rx /opt/${NIK_DIR}/bin
+
+            echo "NIK installed to /opt/${NIK_DIR}"
+          else
+            echo "native-image trovato: $(which native-image)"
           fi
-          native-image --version
 
-
-      - name: Install system libs required by AWT (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
-
-      - name: Verify native-image (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          echo "PATH: $PATH"
-          which native-image || true
-          native-image --version
-
-
-      - name: Install system libs required by AWT (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig
-
-      - name: Verify native-image (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          echo "PATH: $PATH"
-          which native-image || true
-          native-image --version
-
+      # --- macOS and Windows: install GraalVM native-image as before ---
       - name: Install GraalVM (macOS and Windows)
         if: runner.os != 'Linux'
         uses: graalvm/setup-graalvm@v1
@@ -116,7 +98,7 @@ jobs:
         if: runner.os == 'Windows'
         run: choco install upx
 
-      # Build JAR (fat jar)
+      # Build JAR (fat jar) using Ant
       - name: Build JAR with Ant
         run: ant -f build-github.xml jar
 
@@ -127,12 +109,21 @@ jobs:
           name: jc64-jar-${{ runner.os }}
           path: dist/jc64.jar
 
-      # Native Image build Linux using Liberica NIK
-      - name: Build Native Image (Linux with Liberica NIK)
+      # Verify native-image (Linux) - optional extra check
+      - name: Verify native-image (Linux)
         if: runner.os == 'Linux'
-        env:
-          JAVA_HOME: /opt/${{ steps.find_nik_dir.outputs.nik_dir }}
-        run: native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+        run: |
+          echo "PATH: $PATH"
+          which native-image || true
+          native-image --version
+
+      # Native Image build Linux using Liberica Full / NIK
+      - name: Build Native Image (Linux with Liberica/NIK)
+        if: runner.os == 'Linux'
+        run: |
+          set -euo pipefail
+          echo "Using native-image from: $(which native-image || true)"
+          native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
 
       # Native Image build macOS using GraalVM (unchanged)
       - name: Build Native Image (macOS)
