@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- Linux: install Liberica Full (contains NIK) and system libs; fallback to NIK if needed ---
+      # --- Linux: download Liberica Full (contains NIK) and install system libs; fallback to NIK if needed ---
       - name: Install Liberica Full (Linux amd64) and system libs
         if: runner.os == 'Linux'
         run: |
@@ -36,9 +36,13 @@ jobs:
           echo "MIME type:"
           file --brief --mime-type "$TARBALL" || true
 
-          echo "Tar listing (first 40 entries):"
-          tar -tzf "$TARBALL" | head -n 40 || true
+          # verify gzip integrity
+          if ! gzip -t "$TARBALL" >/dev/null 2>&1; then
+            echo "ERROR: gzip integrity check failed for $TARBALL"
+            exit 2
+          fi
 
+          # extract to /opt
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
@@ -65,8 +69,10 @@ jobs:
             echo "Checking MIME type for NIK tarball:"
             file --brief --mime-type "${NIK_TARBALL}" || true
 
-            echo "Tar listing for NIK (first 40 entries):"
-            tar -tzf "${NIK_TARBALL}" | head -n 40 || true
+            if ! gzip -t "${NIK_TARBALL}" >/dev/null 2>&1; then
+              echo "ERROR: gzip integrity check failed for ${NIK_TARBALL}"
+              exit 2
+            fi
 
             sudo tar -xzf "${NIK_TARBALL}" -C /opt
             NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
