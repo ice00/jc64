@@ -50,7 +50,8 @@ jobs:
 
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
-        run: native-image --no-fallback -jar dist/jc64.jar jc64.exe
+        run: native-image --no-fallback -jar dist/jc64.jar jc64
+
 
 
       - name: Compress with UPX (Linux)
