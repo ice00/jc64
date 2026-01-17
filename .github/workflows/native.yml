@@ -66,10 +66,7 @@ jobs:
         if: runner.os == 'Linux'
         env:
           JAVA_HOME: /opt/${{ steps.find_nik_dir.outputs.nik_dir }}
-        run:
-          # Ensure native-image from Liberica NIK is on PATH (we added it via $GITHUB_PATH earlier)
-          echo "Using native-image from: $(which native-image || true)"
-          native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
+        run: native-image -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
 
       # Native Image build macOS using GraalVM (unchanged)
       - name: Build Native Image (macOS)
