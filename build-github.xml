@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jc64-github" default="jar" basedir=".">
+
+    <!-- === Directory structure === -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir" value="dist"/>
+
+    <!-- === Clean === -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- === Compile === -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               source="8"
+               target="8"
+               includeantruntime="false">
+
+            <!-- Classpath: include all JARs in lib/ -->
+            <classpath>
+                <fileset dir="lib" includes="**/*.jar"/>
+            </classpath>
+
+        </javac>
+    </target>
+
+    <!-- === Create JAR === -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+
+        <jar destfile="${dist.dir}/jc64.jar" basedir="${classes.dir}">
+            <!-- Include resources if present -->
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </jar>
+    </target>
+
+</project>

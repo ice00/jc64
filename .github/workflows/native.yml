@@ -37,7 +37,8 @@ jobs:
         run: choco install upx
 
       - name: Build JAR with Ant
-        run: ant clean jar
+        run: ant -f build-github.xml jar
+
 
       - name: Build Native Image
         run: |
