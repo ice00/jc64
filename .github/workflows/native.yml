@@ -37,7 +37,7 @@ jobs:
           file --brief --mime-type "$TARBALL" || true
 
           echo "Tar listing (first 40 entries):"
-          tar -tzf "$TARBALL" | head -n 40
+          tar -tzf "$TARBALL" | head -n 40 || true
 
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
@@ -64,6 +64,9 @@ jobs:
 
             echo "Checking MIME type for NIK tarball:"
             file --brief --mime-type "${NIK_TARBALL}" || true
+
+            echo "Tar listing for NIK (first 40 entries):"
+            tar -tzf "${NIK_TARBALL}" | head -n 40 || true
 
             sudo tar -xzf "${NIK_TARBALL}" -C /opt
             NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
