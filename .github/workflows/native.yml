@@ -24,6 +24,7 @@ jobs:
           java-version: '17'
           components: 'native-image'
 
+      # Install UPX
       - name: Install UPX (Linux)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y upx
@@ -36,56 +37,26 @@ jobs:
         if: runner.os == 'Windows'
         run: choco install upx
 
+      # Build JAR (fat jar)
       - name: Build JAR with Ant
         run: ant -f build-github.xml jar
 
-
+      # Upload JAR artifact
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-            name: jc64-jar-${{ runner.os }}
-            path: dist/jc64.jar
+          name: jc64-jar-${{ runner.os }}
+          path: dist/jc64.jar
 
-
-    - name: Build Native Image (Linux)
-    if: runner.os == 'Linux'
-    run: native-image \
-      --no-fallback \
-      -H:ConfigurationFileDirectories=native-image-config \
-      -jar dist/jc64.jar jc64
-
-    - name: Build Native Image (macOS)
-    if: runner.os == 'macOS'
-    run: native-image \
-      --no-fallback \
-      -H:ConfigurationFileDirectories=native-image-config \
-      -jar dist/jc64.jar jc64
-
-    - name: Build Native Image (Windows)
-    if: runner.os == 'Windows'
-    run: native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
-
-
-
-
-      - name: Compress with UPX (Linux)
+      # Native Image build
+      - name: Build Native Image (Linux)
         if: runner.os == 'Linux'
-        run: upx --best --lzma jc64
+        run: |
+          native-image \
+            --no-fallback \
+            -H:ConfigurationFileDirectories=native-image-config \
+            -jar dist/jc64.jar jc64
 
-      - name: Compress with UPX (Windows)
-        if: runner.os == 'Windows'
-        run: upx --best --lzma jc64.exe
-
-        # macOS: NO UPX
-      - name: Skip UPX on macOS
+      - name: Build Native Image (macOS)
         if: runner.os == 'macOS'
-        run: echo "UPX not supported on macOS, skipping"
-
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: jc64-${{ runner.os }}
-          path: |
-            jc64*
 
