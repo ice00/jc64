@@ -28,13 +28,16 @@ jobs:
           TARBALL=$(basename "$URL")
 
           echo "Downloading Liberica Full from: $URL"
-          curl -fSL -o "$TARBALL" "$URL"
+          curl -fSL --retry 5 --retry-delay 5 -C - -o "$TARBALL" "$URL"
 
           echo "Downloaded file size:"
           ls -lh "$TARBALL"
 
           echo "MIME type:"
           file --brief --mime-type "$TARBALL" || true
+
+          echo "Tar listing (first 40 entries):"
+          tar -tzf "$TARBALL" | head -n 40 || true
 
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
@@ -57,7 +60,7 @@ jobs:
             NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
 
             echo "Downloading NIK from: ${NIK_URL}"
-            curl -fSL -o "${NIK_TARBALL}" "${NIK_URL}"
+            curl -fSL --retry 5 --retry-delay 5 -C - -o "${NIK_TARBALL}" "${NIK_URL}"
 
             echo "Checking MIME type for NIK tarball:"
             file --brief --mime-type "${NIK_TARBALL}" || true
