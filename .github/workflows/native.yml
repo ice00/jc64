@@ -22,18 +22,46 @@ jobs:
       - name: Install Liberica NIK (Linux amd64)
         if: runner.os == 'Linux'
         run: |
-          set -e
-          # versione NIK per Java 17 (linux-amd64)
+          set -euo pipefail
           NIK_VERSION=22.3.1
           NIK_TARBALL=bellsoft-liberica-nik-full-${NIK_VERSION}-linux-amd64.tar.gz
-          curl -L -o ${NIK_TARBALL} https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}
-          sudo tar -xzf ${NIK_TARBALL} -C /opt
-          # trova la directory estratta e aggiungi la bin al PATH
-          NIK_DIR=$(tar -tzf ${NIK_TARBALL} | head -1 | cut -f1 -d"/")
+          NIK_URL="https://download.bell-sw.com/native-image-kit/${NIK_VERSION}/${NIK_TARBALL}"
+          echo "Downloading Liberica NIK from: ${NIK_URL}"
+          # -f : fail on HTTP errors; -S show errors; -L follow redirects; -o output file
+          curl -fSL -o "${NIK_TARBALL}" "${NIK_URL"
+          # Quick sanity checks
+          echo "Downloaded file size:"
+          ls -lh "${NIK_TARBALL}"
+          # Check MIME/type to ensure it's a gzip tarball
+          FILE_TYPE=$(file --brief --mime-type "${NIK_TARBALL}" || true)
+          echo "Detected MIME type: ${FILE_TYPE}"
+          if [[ "${FILE_TYPE}" != "application/gzip" && "${FILE_TYPE}" != "application/x-gzip" ]]; then
+            echo "ERROR: downloaded file is not a gzip tarball. Showing first 200 bytes for debugging:"
+            head -c 200 "${NIK_TARBALL}" || true
+            exit 2
+          fi
+          # Extract to /opt
+          sudo mkdir -p /opt
+          sudo tar -xzf "${NIK_TARBALL}" -C /opt
+          # Find extracted dir and add bin to PATH
+          NIK_DIR=$(tar -tzf "${NIK_TARBALL}" | head -1 | cut -f1 -d"/")
           echo "/opt/${NIK_DIR}/bin" >> $GITHUB_PATH
           echo "JAVA_HOME=/opt/${NIK_DIR}" >> $GITHUB_ENV
-          # rendi eseguibili i binari (precauzione)
           sudo chmod -R a+rx /opt/${NIK_DIR}/bin
+
+      - name: Install system libs required by AWT (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
+
+      - name: Verify native-image (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          echo "PATH: $PATH"
+          which native-image || true
+          native-image --version
+
 
       - name: Install system libs required by AWT (Linux)
         if: runner.os == 'Linux'
