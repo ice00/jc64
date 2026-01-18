@@ -1,5 +1,3 @@
-
-
 {
   "resources": {
     "includes": [
@@ -16,7 +14,11 @@
       { "pattern": ".*\\.properties$" },
       { "pattern": ".*\\.png$" },
       { "pattern": ".*\\.gif$" },
-      { "pattern": ".*\\.svg$" }
+      { "pattern": ".*\\.svg$" },
+
+      { "pattern": "org/fife/ui/rsyntaxtextarea/.*" },
+      { "pattern": "META-INF/services/.*" }
     ]
   }
 }
+

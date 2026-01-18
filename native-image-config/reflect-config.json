@@ -49,5 +49,17 @@
     "name": "javax.swing.UIManager$LookAndFeelInfo",
     "allDeclaredConstructors": true,
     "allDeclaredMethods": true
+  },
+  {
+    "name": "org.fife.ui.rsyntaxtextarea.DefaultTokenMakerFactory",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.fife.ui.rsyntaxtextarea.TokenMakerFactory",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
   }
 ]
