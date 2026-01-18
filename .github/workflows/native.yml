@@ -135,6 +135,37 @@ jobs:
           native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
           upx --best --lzma jc64.exe || true
 
+    - name: Package runtime bundle
+    run: |
+        set -euo pipefail
+        mkdir -p dist-run/bin dist-run/conf
+        cp dist/jc64.jar dist-run/  # opzionale: includi jar se vuoi
+        cp dist/jc64 dist-run/bin/jc64
+        chmod a+rx dist-run/bin/jc64
+
+        JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1)
+        JDK_PATH="/opt/${JDK_DIR}"
+        cp "${JDK_PATH}/lib/"*.so dist-run/bin/ 2>/dev/null || true
+        cp "${JDK_PATH}/lib/server/"*.so dist-run/bin/ 2>/dev/null || true
+
+        if [ -f "${JDK_PATH}/conf/sound.properties" ]; then
+        cp "${JDK_PATH}/conf/sound.properties" dist-run/conf/
+        elif [ -f "${JDK_PATH}/lib/sound.properties" ]; then
+        cp "${JDK_PATH}/lib/sound.properties" dist-run/conf/
+        fi
+
+        # copy wrapper (assume scripts/jc64.sh exists in repo)
+        cp scripts/jc64.sh dist-run/jc64.sh
+        chmod a+rx dist-run/jc64.sh
+
+    - name: Upload runtime bundle
+    uses: actions/upload-artifact@v4
+    with:
+        name: jc64-runtime
+        path: dist-run
+
+
+
       # Upload final executable(s)
       - name: Upload Native Executable
         uses: actions/upload-artifact@v4
