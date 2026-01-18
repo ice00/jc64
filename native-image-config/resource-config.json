@@ -17,7 +17,10 @@
       { "pattern": ".*\\.svg$" },
 
       { "pattern": "org/fife/ui/rsyntaxtextarea/.*" },
-      { "pattern": "META-INF/services/.*" }
+      { "pattern": "org/fife/ui/rtextarea/.*" },
+      { "pattern": "META-INF/services/.*" },
+      { "pattern": "org/fife/ui/rsyntaxtextarea/.*\\.properties$" },
+      { "pattern": "org/fife/ui/rsyntaxtextarea/.*\\.xml$" }
     ]
   }
 }

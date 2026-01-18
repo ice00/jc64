@@ -61,5 +61,13 @@
     "allDeclaredConstructors": true,
     "allDeclaredMethods": true,
     "allDeclaredFields": true
+  },
+  {
+    "name": "org.fife.ui.rsyntaxtextarea.modes.PlainTextTokenMaker",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "org.fife.ui.rsyntaxtextarea.modes.Assembler6502TokenMaker",
+    "allDeclaredConstructors": true
   }
 ]
