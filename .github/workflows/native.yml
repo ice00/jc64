@@ -136,20 +136,38 @@ jobs:
             cp dist/jc64.jar dist-run/
           fi
 
-          # trova il binario nativo generato (jc64, jc64.exe, jc64-*)
-          BINARY=$(find . -maxdepth 2 -type f -name 'jc64*' | head -n1 || true)
-          if [ -z "$BINARY" ]; then
-            echo "ERROR: no native binary found (looked for files starting with 'jc64')"
-            echo "Workspace files:"
-            ls -la
-            exit 1
+          # cerca un binario nativo (ELF/PE/Mach-O) nel workspace (maxdepth 3)
+          NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -print0 \
+            | xargs -0 -n1 file 2>/dev/null \
+            | awk -F: '/ELF|Mach-O|PE32|executable/ { print $1 }' \
+            | head -n1 || true)
+
+          # se non trovato, prova file eseguibili (bit +x)
+          if [ -z "$NATIVE_BIN" ]; then
+            NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -executable -print | head -n1 || true)
           fi
 
-          echo "Found native binary: $BINARY"
-          cp "$BINARY" dist-run/bin/jc64
+          # fallback: dist/jc64 o jc64 (ma avvisa)
+          if [ -z "$NATIVE_BIN" ]; then
+            if [ -f dist/jc64 ]; then
+              echo "WARNING: found dist/jc64 but it may not be a native binary; copying anyway"
+              NATIVE_BIN="dist/jc64"
+            elif [ -f jc64 ]; then
+              echo "WARNING: found jc64 in workspace root; copying (may be jar without extension)"
+              NATIVE_BIN="jc64"
+            else
+              echo "ERROR: no native binary found (looked for ELF/PE/Mach-O or executable files named 'jc64*')"
+              echo "Workspace files:"
+              find . -maxdepth 3 -type f -printf '%p %M\n' | sed -n '1,200p'
+              exit 1
+            fi
+          fi
+
+          echo "Selected native candidate: $NATIVE_BIN"
+          cp "$NATIVE_BIN" dist-run/bin/jc64
           chmod a+rx dist-run/bin/jc64
 
-          # trova la JDK estratta sotto /opt
+          # trova la JDK estratta sotto /opt e copia .so e sound.properties se presenti
           JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1 || true)
           if [ -z "$JDK_DIR" ]; then
             echo "WARNING: no bellsoft-liberica directory found under /opt; skipping .so copy"
