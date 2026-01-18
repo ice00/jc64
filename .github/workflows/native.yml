@@ -10,8 +10,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-    #     os: [ubuntu-latest, macos-latest, windows-latest]
-
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -91,7 +89,6 @@ jobs:
           # list produced binary
           ls -lh jc64* || true
 
-      # --- macOS and Windows: install GraalVM native-image as before ---
       - name: Install GraalVM (macOS and Windows)
         if: runner.os != 'Linux'
         uses: graalvm/setup-graalvm@v1
@@ -100,7 +97,6 @@ jobs:
           java-version: '17'
           components: 'native-image'
 
-      # Install UPX (macOS/Windows) and Linux UPX for later steps (Linux handled above)
       - name: Install UPX (macOS)
         if: runner.os == 'macOS'
         run: brew install upx
@@ -109,33 +105,28 @@ jobs:
         if: runner.os == 'Windows'
         run: choco install upx
 
-      # Build JAR (fat jar) for macOS/Windows
       - name: Build JAR with Ant (macOS/Windows)
         if: runner.os != 'Linux'
         run: ant -f build-github.xml jar
 
-      # Upload JAR artifact
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: jc64-jar-${{ runner.os }}
           path: dist/jc64.jar
 
-      # Native Image build macOS using GraalVM
       - name: Build Native Image (macOS)
         if: runner.os == 'macOS'
         run: |
           native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
-          # UPX not supported on macOS runner by default; skip compression
 
-      # Native Image build Windows using GraalVM
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
         run: |
           native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
           upx --best --lzma jc64.exe || true
 
-       - name: Package runtime bundle
+      - name: Package runtime bundle
         run: |
           set -euo pipefail
           mkdir -p dist-run/bin dist-run/conf
@@ -146,7 +137,7 @@ jobs:
           fi
 
           # trova il binario nativo generato (jc64, jc64.exe, jc64-*)
-          BINARY=$(ls -1 jc64* 2>/dev/null | head -n1 || true)
+          BINARY=$(find . -maxdepth 2 -type f -name 'jc64*' | head -n1 || true)
           if [ -z "$BINARY" ]; then
             echo "ERROR: no native binary found (looked for files starting with 'jc64')"
             echo "Workspace files:"
@@ -188,7 +179,6 @@ jobs:
           name: jc64-runtime
           path: dist-run
 
-      # Upload final executable(s)
       - name: Upload Native Executable
         uses: actions/upload-artifact@v4
         with:
