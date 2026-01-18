@@ -23,58 +23,90 @@
  */
 package sw_emulator.swing.main;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
 import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
 
 /**
  * Java C64 disassembler with graphics
- * 
+ *
  * @author ice
  */
 public class JC64Dis {
+
   private JDisassemblerFrame jMainFrame;
-    
-    public JC64Dis() {               
-        Option option=new Option();
-        
-        // read option file even if it will be reload again in JDisassemblerFrame
-        FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
-        
-        if (option.getLafName().equals("SYNTH")) Option.useLookAndFeel(option.getFlatLaf());
-        else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());  
-                
-      SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-          jMainFrame=new JDisassemblerFrame();
-          jMainFrame.setVisible(true);
-        }
-      });  
+
+  public JC64Dis() {
+    Option option = new Option();
+
+    // read option file even if it will be reload again in JDisassemblerFrame
+    FileManager.instance.readOptionFile(FileManager.OPTION_FILE, option);
+
+    if (option.getLafName().equals("SYNTH")) {
+      Option.useLookAndFeel(option.getFlatLaf());
+    } else {
+      Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
     }
-       
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {    
-      
-    /**  
-      // Log all focus messages.
-      final Logger rootLogger = Logger.getLogger("");
-      rootLogger.setLevel(Level.ALL);
-      final ConsoleHandler consoleHandler = new ConsoleHandler();
-      consoleHandler.setLevel(Level.ALL);
-      // Because there are a lot of focus messages, make them
-      // a little easier to read by logging only the message.
-      consoleHandler.setFormatter(new Formatter() {
-        @Override
-        public String format(LogRecord record) {
-          return "FOCUS: " + record.getMessage() + '\n';
+
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        jMainFrame = new JDisassemblerFrame();
+        jMainFrame.setVisible(true);
+      }
+    });
+  }
+
+  /**
+   * Give true if we run the program as native image
+   *
+   * @return true on native image execution
+   */
+  private static boolean isNativeImage() {
+    try {
+      Class<?> imageInfo = Class.forName("org.graalvm.nativeimage.ImageInfo");
+      java.lang.reflect.Method inImageCode = imageInfo.getMethod("inImageCode");
+      Object res = inImageCode.invoke(null);
+      return Boolean.TRUE.equals(res);
+    } catch (Throwable ignored) {
+      return false;
+    }
+  }
+
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String[] args) {
+    String base = System.getProperty("user.dir");
+    String confSoundPath = base + File.separator + "conf" + File.separator + "sound.properties";
+
+    if (isNativeImage()) {
+      System.setProperty("javax.sound.config.file", confSoundPath);
+
+      try {
+        File f = new File(confSoundPath);
+        if (f.exists() && f.isFile()) {
+          Properties p = new Properties();
+          try (FileInputStream fis = new FileInputStream(f)) {
+            p.load(fis);
+          }
+          for (String name : p.stringPropertyNames()) {
+             if (System.getProperty(name) == null) {
+              System.setProperty(name, p.getProperty(name));
+            }
+          }
         }
-      });
-      final Logger logger = Logger.getLogger("java.awt.focus.Component");
-      logger.setLevel(Level.ALL);
-      logger.setUseParentHandlers(false);
-      logger.addHandler(consoleHandler);
-    */  
-      new JC64Dis();
-    }  
+      } catch (Throwable t) {
+        t.printStackTrace();
+      }
+    }
+
+    // debug TO REMOVE
+    System.out.println("Running in native image: " + isNativeImage());
+    System.out.println("javax.sound.config.file=" + System.getProperty("javax.sound.config.file"));
+    System.out.println("java.home=" + System.getProperty("java.home"));
+
+    new JC64Dis();
+  }
 }
