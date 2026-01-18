@@ -28,6 +28,8 @@ import java.io.FileInputStream;
 import java.util.Properties;
 import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Mixer;
 
 /**
  * Java C64 disassembler with graphics
@@ -92,7 +94,7 @@ public class JC64Dis {
             p.load(fis);
           }
           for (String name : p.stringPropertyNames()) {
-             if (System.getProperty(name) == null) {
+            if (System.getProperty(name) == null) {
               System.setProperty(name, p.getProperty(name));
             }
           }
@@ -100,6 +102,13 @@ public class JC64Dis {
       } catch (Throwable t) {
         t.printStackTrace();
       }
+
+      /// debug TO REMOVE
+      System.out.println("Mixer info:");
+      for (Mixer.Info mi : AudioSystem.getMixerInfo()) {
+        System.out.println(" - " + mi.getName() + " / " + mi.getDescription());
+      }
+
     }
 
     // debug TO REMOVE
