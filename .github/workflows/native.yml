@@ -135,29 +135,52 @@ jobs:
           native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
           upx --best --lzma jc64.exe || true
 
-      # Package runtime bundle
-      - name: Package runtime bundle
+       - name: Package runtime bundle
         run: |
           set -euo pipefail
           mkdir -p dist-run/bin dist-run/conf
-          cp dist/jc64.jar dist-run/  # opzionale: includi jar se vuoi
-          cp dist/jc64 dist-run/bin/jc64
-          chmod a+rx dist-run/bin/jc64
 
-          JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1)
-          JDK_PATH="/opt/${JDK_DIR}"
-          cp "${JDK_PATH}/lib/"*.so dist-run/bin/ 2>/dev/null || true
-          cp "${JDK_PATH}/lib/server/"*.so dist-run/bin/ 2>/dev/null || true
-
-          if [ -f "${JDK_PATH}/conf/sound.properties" ]; then
-            cp "${JDK_PATH}/conf/sound.properties" dist-run/conf/
-          elif [ -f "${JDK_PATH}/lib/sound.properties" ]; then
-            cp "${JDK_PATH}/lib/sound.properties" dist-run/conf/
+          # copia il jar se esiste
+          if [ -f dist/jc64.jar ]; then
+            cp dist/jc64.jar dist-run/
           fi
 
-          # copy wrapper (assume scripts/jc64.sh exists in repo)
-          cp scripts/jc64.sh dist-run/jc64.sh
-          chmod a+rx dist-run/jc64.sh
+          # trova il binario nativo generato (jc64, jc64.exe, jc64-*)
+          BINARY=$(ls -1 jc64* 2>/dev/null | head -n1 || true)
+          if [ -z "$BINARY" ]; then
+            echo "ERROR: no native binary found (looked for files starting with 'jc64')"
+            echo "Workspace files:"
+            ls -la
+            exit 1
+          fi
+
+          echo "Found native binary: $BINARY"
+          cp "$BINARY" dist-run/bin/jc64
+          chmod a+rx dist-run/bin/jc64
+
+          # trova la JDK estratta sotto /opt
+          JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1 || true)
+          if [ -z "$JDK_DIR" ]; then
+            echo "WARNING: no bellsoft-liberica directory found under /opt; skipping .so copy"
+          else
+            JDK_PATH="/opt/${JDK_DIR}"
+            cp "${JDK_PATH}/lib/"*.so dist-run/bin/ 2>/dev/null || true
+            cp "${JDK_PATH}/lib/server/"*.so dist-run/bin/ 2>/dev/null || true
+
+            if [ -f "${JDK_PATH}/conf/sound.properties" ]; then
+              cp "${JDK_PATH}/conf/sound.properties" dist-run/conf/
+            elif [ -f "${JDK_PATH}/lib/sound.properties" ]; then
+              cp "${JDK_PATH}/lib/sound.properties" dist-run/conf/
+            fi
+          fi
+
+          # copia il wrapper se esiste nel repo
+          if [ -f scripts/jc64.sh ]; then
+            cp scripts/jc64.sh dist-run/jc64.sh
+            chmod a+rx dist-run/jc64.sh
+          else
+            echo "WARNING: scripts/jc64.sh not found in repo; skipping wrapper copy"
+          fi
 
       - name: Upload runtime bundle
         uses: actions/upload-artifact@v4
