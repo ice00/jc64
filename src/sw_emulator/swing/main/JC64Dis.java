@@ -102,13 +102,20 @@ public class JC64Dis {
       } catch (Throwable t) {
         t.printStackTrace();
       }
+    }
 
-      /// debug TO REMOVE
-      System.out.println("Mixer info:");
-      for (Mixer.Info mi : AudioSystem.getMixerInfo()) {
-        System.out.println(" - " + mi.getName() + " / " + mi.getDescription());
+    System.out.println("Mixer info:");
+    for (javax.sound.sampled.Mixer.Info mi : javax.sound.sampled.AudioSystem.getMixerInfo()) {
+      System.out.println(" - " + mi.getName() + " / " + mi.getDescription() + " / " + mi.getVendor());
+    }
+    System.out.println("Service files present:");
+    try {
+      java.util.Enumeration<java.net.URL> e = Thread.currentThread().getContextClassLoader().getResources("META-INF/services/javax.sound.sampled.MixerProvider");
+      while (e.hasMoreElements()) {
+        System.out.println(" - " + e.nextElement());
       }
-
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
 
     // debug TO REMOVE
