@@ -25,6 +25,7 @@ package sw_emulator.swing.main;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.Properties;
 import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
@@ -76,6 +77,25 @@ public class JC64Dis {
     }
   }
 
+  private static void ensureAudioProviders() {
+    try {
+      try {
+        Class<?> p1 = Class.forName("com.sun.media.sound.PortMixerProvider");
+        Object prov1 = p1.getDeclaredConstructor().newInstance();
+        // javax.sound.sampled.spi.MixerProvider mp = (javax.sound.sampled.spi.MixerProvider) prov1;
+      } catch (Throwable ignored) {
+      }
+
+      try {
+        Class<?> p2 = Class.forName("com.sun.media.sound.DirectAudioDeviceProvider");
+        Object prov2 = p2.getDeclaredConstructor().newInstance();
+      } catch (Throwable ignored) {
+      }
+    } catch (Throwable t) {
+      t.printStackTrace();
+    }
+  }
+
   /**
    * @param args the command line arguments
    */
@@ -84,6 +104,7 @@ public class JC64Dis {
     String confSoundPath = base + File.separator + "conf" + File.separator + "sound.properties";
 
     if (isNativeImage()) {
+      ensureAudioProviders();
       System.setProperty("javax.sound.config.file", confSoundPath);
 
       try {
@@ -121,7 +142,7 @@ public class JC64Dis {
     // debug TO REMOVE
     System.out.println("Running in native image: " + isNativeImage());
     System.out.println("javax.sound.config.file=" + System.getProperty("javax.sound.config.file"));
-    System.out.println("java.home=" + System.getProperty("java.home"));
+    System.out.println("java.home=" + System.getProperty("java.home"));   
 
     new JC64Dis();
   }

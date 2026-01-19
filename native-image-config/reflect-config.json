@@ -3,6 +3,7 @@
   { "name": "com.sun.media.sound.DirectAudioDeviceProvider", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
   { "name": "com.sun.media.sound.DirectAudioDeviceProvider$DirectAudioDeviceInfo", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
   { "name": "com.sun.media.sound.PortMixerProvider$PortMixerInfo", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
+  { "name": "com.sun.media.sound.PortMixerProvider", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
   { "name": "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
   { "name": "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
   { "name": "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl", "allDeclaredConstructors": true, "allDeclaredMethods": true, "allDeclaredFields": true },
