@@ -66,7 +66,7 @@ jobs:
 
           # install system libs required by AWT/Swing
           sudo apt-get update
-          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
+          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates libasound2 libpulse0
 
           # Export PATH in the same shell so we can run native-image immediately
           export PATH="${LIB_DIR}/bin:$PATH"
@@ -129,25 +129,21 @@ jobs:
       - name: Package runtime bundle
         run: |
           set -euo pipefail
+
+          # prepare directories
+          rm -rf dist-run
           mkdir -p dist-run/bin dist-run/conf
 
-          # copia il jar se esiste
-          if [ -f dist/jc64.jar ]; then
-            cp dist/jc64.jar dist-run/
-          fi
-
-          # cerca un binario nativo (ELF/PE/Mach-O) nel workspace (maxdepth 3)
+          # copy native binary candidate (search)
           NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -print0 \
             | xargs -0 -n1 file 2>/dev/null \
             | awk -F: '/ELF|Mach-O|PE32|executable/ { print $1 }' \
             | head -n1 || true)
 
-          # se non trovato, prova file eseguibili (bit +x)
           if [ -z "$NATIVE_BIN" ]; then
             NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -executable -print | head -n1 || true)
           fi
 
-          # fallback: dist/jc64 o jc64 (ma avvisa)
           if [ -z "$NATIVE_BIN" ]; then
             if [ -f dist/jc64 ]; then
               echo "WARNING: found dist/jc64 but it may not be a native binary; copying anyway"
@@ -167,11 +163,19 @@ jobs:
           cp "$NATIVE_BIN" dist-run/bin/jc64
           chmod a+rx dist-run/bin/jc64
 
-          # trova la JDK estratta sotto /opt e copia .so e sound.properties se presenti
+          # copy the JAR into bin (so root is free for wrapper)
+          if [ -f dist/jc64.jar ]; then
+            cp dist/jc64.jar dist-run/bin/
+          fi
+
+          # copy conf files
+          if [ -d conf ]; then
+            cp -r conf/* dist-run/conf/ || true
+          fi
+
+          # copy .so from extracted JDK if present
           JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1 || true)
-          if [ -z "$JDK_DIR" ]; then
-            echo "WARNING: no bellsoft-liberica directory found under /opt; skipping .so copy"
-          else
+          if [ -n "$JDK_DIR" ]; then
             JDK_PATH="/opt/${JDK_DIR}"
             cp "${JDK_PATH}/lib/"*.so dist-run/bin/ 2>/dev/null || true
             cp "${JDK_PATH}/lib/server/"*.so dist-run/bin/ 2>/dev/null || true
@@ -181,9 +185,11 @@ jobs:
             elif [ -f "${JDK_PATH}/lib/sound.properties" ]; then
               cp "${JDK_PATH}/lib/sound.properties" dist-run/conf/
             fi
+          else
+            echo "WARNING: no bellsoft-liberica directory found under /opt; skipping .so copy"
           fi
 
-          # copia il wrapper se esiste nel repo
+          # copy the wrapper script into the root of the bundle (not in bin)
           if [ -f scripts/jc64.sh ]; then
             cp scripts/jc64.sh dist-run/jc64.sh
             chmod a+rx dist-run/jc64.sh
@@ -191,11 +197,33 @@ jobs:
             echo "WARNING: scripts/jc64.sh not found in repo; skipping wrapper copy"
           fi
 
-      - name: Upload runtime bundle
+          # copy the CONTENTS of doc/ into the root of the bundle (not the doc folder itself)
+          if [ -d doc ]; then
+            shopt -s dotglob
+            cp -r doc/* dist-run/ 2>/dev/null || true
+            shopt -u dotglob
+          else
+            echo "INFO: doc/ directory not found; skipping doc copy"
+          fi
+
+          # create a zip (preserve executable bit where possible)
+          cd dist-run
+          zip -r ../jc64-dist.zip . || true
+          # also create a tar.gz to preserve permissions reliably
+          tar -czf ../jc64-dist.tar.gz -C . .
+          cd ..
+
+          echo "Created jc64-dist.zip and jc64-dist.tar.gz"
+          ls -lh jc64-dist.* || true
+
+      - name: Upload runtime bundle (zip + tar)
         uses: actions/upload-artifact@v4
         with:
           name: jc64-runtime
-          path: dist-run
+          path: |
+            jc64-dist.zip
+            jc64-dist.tar.gz
+            dist-run
 
       - name: Upload Native Executable
         uses: actions/upload-artifact@v4
