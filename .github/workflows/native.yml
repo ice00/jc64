@@ -66,7 +66,7 @@ jobs:
 
           # install system libs required by AWT/Swing
           sudo apt-get update
-          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates libasound2 libpulse0
+          sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
 
           # Export PATH in the same shell so we can run native-image immediately
           export PATH="${LIB_DIR}/bin:$PATH"
