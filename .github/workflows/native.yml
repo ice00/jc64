@@ -138,9 +138,9 @@ jobs:
           mkdir -p dist-run/bin dist-run/conf
 
           # copia il jar se esiste (come nel tuo file originale)
-          if [ -f dist/jc64.jar ]; then
-            cp dist/jc64.jar dist-run/
-          fi
+         # if [ -f dist/jc64.jar ]; then
+            #cp dist/jc64.jar dist-run/
+         # fi
 
           # cerca un binario nativo (ELF/PE/Mach-O) nel workspace (maxdepth 3)
           NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -print0 \
@@ -195,11 +195,11 @@ jobs:
           fi
 
           # COPIA il wrapper scripts/jc64.sh nella root del bundle (richiesto)
-          if [ -f scripts/jc64.sh ]; then
-            cp scripts/jc64.sh dist-run/jc64.sh
+          if [ -f script/jc64.sh ]; then
+            cp script/jc64.sh dist-run/jc64.sh
             chmod a+rx dist-run/jc64.sh
           else
-            echo "ERROR: scripts/jc64.sh not found in repo; expected to copy wrapper into dist-run"
+            echo "ERROR: script/jc64.sh not found in repo; expected to copy wrapper into dist-run"
             # exit 1
           fi
 
