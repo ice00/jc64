@@ -82,7 +82,7 @@ jobs:
           ant -f build-github.xml jar
 
           # Run native-image using the native-image from the extracted Liberica Full
-          native-image -J-Djava.home=${JAVA_HOME} -J-Djavax.sound.config.file=./conf/sound.properties -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*' --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider --report-unsupported-elements-at-runtime -jar dist/jc64.jar jc64
+          native-image -J-Djava.home=${JAVA_HOME} -J-Djavax.sound.config.file=./conf/sound.properties -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*|META-INF/splash.png' --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider --report-unsupported-elements-at-runtime -jar dist/jc64.jar jc64
 
           # compress with upx if available
           if command -v upx >/dev/null 2>&1; then
