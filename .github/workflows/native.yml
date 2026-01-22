@@ -137,11 +137,6 @@ jobs:
           rm -rf dist-run
           mkdir -p dist-run/bin dist-run/conf
 
-          # copia il jar se esiste (come nel tuo file originale)
-         # if [ -f dist/jc64.jar ]; then
-            #cp dist/jc64.jar dist-run/
-         # fi
-
           # cerca un binario nativo (ELF/PE/Mach-O) nel workspace (maxdepth 3)
           NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -print0 \
             | xargs -0 -n1 file 2>/dev/null \
