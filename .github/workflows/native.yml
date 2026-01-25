@@ -79,13 +79,14 @@ jobs:
             "-Djava.awt.headless=false" `
             "--no-fallback" `
             "-H:ConfigurationFileDirectories=native-image-config" `
-            "-H:IncludeResources=conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*" `
+            "-H:IncludeResources=conf/sound.properties^|org/fife/ui/rsyntaxtextarea/.*^|META-INF/services/.*" `
             "--initialize-at-build-time=com.sun.media.sound.PortMixerProvider" `
             "--initialize-at-build-time=com.sun.media.sound.DirectAudioDeviceProvider" `
             "--report-unsupported-elements-at-runtime" `
             "-jar" `
             "dist/jc64.jar" `
             "jc64.exe"
+
 
           if (Get-Command upx -ErrorAction SilentlyContinue) {
             upx --best --lzma jc64.exe
