@@ -69,6 +69,7 @@ jobs:
         if: runner.os == 'Windows'
         run: ant -f build-github.xml jar
 
+
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
         run: |
@@ -79,7 +80,8 @@ jobs:
             "--no-fallback" `
             "-H:ConfigurationFileDirectories=native-image-config" `
             "-H:IncludeResources=conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*" `
-            "--initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider" `
+            "--initialize-at-build-time=com.sun.media.sound.PortMixerProvider" `
+            "--initialize-at-build-time=com.sun.media.sound.DirectAudioDeviceProvider" `
             "--report-unsupported-elements-at-runtime" `
             "-jar" `
             "dist/jc64.jar" `
