@@ -23,14 +23,26 @@
  */
 package sw_emulator.swing.main;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Properties;
+import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Mixer;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JWindow;
 
 /**
  * Java C64 disassembler with graphics
@@ -40,7 +52,12 @@ import javax.sound.sampled.Mixer;
 public class JC64Dis {
 
   private JDisassemblerFrame jMainFrame;
+  private static JWindow nativeSplash = null;
+  private static boolean usingNativeSplash = false;
 
+  /**
+   * Main program that display the disassembler 
+   */
   public JC64Dis() {
     Option option = new Option();
 
@@ -56,7 +73,10 @@ public class JC64Dis {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         jMainFrame = new JDisassemblerFrame();
-        jMainFrame.setVisible(true);
+
+        // close splash once main window is shown
+        closeSplash();
+                jMainFrame.setVisible(true);
       }
     });
   }
@@ -77,6 +97,9 @@ public class JC64Dis {
     }
   }
 
+  /**
+   * Endsure audio is provided in native image
+   */
   private static void ensureAudioProviders() {
     try {
       try {
@@ -97,11 +120,72 @@ public class JC64Dis {
   }
 
   /**
+   * Show sofware splash screen in native image
+   */
+  private static void showSplash() {
+    SplashScreen ss = null;
+    try {
+      ss = SplashScreen.getSplashScreen();
+    } catch (Throwable ignored) {
+    }
+
+    if (ss != null) {
+      return;
+    }
+
+    try {
+      InputStream is = JC64Dis.class.getResourceAsStream("/META-INF/splash.png");
+      if (is == null) {
+        System.err.println("Splash image not found in native image");
+        return;
+      }
+
+      BufferedImage img = ImageIO.read(is);
+      if (img == null) {
+        return;
+      }
+
+      JWindow w = new JWindow();
+      w.getContentPane().add(new JLabel(new ImageIcon(img)));
+      w.pack();
+
+      // Centra sul monitor principale
+      GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+      Rectangle screen = ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+      int x = screen.x + (screen.width - w.getWidth()) / 2;
+      int y = screen.y + (screen.height - w.getHeight()) / 2;
+      w.setLocation(x, y);
+
+      nativeSplash = w;
+      usingNativeSplash = true;
+
+      SwingUtilities.invokeLater(() -> w.setVisible(true));
+
+    } catch (Throwable t) {
+      t.printStackTrace();
+    }
+  }
+
+  /**
+   * Close the sofware splash screen
+   */
+  private static void closeSplash() {
+    if (usingNativeSplash && nativeSplash != null) {
+      nativeSplash.setVisible(false);
+      nativeSplash.dispose();
+      nativeSplash = null;
+      usingNativeSplash = false;
+    }
+  }
+
+  /**
    * @param args the command line arguments
    */
   public static void main(String[] args) {
     String base = System.getProperty("user.dir");
     String confSoundPath = base + File.separator + "conf" + File.separator + "sound.properties";
+
+    showSplash();
 
     if (isNativeImage()) {
       ensureAudioProviders();
@@ -142,7 +226,7 @@ public class JC64Dis {
     // debug TO REMOVE
     System.out.println("Running in native image: " + isNativeImage());
     System.out.println("javax.sound.config.file=" + System.getProperty("javax.sound.config.file"));
-    System.out.println("java.home=" + System.getProperty("java.home"));   
+    System.out.println("java.home=" + System.getProperty("java.home"));
 
     new JC64Dis();
   }
