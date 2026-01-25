@@ -9,217 +9,130 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      #######################################################################
+      # LINUX BUILD
+      #######################################################################
       - name: Install Liberica Full and run native-image (Linux)
         if: runner.os == 'Linux'
         run: |
           set -euo pipefail
 
-          # URL Liberica Full (Full distribution includes NIK/native-image)
           URL="https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-linux-amd64.tar.gz"
           TARBALL=$(basename "$URL")
 
-          echo "Downloading Liberica Full from: $URL"
           curl -fSL --retry 5 --retry-delay 5 -C - -o "$TARBALL" "$URL"
-
-          echo "Downloaded file size:"
-          ls -lh "$TARBALL"
-
-          echo "MIME type:"
-          file --brief --mime-type "$TARBALL" || true
-
-          # verify gzip integrity
-          if ! gzip -t "$TARBALL" >/dev/null 2>&1; then
-            echo "ERROR: gzip integrity check failed for $TARBALL"
-            exit 2
-          fi
-
-          # extract to /opt
           sudo mkdir -p /opt
           sudo tar -xzf "$TARBALL" -C /opt
 
-          # find extracted directory reliably
           EX_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
-          if [ -z "$EX_DIR" ]; then
-            echo "ERROR: could not find extracted Liberica directory under /opt"
-            ls -la /opt
-            exit 2
-          fi
-
           LIB_DIR="/opt/${EX_DIR}"
-          echo "Found Liberica at: ${LIB_DIR}"
 
-          # make sure native-image is executable and available in this shell
-          if [ -x "${LIB_DIR}/bin/native-image" ]; then
-            echo "native-image found in ${LIB_DIR}/bin"
-          else
-            echo "native-image non trovato o non eseguibile in ${LIB_DIR}/bin"
-            ls -la "${LIB_DIR}/bin" || true
-            exit 2
-          fi
-
-          # install system libs required by AWT/Swing
           sudo apt-get update
           sudo apt-get install -y libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 libxcursor1 fontconfig ca-certificates
-
-          # install audio libs (may fail on some runners)
           sudo apt-get install -y libasound2 libpulse0 || true
 
-          # Export PATH in the same shell so we can run native-image immediately
           export PATH="${LIB_DIR}/bin:$PATH"
           export JAVA_HOME="${LIB_DIR}"
 
-          echo "native-image version:"
-          native-image --version
-
-          # Build fat JAR with Ant (if not already built)
           ant -f build-github.xml jar
 
-          # Run native-image using the native-image from the extracted Liberica Full
-          native-image -J-Djava.home=${JAVA_HOME} -J-Djavax.sound.config.file=./conf/sound.properties -Djava.awt.headless=false --no-fallback -H:ConfigurationFileDirectories=native-image-config -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*|META-INF/.*splash\.png' --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider --report-unsupported-elements-at-runtime -jar dist/jc64.jar jc64
+          native-image \
+            -J-Djava.home=${JAVA_HOME} \
+            -J-Djavax.sound.config.file=./conf/sound.properties \
+            -Djava.awt.headless=false \
+            --no-fallback \
+            -H:ConfigurationFileDirectories=native-image-config \
+            -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*' \
+            --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider \
+            --report-unsupported-elements-at-runtime \
+            -jar dist/jc64.jar jc64
 
-          # compress with upx if available
-          if command -v upx >/dev/null 2>&1; then
-            upx --best --lzma jc64 || true
-          fi
-
-          # list produced binary
-          ls -lh jc64* || true
-
-      - name: Install GraalVM (macOS and Windows)
-        if: runner.os != 'Linux'
+      #######################################################################
+      # WINDOWS BUILD
+      #######################################################################
+      - name: Install GraalVM (Windows)
+        if: runner.os == 'Windows'
         uses: graalvm/setup-graalvm@v1
         with:
           distribution: 'graalvm'
           java-version: '17'
           components: 'native-image'
 
-      - name: Install UPX (macOS)
-        if: runner.os == 'macOS'
-        run: brew install upx
-
-      - name: Install UPX (Windows)
+      - name: Build JAR (Windows)
         if: runner.os == 'Windows'
-        run: choco install upx
-
-      - name: Build JAR with Ant (macOS/Windows)
-        if: runner.os != 'Linux'
         run: ant -f build-github.xml jar
-
-      - name: Upload JAR artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: jc64-jar-${{ runner.os }}
-          path: dist/jc64.jar
-
-      - name: Build Native Image (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
 
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
         run: |
-          native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64
-          upx --best --lzma jc64.exe || true
+          native-image --no-fallback -H:ConfigurationFileDirectories=native-image-config -jar dist/jc64.jar jc64.exe
+          if (Test-Path "C:\ProgramData\chocolatey\bin\upx.exe") {
+            upx --best --lzma jc64.exe
+          }
 
-      - name: Package runtime bundle
+      #######################################################################
+      # PACKAGE LINUX RUNTIME
+      #######################################################################
+      - name: Package Linux runtime bundle
+        if: runner.os == 'Linux'
         run: |
           set -euo pipefail
 
-          # prepare directories
           rm -rf dist-run
           mkdir -p dist-run/bin dist-run/conf
 
-          # cerca un binario nativo (ELF/PE/Mach-O) nel workspace (maxdepth 3)
-          NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -print0 \
-            | xargs -0 -n1 file 2>/dev/null \
-            | awk -F: '/ELF|Mach-O|PE32|executable/ { print $1 }' \
-            | head -n1 || true)
-
-          # se non trovato, prova file eseguibili (bit +x)
-          if [ -z "$NATIVE_BIN" ]; then
-            NATIVE_BIN=$(find . -maxdepth 3 -type f -name 'jc64*' -executable -print | head -n1 || true)
-          fi
-
-          # fallback: dist/jc64 o jc64 (ma avvisa)
-          if [ -z "$NATIVE_BIN" ]; then
-            if [ -f dist/jc64 ]; then
-              echo "WARNING: found dist/jc64 but it may not be a native binary; copying anyway"
-              NATIVE_BIN="dist/jc64"
-            elif [ -f jc64 ]; then
-              echo "WARNING: found jc64 in workspace root; copying (may be jar without extension)"
-              NATIVE_BIN="jc64"
-            else
-              echo "ERROR: no native binary found (looked for ELF/PE/Mach-O or executable files named 'jc64*')"
-              echo "Workspace files:"
-              find . -maxdepth 3 -type f -printf '%p %M\n' | sed -n '1,200p'
-              exit 1
-            fi
-          fi
-
-          echo "Selected native candidate: $NATIVE_BIN"
-          cp "$NATIVE_BIN" dist-run/bin/jc64
+          cp jc64 dist-run/bin/jc64
           chmod a+rx dist-run/bin/jc64
 
-          # copia conf files
-          if [ -d conf ]; then
-            cp -r conf/* dist-run/conf/ || true
-          fi
+          cp -r conf/* dist-run/conf/ || true
+          cp script/jc64.sh dist-run/jc64.sh
+          chmod a+rx dist-run/jc64.sh
 
-          # copia .so dalla JDK estratta se presenti (come nel tuo file originale)
-          JDK_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n1 || true)
-          if [ -n "$JDK_DIR" ]; then
-            JDK_PATH="/opt/${JDK_DIR}"
-            cp "${JDK_PATH}/lib/"*.so dist-run/bin/ 2>/dev/null || true
-            cp "${JDK_PATH}/lib/server/"*.so dist-run/bin/ 2>/dev/null || true
-
-            if [ -f "${JDK_PATH}/conf/sound.properties" ]; then
-              cp "${JDK_PATH}/conf/sound.properties" dist-run/conf/
-            elif [ -f "${JDK_PATH}/lib/sound.properties" ]; then
-              cp "${JDK_PATH}/lib/sound.properties" dist-run/conf/
-            fi
-          else
-            echo "WARNING: no bellsoft-liberica directory found under /opt; skipping .so copy"
-          fi
-
-          # COPIA il wrapper scripts/jc64.sh nella root del bundle (richiesto)
-          if [ -f script/jc64.sh ]; then
-            cp script/jc64.sh dist-run/jc64.sh
-            chmod a+rx dist-run/jc64.sh
-          else
-            echo "ERROR: script/jc64.sh not found in repo; expected to copy wrapper into dist-run"
-            # exit 1
-          fi
-
-          # copia il contenuto di doc/ nella root del bundle (mantiene example/ e jc64dis.pdf come nel tuo esempio)
           if [ -d doc ]; then
             shopt -s dotglob
-            cp -r doc/* dist-run/ 2>/dev/null || true
+            cp -r doc/* dist-run/
             shopt -u dotglob
-          else
-            echo "INFO: doc/ directory not found; skipping doc copy"
           fi
 
-          # non creare zip/tar: l'artifact finale sarà la directory dist-run
-          echo "Prepared dist-run directory (no zip/tar created)."
-          echo "Contents:"
-          ls -la dist-run || true
-
-      - name: Upload runtime bundle
+      - name: Upload Linux native bundle
+        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
-          name: jc64-runtime
+          name: jc64-native-linux
           path: dist-run
 
-      - name: Upload Native Executable
+      #######################################################################
+      # PACKAGE WINDOWS RUNTIME
+      #######################################################################
+      - name: Package Windows runtime bundle
+        if: runner.os == 'Windows'
+        run: |
+          Remove-Item -Recurse -Force dist-run-windows -ErrorAction Ignore
+          New-Item -ItemType Directory -Path dist-run-windows\bin | Out-Null
+          New-Item -ItemType Directory -Path dist-run-windows\conf | Out-Null
+
+          Copy-Item jc64.exe dist-run-windows\bin\jc64.exe
+
+          Copy-Item conf\* dist-run-windows\conf -Recurse -ErrorAction Ignore
+
+          if (Test-Path "script\jc64.bat") {
+            Copy-Item script\jc64.bat dist-run-windows\jc64.bat
+          }
+
+          if (Test-Path "doc") {
+            Copy-Item doc\* dist-run-windows -Recurse
+          }
+
+      - name: Upload Windows native bundle
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: jc64-native-${{ runner.os }}
-          path: jc64*
+          name: jc64-native-windows
+          path: dist-run-windows
