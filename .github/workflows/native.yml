@@ -134,17 +134,34 @@ jobs:
           New-Item -ItemType Directory -Path dist-run-windows\bin | Out-Null
           New-Item -ItemType Directory -Path dist-run-windows\conf | Out-Null
 
-          Copy-Item jc64.exe dist-run-windows\bin\jc64.exe
+          # trova l'eseguibile
+          $exe = Get-ChildItem -Recurse -Filter "jc64*.exe" | Select-Object -First 1
+          if (-not $exe) {
+            Write-Error "ERROR: Could not find jc64.exe anywhere in workspace"
+            exit 1
+          }
 
+          # copia exe
+          Copy-Item $exe.FullName dist-run-windows\bin\jc64.exe
+
+          # copia tutte le dll native generate da native-image nella stessa dir
+          Get-ChildItem -Path $exe.DirectoryName -Filter "*.dll" | ForEach-Object {
+            Copy-Item $_.FullName dist-run-windows\bin\
+          }
+
+          # conf
           Copy-Item conf\* dist-run-windows\conf -Recurse -ErrorAction Ignore
 
+          # wrapper .bat
           if (Test-Path "script\jc64.bat") {
             Copy-Item script\jc64.bat dist-run-windows\jc64.bat
           }
 
+          # doc
           if (Test-Path "doc") {
             Copy-Item doc\* dist-run-windows -Recurse
           }
+
 
       - name: Upload Windows native bundle
         if: runner.os == 'Windows'
