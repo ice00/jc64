@@ -134,7 +134,8 @@ public class JC64Dis {
     }
 
     try {
-      InputStream is = JC64Dis.class.getResourceAsStream("/META-INF/splash.png");
+      InputStream is = JC64Dis.class.getResourceAsStream("/sw_emulator/swing/images/splash.png");
+      
       if (is == null) {
         System.err.println("Splash image not found in native image");
         return;
