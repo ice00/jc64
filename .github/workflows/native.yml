@@ -82,8 +82,7 @@ jobs:
             "-H:IncludeResources=conf/sound.properties" `
             "-H:IncludeResources=org/fife/ui/rsyntaxtextarea/.*" `
             "-H:IncludeResources=META-INF/services/.*" `
-            "--initialize-at-build-time=com.sun.media.sound.PortMixerProvider" `
-            "--initialize-at-build-time=com.sun.media.sound.DirectAudioDeviceProvider" `
+            "--initialize-at-run-time=com.sun.media.sound.Platform" `
             "--report-unsupported-elements-at-runtime" `
             "-jar" `
             "dist/jc64.jar" `
@@ -92,8 +91,6 @@ jobs:
           if (Get-Command upx -ErrorAction SilentlyContinue) {
             upx --best --lzma jc64.exe
           }
-
-
 
 
       #######################################################################
