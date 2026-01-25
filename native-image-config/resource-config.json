@@ -19,6 +19,7 @@
       { "pattern": "org/fife/ui/rsyntaxtextarea/.*" },
       { "pattern": "org/fife/ui/rtextarea/.*" },
       { "pattern": "META-INF/services/.*" },
+      { "pattern": "META-INF/splash.png" },
       { "pattern": "org/fife/ui/rsyntaxtextarea/.*\\.properties$" },
       { "pattern": "org/fife/ui/rsyntaxtextarea/.*\\.xml$" },
 
