@@ -105,6 +105,74 @@ jobs:
 
 
       #######################################################################
+      # MACOS BUILD (Liberica VM Full + native-image)
+      #######################################################################
+      - name: Install Liberica Full VM (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          set -euo pipefail
+
+          URL="https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-macos-amd64.zip"
+          ZIP=$(basename "$URL")
+
+          curl -fSL --retry 5 --retry-delay 5 -o "$ZIP" "$URL"
+          unzip "$ZIP" -d /opt
+
+          EX_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
+          LIB_DIR="/opt/${EX_DIR}"
+
+          echo "JAVA_HOME=$LIB_DIR" >> $GITHUB_ENV
+          echo "$LIB_DIR/bin" >> $GITHUB_PATH
+
+      - name: Build JAR (macOS)
+        if: runner.os == 'macOS'
+        run: ant -f build-github.xml jar
+
+      - name: Build Native Image (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          native-image \
+            -J-Djava.home=$JAVA_HOME \
+            -J-Djavax.sound.config.file=./conf/sound.properties \
+            -Djava.awt.headless=false \
+            --no-fallback \
+            -H:ConfigurationFileDirectories=native-image-config \
+            -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*' \
+            --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider \
+            --report-unsupported-elements-at-runtime \
+            -jar dist/jc64.jar jc64
+
+      #######################################################################
+      # PACKAGE MACOS RUNTIME
+      #######################################################################
+      - name: Package macOS runtime bundle
+        if: runner.os == 'macOS'
+        run: |
+          set -euo pipefail
+
+          rm -rf dist-run-macos
+          mkdir -p dist-run-macos/bin dist-run-macos/conf
+
+          cp jc64 dist-run-macos/bin/jc64
+          chmod a+rx dist-run-macos/bin/jc64
+
+          cp -r conf/* dist-run-macos/conf || true
+
+          if [ -d doc ]; then
+            shopt -s dotglob
+            cp -r doc/* dist-run-macos/
+            shopt -u dotglob
+          fi
+
+      - name: Upload macOS native bundle
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jc64-native-macos
+          path: dist-run-macos
+
+
+      #######################################################################
       # PACKAGE LINUX RUNTIME
       #######################################################################
       - name: Package Linux runtime bundle
