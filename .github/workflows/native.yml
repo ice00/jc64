@@ -55,15 +55,27 @@ jobs:
             -jar dist/jc64.jar jc64
 
       #######################################################################
-      # WINDOWS BUILD
+      # WINDOWS BUILD (Liberica VM Full + native-image.cmd)
       #######################################################################
-      - name: Install GraalVM (Windows)
+      - name: Install Liberica Full VM (Windows)
         if: runner.os == 'Windows'
-        uses: graalvm/setup-graalvm@v1
-        with:
-          distribution: 'graalvm'
-          java-version: '17'
-          components: 'native-image'
+        run: |
+          $url = "https://download.bell-sw.com/vm/25.0.1/bellsoft-liberica-vm-full-openjdk25.0.1+16-25.0.1+3-windows-amd64.zip"
+          $zip = "liberica.zip"
+
+          Invoke-WebRequest -Uri $url -OutFile $zip
+          Expand-Archive -Path $zip -DestinationPath "C:\Liberica" -Force
+
+          # trova la directory estratta
+          $dir = Get-ChildItem "C:\Liberica" | Where-Object { $_.PSIsContainer } | Select-Object -First 1
+          $libDir = $dir.FullName
+
+          echo "Liberica installed at: $libDir"
+
+          # imposta JAVA_HOME e PATH
+          echo "JAVA_HOME=$libDir" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "$libDir\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+
 
       - name: Build JAR (Windows)
         if: runner.os == 'Windows'
@@ -73,20 +85,19 @@ jobs:
       - name: Build Native Image (Windows)
         if: runner.os == 'Windows'
         run: |
-          native-image `
+          native-image.cmd `
             "-J-Djava.home=$env:JAVA_HOME" `
             "-J-Djavax.sound.config.file=./conf/sound.properties" `
             "-Djava.awt.headless=false" `
-            "--no-fallback" `
-            "-H:ConfigurationFileDirectories=native-image-config" `
-            "-H:IncludeResources=conf/sound.properties" `
-            "-H:IncludeResources=org/fife/ui/rsyntaxtextarea/.*" `
-            "-H:IncludeResources=META-INF/services/.*" `
-            "--initialize-at-run-time=com.sun.media.sound.Platform" `
-            "--report-unsupported-elements-at-runtime" `
-            "-jar" `
-            "dist/jc64.jar" `
-            "jc64"
+            --no-fallback `
+            -H:ConfigurationFileDirectories=native-image-config `
+            -H:IncludeResources=conf/sound.properties `
+            -H:IncludeResources=org/fife/ui/rsyntaxtextarea/.* `
+            -H:IncludeResources=META-INF/services/.* `
+            --initialize-at-run-time=com.sun.media.sound.Platform `
+            --report-unsupported-elements-at-runtime `
+            -jar dist/jc64.jar `
+            jc64
 
           if (Get-Command upx -ErrorAction SilentlyContinue) {
             upx --best --lzma jc64.exe
