@@ -116,13 +116,16 @@ jobs:
           ZIP=$(basename "$URL")
 
           curl -fSL --retry 5 --retry-delay 5 -o "$ZIP" "$URL"
-          unzip "$ZIP" -d /opt
 
-          EX_DIR=$(ls -1 /opt | grep -E '^bellsoft-liberica' | head -n 1)
-          LIB_DIR="/opt/${EX_DIR}"
+          mkdir -p "$HOME/liberica"
+          unzip "$ZIP" -d "$HOME/liberica"
+
+          EX_DIR=$(ls -1 "$HOME/liberica" | grep -E '^bellsoft-liberica' | head -n 1)
+          LIB_DIR="$HOME/liberica/${EX_DIR}/Contents/Home"
 
           echo "JAVA_HOME=$LIB_DIR" >> $GITHUB_ENV
           echo "$LIB_DIR/bin" >> $GITHUB_PATH
+
 
       - name: Build JAR (macOS)
         if: runner.os == 'macOS'
@@ -141,6 +144,7 @@ jobs:
             --initialize-at-build-time=com.sun.media.sound.PortMixerProvider,com.sun.media.sound.DirectAudioDeviceProvider \
             --report-unsupported-elements-at-runtime \
             -jar dist/jc64.jar jc64
+
 
       #######################################################################
       # PACKAGE MACOS RUNTIME
