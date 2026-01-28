@@ -121,6 +121,7 @@ public class JC64Dis {
 
   private static void showSplash() {
     // macOS native-image does NOT support java.awt.SplashScreen
+   /* 
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
         showSoftwareSplash();
         return;
@@ -133,7 +134,7 @@ public class JC64Dis {
     }
 
     if (ss != null) return;
-
+*/
     showSoftwareSplash();
   }
 
