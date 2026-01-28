@@ -119,53 +119,57 @@ public class JC64Dis {
     }
   }
 
-  /**
-   * Show sofware splash screen in native image
-   */
   private static void showSplash() {
+    // macOS native-image does NOT support java.awt.SplashScreen
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+        showSoftwareSplash();
+        return;
+    }
+
     SplashScreen ss = null;
     try {
-      ss = SplashScreen.getSplashScreen();
+        ss = SplashScreen.getSplashScreen();
     } catch (Throwable ignored) {
     }
 
-    if (ss != null) {
-      return;
-    }
+    if (ss != null) return;
 
+    showSoftwareSplash();
+  }
+
+  private static void showSoftwareSplash() {
     try {
-      InputStream is = JC64Dis.class.getResourceAsStream("/sw_emulator/swing/images/splash.png");
-      
-      if (is == null) {
-        System.err.println("Splash image not found in native image");
-        return;
-      }
+        InputStream is = JC64Dis.class.getResourceAsStream("/sw_emulator/swing/images/splash.png");
+        if (is == null) {
+            System.err.println("Splash image not found in native image");
+            return;
+        }
 
-      BufferedImage img = ImageIO.read(is);
-      if (img == null) {
-        return;
-      }
+        BufferedImage img = ImageIO.read(is);
+        if (img == null) {
+            return;
+        }
 
-      JWindow w = new JWindow();
-      w.getContentPane().add(new JLabel(new ImageIcon(img)));
-      w.pack();
+        JWindow w = new JWindow();
+        w.getContentPane().add(new JLabel(new ImageIcon(img)));
+        w.pack();
 
-      // Centra sul monitor principale
-      GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      Rectangle screen = ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds();
-      int x = screen.x + (screen.width - w.getWidth()) / 2;
-      int y = screen.y + (screen.height - w.getHeight()) / 2;
-      w.setLocation(x, y);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Rectangle screen = ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+        int x = screen.x + (screen.width - w.getWidth()) / 2;
+        int y = screen.y + (screen.height - w.getHeight()) / 2;
+        w.setLocation(x, y);
 
-      nativeSplash = w;
-      usingNativeSplash = true;
+        nativeSplash = w;
+        usingNativeSplash = true;
 
-      SwingUtilities.invokeLater(() -> w.setVisible(true));
+        SwingUtilities.invokeLater(() -> w.setVisible(true));
 
     } catch (Throwable t) {
-      t.printStackTrace();
+        t.printStackTrace();
     }
   }
+
 
   /**
    * Close the sofware splash screen
