@@ -162,11 +162,16 @@ jobs:
 
           cp -r conf/* dist-run-macos/conf || true
 
+          # Add launcher script
+          cp script/jc64-macos.sh dist-run-macos/jc64-macos.sh
+          chmod a+rx dist-run-macos/jc64-macos.sh
+
           if [ -d doc ]; then
             shopt -s dotglob
             cp -r doc/* dist-run-macos/
             shopt -u dotglob
           fi
+
 
       - name: Upload macOS native bundle
         if: runner.os == 'macOS'
