@@ -284,3 +284,9 @@ jobs:
           if [ -d pdf ]; then cp -r pdf dist-jar/; fi
           if [ -d examples ]; then cp -r examples dist-jar/; fi
 
+      - name: Upload JAR bundle
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jc64-jar
+          path: dist-jar
