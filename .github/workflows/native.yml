@@ -273,16 +273,14 @@ jobs:
         run: |
           ant -f build-github.xml clean jar
 
-          # Create distribution folder
           rm -rf dist-jar
           mkdir -p dist-jar
 
-          # Copy JAR
           cp dist/jc64.jar dist-jar/
 
           # Copy resources like NetBeans does
-          [ -d conf ] && cp -r conf dist-jar/
-          [ -d doc ] && cp -r doc dist-jar/
-          [ -d pdf ] && cp -r pdf dist-jar/
-          [ -d examples ] && cp -r examples dist-jar/
+          if [ -d conf ]; then cp -r conf dist-jar/; fi
+          if [ -d doc ]; then cp -r doc dist-jar/; fi
+          if [ -d pdf ]; then cp -r pdf dist-jar/; fi
+          if [ -d examples ]; then cp -r examples dist-jar/; fi
 
