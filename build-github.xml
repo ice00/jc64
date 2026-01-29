@@ -40,6 +40,7 @@
             <!-- Manifest -->
             <manifest>
                 <attribute name="Main-Class" value="sw_emulator.swing.main.JC64Dis"/>
+                 <attribute name="SplashScreen-Image" value="sw_emulator/swing/images/splash.png"/>
             </manifest>
 
             <!-- Include compiled classes -->

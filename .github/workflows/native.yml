@@ -276,13 +276,19 @@ jobs:
           rm -rf dist-jar
           mkdir -p dist-jar
 
+          # Copy JAR
           cp dist/jc64.jar dist-jar/
 
-          # Copy resources like NetBeans does
+          # Copy scripts to root
+          if [ -f script/jc64dis.sh ]; then cp script/jc64dis.sh dist-jar/; fi
+          if [ -f script/jc64dis.bat ]; then cp script/jc64dis.bat dist-jar/; fi
+
+          # Copy resources at root level
           if [ -d conf ]; then cp -r conf dist-jar/; fi
           if [ -d doc ]; then cp -r doc dist-jar/; fi
           if [ -d pdf ]; then cp -r pdf dist-jar/; fi
           if [ -d examples ]; then cp -r examples dist-jar/; fi
+
 
       - name: Upload JAR bundle
         if: runner.os == 'Linux'
