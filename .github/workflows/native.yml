@@ -257,3 +257,30 @@ jobs:
         with:
           name: jc64-native-windows
           path: dist-run-windows
+
+      #######################################################################
+      # BUILD UNIVERSAL JAR (OpenJDK 25)
+      #######################################################################
+      - name: Install OpenJDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Build JAR with OpenJDK 25
+        run: |
+          ant -f build-github.xml clean jar
+
+          # Create distribution folder
+          rm -rf dist-jar
+          mkdir -p dist-jar
+
+          # Copy JAR
+          cp dist/jc64.jar dist-jar/
+
+          # Copy resources like NetBeans does
+          [ -d conf ] && cp -r conf dist-jar/
+          [ -d doc ] && cp -r doc dist-jar/
+          [ -d pdf ] && cp -r pdf dist-jar/
+          [ -d examples ] && cp -r examples dist-jar/
+
