@@ -262,12 +262,14 @@ jobs:
       # BUILD UNIVERSAL JAR (OpenJDK 25)
       #######################################################################
       - name: Install OpenJDK 25
+        if: runner.os == 'Linux'
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '25'
 
       - name: Build JAR with OpenJDK 25
+        if: runner.os == 'Linux'
         run: |
           ant -f build-github.xml clean jar
 
