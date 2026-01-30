@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar JC64.jar
+java -jar jc64.jar

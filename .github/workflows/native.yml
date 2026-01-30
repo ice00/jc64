@@ -285,7 +285,7 @@ jobs:
 
           # Copy resources at root level
           if [ -d conf ]; then cp -r conf dist-jar/; fi
-          if [ -d doc ]; then cp -r doc dist-jar/; fi
+          # if [ -d doc ]; then cp -r doc dist-jar/; fi
           if [ -d pdf ]; then cp -r pdf dist-jar/; fi
           if [ -d examples ]; then cp -r examples dist-jar/; fi
 

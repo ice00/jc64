@@ -1,1 +1,1 @@
-javaw -jar JC64.jar
+javaw -jar jc64.jar
