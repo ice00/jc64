@@ -283,11 +283,23 @@ jobs:
           if [ -f script/jc64dis.sh ]; then cp script/jc64dis.sh dist-jar/; fi
           if [ -f script/jc64dis.bat ]; then cp script/jc64dis.bat dist-jar/; fi
 
-          # Copy resources at root level
+          # Copy conf
           if [ -d conf ]; then cp -r conf dist-jar/; fi
-          # if [ -d doc ]; then cp -r doc dist-jar/; fi
-          if [ -d pdf ]; then cp -r pdf dist-jar/; fi
-          if [ -d examples ]; then cp -r examples dist-jar/; fi
+
+          # Copy doc as-is
+          if [ -d doc ]; then cp -r doc dist-jar/; fi
+
+          # Extract jc64dis.pdf from doc/ to root
+          if [ -f dist-jar/doc/jc64dis.pdf ]; then
+            mv dist-jar/doc/jc64dis.pdf dist-jar/
+          fi
+
+          # Extract example/*.dis from doc/example/ to root/examples/
+          if [ -d dist-jar/doc/example ]; then
+            mkdir -p dist-jar/examples
+            mv dist-jar/doc/example/* dist-jar/examples/
+            rmdir dist-jar/doc/example || true
+          fi
 
 
       - name: Upload JAR bundle
