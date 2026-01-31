@@ -513,6 +513,8 @@ public class Option {
   /** SidFreq: high octave 12 table */
   public boolean sidFreqHiOct12Table=true;
   
+  /** Replace CTRl with META key on menu */
+  public boolean replaceCtrlMeta=false;
   
   
   // comments C64

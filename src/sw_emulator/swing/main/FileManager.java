@@ -501,6 +501,8 @@ public class FileManager {
       option.showXRefPreview = in.readBoolean();
       option.showXRefSource = in.readBoolean();
       
+      // 3.2
+      option.replaceCtrlMeta = in.readBoolean();
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -945,6 +947,9 @@ public class FileManager {
       out.writeBoolean(option.showMiniatureSource);
       out.writeBoolean(option.showXRefPreview);
       out.writeBoolean(option.showXRefSource);
+      
+      // 3.2
+      out.writeBoolean(option.replaceCtrlMeta);
 
       out.flush();
       out.close();

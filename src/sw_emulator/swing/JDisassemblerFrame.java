@@ -59,14 +59,15 @@ import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -103,7 +104,6 @@ import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
 import sw_emulator.software.memory.XRefManager;
-import sw_emulator.software.memory.memoryState;
 import sw_emulator.swing.main.Carets;
 import sw_emulator.swing.main.Constant;
 import sw_emulator.swing.main.DataType;
@@ -267,7 +267,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
 
     initComponents();
-
+    
     jOptionDialog=new JOptionDialog(this, true, dataTableModelMemory, this);
 
     Shared.framesList.add(this);
@@ -293,6 +293,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     //  else Option.useLookAndFeel(option.getLafName(), option.getMethalTheme());
 
     jOptionDialog.useOption(option);
+    if (option.replaceCtrlMeta) remapShortcutsToMac(jMenuBar); 
+    
     
     option.useSyntaxTheme(option.syntaxTheme);
 
@@ -501,10 +503,67 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     
     // Let the dialogs open in the same window of the program
     jConstantDialog.setLocationRelativeTo(this);
-    jLabelsDialog.setLocationRelativeTo(this);
+    jLabelsDialog.setLocationRelativeTo(this);    
+    jFreezeFrame.setLocationRelativeTo(this);
     
     fadeDialog=new FadeDialog(option, this);
   }
+  
+  /**
+   * Remove the shorcurs CTRL using META as for Mac urers
+   * 
+   * @param menuBar the menu to process
+   */
+  private void remapShortcutsToMac(JMenuBar menuBar) {
+    for (int i = 0; i < menuBar.getMenuCount(); i++) {
+        JMenu menu = menuBar.getMenu(i);
+        if (menu != null) {
+            remapMenu(menu);
+        }
+    }
+  }
+
+  /**
+   * Remap the menu from CTRL to META
+   * 
+   * @param menu the menu to process
+   */
+  private void remapMenu(JMenu menu) {
+    for (int i = 0; i < menu.getItemCount(); i++) {
+        JMenuItem item = menu.getItem(i);
+        if (item == null) continue;
+
+        if (item instanceof JMenu) {
+            remapMenu((JMenu) item);
+            continue;
+        }
+
+        KeyStroke ks = item.getAccelerator();
+        if (ks == null) continue;
+
+        int mods = ks.getModifiers();
+
+        boolean hasCtrl =
+                (mods & InputEvent.CTRL_DOWN_MASK) != 0 ||
+                (mods & InputEvent.CTRL_MASK) != 0;
+
+        if (hasCtrl) {
+            int newMods = mods;
+
+            // remove alla variant of CTRL
+            newMods &= ~InputEvent.CTRL_DOWN_MASK;
+            newMods &= ~InputEvent.CTRL_MASK;
+
+            // add META
+            newMods |= InputEvent.META_DOWN_MASK;
+
+            KeyStroke newKs = KeyStroke.getKeyStroke(ks.getKeyCode(), newMods);
+            item.setAccelerator(newKs);
+        }
+    }
+  }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
