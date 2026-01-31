@@ -349,8 +349,17 @@ jobs:
         with:
           path: artifacts
 
+      - name: Zip artifacts
+        run: |
+          cd artifacts
+          for dir in */ ; do
+            name="${dir%/}"
+            zip -r "../${name}.zip" "$name"
+          done
+
       - name: Upload artifacts to latest release
         run: |
-          gh release upload latest artifacts/**/*
+          gh release upload latest *.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
