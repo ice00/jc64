@@ -731,6 +731,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jButtonClearDLabel = new javax.swing.JButton();
     jButtonAddUserComm = new javax.swing.JButton();
     jButtonAddUserBlock = new javax.swing.JButton();
+    jButtonAddUserBlockAuto = new javax.swing.JButton();
     jButtonAddUserLabel = new javax.swing.JButton();
     jButtonAddUserLabelOp = new javax.swing.JButton();
     jButtonMarkCode = new javax.swing.JButton();
@@ -896,6 +897,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jSeparator4 = new javax.swing.JPopupMenu.Separator();
     jMenuItemAddComment = new javax.swing.JMenuItem();
     jMenuItemAddBlock = new javax.swing.JMenuItem();
+    jMenuItemAddBlockAuto = new javax.swing.JMenuItem();
     jMenuItemUserLabel = new javax.swing.JMenuItem();
     jMenuItemUserLabelOp = new javax.swing.JMenuItem();
     jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -2267,6 +2269,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jToolBarMemory.add(jButtonAddUserBlock);
 
+    jButtonAddUserBlockAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/blockauto.png"))); // NOI18N
+    jButtonAddUserBlockAuto.setToolTipText("Add a space in block user comment");
+    jButtonAddUserBlockAuto.setFocusable(false);
+    jButtonAddUserBlockAuto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonAddUserBlockAuto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jButtonAddUserBlockAuto.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddUserBlockAutoActionPerformed(evt);
+      }
+    });
+    jToolBarMemory.add(jButtonAddUserBlockAuto);
+
     jButtonAddUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mem2.png"))); // NOI18N
     jButtonAddUserLabel.setToolTipText("Add user label");
     jButtonAddUserLabel.setFocusable(false);
@@ -3220,6 +3234,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   });
   jMenuMemory.add(jMenuItemAddBlock);
+
+  jMenuItemAddBlockAuto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SEMICOLON, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+  jMenuItemAddBlockAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/blockauto.png"))); // NOI18N
+  jMenuItemAddBlockAuto.setMnemonic('b');
+  jMenuItemAddBlockAuto.setText("Add a space in user block comment");
+  jMenuItemAddBlockAuto.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemAddBlockAutoActionPerformed(evt);
+    }
+  });
+  jMenuMemory.add(jMenuItemAddBlockAuto);
 
   jMenuItemUserLabel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
   jMenuItemUserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem2.png"))); // NOI18N
@@ -6100,6 +6125,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     asmTextAreaSourceCaretUpdate(evt);
   }//GEN-LAST:event_rSyntaxTextAreaSourceCaretUpdate
 
+  private void jButtonAddUserBlockAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserBlockAutoActionPerformed
+    execute(MEM_ADDBLOCKAUTO);
+  }//GEN-LAST:event_jButtonAddUserBlockAutoActionPerformed
+
+  private void jMenuItemAddBlockAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddBlockAutoActionPerformed
+      execute(MEM_ADDBLOCKAUTO);
+  }//GEN-LAST:event_jMenuItemAddBlockAutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6141,6 +6174,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private sw_emulator.swing.HeapView heapView;
   private javax.swing.JButton jButtonAddUserBlock;
+  private javax.swing.JButton jButtonAddUserBlockAuto;
   private javax.swing.JButton jButtonAddUserComm;
   private javax.swing.JButton jButtonAddUserLabel;
   private javax.swing.JButton jButtonAddUserLabelOp;
@@ -6192,6 +6226,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItem3;
   private javax.swing.JMenuItem jMenuItemAbout;
   private javax.swing.JMenuItem jMenuItemAddBlock;
+  private javax.swing.JMenuItem jMenuItemAddBlockAuto;
   private javax.swing.JMenuItem jMenuItemAddComment;
   private javax.swing.JMenuItem jMenuItemAddress;
   private javax.swing.JMenuItem jMenuItemAddress1;
@@ -6728,6 +6763,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          addBlock();
          if (option.forceCompilation) disassembly(true);
          break;
+       case MEM_ADDBLOCKAUTO:
+         addBlockAuto();
+         if (option.forceCompilation) disassembly(true);
+         break;         
        case MEM_CLEARDLABEL:
          clearDLabel();  
          if (option.forceCompilation) disassembly(true);
@@ -8348,6 +8387,19 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();  
       jTableMemory.setRowSelectionInterval(row, row); 
     }       
+  }
+  
+  /**
+   * Add a space in user block for comment
+   */
+  private void addBlockAuto() {
+    int row=jTableMemory.getSelectedRow();
+    
+    if (row<0) return;    
+    MemoryDasm mem= project.memory[row];
+    
+    if (mem.userBlockComment==null || "".equals(mem.userBlockComment)) mem.userBlockComment=" \n";
+    else mem.userBlockComment+=" \n";
   }
 
   /**

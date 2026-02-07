@@ -458,6 +458,9 @@ public interface userAction {
   /** Export source as AS format */
   public static final int SOURCE_AS = 144;
   
+  /** Memory add a space in user block comment */
+  public static final int MEM_ADDBLOCKAUTO = 145;
+  
   /**
    * Execute the passed user action
    * 
