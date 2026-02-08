@@ -221,6 +221,12 @@ jobs:
             shopt -u dotglob
           fi
 
+      - name: Fix permissions for Linux bundle
+        if: runner.os == 'Linux'
+        run: |
+          chmod +x dist-run/bin/jc64
+          chmod +x dist-run/jc64.sh
+
       - name: Upload Linux native bundle
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
