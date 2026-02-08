@@ -135,6 +135,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           native-image \
+            -J-Xmx6g \
             -J-Djava.home=$JAVA_HOME \
             -J-Djavax.sound.config.file=./conf/sound.properties \
             -Djava.awt.headless=false \
