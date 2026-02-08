@@ -227,12 +227,19 @@ jobs:
           chmod +x dist-run/bin/jc64
           chmod +x dist-run/jc64.sh
 
-      - name: Upload Linux native bundle
+      - name: Create Linux ZIP preserving permissions
+        if: runner.os == 'Linux'
+        run: |
+            cd dist-run
+            zip -r ../jc64-native-linux.zip .
+
+      - name: Upload Linux ZIP
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
-          name: jc64-native-linux
-          path: dist-run
+            name: jc64-native-linux
+            path: jc64-native-linux.zip
+
 
       #######################################################################
       # PACKAGE WINDOWS RUNTIME
