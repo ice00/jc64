@@ -1350,57 +1350,65 @@ public class Disassembly {
   /**
    * Merge blocks thare are in adjacent area, so the disassembly can be uniform
    */
-  private void mergeBlocks() {
-    // one blocks did not need to be merged
-    if (blocks.size()==1) return;
-    
-    Collections.sort(blocks, (Block block2, Block block1) -> block2.startAddress-block1.startAddress);
-    
-    Block curBlock;
-    Block nextBlock;
-    Block newBlock;
-    int end;
-    int size;
-    
-    int i=0;
-    while (i<blocks.size()-1) {
-      curBlock=blocks.get(i);
-      nextBlock=blocks.get(i+1);
-      
-      // are the block intersected or attached?
-      if (curBlock.endAddress-nextBlock.startAddress>=-1) {
-        // we must merge the blocks
-        newBlock=new Block();        
-        newBlock.startAddress=curBlock.startAddress;
-        newBlock.endAddress=nextBlock.endAddress;
-        newBlock.startBuffer=0;
-        end=newBlock.endAddress-newBlock.startAddress;
-        newBlock.endBuffer=end;
-        newBlock.inB=new byte[end+1];
-        
-        size=curBlock.endAddress-curBlock.startAddress+1;
-        
-        // fill the block with first part
-        for (int j=0; j<size; j++) {
-          newBlock.inB[j]=curBlock.inB[j+curBlock.startBuffer];
+ /**
+ * Merge blocks that are adjacent or overlapping, based on logical addresses.
+ */
+private void mergeBlocks() {
+    if (blocks.size() <= 1) return;
+
+    // Ordina per indirizzo logico di inizio
+    Collections.sort(blocks, (a, b) -> Integer.compare(a.startAddress, b.startAddress));
+
+    int i = 0;
+    while (i < blocks.size() - 1) {
+
+        Block cur  = blocks.get(i);
+        Block next = blocks.get(i + 1);
+
+        // are the block intersected or attached?
+        if (cur.endAddress >= next.startAddress - 1) {
+
+            // new logic range
+            int mergedStartAddr = cur.startAddress;
+            int mergedEndAddr   = Math.max(cur.endAddress, next.endAddress);
+            int mergedLen       = mergedEndAddr - mergedStartAddr + 1;
+
+            // we must merge the blocks
+            Block merged = new Block();
+            merged.startAddress = mergedStartAddr;
+            merged.endAddress   = mergedEndAddr;
+
+            merged.startBuffer = 0;
+            merged.endBuffer   = mergedLen - 1;
+            merged.inB         = new byte[mergedLen];
+
+            // fill the block with first part
+            for (int addr = cur.startAddress; addr <= cur.endAddress; addr++) {
+                int destIndex = addr - mergedStartAddr;                    // dove scrivo nel nuovo
+                int srcIndex  = cur.startBuffer + (addr - cur.startAddress); // da dove leggo nel vecchio
+                merged.inB[destIndex] = cur.inB[srcIndex];
+            }
+
+            // fill the block with second part
+            for (int addr = next.startAddress; addr <= next.endAddress; addr++) {
+                int destIndex = addr - mergedStartAddr;
+                int srcIndex  = next.startBuffer + (addr - next.startAddress);
+                merged.inB[destIndex] = next.inB[srcIndex];
+            }
+
+            // remove next block
+            blocks.set(i, merged);
+            
+            // replace current block with new one
+            blocks.remove(i + 1);
+
+        } else {
+            // no intersection. go to next
+            i++;
         }
-        
-        end=nextBlock.endAddress-nextBlock.startAddress+1;
-        
-        // fill the block with second part
-        for (int j=0; j<end; j++) {
-          newBlock.inB[j+size]=nextBlock.inB[j + nextBlock.startBuffer];
-        }
-        
-        // remove next block
-        blocks.remove(i+1);
-        
-        // replace current block with new one
-        blocks.set(i, newBlock);        
-      }
-      i++;
     }
-  }
+}
+
   
   /**
    * Apply patches in this memory block
