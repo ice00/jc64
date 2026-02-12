@@ -1384,8 +1384,8 @@ private void mergeBlocks() {
 
             // fill the block with first part
             for (int addr = cur.startAddress; addr <= cur.endAddress; addr++) {
-                int destIndex = addr - mergedStartAddr;                    // dove scrivo nel nuovo
-                int srcIndex  = cur.startBuffer + (addr - cur.startAddress); // da dove leggo nel vecchio
+                int destIndex = addr - mergedStartAddr;
+                int srcIndex  = cur.startBuffer + (addr - cur.startAddress);
                 merged.inB[destIndex] = cur.inB[srcIndex];
             }
 
