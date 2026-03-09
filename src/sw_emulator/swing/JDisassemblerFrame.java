@@ -7212,7 +7212,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
       m_prefNode.put(LAST_DIR_PROJECT, projectFile.getPath());
 
-      project=new Project();
+      openProject(projectFile);
+    }                
+  }
+  
+  /**
+   * Open the given projct
+   * 
+   * @param projectFile the project file to opne
+   */
+  public void openProject(File projectFile) {
+    project=new Project();
       setTitle("JC64dis ("+projectFile.getName()+")");
       if (!FileManager.instance.readProjectFile(projectFile , project)) {
           JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
@@ -7225,8 +7235,6 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();
       xRefPanelDis.setMemory(project.memory);
       xRefPanelSource.setMemory(project.memory);
-    }
-                
   }
   
   /**

@@ -35,6 +35,7 @@ import javax.swing.SwingUtilities;
 import sw_emulator.swing.JDisassemblerFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 
 /**
@@ -51,7 +52,7 @@ public class JC64Dis {
   /**
    * Main program that display the disassembler 
    */
-  public JC64Dis() {
+  public JC64Dis(File projectFile) {
     Option option = new Option();
 
     // read option file even if it will be reload again in JDisassemblerFrame
@@ -66,10 +67,25 @@ public class JC64Dis {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         jMainFrame = new JDisassemblerFrame();
-
+        
         // close splash once main window is shown
         closeSplash();
-                jMainFrame.setVisible(true);
+        
+        if (projectFile != null) {
+            try {
+                jMainFrame.openProject(projectFile);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Error in opening project file:\n" + projectFile.getAbsolutePath(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }        
+
+
+        jMainFrame.setVisible(true);
       }
     });
   }
@@ -204,7 +220,13 @@ public class JC64Dis {
     } catch (Exception ex) {
       ex.printStackTrace();
     }
+    
+    File projectFile = null;
 
-    new JC64Dis();
+    if (args.length > 0) {
+        projectFile = new File(args[0]);
+    }
+
+    new JC64Dis(projectFile);
   }
 }
