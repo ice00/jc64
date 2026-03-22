@@ -461,6 +461,9 @@ public interface userAction {
   /** Memory add a space in user block comment */
   public static final int MEM_ADDBLOCKAUTO = 145;
   
+  /** Get labels from AI */
+  public static final int AI_GETLABELS = 146;
+  
   /**
    * Execute the passed user action
    * 

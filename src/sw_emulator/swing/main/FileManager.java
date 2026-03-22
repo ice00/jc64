@@ -41,6 +41,7 @@ import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
 import sw_emulator.software.BasicDetokenize.BasicType;
 import sw_emulator.software.MemoryDasm;
+import sw_emulator.software.ai.AIBackendConfig.AI;
 
 /**
  * Manage the files of disassembler
@@ -503,6 +504,18 @@ public class FileManager {
       
       // 3.2
       option.replaceCtrlMeta = in.readBoolean();
+      option.ai = AI.valueOf(in.readUTF());
+      option.hostLMStudio = in.readUTF();
+      option.portLMStudio = in.readInt();
+      option.apiKeyClaude = in.readUTF();
+      option.modelClaude = in.readUTF();
+      option.apiKeyGemini = in.readUTF();
+      option.modelGemini = in.readUTF();
+      option.apiKeyOpenAI = in.readUTF();
+      option.modelOpenAI = in.readUTF();
+      option.apiKeyOpenRouter = in.readUTF();
+      option.modelOpenRouter = in.readUTF();
+      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -949,7 +962,18 @@ public class FileManager {
       out.writeBoolean(option.showXRefSource);
       
       // 3.2
-      out.writeBoolean(option.replaceCtrlMeta);
+      out.writeBoolean(option.replaceCtrlMeta);      
+      out.writeUTF(option.ai.name());
+      out.writeUTF(option.hostLMStudio);
+      out.writeInt(option.portLMStudio);
+      out.writeUTF(option.apiKeyClaude);
+      out.writeUTF(option.modelClaude);
+      out.writeUTF(option.apiKeyGemini);
+      out.writeUTF(option.modelGemini);
+      out.writeUTF(option.apiKeyOpenAI);
+      out.writeUTF(option.modelOpenAI);
+      out.writeUTF(option.apiKeyOpenRouter);
+      out.writeUTF(option.modelOpenRouter);
 
       out.flush();
       out.close();

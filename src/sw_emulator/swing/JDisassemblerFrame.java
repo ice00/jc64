@@ -53,9 +53,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -101,6 +104,8 @@ import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MINOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
+import sw_emulator.software.ai.AIBackendConfig;
+import sw_emulator.software.ai.M6510LabelAnalyzer;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
 import sw_emulator.software.memory.XRefManager;
@@ -121,6 +126,7 @@ import sw_emulator.swing.main.XRefToolTipManager;
 import sw_emulator.swing.main.userAction;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
+import sw_emulator.swing.table.LabelTableModel;
 import sw_emulator.swing.table.MemoryTableCellRenderer;
 
 /**
@@ -243,6 +249,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   /** Dialog for constants table */
   JConstantDialog jConstantDialog=new JConstantDialog(this, true);
   
+  /** AI label analyzer */
+  M6510LabelAnalyzer m6510LabelAnalyzer=new M6510LabelAnalyzer();
+  
+  /** AI frame */
+  JAIFrame jAIFrame=new JAIFrame(this, m6510LabelAnalyzer);
+  
   
   /** Last directory for saving project  */
   public final static String LAST_DIR_PROJECT = "last.dir.project";  
@@ -254,7 +266,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private String lastSearch="";
   
   
-    /**
+  /**
    * Creates new form JFrameDisassembler
    */
   public JDisassemblerFrame() {        
@@ -1032,6 +1044,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemSaveAsGlass1 = new javax.swing.JMenuItem();
     jMenuItemSaveAsAS1 = new javax.swing.JMenuItem();
     jMenuItem3 = new javax.swing.JMenuItem();
+    jMenuAI = new javax.swing.JMenu();
+    jMenuItemGetLabels = new javax.swing.JMenuItem();
     jMenuHelpContents = new javax.swing.JMenu();
     jMenuItemContents = new javax.swing.JMenuItem();
     jSeparatorHelp1 = new javax.swing.JPopupMenu.Separator();
@@ -4355,6 +4369,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
   jMenuBar.add(jMenuSource);
 
+  jMenuAI.setText("AI");
+
+  jMenuItemGetLabels.setText("Get labels");
+  jMenuItemGetLabels.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemGetLabelsActionPerformed(evt);
+    }
+  });
+  jMenuAI.add(jMenuItemGetLabels);
+
+  jMenuBar.add(jMenuAI);
+
   jMenuHelpContents.setText("Help");
 
   jMenuItemContents.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
@@ -6130,8 +6156,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   }//GEN-LAST:event_jButtonAddUserBlockAutoActionPerformed
 
   private void jMenuItemAddBlockAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddBlockAutoActionPerformed
-      execute(MEM_ADDBLOCKAUTO);
+    execute(MEM_ADDBLOCKAUTO);
   }//GEN-LAST:event_jMenuItemAddBlockAutoActionPerformed
+
+  private void jMenuItemGetLabelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGetLabelsActionPerformed
+    execute(AI_GETLABELS);
+  }//GEN-LAST:event_jMenuItemGetLabelsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6215,6 +6245,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JButton jButtonViewLabels;
   private javax.swing.JButton jButtonViewProject;
   private javax.swing.JButton jButtonWizard;
+  private javax.swing.JMenu jMenuAI;
   private javax.swing.JMenuBar jMenuBar;
   private javax.swing.JMenu jMenuBasic;
   private javax.swing.JMenu jMenuBasic1;
@@ -6342,6 +6373,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItemGame;
   private javax.swing.JMenuItem jMenuItemGame1;
   private javax.swing.JMenuItem jMenuItemGarbage;
+  private javax.swing.JMenuItem jMenuItemGetLabels;
   private javax.swing.JMenuItem jMenuItemGraphics;
   private javax.swing.JMenuItem jMenuItemGraphics1;
   private javax.swing.JMenuItem jMenuItemHandy;
@@ -7123,6 +7155,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          appPaste();  
          if (option.forceCompilation) disassembly(true);   
          break;        
+         
+       case AI_GETLABELS:
+         aiGetLabels();
+         break;
     }
         
   }
@@ -10281,4 +10317,55 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         xRefPanelSource.showXRefsForAddress(address);
       }
     }      
+    
+   /**
+   * Get labels from AI
+   */
+  private void aiGetLabels() {
+
+    SwingUtilities.invokeLater(() -> {
+      if (project == null) {
+        JOptionPane.showMessageDialog(this, "Create or open a project ro use this festure", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+      }
+
+      Map<String, String> knownLabels = new HashMap<String, String>();
+      Map<String, String> currentLabels = new HashMap<String, String>();
+
+      for (MemoryDasm mem : project.memory) {
+        if (mem.userLocation != null && !"".equals(mem.userLocation)) {
+          knownLabels.put(String.format("%04X", mem.address), mem.userLocation);
+          continue;
+        }
+        if (mem.dasmLocation != null && !"".equals(mem.dasmLocation)) {
+          knownLabels.put(String.format("%04X", mem.address), mem.dasmLocation);
+          continue;
+        }
+      }
+
+      jAIFrame.setVisible(true);
+
+      StringBuffer source = new StringBuffer();
+ 
+      source.append(rSyntaxTextAreaDis.getText());
+      
+      jAIFrame.startAnalysis(AIBackendConfig.lmStudio(), source, currentLabels, knownLabels,
+              selectedRows -> {
+                int address;
+                String label;
+                
+                System.out.println("User applied " + selectedRows.size() + " labels:");
+                for (LabelTableModel.Row r : selectedRows) {
+                  address = Integer.parseInt(r.address, 16);
+                  label = r.newLabel;
+                  
+                  // skip if label is already present or address is wrong
+                  if (errorLabel(label)==null && address>0 && address<project.memory.length) project.memory[address].userLocation=label;
+                }
+                
+                if (option.forceCompilation) disassembly(true);
+              }
+      );
+    });
+  }
 }

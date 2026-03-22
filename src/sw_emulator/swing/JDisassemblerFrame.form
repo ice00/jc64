@@ -3074,6 +3074,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuAI">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="AI"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemGetLabels">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Get labels"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGetLabelsActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuHelpContents">
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>

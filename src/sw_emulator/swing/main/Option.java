@@ -99,6 +99,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 import sw_emulator.software.Assembler;
 import sw_emulator.software.Assembler.Name;
+import sw_emulator.software.ai.AIBackendConfig.AI;
 import sw_emulator.swing.Shared;
 import sw_emulator.swing.table.DataTableModelMemory;
 
@@ -515,6 +516,41 @@ public class Option {
   
   /** Replace CTRl with META key on menu */
   public boolean replaceCtrlMeta=false;
+  
+  
+  /** AI selected */
+  public AI ai=AI.LM_STUDIO_LOC;
+  
+  /** Host of LM studio */
+  public String hostLMStudio="";
+  
+  /** Port for LM Studio */
+  public int portLMStudio;
+  
+  /** Api key for Antropic Claude */
+  public String apiKeyClaude="";
+  
+  /** Model fot Antropic Clause */
+  public String modelClaude="";
+  
+  /** Api key for Google Gemini */
+  public String apiKeyGemini="";
+  
+  /** Model fot Google Gemini */
+  public String modelGemini="";
+  
+  /** Api key for OpenAI */
+  public String apiKeyOpenAI="";
+  
+  /** Model fot OpenAI */
+  public String modelOpenAI="";
+  
+  /** Api key for OpenAI */
+  public String apiKeyOpenRouter="";
+  
+  /** Model fot OpenAI */
+  public String modelOpenRouter="";
+  
   
   
   // comments C64
