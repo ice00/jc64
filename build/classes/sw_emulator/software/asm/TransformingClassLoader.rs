@@ -1,0 +1,3 @@
+sw_emulator.software.asm.ExitCallClassAdapter
+sw_emulator.software.asm.ExitCallMethodAdapter
+sw_emulator.software.asm.TransformingClassLoader

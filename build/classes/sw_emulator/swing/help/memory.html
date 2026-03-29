@@ -1,0 +1,276 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Memory menu</h1>
+  <p>The memory menu is dedicated to the memory area, and so have many voices:<br></p>
+  <p align="center"><img src="./memory1.png"></p>  
+  <p align="center"><img src="./memory2.png"></p>    
+  <p align="center"><img src="./memory16.png"></p> 
+  
+  <h2>Clear disassembly automatic comment</h2>
+  <p>During the disassemble phase, the disassembly engine is able to add some comments to common memory locations (based onto the choosed platform) used by the instruction being executed.<br>
+    So, for example, if the address of an load/store instruction is $D400, the automatic comment appended to that memory area will be "Voice 1: Frequency control (lo byte)"<br>
+    You can use those comments to easy search for some text (eg. "Frequency control"), however if you don't need it, you can use this menu function to erase the comments and leave them blank to all the memory location you had delected<br>
+    Please, note that as soon as you will regenerate the source code, the disassembler will add again that comment, so instead of erasing it, it silenty add a user comment (see Add user comment) that is blank as the rule applied in the engine is that a user comment is always used over a disassembler automatic comment.<br>
+    Another way to clear the automatic comment is to activate a flag in option that allow you to click in the DC column of memory area for erasing it.
+  </p>
+  
+  <h2>Clear user comment</h2>
+  <p>This is a shortcut function to make your comment to that location as blank (e.g you can enter the comment and modify it to be empty, but this is fastest).</p>
+ 
+ <h2>Clear disassembly automatic label</h2>
+ <p>The disassembly engine is able to detect all the memory locations used into the program area and label them as "W" + the hex representation of the memory area.<br>
+  This command will erase that association, but if it is still present into the source it will be recreated at next disassembler source regeneration. So why this function is present?<br>
+  The answer is simple: at the beginning all memory locations are not marked as code/data, so the engine use them as code (by default in option). <br>
+  In this phase that could be a data area that if managed as code refers to a given memory location and so that will be labeled. 
+  When you will mark that area as code, the label is still associated, so it could appars when it is utilizated as data.<br>
+  Another way to clear the automatic label is to activate a flag in option that allow you to click in the DL column of memory area for erasing it.<br><br>
+  Please, note that if you did not select a memory address, it apply the delete to all the automatic labels, like in the Help command.
+ </p>
+ 
+  <h2>Add user comment</h2> 
+  <p>This function let you add a comment to the selected memory area. The comment is used over a disassembler automatic one and in source appears in the line where there is the code.</p>
+  <p align="center"><img src="./memory3.png"></p> 
+  <p>Note instead that a comment into the data area will appears only if there is a label and it will be after the label declaration (this let to merge more bytes to one row).<br>
+     Another way to add/edit a user comment is to activate a flag in option that allow you to click in the UC column of memory area for adding it.   
+  </p>
+  
+  <h2>Add user block comment</h2> 
+  <p>This function is essential for adding the right formatting to the source and appropriate comments to block of code.<br>
+  The fist usage is for adding blank lines and so separating parts of code or data. The rule is simple: add a space (only one) and a carriage return (and iterate more times as you need). 
+  That char will add a blank line, otherwise you will get a line formatted as comment that it is not good to read.<br><br>
+  Here an example with data that are separated every 8 lines (so we have a block of 8x8 area): you can see the comment inside memort address $2040</p>
+  <p align="center"><img src="./memory4.png"></p> 
+  <p>All other values inserted will be addes as global comment (with the format selected in option), so for example, here a screen that show what it was inserted in comment and what you got:</p>
+   <p align="center"><img src="./memory5.png"></p>  
+  <p>Another way to add/edit a block comment is to activate a flag in option that allow you to click in the UB column of memory area for adding it.</p>
+  <p>A new features added in version 2.5 is the macro block comments: using a special syntax is possible to make the generation in automatic of sprites/chars dots view of an block of NxM elements:
+  <ul>
+    <li><b>[&lt;CHAR#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;CHAR#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic chars arranged in row that goes from up/sx to dn/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;CHAR#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor chars arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#UPDN&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MONO#NxM#DNUP&gt;]</b> Shows a grid of NxM monocromatic sprites arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#UPDN&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to up/dx and then go below of one line and so on.</li>
+    <li><b>[&lt;SPRITE#MULTI#NxM#DNUP&gt;]</b> Shows a grid of NxM multicolor sprites arranged in row that goes from up/sx to dx/sx and then go rigth of one line and so on.</li>
+  </ul>
+  <p align="center"><img src="./memory19.png"></p> 
+   
+   <h2>add a space in user block comment</h2>
+   <p>This add the special space followed by carriage return chars that make the block comment to leave a blank line<p>
+
+   <h2>Add user label</h2> 
+   <p>The user can add label to a memory location in data or code area and if there was a disassembly automatic generated one in that position, the user's one will be used instead of the other.<br>
+   You cannot insert label with less than 5 chars and a option let you specify the max one to use (as some assembler has a limit in his length). <br>
+   The program will search if the label was already present into the code, so you cannot create duplicates.
+   As we had seen, disassembler generate labels only for memory locations inside the binary data, but a user can add a label even in the outside area (so as a constant).<br>
+   This is for mark up external routine (like the KERNAL one) or memory area where to copy some code/data.<br><br>
+   The engine of source generation processes the memory outside the binary data first, so block comments and label declaration will appears into the source into the initial area, then it process the internal memory area.<br>
+   During the constant declaration even user comment are showed:
+   </p>  
+   <p align="center"><img src="./memory6.png"></p>   
+   Another way to add/edit a user label is to activate a flag in option that allow you to click in the UL column of memory area for adding it.
+   
+   <h2>Add user label on next word address</h2> 
+   <p>This is a fast way to create a label when you are onto an instuction that operated in an word address: instead of goint to that memory location and define the label, you define it by positioning to the memory location of the instruction.</p>
+   
+   <h2>Mark as code</h2>
+   <p>The selected area will be marked as code (so color will be green)</p>
+   
+   <h2>Mark as data</h2>
+   <p>The selected area will be marked as data (so color will be light blue).<br>
+   Note that you can enhance the classification by selecting the kind in a sub menu. The disassembly engine in that case apply a different decoding of the data.
+   </p>
+   
+   <h2>Data as BASIC</h2>
+   <p>The selected area will be marked as BASIC data.<br>
+   You can select many different type of BASIC. This information is used for comment the code with BASIC instructions.
+   </p>
+   
+   <h2>Mark data as Byte (HEX)</h2>
+   This marks the data as byte and format it as hexadecimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <b>.byte $12</b> or <b>!byte $F4</b><br>
+   This is the method used when you select the data type without a further classification.<br>
+   Where some comments are find in data of byte type (not where there is a label), it is forced a carriage return for printing the label.
+   
+   <h2>Mark data as Byte (DEC)</h2>
+   This marks the data as byte and format it as decimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <b>.byte 18</b> or <b>!byte 244</b>
+   
+   <h2>Mark data as Byte (BIN)</h2>
+   This marks the data as byte and format it as decimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <b>.byte 18</b> or <b>!byte 244</b>
+   
+   <h2>Mark data as Byte (CHAR)</h2>
+   This marks the data as byte and format it as character. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <b>.byte 'A</b> or <b>!byte 'Z</b>
+   
+   <h2>Mark data as Word</h2>
+   This marks the data as word and format it as hexadecimal number. According with the selected assembler and his possible variants the format could be many, for example:<br>
+   <a>.word $1234</a> or <a>!word $1234</a><br>
+   The data <i><$xxyy</i> are equivalent to the bytes <i>$yy, $xx</i>, so if those bytes are of a memory relative location (low/high), the word is replaced by the associate label, so those are equivalent:<br>
+   <b>.byte &lt;Label, &gt;Label</b> and <b>.word Label</b>
+   
+   <h2>Mark data as Tribyte</h2>
+   This marks the data as tribyte and format it as hexadecimal number. As not all the assemblers support tribyte, it will be used macro in that case.<br>
+   Eventual memory address pointers (#&lt;, #&gt;) in one of the tribyte are not supported.
+   
+   <h2>Mark data as Long</h2>
+   This marks the data as long and format it as hexadecimal number. As not all the assembler supports long it will be used macro in that case.<br>
+   Eventual memory address pointers (#&lt;, #&gt;) in one of the long are not supported.
+   
+   <h2>Mark data as Address</h2>
+   This marks the data as of an address. Essentially it is equals to a Word declaration, unless for assembler that explicitely support it.
+   
+   <h2>Mark data as Stack Word</h2>
+   A stack word is like a word but decremented by 1. It's used to push two addresses to the stack and executing an RTS. As not all the assemblers support it, in that case a macro is used.
+   
+   <h2>Mark data as Monocromatic spite definitions</h2>
+   This marks data as of a monocromatic spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of lines of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
+   For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
+   Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes. Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
+   
+   <h2>Mark data as Multicolor spite definitions</h2>
+   This marks data as of a molticolor spite definitions, so it expects to have multiple of 64 bytes. The disassembler puts group of lines of 3 bytes for 21 lines, then it puts only a byte for closing the block.<br>
+   The disasssembler will add a comment at the end of each line with the bits layout of the sprite (you can suppress them by delete the generated comments)<br>
+   For the sprites, in option, you can choose to puts the 3 bytes as hexadecimal or binary number. Has not all assembler program supports tribyte number, it is used macro definitions to support them.<br>
+   Labels are supported but in front of a sprite row, if it is inside the row, the row is splitted into bytes.  Eventual memory address pointers (#<, #>) in one byte of the row are not supported.
+   
+   <h2>Mark data as Text</h2>
+   This marks data as of text. If the byte cannot be converted into text it is addes as a HEX byte if the assembler support them, otherwise the text is forced to be as bytes.
+   
+   <h2>Mark data as Text with number of byte before</h2>
+   This marks the data as text, but the first byte gives the length of the string. So if you not select the right number of chars according with the first byte, the data is not marked.
+   As some assemblers has special instruction for this mode, the length is so obmitted into the source.
+   
+   <h2>Mark data as Text terminated with 0</h2>
+   This marks the data as text that terminate when there is a zero. So, only when you select an area that has a zero then the area is marked.
+   As some assemblers has special instruction for this mode, the final zero is obmittted into the source.
+   
+   <h2>Mark data as Text terminated with high bit at 1</h2>
+   This mark the data as text that terminate when there is the high bit at one. So, only when you select an area that has a high bit with 1 then the area is marked.
+   As some assemblers has special instruction for this mode, the final 1 high bit is obmittted into the source.
+   
+   <h2>Mark data as Text left shifted</h2>
+   This marks the data as of a left shifted bytes, so low bit is always 0 (you cannot select an area with low bit at 1 for this kind).
+   As some assemblers support this syntax, the byte is right shifted when converted into the source, while all the others simply acts it as normal text.
+   
+   <h2>Mark data as Text converted to screen code</h2>
+   This marks data as text convertet to C64 screen code. It change the disassembled output for the assembler that has an instruction that support it, otherwise it is acted as normal text.
+   
+   <h2>Mark data as Text converted to petascii code</h2>
+   This marks data as text convertet to C64 petascii code. It change the disassembled output for the assembler that has an instruction that support it, otherwise it is acted as normal text.
+   
+   <h2>Sub mark a cell of constant 0/1/2/3/4/5/6/7/8/9/clear all</h2>
+   The selected memory location is marked as of table X, so disassambler can show that data as of constant definend in that table (this is even true even for code for some instructions).<br>
+   Actually it is used in instruction with immediate value, in data marked as byte and in text.
+   
+   <h2>Mark as garbage</h2>
+   The selected area are marked as garbase and so it will be ignored by the disassembler.<br>
+   However if you had a user label, a memory comment or block comment, it will be shown in disassembler.
+   
+   <h2>Un-mark data</h2>
+   Remove previously assigned data type.
+   
+   <h2>Assign the selected address as +</h2>
+   <p>In some cases, accessing a sequences of byte referring to an initial address (and so label) can improve source clearance, instead of creating one label for every bytes:</p>
+   <p align="center"><img src="./memory7.png"></p>   
+   <p>Using this function you can create such relation: you need to positionate to the element you want to make point to another, then into the given table you can choose one address (that can have a label, but if it is not present, disassembler engine will create one for it). At this point the label of this address will not be used and instead will be used the one that are associated with the offest for it.<br>
+   You will see that now the RE column will have a + inside it and the tool tip will gives the address + offset. </p>
+   <p align="center"><img src="./memory8.png"></p> 
+   <p>You should note that the disassembler engine will create in automatic a such relation in one particular case: where there is a self modified code!<br>
+   A common way to save raster line or write compact code is to modify the low/high byte of the address of an LDA or STA instruction. 
+   In this case you cannot create a label to that memory location as it is inside the code, so you must refer to it as another (usually labelling where the instruction start) plus an offset:</p>
+   <p align="center"><img src="./memory9.png"></p> 
+   <p>You can delete a plus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it. It even useful when disassembler engine create a relation to part that where not marked as code and then you mark as data.  </p>
+  
+   <h2>Assign the selected address as -</h2>
+   <p>In some cases even having a pointer that refers to a label that is ahead can be usefull, so this create (in the same manner of plus) a minus relation<br>
+    <p align="center"><img src="./memory12.png"></p>  
+    <p>You will see that now the RE column will have a - inside it and the tool tip will gives the address - offset. </p>
+     <p align="center"><img src="./memory13.png"></p> 
+   <p>You can delete a minus relation by simple using the function and selecting only Ok: the program will ask you if you want to delete it.</p>
+   
+   <h2>Assign the selected address as #&lt; </h2>
+   <p>In some cases a immediate value is not a simple byte but it could be the low part of one address.<br>
+  <p> In you reverse a binary to source you can compile again the file back to binary and it works, but if you relocate the code to another memory position it will not works if the byte where a low part of one pointer.<br>
+   It is let to your analisys to find such relation but the program will help you.<br>
+   You need to select the memory location of that byte (that is the next byte after the opcode position for example) and this function will open a table where 
+   all possible addresses in the binary range are equal to that byte as low part:</p>
+   <p align="center"><img src="./memory10.png"></p> 
+  <p> If you press Ok without select a location and there was already a mapped one, the program will ask you if it has to remove the association.<br>
+      For select the address it will show even the memory location labels (DASM=automatic one, USER=user defined, REL=relative label).<br>
+   The RE column will show an < sign in that location and the tool tip will show the value of it</p>
+   
+   <h2>Assign the 2 selected addresss as #&lt; #&gt;</h2>
+   <p>This declare the selected couple of bytes as #&lt; #&gt; of the address formed by his low/high value</p>
+ 
+   <h2>Assign the 2 tables as #&gt; #&lt;</h2>
+   <p>This open a dialog that ask for starting and ending position of low addresses and the starting and ending position of high address. 
+   Then it automatically assign the correct values in the two tables as a memory word pointer.
+   </p>
+   
+  <p align="center"><img src="./memory17.png"></p> 
+  
+   <h2>Assign the 2 selected addresss as #&gt; #&lt;</h2>
+   <p>This declare the selected couple of bytes as #&gt; #&lt; of the address formed by his high/low value</p>
+    
+   <h2>Assign the selected address as #&gt; </h2>
+   <p>This function is the analoge of the previous but operates with the high part of an address. </p>
+  
+   <p align="center"><img src="./memory11.png"></p> 
+   
+   <p>As a final note you should know that you cannot mark a memory location as +/- and # at the same time. Only one is tollerated, unless one case:</p>
+   
+   <h2>Special hidden assign of #^ </h2>      
+   You can mark a location as #&gt and at the same time of +, by apply the two operations to the same address location. In this special case the ^ mark is used<br>
+   This special case is when you have a table of words that are the addresses to other part of the program and you read it with an index register operation.<br>
+   
+   <p align="center"><img src="./memory14.png"></p> 
+   
+   You can still not use this features, but the code will be less well formatted:
+   
+   <p align="center"><img src="./memory15.png"></p>  
+   
+   <h2>Assign using a wizard</h2>
+   This special function open a wizard dialog where you have to select the low and high address of tables that refers to some addresses in memory.
+   
+   <p align="center"><img src="./memory18.png"></p>  
+   
+   You can use CTRL+D and CTRL+F to search for low and high position in memory table. Once find, changes the size that the table has. A preview of what you will optain is showed into the main table.<br>
+   Using this function you can also generate labels for the memory locations (be sure that the addresses are unique, as if they are repeated the engine will overwrite already assigned labels).
+   For this, set an prefix to use, how many digits to have (1 or 2), the starting index and if you want uppercase hex index.<br> 
+   Please not that only when you press Apply what you have generate in the preview will be apply into memory.<br>
+   Use Reset to clear all field you insert and start with an empty selection.
+   
+   <hr>
+   Three memory related functions are locate under Help menu:
+   <h2>Import labels:</h2>
+   This import labels from a DASM dump, so it has a txt format that contain label, spaces, hex address. It will not generate a label already present or that is equal to an autogenerated one.
+   
+   <h2>Refactor labels: </h2>    
+   It ask for an prefix of label to be replaced by another one. If this will generate a collision with a present label, the refactor will be interrupt at that point.
+   
+   <h2>Clear automatic comments: </h2>    
+   Clear all automatic comments present in memory. As a new compilation will regenerate them, this is to use for erase the one that was created from code and now are not needed as in data.
+   
+   <h2>Clear automatic labels: </h2>    
+   Clear all automatic labels present in memory. As a new compilation will regenerate them, this is to use for erase all not more referenced label that comes when you declare code as data.
+   <hr>
+   An undo menu let you select the date/time of one project to restore a previous state. A state is automatically saved after a compilation.
+   <hr>
+   In Help there is even the <b>SIDld player</b> menu that opens a sid player based onto cRSID that is able to produce SIDLD binary memory map inside a BIN file in temp folder if you are disassembly a PSID fie. You should listen to the tune (even at fast speed) and on stop it generates the file that you can then use inside JC64dis.
+   
+   
+   <p align="center"><img src="./sidld.png"></p> 
+   
+    <hr>  
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>

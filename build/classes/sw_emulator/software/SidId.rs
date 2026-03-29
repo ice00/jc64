@@ -1,0 +1,2 @@
+sw_emulator.software.SidIdRecord
+sw_emulator.software.SidId

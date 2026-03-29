@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>JC64dis</title>
+    <meta content="JC64dis">
+    <style></style>
+  </head>
+  <body>
+  <h1 align="center">JC64dis Memory Area</h1>
+  <p>
+  Once a file that are not a MUS is processed, in the memory area there will appears a table that contains all $FFFF memory addresses in sequences with different colors and flag information in the columns.
+  </p>
+  
+  <p align="center"><img src="./mem1.png"></p>  
+  
+  <p>
+  The meanings of columns are:
+   <ul>
+    <li>ID: the memory address location number in Hex format.</li>
+    <li>DC: the disassember automatic row comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the comment itself.</li>
+    <li>UC: the user manual row comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the comment itself.</li>
+    <li>DL: the disassembler label name assigned to this memory location. The program generate it as Wxxxx (where xxxx is the memory address in Hex). If it is set, than by passing with the mouse over it will show the label itself</li>
+    <li>UL: the user label name assigned to this memory location. If it is set, than by passing with the mouse over it will show the label itself</li>
+    <li>UB: the user global comment assigned to this memory location. If it is set, than by passing with the mouse over it will show the global comment itself</li>
+    <li>RE: it indicates that the location is related to another, so it can contains the value +, -, &lt; and &gt;. By passing with the mouse over it will show the related address.</li>
+    <li>VL: it show the memory value in a format that can be choosen in option. It is very usefull for determine text area in the data</li>
+   </ul>
+  
+  The RE area shows even the kind of data selected (it is hidden if there are +, -, &lt; and &gt;) according with a char:
+  <ul>
+    <li><a>B</a> data marked as Byte (Hex)</li>
+    <li><a>D</a> data marked as Byte (Decimal)</li>
+    <li><a>Y</a> data marked as Byte (Binary)</li>
+    <li><a>R</a> data marked as Byte (Char)</li>
+    <li><a>W</a> data marked as Word</li>
+    <li><a>P</a> data marked as Word Swapped</li>
+    <li><a>E</a> data marked as Tribyte</li>
+    <li><a>L</a> data marked as Long</li>
+    <li><a>A</a> data marked as Address</li>
+    <li><a>S</a> data marked as Stack Word</li>
+    <li><a>O</a> data marked as Monocromatic Sprite definitions</li>
+    <li><a>F</a> data marked as Multicolor Sprite definitions</li>
+    <li><a>T</a> data marked as Text</li>
+    <li><a>N</a> data marked as Text with number of byte before</li>
+    <li><a>Z</a> data marked as Text terminated with 0</li>
+    <li><a>M</a> data marked as Text with high bit 1</li>
+    <li><a>H</a> data marked as Text with high bit and shiffed</li>
+    <li><a>C</a> data marked as Text converted to screen code</li>
+    <li><a>I</a> data marked as Text coverted to petscii code</li>
+  </ul>
+  
+   The colors instead could be:
+    <ul>
+     <li>White: this indicates that the memory address is outside the binary data read from the file. Assigning label or comments to this area works different from the inside area (all other colors means an area inside the binary file)</li>
+     <li>Light gray: this area are undefined, or in other words, we did not say if it is a code to execute or a data to being read by other codes. Disassembler threats code and data area in different manner. In option, you can select if an undefined area must be used as code or as data by default, but during your analysis you must declare the right type as soon as you understand the code.</li>
+     <li>Light blue: this area is of data.</li>
+     <li>Green: this area is of code.</li>
+     <li>Red: this area is of junk</li>
+    </ul>
+  </p>  
+  <p align="center"><img src="./mem2.png"></p>  
+  
+  <p>
+      If you are analising two different version of the same routine in two different instance of JC64dis, then you can select the rows into memory to copy, by a right ckick onto the table and then copy action<br>
+      If the second instance you choose the memory row (that can have different addresses of the first) and paste the memory information to it.
+  </p>
+  <p>The tooltip over a code/data/garbage memory location will say that type and inside (/) the number of bytes of that are with the same type and the amount that are selected.</p>
+  <p>ALT+HOME and ALT+END keycode will move the memroy location to the top or bottom of the same type where the cursor actually is.</p>
+  
+  <p>With right click on a row cell, you can select the Show hex/text/char view:</p>
+  <p align="center"><img src="./hex.png"></p>  
+  <p>Here you can see the hex values grouped by 8 bytes from the starting selected row, the corresponding char in C64 font (in upper or lower form) and then the 8x8 mono or multi color chars corresponding to them.<br>
+   You can change the colors of chars for better see the right pattern.
+  
+   <hr>
+    <p align="center"><a href="./index.html"><img src="back.png" alt="Back" width="51" height="23" align="middle" border="0"></a></p>
+  </body>
+</html>
