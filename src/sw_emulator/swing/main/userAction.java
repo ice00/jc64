@@ -464,6 +464,9 @@ public interface userAction {
   /** Get labels from AI */
   public static final int AI_GETLABELS = 146;
   
+  /** Import regenerator2000 project */
+  public static final int PROJ_IMPORT = 147;
+  
   /**
    * Execute the passed user action
    * 

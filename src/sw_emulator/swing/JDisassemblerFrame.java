@@ -53,7 +53,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -124,6 +123,7 @@ import sw_emulator.swing.main.Serial;
 import sw_emulator.swing.main.UndoManager;
 import sw_emulator.swing.main.XRefToolTipManager;
 import sw_emulator.swing.main.userAction;
+import sw_emulator.swing.main.Regenerator2000Importer;
 import static sw_emulator.swing.main.userAction.SOURCE_FINDD;
 import sw_emulator.swing.table.DataTableModelMemory;
 import sw_emulator.swing.table.LabelTableModel;
@@ -170,6 +170,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   
   /** Project chooser file dialog*/
   JFileChooser projectChooserFile=new JFileChooser();
+  
+  /** Project import file dialog*/
+  JFileChooser projectImportFile=new JFileChooser();  
   
   /** Project merge file dialog*/
   JFileChooser projectMergeFile=new JFileChooser();  
@@ -284,6 +287,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     Shared.framesList.add(this);
     Shared.framesList.add(projectChooserFile);
+    Shared.framesList.add(projectImportFile);
     Shared.framesList.add(projectMergeFile);
     Shared.framesList.add(exportAsChooserFile);
     Shared.framesList.add(optionMPRLoadChooserFile);
@@ -314,6 +318,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     projectChooserFile.setAcceptAllFileFilterUsed(false);
     projectChooserFile.setCurrentDirectory(new File(m_prefNode.get(LAST_DIR_PROJECT, "")));
     projectChooserFile.setFileView(new ProjectFileView(option));
+    
+    projectImportFile.addChoosableFileFilter(new FileNameExtensionFilter("Regenerator 2000 (*.regen2000proj)", "regen2000proj"));
 
     projectMergeFile.addChoosableFileFilter(new FileNameExtensionFilter("JC64Dis (*.dis)", "dis"));
     exportAsChooserFile.addChoosableFileFilter(new FileNameExtensionFilter("Source (*.txt)", "txt"));
@@ -732,6 +738,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jButtonNewProject = new javax.swing.JButton();
     jButtonOpenProject = new javax.swing.JButton();
     jButtonClose = new javax.swing.JButton();
+    jButtonImport = new javax.swing.JButton();
     jButtonSaveProject = new javax.swing.JButton();
     jButtonSaveProjectAs = new javax.swing.JButton();
     jButtonMPR = new javax.swing.JButton();
@@ -895,6 +902,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItemRecent8 = new javax.swing.JMenuItem();
     jMenuItemRecent9 = new javax.swing.JMenuItem();
     jMenuItemCloseProject = new javax.swing.JMenuItem();
+    jMenuItemImport = new javax.swing.JMenuItem();
     jSeparatorProject2 = new javax.swing.JPopupMenu.Separator();
     jMenuItemSaveProject = new javax.swing.JMenuItem();
     jMenuItemSaveAsProject = new javax.swing.JMenuItem();
@@ -2159,6 +2167,18 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     });
     jToolBarFile.add(jButtonClose);
 
+    jButtonImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/import22.png"))); // NOI18N
+    jButtonImport.setToolTipText("Close the project");
+    jButtonImport.setFocusable(false);
+    jButtonImport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonImport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jButtonImport.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonImportActionPerformed(evt);
+      }
+    });
+    jToolBarFile.add(jButtonImport);
+
     jButtonSaveProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/filesave.png"))); // NOI18N
     jButtonSaveProject.setToolTipText("Save project");
     jButtonSaveProject.setFocusable(false);
@@ -3132,6 +3152,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   });
   jMenuFile.add(jMenuItemCloseProject);
+
+  jMenuItemImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+  jMenuItemImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/import16.png"))); // NOI18N
+  jMenuItemImport.setText("Import Project");
+  jMenuItemImport.setToolTipText("Import Regenerator2000 project");
+  jMenuItemImport.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemImportActionPerformed(evt);
+    }
+  });
+  jMenuFile.add(jMenuItemImport);
   jMenuFile.add(jSeparatorProject2);
 
   jMenuItemSaveProject.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -6163,6 +6194,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(AI_GETLABELS);
   }//GEN-LAST:event_jMenuItemGetLabelsActionPerformed
 
+  private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
+    execute(PROJ_IMPORT);
+  }//GEN-LAST:event_jButtonImportActionPerformed
+
+  private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
+    execute(PROJ_IMPORT);
+  }//GEN-LAST:event_jMenuItemImportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6223,6 +6262,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JButton jButtonFindDis;
   private javax.swing.JButton jButtonFindMem;
   private javax.swing.JButton jButtonFindSource;
+  private javax.swing.JButton jButtonImport;
   private javax.swing.JButton jButtonJumpBack;
   private javax.swing.JButton jButtonJumpFollow;
   private javax.swing.JButton jButtonMPR;
@@ -6379,6 +6419,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItemHandy;
   private javax.swing.JMenuItem jMenuItemHandy1;
   private javax.swing.JMenuItem jMenuItemHex;
+  private javax.swing.JMenuItem jMenuItemImport;
   private javax.swing.JMenuItem jMenuItemImportLabels;
   private javax.swing.JMenuItem jMenuItemKipper;
   private javax.swing.JMenuItem jMenuItemKipper1;
@@ -6616,6 +6657,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case PROJ_OPEN:
         projectOpen();
         break;
+      case PROJ_IMPORT:
+        projectImport();
+        break;  
       case PROJ_RECENT:
         recentFile();  
         break;  
@@ -6637,7 +6681,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       case OPTION_CONSTANTS:
         projectConstants();
         if (option.forceCompilation) disassembly(true);
-        break;        
+        break;                
       case OPTION_MPR:
         optionMPR();
         break;
@@ -7271,6 +7315,33 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       dataTableModelMemory.fireTableDataChanged();
       xRefPanelDis.setMemory(project.memory);
       xRefPanelSource.setMemory(project.memory);
+  }
+  
+  /**
+   * Project importy user action
+   */
+  private void projectImport() {     
+    if (project != null && !project.equals(savedProject)) {
+      int input = JOptionPane.showConfirmDialog(this, "Project not saved. Save it? (No=not save it)", "Information", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE); 
+      if (input==JOptionPane.CANCEL_OPTION) return;
+      else if (input==JOptionPane.OK_OPTION) projectSave();      
+    } 
+    
+    int retVal=projectImportFile.showOpenDialog(this);
+    if (retVal == JFileChooser.APPROVE_OPTION) {
+      projectFile=projectImportFile.getSelectedFile();
+
+      try {
+        project=Regenerator2000Importer.importFile(projectFile.getAbsolutePath());
+      } catch (Exception e) {
+           JOptionPane.showMessageDialog(this, "Error reading project file", "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+      }
+      
+      if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
+      execute(SOURCE_DISASS);
+      projectView();
+    }                
   }
   
   /**
