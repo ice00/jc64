@@ -6125,6 +6125,7 @@ public class JOptionDialog extends javax.swing.JDialog {
           frame.xRefPanelDis.setVisible(option.showXRefPreview);
           frame.xRefPanelSource.setVisible(option.showXRefSource);
           
+          frame.disassembly(true);
           frame.pack();
         }
       });

@@ -7951,7 +7951,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * 
    * @param storeUndo true if we store for the undo the compiled project
    */
-  private void disassembly(boolean storeUndo) {
+  public void disassembly(boolean storeUndo) {
     useFont();  
       
     if (project==null) {
