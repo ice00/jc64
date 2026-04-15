@@ -9063,11 +9063,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    * Mark the memory as address +
    */
   private void memPlus() {
-    int row=jTableMemory.getSelectedRow();
-    if (row<0) {
-      JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
-      return;
+    int[] selectedRows = jTableMemory.getSelectedRows();
+    if (selectedRows.length == 0) {
+        JOptionPane.showMessageDialog(this, "No rows selected", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+
+    // first row is used as model for all the others
+    int firstRow = selectedRows[0];
     
     Vector cols=new Vector();
     cols.add("ADDR");
@@ -9077,14 +9080,12 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     Vector rows=new Vector();
     Vector data;
     
-    int value=project.memory[row].copy & 0xFF;
-    
-    MemoryDasm mem=project.memory[row];
+    MemoryDasm memReference = project.memory[firstRow];
     MemoryDasm memory;
     
     int addr;
     for (int i=1; i<256; i++) {
-      addr=mem.address-i;
+      addr=memReference.address-i;
       if (addr<0) continue;
       
       memory=project.memory[addr];
@@ -9105,12 +9106,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
            "Select the address to use as + in table", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION) {
         
       int rowS=table.getSelectedRow();
+      
+      // no row selected: looks for delete
       if (rowS<0) {
-        if (project.memory[row].type==TYPE_PLUS || 
-            project.memory[row].type==TYPE_PLUS_MAJOR || 
-            project.memory[row].type==TYPE_PLUS_MINOR) {
+        if (project.memory[firstRow].type==TYPE_PLUS || 
+            project.memory[firstRow].type==TYPE_PLUS_MAJOR || 
+            project.memory[firstRow].type==TYPE_PLUS_MINOR) {
           if (JOptionPane.showConfirmDialog(this, "Did you want to delete the current address association?", "No selection were done, so:", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
               // + and < ?
+            for (int row : selectedRows) {
               switch (project.memory[row].type) {
                   case TYPE_PLUS_MAJOR:
                       project.memory[row].type=TYPE_MAJOR;
@@ -9128,28 +9132,35 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               
               // delete an automatic label if present, otherwise in code instruction it will be recreated if label is no more used
               project.memory[row].dasmLocation=null;
+            }  
           }
         } else JOptionPane.showMessageDialog(this, "No row selected", "Warning", JOptionPane.WARNING_MESSAGE);  
         return;
       } else {         
-          switch (project.memory[row].type) {
+          int selectedAddrValue = Integer.parseInt((String)table.getValueAt(rowS, 0), 16);
+        
+          for (int row : selectedRows) {
+            switch (project.memory[row].type) {
               case TYPE_MAJOR:
                   project.memory[row].type=TYPE_PLUS_MAJOR;
-                  project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
+                  project.memory[row].related=project.memory[row].related+(selectedAddrValue<<16);
                   break;
               case TYPE_MINOR:
                   project.memory[row].type=TYPE_PLUS_MINOR;
-                  project.memory[row].related=project.memory[row].related+(Integer.parseInt((String)table.getValueAt(rowS, 0),16)<<16);
+                  project.memory[row].related=project.memory[row].related+(selectedAddrValue<<16);
                   break;
               default:
                   project.memory[row].type=TYPE_PLUS;
-                  project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
+                  project.memory[row].related=selectedAddrValue;
                   break;
+            }
           }
         }
        
       dataTableModelMemory.fireTableDataChanged();
-      jTableMemory.setRowSelectionInterval(row, row);
+      for (int row : selectedRows) {
+            jTableMemory.addRowSelectionInterval(row, row);
+        }
     }
   }
   
