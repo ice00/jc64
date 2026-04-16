@@ -10431,7 +10431,31 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
  
       source.append(rSyntaxTextAreaDis.getText());
       
-      jAIFrame.startAnalysis(AIBackendConfig.lmStudio(), source, currentLabels, knownLabels,
+      AIBackendConfig config;
+      switch (option.ai) {
+        case LM_STUDIO_LOC:
+          config = AIBackendConfig.lmStudio();
+          break;
+        case LM_STUDIO_CUST:
+          config = AIBackendConfig.lmStudio(option.hostLMStudio, option.portLMStudio);
+          break;
+        case CLAUDE:
+          config = AIBackendConfig.anthropic(option.apiKeyClaude, option.modelClaude);
+          break;
+        case GEMINI:
+          config = AIBackendConfig.gemini(option.apiKeyGemini, option.modelGemini);
+          break;
+        case OPENAI:
+          config = AIBackendConfig.openAI(option.apiKeyOpenAI, option.modelOpenAI);
+          break;
+        case OPEN_ROUTE:
+          config = AIBackendConfig.openRouter(option.apiKeyOpenRouter, option.modelOpenRouter);
+          break;
+        default:
+          config = AIBackendConfig.lmStudio();
+      }      
+      
+      jAIFrame.startAnalysis(config, source, currentLabels, knownLabels,
               selectedRows -> {
                 int address;
                 String label;

@@ -3816,7 +3816,6 @@ public class JOptionDialog extends javax.swing.JDialog {
     );
 
     jPanelAIParam.add(jPanelLMStudioCust, "LMStudioCust");
-    jPanelLMStudioCust.getAccessibleContext().setAccessibleName("");
 
     jPanelLMStudioClaude.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -4041,7 +4040,7 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addContainerGap(564, Short.MAX_VALUE))
     );
 
-    jPanelAIParam.add(jPanelLMStudioOpenRouter, "OpenAI");
+    jPanelAIParam.add(jPanelLMStudioOpenRouter, "OpenRouter");
 
     jPanelAI.add(jPanelAIParam, java.awt.BorderLayout.CENTER);
 
@@ -5147,31 +5146,37 @@ public class JOptionDialog extends javax.swing.JDialog {
   private void jRadioButtonLMStudioLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLMStudioLocalActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "LMStudioLocal");
+    option.ai=AI.LM_STUDIO_LOC;
   }//GEN-LAST:event_jRadioButtonLMStudioLocalActionPerformed
 
   private void jRadioButtonLMStudioCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLMStudioCustActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "LMStudioCust");
+    option.ai=AI.LM_STUDIO_CUST;
   }//GEN-LAST:event_jRadioButtonLMStudioCustActionPerformed
 
   private void jRadioButtonClaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonClaudeActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "AntropicClaude");
+    option.ai=AI.CLAUDE;
   }//GEN-LAST:event_jRadioButtonClaudeActionPerformed
 
   private void jRadioButtonGeminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGeminiActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "GoogleGemini");
+    option.ai=AI.GEMINI;
   }//GEN-LAST:event_jRadioButtonGeminiActionPerformed
 
   private void jRadioButtonOpenAIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOpenAIActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "OpenAI");
+    option.ai=AI.OPENAI;
   }//GEN-LAST:event_jRadioButtonOpenAIActionPerformed
 
   private void jRadioButtonOpenRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOpenRouterActionPerformed
     CardLayout card = (CardLayout)jPanelAIParam.getLayout();
     card.show(jPanelAIParam, "OpenRouter");
+    option.ai=AI.OPEN_ROUTE;
   }//GEN-LAST:event_jRadioButtonOpenRouterActionPerformed
 
   private void jTextFieldHostLMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldHostLMFocusLost
@@ -5820,24 +5825,31 @@ public class JOptionDialog extends javax.swing.JDialog {
       
       // AI
             
+      CardLayout card = (CardLayout)jPanelAIParam.getLayout();    
       switch (option.ai) {
         case LM_STUDIO_LOC:
             jRadioButtonLMStudioLocal.setSelected(true);
+            card.show(jPanelAIParam, "LMStudioLocal");
             break;
         case LM_STUDIO_CUST:
             jRadioButtonLMStudioCust.setSelected(true);
+            card.show(jPanelAIParam, "LMStudioCust");
             break;     
         case CLAUDE:
             jRadioButtonClaude.setSelected(true);
+            card.show(jPanelAIParam, "AntropicClaude");
             break;         
-        case GEMINI:
+        case GEMINI:          
             jRadioButtonGemini.setSelected(true);
+            card.show(jPanelAIParam, "GoogleGemini");
             break;    
         case OPENAI:
             jRadioButtonOpenAI.setSelected(true);
+            card.show(jPanelAIParam, "OpenAI");
             break;         
         case OPEN_ROUTE:
             jRadioButtonOpenRouter.setSelected(true);
+            card.show(jPanelAIParam, "OpenRouter");
             break;               
       }
      
