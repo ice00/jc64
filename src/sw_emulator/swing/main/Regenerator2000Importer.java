@@ -35,6 +35,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.zip.GZIPInputStream;
+import static sw_emulator.software.MemoryDasm.TYPE_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_MINUS_MINOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
+import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 
 /**
  * Imports a Regenerator2000 .regen2000proj file into a jc64 {@link Project}.
@@ -205,6 +213,42 @@ public class Regenerator2000Importer {
                 }
             }
         }
+        
+        // --- immediate_value_formats -----------------------------------------
+        //
+        // Format: { "addr": "Decimal" | "Hex" | "Binary" | "Char"
+        //                  | {"LowByte": targetAddr}
+        //                  | {"HighByte": targetAddr} }
+        //
+        // Simple string formats (Decimal/Hex/…) have no direct equivalent in
+        // jc64 yet — they are parsed but currently ignored.
+        //
+        // LowByte/HighByte mean the immediate operand at <addr> is the low or
+        // high byte of <targetAddr>.  We call applyImmediateValueFormat() so
+        // you can wire up the jc64 fields in one place.
+        //
+        if (root.has("immediate_value_formats")) {
+            JSONObject ivf = root.getJSONObject("immediate_value_formats");
+            for (String addrKey : ivf.keySet()) {
+                int addr = parseAddr(addrKey);
+                if (!isValidAddr(addr)) continue;
+
+                Object value = ivf.get(addrKey);
+
+                if (value instanceof JSONObject) {
+                    JSONObject fmt = (JSONObject) value;
+
+                    if (fmt.has("LowByte")) {
+                        int targetAddr = fmt.getInt("LowByte");
+                        applyImmediateLowByte(project, addr, targetAddr);
+
+                    } else if (fmt.has("HighByte")) {
+                        int targetAddr = fmt.getInt("HighByte");
+                        applyImmediateHighByte(project, addr, targetAddr);
+                    }
+                }
+            }
+        }
 
         project.targetType=TargetType.C64;
         
@@ -292,9 +336,9 @@ public class Regenerator2000Importer {
             
             case "LowByte":
             case "HighByte":
-            case "Byte":             return DataType.BYTE_HEX;
+            case "DataByte":         return DataType.BYTE_HEX;
             
-            case "Word":             return DataType.WORD;
+            case "DataWord":         return DataType.WORD;
             case "Address":          return DataType.WORD; 
             case "HiLoWord":         return DataType.WORD; 
             case "PetsciiText":      return DataType.TEXT;        // PETSCII text
@@ -306,6 +350,60 @@ public class Regenerator2000Importer {
         }
     }
 
+    /**
+     * Called when the immediate operand at {@code addr} is the <b>low byte</b>
+     * of {@code targetAddr} (i.e. {@code targetAddr & 0xFF}).
+     *
+     * Fill in whatever jc64 fields represent this relationship.
+     */
+    private static void applyImmediateLowByte(Project project, int addr, int targetAddr) {
+        // regenerator show the instruction address
+        addr+=1;
+        if (addr>0xFFFF) return;
+        
+        switch (project.memory[addr].type) {
+            case TYPE_PLUS:
+              project.memory[addr].type=TYPE_PLUS_MINOR;
+              project.memory[addr].related=(project.memory[addr].related<<16)+targetAddr;
+              break;
+            case TYPE_MINUS:
+              project.memory[addr].type=TYPE_MINUS_MINOR;
+              project.memory[addr].related=(project.memory[addr].related<<16)+targetAddr;
+              break;
+            default:
+              project.memory[addr].type=TYPE_MINOR;
+              project.memory[addr].related=targetAddr;
+              break;
+          }
+    }
+
+    /**
+     * Called when the immediate operand at {@code addr} is the <b>high byte</b>
+     * of {@code targetAddr} (i.e. {@code (targetAddr >> 8) & 0xFF}).
+     *
+     * Fill in whatever jc64 fields represent this relationship.
+     */
+    private static void applyImmediateHighByte(Project project, int addr, int targetAddr) {
+        // regenerator show the instruction address
+        addr+=1;
+        if (addr>0xFFFF) return;
+        
+        switch (project.memory[addr].type) {
+             case TYPE_PLUS:
+               project.memory[addr].type=TYPE_PLUS_MAJOR;
+               project.memory[addr].related=(project.memory[addr].related<<16)+targetAddr;
+               break;
+             case TYPE_MINUS:
+               project.memory[addr].type=TYPE_MINUS_MAJOR;
+               project.memory[addr].related=(project.memory[addr].related<<16)+targetAddr;
+               break;
+             default:
+               project.memory[addr].type=TYPE_MAJOR;
+               project.memory[addr].related=targetAddr;
+               break;
+        }
+    }
+    
     // -------------------------------------------------------------------------
     // Binary data decoding
     // -------------------------------------------------------------------------

@@ -4402,6 +4402,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
   jMenuAI.setText("AI");
 
+  jMenuItemGetLabels.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/mini/mem_ai.png"))); // NOI18N
   jMenuItemGetLabels.setText("Get labels");
   jMenuItemGetLabels.addActionListener(new java.awt.event.ActionListener() {
     public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -7310,6 +7311,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
           if (option.pedantic) JOptionPane.showMessageDialog(this, "File read", "Information", JOptionPane.INFORMATION_MESSAGE);
           execute(SOURCE_DISASS);
         }
+      this.projectFile = projectFile;
       savedProject=project.clone();
       dataTableModelMemory.setData(project.memory);
       dataTableModelMemory.fireTableDataChanged();
@@ -8949,7 +8951,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
                project.memory[row].type=TYPE_MAJOR;
                project.memory[row].related=Integer.parseInt((String)table.getValueAt(rowS, 0),16);
                break;
-        }
+           }
          }
        
        dataTableModelMemory.fireTableDataChanged();
@@ -10407,7 +10409,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
 
     SwingUtilities.invokeLater(() -> {
       if (project == null) {
-        JOptionPane.showMessageDialog(this, "Create or open a project ro use this festure", "Warning", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Create or open a project ro use this feature", "Warning", JOptionPane.WARNING_MESSAGE);
         return;
       }
 

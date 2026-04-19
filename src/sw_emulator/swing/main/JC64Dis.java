@@ -51,6 +51,8 @@ public class JC64Dis {
 
   /**
    * Main program that display the disassembler 
+   * 
+   * @param projectFile project file to read
    */
   public JC64Dis(File projectFile) {
     Option option = new Option();
