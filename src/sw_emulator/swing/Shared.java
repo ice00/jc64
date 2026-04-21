@@ -44,7 +44,7 @@ public class Shared {
   public static final ArrayList<RSyntaxTextArea> syntaxList=new ArrayList();  
   
   /** Version of the application */
-  public static final String VERSION="3.2-pre";
+  public static final String VERSION="3.2";
  
   /** Instance UUID */
   public static final UUID uuid=UUID.randomUUID();

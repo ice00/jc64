@@ -49,6 +49,7 @@
 * Nick Scarim'player (tune "Spy vs Spy" by Nick Scarim (c) 1984 First Star Software)
 * Novaload player (tune "Elite Loader" by Mark Cooksey (c) 1985 Elite)
 * P.A.S.S. (tune "New Years Day" by Bob Landwehr (c) 1985 Parabola)
+* Paul Norman's player (tune "Aztec Challenge" (c) 1984 Cosmi)
 * Power Music player (tune "Delta-Music" by ? (c) 1989 64'er/Markt & Technik)
 * Peter Liepa's player (tune "Boulder Dash" by Peter Liepa (c) 1984 First Star Software) SID|POKEY
 * Rob Hubbard's Companion player (tune "Synth Sample III" by Rob Hubbard (c) 1985 Rob Hubbard)
