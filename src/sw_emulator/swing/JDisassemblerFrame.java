@@ -23,6 +23,7 @@
  */
 package sw_emulator.swing;
 
+import sw_emulator.swing.ai.JAIFrame;
 import java.awt.AWTException;
 import java.awt.Font;
 import java.awt.Image;
@@ -104,6 +105,7 @@ import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.software.ai.AIBackendConfig;
+import sw_emulator.software.ai.DisassemblerAgent;
 import sw_emulator.software.ai.M6510LabelAnalyzer;
 import sw_emulator.software.cpu.M6510Dasm;
 import sw_emulator.software.cpu.Z80Dasm;
@@ -1054,6 +1056,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jMenuItem3 = new javax.swing.JMenuItem();
     jMenuAI = new javax.swing.JMenu();
     jMenuItemGetLabels = new javax.swing.JMenuItem();
+    jSeparator8 = new javax.swing.JPopupMenu.Separator();
+    jMenuItemAutomaticAgent = new javax.swing.JMenuItem();
     jMenuHelpContents = new javax.swing.JMenu();
     jMenuItemContents = new javax.swing.JMenuItem();
     jSeparatorHelp1 = new javax.swing.JPopupMenu.Separator();
@@ -2168,7 +2172,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     jToolBarFile.add(jButtonClose);
 
     jButtonImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw_emulator/swing/icons/import22.png"))); // NOI18N
-    jButtonImport.setToolTipText("Close the project");
+    jButtonImport.setToolTipText("Import a project");
     jButtonImport.setFocusable(false);
     jButtonImport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     jButtonImport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -4410,6 +4414,15 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
   });
   jMenuAI.add(jMenuItemGetLabels);
+  jMenuAI.add(jSeparator8);
+
+  jMenuItemAutomaticAgent.setText("Automatic agent");
+  jMenuItemAutomaticAgent.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+      jMenuItemAutomaticAgentActionPerformed(evt);
+    }
+  });
+  jMenuAI.add(jMenuItemAutomaticAgent);
 
   jMenuBar.add(jMenuAI);
 
@@ -6203,6 +6216,10 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     execute(PROJ_IMPORT);
   }//GEN-LAST:event_jMenuItemImportActionPerformed
 
+  private void jMenuItemAutomaticAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAutomaticAgentActionPerformed
+    execute(AI_AUTOMATIC);
+  }//GEN-LAST:event_jMenuItemAutomaticAgentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6308,6 +6325,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JMenuItem jMenuItemAssembly;
   private javax.swing.JMenuItem jMenuItemAutComment;
   private javax.swing.JMenuItem jMenuItemAutLabel;
+  private javax.swing.JMenuItem jMenuItemAutomaticAgent;
   private javax.swing.JMenuItem jMenuItemBails;
   private javax.swing.JMenuItem jMenuItemBails1;
   private javax.swing.JMenuItem jMenuItemBasex;
@@ -6590,6 +6608,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
   private javax.swing.JPopupMenu.Separator jSeparator5;
   private javax.swing.JPopupMenu.Separator jSeparator6;
   private javax.swing.JPopupMenu.Separator jSeparator7;
+  private javax.swing.JPopupMenu.Separator jSeparator8;
   private javax.swing.JPopupMenu.Separator jSeparatorByte;
   private javax.swing.JPopupMenu.Separator jSeparatorByte1;
   private javax.swing.JPopupMenu.Separator jSeparatorByte2;
@@ -7202,8 +7221,11 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;        
          
        case AI_GETLABELS:
-         aiGetLabels();
-         break;
+         aiGetLabels();                  
+         break;         
+       case AI_AUTOMATIC:
+         aiAutomatic();                  
+         break;         
     }
         
   }
@@ -10402,14 +10424,45 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
       }
     }      
     
-   /**
+    /**
+     * Get the aI configuration
+     * @return the configuration
+     */
+    private AIBackendConfig getAIConfig() {
+      AIBackendConfig config;
+      switch (option.ai) {
+        case LM_STUDIO_LOC:
+          config = AIBackendConfig.lmStudio();
+          break;
+        case LM_STUDIO_CUST:
+          config = AIBackendConfig.lmStudio(option.hostLMStudio, option.portLMStudio);
+          break;
+        case CLAUDE:
+          config = AIBackendConfig.anthropic(option.apiKeyClaude, option.modelClaude);
+          break;
+        case GEMINI:
+          config = AIBackendConfig.gemini(option.apiKeyGemini, option.modelGemini);
+          break;
+        case OPENAI:
+          config = AIBackendConfig.openAI(option.apiKeyOpenAI, option.modelOpenAI);
+          break;
+        case OPEN_ROUTE:
+          config = AIBackendConfig.openRouter(option.apiKeyOpenRouter, option.modelOpenRouter);
+          break;
+        default:
+          config = AIBackendConfig.lmStudio();
+      }   
+      return config;
+    }
+    
+  /**
    * Get labels from AI
    */
   private void aiGetLabels() {
 
     SwingUtilities.invokeLater(() -> {
       if (project == null) {
-        JOptionPane.showMessageDialog(this, "Create or open a project ro use this feature", "Warning", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Create or open a project to use this feature", "Warning", JOptionPane.WARNING_MESSAGE);
         return;
       }
 
@@ -10433,29 +10486,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
  
       source.append(rSyntaxTextAreaDis.getText());
       
-      AIBackendConfig config;
-      switch (option.ai) {
-        case LM_STUDIO_LOC:
-          config = AIBackendConfig.lmStudio();
-          break;
-        case LM_STUDIO_CUST:
-          config = AIBackendConfig.lmStudio(option.hostLMStudio, option.portLMStudio);
-          break;
-        case CLAUDE:
-          config = AIBackendConfig.anthropic(option.apiKeyClaude, option.modelClaude);
-          break;
-        case GEMINI:
-          config = AIBackendConfig.gemini(option.apiKeyGemini, option.modelGemini);
-          break;
-        case OPENAI:
-          config = AIBackendConfig.openAI(option.apiKeyOpenAI, option.modelOpenAI);
-          break;
-        case OPEN_ROUTE:
-          config = AIBackendConfig.openRouter(option.apiKeyOpenRouter, option.modelOpenRouter);
-          break;
-        default:
-          config = AIBackendConfig.lmStudio();
-      }      
+      AIBackendConfig config=getAIConfig();       
       
       jAIFrame.startAnalysis(config, source, currentLabels, knownLabels,
               selectedRows -> {
@@ -10475,5 +10506,28 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
               }
       );
     });
+  }
+  
+  /**
+   * Automatic AI disassembly
+   */
+  public void aiAutomatic() {
+    DisassemblerAgent agent = new DisassemblerAgent(
+        project.memory, project.targetType.getDasm(), option, project.getMemoryCopy());
+
+    agent.analyzeWithProgress(
+        this,              // JFrame owner per il dialog modale
+        getAIConfig(),     // AIBackendConfig dall'utente
+        project.getMinAddress(), project.getMaxAddress(),         // range da analizzare
+        (addr, label) ->        // chiamato ad ogni label impostata
+            SwingUtilities.invokeLater(() -> disassembly(true)),
+        result -> {
+           int type = result.startsWith("Error")
+        ? JOptionPane.ERROR_MESSAGE
+        : JOptionPane.INFORMATION_MESSAGE;
+         JOptionPane.showMessageDialog(this, result, "AI Analysis", type);
+        }
+    );
+    disassembly(true);
   }
 }

@@ -234,4 +234,43 @@ public class Project implements Cloneable {
     return true;
   }
   
+  /**
+   * Get internal memory copy as values
+   * 
+   * @return the memory buffer
+   */
+  public byte[] getMemoryCopy() {
+    byte[] res=new byte[0xFFFF+1];
+    
+    for (int i=0; i<=0xFFFF; i++) {
+      res[i]=memory[i].copy;
+    }
+    
+    return res;
+  }
+  
+  /***
+   * Get the min used address 
+   * 
+   * @return the min used address
+   */
+  public int getMinAddress() {
+    for (MemoryDasm mem: memory) {
+      if (mem.isInside) return mem.address;
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Get the max used address
+   * 
+   * @return the max used address
+   */
+  public int getMaxAddress() {
+    for (int i=0xFFFF; i>0; i--) {
+      if (memory[i].isInside) return memory[i].address;
+    }
+    return 0xFFFF;
+  }
 }

@@ -467,6 +467,9 @@ public interface userAction {
   /** Import regenerator2000 project */
   public static final int PROJ_IMPORT = 147;
   
+  /** Automatic from AI */
+  public static final int AI_AUTOMATIC = 148;
+  
   /**
    * Execute the passed user action
    * 

@@ -21,7 +21,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  *  02111-1307  USA.
  */
-package sw_emulator.swing;
+package sw_emulator.swing.ai;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
