@@ -516,6 +516,10 @@ public class FileManager {
       option.apiKeyOpenRouter = in.readUTF();
       option.modelOpenRouter = in.readUTF();
       
+      // 3.3
+      option.apiKeyOpenCode = in.readUTF();
+      option.modelOpenCode = in.readUTF();
+      
     } catch (FileNotFoundException e) {
          return true; 
     } catch (Exception e) {
@@ -974,6 +978,10 @@ public class FileManager {
       out.writeUTF(option.modelOpenAI);
       out.writeUTF(option.apiKeyOpenRouter);
       out.writeUTF(option.modelOpenRouter);
+      
+      // 3.3
+      out.writeUTF(option.apiKeyOpenCode);
+      out.writeUTF(option.modelOpenCode);
 
       out.flush();
       out.close();

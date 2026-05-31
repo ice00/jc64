@@ -551,6 +551,12 @@ public class Option {
   /** Model fot OpenAI */
   public String modelOpenRouter="";
   
+  /** Api key for OpenCode */
+  public String apiKeyOpenCode="";
+  
+  /** Model fot OpenCode */
+  public String modelOpenCode="";
+  
   
   
   // comments C64

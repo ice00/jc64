@@ -105,6 +105,7 @@ import static sw_emulator.software.MemoryDasm.TYPE_PLUS;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MAJOR;
 import static sw_emulator.software.MemoryDasm.TYPE_PLUS_MINOR;
 import sw_emulator.software.ai.AIBackendConfig;
+import static sw_emulator.software.ai.AIBackendConfig.AI.OPEN_ROUTE;
 import sw_emulator.software.ai.DisassemblerAgent;
 import sw_emulator.software.ai.M6510LabelAnalyzer;
 import sw_emulator.software.cpu.M6510Dasm;
@@ -10449,6 +10450,9 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         case OPEN_ROUTE:
           config = AIBackendConfig.openRouter(option.apiKeyOpenRouter, option.modelOpenRouter);
           break;
+        case OPEN_CODE:
+          config = AIBackendConfig.openRouter(option.apiKeyOpenCode, option.modelOpenCode);
+          break;  
         default:
           config = AIBackendConfig.lmStudio();
       }   

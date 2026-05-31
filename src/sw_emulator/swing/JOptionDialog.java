@@ -45,6 +45,7 @@ import sw_emulator.swing.table.DataTableModelMemory;
 import sw_emulator.software.ai.AIBackendConfig.AI;
 import static sw_emulator.software.ai.AIBackendConfig.AI.GEMINI;
 import static sw_emulator.software.ai.AIBackendConfig.AI.LM_STUDIO_CUST;
+import static sw_emulator.software.ai.AIBackendConfig.AI.OPEN_ROUTE;
 
 /**
  * A dialog for option
@@ -495,6 +496,7 @@ public class JOptionDialog extends javax.swing.JDialog {
     jRadioButtonGemini = new javax.swing.JRadioButton();
     jRadioButtonOpenAI = new javax.swing.JRadioButton();
     jRadioButtonOpenRouter = new javax.swing.JRadioButton();
+    jRadioButtonOpenCode = new javax.swing.JRadioButton();
     jPanelAIParam = new javax.swing.JPanel();
     jPanelLMStudioLocal = new javax.swing.JPanel();
     jLabelNoconfig = new javax.swing.JLabel();
@@ -503,30 +505,36 @@ public class JOptionDialog extends javax.swing.JDialog {
     jTextFieldHostLM = new javax.swing.JTextField();
     jLabelPortLM = new javax.swing.JLabel();
     jSpinnerPortLM = new javax.swing.JSpinner();
-    jPanelLMStudioClaude = new javax.swing.JPanel();
+    jPanelClaude = new javax.swing.JPanel();
     jLabelApiClaude = new javax.swing.JLabel();
     jPasswordFieldApiClaude = new javax.swing.JPasswordField();
     jLabelModelClaude = new javax.swing.JLabel();
     jTextFieldModelClaude = new javax.swing.JTextField();
     jLabelEgClaude = new javax.swing.JLabel();
-    jPanelLMStudioGemini = new javax.swing.JPanel();
+    jPanelGemini = new javax.swing.JPanel();
     jLabelApiGemini = new javax.swing.JLabel();
     jPasswordFieldApiGemini = new javax.swing.JPasswordField();
     jLabelModelGemini = new javax.swing.JLabel();
     jTextFieldModelGemini = new javax.swing.JTextField();
     jLabelEgGemini = new javax.swing.JLabel();
-    jPanelLMStudioOpenAI = new javax.swing.JPanel();
+    jPanelOpenAI = new javax.swing.JPanel();
     jLabelApiOpenAI = new javax.swing.JLabel();
     jPasswordFieldApiOpenAI = new javax.swing.JPasswordField();
     jLabelModelGeminiOpenAI = new javax.swing.JLabel();
     jTextFieldModelOpenAI = new javax.swing.JTextField();
     jLabelEgOpenAI = new javax.swing.JLabel();
-    jPanelLMStudioOpenRouter = new javax.swing.JPanel();
+    jPanelOpenRouter = new javax.swing.JPanel();
     jLabelApiOpenRouter = new javax.swing.JLabel();
     jPasswordFieldApiOpenRouter = new javax.swing.JPasswordField();
     jLabelModelGeminiOpenRouter = new javax.swing.JLabel();
     jTextFieldModelOpenRouter = new javax.swing.JTextField();
     jLabelEgOpenRouter = new javax.swing.JLabel();
+    jPanelOpenCode = new javax.swing.JPanel();
+    jLabelApiOpenCode = new javax.swing.JLabel();
+    jPasswordFieldApiOpenCode = new javax.swing.JPasswordField();
+    jLabelModelGeminiOpenCode = new javax.swing.JLabel();
+    jTextFieldModelOpenCode = new javax.swing.JTextField();
+    jLabelEgOpenCode = new javax.swing.JLabel();
     jPanelDn = new javax.swing.JPanel();
     jButtonLoad = new javax.swing.JButton();
     jButtonSave = new javax.swing.JButton();
@@ -3740,6 +3748,15 @@ public class JOptionDialog extends javax.swing.JDialog {
     });
     jPanelAIBackend.add(jRadioButtonOpenRouter);
 
+    buttonGroupAI.add(jRadioButtonOpenCode);
+    jRadioButtonOpenCode.setText("OpenCode");
+    jRadioButtonOpenCode.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonOpenCodeActionPerformed(evt);
+      }
+    });
+    jPanelAIBackend.add(jRadioButtonOpenCode);
+
     jPanelAI.add(jPanelAIBackend, java.awt.BorderLayout.NORTH);
 
     jPanelAIParam.setLayout(new java.awt.CardLayout());
@@ -3817,7 +3834,7 @@ public class JOptionDialog extends javax.swing.JDialog {
 
     jPanelAIParam.add(jPanelLMStudioCust, "LMStudioCust");
 
-    jPanelLMStudioClaude.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanelClaude.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
     jLabelApiClaude.setText("API:");
 
@@ -3839,31 +3856,31 @@ public class JOptionDialog extends javax.swing.JDialog {
     jLabelEgClaude.setForeground(new java.awt.Color(153, 153, 153));
     jLabelEgClaude.setText("e.g. claude-haiku-4-5-20251001 · claude-sonnet-4-6");
 
-    javax.swing.GroupLayout jPanelLMStudioClaudeLayout = new javax.swing.GroupLayout(jPanelLMStudioClaude);
-    jPanelLMStudioClaude.setLayout(jPanelLMStudioClaudeLayout);
-    jPanelLMStudioClaudeLayout.setHorizontalGroup(
-      jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioClaudeLayout.createSequentialGroup()
+    javax.swing.GroupLayout jPanelClaudeLayout = new javax.swing.GroupLayout(jPanelClaude);
+    jPanelClaude.setLayout(jPanelClaudeLayout);
+    jPanelClaudeLayout.setHorizontalGroup(
+      jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelClaudeLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(jLabelModelClaude, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jLabelApiClaude, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabelEgClaude, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
           .addComponent(jTextFieldModelClaude)
           .addComponent(jPasswordFieldApiClaude))
         .addContainerGap(429, Short.MAX_VALUE))
     );
-    jPanelLMStudioClaudeLayout.setVerticalGroup(
-      jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioClaudeLayout.createSequentialGroup()
+    jPanelClaudeLayout.setVerticalGroup(
+      jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelClaudeLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelApiClaude)
           .addComponent(jPasswordFieldApiClaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelClaudeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelModelClaude)
           .addComponent(jTextFieldModelClaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3871,10 +3888,10 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addContainerGap(564, Short.MAX_VALUE))
     );
 
-    jPanelAIParam.add(jPanelLMStudioClaude, "AntropicClaude");
-    jPanelLMStudioClaude.getAccessibleContext().setAccessibleDescription("");
+    jPanelAIParam.add(jPanelClaude, "AntropicClaude");
+    jPanelClaude.getAccessibleContext().setAccessibleDescription("");
 
-    jPanelLMStudioGemini.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanelGemini.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
     jLabelApiGemini.setText("API:");
 
@@ -3896,31 +3913,31 @@ public class JOptionDialog extends javax.swing.JDialog {
     jLabelEgGemini.setForeground(new java.awt.Color(153, 153, 153));
     jLabelEgGemini.setText("e.g. gpt-4o-mini · gpt-4o");
 
-    javax.swing.GroupLayout jPanelLMStudioGeminiLayout = new javax.swing.GroupLayout(jPanelLMStudioGemini);
-    jPanelLMStudioGemini.setLayout(jPanelLMStudioGeminiLayout);
-    jPanelLMStudioGeminiLayout.setHorizontalGroup(
-      jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioGeminiLayout.createSequentialGroup()
+    javax.swing.GroupLayout jPanelGeminiLayout = new javax.swing.GroupLayout(jPanelGemini);
+    jPanelGemini.setLayout(jPanelGeminiLayout);
+    jPanelGeminiLayout.setHorizontalGroup(
+      jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelGeminiLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(jLabelModelGemini, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jLabelApiGemini, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabelEgGemini, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
           .addComponent(jTextFieldModelGemini)
           .addComponent(jPasswordFieldApiGemini))
         .addContainerGap(429, Short.MAX_VALUE))
     );
-    jPanelLMStudioGeminiLayout.setVerticalGroup(
-      jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioGeminiLayout.createSequentialGroup()
+    jPanelGeminiLayout.setVerticalGroup(
+      jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelGeminiLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelApiGemini)
           .addComponent(jPasswordFieldApiGemini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelGeminiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelModelGemini)
           .addComponent(jTextFieldModelGemini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3928,9 +3945,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addContainerGap(564, Short.MAX_VALUE))
     );
 
-    jPanelAIParam.add(jPanelLMStudioGemini, "GoogleGemini");
+    jPanelAIParam.add(jPanelGemini, "GoogleGemini");
 
-    jPanelLMStudioOpenAI.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanelOpenAI.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
     jLabelApiOpenAI.setText("API:");
 
@@ -3952,31 +3969,31 @@ public class JOptionDialog extends javax.swing.JDialog {
     jLabelEgOpenAI.setForeground(new java.awt.Color(153, 153, 153));
     jLabelEgOpenAI.setText("e.g. gemini-2.0-flash · gemini-1.5-pro");
 
-    javax.swing.GroupLayout jPanelLMStudioOpenAILayout = new javax.swing.GroupLayout(jPanelLMStudioOpenAI);
-    jPanelLMStudioOpenAI.setLayout(jPanelLMStudioOpenAILayout);
-    jPanelLMStudioOpenAILayout.setHorizontalGroup(
-      jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioOpenAILayout.createSequentialGroup()
+    javax.swing.GroupLayout jPanelOpenAILayout = new javax.swing.GroupLayout(jPanelOpenAI);
+    jPanelOpenAI.setLayout(jPanelOpenAILayout);
+    jPanelOpenAILayout.setHorizontalGroup(
+      jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenAILayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(jLabelModelGeminiOpenAI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jLabelApiOpenAI, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabelEgOpenAI, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
           .addComponent(jTextFieldModelOpenAI)
           .addComponent(jPasswordFieldApiOpenAI))
         .addContainerGap(429, Short.MAX_VALUE))
     );
-    jPanelLMStudioOpenAILayout.setVerticalGroup(
-      jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioOpenAILayout.createSequentialGroup()
+    jPanelOpenAILayout.setVerticalGroup(
+      jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenAILayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelApiOpenAI)
           .addComponent(jPasswordFieldApiOpenAI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelOpenAILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelModelGeminiOpenAI)
           .addComponent(jTextFieldModelOpenAI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3984,9 +4001,9 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addContainerGap(564, Short.MAX_VALUE))
     );
 
-    jPanelAIParam.add(jPanelLMStudioOpenAI, "OpenAI");
+    jPanelAIParam.add(jPanelOpenAI, "OpenAI");
 
-    jPanelLMStudioOpenRouter.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanelOpenRouter.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
     jLabelApiOpenRouter.setText("API:");
 
@@ -4008,31 +4025,31 @@ public class JOptionDialog extends javax.swing.JDialog {
     jLabelEgOpenRouter.setForeground(new java.awt.Color(153, 153, 153));
     jLabelEgOpenRouter.setText("any model slug from openrouter.ai/models");
 
-    javax.swing.GroupLayout jPanelLMStudioOpenRouterLayout = new javax.swing.GroupLayout(jPanelLMStudioOpenRouter);
-    jPanelLMStudioOpenRouter.setLayout(jPanelLMStudioOpenRouterLayout);
-    jPanelLMStudioOpenRouterLayout.setHorizontalGroup(
-      jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioOpenRouterLayout.createSequentialGroup()
+    javax.swing.GroupLayout jPanelOpenRouterLayout = new javax.swing.GroupLayout(jPanelOpenRouter);
+    jPanelOpenRouter.setLayout(jPanelOpenRouterLayout);
+    jPanelOpenRouterLayout.setHorizontalGroup(
+      jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenRouterLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(jLabelModelGeminiOpenRouter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jLabelApiOpenRouter, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabelEgOpenRouter, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
           .addComponent(jTextFieldModelOpenRouter)
           .addComponent(jPasswordFieldApiOpenRouter))
         .addContainerGap(429, Short.MAX_VALUE))
     );
-    jPanelLMStudioOpenRouterLayout.setVerticalGroup(
-      jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelLMStudioOpenRouterLayout.createSequentialGroup()
+    jPanelOpenRouterLayout.setVerticalGroup(
+      jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenRouterLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelApiOpenRouter)
           .addComponent(jPasswordFieldApiOpenRouter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelLMStudioOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanelOpenRouterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelModelGeminiOpenRouter)
           .addComponent(jTextFieldModelOpenRouter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -4040,7 +4057,64 @@ public class JOptionDialog extends javax.swing.JDialog {
         .addContainerGap(564, Short.MAX_VALUE))
     );
 
-    jPanelAIParam.add(jPanelLMStudioOpenRouter, "OpenRouter");
+    jPanelAIParam.add(jPanelOpenRouter, "OpenRouter");
+
+    jPanelOpenCode.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+    jLabelApiOpenCode.setText("API:");
+
+    jPasswordFieldApiOpenCode.setText("jPasswordField1");
+    jPasswordFieldApiOpenCode.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(java.awt.event.FocusEvent evt) {
+        jPasswordFieldApiOpenCodeFocusLost(evt);
+      }
+    });
+
+    jLabelModelGeminiOpenCode.setText("Model:");
+
+    jTextFieldModelOpenCode.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(java.awt.event.FocusEvent evt) {
+        jTextFieldModelOpenCodeFocusLost(evt);
+      }
+    });
+
+    jLabelEgOpenCode.setForeground(new java.awt.Color(153, 153, 153));
+    jLabelEgOpenCode.setText("any model slug from opencode/models");
+
+    javax.swing.GroupLayout jPanelOpenCodeLayout = new javax.swing.GroupLayout(jPanelOpenCode);
+    jPanelOpenCode.setLayout(jPanelOpenCodeLayout);
+    jPanelOpenCodeLayout.setHorizontalGroup(
+      jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenCodeLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+          .addComponent(jLabelModelGeminiOpenCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jLabelApiOpenCode, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jLabelEgOpenCode, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+          .addComponent(jTextFieldModelOpenCode)
+          .addComponent(jPasswordFieldApiOpenCode))
+        .addContainerGap(429, Short.MAX_VALUE))
+    );
+    jPanelOpenCodeLayout.setVerticalGroup(
+      jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelOpenCodeLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabelApiOpenCode)
+          .addComponent(jPasswordFieldApiOpenCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelOpenCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabelModelGeminiOpenCode)
+          .addComponent(jTextFieldModelOpenCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jLabelEgOpenCode)
+        .addContainerGap(564, Short.MAX_VALUE))
+    );
+
+    jPanelAIParam.add(jPanelOpenCode, "OpenCode");
+    jPanelOpenCode.getAccessibleContext().setAccessibleDescription("");
 
     jPanelAI.add(jPanelAIParam, java.awt.BorderLayout.CENTER);
 
@@ -5219,6 +5293,20 @@ public class JOptionDialog extends javax.swing.JDialog {
     option.modelOpenAI=jTextFieldModelOpenAI.getText();
   }//GEN-LAST:event_jTextFieldModelOpenAIFocusLost
 
+  private void jRadioButtonOpenCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOpenCodeActionPerformed
+    CardLayout card = (CardLayout)jPanelAIParam.getLayout();
+    card.show(jPanelAIParam, "OpenCode");
+    option.ai=AI.OPEN_CODE;
+  }//GEN-LAST:event_jRadioButtonOpenCodeActionPerformed
+
+  private void jPasswordFieldApiOpenCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldApiOpenCodeFocusLost
+    option.apiKeyOpenCode=String.valueOf(jPasswordFieldApiOpenCode.getPassword());
+  }//GEN-LAST:event_jPasswordFieldApiOpenCodeFocusLost
+
+  private void jTextFieldModelOpenCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldModelOpenCodeFocusLost
+    option.modelOpenCode=jTextFieldModelOpenCode.getText();
+  }//GEN-LAST:event_jTextFieldModelOpenCodeFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -5436,6 +5524,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabelApiClaude;
   private javax.swing.JLabel jLabelApiGemini;
   private javax.swing.JLabel jLabelApiOpenAI;
+  private javax.swing.JLabel jLabelApiOpenCode;
   private javax.swing.JLabel jLabelApiOpenRouter;
   private javax.swing.JLabel jLabelArrow;
   private javax.swing.JLabel jLabelAutoComment;
@@ -5453,6 +5542,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabelEgClaude;
   private javax.swing.JLabel jLabelEgGemini;
   private javax.swing.JLabel jLabelEgOpenAI;
+  private javax.swing.JLabel jLabelEgOpenCode;
   private javax.swing.JLabel jLabelEgOpenRouter;
   private javax.swing.JLabel jLabelFlatLaf;
   private javax.swing.JLabel jLabelFontSize;
@@ -5482,6 +5572,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabelModelClaude;
   private javax.swing.JLabel jLabelModelGemini;
   private javax.swing.JLabel jLabelModelGeminiOpenAI;
+  private javax.swing.JLabel jLabelModelGeminiOpenCode;
   private javax.swing.JLabel jLabelModelGeminiOpenRouter;
   private javax.swing.JLabel jLabelNoconfig;
   private javax.swing.JLabel jLabelPSIDinitsong;
@@ -5503,17 +5594,18 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JPanel jPanelC128Comm;
   private javax.swing.JPanel jPanelC1541Comm;
   private javax.swing.JPanel jPanelC64Comm;
+  private javax.swing.JPanel jPanelClaude;
   private javax.swing.JPanel jPanelComment;
   private javax.swing.JPanel jPanelDisassembler;
   private javax.swing.JPanel jPanelDn;
-  private javax.swing.JPanel jPanelLMStudioClaude;
+  private javax.swing.JPanel jPanelGemini;
   private javax.swing.JPanel jPanelLMStudioCust;
-  private javax.swing.JPanel jPanelLMStudioGemini;
   private javax.swing.JPanel jPanelLMStudioLocal;
-  private javax.swing.JPanel jPanelLMStudioOpenAI;
-  private javax.swing.JPanel jPanelLMStudioOpenRouter;
   private javax.swing.JPanel jPanelLook;
   private javax.swing.JPanel jPanelOdyssey;
+  private javax.swing.JPanel jPanelOpenAI;
+  private javax.swing.JPanel jPanelOpenCode;
+  private javax.swing.JPanel jPanelOpenRouter;
   private javax.swing.JPanel jPanelOption;
   private javax.swing.JPanel jPanelPlus4Comm;
   private javax.swing.JPanel jPanelPreview;
@@ -5522,6 +5614,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JPasswordField jPasswordFieldApiClaude;
   private javax.swing.JPasswordField jPasswordFieldApiGemini;
   private javax.swing.JPasswordField jPasswordFieldApiOpenAI;
+  private javax.swing.JPasswordField jPasswordFieldApiOpenCode;
   private javax.swing.JPasswordField jPasswordFieldApiOpenRouter;
   private javax.swing.JRadioButton jRadioButtonAqua;
   private javax.swing.JRadioButton jRadioButtonCharcoal;
@@ -5556,6 +5649,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JRadioButton jRadioButtonNone;
   private javax.swing.JRadioButton jRadioButtonOcean;
   private javax.swing.JRadioButton jRadioButtonOpenAI;
+  private javax.swing.JRadioButton jRadioButtonOpenCode;
   private javax.swing.JRadioButton jRadioButtonOpenRouter;
   private javax.swing.JRadioButton jRadioButtonRuby;
   private javax.swing.JRadioButton jRadioButtonStandard;
@@ -5629,6 +5723,7 @@ public class JOptionDialog extends javax.swing.JDialog {
   private javax.swing.JTextField jTextFieldModelClaude;
   private javax.swing.JTextField jTextFieldModelGemini;
   private javax.swing.JTextField jTextFieldModelOpenAI;
+  private javax.swing.JTextField jTextFieldModelOpenCode;
   private javax.swing.JTextField jTextFieldModelOpenRouter;
   private javax.swing.JTextField jTextFieldPlaySound;
   private javax.swing.JTextField jTextFieldShortLinearTable;
@@ -5850,7 +5945,11 @@ public class JOptionDialog extends javax.swing.JDialog {
         case OPEN_ROUTE:
             jRadioButtonOpenRouter.setSelected(true);
             card.show(jPanelAIParam, "OpenRouter");
-            break;               
+            break;    
+        case OPEN_CODE:
+            jRadioButtonOpenCode.setSelected(true);
+            card.show(jPanelAIParam, "OpenCode");
+            break;              
       }
      
       jTextFieldHostLM.setText(option.hostLMStudio);

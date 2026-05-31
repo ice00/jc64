@@ -96,6 +96,12 @@ public final class AIBackendConfig {
        public String getName() {
          return "Open Route";
        }
+     },
+     OPEN_CODE {
+      @Override
+      public String getName() {
+        return "OpenCode.ai";
+      }
      };        
     
      /**
@@ -302,6 +308,23 @@ public final class AIBackendConfig {
             .maxOutputTokens(8192)
             .build();
   }
+  
+  /**
+   * OpenCode.ai – OpenAI‑compatible endpoint.
+   *
+   * @param apiKey  OpenCode API key
+   * @param model   e.g. "opencode/llama-3.1-8b", "opencode/qwen-2.5-7b"
+   * @return OpenCode instance
+   */
+  public static AIBackendConfig openCode(String apiKey, String model) {
+      return new Builder("OpenCode.ai")
+              .endpoint("https://api.opencode.ai/v1/chat/completions")
+              .model(model)
+              .apiKey(apiKey)
+              .maxOutputTokens(8192)
+              .build();
+  }
+
 
   // ---------------------------------------------------------------------------
   // Builder
