@@ -333,6 +333,13 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     optionMPRSaveChooserFile.setDialogTitle("Select the MPR file to save");
     importLabelsChooserFile.setDialogTitle("Select a memory label dump file from DASM");
     compiler.setOption(option);
+    
+    
+    // avoid to generate undo in read only text
+    rSyntaxTextAreaDis.setDocument(new NoUndoRSyntaxDocument(rSyntaxTextAreaDis.getSyntaxEditingStyle()));
+    rSyntaxTextAreaSource.setDocument(new NoUndoRSyntaxDocument(rSyntaxTextAreaSource.getSyntaxEditingStyle()));
+    rSyntaxTextAreaDisMin.setDocument(new NoUndoRSyntaxDocument(rSyntaxTextAreaDisMin.getSyntaxEditingStyle()));
+    rSyntaxTextAreaSourceMin.setDocument(new NoUndoRSyntaxDocument(rSyntaxTextAreaSourceMin.getSyntaxEditingStyle()));
 
     jTableMemory.addMouseListener(new java.awt.event.MouseAdapter() {
       MouseEvent last;
@@ -8004,6 +8011,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     rSyntaxTextAreaSource.setText(disassembly.source); 
+
     if (option.showMiniatureSource) rSyntaxTextAreaSourceMin.setText(disassembly.source); 
     else rSyntaxTextAreaSourceMin.setText("");
     try {
@@ -8016,6 +8024,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
     }
     
     rSyntaxTextAreaDis.setText(disassembly.disassembly);
+
     if (option.showMiniaturePreview) rSyntaxTextAreaDisMin.setText(disassembly.disassembly);
     else rSyntaxTextAreaDisMin.setText("");
     try {

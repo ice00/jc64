@@ -72,6 +72,8 @@ import javax.swing.UIManager;
 public class HeapView extends JComponent {
     
  private static final boolean AUTOMATIC_REFRESH = true;
+ 
+ private boolean warned = false;
 
     /*
      * How often the display is updated.
@@ -238,12 +240,6 @@ public class HeapView extends JComponent {
     @Override
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
-        //if (!e.isConsumed()) {
-        //    if (e.isPopupTrigger()) {
-        //        // Show a popup allowing to configure the various options
-         //       showPopup(e.getX(), e.getY());
-         //   }
-        //}
 
         if (e.getID() == MouseEvent.MOUSE_CLICKED
                 && SwingUtilities.isLeftMouseButton(e)
@@ -259,24 +255,6 @@ public class HeapView extends JComponent {
     }
 
     /**
-     * Shows a popup at the specified location that allows you to configure the
-     * various options.
-     */
- /*   private void showPopup(int x, int y) {
-        JPopupMenu popup = new JPopupMenu();
-        JCheckBoxMenuItem cbmi = new JCheckBoxMenuItem("Show text");
-        cbmi.setSelected(getShowText());
-        cbmi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setShowText(((JCheckBoxMenuItem) e.getSource()).
-                        isSelected());
-            }
-        });
-        popup.add(cbmi);
-        popup.show(this, x, y);
-    }*/
-
-    /**
      * Paints the component.
      */
     @Override
@@ -287,7 +265,7 @@ public class HeapView extends JComponent {
 
         if (width > 0 && height > 0) {
             startTimerIfNecessary();
-            Graphics2D g2 =(Graphics2D)g;// (Graphics2D) g.create();
+            Graphics2D g2 =(Graphics2D)g;
             try {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
@@ -385,16 +363,39 @@ public class HeapView extends JComponent {
     private void update() {
         if (isShowing()) {
             Runtime r = Runtime.getRuntime();
-            long total = r.totalMemory();
-            long used = total - r.freeMemory();
+            long allocated = r.totalMemory();
+            long max = r.maxMemory();
+            long used = allocated - r.freeMemory();
+            
+            double usedPct = (double) used / (double) max;
+            
+            if (!warned && usedPct > 0.90) { // 90% della heap
+              warned = true;
+               
+              SwingUtilities.invokeLater(() -> {
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Warning: heap memory is almost terminated.\n" +
+                    "Save the project often and maybe restart the application.",
+                    "Heap almost terminated",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+                );
+              });
+            }
+            
+            if (warned && usedPct < 0.80) {
+              warned = false;
+            }
+
+            
             graph[graphIndex] = used;
-            lastTotal = total;
+            lastTotal = allocated;
             ++graphIndex;
             if (graphIndex >= GRAPH_COUNT) {
                 graphIndex = 0;
             }
             values[0]=(double) used / (1024.0 * 1024.0);
-            values[1]=(double) total / (1024.0 * 1024.0);
+            values[1]=(double) allocated / (1024.0 * 1024.0);
             heapSizeText = format.format(
                    // new Object[]{(double) used / (1024.0 * 1024.0), (double) total / (1024.0 * 1024.0)});
                     values);            
