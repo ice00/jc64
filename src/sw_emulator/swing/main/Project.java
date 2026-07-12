@@ -44,12 +44,13 @@ import sw_emulator.software.MemoryDasm;
  * Version 9: add related relocation addresses
  * Version 10: add basic type, add comments for contants
  * Version 11: add raw binary starting adddess
+ * Version 12: pucruch
  * 
  * @author ice
  */
 public class Project implements Cloneable { 
   /** Actual version of project */ 
-  public static final byte ACTUAL_VERSION=11;       
+  public static final byte ACTUAL_VERSION=12;       
     
   /** Type of the file */
   public FileType fileType;
@@ -95,6 +96,12 @@ public class Project implements Cloneable {
   
   /** Freeze image */
   public Freeze[] freezes;
+  
+  /** Pucrunch the executable */
+  public boolean pucrunch=false;
+  
+  /** Starting address for pucrunch */
+  public int puncruchStart = 2061;
 
   /**
    * Construct the project
@@ -140,6 +147,8 @@ public class Project implements Cloneable {
     hash = 89 * hash + Arrays.hashCode(this.relocates);
     hash = 89 * hash + Arrays.hashCode(this.patches);
     hash = 89 * hash + Arrays.hashCode(this.freezes);
+    hash = 89 * hash + (this.pucrunch ? 1:0);
+    hash = 89 * hash + this.puncruchStart;
     return hash;
   }
   
@@ -179,6 +188,9 @@ public class Project implements Cloneable {
         p.freezes[i]=(Freeze)this.freezes[i].clone();
       }        
     }
+    
+    p.pucrunch=this.pucrunch;
+    p.puncruchStart=this.puncruchStart;
       
     return p;
   }    
@@ -230,6 +242,9 @@ public class Project implements Cloneable {
         if (!this.freezes[i].equals(p.freezes[i])) return false;  
       }  
     }
+    
+    if (this.pucrunch!=p.pucrunch)return false;
+    if (this.puncruchStart!=p.puncruchStart) return false;
     
     return true;
   }

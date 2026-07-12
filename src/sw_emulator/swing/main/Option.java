@@ -477,7 +477,7 @@ public class Option {
   /** Merge adjacent blocks */
   public boolean mergeBlocks=false;
   
-  
+ 
   /** SidFreq: linear table */
   public boolean sidFreqLinearTable=true;
   

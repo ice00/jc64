@@ -497,7 +497,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
       String source=rSyntaxTextAreaSource.getText();  
       
       File inputFile=new File(option.tmpPath+File.separator+"input.s");
-      File outputFile=new File(option.tmpPath+File.separator+"output.prg");        
+      File outputFile=new File(option.tmpPath+File.separator+"output.prg");           
     
       if (source==null || "".equals(source)) {
        JOptionPane.showMessageDialog(this, "There is no source to assemble",
@@ -534,7 +534,7 @@ public class JFreezeFrame extends javax.swing.JFrame {
         }
       }
       
-      String res=compiler.compile(inputFile, outputFile);
+      String res=compiler.compile(inputFile, outputFile, null, false, 0);
     
       JTextArea textArea = new JTextArea(50, 50);
       textArea.setText(res);

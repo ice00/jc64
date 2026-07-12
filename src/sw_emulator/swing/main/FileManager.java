@@ -982,7 +982,7 @@ public class FileManager {
       // 3.3
       out.writeUTF(option.apiKeyOpenCode);
       out.writeUTF(option.modelOpenCode);
-
+      
       out.flush();
       out.close();
     } catch (Exception e) {
@@ -1189,6 +1189,11 @@ public class FileManager {
       }    
       
       if (version>10) project.binAddress=in.readInt(); // version 11
+      
+      if (version>11) {  // version 12
+        project.pucrunch = in.readBoolean();
+        project.puncruchStart = in.readInt();
+      }
     } catch (Exception e) {
         System.err.println(e);
         return false;
@@ -1374,6 +1379,10 @@ public class FileManager {
       
       // version 11
       out.writeInt(project.binAddress);  
+      
+      // version 12
+      out.writeBoolean(project.pucrunch);      
+      out.writeInt(project.puncruchStart); 
       
       out.flush();
       out.close();

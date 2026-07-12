@@ -60,9 +60,12 @@ public class Compiler {
    * 
    * @param input the input file 
    * @param output the output file
+   * @param output2 the output crunch file
+   * @param pucrunch true if crunch is needed
+   * @param pucrunchStart the starting address
    * @return the io message from the appplication
    */
-  public String compile(File input, File output) {
+  public String compile(File input, File output, File output2, boolean pucrunch, int pucrunchStart) {
     if (option==null) return "Internal error: no option selected";
     
     String res="";  
@@ -73,7 +76,7 @@ public class Compiler {
         break;
       case TMPX:
         res=tmpxCompile(input, output);
-        break;  
+        return res;  // we have not an asembler to use
       case ACME:
         res=acmeCompile(input, output);  
         break;   
@@ -93,6 +96,11 @@ public class Compiler {
         res=asCompile(input, output);
         break;
     }
+    
+    if (pucrunch) {
+      res+=pucrunch(output, output2, pucrunchStart);
+    }
+      
     
     return res;  
   }
@@ -398,7 +406,7 @@ public class Compiler {
         "nl.grauw.glass.Assembler", args, glassPackages, option
     );
     
-    // Se l'esecuzione è andata bene, leggi l'output dal file temporaneo
+    // If execution is good, rad the output from temp file
     if (result.equals("Compilation done") || result.equals("Compilation done (exit prevented)")) {
         return SafeLibraryExecutor.getCompilationOutput(option);
     }
@@ -495,4 +503,53 @@ public class Compiler {
 
     return result+"\n"+result2;    
   }
+  
+  /**
+   * Crunch the input file to the output file with pucrunch
+   * 
+   * @param input the input file 
+   * @param output the output file
+   * @param address starting address
+   * @return the io message from the appplication
+   */ 
+  public String pucrunch(File input, File output, int address) {
+    PrintStream orgStream;
+    PrintStream fileStream;
+    
+    orgStream = System.out;
+    
+    String result="No result obtained!!";
+    String[] args=new String[4];
+    
+    args[0]="";
+    args[1]="-x"+address;
+    args[2]=input.getAbsolutePath();
+    args[3]=output.getAbsolutePath();
+    
+    try {
+      fileStream = new PrintStream(option.tmpPath+File.separator+"tmp.tmp");
+      System.setOut(fileStream);
+      System.setErr(fileStream);  
+        
+      Class cl = Class.forName("sw_emulator.software.asm.Pucrunch");
+      Method mMain = cl.getMethod("run", new Class[]{String[].class});
+      mMain.invoke(cl.newInstance(), new Object[]{args});
+      
+    } catch (Exception e) {
+        System.err.println(e);
+      }      
+    System.setOut(orgStream);
+    System.setErr(orgStream);
+    
+    try {
+       result = new String(Files.readAllBytes(Paths.get(option.tmpPath+File.separator+"tmp.tmp")), StandardCharsets.UTF_8);
+       // remove the extra error message
+       int pos=result.indexOf("org.ibex.nestedvm.Runtime$ExecutionException:");
+       if (pos>0) result=result.substring(0, pos);
+    } catch (Exception e) {
+        System.err.println(e);
+      }   
+    
+    return result;
+  }  
 }

@@ -9409,7 +9409,8 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
    */
   private void assembly() {
     File inputFile=new File(option.tmpPath+File.separator+"input.s");
-    File outputFile=new File(option.tmpPath+File.separator+"output.prg");        
+    File outputFile=new File(option.tmpPath+File.separator+"output.prg");       
+    File crunchFile=new File(option.tmpPath+File.separator+"output2.prg"); 
     
     if (disassembly.source==null || "".equals(disassembly.source)) {
        JOptionPane.showMessageDialog(this, "There is no source to assemble",
@@ -9432,7 +9433,7 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         System.err.println(e);
       }
       
-    String res=compiler.compile(inputFile, outputFile);
+    String res=compiler.compile(inputFile, outputFile, crunchFile, project.pucrunch, project.puncruchStart);
     
     JTextArea textArea = new JTextArea(50, 50);
     textArea.setText(res);
