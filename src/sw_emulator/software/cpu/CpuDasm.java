@@ -205,7 +205,7 @@ public class CpuDasm implements disassembler {
   }
   
   /**
-   * Get the major/minor representation of the isntruction 
+   * Get the major/minor representation of the instruction 
    * 
    * @param type the type of major/minor
    * @param value the address value
@@ -232,6 +232,7 @@ public class CpuDasm implements disassembler {
     if (addr<0 || addr>0xffff) return HexNum("??", defaultMode); 
     
     char type=memory[(int)addr].type;
+    int index = memory[(int)addr].index;
     
     // this is a data declaration            
     if (type==TYPE_MINOR || 
@@ -253,29 +254,28 @@ public class CpuDasm implements disassembler {
                   /// this is a memory in table label
                   int pos=memRel.address-memRel.related;
                   MemoryDasm mem2=memory[memRel.related];
-                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+"+"+pos);
-                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+"+"+pos);
-                  return getNormType(type)+HexNum(ByteToExe((int)memRel.related), defaultMode)+"+"+pos;  
+                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+"+"+getPosConstant(pos, index));
+                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+"+"+getPosConstant(pos, index));
+                  return getNormType(type)+HexNum(ByteToExe((int)memRel.related), defaultMode)+"+"+getPosConstant(pos, index);  
                   
                 case TYPE_MINUS:
                   /// this is a memory in table label
                   pos=memRel.address-memRel.related;
                   mem2=memory[memRel.related];
-                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+pos);
-                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+pos);
-                  return getMajorMinor(type, HexNum(ByteToExe((int)memRel.related), defaultMode)+pos);    
+                  if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return getMajorMinor(type, mem2.userLocation+getPosConstant(pos, index));
+                  if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return getMajorMinor(type, mem2.dasmLocation+getPosConstant(pos, index));
+                  return getMajorMinor(type, HexNum(ByteToExe((int)memRel.related), defaultMode)+getPosConstant(pos, index));    
                 default: return getMajorMinor(memory[(int)addr].type, HexNum(ShortToExe(memRel.address), defaultMode));
               }
            }
     } else {        
-        if (memory[(int)addr].index!=-1) {
-          String res=constant.table[memory[(int)addr].index][(int)value];  
+        if (index!=-1) {
+          String res=constant.table[index][(int)value];  
           if (res!=null && !"".equals(res)) return res;
         }            
         return HexNum(ByteToExe((int)value), defaultMode);
       }
   }
-  
   
   /**
    * Get the label or memory location ($) of zero page
@@ -286,15 +286,16 @@ public class CpuDasm implements disassembler {
   protected String getLabelZero(long addr) {
     if (addr<0 || addr>0xffff) return HexNum("??", defaultMode);
       
-    MemoryDasm mem=memory[(int)addr];          
+    MemoryDasm mem=memory[(int)addr];     
+    int index = memory[(int)addr].index;
     
     if (mem.type==TYPE_PLUS) {
       /// this is a memory in table label
       int pos=mem.address-mem.related;
       MemoryDasm mem2=memory[mem.related];
-      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
-      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
-      return HexNum(ByteToExe((int)mem.related), defaultMode)+"+"+pos;  
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+getPosConstant(pos, index);
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+getPosConstant(pos, index);
+      return HexNum(ByteToExe((int)mem.related), defaultMode)+"+"+getPosConstant(pos, index);  
     }
     
     if (mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
@@ -302,9 +303,9 @@ public class CpuDasm implements disassembler {
       int rel=mem.related>>16;
       int pos=mem.address-rel;
       MemoryDasm mem2=memory[rel];
-      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
-      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
-      return HexNum(ByteToExe(rel), defaultMode)+"+"+pos;  
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+getPosConstant(pos, index);
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+getPosConstant(pos, index);
+      return HexNum(ByteToExe(rel), defaultMode)+"+"+getPosConstant(pos, index);  
     }    
     
     if (mem.type==TYPE_MINUS_MAJOR || mem.type==TYPE_MINUS_MINOR) {
@@ -312,18 +313,18 @@ public class CpuDasm implements disassembler {
       int rel=mem.related>>16;
       int pos=mem.address-rel;
       MemoryDasm mem2=memory[rel];
-      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
-      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
-      return HexNum(ByteToExe(rel), defaultMode)+pos;  
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+getPosConstant(pos, index);
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+getPosConstant(pos, index);
+      return HexNum(ByteToExe(rel), defaultMode)+getPosConstant(pos, index);  
     }      
     
     if (mem.type==TYPE_MINUS) {
       /// this is a memory in table label
       int pos=mem.address-mem.related;
       MemoryDasm mem2=memory[mem.related];
-      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
-      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
-      return HexNum(ByteToExe((int)mem.related), defaultMode)+pos;  
+      if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+getPosConstant(pos, index);
+      if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+getPosConstant(pos, index);
+      return HexNum(ByteToExe((int)mem.related), defaultMode)+getPosConstant(pos, index);  
     }     
      
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
@@ -341,15 +342,16 @@ public class CpuDasm implements disassembler {
     if (addr<0 || addr>0xffff) return HexNum("????", defaultMode);  
       
     MemoryDasm mem=memory[(int)addr];
+    int index = memory[(int)addr].index;
 
     try {    
         if (mem.type==TYPE_PLUS) {
           /// this is a memory in table label
           int pos=mem.address-mem.related;
           MemoryDasm mem2=memory[mem.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
-          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
-          return HexNum(ShortToExe((int)mem.related), defaultMode)+"+"+pos;  
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+getPosConstant(pos, index);
+          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+getPosConstant(pos, index);
+          return HexNum(ShortToExe((int)mem.related), defaultMode)+"+"+getPosConstant(pos, index);  
         }
 
         if (mem.type==TYPE_PLUS_MAJOR || mem.type==TYPE_PLUS_MINOR) {
@@ -357,9 +359,9 @@ public class CpuDasm implements disassembler {
           int rel=(mem.related>>16)&0xFFFF;
           int pos=mem.address-rel;
           MemoryDasm mem2=memory[rel];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+pos;
-          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+pos;
-          return HexNum(ShortToExe(rel), defaultMode)+"+"+pos;  
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+"+"+getPosConstant(pos, index);
+          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+"+"+getPosConstant(pos, index);
+          return HexNum(ShortToExe(rel), defaultMode)+"+"+getPosConstant(pos, index);  
         }    
         
         if (mem.type==TYPE_MINUS_MAJOR || mem.type==TYPE_MINUS_MINOR) {
@@ -367,29 +369,46 @@ public class CpuDasm implements disassembler {
           int rel=(mem.related>>16)&0xFFFF;
           int pos=mem.address-rel;
           MemoryDasm mem2=memory[rel];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
-          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
-          return HexNum(ShortToExe(rel), defaultMode)+pos;  
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+getPosConstant(pos, index);
+          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+getPosConstant(pos, index);
+          return HexNum(ShortToExe(rel), defaultMode)+getPosConstant(pos, index);  
         }          
 
         if (mem.type==TYPE_MINUS) {
           /// this is a memory in table label
           int pos=mem.address-mem.related;
           MemoryDasm mem2=memory[mem.related];
-          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+pos;
-          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+pos;
-          return HexNum(ShortToExe((int)mem.related), defaultMode)+pos;  
+          if (mem2.userLocation!=null && !"".equals(mem2.userLocation)) return mem2.userLocation+getPosConstant(pos, index);
+          if (mem2.dasmLocation!=null && !"".equals(mem2.dasmLocation)) return mem2.dasmLocation+getPosConstant(pos, index);
+          return HexNum(ShortToExe((int)mem.related), defaultMode)+getPosConstant(pos, index);  
         } 
     } catch (Exception e) {
         return HexNum("xxxx", defaultMode);
       }
-    
 
-     
     if (mem.userLocation!=null && !"".equals(mem.userLocation)) return mem.userLocation;
     if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) return mem.dasmLocation;
     return HexNum(ShortToExe((int)addr), defaultMode);        
   } 
+  
+    
+  /**
+   * Return the position or constant
+   * 
+   * @param pos the position (positive or negative)
+   * @param index rhe constant ind4ex
+   * @return the position or constant
+   */
+  protected String getPosConstant(int pos, int index) {
+    if (index != -1) {
+      String res=constant.table[index][pos];  
+      if (res!=null && !"".equals(res)) 
+        if (pos>=0) return res;    
+        else if (res.contains("+") || res.contains(("-"))) return "-("+res+")";
+        else return "-"+res;
+    }
+    return ""+pos;
+  }
   
   /**
    * Set the dasm label
