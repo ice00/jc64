@@ -396,7 +396,7 @@ public class CpuDasm implements disassembler {
    * Return the position or constant
    * 
    * @param pos the position (positive or negative)
-   * @param index rhe constant ind4ex
+   * @param index rhe constant index
    * @return the position or constant
    */
   protected String getPosConstant(int pos, int index) {

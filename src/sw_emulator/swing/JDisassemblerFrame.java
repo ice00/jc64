@@ -832,6 +832,24 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         };
       }
 
+      /**
+      * Return the position or constant
+      *
+      * @param pos the position (positive or negative)
+      * @param index rhe constant index
+      * @return the position or constant
+      */
+      protected String getPosConstant(int pos, int index) {
+        if (index != -1 && project!=null) {
+          String res=project.constant.table[index][pos];
+          if (res!=null && !"".equals(res))
+          if (pos>=0) return res;
+          else if (res.contains("+") || res.contains(("-"))) return "-("+res+")";
+          else return "-"+res;
+        }
+        return ""+pos;
+      }
+
       //Implement table cell tool tips.
       public String getToolTipText(MouseEvent e) {
         String tip = null;
@@ -868,16 +886,17 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
             case RE:
             if (memory.type!=TYPE_EMPTY) {
               MemoryDasm mem=dataTableModelMemory.getData()[memory.related];
+              int pos=memory.address-memory.related;
               switch (memory.type) {
                 case TYPE_PLUS:
-                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+(memory.address-memory.related);
-                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+(memory.address-memory.related);
-                else tip="$"+Shared.ShortToExe(mem.address)+"+"+(memory.address-memory.related);
+                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+"+"+getPosConstant(pos, memory.index);
+                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+"+"+getPosConstant(pos, memory.index);
+                else tip="$"+Shared.ShortToExe(mem.address)+"+"+getPosConstant(pos, memory.index);
                 break;
                 case TYPE_MINUS:
-                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+(memory.address-memory.related);
-                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+(memory.address-memory.related);
-                else tip="$"+Shared.ShortToExe(mem.address)+(memory.address-memory.related);
+                if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip=mem.userLocation+getPosConstant(pos, memory.index);
+                else if (mem.dasmLocation!=null && !"".equals(mem.dasmLocation)) tip=mem.dasmLocation+getPosConstant(pos, memory.index);
+                else tip="$"+Shared.ShortToExe(mem.address)+getPosConstant(pos, memory.index);
                 break;
                 default:
                 if (mem.userLocation!=null && !"".equals(mem.userLocation)) tip="#"+memory.type+mem.userLocation;
