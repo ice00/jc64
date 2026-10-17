@@ -47,6 +47,7 @@ jobs:
             -J-Djava.home=${JAVA_HOME} \
             -J-Djavax.sound.config.file=./conf/sound.properties \
             -Djava.awt.headless=false \
+            --enable-url-protocols=http,https \
             --no-fallback \
             -H:ConfigurationFileDirectories=native-image-config \
             -H:IncludeResources='conf/.*\.png|conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*' \
@@ -89,6 +90,7 @@ jobs:
             "-J-Djava.home=$env:JAVA_HOME" `
             "-J-Djavax.sound.config.file=./conf/sound.properties" `
             "-Djava.awt.headless=false" `
+            --enable-url-protocols=http,https `
             --no-fallback `
             -H:ConfigurationFileDirectories=native-image-config `
             -H:IncludeResources=conf/sound.properties `
@@ -139,6 +141,7 @@ jobs:
             -J-Djava.home=$JAVA_HOME \
             -J-Djavax.sound.config.file=./conf/sound.properties \
             -Djava.awt.headless=false \
+            --enable-url-protocols=http,https \
             --no-fallback \
             -H:ConfigurationFileDirectories=native-image-config \
             -H:IncludeResources='conf/sound.properties|org/fife/ui/rsyntaxtextarea/.*|META-INF/services/.*' \
