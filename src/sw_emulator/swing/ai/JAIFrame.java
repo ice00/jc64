@@ -328,17 +328,20 @@ public class JAIFrame extends javax.swing.JFrame {
     elapsedTimer = new Timer(500, e -> updateElapsed());
     elapsedTimer.start();
 
+    jTextAreaStatus.setForeground(Color.GRAY);
     jTextAreaStatus.setText("Analyzing…");
     jButtonApply.setEnabled(false);
 
     // Launch background thread
     final String sourceSnap = source.toString();
-    analyzer.analyzeLabelsAsync(config, 
-            sourceSnap, knownLabels,
-            suggestions -> SwingUtilities.invokeLater(() ->
-                    onAnalysisComplete(suggestions, currentLabels)),
-            error -> SwingUtilities.invokeLater(() ->
-                    onAnalysisError(error)));
+    analyzer.analyzeLabelsAsync(config,
+        sourceSnap, knownLabels,
+        suggestions -> SwingUtilities.invokeLater(() ->
+                onAnalysisComplete(suggestions, currentLabels)),
+        error -> SwingUtilities.invokeLater(() ->
+                onAnalysisError(error)),
+        progress -> SwingUtilities.invokeLater(() ->
+                jTextAreaStatus.setText("Analyzing…  " + progress)));
   }
   
   // ---------------------------------------------------------------------------

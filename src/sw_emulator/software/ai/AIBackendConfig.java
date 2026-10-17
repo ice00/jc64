@@ -111,11 +111,13 @@ public final class AIBackendConfig {
       */
      public abstract String getName();
    }  
-  
-
+   
   // ---------------------------------------------------------------------------
   // Fields
   // ---------------------------------------------------------------------------
+
+  /** AI context windows token sixe */
+  private final int contextWindow;
 
   /** Human-readable name shown in the UI (e.g. "Anthropic Claude"). */
   private final String displayName;
@@ -181,6 +183,7 @@ public final class AIBackendConfig {
     this.localReachabilityCheck = b.localReachabilityCheck;
     this.localHost              = b.localHost;
     this.localPort              = b.localPort;
+    this.contextWindow          = b.contextWindow;
   }
 
   // ---------------------------------------------------------------------------
@@ -198,6 +201,7 @@ public final class AIBackendConfig {
   public boolean isLocalReachabilityCheck()  { return localReachabilityCheck; }
   public String  getLocalHost()              { return localHost; }
   public int     getLocalPort()              { return localPort; }
+  public int     getContextWindow()          { return contextWindow; }
 
   public boolean requiresApiKey() { return apiKey != null && !apiKey.isBlank(); }
 
@@ -346,6 +350,7 @@ public final class AIBackendConfig {
     private boolean                 localReachabilityCheck = false;
     private String                  localHost        = "localhost";
     private int                     localPort        = 1234;
+    private int                     contextWindow    = 0;
 
     /**
      * Build with the given display name
@@ -356,11 +361,12 @@ public final class AIBackendConfig {
       this.displayName = displayName;
     }
 
-    public Builder endpoint(String endpoint)          { this.endpoint = endpoint; return this; }
-    public Builder model(String model)                { this.model = model; return this; }
-    public Builder apiKey(String apiKey)              { this.apiKey = apiKey; return this; }
-    public Builder maxOutputTokens(int max)           { this.maxOutputTokens = max; return this; }
-
+    public Builder endpoint(String endpoint) { this.endpoint = endpoint; return this; }
+    public Builder model(String model)       { this.model = model; return this; }
+    public Builder apiKey(String apiKey)     { this.apiKey = apiKey; return this; }
+    public Builder maxOutputTokens(int max)  { this.maxOutputTokens = max; return this; }
+    public Builder contextWindow(int c)      { this.contextWindow = c; return this; }
+    
     /**
      * Sets the auth header name and optional prefix.
      *

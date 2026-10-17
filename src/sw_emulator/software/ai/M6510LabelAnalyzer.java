@@ -61,6 +61,8 @@ public class M6510LabelAnalyzer {
 
   private static final int CONNECT_TIMEOUT_MS  = 5_000;
   private static final int RESPONSE_TIMEOUT_MS = 180_000; // 3 min – local models can be slow
+  private volatile int maxTokensOverride = 0;
+  private volatile int lastPromptTokens  = 0; 
 
   // ---------------------------------------------------------------------------
   // System prompt
@@ -139,9 +141,9 @@ public class M6510LabelAnalyzer {
    * @return the result
    * @throws java.io.IOException
    */
-  public Map<String, String> analyzeLabels(AIBackendConfig config, CharSequence source)
-          throws IOException {
-    return analyzeLabels(config, source, null);
+  public Map<String, String> analyzeLabels(AIBackendConfig config, CharSequence source,
+        Map<String, String> knownLabels) throws IOException {
+    return analyzeLabels(config, source, knownLabels, null);
   }
 
   /**
@@ -154,9 +156,35 @@ public class M6510LabelAnalyzer {
    * @throws java.io.IOException 
    */
   public Map<String, String> analyzeLabels(AIBackendConfig config, CharSequence source,
-          Map<String, String> knownLabels) throws IOException {
+        Map<String, String> knownLabels, Consumer<String> onProgress) throws IOException {
     applyConfig(config);
-    return parseResponse(callApi(source, knownLabels));
+    Map<String, String> known = knownLabels != null ? knownLabels : new LinkedHashMap<>();
+
+    int ctx = AIContextChunker.detectContext(config, 8192);
+    LOG.log(Level.INFO, "AI context window: {0} tokens", ctx);
+    AIContextChunker chunker = new AIContextChunker(ctx, config.getMaxOutputTokens());
+    chunker.setPromptOverheadChars(SYSTEM_PROMPT.length());
+
+    try {
+      return chunker.run(source.toString(), known,
+          (chunk, k, c) -> {
+            Map<String, String> hint = new LinkedHashMap<>(k);
+            hint.putAll(c);
+            maxTokensOverride = chunker.getOutputReserveTokens();
+            lastPromptTokens = 0;
+            String raw = callApi(chunk, hint);
+            chunker.calibrate(SYSTEM_PROMPT.length() + buildUserMessage(chunk, hint).length(),
+                              lastPromptTokens);
+            return parseResponse(raw);
+          },
+          (n, est, from, to, total) -> {
+            String msg = "Chunk " + n + "/~" + est + "  (lines " + from + "-" + to + " of " + total + ")";
+            LOG.info(msg);
+            if (onProgress != null) onProgress.accept(msg);
+          });
+    } finally {
+      maxTokensOverride = 0;
+    }
   }
 
   /**
@@ -191,19 +219,17 @@ public class M6510LabelAnalyzer {
    * @param knownLabels  labels confirmed in previous calls, or null
    * @param onSuccess    called on the completion thread when analysis succeeds
    * @param onError      called on the completion thread on any error
-   */
-  public void analyzeLabelsAsync(AIBackendConfig config,
-          CharSequence source,
-          Map<String, String> knownLabels,
-          Consumer<Map<String, String>> onSuccess,
-          Consumer<Exception> onError) {
+   */ 
+  public void analyzeLabelsAsync(AIBackendConfig config, CharSequence source,
+        Map<String, String> knownLabels,
+        Consumer<Map<String, String>> onSuccess,
+        Consumer<Exception> onError,
+        Consumer<String> onProgress) {
 
     final String sourceSnap = source.toString();
-
     CompletableFuture.runAsync(() -> {
       try {
-        Map<String, String> result = analyzeLabels(config, sourceSnap, knownLabels);
-        onSuccess.accept(result);
+        onSuccess.accept(analyzeLabels(config, sourceSnap, knownLabels, onProgress));
       } catch (Exception e) {
         onError.accept(e);
       }
@@ -297,7 +323,7 @@ public class M6510LabelAnalyzer {
   private String buildRequestBody(CharSequence source, Map<String, String> knownLabels) {
     JSONObject body = new JSONObject();
     body.put("model", config.getModel());
-    body.put("max_tokens", config.getMaxOutputTokens());
+    body.put("max_tokens", maxTokensOverride > 0 ? maxTokensOverride : config.getMaxOutputTokens());
 
     JSONArray messages = new JSONArray();
     messages.put(new JSONObject().put("role", "system").put("content", SYSTEM_PROMPT));
@@ -341,6 +367,7 @@ public class M6510LabelAnalyzer {
     if (json.has("usage")) {
       JSONObject u = json.getJSONObject("usage");
       int prompt     = u.optInt("prompt_tokens",     0);
+      lastPromptTokens = prompt;
       int completion = u.optInt("completion_tokens", 0);
       int total      = u.optInt("total_tokens",      0);
       lastUsage = new TokenUsage(prompt, completion, total);
@@ -470,6 +497,7 @@ public class M6510LabelAnalyzer {
       String response = new String(is.readAllBytes(), StandardCharsets.UTF_8);
 
       if (status != 200) {
+        AIContextChunker.throwIfContextError(response);  
         throw new IOException("API error HTTP " + status + " [" + config + "]: " + response);
       }
       return response;
@@ -632,7 +660,7 @@ public class M6510LabelAnalyzer {
       System.out.println("Exact prompt tokens (from API):        " + exact);
 
       // --- Real analysis ---
-      Map<String, String> labels = analyzer.analyzeLabels(cfg, source);
+      Map<String, String> labels = analyzer.analyzeLabels(cfg, source, null, null);
       System.out.println("=== Identified Labels ===");
       labels.forEach((addr, name) -> System.out.printf("%-6s  %s%n", addr, name));
 

@@ -10499,16 +10499,16 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
         return;
       }
 
-      Map<String, String> knownLabels = new HashMap<String, String>();
-      Map<String, String> currentLabels = new HashMap<String, String>();
+      Map<String, String> knownLabels = new HashMap<String, String>();    // know labels from previous call
+      Map<String, String> currentLabels = new HashMap<String, String>();  // current label present in dissassembly
 
       for (MemoryDasm mem : project.memory) {
         if (mem.userLocation != null && !"".equals(mem.userLocation)) {
-          knownLabels.put(String.format("%04X", mem.address), mem.userLocation);
+          currentLabels.put(String.format("%04X", mem.address), mem.userLocation);
           continue;
         }
         if (mem.dasmLocation != null && !"".equals(mem.dasmLocation)) {
-          knownLabels.put(String.format("%04X", mem.address), mem.dasmLocation);
+          currentLabels.put(String.format("%04X", mem.address), mem.dasmLocation);
           continue;
         }
       }

@@ -24,6 +24,7 @@
 package sw_emulator.swing.table;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.AbstractTableModel;
@@ -83,8 +84,8 @@ public class LabelTableModel extends AbstractTableModel {
   // Population
   // ---------------------------------------------------------------------------
 
-  /**
-   * Replaces all rows with a new set of AI suggestions.
+/**
+   * Replaces all rows with a new set of AI suggestions, ordered by address.
    *
    * @param suggestions   address -> AI-proposed label name
    * @param currentLabels address -> label already present in the disassembler
@@ -93,8 +94,14 @@ public class LabelTableModel extends AbstractTableModel {
   public void setData(Map<String, String> suggestions,
                       Map<String, String> currentLabels) {
     rows.clear();
-    for (Map.Entry<String, String> e : suggestions.entrySet()) {
-      String addr     = e.getKey();
+    
+    // Convert map into orderd list with esadecimal addr
+    List<Map.Entry<String, String>> sortedEntries = new ArrayList<>(suggestions.entrySet());
+    sortedEntries.sort(Comparator.comparing(e -> Integer.parseInt(e.getKey(), 16)));
+
+    // Insert orderd roes in the table
+    for (Map.Entry<String, String> e : sortedEntries) {
+      String addr      = e.getKey();
       String newLabel = e.getValue();
       String oldLabel = currentLabels.getOrDefault(addr, "");
       // Pre-select only rows where the AI suggestion differs from the current label
