@@ -135,6 +135,8 @@ public class FileManager {
       option.dasmStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.dasmMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.dasmMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.dasmMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.dasmMultiChar = Assembler.MultiChar.valueOf(in.readUTF());
       option.dasmText = Assembler.Text.valueOf(in.readUTF());
       option.dasmNumText = Assembler.NumText.valueOf(in.readUTF());
       option.dasmZeroText = Assembler.ZeroText.valueOf(in.readUTF());
@@ -157,6 +159,8 @@ public class FileManager {
       option.tmpxStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.tmpxMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.tmpxMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.tmpxMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.tmpxMultiChar = Assembler.MultiChar.valueOf(in.readUTF());
       option.tmpxText = Assembler.Text.valueOf(in.readUTF());
       option.tmpxNumText = Assembler.NumText.valueOf(in.readUTF());
       option.tmpxZeroText = Assembler.ZeroText.valueOf(in.readUTF());
@@ -179,6 +183,8 @@ public class FileManager {
       option.ca65StackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.ca65MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.ca65MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.ca65MonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.ca65MultiChar = Assembler.MultiChar.valueOf(in.readUTF());
       option.ca65Text = Assembler.Text.valueOf(in.readUTF());
       option.ca65NumText = Assembler.NumText.valueOf(in.readUTF());
       option.ca65ZeroText = Assembler.ZeroText.valueOf(in.readUTF());
@@ -201,6 +207,8 @@ public class FileManager {
       option.acmeStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.acmeMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.acmeMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.acmeMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.acmeMultiChar = Assembler.MultiChar.valueOf(in.readUTF());
       option.acmeText = Assembler.Text.valueOf(in.readUTF());
       option.acmeNumText = Assembler.NumText.valueOf(in.readUTF());
       option.acmeZeroText = Assembler.ZeroText.valueOf(in.readUTF());
@@ -224,6 +232,8 @@ public class FileManager {
       option.kickStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.kickMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
       option.kickMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.kickMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.kickMultiChar = Assembler.MultiChar.valueOf(in.readUTF());
       option.kickText = Assembler.Text.valueOf(in.readUTF());
       option.kickNumText = Assembler.NumText.valueOf(in.readUTF());
       option.kickZeroText = Assembler.ZeroText.valueOf(in.readUTF());
@@ -245,7 +255,9 @@ public class FileManager {
       option.tass64Address = Assembler.Address.valueOf(in.readUTF());
       option.tass64StackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.tass64MonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
-      option.tass64MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.tass64MultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.tass64MonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.tass64MultiChar = Assembler.MultiChar.valueOf(in.readUTF());      
       option.tass64Text = Assembler.Text.valueOf(in.readUTF());
       option.tass64NumText = Assembler.NumText.valueOf(in.readUTF());
       option.tass64ZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
@@ -388,7 +400,9 @@ public class FileManager {
       option.glassAddress = Assembler.Address.valueOf(in.readUTF());
       option.glassStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.glassMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
-      option.glassMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.glassMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.glassMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.glassMultiChar = Assembler.MultiChar.valueOf(in.readUTF());      
       option.glassText = Assembler.Text.valueOf(in.readUTF());
       option.glassNumText = Assembler.NumText.valueOf(in.readUTF());
       option.glassZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
@@ -463,7 +477,9 @@ public class FileManager {
       option.asmAddress = Assembler.Address.valueOf(in.readUTF());
       option.asmStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.asmMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
-      option.asmMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.asmMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.asmMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.asmMultiChar = Assembler.MultiChar.valueOf(in.readUTF());      
       option.asmText = Assembler.Text.valueOf(in.readUTF());
       option.asmNumText = Assembler.NumText.valueOf(in.readUTF());
       option.asmZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
@@ -485,7 +501,9 @@ public class FileManager {
       option.asiAddress = Assembler.Address.valueOf(in.readUTF());
       option.asiStackWord = Assembler.StackWord.valueOf(in.readUTF());
       option.asiMonoSprite = Assembler.MonoSprite.valueOf(in.readUTF());
-      option.asiMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());      
+      option.asiMultiSprite = Assembler.MultiSprite.valueOf(in.readUTF());
+      option.asiMonoChar = Assembler.MonoChar.valueOf(in.readUTF());
+      option.asiMultiChar = Assembler.MultiChar.valueOf(in.readUTF());      
       option.asiText = Assembler.Text.valueOf(in.readUTF());
       option.asiNumText = Assembler.NumText.valueOf(in.readUTF());
       option.asiZeroText = Assembler.ZeroText.valueOf(in.readUTF()); 
@@ -599,6 +617,8 @@ public class FileManager {
       out.writeUTF(option.dasmStackWord.name());
       out.writeUTF(option.dasmMonoSprite.name());
       out.writeUTF(option.dasmMultiSprite.name());
+      out.writeUTF(option.dasmMonoChar.name());
+      out.writeUTF(option.dasmMultiChar.name());
       out.writeUTF(option.dasmText.name());
       out.writeUTF(option.dasmNumText.name());
       out.writeUTF(option.dasmZeroText.name());
@@ -621,6 +641,8 @@ public class FileManager {
       out.writeUTF(option.tmpxStackWord.name());
       out.writeUTF(option.tmpxMonoSprite.name());
       out.writeUTF(option.tmpxMultiSprite.name());
+      out.writeUTF(option.tmpxMonoChar.name());
+      out.writeUTF(option.tmpxMultiChar.name());
       out.writeUTF(option.tmpxText.name());
       out.writeUTF(option.tmpxNumText.name());
       out.writeUTF(option.tmpxZeroText.name());
@@ -643,6 +665,8 @@ public class FileManager {
       out.writeUTF(option.ca65StackWord.name());
       out.writeUTF(option.ca65MonoSprite.name());
       out.writeUTF(option.ca65MultiSprite.name());
+      out.writeUTF(option.ca65MonoChar.name());
+      out.writeUTF(option.ca65MultiChar.name());
       out.writeUTF(option.ca65Text.name());
       out.writeUTF(option.ca65NumText.name());
       out.writeUTF(option.ca65ZeroText.name());
@@ -665,6 +689,8 @@ public class FileManager {
       out.writeUTF(option.acmeStackWord.name());
       out.writeUTF(option.acmeMonoSprite.name());
       out.writeUTF(option.acmeMultiSprite.name());
+      out.writeUTF(option.acmeMonoChar.name());
+      out.writeUTF(option.acmeMultiChar.name());
       out.writeUTF(option.acmeText.name());
       out.writeUTF(option.acmeNumText.name());
       out.writeUTF(option.acmeZeroText.name());
@@ -688,6 +714,8 @@ public class FileManager {
       out.writeUTF(option.kickStackWord.name());
       out.writeUTF(option.kickMonoSprite.name());
       out.writeUTF(option.kickMultiSprite.name());
+      out.writeUTF(option.kickMonoChar.name());
+      out.writeUTF(option.kickMultiChar.name());
       out.writeUTF(option.kickText.name());
       out.writeUTF(option.kickNumText.name());
       out.writeUTF(option.kickZeroText.name());  
@@ -709,7 +737,9 @@ public class FileManager {
       out.writeUTF(option.tass64Address.name());
       out.writeUTF(option.tass64StackWord.name());
       out.writeUTF(option.tass64MonoSprite.name());
-      out.writeUTF(option.tass64MultiSprite.name());   
+      out.writeUTF(option.tass64MultiSprite.name());
+      out.writeUTF(option.tass64MonoChar.name());
+      out.writeUTF(option.tass64MultiChar.name());   
       out.writeUTF(option.tass64Text.name());
       out.writeUTF(option.tass64NumText.name());
       out.writeUTF(option.tass64ZeroText.name()); 
@@ -851,7 +881,9 @@ public class FileManager {
       out.writeUTF(option.glassAddress.name());
       out.writeUTF(option.glassStackWord.name());
       out.writeUTF(option.glassMonoSprite.name());
-      out.writeUTF(option.glassMultiSprite.name());   
+      out.writeUTF(option.glassMultiSprite.name());
+      out.writeUTF(option.glassMonoChar.name());
+      out.writeUTF(option.glassMultiChar.name());   
       out.writeUTF(option.glassText.name());
       out.writeUTF(option.glassNumText.name());
       out.writeUTF(option.glassZeroText.name()); 
@@ -926,7 +958,9 @@ public class FileManager {
       out.writeUTF(option.asmAddress.name());
       out.writeUTF(option.asmStackWord.name());
       out.writeUTF(option.asmMonoSprite.name());
-      out.writeUTF(option.asmMultiSprite.name());   
+      out.writeUTF(option.asmMultiSprite.name());
+      out.writeUTF(option.asmMonoChar.name());
+      out.writeUTF(option.asmMultiChar.name());   
       out.writeUTF(option.asmText.name());
       out.writeUTF(option.asmNumText.name());
       out.writeUTF(option.asmZeroText.name()); 
@@ -948,7 +982,9 @@ public class FileManager {
       out.writeUTF(option.asiAddress.name());
       out.writeUTF(option.asiStackWord.name());
       out.writeUTF(option.asiMonoSprite.name());
-      out.writeUTF(option.asiMultiSprite.name());   
+      out.writeUTF(option.asiMultiSprite.name());
+      out.writeUTF(option.asiMonoChar.name());
+      out.writeUTF(option.asiMultiChar.name());   
       out.writeUTF(option.asiText.name());
       out.writeUTF(option.asiNumText.name());
       out.writeUTF(option.asiZeroText.name()); 

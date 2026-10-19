@@ -3620,6 +3620,219 @@ public class Assembler {
    } 
    
    /**
+    * Mono char declaration type (8-byte C64 char tiles -> ASCII art)
+    * 
+    * --> [byte] $xx / %%b, --> [.mac] DASM, [.macro] Kick, !macro Acme,
+    *     .macro CA65, .macro TMPx, Glass/AS macro
+    */ 
+   public enum MonoChar implements ActionType {
+     BYTE_HEX, BYTE_BIN, TWENTYFOUR_HEX, TWENTYFOUR_BIN,
+     MACRO_HEX, MACRO_BIN, MACRO1_HEX, MACRO1_BIN, MACRO2_HEX, MACRO2_BIN,
+     MACRO3_HEX, MACRO3_BIN, MACRO4_HEX, MACRO4_BIN, MACRO5_HEX, MACRO5_BIN,
+     MACRO6_HEX, MACRO6_BIN;
+     @Override
+     public void flush(StringBuilder str) {
+        if (list.isEmpty()) return;
+        MemoryDasm mem1=list.pop();
+        StringBuilder tmp; String tmpS;
+        mem1.dasmComment=BinToMono(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1));
+        lastMem=mem1;
+        int initial=str.length(); int start=initial;
+        switch (aMonoChar) {
+          case BYTE_HEX:
+          case TWENTYFOUR_HEX:
+            mem1=mem1.clone(); mem1.dataType=DataType.BYTE_HEX; list.push(mem1);
+            tmp=new StringBuilder(); aByte.flush(tmp); tmpS=tmp.toString();
+            str.append(tmpS.substring(0, tmpS.length()-1)).append("  "); break;
+          case BYTE_BIN:
+          case TWENTYFOUR_BIN:
+            mem1=mem1.clone(); mem1.dataType=DataType.BYTE_BIN; list.push(mem1);
+            tmp=new StringBuilder(); aByte.flush(tmp); tmpS=tmp.toString();
+            str.append(tmpS.substring(0, tmpS.length()-1)).append("  "); break;
+          case MACRO_HEX: case MACRO3_HEX: case MACRO5_HEX: case MACRO6_HEX:
+            str.append(getDataSpacesTabs()).append("CharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO_BIN: case MACRO3_BIN: case MACRO5_BIN: case MACRO6_BIN:
+            str.append(getDataSpacesTabs()).append("CharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+          case MACRO1_HEX:
+            str.append(getDataSpacesTabs()).append((option.kickColonMacro ? ":":""))
+               .append("CharLine($")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append(")  ");
+            charEmptyPop(); break;
+          case MACRO1_BIN:
+            str.append(getDataSpacesTabs()).append((option.kickColonMacro ? ":":""))
+               .append("CharLine(%")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append(")  ");
+            charEmptyPop(); break;
+          case MACRO2_HEX:
+            str.append(getDataSpacesTabs()).append("+CharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO2_BIN:
+            str.append(getDataSpacesTabs()).append("+CharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+          case MACRO4_HEX:
+            str.append(getDataSpacesTabs()).append("#CharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO4_BIN:
+            str.append(getDataSpacesTabs()).append("#CharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+        }
+        carets.add(start, str.length(), mem1, Type.MONO_CHAR);
+        str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
+        if (aMonoChar!=BYTE_HEX && aMonoChar!=BYTE_BIN) aComment.flush(str);
+        else str.append("\n");
+     }
+     @Override
+     public void putValue(StringBuilder str, MemoryDasm mem, Option option) { flush(str); }
+     private void charEmptyPop() {
+        listRel.pop(); listRel2.pop(); listBase.pop(); listDest.pop(); }
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aMonoChar) {
+         case MACRO_HEX: case MACRO_BIN:
+           str.append(getDataSpacesTabs()).append(".mac CharLine \n")
+              .append(getDataSpacesTabs()).append("  .byte {1}\n")
+              .append(getDataSpacesTabs()).append(".endm \n\n"); break;
+         case MACRO1_HEX: case MACRO1_BIN:
+           str.append(getDataSpacesTabs()).append(".macro CharLine (value) {\n")
+              .append(getDataSpacesTabs()).append("  .byte value\n")
+              .append(getDataSpacesTabs()).append("}\n\n"); break;
+         case MACRO2_HEX: case MACRO2_BIN:
+           str.append(getDataSpacesTabs()).append("!macro CharLine value {\n")
+              .append(getDataSpacesTabs()).append("  !byte value\n")
+              .append(getDataSpacesTabs()).append("}\n\n"); break;
+         case MACRO3_HEX: case MACRO3_BIN:
+           str.append(getDataSpacesTabs()).append(".macro CharLine value \n")
+              .append(getDataSpacesTabs()).append("  .byte value\n")
+              .append(getDataSpacesTabs()).append(".endmacro\n\n"); break;
+         case MACRO4_HEX: case MACRO4_BIN:
+           str.append("CharLine .macro \n     .byte \\1\n  .endm\n\n"); break;
+         case MACRO5_HEX: case MACRO5_BIN:
+           str.append(getDataSpacesTabs()).append("CharLine: macro ?value \n")
+              .append(getDataSpacesTabs()).append(" db ?value\n")
+              .append(getDataSpacesTabs()).append("endm\n\n"); break;
+         case MACRO6_HEX: case MACRO6_BIN:
+           str.append(getDataSpacesTabs()).append("CharLine: macro value \n")
+              .append(getDataSpacesTabs()).append(" db value\n")
+              .append(getDataSpacesTabs()).append("endm\n\n"); break;
+       }
+     };
+   }
+   /**
+    * Multi char declaration type (8-byte C64 char tiles -> ASCII art)
+    * 
+    * --> [byte] $xx / %%b, --> [.mac] DASM, [.macro] Kick, !macro Acme,
+    *     .macro CA65, .macro TMPx, Glass/AS macro
+    */ 
+   public enum MultiChar implements ActionType {
+     BYTE_HEX, BYTE_BIN, TWENTYFOUR_HEX, TWENTYFOUR_BIN,
+     MACRO_HEX, MACRO_BIN, MACRO1_HEX, MACRO1_BIN, MACRO2_HEX, MACRO2_BIN,
+     MACRO3_HEX, MACRO3_BIN, MACRO4_HEX, MACRO4_BIN, MACRO5_HEX, MACRO5_BIN,
+     MACRO6_HEX, MACRO6_BIN;
+     @Override
+     public void flush(StringBuilder str) {
+        if (list.isEmpty()) return;
+        MemoryDasm mem1=list.pop();
+        StringBuilder tmp; String tmpS;
+        mem1.dasmComment=BinToMulti(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1));
+        lastMem=mem1;
+        int initial=str.length(); int start=initial;
+        switch (aMultiChar) {
+          case BYTE_HEX:
+          case TWENTYFOUR_HEX:
+            mem1=mem1.clone(); mem1.dataType=DataType.BYTE_HEX; list.push(mem1);
+            tmp=new StringBuilder(); aByte.flush(tmp); tmpS=tmp.toString();
+            str.append(tmpS.substring(0, tmpS.length()-1)).append("  "); break;
+          case BYTE_BIN:
+          case TWENTYFOUR_BIN:
+            mem1=mem1.clone(); mem1.dataType=DataType.BYTE_BIN; list.push(mem1);
+            tmp=new StringBuilder(); aByte.flush(tmp); tmpS=tmp.toString();
+            str.append(tmpS.substring(0, tmpS.length()-1)).append("  "); break;
+          case MACRO_HEX: case MACRO3_HEX: case MACRO5_HEX: case MACRO6_HEX:
+            str.append(getDataSpacesTabs()).append("MultiCharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO_BIN: case MACRO3_BIN: case MACRO5_BIN: case MACRO6_BIN:
+            str.append(getDataSpacesTabs()).append("MultiCharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+          case MACRO1_HEX:
+            str.append(getDataSpacesTabs()).append((option.kickColonMacro ? ":":""))
+               .append("MultiCharLine($")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append(")  ");
+            charEmptyPop(); break;
+          case MACRO1_BIN:
+            str.append(getDataSpacesTabs()).append((option.kickColonMacro ? ":":""))
+               .append("MultiCharLine(%")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append(")  ");
+            charEmptyPop(); break;
+          case MACRO2_HEX:
+            str.append(getDataSpacesTabs()).append("+MultiCharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO2_BIN:
+            str.append(getDataSpacesTabs()).append("+MultiCharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+          case MACRO4_HEX:
+            str.append(getDataSpacesTabs()).append("#MultiCharLine $")
+               .append(ByteToExe(Unsigned.done(mem1.copy))).append("  ");
+            charEmptyPop(); break;
+          case MACRO4_BIN:
+            str.append(getDataSpacesTabs()).append("#MultiCharLine %")
+               .append(Integer.toBinaryString((mem1.copy & 0xFF) + 0x100).substring(1)).append("  ");
+            charEmptyPop(); break;
+        }
+        carets.add(start, str.length(), mem1, Type.MULTI_CHAR);
+        str.append(getDataCSpacesTabs(str.length()-initial-getDataSpacesTabs().length()));
+        if (aMultiChar!=BYTE_HEX && aMultiChar!=BYTE_BIN) aComment.flush(str);
+        else str.append("\n");
+     }
+     @Override
+     public void putValue(StringBuilder str, MemoryDasm mem, Option option) { flush(str); }
+     private void charEmptyPop() {
+        listRel.pop(); listRel2.pop(); listBase.pop(); listDest.pop(); }
+     @Override
+     public void setting(StringBuilder str) {
+       switch (aMultiChar) {
+         case MACRO_HEX: case MACRO_BIN:
+           str.append(getDataSpacesTabs()).append(".mac MultiCharLine \n")
+              .append(getDataSpacesTabs()).append("  .byte {1}\n")
+              .append(getDataSpacesTabs()).append(".endm \n\n"); break;
+         case MACRO1_HEX: case MACRO1_BIN:
+           str.append(getDataSpacesTabs()).append(".macro MultiCharLine (value) {\n")
+              .append(getDataSpacesTabs()).append("  .byte value\n")
+              .append(getDataSpacesTabs()).append("}\n\n"); break;
+         case MACRO2_HEX: case MACRO2_BIN:
+           str.append(getDataSpacesTabs()).append("!macro MultiCharLine value {\n")
+              .append(getDataSpacesTabs()).append("  !byte value\n")
+              .append(getDataSpacesTabs()).append("}\n\n"); break;
+         case MACRO3_HEX: case MACRO3_BIN:
+           str.append(getDataSpacesTabs()).append(".macro MultiCharLine value \n")
+              .append(getDataSpacesTabs()).append("  .byte value\n")
+              .append(getDataSpacesTabs()).append(".endmacro\n\n"); break;
+         case MACRO4_HEX: case MACRO4_BIN:
+           str.append("MultiCharLine .macro \n     .byte \\1\n  .endm\n\n"); break;
+         case MACRO5_HEX: case MACRO5_BIN:
+           str.append(getDataSpacesTabs()).append("MultiCharLine: macro ?value \n")
+              .append(getDataSpacesTabs()).append(" db ?value\n")
+              .append(getDataSpacesTabs()).append("endm\n\n"); break;
+         case MACRO6_HEX: case MACRO6_BIN:
+           str.append(getDataSpacesTabs()).append("MultiCharLine: macro value \n")
+              .append(getDataSpacesTabs()).append(" db value\n")
+              .append(getDataSpacesTabs()).append("endm\n\n"); break;
+       }
+     };
+   }
+
+   /**
     * Text declaration type
     *  -> .byte "xxx"
     *  -> .byt "xxx"
@@ -6870,6 +7083,8 @@ public class Assembler {
    
    /** Assembler multi color sprite type */
    protected static Assembler.MultiSprite aMultiSprite;
+   protected static Assembler.MonoChar aMonoChar;
+   protected static Assembler.MultiChar aMultiChar;
    
    /** Assembler text type */
    protected static Assembler.Text aText;
@@ -6964,6 +7179,8 @@ public class Assembler {
                          Assembler.StackWord aStackWord,
                          Assembler.MonoSprite aMonoSprite,
                          Assembler.MultiSprite aMultiSprite,
+                         Assembler.MonoChar aMonoChar,
+                         Assembler.MultiChar aMultiChar,
                          Assembler.Text aText,
                          Assembler.NumText aNumText,
                          Assembler.ZeroText aZeroText,
@@ -6990,6 +7207,8 @@ public class Assembler {
      Assembler.aStackWord=aStackWord;
      Assembler.aMonoSprite=aMonoSprite;
      Assembler.aMultiSprite=aMultiSprite;
+     Assembler.aMonoChar=aMonoChar;
+     Assembler.aMultiChar=aMultiChar;
      Assembler.aText=aText;
      Assembler.aNumText=aNumText;
      Assembler.aZeroText=aZeroText;
@@ -7177,6 +7396,8 @@ public class Assembler {
    public void setMacro(StringBuilder str, MemoryDasm[] memory) {
      boolean hasMonoSprite=false;
      boolean hasMultiSprite=false;
+     boolean hasMonoChar=false;
+     boolean hasMultiChar=false;
      boolean hasWordSwapped=false;
      boolean hasTribyte=false;
      boolean hasLong=false;
@@ -7185,6 +7406,8 @@ public class Assembler {
      for (MemoryDasm mem:memory) {
        if (mem.dataType==DataType.MONO_SPRITE) hasMonoSprite=true;
        if (mem.dataType==DataType.MULTI_SPRITE) hasMultiSprite=true;
+       if (mem.dataType==DataType.MONO_CHAR) hasMonoChar=true;
+       if (mem.dataType==DataType.MULTI_CHAR) hasMultiChar=true;
        if (mem.dataType==DataType.SWAPPED) hasWordSwapped=true;
        if (mem.dataType==DataType.TRIBYTE) hasTribyte=true;
        if (mem.dataType==DataType.LONG) hasLong=true;
@@ -7193,6 +7416,8 @@ public class Assembler {
      
      if (hasMonoSprite) aMonoSprite.setting(str);
      if (hasMultiSprite) aMultiSprite.setting(str);
+     if (hasMonoChar) aMonoChar.setting(str);
+     if (hasMultiChar) aMultiChar.setting(str);
      if (hasWordSwapped) aWordSwapped.setting(str);
      if (hasTribyte) aTribyte.setting(str);
      if (hasLong) aLong.setting(str);
@@ -7520,6 +7745,12 @@ public class Assembler {
          sizeMultiSpriteBlock++;
          numText=null;
          return aMultiSprite;  
+       case MONO_CHAR:
+         numText=null;
+         return aMonoChar;
+       case MULTI_CHAR:
+         numText=null;
+         return aMultiChar;  
        case TEXT:
          isMonoSpriteBlock=false;
          isMultiSpriteBlock=false;   

@@ -249,6 +249,28 @@ package sw_emulator.swing.main;
         public String getDescription() {
           return "Multicolor sprite";
         }
+    }, 
+    MONO_CHAR{
+        @Override
+        public char getChar() {
+          return 'G';
+        }        
+
+        @Override
+        public String getDescription() {
+          return "Monocromatic char";
+        }
+    }, 
+    MULTI_CHAR{
+        @Override
+        public char getChar() {
+          return 'J';
+        }        
+
+        @Override
+        public String getDescription() {
+          return "Multicolor char";
+        }
     };
     
     /**

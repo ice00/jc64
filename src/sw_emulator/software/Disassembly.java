@@ -151,6 +151,10 @@ public class Disassembly {
    
   /** Asembler multi color sprite type */
   protected static Assembler.MultiSprite aMultiSprite;
+  /** Assembler mono color char type */
+  protected static Assembler.MonoChar aMonoChar;
+  /** Assembler multi color char type */
+  protected static Assembler.MultiChar aMultiChar;
    
   /** Asembler text type */
   protected static Assembler.Text aText;
@@ -1547,6 +1551,8 @@ private void mergeBlocks() {
         aStackWord=option.dasmStackWord;
         aMonoSprite=option.dasmMonoSprite;
         aMultiSprite=option.dasmMultiSprite;
+        aMonoChar=option.dasmMonoChar;
+        aMultiChar=option.dasmMultiChar;
         aText=option.dasmText;
         aNumText=option.dasmNumText;
         aZeroText=option.dasmZeroText;
@@ -1570,6 +1576,8 @@ private void mergeBlocks() {
         aStackWord=option.tmpxStackWord;
         aMonoSprite=option.tmpxMonoSprite;
         aMultiSprite=option.tmpxMultiSprite;
+        aMonoChar=option.tmpxMonoChar;
+        aMultiChar=option.tmpxMultiChar;
         aText=option.tmpxText;
         aNumText=option.tmpxNumText;
         aZeroText=option.tmpxZeroText;
@@ -1593,6 +1601,8 @@ private void mergeBlocks() {
         aStackWord=option.ca65StackWord;
         aMonoSprite=option.ca65MonoSprite;
         aMultiSprite=option.ca65MultiSprite;
+        aMonoChar=option.ca65MonoChar;
+        aMultiChar=option.ca65MultiChar;
         aText=option.ca65Text;
         aNumText=option.ca65NumText;
         aZeroText=option.ca65ZeroText;
@@ -1616,6 +1626,8 @@ private void mergeBlocks() {
         aStackWord=option.acmeStackWord;
         aMonoSprite=option.acmeMonoSprite;
         aMultiSprite=option.acmeMultiSprite;
+        aMonoChar=option.acmeMonoChar;
+        aMultiChar=option.acmeMultiChar;
         aText=option.acmeText;
         aNumText=option.acmeNumText;
         aZeroText=option.acmeZeroText;
@@ -1639,6 +1651,8 @@ private void mergeBlocks() {
         aStackWord=option.kickStackWord;
         aMonoSprite=option.kickMonoSprite;
         aMultiSprite=option.kickMultiSprite;
+        aMonoChar=option.kickMonoChar;
+        aMultiChar=option.kickMultiChar;
         aText=option.kickText;
         aNumText=option.kickNumText;
         aZeroText=option.kickZeroText;
@@ -1662,6 +1676,8 @@ private void mergeBlocks() {
         aStackWord=option.tass64StackWord;
         aMonoSprite=option.tass64MonoSprite;
         aMultiSprite=option.tass64MultiSprite;
+        aMonoChar=option.tass64MonoChar;
+        aMultiChar=option.tass64MultiChar;
         aText=option.tass64Text;
         aNumText=option.tass64NumText;
         aZeroText=option.tass64ZeroText;
@@ -1685,6 +1701,8 @@ private void mergeBlocks() {
         aStackWord=option.glassStackWord;
         aMonoSprite=option.glassMonoSprite;
         aMultiSprite=option.glassMultiSprite;
+        aMonoChar=option.glassMonoChar;
+        aMultiChar=option.glassMultiChar;
         aText=option.glassText;
         aNumText=option.glassNumText;
         aZeroText=option.glassZeroText;
@@ -1709,6 +1727,8 @@ private void mergeBlocks() {
         aStackWord=option.asiStackWord;
         aMonoSprite=option.asiMonoSprite;
         aMultiSprite=option.asiMultiSprite;
+        aMonoChar=option.asiMonoChar;
+        aMultiChar=option.asiMultiChar;
         aText=option.asiText;
         aNumText=option.asiNumText;
         aZeroText=option.asiZeroText;
@@ -1731,6 +1751,8 @@ private void mergeBlocks() {
         aStackWord=option.asmStackWord;
         aMonoSprite=option.asmMonoSprite;
         aMultiSprite=option.asmMultiSprite;
+        aMonoChar=option.asmMonoChar;
+        aMultiChar=option.asmMultiChar;
         aText=option.asmText;
         aNumText=option.asmNumText;
         aZeroText=option.asmZeroText;
@@ -1745,7 +1767,8 @@ private void mergeBlocks() {
     assembler.setOption(option, aStarting, aOrigin, aLabel, aComment, 
                         aBlockComment, aByte, aWord, aWordSwapped,
                         aTribyte, aLong, aAddress, aStackWord,
-                        aMonoSprite, aMultiSprite, 
+                        aMonoSprite, aMultiSprite,
+                        aMonoChar, aMultiChar, 
                         aText, aNumText, aZeroText, aHighText, aShiftText,
                         aScreenText, aPetasciiText, constant, actualCarets, memory);      
   }

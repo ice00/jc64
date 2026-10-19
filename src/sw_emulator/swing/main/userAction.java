@@ -194,6 +194,12 @@ public interface userAction {
   /** Mark memory of text converted to multicolor sprite data kind */
   public static final int MEM_MARKDATA_F = 56;  
   
+  /** Mark memory of text converted to monocromatic char data kind */
+  public static final int MEM_MARKDATA_G = 149;   
+  
+  /** Mark memory of text converted to multicolor char data kind */
+  public static final int MEM_MARKDATA_J = 150;  
+  
   /** Memory assign #<>  */
   public static final int MEM_LOWHIGH = 57;
   

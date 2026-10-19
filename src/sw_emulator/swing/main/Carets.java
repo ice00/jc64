@@ -68,6 +68,8 @@ public class Carets {
       ADDRESS, 
       MONO_SPRITE,
       MULTI_SPRITE, 
+      MONO_CHAR,
+      MULTI_CHAR, 
       TEXT, 
       NUM_TEXT, 
       ZERO_TEXT, 

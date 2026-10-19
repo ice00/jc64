@@ -926,6 +926,8 @@ public class Option {
    
   /** DASM: multi color sprite declaration */
   public Assembler.MultiSprite dasmMultiSprite=Assembler.MultiSprite.MACRO_BIN;
+  public Assembler.MonoChar dasmMonoChar=Assembler.MonoChar.MACRO_BIN;
+  public Assembler.MultiChar dasmMultiChar=Assembler.MultiChar.MACRO_BIN;
   
   /** DASM: text declaration */
   public Assembler.Text dasmText=Assembler.Text.DOT_BYTE_TEXT;
@@ -990,6 +992,8 @@ public class Option {
    
   /** TMPx: multi color sprite declaration type */
   public Assembler.MultiSprite tmpxMultiSprite=Assembler.MultiSprite.MACRO4_BIN;
+  public Assembler.MonoChar tmpxMonoChar=Assembler.MonoChar.MACRO4_BIN;
+  public Assembler.MultiChar tmpxMultiChar=Assembler.MultiChar.MACRO4_BIN;
   
   /** TMPx: text declaration type */
   public Assembler.Text tmpxText=Assembler.Text.DOT_TEXT;
@@ -1054,6 +1058,8 @@ public class Option {
    
   /** CA65: multi color sprite */
   public Assembler.MultiSprite ca65MultiSprite=Assembler.MultiSprite.MACRO3_BIN;
+  public Assembler.MonoChar ca65MonoChar=Assembler.MonoChar.MACRO3_BIN;
+  public Assembler.MultiChar ca65MultiChar=Assembler.MultiChar.MACRO3_BIN;
   
   /** CA65: text declaration */
   public Assembler.Text ca65Text=Assembler.Text.DOT_BYTE_TEXT;
@@ -1118,6 +1124,8 @@ public class Option {
    
   /** ACME: multi color sprite */
   public Assembler.MultiSprite acmeMultiSprite=Assembler.MultiSprite.MACRO2_BIN;
+  public Assembler.MonoChar acmeMonoChar=Assembler.MonoChar.MACRO2_BIN;
+  public Assembler.MultiChar acmeMultiChar=Assembler.MultiChar.MACRO2_BIN;
   
   /** ACME: text declaration */
   public Assembler.Text acmeText=Assembler.Text.MARK_TEXT;
@@ -1184,7 +1192,9 @@ public class Option {
   public Assembler.MonoSprite kickMonoSprite=Assembler.MonoSprite.MACRO1_BIN;
    
   /** KickAsembler: multi color sprite */
-  public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;  
+  public Assembler.MultiSprite kickMultiSprite=Assembler.MultiSprite.MACRO1_BIN;
+  public Assembler.MonoChar kickMonoChar=Assembler.MonoChar.MACRO1_BIN;
+  public Assembler.MultiChar kickMultiChar=Assembler.MultiChar.MACRO1_BIN;  
     
   /** KickAsembler: text declaration type */
   public Assembler.Text kickText=Assembler.Text.DOT_TEXT;
@@ -1249,6 +1259,8 @@ public class Option {
    
   /** Glass: multi color sprite */
   public Assembler.MultiSprite glassMultiSprite=Assembler.MultiSprite.BYTE_BIN;
+  public Assembler.MonoChar glassMonoChar=Assembler.MonoChar.BYTE_BIN;
+  public Assembler.MultiChar glassMultiChar=Assembler.MultiChar.BYTE_BIN;
       
   /** Glass: text declaration type */
   public Assembler.Text glassText=Assembler.Text.DB_BYTE_TEXT;
@@ -1314,6 +1326,8 @@ public class Option {
    
   /** 64Tass: multi color sprite */
   public Assembler.MultiSprite tass64MultiSprite=Assembler.MultiSprite.MACRO4_BIN;
+  public Assembler.MonoChar tass64MonoChar=Assembler.MonoChar.MACRO4_BIN;
+  public Assembler.MultiChar tass64MultiChar=Assembler.MultiChar.MACRO4_BIN;
   
   /** 64Tass: text declaration type */
   public Assembler.Text tass64Text=Assembler.Text.DOT_TEXT;
@@ -1380,6 +1394,8 @@ public class Option {
    
   /** AS(M): multi color sprite declaration */
   public Assembler.MultiSprite asmMultiSprite=Assembler.MultiSprite.MACRO6_BIN;
+  public Assembler.MonoChar asmMonoChar=Assembler.MonoChar.MACRO6_BIN;
+  public Assembler.MultiChar asmMultiChar=Assembler.MultiChar.MACRO6_BIN;
   
   /** AS(M): text declaration */
   public Assembler.Text asmText=Assembler.Text.DB_BYTE_TEXT;
@@ -1446,6 +1462,8 @@ public class Option {
    
   /** AS(I): multi color sprite declaration */
   public Assembler.MultiSprite asiMultiSprite=Assembler.MultiSprite.MACRO6_BIN;
+  public Assembler.MonoChar asiMonoChar=Assembler.MonoChar.MACRO6_BIN;
+  public Assembler.MultiChar asiMultiChar=Assembler.MultiChar.MACRO6_BIN;
   
   /** AS(I): text declaration */
   public Assembler.Text asiText=Assembler.Text.DB_BYTE_TEXT;

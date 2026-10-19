@@ -6872,8 +6872,14 @@ public class JDisassemblerFrame extends javax.swing.JFrame implements userAction
          break;        
        case MEM_MARKDATA_F:  
          markAsData(DataType.MULTI_SPRITE);  
+       case MEM_MARKDATA_G:  
+         markAsData(DataType.MONO_CHAR);  
          if (option.forceCompilation) disassembly(true);
-         break;          
+         break;        
+       case MEM_MARKDATA_J:  
+         markAsData(DataType.MULTI_CHAR);  
+         if (option.forceCompilation) disassembly(true);
+         break;  
        case MEM_MARKGARB:
          markAsGarbage();  
          if (option.forceCompilation) disassembly(true);
