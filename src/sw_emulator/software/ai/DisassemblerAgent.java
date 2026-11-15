@@ -663,6 +663,24 @@ public class DisassemblerAgent {
     return sb.toString();
   }
 
+  /**
+   * Sets or updates a user-defined label for a specific memory address.
+   * <p>
+   * This method enforces specific constraints on the label format:
+   * <ul>
+   *   <li>The label must not be empty.</li>
+   *   <li>The label must not contain spaces.</li>
+   * </ul>
+   * <p>
+   * It also implements a protection logic for "meaningful" labels.
+   * Existing labels are preserved unless they are considered generic placeholders
+   * (matching the pattern `W[0-9A-Fa-f]{4}`) or are shorter than 4 characters.
+   *
+   * @param addr      The memory address (0-65535) to label. Will be clamped to a valid range.
+   * @param label     The new label text to assign.
+   * @param onLabelSet An optional callback invoked when a label is successfully set.
+   * @return A status message indicating success or the reason for failure/skip.
+   */
   private String toolSetLabel(int addr, String label,
           BiConsumer<Integer, String> onLabelSet) {
     addr = clamp(addr);
@@ -697,18 +715,62 @@ public class DisassemblerAgent {
     return "OK: label '" + label + "' set at $" + String.format("%04X", addr);
   }
 
+  /**
+   * Sets a single-line comment for the instruction at the specified memory address.
+   * <p>
+   * The comment is associated directly with the disassembled instruction at that address.
+   *
+   * @param addr    The memory address (0-65535) to associate the comment with.
+   *                Will be clamped to a valid range.
+   * @param comment The comment text to assign. Can be an empty string to clear the comment.
+   * @return A status message indicating success, including the formatted address.
+   */
   private String toolSetLineComment(int addr, String comment) {
     addr = clamp(addr);
     memory[addr].userComment = comment;
     return "OK: line comment set at $" + String.format("%04X", addr);
   }
 
+   /**
+   * Sets a multi-line (block) comment for the instruction at the specified memory address.
+   * <p>
+   * Unlike {@link #toolSetLineComment(int, String)}, this method stores a comment
+   * intended to span multiple lines in disassembler output.
+   *
+   * @param addr    The memory address (0-65535) to associate the comment with.
+   *                Will be clamped to a valid range.
+   * @param comment The comment text to assign. Can be an empty string to clear the comment.
+   * @return A status message indicating success, including the formatted address.
+   */
   private String toolSetBlockComment(int addr, String comment) {
     addr = clamp(addr);
     memory[addr].userBlockComment = comment;
     return "OK: block comment set at $" + String.format("%04X", addr);
   }
 
+  /**
+   * Retrieves detailed information about the disassembled entry at the specified memory address.
+   * <p>
+   * The method returns a JSON object containing various properties of the memory entry,
+   * including its classification (code/data/garbage), raw byte value, labels, and comments.
+   *
+   * @param addr The memory address (0-65535) to inspect.
+   *             Will be clamped to a valid range.
+   * @return A pretty-printed JSON string containing memory info with the following keys:
+   *         <ul>
+   *           <li>{@code address}: Hexadecimal address string (e.g., "1234").</li>
+   *           <li>{@code isInside}: Boolean indicating if the address is inside the code/data region.</li>
+   *           <li>{@code isCode}: Boolean indicating if the entry is classified as code.</li>
+   *           <li>{@code isData}: Boolean indicating if the entry is classified as data.</li>
+   *           <li>{@code isGarbage}: Boolean indicating if the entry is classified as garbage.</li>
+   *           <li>{@code byte}: Hexadecimal byte value (e.g., "FF").</li>
+   *           <li>{@code dasmLabel}: The auto-generated label from disassembly.</li>
+   *           <li>{@code userLabel}: The user-defined label (empty string if null).</li>
+   *           <li>{@code dasmComment}: The auto-generated comment from disassembly.</li>
+   *           <li>{@code userComment}: The user-defined line comment (empty string if null).</li>
+   *           <li>{@code blockComment}: The user-defined block comment (empty string if null).</li>
+   *         </ul>
+   */
   private String toolGetMemoryInfo(int addr) {
     addr = clamp(addr);
     MemoryDasm m = memory[addr];
@@ -729,6 +791,20 @@ public class DisassemblerAgent {
     return info.toString(2);
   }
 
+  /**
+   * Changes the classification of the memory entry at the specified address.
+   * <p>
+   * Valid types are "code", "data", or "garbage". The implementation ensures
+   * mutual exclusivity: setting one type automatically unsets the others.
+   *
+   * @param addr The memory address (0-65535) to classify.
+   *             Will be clamped to a valid range.
+   * @param type The desired classification: "code", "data", or "garbage".
+   * @return A status message indicating success or an error if the type is invalid.
+   * @throws IllegalArgumentException if an invalid type string is passed.
+   *         (Note: The method currently returns an error string instead, so this tag
+   *         is informational; consider using Exception for strict enforcement in future refactors.)
+   */
   private String toolSetMemoryType(int addr, String type) {
     addr = clamp(addr);
     MemoryDasm m = memory[addr];
@@ -764,9 +840,19 @@ public class DisassemblerAgent {
     return "OK: $" + String.format("%04X", addr) + " marked as " + type;
   }
 
-  // ---------------------------------------------------------------------------
-  // HTTP call (same pattern as M6510LabelAnalyzer)
-  // ---------------------------------------------------------------------------
+  /**
+   * Executes an HTTP POST request to an AI API endpoint, sending a structured JSON payload.
+   * <p>
+   * This method handles connection setup, authentication header injection,
+   * and response parsing. It supports extra custom headers defined in the configuration.
+   *
+   * @param config The configuration object containing the API endpoint, model,
+   *               timeout settings, and authentication details.
+   * @param messages An array of message objects to send to the AI model.
+   * @return A {@link JSONObject} representing the parsed JSON response from the server.
+   * @throws IOException If the HTTP request fails (connection errors) or the
+   *         server returns a non-200 status code.
+   */
   private JSONObject callApi(AIBackendConfig config, JSONArray messages)
           throws IOException {
 
@@ -826,8 +912,16 @@ public class DisassemblerAgent {
   // ---------------------------------------------------------------------------
   
   /**
-   * Returns a log-friendly string of tool arguments where address fields
-   * are shown as $XXXX hex regardless of how the AI passed them.
+   * Converts tool call arguments into a log-friendly string representation.
+   * <p>
+   * Specifically, this method normalizes address-related fields
+   * ({@code address}, {@code startAddr}, {@code endAddr}) to display them
+   * as hexadecimal strings prefixed with "$" (e.g., "$1234"), regardless
+   * of the original format passed by the AI. This ensures consistent formatting in logs.
+   *
+   * @param args A {@link JSONObject} containing the raw arguments from a tool call.
+   * @return A pretty-printed (or compact) string representation of the arguments,
+   *         with address fields formatted as hexadecimal strings.
    */
   private String argsToLogString(JSONObject args) {
     JSONObject display = new JSONObject(args.toString()); // shallow copy
@@ -877,10 +971,30 @@ public class DisassemblerAgent {
   }  
    */
   
+  /**
+   * Clamps an integer value to the valid 16-bit memory address range.
+   * <p>
+   * This ensures that any provided address is within the range of 0 to 65535.
+   * Values less than 0 are clamped to 0, and values greater than 65535 are clamped to 65535.
+   *
+   * @param addr The address value to clamp.
+   * @return The clamped address value, guaranteed to be between 0 and 65535.
+   */
   private static int clamp(int addr) {
     return Math.max(0, Math.min(65535, addr));
   }
 
+  /**
+   * Retrieves the most specific label for a memory entry.
+   * <p>
+   * This method prioritizes user-defined labels over auto-generated disassembly labels.
+   * It returns the user-defined label if it is non-null and not blank.
+   * Otherwise, it returns the disassembly label if it is non-null and not blank.
+   * Returns {@code null} if neither is available or valid.
+   *
+   * @param m The {@link MemoryDasm} object representing the memory entry.
+   * @return The preferred label string, or {@code null} if no valid label exists.
+   */
   private String effectiveLabel(MemoryDasm m) {
     if (m.userLocation != null && !m.userLocation.isBlank()) {
       return m.userLocation;
@@ -892,9 +1006,16 @@ public class DisassemblerAgent {
   }
 
   /**
-   * Returns a minimal opcode hint for the AI by reading up to 3 bytes from the
-   * memory array starting at addr. This gives the AI enough context to
-   * recognize instructions without requiring a full disassembler pass.
+   * Retrieves a minimal sequence of raw opcode bytes to provide context to the AI.
+   * <p>
+   * By reading up to 3 bytes starting at the specified address, this method
+   * allows the AI to recognize instruction patterns without performing a full
+   * disassembly pass. It respects the {@code isInside} flag to stop collecting
+   * bytes if a non-code/data memory boundary is encountered.
+   *
+   * @param addr The starting memory address to inspect.
+   * @return A space-separated string of hexadecimal byte values (e.g., "A9 FF 85")
+   *         representing the first few bytes of the instruction stream.
    */
   private String opcodeHint(int addr) {
     // Collect up to 3 bytes
@@ -908,9 +1029,18 @@ public class DisassemblerAgent {
     return String.join(" ", bytes);
   }
 
-  // ---------------------------------------------------------------------------
-  // JSON builder helpers (keep tool definitions readable)
-  // ---------------------------------------------------------------------------
+  /**
+   * Constructs a standard JSON function definition for tool use.
+   * <p>
+   * This helper simplifies the creation of OpenAI-compatible tool definitions by
+   * encapsulating the nested structure required for {@code type: "function"}.
+   *
+   * @param name        The name of the function/tool.
+   * @param description A human-readable description of what the function does.
+   * @param properties  A {@link JSONObject} defining the parameters' schema (types, descriptions).
+   * @param required    A {@link JSONArray} listing the names of required parameters.
+   * @return A {@link JSONObject} representing the complete function definition.
+   */
   private static JSONObject tool(String name, String description,
           JSONObject properties, JSONArray required) {
     return new JSONObject()
@@ -924,16 +1054,41 @@ public class DisassemblerAgent {
                             .put("required", required)));
   }
 
+  /**
+   * Creates an empty JSON object, typically used as the base for
+   * defining function parameters.
+   *
+   * @return A new, empty {@link JSONObject}.
+   */
   private static JSONObject params() {
     return new JSONObject();
   }
 
+  /**
+   * Creates a JSON object representing a single parameter definition.
+   * <p>
+   * The parameter is defined by its data type (e.g., "string", "integer")
+   * and a description.
+   *
+   * @param type        The JSON schema type of the parameter.
+   * @param description A human-readable explanation of the parameter.
+   * @return A {@link JSONObject} containing the {@code type} and {@code description} keys.
+   */
   private static JSONObject param(String type, String description) {
     return new JSONObject()
             .put("type", type)
             .put("description", description);
   }
 
+  /**
+   * Creates a JSON array containing the given string items.
+   * <p>
+   * This is a utility method to simplify the creation of lists
+   * for things like "required" parameter fields or enum options.
+   *
+   * @param items The string elements to include in the array.
+   * @return A {@link JSONArray} containing the provided items.
+   */
   private static JSONArray list(String... items) {
     JSONArray a = new JSONArray();
     for (String s : items) {

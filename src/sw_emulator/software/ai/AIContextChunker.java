@@ -78,15 +78,22 @@ public class AIContextChunker {
      */
     Map<String, String> call(String chunk, Map<String, String> known, Map<String, String> current) throws IOException;
   }
-
-  /** Progress listener, called before each backend call */
+  
+  /**
+   * Listener interface for reporting the progress of the label extraction process.
+   * <p>
+   * Implementations should be notified at the start of each chunk processing step to allow
+   * for UI updates or logging.
+   */
   public interface Progress {
     /**
-     * @param chunk           number of the chunk being sent (1-based)
-     * @param estimatedChunks estimated total chunks (can change while running)
-     * @param fromLine        first line of the chunk (1-based)
-     * @param toLine          last line of the chunk (1-based)
-     * @param totalLines      lines of the whole listing
+     * Called before each chunk is sent to the backend for processing.
+     *
+     * @param chunk           The 1-based index of the current chunk being processed.
+     * @param estimatedChunks The estimated total number of chunks required to process the entire source. This may change dynamically as the processing adapts.
+     * @param fromLine        The 1-based index of the first line in the current chunk.
+     * @param toLine          The 1-based index of the last line in the current chunk.
+     * @param totalLines      The total number of lines in the entire source listing.
      */
     void update(int chunk, int estimatedChunks, int fromLine, int toLine, int totalLines);
   }
@@ -155,11 +162,35 @@ public class AIContextChunker {
   // Main loop
   // ---------------------------------------------------------------------------
 
+  /**
+   * Executes the label extraction process on the provided source text.
+   *
+   * @param source        The raw source text to be processed.
+   * @param knownLabels   A map of labels already established in previous runs.
+   * @param caller        The mechanism used to communicate with the LLM.
+   * @param progress      An optional callback to report execution progress.
+   * @return A {@link Map} of discovered address-to-name mappings.
+   * @throws IOException if an error occurs during the calling process.
+   */
   public Map<String, String> run(String source, Map<String, String> knownLabels,
           Caller caller, Progress progress) throws IOException {
     return run(source, knownLabels, caller, progress, null);
   }
 
+  /**
+   * Executes the label extraction process on the provided source text.
+   * <p>
+   * This method processes the source text in logical chunks to stay within LLM context limits,
+   * extracts relevant information via a {@link Caller}, and resolves address/name collisions.
+   *
+   * @param source        The raw source text to be processed.
+   * @param knownLabels   A map of labels already established in previous runs or known context.
+   * @param caller        The mechanism used to communicate with the LLM (e.g., an API client).
+   * @param progress      An optional callback to report execution progress.
+   * @param cancel        An optional {@link AtomicBoolean} to allow for graceful cancellation.
+   * @return A {@link Map} of discovered address-to-name mappings.
+   * @throws IOException if an error occurs during the calling process.
+   */
   public Map<String, String> run(String source, Map<String, String> knownLabels,
           Caller caller, Progress progress, AtomicBoolean cancel) throws IOException {
 
@@ -215,6 +246,22 @@ public class AIContextChunker {
   // Chunking
   // ---------------------------------------------------------------------------
 
+  /**
+   * Calculates the maximum number of characters allowed in a single chunk, based on the current 
+   * context window and reserved allocations.
+   * <p>
+   * The calculation subtracts several reserved portions from the total context:
+   * <ul>
+   *   <li><b>Overhead Tokens:</b> Calculated from {@link #promptOverheadChars} converted to tokens.</li>
+   *   <li><b>Hint Tokens:</b> A fixed share of the context reserved for hints, determined by {@link #LABEL_SHARE}.</li>
+   *   <li><b>Output Reserve:</b> Space reserved for the expected output generation.</li>
+   * </ul>
+   * <p>
+   * The result is converted back to characters using {@link #charsPerToken}. A minimum budget of 
+   * 128 characters is enforced to ensure chunks are never too small to be meaningful.
+   *
+   * @return The number of characters allowed for the current chunk, constrained by context limits.
+   */
   private int chunkBudgetChars() {
     int overheadTokens = (int) Math.ceil(promptOverheadChars / charsPerToken);
     int hintTokens = (int) (context * LABEL_SHARE);
@@ -224,7 +271,30 @@ public class AIContextChunker {
 
   private static final Pattern BREAK = Pattern.compile("\\b(RTS|RTI|JMP)\\b", Pattern.CASE_INSENSITIVE);
 
-  /** Exclusive end index; prefers to cut after RTS/RTI/JMP or on blank lines */
+  /**
+   * Calculates the exclusive end index for a block of text, attempting to find a logical 
+   * stopping point within a character budget.
+   * <p>
+   * The method scans lines starting from {@code start}, accumulating character counts. 
+   * It prioritizes "clean" break points such as:
+   * <ul>
+   *   <li>Control flow instructions (e.g., RTS, RTI, JMP via the {@link #BREAK} pattern)</li>
+   *   <li>Blank lines or lines containing only comments</li>
+   * </ul>
+   * <p>
+   * <b>Heuristics:</b>
+   * <ul>
+   *   <li>If the budget is exceeded, it attempts to backtrack to the last "clean" break point, 
+   *       provided that break point covers at least 60% of the budget.</li>
+   *   <li>It ensures the block does not end with a dangling label (a line ending in ':').</li>
+   * </ul>
+   *
+   * @param lines        The list of strings representing the lines of text to scan.
+   * @param start        The index of the line to begin scanning from.
+   * @param budgetChars  The maximum number of characters allowed in the resulting range.
+   * @return An exclusive end index {@code end} such that {@code lines.subList(start, end)} 
+   *     
+   */
   private int findEnd(List<String> lines, int start, int budgetChars) {
     int size = 0, i = start, lastBreak = -1, lastBreakSize = 0;
     while (i < lines.size()) {
@@ -254,6 +324,19 @@ public class AIContextChunker {
   private static final Pattern TOKEN = Pattern.compile("[A-Za-z_][A-Za-z0-9_]*|\\$?[0-9A-Fa-f]{4}\\b");
   private static final Pattern DEFINED = Pattern.compile("(?m)^\\s*([0-9A-Fa-f]{4})\\s");
 
+    /**
+   * Tokenizes a string of text into a set of normalized tokens.
+   * <p>
+   * This method scans the input {@code text} using the {@link #TOKEN} pattern. For each match, it adds
+   * the token to the set. It also adds an uppercase version of the token, stripping a leading '$' if present.
+   * <p>
+   * Additionally, it handles specific placeholder formats. If a token consists of a single letter followed by
+   * four hexadecimal digits (e.g., "W0AE0"), it extracts the hexadecimal part and adds that as a separate
+   * token, effectively treating the placeholder as a reference to an address.
+   *
+   * @param text The input string to tokenize.
+   * @return A set of strings containing the original tokens, their uppercase variants, and any extracted addresses.
+   */
   private static Set<String> tokenize(String text) {
     Set<String> set = new HashSet<>();
     Matcher m = TOKEN.matcher(text);
@@ -269,8 +352,16 @@ public class AIContextChunker {
     }
     return set;
   }
-
-  /** Addresses that start a line in this chunk (ADDRESS BYTES INSTRUCTION) */
+  
+  /**
+   * Extracts and returns all defined addresses found within the provided chunk of text.
+   * <p>
+   * This method scans the input {@code chunk} using a predefined regex pattern {@link #DEFINED}.
+   * It captures the first group of matches, converts them to uppercase, and stores them in a new set.
+   *
+   * @param chunk The string containing the text to scan for addresses.
+   * @return A set of uppercase strings representing the addresses found in the chunk.
+   */
   private static Set<String> definedAddresses(String chunk) {
     Set<String> set = new HashSet<>();
     Matcher m = DEFINED.matcher(chunk);
@@ -278,6 +369,21 @@ public class AIContextChunker {
     return set;
   }
 
+  /**
+   * Filters a map of labels, returning entries whose keys or values match specified tokens,
+   * up to a maximum character count.
+   * <p>
+   * This method iterates through the input {@code labels} map. For each entry, it checks if
+   * the key (converted to uppercase) or the value itself is present in the {@code tokens} set.
+   * If a match is found, the entry is added to the output map. The process stops when the
+   * cumulative length of the entries (including a buffer of 3 characters per entry) exceeds
+   * the {@code maxChars} limit.
+   *
+   * @param labels   The source map containing label key-value pairs to filter.
+   * @param tokens   The set of tokens to match against; keys are compared in uppercase.
+   * @param maxChars The maximum number of characters allowed in the result set.
+   * @return A new LinkedHashMap containing the filtered entries that fit within the character limit.
+   */
   private static Map<String, String> relevant(Map<String, String> labels, Set<String> tokens, int maxChars) {
     Map<String, String> out = new LinkedHashMap<>();
     int chars = 0;
@@ -291,6 +397,26 @@ public class AIContextChunker {
     return out;
   }
 
+  /**
+   * Merges entries from the {@code answer} map into the {@code found} map based on specific priority and uniqueness rules.
+   * <p>
+   * This method iterates through the provided {@code answer} map and populates {@code found} with the first valid entry found for a given address.
+   * It enforces uniqueness by appending the address to the name if a name collision is detected in {@code usedNames} must be updated.
+   * 
+   * <ul>
+   *   <li>If {@code answer} is null, no action is taken.</li>
+   *   <li>If an entry's name is null or empty, it is skipped.</li>
+   *   <li>If {@code defined} is not empty, it only processes entries where the key matches an entry in the {@code defined} set.</li>
+   *   <li>The first entry processed for a specific key "wins" and is stored in {@code found}.</li>
+   *   <li>If a name is already in {@code usedNames}, it is suffixed with the address to ensure uniqueness.</li>
+   * </ul>
+   *
+   * @param found     The destination map where discovered name-address pairs are stored.
+   * @param answer    The source map containing proposed name-address pairs.
+   * @param defined   A set of allowed addresses; if non-empty, only addresses in this set are processed.
+   * @param known     A map used to verify if a name is the "correct" one for an address to prevent unnecessary renaming.
+   * @param usedNames A set of names already assigned, used to detect and resolve name collisions.
+   */
   private static void merge(Map<String, String> found, Map<String, String> answer, Set<String> defined,
           Map<String, String> known, Set<String> usedNames) {
     if (answer == null) return;
@@ -390,6 +516,13 @@ public class AIContextChunker {
   // Tiny HTTP GET
   // ---------------------------------------------------------------------------
 
+  /**
+   * Extracts the first integer from a text by applying a regex with a capture group.
+   *
+   * @param text  input text (may be null)
+   * @param regex regex containing a capture group for the integer
+   * @return the first matched integer, or 0 on failure
+   */
   private static int firstInt(String text, String regex) {
     if (text == null) return 0;
     Matcher m = Pattern.compile(regex).matcher(text);
@@ -400,6 +533,12 @@ public class AIContextChunker {
     }
   }
 
+  /**
+   * Performs a simple HTTP GET request with a 3-second timeout.
+   *
+   * @param url the URL to fetch
+   * @return the response body as UTF-8 string, or null on failure
+   */
   private static String httpGet(String url) {
     HttpURLConnection con = null;
     try {
