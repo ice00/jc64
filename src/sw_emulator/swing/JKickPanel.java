@@ -141,7 +141,7 @@ public class JKickPanel extends javax.swing.JPanel {
     jTextPaneKickMacroHexMonoSprite = new javax.swing.JTextPane();
     jRadioButtonKickMacroBinMonoSprite = new javax.swing.JRadioButton();
     jRadioButtonKickMacroBinMultiSprite = new javax.swing.JRadioButton();
-    jScrollPanekickMacroBinMultiSprite = new javax.swing.JScrollPane();
+    jScrollPaneKickMacroBinMultiSprite = new javax.swing.JScrollPane();
     jTextPaneKickMacroBinMultiSprite = new javax.swing.JTextPane();
     jScrollPaneKickMacroBinMonoSprite = new javax.swing.JScrollPane();
     jTextPaneKickMacroBinMonoSprite = new javax.swing.JTextPane();
@@ -488,13 +488,13 @@ public class JKickPanel extends javax.swing.JPanel {
       }
     });
 
-    jScrollPanekickMacroBinMultiSprite.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    jScrollPanekickMacroBinMultiSprite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+    jScrollPaneKickMacroBinMultiSprite.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPaneKickMacroBinMultiSprite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
     jTextPaneKickMacroBinMultiSprite.setEditable(false);
     jTextPaneKickMacroBinMultiSprite.setContentType("text/html"); // NOI18N
     jTextPaneKickMacroBinMultiSprite.setText("<html>\n  <head>\n\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      <b>[.macro] </b> <font color='red'>%b..</font><br>\n\n    </p>\n  </body>\n</html>\n");
-    jScrollPanekickMacroBinMultiSprite.setViewportView(jTextPaneKickMacroBinMultiSprite);
+    jScrollPaneKickMacroBinMultiSprite.setViewportView(jTextPaneKickMacroBinMultiSprite);
 
     jScrollPaneKickMacroBinMonoSprite.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     jScrollPaneKickMacroBinMonoSprite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -897,7 +897,7 @@ public class JKickPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jScrollPaneKickMacroBinMonoSprite)
-              .addComponent(jScrollPanekickMacroBinMultiSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
+              .addComponent(jScrollPaneKickMacroBinMultiSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
           .addGroup(layout.createSequentialGroup()
             .addGap(12, 12, 12)
             .addComponent(jCheckBoxKickColonMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -925,7 +925,7 @@ public class JKickPanel extends javax.swing.JPanel {
 
     layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPaneDasmSharpIfPBlockComment, jScrollPaneKickMacroHexMonoSprite, jScrollPaneKickMacroHexMultiSprite});
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPaneKickMacroBinMonoSprite, jScrollPanekickMacroBinMultiSprite});
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPaneKickMacroBinMonoSprite, jScrollPaneKickMacroBinMultiSprite});
 
     layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelKickAddressDeclaration, jLabelKickBlockCommentDeclaration, jLabelKickByteDeclaration, jLabelKickCommentDeclaration, jLabelKickHighTextDeclaration, jLabelKickLabelDeclaration, jLabelKickLongDeclaration, jLabelKickMonoSpriteDeclaration, jLabelKickMultiSpriteDeclaration, jLabelKickNumTextDeclaration, jLabelKickOriginDeclaration, jLabelKickPetasciiTextDeclaration, jLabelKickScreenTextDeclaration, jLabelKickShiftTextDeclaration, jLabelKickStackWordDeclaration, jLabelKickStartingDeclaration, jLabelKickTextDeclaration, jLabelKickTribyteDeclaration, jLabelKickWordDeclaration, jLabelKickWordSwappedDeclaration, jLabelKickZeroTextDeclaration});
 
@@ -1033,7 +1033,7 @@ public class JKickPanel extends javax.swing.JPanel {
           .addComponent(jRadioButtonKickMacroHexMultiSprite)
           .addComponent(jScrollPaneKickMacroHexMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jRadioButtonKickMacroBinMultiSprite)
-          .addComponent(jScrollPanekickMacroBinMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jScrollPaneKickMacroBinMultiSprite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
           .addComponent(jLabelKickTextDeclaration)
@@ -1321,12 +1321,12 @@ public class JKickPanel extends javax.swing.JPanel {
   private javax.swing.JScrollPane jScrollPaneKickDwordLong;
   private javax.swing.JScrollPane jScrollPaneKickLabelNameColon;
   private javax.swing.JScrollPane jScrollPaneKickMacroBinMonoSprite;
+  private javax.swing.JScrollPane jScrollPaneKickMacroBinMultiSprite;
   private javax.swing.JScrollPane jScrollPaneKickMacroHexMonoSprite;
   private javax.swing.JScrollPane jScrollPaneKickMacroHexMultiSprite;
   private javax.swing.JScrollPane jScrollPaneKickMacroStackWord;
   private javax.swing.JScrollPane jScrollPaneKickMacroTribyte;
   private javax.swing.JScrollPane jScrollPaneKickMacroWordSwapped;
-  private javax.swing.JScrollPane jScrollPanekickMacroBinMultiSprite;
   private javax.swing.JTextPane jTextPaneDasmSharpIfPBlockComment;
   private javax.swing.JTextPane jTextPaneKickAsterixOrigin;
   private javax.swing.JTextPane jTextPaneKickByteBinMonoSprite;

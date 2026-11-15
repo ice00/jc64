@@ -176,7 +176,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPaneKickMacroBinMonoSprite" linkSize="4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPanekickMacroBinMultiSprite" linkSize="4" alignment="0" pref="112" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneKickMacroBinMultiSprite" linkSize="4" alignment="0" pref="112" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -328,7 +328,7 @@
                   <Component id="jRadioButtonKickMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPaneKickMacroHexMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonKickMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPanekickMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPaneKickMacroBinMultiSprite" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
@@ -932,7 +932,7 @@
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButtonKickMacroBinMultiSpriteItemStateChanged"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPanekickMacroBinMultiSprite">
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneKickMacroBinMultiSprite">
       <Properties>
         <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
         <Property name="verticalScrollBarPolicy" type="int" value="21"/>

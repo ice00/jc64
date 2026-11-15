@@ -161,7 +161,7 @@ public class Project implements Cloneable {
     p.fileType=this.fileType;
     p.targetType=this.targetType;
     if (this.inB!=null) p.inB=this.inB.clone();
-    if (p.memoryFlags!=null) p.memoryFlags=this.memoryFlags.clone();
+    if (this.memoryFlags!=null) p.memoryFlags=this.memoryFlags.clone();
     p.name=this.name;
     if (this.mpr!=null) p.mpr=(MPR)this.mpr.clone();
       
@@ -173,17 +173,20 @@ public class Project implements Cloneable {
     p.binAddress=this.binAddress;
     p.constant=(Constant)this.constant.clone();
         
-    if (p.relocates!=null) {
+    if (this.relocates!=null) {
+      p.relocates = new Relocate[this.relocates.length]; 
       for (int i=0; i<this.relocates.length; i++) {
         p.relocates[i]=(Relocate)this.relocates[i].clone();
       }  
     }
     if (p.patches!=null) {
-      for (int i=0; i<this.relocates.length; i++) {
+      p.patches = new Patch[this.patches.length]; 
+      for (int i=0; i<this.patches.length; i++) {
         p.patches[i]=(Patch)this.patches[i].clone();
       }        
     }
     if (p.freezes!=null) {
+      p.freezes = new Freeze[this.freezes.length];
       for (int i=0; i<this.freezes.length; i++) {
         p.freezes[i]=(Freeze)this.freezes[i].clone();
       }        

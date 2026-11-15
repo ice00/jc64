@@ -1451,6 +1451,8 @@ public class SidFreq {
   private boolean searchInverseHigh(int index) {
     int i;
     int actual=1;   
+    
+    if (index < 2) return false;
    
     // it must start with three 1
     if ( ((int)inB[index-0]!=1) || ((int)inB[index-1]!=1) || ((int)inB[index-2]!=1)) return false;

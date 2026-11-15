@@ -55,12 +55,9 @@ public class Freeze implements Cloneable {
   public boolean equals(Object obj) {
     if (!(obj instanceof Freeze)) return false;
     
-    Freeze freeze=(Freeze) obj;
-     
-    freeze.name=name;
-    freeze.text=text;
+    Freeze freeze=(Freeze)obj;
 
-    return true;
+    return Objects.equals(this.name, freeze.name) && Objects.equals(this.text, freeze.text);
   }
 
   @Override

@@ -352,15 +352,17 @@ public class JBlockDialog extends javax.swing.JDialog {
     String label;
     
     // make the action
-      for (int i=start; i<=end; i+=step) {
-        if (prefix!=null && !"".equals(prefix)) { 
-          label=ShortToExe((int)i);
-          label=prefix+label;        
-          memories[(int)i].userLocation=label;
-        }                 
-      }
+    for (int i=start; i<=end; i+=step) {
+      if (i >= memories.length) break;
+
+      if (prefix!=null && !"".equals(prefix)) { 
+        label=ShortToExe((int)i);
+        label=prefix+label;        
+        memories[(int)i].userLocation=label;
+      }                 
+    }
       
-      setVisible(false);
+    setVisible(false);
   }//GEN-LAST:event_jButtonApplyMemoryActionPerformed
 
     /**

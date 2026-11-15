@@ -80,6 +80,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlIJThem
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedDarkContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
 import java.awt.Component;
+import java.io.InputStream;
 import java.util.Iterator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -1585,33 +1586,57 @@ public class Option {
       }    
   }  
   
-  /**
-   * Use the given xml theme path for syntax highlight
-   * 
-   * @param themePath  xml theme path
-   */
-  public void useSyntaxTheme(String themePath) {
-    try {      
-      RSyntaxTextArea syntax;
-      float size;
-      Theme theme;
-        
-      Iterator<RSyntaxTextArea> iter=Shared.syntaxList.iterator();
+ /**
+ * Use the given xml theme path for syntax highlight
+ * 
+ * @param themePath  xml theme path
+ */
+public void useSyntaxTheme(String themePath) {
+    // Safety check for the list
+    if (Shared.syntaxList == null) return;
 
-      while (iter.hasNext()) {
-        theme = Theme.load(Option.class.getResourceAsStream(themePath));
-        syntax=iter.next();
-        //size=syntax.getFont().getSize();
-        theme.apply(syntax);
-        if ("Miniature".equals(syntax.getName())) size=3;
-        else if ("Dis".equals(syntax.getName())) size=sizePreviewFont;
-        else size=sizeSourceFont;
-        syntax.setFont(syntax.getFont().deriveFont(size));
-      }  
-    } catch (Exception e) {
-        System.out.println(e.toString());
-      }    
-  }
+    for (RSyntaxTextArea syntax : Shared.syntaxList) {
+        if (syntax == null) continue;
+
+        // Use try-with-resources to handle the stream safely.
+        // This fixes the NullPointerException and the Memory Leak.
+        try (InputStream is = Option.class.getResourceAsStream(themePath)) {
+            
+            // Check if the file actually exists before trying to load it
+            if (is == null) {
+                System.err.println("Error: Theme file not found at: " + themePath);
+                continue; // Skip this component and move to the next
+            }
+
+            // Load a FRESH theme for every component.
+            // We keep this INSIDE the loop because your library requires 
+            // a new instance to prevent font corruption.
+            Theme theme = Theme.load(is);
+            
+            if (theme == null) {
+                System.err.println("Error: Theme failed to load from: " + themePath);
+                continue;
+            }
+
+            // Apply the theme
+            theme.apply(syntax);
+
+            // Apply the font size exactly as your original code did
+            float size;
+            String name = syntax.getName();
+            
+            if ("Miniature".equals(name)) size = 3f;
+            else if ("Dis".equals(name)) size = sizePreviewFont;
+            else size = sizeSourceFont;           
+           
+            // We apply the font size to the component
+            syntax.setFont(syntax.getFont().deriveFont(size));
+        } catch (Exception e) {
+            // Catching exceptions per-component so one failure doesn't stop the whole app
+            System.err.println("Error applying theme to a component: " + e.getMessage());
+        }
+    }
+}
   
   /**
    * Use the given flat laf theme

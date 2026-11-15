@@ -83,6 +83,17 @@ public class PSID {
  
   public static final String MagicStringPSID="PSID";
   
+  /**
+   * Initializes a new C64 audio engine instance with default settings.
+   * <p>
+   * Sets up the SID chip emulation with high-quality audio enabled, 
+   * mono output, and default playback parameters.
+   * </p>
+   *
+   * @param samplerate The audio sampling rate in Hz (e.g., 44100).
+   * @param buflen     The size of the audio buffer.
+   * @return A configured {@link C64} object ready for playback.
+   */
   public C64 init(int samplerate, int buflen) {
     C64 c64=new C64(samplerate);
     
@@ -96,10 +107,28 @@ public class PSID {
     return c64;  
   }
   
+  /**
+   * Parses a SID file (Commodore 64 music file) and loads its data into the provided C64 instance.
+   * <p>
+   * This method performs the following operations:
+   * <ul>
+   *   <li>Validates the file header and "magic string".</li>
+   *   <li>Parses SID metadata (title, author, release info).</li>
+   *   <li>Extracts SID chip settings and subtune configurations.</li>
+   *   <li>Initializes the C64 virtual RAM banks.</li>
+   *   <li>Determines the load address and copies the SID data into the appropriate memory range.</li>
+   * </ul>
+   * </p>
+   *
+   * @param c64      The C64 emulator instance to load the data into.
+   * @param filedata  The raw byte array containing the SID file content.
+   * @param filesize   The total size of the file data in bytes.
+   */
   public void processSIDfile(C64 c64, byte[] filedata, int filesize) {
     int i;
     int sidDataOffset;
 
+    if (filedata == null || filedata.length < 0x80) return;
         
     magicString=""+(char)filedata[0]+(char)filedata[1]+(char)filedata[2]+(char)filedata[3];          
     versionH00=filedata[4] & 0xFF;
@@ -167,7 +196,7 @@ public class PSID {
     }
     c64.realSIDmode = (magicString.charAt(0) == 'R');
 
-    if (loadAddressH == 0 && loadAddressH == 0) { //load-address taken from first 2 bytes of the C64 PRG
+    if (loadAddressH == 0 && loadAddressL == 0) { //load-address taken from first 2 bytes of the C64 PRG
       c64.loadAddress = ((filedata[headerSize + 1] & 0xff) << 8) + ((filedata[headerSize + 0]&0xFF));
       sidDataOffset = headerSize + 2;
     } else { //load-adress taken from SID-header
